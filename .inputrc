@@ -1,0 +1,8 @@
+# reload .inputrc with C-x C-r ("reload-init-file" function)
+set completion-ignore-case On
+"\e[A": history-search-backward   # up-arrow
+"\e[B": history-search-forward    # down-arrow
+"\e[3;5~": kill-whole-line        # Ctrl-Delete
+Control-u: universal-argument
+
+"^[i": universal-argument

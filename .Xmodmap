@@ -1,0 +1,6 @@
+remove Lock = Caps_Lock
+keycode 0x42 = Control_L
+add Control = Control_L
+
+keycode 115 = Super_L
+add mod4 = Super_L

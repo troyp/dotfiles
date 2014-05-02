@@ -1,0 +1,15 @@
+set noloadplugins
+let vimpager_disable_x11 = 1
+
+inoremap <C-d> <Esc>
+
+colorscheme desert
+
+set ruler                    " Ruler on
+set showcmd                  " show (partial) commands in last line
+set number                   " Line numbers on
+
+set incsearch                " show incsearch matches (leave showing: hls/nohls)
+
+set mouse=a                  " mouse support for all modes
+set ttymouse=xterm2            " set terminal mouse support codes

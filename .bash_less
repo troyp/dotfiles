@@ -1,0 +1,19 @@
+# export PAGER="less"
+export LESS="-R"
+# nicer highlighting
+if [ -f "/usr/share/source-highlight/src-hilite-lesspipe.sh" ]; then
+    # ubuntu 12.10: sudo apt-get install source-highlight
+    export LESSOPEN="| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
+elif [ -f "/usr/bin/src-hilite-lesspipe.sh" ]; then
+    # fedora 18: sudo yum install source-highlight
+    export LESSOPEN="| /usr/bin/src-hilite-lesspipe.sh %s"
+fi
+
+# -x4 = Set tab stops to 4 spaces.
+# -F = Don't open with less if entire file fits on screen.
+# -R = Output "raw" control characters. (colors)
+# -s = Squeeze multiple blank lines.
+# -X = Ignore ignore termcap initialization. With xterms it keeps
+#        the last page of the document on the screen. (see
+#        http://www.shallowsky.com/linux/noaltscreen.html)
+alias less='less -x4RFsX'
