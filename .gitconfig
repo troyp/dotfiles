@@ -2,6 +2,12 @@
 	excludesfile = /home/troy/.gitignore_global
 [user]
 	name = Troy Pracy
-	email = tspracy@gmail.com
+	email = troyp7@gmail.com
 [alias]
+	s = status
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%C(bold blue)<%an>%Creset' --abbrev-commit
+	ll = log --stat --abbrev-commit	
+	d = diff --color-words
+[color]
+	ui = auto # covers diff = true, status = auto, branch = auto
+	interactive = auto

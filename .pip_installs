@@ -6,3 +6,7 @@ pil
 pygments
 bpython
 pudb
+pillow
+sh
+rpy2
+pandas

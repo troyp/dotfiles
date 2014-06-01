@@ -40,6 +40,9 @@ paths=(
     $HOME/local/bin/node
     $HOME/.cask/bin
     /opt/clean/bin
+    /opt/clean/rstudio
+    /opt/tor-browser
+    /usr/local/texlive/2013/bin/x86_64-linux
 )
 for i in "${paths[@]}"; do pathappend "$i" ; done
 # pathappend "/opt/mozart/platform/unknown-unknown"
@@ -64,6 +67,7 @@ _JAVA_AWT_WM_NONREPARENTING=1; export _JAVA_AWT_WM_NONREPARENTING
 LIBOVERLAY_SCROLLBAR=0
 GTAGSCONF=/usr/share/doc/global/examples/gtags.conf
 VIMPAGER_RC=/opt/vimpager/vimpagerrc
+SWEAVE_STYLEPATH_DEFAULT="TRUE"
 
 
 # ---SHELL OPTIONS---
@@ -123,6 +127,9 @@ alias clj=clj-env-dir
 
 # ---bashmarks---
 if [ -f /opt/scripts/bashmarks.sh ]; then source /opt/scripts/bashmarks.sh; fi
+
+# ---run xcape---
+if ! pgrep xcape >/dev/null; then xcape & fi 
 
 # ---------------
 

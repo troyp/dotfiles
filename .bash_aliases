@@ -7,6 +7,7 @@
 # DEBIAN-SPECIFIC ALIASES
 #-------------------------
 alias sapt='sudo apt-get'
+alias saptu='sudo apt-get update'
 alias sapti='sudo apt-get install'
 alias aptc='apt-cache'
 alias aptcs='apt-cache search'
@@ -57,7 +58,9 @@ alias wgetmcut='wgetm -nH --cut-dirs'  #eg wgetmcut 2 ... (removes root + top 2 
 alias wgetmflat='wgetm -nd'
 alias wgetmstealth='wgetm -e robots=off -U="Mozilla" -w 1'
 alias wget1='wget -rNkpE -l 1 --no-remove-listing'
-alias listhttplinks='xargs elinks --dump | grep "http" | sed "s/.*http/http/g"' # Waits for url from stdin then lists http links on page. Pipe to wget.
+alias wgetcat='wget -pE -O' # usage: wgetcat <filename> <filename> ... <url> #UNTESTED
+alias listhttplinks='xargs elinks --dump | grep "http" | sed "s/.*http/http/g"' # Waits for url from stdin then lists http links on page. echo url | listhttplinks. Pipe to wget.
+alias listhttplinks2='xargs wget -O - 2>&1 | grep -i "http:" | sed "s/^.*http/http/\" | cut -d"\"" -f1 | sort -u'
 
 #------------------------
 # BROWSER/SERVER ALIASES.
@@ -235,3 +238,14 @@ alias ranAlpha='tr -dc "[:alpha:]" < /dev/urandom | head -c'
 alias rannum='tr -dc "0-9" < /dev/urandom | head -c'
 alias deduppath="awk -F: '{for (i=1;i<=NF;i++) { if ( !x[\$i]++ ) printf(\"%s:\",\$i); }}'"
 alias pman='pinfo -m'
+alias lstab='cat /etc/mtab'  # list mounted partitions in fstab format 
+
+
+# *********************
+# *                   *
+# * COMMAND REMINDERS *
+# *                   *
+# *********************
+# These entries are to facilitate grepping the alias file for a forgotten command
+
+# xdg-desktop-menu : refresh register desktop files for applications
