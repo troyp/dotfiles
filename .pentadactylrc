@@ -1,0 +1,73 @@
+set runtimepath=~/.pentadactyl
+set guioptions=bCrsTn
+set hintkeys="jfkdls;ahgnvurieow"
+set incfind
+set hlfind
+set findcase=smart
+set showstatuslinks=status
+set strictfocus=mail.google.com:laissez-faire,'chrome:*':laissez-faire,*:moderate 
+" Ex commands output in a new tab by default (prefs, addons...)
+set newtab=all
+
+map -g user -b , @:
+
+map -g user -b <C-m><C-m> :emenu<SPACE>
+" M-Up toggles the navigation and bookmarks toolbars
+map -g user -b <A-Up> :set guioptions-=mTB | set showtabline=never<CR>
+map -g user -b <A-Down> :set guioptions+=TB | set showtabline=always<CR>
+map -g user -b <C-c><C-a> :set guioptions!=TB | set showtabline!=always,never<CR>
+map -g user -b <C-c><C-m> :set guioptions!=m<CR>
+map -g user -b <C-c><C-t> :set showtabline!=always,never<CR>
+map -g user -b <C-c><C-n> :set guioptions!=T<CR>
+map -g user -b <C-c><C-b> :set guioptions!=B<CR>
+map -g user -b <C-c><C-s> :set guioptions!=B<CR>
+
+" Restart with C-c C-r
+map -g user -b <C-c><C-r> :restart<CR>
+
+" Select
+map -g user -b s <pass>
+map -g user -b sb :bmarks<SPACE>
+map -g user -b sh :history<SPACE>
+map -g user -b st :buffers<SPACE>
+map -g user -b sj :jumps<CR>
+map -g user -b sa :addons<CR>
+map -g user -b ss :open<SPACE>
+map -g user -b sg :open g<SPACE>
+
+" Sidebar selection with s, close with S
+map -g user -b sbo :sidebar<SPACE>
+map -g user -b sbx :sbclose<CR>
+
+" Open in new tab
+map -g user -b tt :tabopen<SPACE>
+map -g user -b tg :tabopen g<SPACE>
+map -g user -b tw :tabopen w<SPACE>
+map -g user -b ta :tabopen wa<SPACE>
+map -g user -b tn :tabopen about:newtab<CR>
+map -g user -b tp :pintab!<CR>
+
+" Tab moving helpers
+" map -g user -b -arg <C-m>t :tabmove <arg><CR>
+map -g user -b tm :tabmove<SPACE>
+map -g user -b <A-Left> :tabmove! -1<CR>
+map -g user -b <A-Right> :tabmove! +1<CR>
+map -g user -b td :tabduplicate<CR>
+
+
+map -g user -b J <C-PageDown>
+map -g user -b K <C-PageUp>
+nnoremap -g user -b <C-b> :sidebar bookmarks<CR>
+
+command! d tabduplicate
+command! rc source ~/.pentadactylrc
+command! rce viewsource! file:/home/troy/.pentadactylrc
+
+" Add hints for anchor elements whose class attribute starts with "vote"
+set hinttags+=a[class^='vote']  
+set hinttags+=a[class^='speed']  
+
+" EdX
+command! edx :so ~/.pentadactyl/edx.pentadactyl
+command! edxe viewsource! file:/home/troy/.pentadactyl/edx.pentadactyl
+

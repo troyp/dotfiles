@@ -12,6 +12,7 @@ paths=(
     /opt/scripts
     /opt/bin
     /opt/firefox
+    /opt/calibre
     /opt
     $HOME/code/scripts
     $HOME/.cabal/bin
@@ -19,6 +20,7 @@ paths=(
     /opt/j64-701/bin
     /opt/xcape
     /opt/LightTable
+    # /opt/node/bin
     ${SCALA_HOME:-/opt/scala}/bin
     /opt/sbt/bin
     /opt/mozart2/bin
@@ -40,13 +42,16 @@ paths=(
     $HOME/local/bin/node
     $HOME/.cask/bin
     /opt/clean/bin
-    /opt/clean/rstudio
+    /opt/rstudio/bin
     /opt/tor-browser
-    /usr/local/texlive/2013/bin/x86_64-linux
+    /usr/local/texlive/2014/bin/x86_64-linux
+    /$HOME/.rvm/bin
 )
 for i in "${paths[@]}"; do pathappend "$i" ; done
 # pathappend "/opt/mozart/platform/unknown-unknown"
 
+INFOPATH=$INFOPATH:/usr/local/texlive/2014/texmf-dist/doc/info
+MANPATH=$MANPATH:/usr/local/texlive/2014/texmf-dist/doc/man
 alias gprolog='/usr/local/bin/gprolog'
 CLASSPATH=$CLASSPATH:.
 # OZHOME=/opt/mozart2
@@ -69,6 +74,8 @@ GTAGSCONF=/usr/share/doc/global/examples/gtags.conf
 VIMPAGER_RC=/opt/vimpager/vimpagerrc
 SWEAVE_STYLEPATH_DEFAULT="TRUE"
 
+# ---GREP---
+GREP_OPTIONS='-i --color=auto'
 
 # ---SHELL OPTIONS---
 shopt -q -s dotglob
@@ -90,8 +97,8 @@ xset r rate 250 50  # X key repeat: xset r rate <ms delay> <char per sec>
 
 # ---LOAD OTHER FILES---
 #if [ -f /etc/profile ]; then . /etc/profile; fi
-if [ -f ~/.bash_aliases ]; then . ~/.bash_aliases; fi
-if [ -f ~/.bash_prompt ]; then . ~/.bash_prompt; fi
+if [ -f ~/.bash-aliases ]; then . ~/.bash-aliases; fi
+if [ -f ~/.bash-prompt ]; then . ~/.bash-prompt; fi
 
 
 # if [ -f /bin/config.sh ]; then . ~/algs4/bin/config.sh; fi
@@ -160,3 +167,5 @@ echo ".bashrc done"
 # bindkey -v
 # bindkey -M viins 'jj' vi-cmd-mode
 # bindkey '^R' history-incremental-search-backward
+
+source $HOME/.rvm/scripts/rvm

@@ -1,0 +1,32 @@
+#!/usr/bin/env python
+# from: https://github.com/sashahart/dotfiles/blob/master/.lessfilter
+
+# Approach 1. directly symlink pygmentize as ~/.lessfilter (inflexible)
+# Approach 2. ~/.lessfilter is a shell script which calls pygmentize (slow)
+#   if [[ "$TERM" =~ 256* ]]; then
+#   	pygmentize -f 256 -P style=monokai -O"encoding=utf-8" "$1"
+#   else
+#   	pygmentize -P style=monokai -O"encoding=utf8" "$1"
+#   fi
+# Approach 3. Cut out the middleman and just use a Python interpreter directly
+
+from sys import stdout, argv
+from os import environ
+from pygments import highlight
+from pygments.lexers import get_lexer_for_filename
+from pygments.formatters.terminal256 import Terminal256Formatter
+from pygments.formatters.terminal import TerminalFormatter
+
+TERM = environ.get("TERM")
+filename = argv[1]
+options = {'style': 'monokai', 'encoding': 'utf-8'}
+if "256" in TERM: 
+	Formatter = Terminal256Formatter
+else:
+	Formatter = TerminalFormatter
+formatter = Formatter(**options)
+lexer = get_lexer_for_filename(filename, **options)
+with open(filename, 'rb') as f:
+	code = f.read()
+	highlight(code, lexer, formatter, stdout)
+

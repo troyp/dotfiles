@@ -34,6 +34,11 @@ set timeoutlen=250           " delay after ESC (default too long)
 set nojoinspaces             " no extra space joining to lines ending in [.?!]
 set virtualedit=all
 
+autocmd BufNewFile,BufRead *.pentadactyl set filetype=vim
+autocmd BufNewFile,BufRead .pentadactylrc set filetype=vim
+autocmd BufNewFile,BufRead *.vimperator set filetype=vim
+autocmd BufNewFile,BufRead .vimperatorrc set filetype=vim
+
 "------------------------------------------------------
 
 "------------
@@ -127,6 +132,13 @@ let g:mapleader = " "
 "------------------------------------------------------
 
 " ------------
+" NeoComplete.
+" ------------
+let g:neocomplete#enable_at_startup = 1
+
+"------------------------------------------------------
+
+" ------------
 " Keybindings.
 "-------------
 
@@ -155,3 +167,7 @@ if !exists(":DiffOrig")
                \ | wincmd p | diffthis
 endif
 
+"------------------------------------------------------
+
+" Close buffer (without closing window)
+command! Bc bnext | bdelete #

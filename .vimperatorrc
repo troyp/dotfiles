@@ -1,0 +1,47 @@
+set hintchars="jfkdls;ahgnvurieow"
+set incsearch
+set hlsearch
+set showstatuslinks=1
+" Override ignorecase if pattern has uppercase chars
+set smartcase
+" Show numbers for tabs
+" set tabnumbers
+ 
+" Ex commands output in a new tab by default (prefs, addons...)
+set newtab=all
+
+map <C-m><C-m> :emenu<SPACE>
+" M-Up toggles the navigation and bookmarks toolbars
+map <A-Up> :set toolbars=invnavigation,invbookmarks,invmenu,invtabs<CR>
+map <C-c><C-a> :set toolbars=invnavigation,invbookmarks,invmenu,invtabs<CR>
+map <C-c><C-m> :set toolbars=invmenu<CR>
+map <C-c><C-t> :set toolbars=invtabs<CR>
+map <C-c><C-n> :set toolbars=invnavigation<CR>
+map <C-c><C-b> :set toolbars=invbookmarks<CR>
+
+" Select
+map sb :bmarks<SPACE>
+map sh :history<SPACE>
+map st :buffers<SPACE>
+map sj :jumps<SPACE>
+
+" Sidebar selection with s, close with S
+map ss :sidebar<SPACE>
+map sx :sbclose<CR>
+
+" Restart with C-c C-r
+map <C-c><C-r> :restart<CR>
+
+" Tab moving helpers
+map tm :tabmove<SPACE>
+map <A-Left> :tabmove! -1<CR>
+map <A-Right> :tabmove! +1<CR>
+map td :tabduplicate<CR>
+
+
+map J <C-PageDown>
+map K <C-PageUp>
+nnoremap <C-b> :sidebar bookmarks<CR>
+
+cabbrev d tabduplicate
+
