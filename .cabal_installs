@@ -3,3 +3,5 @@ pointfree
 pointful
 diagrams
 pandoc
+TypeCompose
+HList

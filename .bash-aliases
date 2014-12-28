@@ -67,7 +67,8 @@ alias wgetmlimit='wget -rkpNE -np -l'  #eg wgetmlimit 2... (2 recurs lvls)
 alias wgetmcut='wgetm -nH --cut-dirs'  #eg wgetmcut 2 ... (removes root + top 2 subdirs)
 alias wgetmflat='wgetm -nd'
 alias wgetmstealth='wgetm -e robots=off -U="Mozilla" -w 1'
-alias wget1='wget -rNkpE -l 1 --no-remove-listing'
+alias wget1='wget -rNkpE -l 1'
+alias wgetp='wget -NkpE'
 alias wgetcat='wget -pE -O' # usage: wgetcat <filename> <filename> ... <url> #UNTESTED
 alias listhttplinks='xargs elinks --dump | grep "http" | sed "s/.*http/http/g"' # Waits for url from stdin then lists http links on page. echo url | listhttplinks. Pipe to wget.
 alias listhttplinks2='xargs wget -O - 2>&1 | grep -i "http:" | sed "s/^.*http/http/\" | cut -d"\"" -f1 | sort -u'
@@ -113,6 +114,7 @@ alias 2sel='xsel -ip'
 #--------------
 alias vi-bindings='set -o vi'
 alias emacs-bindings='set -o emacs'
+alias bashref='xrun ~/ebooks/coding/Shell\ Scripting/Bash\ Quick\ Reference.pdf &'
 
 
 #-----------------------
@@ -194,7 +196,12 @@ alias rscopy='rsync -avzH --progress'
 alias rsupdate='rsync -auvzH --progress'
 #alias info='pinfo'
 alias edx-dl='edx-dl -s'
-alias info='info --vi-bindings'
+alias info='info --vi-keys'
+alias pdfgrep='pdfgrep -n'
+alias symlink='ln -s'
+alias sln='ln -s'
+alias octave='octave --quiet'
+alias qiv='qiv -e'
 # enable color support of ls, etc, and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -209,7 +216,7 @@ fi
 alias viminstall='cd ~/.vim/bundle; git clone'
 alias pynote='ipython notebook --pylab=inline'
 alias ipylab='ipython --pylab'
-alias mzscheme='rlwrap mzscheme'
+alias mzscheme='rlwrap /opt/racket/bin/mzscheme'
 alias colorize='pygmentize -f terminal256 -O style=native -O -l'  # eg. "cat file | colorizelang c"
 #alias colorizelang='source-highlight -f esc -s'  # eg. "cat file | colorizelang c"
 alias colorize='pygmentize -f terminal256 -O style=native -O -g'    # eg. "cat file | colorize"
@@ -269,6 +276,9 @@ alias remove-wayback-insert="sed -i '/BEGIN WAYBACK TOOLBAR INSERT/,/END WAYBACK
 alias tabs2cols="column -t -s $'\t'"
 alias mihtm="tmp=$(mktemp); mediainfo --Output=HTML > $tmp; firefox $tmp"
 alias pc="python2 -c 'from math import *; from operator import *; from itertools import *; from functools import *; print "
+alias systeminfo='DISTRO=$(cat /etc/os-release|command grep PRETTY); DISTRO="${DISTRO#PRETTY_NAME=\"}"; printf "DISTRO: ${DISTRO%\"}\nARCH:   $(uname -i)\nKERNEL: $(uname -r)\nNODE:   $(uname -n)\n"'
+# http://www.reddit.com/r/commandline/comments/2ofb4e/star_trek_holodeck_noise_for_12_hours_with/
+alias startrek='play -n -c2 synth whitenoise lowpass -1 69 lowpass -1 50 lowpass -1 120 gain +15'
 
 # *********************
 # *                   *
@@ -278,3 +288,5 @@ alias pc="python2 -c 'from math import *; from operator import *; from itertools
 # These entries are to facilitate grepping the alias file for a forgotten command
 
 # xdg-desktop-menu : refresh register desktop files for applications
+# fuser : list open files, ids and processes 
+# lsof, fuser : list processes accessing a file or socket

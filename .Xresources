@@ -90,6 +90,8 @@
  URxvt.tabbed.tab-fg:                  0
  URxvt.tabbed.tab-bg:                  3
  URxvt*iso14755_52:			false
+URxvt.font: xft:terminus:size=8:antialias=true:hinting=Full
+URxvt.urlLauncher : firefox
 
  !URxvt*matcher.pattern.1:  \\b(mailto:)[\\w\-\@;\/?:&=%\$_.+!*\x27(),~#]+ [\\w\-\@;\/?:&=%\$_+!*\x27()~]
  !URxvt.matcher.launcher.1:             claws-mail
@@ -113,31 +115,53 @@
  URxvt.underlineURLs:                   true
 
 
- !colors
- !black
- URxvt*color0:				#171717
- URxvt*color8:				#737373
- !red
- URxvt*color1:				#FF5E5E
- URxvt*color9:				#FF7878
- !green
- URxvt*color2:				#9CE82B
- URxvt*color10:				#9ACD32
- !yellow
- URxvt*color3:				#F0E68C
- URxvt*color11:				#EEE8AA
- !blue
- URxvt*color4:				#008AFF
- URxvt*color12:				#4F98FF
- !magenta
- URxvt*color5:				#E88CFF
- URxvt*color13:				#EDA6FF
- !cyan
- URxvt*color6:				#87CEFA
- URxvt*color14:				#B0E2FF
- !white
- URxvt*color7:				#DCDCCC
- URxvt*color15:				#FFFFFF
+ ! !colors
+ ! !black
+ ! URxvt*color0:				#171717
+ ! URxvt*color8:				#737373
+ ! !red
+ ! URxvt*color1:				#FF5E5E
+ ! URxvt*color9:				#FF7878
+ ! !green
+ ! URxvt*color2:				#9CE82B
+ ! URxvt*color10:				#9ACD32
+ ! !yellow
+ ! URxvt*color3:				#F0E68C
+ ! URxvt*color11:				#EEE8AA
+ ! !blue
+ ! URxvt*color4:				#008AFF
+ ! URxvt*color12:				#4F98FF
+ ! !magenta
+ ! URxvt*color5:				#E88CFF
+ ! URxvt*color13:				#EDA6FF
+ ! !cyan
+ ! URxvt*color6:				#87CEFA
+ ! URxvt*color14:				#B0E2FF
+ ! !white
+ ! URxvt*color7:				#DCDCCC
+ ! URxvt*color15:				#FFFFFF
+
+! BLACK & GOLD 
+
+URxvt.depth: 32
+URxvt.background: [100]#181818
+URxvt.foreground: [100]#ebeac5
+URxvt*color0: #917649
+URxvt*color1: #fdc963
+URxvt*color2: #dbb574
+URxvt*color3: #695532
+URxvt*color4: #544119
+URxvt*color5: #917649
+URxvt*color6: #fdc963
+URxvt*color7: #dbb574
+URxvt*color8: #695532
+URxvt*color9: #544119
+URxvt*color10: #917649
+URxvt*color11: #fdc963
+URxvt*color12: #dbb574
+URxvt*color13: #695532
+URxvt*color14: #544119
+URxvt*color15: #917649
 
  !-------------------------------------------------------------------------------
  !

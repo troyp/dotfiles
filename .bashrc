@@ -43,7 +43,10 @@ paths=(
     $HOME/.cask/bin
     /opt/clean/bin
     /opt/rstudio/bin
+    /opt/processing
     /opt/tor-browser
+    /opt/helpdeco
+    /opt/lfe-master/bin
     /usr/local/texlive/2014/bin/x86_64-linux
     /$HOME/.rvm/bin
 )
@@ -106,7 +109,10 @@ if [ -f ~/.bash-prompt ]; then . ~/.bash-prompt; fi
 #---KEY REBINDING---
 #if [ -f ~/.Xmodmap ]; then xmodmap ~/.Xmodmap; fi
 #xmodmap -e "keycode 115 = Super_L" -e "add mod4 = Super_L" # -> .Xmodmap
-setxkbmap -option "ctrl:swapcaps"
+# setxkbmap -option "ctrl:swapcaps"
+
+# fix End key (mapped to SuperL for unknown reason)
+xmodmap -e "keycode 115 = End NoSymbol End"
 
 # #---xinput---
 # # swap middle-button(2) and thumb1 (8)
@@ -136,7 +142,9 @@ alias clj=clj-env-dir
 if [ -f /opt/scripts/bashmarks.sh ]; then source /opt/scripts/bashmarks.sh; fi
 
 # ---run xcape---
-if ! pgrep xcape >/dev/null; then xcape & fi 
+# if ! pgrep xcape >/dev/null; then xcape & fi 
+if pgrep xcape >/dev/null; then pkill xcape; fi
+xcape & 
 
 # ---------------
 

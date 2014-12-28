@@ -26,3 +26,7 @@ psutil
 units
 pillow
 dill
+pysrt
+mps-youtube
+pyp
+moviepy
