@@ -90,7 +90,7 @@
  URxvt.tabbed.tab-fg:                  0
  URxvt.tabbed.tab-bg:                  3
  URxvt*iso14755_52:			false
-URxvt.font: xft:terminus:size=8:antialias=true:hinting=Full
+URxvt.font: xft:monospace:size=11:antialias=true:hinting=Full
 URxvt.urlLauncher : firefox
 
  !URxvt*matcher.pattern.1:  \\b(mailto:)[\\w\-\@;\/?:&=%\$_.+!*\x27(),~#]+ [\\w\-\@;\/?:&=%\$_+!*\x27()~]

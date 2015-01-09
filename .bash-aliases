@@ -90,6 +90,9 @@ alias dirserve='python2 -m SimpleHTTPServer'  # serve current dir tree on port 8
 #--------------------
 alias tracert='traceroute'
 alias ports='netstat -tunp'
+# from: http://unix.stackexchange.com/questions/22615/
+alias 'ip-addr="lwp-request -o text checkip.dyndns.org | awk '{ print $NF }'"
+
 
 #-------------------
 # OPEN & SU ALIASES.
@@ -167,6 +170,7 @@ alias blkid='sudo blkid'     # list mounted partitions
 alias factorlang='/opt/factor/factor'
 alias coline='command col'    # leave col free as a column selection command
 alias pdfdiff='diffpdf'
+alias x='xdg-open'
 
 #---------------------------------
 # APPLICATION DEFAULTS & VARIANTS.
@@ -187,6 +191,8 @@ alias sulocate='sudo locate'
 alias sudb='sudo updatedb'
 alias untgz='tar -zxvf'
 alias vip='vimpager'
+# follow appended data (like tail -f) in less
+alias fless='less +F'
 alias vless='vim -u $VIMRUNTIME/macros/less.sh'
 alias vmore='vim -u $HOME/.vim/vimrc.more'
 alias cless="LESSOPEN='|~/.lessfilter %s' less -R"
@@ -202,6 +208,24 @@ alias symlink='ln -s'
 alias sln='ln -s'
 alias octave='octave --quiet'
 alias qiv='qiv -e'
+# ------------------------------------------------------
+# rs variants:
+# ------------
+# row2col: eg.    echo 1 2 3 | row2col
+# equivalent to row2col='xargs printf "%d\n"'
+alias row2col='rs 0 1'
+alias r2c='rs 0 1'
+alias col2row='rs 1 0'
+alias c2r='rs 1 0'
+# transpose: eg.    printf "1 2 3\n4 5 6\n" | transpose
+alias transpose='rs -T'
+# ------------------------------------------------------
+# align columns
+alias align='column -t'
+# repeat character, eg.    rep '*' 20
+alias rep='jot -s "" -b'
+alias htmlcat='htmldoc -f html'
+
 # enable color support of ls, etc, and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -252,12 +276,17 @@ alias concatpdfs='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=out.pdf
 alias partitionlist='fdisk -l'
 # alias maplines='xargs -d "\n" -n 1'
 alias maplines='xargs -L1'
+# eg.     ls|dolines printf "`pwd`/$x\n"; done
 alias dolines='while read -r x; do'
-alias prdirs='while read -r line; do dirname "`readlink -f "$line"`"; done | uniq'
+# prdirs: print a list of target directories (ie. resolve symlinks) of files 
+alias prdirs='while read -r line; do dirname "`readlink -f "$line"`"; done | sort | uniq'
+# eg.              ls -l | dofields echo $x9; done
+# equivalent to:   ls -l | awk '{ print $9 }'
 alias dofields='while read -r x1 x2 x3 x4 x5 x6 x7 x8 x9; do'
 # while read -r x; do echo "stmts using $x"; done
 alias imaplines='xargs -d "\n" -n 1 -p'
 alias dofiles='for x in *; do'
+# eg.     mapfiles printf "`pwd`/$x\n"; done
 alias mapfiles='for x in *; do echo "$x" |'
 alias locatedirs='cat|xargs locate|prdirs'
 alias myprocs='ps uxf'
@@ -290,3 +319,15 @@ alias startrek='play -n -c2 synth whitenoise lowpass -1 69 lowpass -1 50 lowpass
 # xdg-desktop-menu : refresh register desktop files for applications
 # fuser : list open files, ids and processes 
 # lsof, fuser : list processes accessing a file or socket
+# jot -s'' -b'*' 10 : print 10 *s 
+
+# *******************
+# *                 *
+# * USEFUL PACKAGES *
+# *                 *
+# *******************
+# moreutils
+# filo
+# numutils
+# suckless-tools
+# jot, enum, rs, ranomize-lines

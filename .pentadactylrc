@@ -8,6 +8,8 @@ set showstatuslinks=status
 set strictfocus=mail.google.com:laissez-faire,'chrome:*':laissez-faire,*:moderate 
 " Ex commands output in a new tab by default (prefs, addons...)
 set newtab=all
+" make yanks go to clipboard
+js editor.defaultRegister="+"    
 
 map -g user -b , @:
 
@@ -50,13 +52,14 @@ map -g user -b tw :tabopen w<SPACE>
 map -g user -b ta :tabopen wa<SPACE>
 map -g user -b tn :tabopen about:newtab<CR>
 map -g user -b tp :pintab!<CR>
+map -g user -b td :tabduplicate<CR>
+map -g user -b to :tabonly<CR>
 
 " Tab moving helpers
 " map -g user -b -arg <C-m>t :tabmove <arg><CR>
 map -g user -b tm :tabmove<SPACE>
 map -g user -b <A-Left> :tabmove! -1<CR>
 map -g user -b <A-Right> :tabmove! +1<CR>
-map -g user -b td :tabduplicate<CR>
 
 map -g user -b <A-J> :tabnext<CR>
 map -g user -b <A-K> :tabprevious<CR>
@@ -73,6 +76,8 @@ command! rce viewsource! file:/home/troy/.pentadactylrc
 nmap -g user -b <C-a> 0
 nmap -g user -b <C-e> $
 nmap -g user -b <C-S-Y> <C-e>
+" replace builtin <C-a> binding
+nmap -g user -b <C-S-X> <C-a>
 
 " Search
 " clear the search term highlighting
