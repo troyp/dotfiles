@@ -91,7 +91,7 @@ alias dirserve='python2 -m SimpleHTTPServer'  # serve current dir tree on port 8
 alias tracert='traceroute'
 alias ports='netstat -tunp'
 # from: http://unix.stackexchange.com/questions/22615/
-alias 'ip-addr="lwp-request -o text checkip.dyndns.org | awk '{ print $NF }'"
+alias ip-addr="lwp-request -o text checkip.dyndns.org | awk '{ print $NF }'"
 
 
 #-------------------
