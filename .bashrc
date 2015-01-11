@@ -1,5 +1,4 @@
 set -a
-LD_LIBRARY_PATH=/usr/local/lib
 
 pathappend() {
     if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
@@ -53,9 +52,17 @@ paths=(
 for i in "${paths[@]}"; do pathappend "$i" ; done
 # pathappend "/opt/mozart/platform/unknown-unknown"
 
+
+# ***************
+# *             *
+# * ENVIRONMENT *
+# * VARIABLES   *
+# *             *
+# ***************
+
+LD_LIBRARY_PATH=/usr/local/lib
 INFOPATH=$INFOPATH:/usr/local/texlive/2014/texmf-dist/doc/info
 MANPATH=$MANPATH:/usr/local/texlive/2014/texmf-dist/doc/man
-alias gprolog='/usr/local/bin/gprolog'
 CLASSPATH=$CLASSPATH:.
 # OZHOME=/opt/mozart2
 OZHOME=/usr
@@ -69,7 +76,6 @@ HISTFILESIZE=2000
 #PAGER=vimpager
 #MANPAGER=vimpager
 EDITOR=vim
-UWHPSC='$HOME/Documents/hpsc-course/uwhpsc'
 #OZEMACS="z:\\programs\\XEmacs\\XEmacs-21.4.22\\i586-pc-win32\\xemacs.exe"
 _JAVA_AWT_WM_NONREPARENTING=1; export _JAVA_AWT_WM_NONREPARENTING
 LIBOVERLAY_SCROLLBAR=0
@@ -80,7 +86,13 @@ SWEAVE_STYLEPATH_DEFAULT="TRUE"
 # ---GREP---
 GREP_OPTIONS='-i --color=auto'
 
-# ---SHELL OPTIONS---
+
+# *****************
+# *               *
+# * SHELL OPTIONS *
+# *               *
+# *****************
+
 shopt -q -s dotglob
 shopt -q -s extglob
 #shopt -q -s failglob
@@ -91,20 +103,17 @@ shopt -q -s histverify
 shopt -q -s lithist
 #shopt -q -s nullglob  # prevents eg, find . -iname *string* without quotes
 
-# ---ULIMIT---
-#ulimit -c unlimited
+
+# *********
+# *       *
+# * INPUT *
+# *       *
+# *********
 
 # ---KEY REPEAT---
 xset r rate 250 50  # X key repeat: xset r rate <ms delay> <char per sec>
 #kbdrate -r 50 -d 250  # console key repeat: kbdrate -r <cps> -d <ms>
 
-# ---LOAD OTHER FILES---
-#if [ -f /etc/profile ]; then . /etc/profile; fi
-if [ -f ~/.bash-aliases ]; then . ~/.bash-aliases; fi
-if [ -f ~/.bash-prompt ]; then . ~/.bash-prompt; fi
-
-
-# if [ -f /bin/config.sh ]; then . ~/algs4/bin/config.sh; fi
 
 #---KEY REBINDING---
 #if [ -f ~/.Xmodmap ]; then xmodmap ~/.Xmodmap; fi
@@ -122,10 +131,23 @@ xmodmap -e "keycode 115 = End NoSymbol End"
 # #xinput set-button-map $MOUSE_ID 1 2 3 4 5 6 7 2 8
 # xinput set-button-map $MOUSE_ID 1 2 3 4 5 6 7 2 2
 
-# ---git---
-git config --global core.excludesfile ~/.gitignore_global
 
-# ---python---
+# *******
+# *     *
+# * GIT *
+# *     *
+# *******
+git config --global core.excludesfile ~/.gitignore_global
+# https://coderwall.com/p/euwpig/a-better-git-log
+git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+git config --global core.pager 'less -+F -RSX'
+
+
+# **********
+# *        *
+# * PYTHON *
+# *        *
+# **********
 PYTHONPATH=$PYTHONPATH:/opt/phpsh/lib/python2.7/site-packages
 PYTHONPATH=$PYTHONPATH:/usr/share/sip
 # warning: this can break system python programs - the dirs are
@@ -133,10 +155,22 @@ PYTHONPATH=$PYTHONPATH:/usr/share/sip
 #PYTHONPATH=$PYTHONPATH:/usr/share/pyshared:$HOME/code/python
 #PYTHONPATH=$PYTHONPATH:/usr/share/pyshared
 
-# ---clojure---
+
+# ***********
+# *         *
+# * CLOJURE *
+# *         *
+# ***********
 CLOJURE_EXT=~/.clojure
 pathappend "/opt/clojure-contrib/launchers/bash"
 alias clj=clj-env-dir
+
+
+# ********
+# *      *
+# * MISC *
+# *      *
+# ********
 
 # ---bashmarks---
 if [ -f /opt/scripts/bashmarks.sh ]; then source /opt/scripts/bashmarks.sh; fi
@@ -146,7 +180,35 @@ if [ -f /opt/scripts/bashmarks.sh ]; then source /opt/scripts/bashmarks.sh; fi
 if pgrep xcape >/dev/null; then pkill xcape; fi
 xcape & 
 
-# ---------------
+# ---ULIMIT---
+#ulimit -c unlimited
+
+# --------------
+# # vi bindings.
+# #-------------
+# bindkey -v
+# bindkey -M viins 'jj' vi-cmd-mode
+# bindkey '^R' history-incremental-search-backward
+
+
+
+# ********************
+# *                  *
+# * LOAD OTHER FILES *
+# *                  *
+# ********************
+
+#if [ -f /etc/profile ]; then . /etc/profile; fi
+if [ -f ~/.bash-aliases ]; then . ~/.bash-aliases; fi
+if [ -f ~/.bash-prompt ]; then . ~/.bash-prompt; fi
+if [ -f ~/.rvm/scripts/rvm ]; then . ~/.rvm/scripts/rvm; fi
+
+
+# *************
+# *           *
+# * FUNCTIONS *
+# *           *
+# *************
 
 bind -x '"\C-x\C-m": "xmodmap $HOME/.Xmodmap"'
 
@@ -165,15 +227,10 @@ function pe { $( echo "printenv ${1^^}" ); }
 function col {
     awk -- "{print \$$1}";
 }
+
+
+# ----------------------------------------------------------------------------
+
 set +a
 
 echo ".bashrc done"
-
-# --------------
-# # vi bindings.
-# #-------------
-# bindkey -v
-# bindkey -M viins 'jj' vi-cmd-mode
-# bindkey '^R' history-incremental-search-backward
-
-source $HOME/.rvm/scripts/rvm
