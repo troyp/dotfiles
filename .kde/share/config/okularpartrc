@@ -1,0 +1,25 @@
+[$Version]
+update_info=okular.upd:sep_settings
+
+[Core General]
+ChooseGenerators=false
+ObeyDRM=false
+
+[General]
+ObeyDRM[$d]
+ShellOpenFileInTabs=true
+UseKTTSD=false
+
+[Main View]
+SplitterSizes=393,476
+
+[Nav Panel]
+SidebarIconSize=32
+
+[PageView]
+EditToolBarPlacement=3
+ScrollOverlap=10
+TrimMargins=true
+
+[Reviews]
+AnnotationTools=<tool type="note-inline" id="1"><engine hoverIcon="tool-note-inline" block="true" type="PickPoint" color="#ffff00"><annotation type="FreeText" color="#ffff00" font="Ubuntu\\,12\\,-1\\,5\\,50\\,0\\,0\\,0\\,0\\,0"/></engine><shortcut>1</shortcut></tool>,<tool type="ink" id="2"><engine type="SmoothLine" color="#0000ff"><annotation width="2" type="Ink" color="#0000ff"/></engine><shortcut>2</shortcut></tool>,<tool type="ink" id="3"><engine type="SmoothLine" color="#ff0000"><annotation width="2" type="Ink" color="#ff0000"/></engine><shortcut>3</shortcut></tool>,<tool type="highlight" id="4"><engine type="TextSelector" color="#ffff00"><annotation type="Highlight" color="#ffff00"/></engine><shortcut>4</shortcut></tool>,<tool type="straight-line" id="5"><engine points="2" type="PolyLine" color="#ffe000"><annotation width="1" type="Line" color="#ffe000"/></engine><shortcut>5</shortcut></tool>,<tool type="polygon" id="6"><engine points="-1" type="PolyLine" color="#007eee"><annotation width="1" type="Line" color="#007eee"/></engine><shortcut>6</shortcut></tool>,<tool type="underline" id="7"><engine type="TextSelector" color="#000000"><annotation type="Underline" color="#000000"/></engine><shortcut>7</shortcut></tool>,<tool type="ellipse" id="8"><engine block="true" type="PickPoint" color="#00ffff"><annotation width="5" type="GeomCircle" color="#00ffff"/></engine><shortcut>8</shortcut></tool>,<tool type="ink" id="9" name="Black Freehand"><engine type="SmoothLine" color="#000000"><annotation width="2" type="Ink" color="#000000"/></engine><shortcut>9</shortcut></tool>,<tool type="stamp" id="10"><engine hoverIcon="okular" size="64" block="true" type="PickPoint"><annotation icon="okular" type="Stamp"/></engine></tool>,<tool type="note-linked" id="11"><engine hoverIcon="tool-note" type="PickPoint" color="#ffff00"><annotation icon="Note" type="Text" color="#ffff00"/></engine></tool>

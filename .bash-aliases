@@ -171,6 +171,7 @@ alias factorlang='/opt/factor/factor'
 alias coline='command col'    # leave col free as a column selection command
 alias pdfdiff='diffpdf'
 alias x='xdg-open'
+alias unmount='umount'
 
 #---------------------------------
 # APPLICATION DEFAULTS & VARIANTS.
@@ -255,6 +256,10 @@ alias pl='perl -e'
 alias plp='perl -pe'
 alias perlrepl='perl -de 0'
 alias phprepl='php --interactive'
+alias xracket='racket -il xrepl'
+alias rkt='racket -e "(require readline)" -i'
+# the code to install scribble-emacs (from scribble docs) seems to be broken
+alias update-scribble-mode='racket -e "(require (planet neil/scribble-emacs:1:2/install-in-my-emacs))"'
 
 #---------------
 # OTHER ALIASES.

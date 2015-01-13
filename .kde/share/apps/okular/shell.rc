@@ -1,0 +1,66 @@
+<!DOCTYPE kpartgui>
+<kpartgui version="7" name="okular_shell">
+ <MenuBar alreadyVisited="1">
+  <Menu noMerge="1" name="file" alreadyVisited="1">
+   <text>&amp;File</text>
+   <Action name="file_open"/>
+   <Action name="file_open_recent"/>
+   <DefineGroup append="open_merge" name="file_open"/>
+   <Separator weakSeparator="1"/>
+   <DefineGroup append="save_merge" name="file_save"/>
+   <Separator weakSeparator="1"/>
+   <Action name="file_print"/>
+   <DefineGroup append="print_merge" name="file_print"/>
+   <Separator weakSeparator="1"/>
+   <Action name="file_close"/>
+   <Separator weakSeparator="1"/>
+   <Action name="file_quit"/>
+  </Menu>
+  <Merge/>
+  <Menu noMerge="1" name="settings" alreadyVisited="1">
+   <text>&amp;Settings</text>
+   <Action name="options_show_menubar"/>
+   <Merge name="StandardToolBarMenuHandler"/>
+   <Merge name="KMDIViewActions"/>
+   <DefineGroup append="show_merge" name="show_merge"/>
+   <Separator weakSeparator="1"/>
+   <Action name="fullscreen"/>
+   <Separator weakSeparator="1"/>
+   <Action name="options_configure_keybinding"/>
+   <Action name="options_configure_toolbars"/>
+   <DefineGroup append="configure_merge" name="configure_merge"/>
+  </Menu>
+  <Separator weakSeparator="1"/>
+  <Menu noMerge="1" name="help" alreadyVisited="1">
+   <text>&amp;Help</text>
+   <Action name="help_contents"/>
+   <Action name="help_whats_this"/>
+   <Separator weakSeparator="1"/>
+   <Action name="help_report_bug"/>
+   <Separator weakSeparator="1"/>
+   <Action name="switch_application_language"/>
+   <Separator weakSeparator="1"/>
+   <DefineGroup append="about_merge" name="about_merge"/>
+   <Action name="help_about_app"/>
+   <Action name="help_about_kde"/>
+  </Menu>
+ </MenuBar>
+ <ToolBar noMerge="1" name="mainToolBar" alreadyVisited="1">
+  <Action name="file_open_recent"/>
+  <Action name="options_show_menubar"/>
+  <text>Main Toolbar</text>
+  <!--Action name="file_open_recent" /-->
+  <!--Action name="file_print" /-->
+ </ToolBar>
+ <ActionProperties scheme="Default">
+  <Action shortcut="Ctrl+Shift+F; F11" name="fullscreen"/>
+  <Action shortcut="Ctrl+M; Alt+M" priority="0" name="options_show_menubar"/>
+  <Action iconText="Recent" shortcut="Ctrl+Shift+O" name="file_open_recent"/>
+  <Action shortcut="F1; Ctrl+H" name="help_contents"/>
+  <Action shortcut="S" name="options_configure_keybinding"/>
+  <Action shortcut="P" name="file_print"/>
+  <Action shortcut="Alt+J" name="tab-next"/>
+  <Action shortcut="Alt+K" name="tab-previous"/>
+  <Action shortcut="Ctrl+O; O" name="file_open"/>
+ </ActionProperties>
+</kpartgui>

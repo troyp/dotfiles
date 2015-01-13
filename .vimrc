@@ -23,6 +23,8 @@ set hidden                   " hide buffers instead of unloading
 inoremap <C-d> <Esc>
 noremap <C-d> <Esc>
 
+set clipboard=unnamed
+
 " .GVIMRC: nnoremap <C-z> :"suspending disabled <CR>
 
 set encoding=utf-8
@@ -154,6 +156,15 @@ map <leader>bd :bp<bar>sp<bar>bn<bar>bd<CR>
 
 " F2 = Move rest of line to new line
 map <F2> i<CR><ESC>
+
+"------------------------------------------------------
+"
+" --------
+" Aliases.
+" --------
+
+command Clipon set clipboard=unnamed
+command Clipoff set clipboard=
 
 "------------------------------------------------------
 
