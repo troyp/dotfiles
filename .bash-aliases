@@ -63,6 +63,9 @@ alias ecp="qcp -e 'emacsclient -nw'"          # rename files with emacs/qcp
 # WGET & RELATED ALIASES.
 #------------------------
 alias wgetm='wget -mkpE -np'   # -m='-r -N -l inf --no-remove-listing'
+alias wgetm-incdirs='wget -mkpE --include-dirs'   # eg. wgetmincdirs /Tools,/Utilities domainname.com/Tools/index.html
+alias wgetm-noconv='wget -mkp -np'   # -m='-r -N -l inf --no-remove-listing'
+alias wgetm-noconv-incdirs='wget -mkp --include-dirs'   # eg. wgetmincdirs /Tools,/Utilities domainname.com/Tools/index.html
 alias wgetmlimit='wget -rkpNE -np -l'  #eg wgetmlimit 2... (2 recurs lvls)
 alias wgetmcut='wgetm -nH --cut-dirs'  #eg wgetmcut 2 ... (removes root + top 2 subdirs)
 alias wgetmflat='wgetm -nd'
@@ -242,6 +245,8 @@ alias viminstall='cd ~/.vim/bundle; git clone'
 alias pynote='ipython notebook --pylab=inline'
 alias ipylab='ipython --pylab'
 alias mzscheme='rlwrap /opt/racket/bin/mzscheme'
+alias sml='rlwrap sml'
+alias ocaml='rlwrap ocaml'
 alias colorize='pygmentize -f terminal256 -O style=native -O -l'  # eg. "cat file | colorizelang c"
 #alias colorizelang='source-highlight -f esc -s'  # eg. "cat file | colorizelang c"
 alias colorize='pygmentize -f terminal256 -O style=native -O -g'    # eg. "cat file | colorize"
@@ -268,6 +273,7 @@ alias iselect='iselect -kj:KEY_DOWN -kk:KEY_UP'
 alias choose='iselect -ma'
 alias choose-and-show='iselect -ma | xargs cat'
 alias hdd='df -hT'
+alias onespace="tr '\t' ' ' | tr -s ' '"  # collapse tabs/spaces into a single space (good with cut)
 alias tolines='tr " \t" "\n\n"'
 alias splitpath='tr ":" "\n"'
 alias firstcol="cut -d' ' -f1"
@@ -309,6 +315,7 @@ alias tabs2cols="column -t -s $'\t'"
 alias mihtm="tmp=$(mktemp); mediainfo --Output=HTML > $tmp; firefox $tmp"
 alias pc="python2 -c 'from math import *; from operator import *; from itertools import *; from functools import *; print "
 alias systeminfo='DISTRO=$(cat /etc/os-release|command grep PRETTY); DISTRO="${DISTRO#PRETTY_NAME=\"}"; printf "DISTRO: ${DISTRO%\"}\nARCH:   $(uname -i)\nKERNEL: $(uname -r)\nNODE:   $(uname -n)\n"'
+alias makelinks='find . -type f -exec printf "<a href={}>{}</a><br>\n"  \; > index.html
 # http://www.reddit.com/r/commandline/comments/2ofb4e/star_trek_holodeck_noise_for_12_hours_with/
 alias startrek='play -n -c2 synth whitenoise lowpass -1 69 lowpass -1 50 lowpass -1 120 gain +15'
 

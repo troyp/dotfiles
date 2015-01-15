@@ -47,6 +47,7 @@ paths=(
     /opt/helpdeco
     /opt/lfe-master/bin
     /usr/local/texlive/2014/bin/x86_64-linux
+    /opt/pdf-diff
     /$HOME/.rvm/bin
 )
 for i in "${paths[@]}"; do pathappend "$i" ; done
