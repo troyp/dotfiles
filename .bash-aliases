@@ -315,7 +315,7 @@ alias tabs2cols="column -t -s $'\t'"
 alias mihtm="tmp=$(mktemp); mediainfo --Output=HTML > $tmp; firefox $tmp"
 alias pc="python2 -c 'from math import *; from operator import *; from itertools import *; from functools import *; print "
 alias systeminfo='DISTRO=$(cat /etc/os-release|command grep PRETTY); DISTRO="${DISTRO#PRETTY_NAME=\"}"; printf "DISTRO: ${DISTRO%\"}\nARCH:   $(uname -i)\nKERNEL: $(uname -r)\nNODE:   $(uname -n)\n"'
-alias makelinks='find . -type f -exec printf "<a href={}>{}</a><br>\n"  \; > index.html
+alias makelinks='find . -type f -exec printf "<a href={}>{}</a><br>\n"  \; > index.html'
 # http://www.reddit.com/r/commandline/comments/2ofb4e/star_trek_holodeck_noise_for_12_hours_with/
 alias startrek='play -n -c2 synth whitenoise lowpass -1 69 lowpass -1 50 lowpass -1 120 gain +15'
 

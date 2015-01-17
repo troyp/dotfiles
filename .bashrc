@@ -48,7 +48,8 @@ paths=(
     /opt/lfe-master/bin
     /usr/local/texlive/2014/bin/x86_64-linux
     /opt/pdf-diff
-    /$HOME/.rvm/bin
+    $HOME/.rvm/bin
+    $HOME/.linuxbrew/bin
 )
 for i in "${paths[@]}"; do pathappend "$i" ; done
 # pathappend "/opt/mozart/platform/unknown-unknown"
@@ -63,7 +64,9 @@ for i in "${paths[@]}"; do pathappend "$i" ; done
 
 LD_LIBRARY_PATH=/usr/local/lib
 INFOPATH=$INFOPATH:/usr/local/texlive/2014/texmf-dist/doc/info
+INFOPATH=$INFOPATH:$HOME/.linuxbrew/share/info
 MANPATH=$MANPATH:/usr/local/texlive/2014/texmf-dist/doc/man
+MANPATH=$MANPATH:$HOME/.linuxbrew/share/man
 CLASSPATH=$CLASSPATH:.
 # OZHOME=/opt/mozart2
 OZHOME=/usr
