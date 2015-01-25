@@ -50,6 +50,7 @@ paths=(
     /opt/pdf-diff
     $HOME/.rvm/bin
     $HOME/.linuxbrew/bin
+    $HOME/.fzf
 )
 for i in "${paths[@]}"; do pathappend "$i" ; done
 # pathappend "/opt/mozart/platform/unknown-unknown"
@@ -238,3 +239,4 @@ function col {
 set +a
 
 echo ".bashrc done"
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

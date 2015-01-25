@@ -5,9 +5,15 @@
 "----------
 " Pathogen.
 "----------
-
 execute pathogen#infect()
 Helptags
+
+" ----------
+"  Vim-plug.
+" ----------
+call plug#begin('~/.vim/plugged')
+
+call plug#end()
 
 "------------------------------------------------------
 
@@ -41,6 +47,8 @@ autocmd BufNewFile,BufRead .pentadactylrc set filetype=vim
 autocmd BufNewFile,BufRead *.vimperator set filetype=vim
 autocmd BufNewFile,BufRead .vimperatorrc set filetype=vim
 
+set rtp+=~/.fzf              " add fzf to runtimepath
+
 "------------------------------------------------------
 
 "------------
@@ -69,8 +77,8 @@ set expandtab
 
 syntax on                    " syntax highlighting
 set background=dark          " use colours that suit a dark background
-colorscheme evening   "desert, bubblegum, bubblegum, vividchalk, zenburn
-
+colorscheme twilight         
+"others: evening, desert, bubblegum, bubblegum, vividchalk, zenburn
 set laststatus=2             " always display status line
 set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 set ruler                    " Ruler on
@@ -163,8 +171,8 @@ map <F2> i<CR><ESC>
 " Aliases.
 " --------
 
-command Clipon set clipboard=unnamed
-command Clipoff set clipboard=
+command! Clipon set clipboard=unnamed
+command! Clipoff set clipboard=
 
 "------------------------------------------------------
 
