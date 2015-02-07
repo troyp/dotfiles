@@ -188,9 +188,14 @@ xcape &
 # ---ULIMIT---
 #ulimit -c unlimited
 
-# --------------
-# # vi bindings.
-# #-------------
+#  -------- 
+#  bindings 
+#  -------- 
+bind -x '"\C-x\C-m": "xmodmap $HOME/.Xmodmap"'
+
+# -------------
+#  vi bindings
+# -------------
 # bindkey -v
 # bindkey -M viins 'jj' vi-cmd-mode
 # bindkey '^R' history-incremental-search-backward
@@ -206,6 +211,7 @@ xcape &
 #if [ -f /etc/profile ]; then . /etc/profile; fi
 if [ -f ~/.bash-aliases ]; then . ~/.bash-aliases; fi
 if [ -f ~/.bash-prompt ]; then . ~/.bash-prompt; fi
+if [ -f ~/.bash-functions ]; then . ~/.bash-functions; fi
 if [ -f ~/.rvm/scripts/rvm ]; then . ~/.rvm/scripts/rvm; fi
 
 
@@ -215,7 +221,6 @@ if [ -f ~/.rvm/scripts/rvm ]; then . ~/.rvm/scripts/rvm; fi
 # *           *
 # *************
 
-bind -x '"\C-x\C-m": "xmodmap $HOME/.Xmodmap"'
 
 function cnd {
     mkdir "$1"

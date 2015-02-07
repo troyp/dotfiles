@@ -11,92 +11,95 @@ set newtab=all
 " make yanks go to clipboard
 js editor.defaultRegister="+"    
 
-map -g user -b , @:
+map -g user -b , @: 
 
-map -g user -b J <C-d>
-map -g user -b K <C-u>
+map -g user -b J <C-d> 
+map -g user -b K <C-u> 
+map -g user -b <C-m><C-m> :emenu<SPACE> 
 
+" M-Up toggles the navigation and bookmarks toolbars 
+map -g user -b <A-Up> :set guioptions-=mTB | set showtabline=never<CR> 
+map -g user -b <A-Down> :set guioptions+=TB | set showtabline=always<CR> 
+map -g user -b <C-c><C-a> :set guioptions!=TB | set showtabline!=always,never<CR> 
+map -g user -b <C-c><C-m> :set guioptions!=m<CR> 
+map -g user -b <C-c><C-t> :set showtabline!=always,never<CR> 
+map -g user -b <C-c><C-n> :set guioptions!=T<CR> 
+map -g user -b <C-c><C-b> :set guioptions!=B<CR> 
+map -g user -b <C-c><C-s> :set guioptions!=B<CR> 
+map -g user -b <C-S-d> :dialog downloads<CR> 
 
-map -g user -b <C-m><C-m> :emenu<SPACE>
-" M-Up toggles the navigation and bookmarks toolbars
-map -g user -b <A-Up> :set guioptions-=mTB | set showtabline=never<CR>
-map -g user -b <A-Down> :set guioptions+=TB | set showtabline=always<CR>
-map -g user -b <C-c><C-a> :set guioptions!=TB | set showtabline!=always,never<CR>
-map -g user -b <C-c><C-m> :set guioptions!=m<CR>
-map -g user -b <C-c><C-t> :set showtabline!=always,never<CR>
-map -g user -b <C-c><C-n> :set guioptions!=T<CR>
-map -g user -b <C-c><C-b> :set guioptions!=B<CR>
-map -g user -b <C-c><C-s> :set guioptions!=B<CR>
-map -g user -b <C-S-d> :dialog downloads<CR>
+" Restart with C-c C-r 
+map -g user -b <C-c><C-r> :restart<CR> 
 
-" Restart with C-c C-r
-map -g user -b <C-c><C-r> :restart<CR>
+" Select 
+map -g user -b s <pass> 
+map -g user -b ss :bmarks!<SPACE> 
+map -g user -b sb :bmarks!<SPACE> 
+map -g user -b s;b :bmarks<SPACE> 
+map -g user -b sk :set guioptions!=B<CR> 
+map -g user -b sh :history!<SPACE> 
+map -g user -b s;h :history<SPACE> 
+map -g user -b st :buffer<SPACE> 
+map -g user -b sj :jumps<CR> 
+map -g user -b sa :addons<CR> 
 
-" Select
-map -g user -b s <pass>
-map -g user -b sb :bmarks!<SPACE>
-map -g user -b sxb :bmarks<SPACE>
-map -g user -b sk :set guioptions!=B<CR>
-map -g user -b sh :history<SPACE>
-map -g user -b st :buffers<SPACE>
-map -g user -b sj :jumps<CR>
-map -g user -b sa :addons<CR>
+" Sidebar selection with s, close with S 
+map -g user -b si :sidebar<SPACE> 
 
-" Sidebar selection with s, close with S
-map -g user -b si :sidebar<SPACE>
+" Open in new tab 
+map -g user -b tt :tabopen<SPACE> 
+map -g user -b tg :tabopen g<SPACE> 
+map -g user -b tw :tabopen w<SPACE> 
+map -g user -b ta :tabopen wa<SPACE> 
+map -g user -b tn :tabopen about:newtab<CR> 
+map -g user -b tp :pintab!<CR> 
+map -g user -b td :tabduplicate<CR> 
+map -g user -b to :tabonly<CR> 
 
-" Open in new tab
-map -g user -b tt :tabopen<SPACE>
-map -g user -b tg :tabopen g<SPACE>
-map -g user -b tw :tabopen w<SPACE>
-map -g user -b ta :tabopen wa<SPACE>
-map -g user -b tn :tabopen about:newtab<CR>
-map -g user -b tp :pintab!<CR>
-map -g user -b td :tabduplicate<CR>
-map -g user -b to :tabonly<CR>
+" Tab moving helpers 
+" map -g user -b -arg <C-m>t :tabmove <arg><CR> 
+map -g user -b tm :tabmove<SPACE> 
+map -g user -b <A-Left> :tabmove! -1<CR> 
+map -g user -b <A-Right> :tabmove! +1<CR> 
+map -g user -b <A-J> :tabnext<CR> 
+map -g user -b <A-K> :tabprevious<CR> 
+nmap -builtin -g user -b <C-b> :sidebar bookmarks<CR> 
+command! d tabduplicate 
+command! unpinall tabdo unpintab 
 
-" Tab moving helpers
-" map -g user -b -arg <C-m>t :tabmove <arg><CR>
-map -g user -b tm :tabmove<SPACE>
-map -g user -b <A-Left> :tabmove! -1<CR>
-map -g user -b <A-Right> :tabmove! +1<CR>
+" Command mode and insert mode 
+cmap -g user -b <C-Y> <C-V><C-V> 
+imap -g user -b <C-Y> <C-V><C-V> 
+command! rc source ~/.pentadactylrc 
+command! rce viewsource! file:/home/troy/.pentadactylrc 
 
-map -g user -b <A-J> :tabnext<CR>
-map -g user -b <A-K> :tabprevious<CR>
-nmap -builtin -g user -b <C-b> :sidebar bookmarks<CR>
-command! d tabduplicate
-command! unpinall tabdo unpintab
+" Caret mode 
+" C-e end of line, C-a start of line. 
+" C-y scroll down, C-Y scroll up. 
+nmap -g user -b <C-a> 0 
+nmap -g user -b <C-e> $ 
+nmap -g user -b <C-S-Y> <C-e> 
+" replace builtin <C-a> binding 
+nmap -g user -b <C-S-X> <C-a> 
 
-command! rc source ~/.pentadactylrc
-command! rce viewsource! file:/home/troy/.pentadactylrc
+" Search 
+" clear the search term highlighting 
+map -g user -b <C-/> :noh<CR> 
 
-" Caret mode
-" C-e end of line, C-a start of line.
-" C-y scroll down, C-Y scroll up.
-nmap -g user -b <C-a> 0
-nmap -g user -b <C-e> $
-nmap -g user -b <C-S-Y> <C-e>
-" replace builtin <C-a> binding
-nmap -g user -b <C-S-X> <C-a>
-
-" Search
-" clear the search term highlighting
-map -g user -b <C-/> :noh<CR>
-
-
-" Add hints for anchor elements whose class attribute starts with "vote"
+" Add hints for anchor elements whose class attribute starts with "vote" 
 set hinttags+=a[class^='vote']  
 set hinttags+=a[class^='speed']  
 
-"hi Hint font-family: "Monospace"; line-height: 15px; text-shadow: 1px 1px 1px #000; padding: 5px 8px 6px; font-size: 13px; font-weight: normal; color: white; background-color: rgba(0, 0, 0, 0.75); -moz-border-radius: 1em; -moz-box-shadow: 0 0 4px rgba(0,0,0,1);
+"hi Hint font-family: "Monospace"; line-height: 15px; text-shadow: 1px 1px 1px #000; padding: 5px 8px 6px; font-size: 13px; font-weight: normal; color: white; background-color: rgba(0, 0, 0, 0.75); -moz-border-radius: 1em; -moz-box-shadow: 0 0 4px rgba(0,0,0,1); 
 hi Hint font-family: "Monospace"; line-height: 14px; text-shadow: 1px 1px 1px #888; padding: 5px 8px 6px; font-size: 18px; font-weight: bold; text-transform: uppercase; color: rgb(200, 0, 0); background-color: rgba(240, 255, 240, 0.80); -moz-border-radius: 1em; 
-hi HintElem background-color: rgba(55, 255, 50, 0.15) !important; -moz-border-radius: 2px;
-hi HintActive background-color: rgba(54, 255, 250, 0.2) !important; color: black !important; -moz-border-radius: 2px;
+hi HintElem background-color: rgba(55, 255, 50, 0.15) !important; -moz-border-radius: 2px; 
+hi HintActive background-color: rgba(54, 255, 250, 0.2) !important; color: black !important; -moz-border-radius: 2px; 
 
-" EdX
-command! edx :so ~/.pentadactyl/edx.pentadactyl
-command! edxe viewsource! file:/home/troy/.pentadactyl/edx.pentadactyl
-edx
+" EdX 
+command! edx :so ~/.pentadactyl/edx.pentadactyl 
+command! edxe viewsource! file:/home/troy/.pentadactyl/edx.pentadactyl 
+edx 
 
-" Coursera
+" Coursera 
 set passkeys+='class.coursera.org/.*/lecture/':'hp-+fc<up><down><left><right>'
+

@@ -247,9 +247,11 @@ alias ipylab='ipython --pylab'
 alias mzscheme='rlwrap /opt/racket/bin/mzscheme'
 alias sml='rlwrap sml'
 alias ocaml='rlwrap ocaml'
-alias colorize='pygmentize -f terminal256 -O style=native -O -l'  # eg. "cat file | colorizelang c"
-#alias colorizelang='source-highlight -f esc -s'  # eg. "cat file | colorizelang c"
-alias colorize='pygmentize -f terminal256 -O style=native -O -g'    # eg. "cat file | colorize"
+alias colorizelang='pygmentize -f terminal256 -O style=native -l'  # eg. "cat file | colorizelang c"
+alias colzl='pygmentize -f terminal256 -O style=native -l'  # eg. "cat file | colorizelang c"
+# alias colorizelang='source-highlight -f esc -s'  # eg. "cat file | colorizelang c"
+alias colorize='pygmentize -f terminal256 -O style=native -g'  # eg. "cat file | colorize -g"
+alias colz='pygmentize -f terminal256 -O style=native -g'  # eg. "cat file | colorize -g"
 alias etags_rec_el_c_h='find . -type f -iregex '.*[.]\(c\|h\|el\)' | etags -'
 alias etags_sudo_rec_el_c_h='find . -type f -iregex '.*[.]\(c\|h\|el\)' | sudo etags -'
 alias extract_elisp='find . -name "*.el.gz" | xargs sudo gunzip'
@@ -265,6 +267,7 @@ alias xracket='racket -il xrepl'
 alias rkt='racket -e "(require readline)" -i'
 # the code to install scribble-emacs (from scribble docs) seems to be broken
 alias update-scribble-mode='racket -e "(require (planet neil/scribble-emacs:1:2/install-in-my-emacs))"'
+alias cppdecl='c++decl'
 
 #---------------
 # OTHER ALIASES.

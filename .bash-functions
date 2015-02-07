@@ -24,3 +24,34 @@ function remove-last {
     head -n -1 $1 > temp-remove-last
     mv temp-remove-last $1
 }
+
+# TODO: handle aliases, functions, failure, multiple matches (eg. alias and command)
+# TODO: probably best to convert to script
+function prsource {
+    cat $(which $1)
+}
+# prsource with syntax highlighting via colz alias
+function prsrc {
+    cat $(which $1) | colz
+}
+
+# compress directory as .tgz
+function tgz {
+    tar czf "${1%/}.tgz" "$1"
+}
+
+# convert directory to .cbz
+function cbz {
+    pushd "$1"
+    n=`ls -v | tail -n1 | awk -F'.' '{ print(length($1)) }'`
+    for fname in *; do 
+	fnum="${fname%.*}"
+	padded=`printf "%0${n}d.%s" "$(expr $fnum + 0)" "${fname##*.}"`
+	mv "$fname" "$padded"
+	# echo "$fname    $padded"
+    done
+    popd
+    zip -r "${1%/}.cbz" "$1" 
+}
+# cbz quiet
+alias cbzq='cbz > /dev/null'

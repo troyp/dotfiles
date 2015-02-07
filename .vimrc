@@ -153,17 +153,21 @@ let g:neocomplete#enable_at_startup = 1
 "-------------
 
 " Fast saving
-nmap <leader>w :w!<cr>
+nnoremap <leader>w :w!<cr>
 
 " Fast editing of the .vimrc
-map <leader>ev :e! ~/.vimrc<cr>
-map <leader>sv :so ~/.vimrc<cr>
+noremap <leader>ev :e! ~/.vimrc<cr>
+noremap <leader>eg :e! ~/.gvimrc<cr>
+noremap <leader>sv :so ~/.vimrc<cr>
+noremap <leader>sg :so ~/.gvimrc<cr>
 
 " Close buffer but not window
-map <leader>bd :bp<bar>sp<bar>bn<bar>bd<CR>
+noremap <leader>bd :bp<bar>sp<bar>bn<bar>bd<CR>
 
 " F2 = Move rest of line to new line
-map <F2> i<CR><ESC>
+noremap <F2> i<CR><ESC>
+
+inoremap <C-l> <Del>
 
 "------------------------------------------------------
 "
@@ -171,8 +175,14 @@ map <F2> i<CR><ESC>
 " Aliases.
 " --------
 
+" Set selection to write to clipboard
 command! Clipon set clipboard=unnamed
 command! Clipoff set clipboard=
+" Close buffer (without closing window)
+command! Bc bnext | bdelete #
+" Sudo write
+command! W w !sudo tee % > /dev/null
+
 
 "------------------------------------------------------
 
@@ -188,5 +198,3 @@ endif
 
 "------------------------------------------------------
 
-" Close buffer (without closing window)
-command! Bc bnext | bdelete #
