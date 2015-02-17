@@ -33,10 +33,9 @@ map -g user -b <C-c><C-r> :restart<CR>
 
 " Select 
 map -g user -b s <pass> 
-map -g user -b ss :bmarks!<SPACE> 
-map -g user -b sb :bmarks!<SPACE> 
-map -g user -b s;b :bmarks<SPACE> 
-map -g user -b sk :set guioptions!=B<CR> 
+map -g user -b sk :bmarks!<SPACE> 
+map -g user -b s;k :bmarks<SPACE> 
+map -g user -b ss :set guioptions!=B<CR> 
 map -g user -b sh :history!<SPACE> 
 map -g user -b s;h :history<SPACE> 
 map -g user -b st :buffer<SPACE> 
@@ -51,6 +50,7 @@ map -g user -b tt :tabopen<SPACE>
 map -g user -b tg :tabopen g<SPACE> 
 map -g user -b tw :tabopen w<SPACE> 
 map -g user -b ta :tabopen wa<SPACE> 
+map -g user -b t3 :tabopen w3<SPACE> 
 map -g user -b tn :tabopen about:newtab<CR> 
 map -g user -b tp :pintab!<CR> 
 map -g user -b td :tabduplicate<CR> 

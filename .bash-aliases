@@ -2,6 +2,10 @@
 # to "escape" ' (when you need both ' and " in alias): use '"'"'
 #    (doesn't really escape - it ends string, concatenates string "'" (a single
 #     quote) and concatenates a new string that extends to the end of the alias)
+# C-A-e ("shell-expand-line") does inline alias, word and history expansion
+#     (note: will recursively expand aliases in a history expansion.)
+#     (note: "alias-expand-line" and "history-and-alias-expand-line" are also
+#             available, but not bound by default.)
 
 #-------------------------
 # DEBIAN-SPECIFIC ALIASES
@@ -44,12 +48,17 @@ alias ll='ls -l --group-directories-first --color=auto'
 alias la='ls -Al --color=auto'
 alias lr='ls -lR --color=auto'
 alias lc='ls -CF --color=auto'
-alias lsub='ls -d */'    # list subdirectories of current dir
-alias lsubv='ls -p | command grep -o ^.*/$ | xargs ls -d --color=auto'  # visible only
+alias lsdirs='ls -d */'    # list subdirectories of current dir
+alias lsvdirs='ls -p | command grep -o ^.*/$ | xargs ls -d --color=auto'  # visible only
+alias lldirs='ls -lp | GREP_OPTIONS="" grep ".*/$"'    # list details of directories only
+alias lsfiles='ls -p | GREP_OPTIONS="" grep -v ".*/$"'   # list details of files only
+alias llfiles='ls -lp | GREP_OPTIONS="" grep -v ".*/$"'   # list details of files only
 alias lsod='LC_COLLATE=C ls --color=auto --group-directories-first' # sort dir/other, dot/UC/LC
 alias laod='LC_COLLATE=C ls -la --color=auto --group-directories-first'
 alias lsatimes='for x in *; do stat -c"%n	%x" "$x"; done | tabs2cols' # if broken, check tab
 alias sortatimes='for x in *; do stat -c"%x	%n" "$x"; done | tabs2cols | sort'
+# alias lsexec='lsfiles | dolines if [[ -x "$x" ]]; then echo "$x"; fi; done'
+alias lsexec='lsfiles | filterexec'
 
 #-----------------------
 # FILE RENAMING ALIASES.
@@ -63,16 +72,16 @@ alias ecp="qcp -e 'emacsclient -nw'"          # rename files with emacs/qcp
 # WGET & RELATED ALIASES.
 #------------------------
 alias wgetm='wget -mkpE -np'   # -m='-r -N -l inf --no-remove-listing'
-alias wgetm-incdirs='wget -mkpE --include-dirs'   # eg. wgetmincdirs /Tools,/Utilities domainname.com/Tools/index.html
+alias wgetm-incdirs='wget -mkpE --include-directories'   # eg. wgetmincdirs /Tools,/Utilities domainname.com/Tools/index.html
 alias wgetm-noconv='wget -mkp -np'   # -m='-r -N -l inf --no-remove-listing'
-alias wgetm-noconv-incdirs='wget -mkp --include-dirs'   # eg. wgetmincdirs /Tools,/Utilities domainname.com/Tools/index.html
+alias wgetm-noconv-incdirs='wget -mkp --include-directories'   # eg. wgetmincdirs /Tools,/Utilities domainname.com/Tools/index.html
 alias wgetmlimit='wget -rkpNE -np -l'  #eg wgetmlimit 2... (2 recurs lvls)
 alias wgetmcut='wgetm -nH --cut-dirs'  #eg wgetmcut 2 ... (removes root + top 2 subdirs)
 alias wgetmflat='wgetm -nd'
 alias wgetmstealth='wgetm -e robots=off -U="Mozilla" -w 1'
 alias wget1='wget -rNkpE -l 1'
 alias wgetp='wget -NkpE'
-alias wgetcat='wget -pE -O' # usage: wgetcat <filename> <filename> ... <url> #UNTESTED
+alias wgetcat='wget -kpE -O' # usage: wgetcat <filename> <filename> ... <url> #UNTESTED
 alias listhttplinks='xargs elinks --dump | grep "http" | sed "s/.*http/http/g"' # Waits for url from stdin then lists http links on page. echo url | listhttplinks. Pipe to wget.
 alias listhttplinks2='xargs wget -O - 2>&1 | grep -i "http:" | sed "s/^.*http/http/\" | cut -d"\"" -f1 | sort -u'
 
@@ -146,6 +155,7 @@ alias untargz='tar xzvf'
 alias untarbz2='tar xjvf'
 alias untar='tar xaf'    # unarchive - multiple formats  # use unar instead
 alias lstar='tar taf'    # list contents - multiple formats
+alias 7zip='7z a -tzip'  # 7zip myarchive.zip myarchive/
 # tgz [name [files]]    make .tgz out of files
 # unar unarchive multiple formats
 
@@ -187,6 +197,7 @@ alias nautilus='nautilus --no-desktop'
 alias ack='ack-grep'
 alias mc='mc -S gotar'
 alias diff='colordiff -u'
+alias diffdir='diff -r'
 alias bc='bc -l'
 alias echoe='echo -e'
 alias esed='sed -r'
@@ -268,6 +279,24 @@ alias rkt='racket -e "(require readline)" -i'
 # the code to install scribble-emacs (from scribble docs) seems to be broken
 alias update-scribble-mode='racket -e "(require (planet neil/scribble-emacs:1:2/install-in-my-emacs))"'
 alias cppdecl='c++decl'
+alias pcgrep='pkg-config --list-all | grep'
+alias pkgc='pkg-config --libs'
+alias cpkgc='cmake --find-package -DLANGUAGE=C -DCOMPILER_ID=GNU -DMODE=COMPILE'   # eg. cpkgc -DNAME=LibXml2
+
+# ------------------
+# PIPELINE OPERATORS
+# ------------------
+alias maplines='xargs -L1'
+# eg.     ls|dolines printf "`pwd`/$x\n"; done
+alias dolines='while read -r x; do'
+# prdirs: print a list of target directories (ie. resolve symlinks) of files 
+alias prdirs='while read -r line; do dirname "`readlink -f "$line"`"; done | sort | uniq'
+# eg.              ls -l | dofields echo $x9; done
+# equivalent to:   ls -l | awk '{ print $9 }'
+alias dofields='while read -r x1 x2 x3 x4 x5 x6 x7 x8 x9; do'
+# while read -r x; do echo "stmts using $x"; done
+alias imaplines='xargs -d "\n" -n 1 -p'
+alias filterexec='dolines if [[ -x "$x" ]]; then echo "$x"; fi; done'
 
 #---------------
 # OTHER ALIASES.
@@ -287,16 +316,6 @@ alias xevkb="xev | grep -A2 --line-buffered '^KeyRelease' | sed -n '/keycode /s/
 alias concatpdfs='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=out.pdf' # joins pdfs in order
 alias partitionlist='fdisk -l'
 # alias maplines='xargs -d "\n" -n 1'
-alias maplines='xargs -L1'
-# eg.     ls|dolines printf "`pwd`/$x\n"; done
-alias dolines='while read -r x; do'
-# prdirs: print a list of target directories (ie. resolve symlinks) of files 
-alias prdirs='while read -r line; do dirname "`readlink -f "$line"`"; done | sort | uniq'
-# eg.              ls -l | dofields echo $x9; done
-# equivalent to:   ls -l | awk '{ print $9 }'
-alias dofields='while read -r x1 x2 x3 x4 x5 x6 x7 x8 x9; do'
-# while read -r x; do echo "stmts using $x"; done
-alias imaplines='xargs -d "\n" -n 1 -p'
 alias dofiles='for x in *; do'
 # eg.     mapfiles printf "`pwd`/$x\n"; done
 alias mapfiles='for x in *; do echo "$x" |'

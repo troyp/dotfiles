@@ -10,8 +10,8 @@ function irm {
     echo $(ls $1)
     n=$(ls $1 | wc -l)
     read -p "Delete $n files?" -n 1 CONFIRM
-    if [[ $CONFIRM =~ ^[Yy]$ ]]
-    then rm $1
+    if [[ $CONFIRM =~ ^[Yy]$ ]]; then
+	rm $1
     fi
 }
 
@@ -55,3 +55,36 @@ function cbz {
 }
 # cbz quiet
 alias cbzq='cbz > /dev/null'
+
+# compress directory as .tgz
+function maff {
+    # archive_name=`echo "${1%/}" | sed -e 's/ /_/g'`.maff
+    archive_name="${1%/}.maff"
+    7z a -tzip "$archive_name" "$1"
+}
+
+function man2text { man "$1" | col -bx; }
+
+function ussp {
+    converted_name=${1//_/ }
+    if [ ! -f "$converted_name" ]; then 
+	mv "$1" "$converted_name"
+    fi
+}
+ 
+function spus {
+    converted_name=${1// /_}
+    if [ ! -f "$converted_name" ]; then 
+	mv "$1" "$converted_name"
+    fi
+}
+ 
+function dotsp {
+    extension="${1##*.}"
+    base_name="${1%.*}"
+    converted_name="${base_name//./ }.$extension"
+    if [ ! -f "$converted_name" ]; then 
+	mv "$1" "$converted_name"
+    fi
+}
+ 

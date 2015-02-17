@@ -176,5 +176,6 @@
   <Action shortcut="Ctrl+P" name="file_print_preview"/>
   <Action shortcut="Shift+S" name="options_configure"/>
   <Action shortcut="Ctrl+Shift+Z; Ctrl+R" name="edit_redo"/>
+  <Action shortcut=";" name="show_bottombar"/>
  </ActionProperties>
 </kpartgui>
