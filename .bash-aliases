@@ -43,18 +43,22 @@ alias rn='source ranger ranger'    # navigate to new dir with ranger
 #------------
 # LS ALIASES.
 #------------
-alias ls='ls --color=auto'
-alias ll='ls -l --group-directories-first --color=auto'
-alias la='ls -Al --color=auto'
-alias lr='ls -lR --color=auto'
-alias lc='ls -CF --color=auto'
+alias ls='ls --group-directories-first --color=auto'
+alias ll='ls -l'   # list details
+alias lln='ls -lv'   # detailed list natural sort 
+alias llt='ls -lt'   # detailed list sort by last modified
+alias llx='ls -lX'   # detailed list sort by extension
+alias lls='ls -lS'   # detailed list sort by file size
+alias la='ls -Al'    # detailed list dotfiles
+alias lr='ls -lR'    # detailed list recursive 
+alias lc='ls -Cp'    # filenames only, append / to directories
 alias lsdirs='ls -d */'    # list subdirectories of current dir
 alias lsvdirs='ls -p | command grep -o ^.*/$ | xargs ls -d --color=auto'  # visible only
-alias lldirs='ls -lp | GREP_OPTIONS="" grep ".*/$"'    # list details of directories only
-alias lsfiles='ls -p | GREP_OPTIONS="" grep -v ".*/$"'   # list details of files only
+alias lldirs='ls -lp | GREP_OPTIONS="" grep ".*/$"'       # list details of directories only
+alias lsfiles='ls -p | GREP_OPTIONS="" grep -v ".*/$"'    # list details of files only
 alias llfiles='ls -lp | GREP_OPTIONS="" grep -v ".*/$"'   # list details of files only
-alias lsod='LC_COLLATE=C ls --color=auto --group-directories-first' # sort dir/other, dot/UC/LC
-alias laod='LC_COLLATE=C ls -la --color=auto --group-directories-first'
+alias lsod='LC_COLLATE=C ls'      # sort dotfiles, then UC, then LC
+alias laod='LC_COLLATE=C ls -la'
 alias lsatimes='for x in *; do stat -c"%n	%x" "$x"; done | tabs2cols' # if broken, check tab
 alias sortatimes='for x in *; do stat -c"%x	%n" "$x"; done | tabs2cols | sort'
 # alias lsexec='lsfiles | dolines if [[ -x "$x" ]]; then echo "$x"; fi; done'
@@ -63,18 +67,21 @@ alias lsexec='lsfiles | filterexec'
 #-----------------------
 # FILE RENAMING ALIASES.
 #-----------------------
+# alternatives to wdired (C-x d <directory> C-x C-q)
 alias emdir="env EDITOR='emacs -fh' vidir"    # rename files with emacs/vidir
 alias emv="qmv -e 'emacsclient -nw'"          # rename files with emacs/qmv
-alias ecp="qcp -e 'emacsclient -nw'"          # rename files with emacs/qcp
-# gcp    # cp with additional functionality, incl. progress
+alias ecp="qcp -e 'emacsclient -nw'"          # copies files with emacs/qcp
 
 #------------------------
 # WGET & RELATED ALIASES.
 #------------------------
-alias wgetm='wget -mkpE -np'   # -m='-r -N -l inf --no-remove-listing'
-alias wgetm-incdirs='wget -mkpE --include-directories'   # eg. wgetmincdirs /Tools,/Utilities domainname.com/Tools/index.html
-alias wgetm-noconv='wget -mkp -np'   # -m='-r -N -l inf --no-remove-listing'
-alias wgetm-noconv-incdirs='wget -mkp --include-directories'   # eg. wgetmincdirs /Tools,/Utilities domainname.com/Tools/index.html
+alias wgetm='wget -mkp -np'   # -m='-r -N -l inf --no-remove-listing'
+alias wgets='wgetm -nH'
+alias wgetm-incdirs='wget -mkp --include-directories'
+# wgetm-incdirs: eg. wgetmincdirs /Tools,/Utilities domainname.com/Tools/index.html
+alias wgetm-conv='wgetm -E' 
+alias wgetm-conv-incdirs='wget -mkpE --include-directories'
+# wgetm-conv-incdirs: eg. wgetmincdirs /Tools,/Utilities domainname.com/Tools/index.html
 alias wgetmlimit='wget -rkpNE -np -l'  #eg wgetmlimit 2... (2 recurs lvls)
 alias wgetmcut='wgetm -nH --cut-dirs'  #eg wgetmcut 2 ... (removes root + top 2 subdirs)
 alias wgetmflat='wgetm -nd'
@@ -244,7 +251,7 @@ alias htmlcat='htmldoc -f html'
 # enable color support of ls, etc, and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    alias ls='ls --color=auto'
+    # alias ls='ls --color=auto'
     #alias dir='dir --color=auto'
     #alias vdir='vdir --color=auto'
 fi
@@ -340,6 +347,7 @@ alias systeminfo='DISTRO=$(cat /etc/os-release|command grep PRETTY); DISTRO="${D
 alias makelinks='find . -type f -exec printf "<a href={}>{}</a><br>\n"  \; > index.html'
 # http://www.reddit.com/r/commandline/comments/2ofb4e/star_trek_holodeck_noise_for_12_hours_with/
 alias startrek='play -n -c2 synth whitenoise lowpass -1 69 lowpass -1 50 lowpass -1 120 gain +15'
+alias href-relativize="sed -e 's/href=\"http:\/\/[^ \"]*\//href=\"/g'"
 
 # *********************
 # *                   *
@@ -352,6 +360,7 @@ alias startrek='play -n -c2 synth whitenoise lowpass -1 69 lowpass -1 50 lowpass
 # fuser : list open files, ids and processes 
 # lsof, fuser : list processes accessing a file or socket
 # jot -s'' -b'*' 10 : print 10 *s 
+# gcp: cp with additional functionality, incl. progress, munging to handle FAT restrictions,...
 
 # *******************
 # *                 *
@@ -362,4 +371,4 @@ alias startrek='play -n -c2 synth whitenoise lowpass -1 69 lowpass -1 50 lowpass
 # filo
 # numutils
 # suckless-tools
-# jot, enum, rs, ranomize-lines
+# jot, enum, rs, randomize-lines

@@ -1,5 +1,5 @@
 set runtimepath=~/.pentadactyl
-set guioptions=bCrsTn
+set guioptions=bBCrMNsT
 set hintkeys="jfkdls;ahgnvurieow"
 set incfind
 set hlfind
@@ -102,4 +102,7 @@ edx
 
 " Coursera 
 set passkeys+='class.coursera.org/.*/lecture/':'hp-+fc<up><down><left><right>'
+
+" Autopager
+command! apoff :js autopagerMain.enabledThisSite()
 

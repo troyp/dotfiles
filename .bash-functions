@@ -58,8 +58,12 @@ alias cbzq='cbz > /dev/null'
 
 # compress directory as .tgz
 function maff {
-    # archive_name=`echo "${1%/}" | sed -e 's/ /_/g'`.maff
     archive_name="${1%/}.maff"
+    7z a -tzip "$archive_name" "$1"
+}
+
+function maffus {
+    archive_name=`echo "${1%/}" | sed -e 's/ /_/g'`.maff
     7z a -tzip "$archive_name" "$1"
 }
 

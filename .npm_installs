@@ -5,3 +5,4 @@ node
 grunt-cli
 browserify
 gfms
+marked
