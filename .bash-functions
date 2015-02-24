@@ -42,8 +42,9 @@ function tgz {
 
 # convert directory to .cbz
 function cbz {
-    pushd "$1"
-    n=`ls -v | tail -n1 | awk -F'.' '{ print(length($1)) }'`
+    pushd "$1" || return
+    # n=`ls -v | tail -n1 | awk -F'.' '{ print(length($1)) }'`
+    n=`ls -pv | GREP_OPTIONS="" grep -v ".*/$" | tail -n1 | awk -F'.' '{ print(length($1)) }'`;
     for fname in *; do 
 	fnum="${fname%.*}"
 	padded=`printf "%0${n}d.%s" "$(expr $fnum + 0)" "${fname##*.}"`
