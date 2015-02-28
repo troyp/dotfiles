@@ -72,6 +72,12 @@ alias emdir="env EDITOR='emacs -fh' vidir"    # rename files with emacs/vidir
 alias emv="qmv -e 'emacsclient -nw'"          # rename files with emacs/qmv
 alias ecp="qcp -e 'emacsclient -nw'"          # copies files with emacs/qcp
 
+# ------------
+# GREP ALIASES
+# ------------
+alias grep='grep -i --color=auto'
+alias egrep='grep -iE --color=auto'
+
 #------------------------
 # WGET & RELATED ALIASES.
 #------------------------
@@ -88,7 +94,7 @@ alias wgetmflat='wgetm -nd'
 alias wgetmstealth='wgetm -e robots=off -U="Mozilla" -w 1'
 alias wget1='wget -rNkpE -l 1'
 alias wgetp='wget -NkpE'
-alias wgetcat='wget -kpE -O' # usage: wgetcat <filename> <filename> ... <url> #UNTESTED
+alias wgetcat='wget -pE -O' # usage: wgetcat <filename> <filename> ... <url> #UNTESTED
 alias listhttplinks='xargs elinks --dump | grep "http" | sed "s/.*http/http/g"' # Waits for url from stdin then lists http links on page. echo url | listhttplinks. Pipe to wget.
 alias listhttplinks2='xargs wget -O - 2>&1 | grep -i "http:" | sed "s/^.*http/http/\" | cut -d"\"" -f1 | sort -u'
 
@@ -169,7 +175,8 @@ alias 7zip='7z a -tzip'  # 7zip myarchive.zip myarchive/
 #------------------
 # SETTINGS ALIASES.
 #------------------
-alias editalias='${EDITOR:-vim} ~/.bash_aliases; source ~/.bash_aliases'
+alias pralias='cat $BASHALIASFILE'
+alias editalias='${EDITOR:-vim} $BASHALIASFILE; source $BASHALIASFILE'
 alias xres='xrdb ~/.Xresources'
 alias setopts='set -o | grep "on$"'
 alias lspath='echo $PATH|tr ":" "\n"'
@@ -189,7 +196,6 @@ alias blkid='sudo blkid'     # list mounted partitions
 #---------------------
 alias factorlang='/opt/factor/factor'
 alias coline='command col'    # leave col free as a column selection command
-alias pdfdiff='diffpdf'
 alias x='xdg-open'
 alias unmount='umount'
 
@@ -204,11 +210,10 @@ alias nautilus='nautilus --no-desktop'
 alias ack='ack-grep'
 alias mc='mc -S gotar'
 alias diff='colordiff -u'
-alias diffdir='diff -r'
+alias diffdir='diff -rqb'
 alias bc='bc -l'
 alias echoe='echo -e'
 alias esed='sed -r'
-alias pdfg='pdfgrep -n'
 alias sulocate='sudo locate'
 alias sudb='sudo updatedb'
 alias untgz='tar -zxvf'
@@ -288,7 +293,22 @@ alias update-scribble-mode='racket -e "(require (planet neil/scribble-emacs:1:2/
 alias cppdecl='c++decl'
 alias pcgrep='pkg-config --list-all | grep'
 alias pkgc='pkg-config --libs'
-alias cpkgc='cmake --find-package -DLANGUAGE=C -DCOMPILER_ID=GNU -DMODE=COMPILE'   # eg. cpkgc -DNAME=LibXml2
+alias cpkgc='cmake --find-package -DLANGUAGE=C -DCOMPILER_ID=GNU -DMODE=COMPILE'   # eg. cpkgc -DNAME=LibXml2 
+
+# -----------
+# PDF ALIASES
+# -----------
+alias pdfdiff='diffpdf'
+alias pdfg='pdfgrep -n'
+alias concatpdfs='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=out.pdf' # joins pdfs (and bookmarks) in order
+alias sej='sejda-console'
+alias pdfmergeall='sejda-console merge -f *.pdf -o out.pdf'
+alias sejmerge='sejda-console merge' # eg. sejmerge -f file1.pdf file2.pdf -o newfile.pdf
+# unlike pdfjoin, sejda-console merge preserves bookmarks
+alias sejsplit='sejda-console splitbypages'
+alias sejpptojpeg='sejda-console pdftojpeg'
+alias sejpptotext='sejda-console extractpages'
+alias sejtotext='sejda-console extracttext'
 
 # ------------------
 # PIPELINE OPERATORS
@@ -314,13 +334,13 @@ alias choose-and-show='iselect -ma | xargs cat'
 alias hdd='df -hT'
 alias onespace="tr '\t' ' ' | tr -s ' '"  # collapse tabs/spaces into a single space (good with cut)
 alias tolines='tr " \t" "\n\n"'
+alias joinlines='tr "\n" " "'
 alias splitpath='tr ":" "\n"'
 alias firstcol="cut -d' ' -f1"
 alias append='cat >>'
 alias say='spd-say -r -40 -t male2'
 alias xevkb="xev | grep -A2 --line-buffered '^KeyRelease' | sed -n '/keycode /s/^.*keycode \([0-9]*\).* (.*, \(.*\)).*$/\1 \2/p'"
 # alias mans='man -k . | grep'  # use whatis -r (or -w) instead
-alias concatpdfs='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=out.pdf' # joins pdfs in order
 alias partitionlist='fdisk -l'
 # alias maplines='xargs -d "\n" -n 1'
 alias dofiles='for x in *; do'

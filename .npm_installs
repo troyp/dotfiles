@@ -6,3 +6,4 @@ grunt-cli
 browserify
 gfms
 marked
+jshint

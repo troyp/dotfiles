@@ -93,3 +93,34 @@ function dotsp {
     fi
 }
  
+function pdfbmarks-out {
+    # pdfmarks PDF_DOC > BMARKFILE
+    pdftk "$1" dump_data
+}
+
+function pdfbmarks-in {
+    # pdfbmarks PDF_DOC BMARK_FILE
+    # produces new pdf 'out.pdf'
+    pdftk "$1" update_info "$2" output out.pdf
+}
+
+function quick-diffdir {
+    diff <(cd "$1" && find | sort) <(cd "$2" && find | sort)
+}
+
+function findinfilename {
+    find * -regextype posix-extended -type f -iregex "^[^.]*$1[^/]*$"
+}
+
+function findinfofile {
+    locate --regex "/$1\.info(\.gz)?$"
+}
+
+function apt-install-from-file {
+    sudo apt-get install `cat $1 | tr '\n' ' '`
+}
+
+function einfo {
+    emacsclient --eval "(info \"$(findinfofile $1)\")"
+}
+

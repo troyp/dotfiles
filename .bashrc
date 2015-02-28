@@ -34,7 +34,8 @@ paths=(
     /opt/Amber/bin
     /opt/redline
     /opt/epub2pdf
-    /opt/Nimrod/bin
+    /opt/nim/bin
+    $HOME/.nimble/bin
     /opt/gcolor3/src
     /opt/utorrent-server-v3_0
     $HOME/local/bin
@@ -48,6 +49,10 @@ paths=(
     /opt/lfe-master/bin
     /usr/local/texlive/2014/bin/x86_64-linux
     /opt/pdf-diff
+    /opt/pdfdir
+    /opt/sejda-console/bin
+    /opt/jpdfbookmarks
+    /opt/info2html
     $HOME/.rvm/bin
     $HOME/.linuxbrew/bin
     $HOME/.fzf
@@ -64,6 +69,7 @@ for i in "${paths[@]}"; do pathappend "$i" ; done
 # *             *
 # ***************
 
+BASHALIASFILE=$HOME/.bash-aliases
 LD_LIBRARY_PATH=/usr/local/lib
 INFOPATH=$INFOPATH:/usr/local/texlive/2014/texmf-dist/doc/info
 INFOPATH=$INFOPATH:$HOME/.linuxbrew/share/info
@@ -88,9 +94,6 @@ LIBOVERLAY_SCROLLBAR=0
 GTAGSCONF=/usr/share/doc/global/examples/gtags.conf
 VIMPAGER_RC=/opt/vimpager/vimpagerrc
 SWEAVE_STYLEPATH_DEFAULT="TRUE"
-
-# ---GREP---
-GREP_OPTIONS='-i --color=auto'
 
 
 # *****************

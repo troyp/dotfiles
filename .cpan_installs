@@ -1,2 +1,8 @@
 CAM::PDF
 utop
+Devel::REPL
+Devel::REPL::Plugin::ReadLineHistory
+Term::ReadLine
+Term::ReadLine::Gnu
+File::Next
+B::Keywords
