@@ -1,10 +1,16 @@
 set -a
 
+function append-to-path-var {
+    if [ -d "$2" ] && [[ ":$(printenv $1):" != *":$2:"*  ]]; then
+        eval "$1=\${$1}:$2"
+    fi
+}
 pathappend() {
     if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
         PATH="$PATH:$1"
     fi
 }
+
 PATH=${PATH%:.}  # remove . from end of $PATH
 paths=(
     $HOME/local/bin
@@ -69,10 +75,16 @@ for i in "${paths[@]}"; do pathappend "$i" ; done
 # *             *
 # ***************
 
+infopaths=(
+    /usr/local/texlive/2014/texmf-dist/doc/info
+    $HOME/.linuxbrew/share/info
+    /opt/info
+)
+for i in "${infopaths[@]}"; do append-to-path-var "INFOPATH" "$i" ; done
+
+
 BASHALIASFILE=$HOME/.bash-aliases
 LD_LIBRARY_PATH=/usr/local/lib
-INFOPATH=$INFOPATH:/usr/local/texlive/2014/texmf-dist/doc/info
-INFOPATH=$INFOPATH:$HOME/.linuxbrew/share/info
 MANPATH=$MANPATH:/usr/local/texlive/2014/texmf-dist/doc/man
 MANPATH=$MANPATH:$HOME/.linuxbrew/share/man
 CLASSPATH=$CLASSPATH:.

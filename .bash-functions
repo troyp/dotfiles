@@ -20,7 +20,6 @@ function explode {
 }
 
 function remove-last {
-    cp $1 "$1.bk"
     head -n -1 $1 > temp-remove-last
     mv temp-remove-last $1
 }

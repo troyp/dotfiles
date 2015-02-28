@@ -82,16 +82,20 @@ alias egrep='grep -iE --color=auto'
 # WGET & RELATED ALIASES.
 #------------------------
 alias wgetm='wget -mkp -np'   # -m='-r -N -l inf --no-remove-listing'
+alias wgetmf="wgetm --reject-regex '.*[?].*'"  # filter out URLs with params
 alias wgets='wgetm -nH'
-alias wgetm-incdirs='wget -mkp --include-directories'
+alias wgetsf='wgetmf -nH'
 # wgetm-incdirs: eg. wgetmincdirs /Tools,/Utilities domainname.com/Tools/index.html
+alias wgetm-incdirs='wget -mkp --include-directories'
+alias wgetmf-incdirs="wget -mkp --reject-regex '.*[?].*' --include-directories"
 alias wgetm-conv='wgetm -E' 
 alias wgetm-conv-incdirs='wget -mkpE --include-directories'
-# wgetm-conv-incdirs: eg. wgetmincdirs /Tools,/Utilities domainname.com/Tools/index.html
 alias wgetmlimit='wget -rkpNE -np -l'  #eg wgetmlimit 2... (2 recurs lvls)
 alias wgetmcut='wgetm -nH --cut-dirs'  #eg wgetmcut 2 ... (removes root + top 2 subdirs)
+alias wgetmfcut='wgetmf -nH --cut-dirs'  #eg wgetmcut 2 ... (removes root + top 2 subdirs)
 alias wgetmflat='wgetm -nd'
 alias wgetmstealth='wgetm -e robots=off -U="Mozilla" -w 1'
+alias wgetmfstealth='wgetmf -e robots=off -U="Mozilla" -w 1'
 alias wget1='wget -rNkpE -l 1'
 alias wgetp='wget -NkpE'
 alias wgetcat='wget -pE -O' # usage: wgetcat <filename> <filename> ... <url> #UNTESTED
@@ -101,8 +105,9 @@ alias listhttplinks2='xargs wget -O - 2>&1 | grep -i "http:" | sed "s/^.*http/ht
 #------------------------
 # BROWSER/SERVER ALIASES.
 #------------------------
-# alias manh='man -Hfirefox'   # problem with grohtml images
-alias manh='man -Hchromium-browser'   # problem with grohtml images
+# currently problem with man -H: use manh function (works via man2html)
+# alias manht='man -Hfirefox'   # problem with grohtml images
+# alias manht='man -Hchromium-browser'   # problem with grohtml images
 alias archm='sudo archmage -p'    # eg. archm 81 myfile.chm
 alias ff='firefox -no-remote -P'
 alias ffmain='firefox no-remote -P default'
