@@ -143,8 +143,8 @@
   <Action shortcut="Ctrl+Left; Ctrl+K" name="previous_bookmark"/>
   <Action shortcut="Alt+Down" name="view_scroll_down"/>
   <Action shortcut="Alt+Up" name="view_scroll_up"/>
-  <Action shortcut="F3; N" name="edit_find_next"/>
-  <Action shortcut="Shift+F3; Shift+N" name="edit_find_prev"/>
+  <Action shortcut="F3; Ctrl+N" name="edit_find_next"/>
+  <Action shortcut="Shift+F3; Ctrl+Shift+N" name="edit_find_prev"/>
   <Action shortcut="Ctrl+Z; U" name="edit_undo"/>
   <Action shortcut="D" priority="0" name="presentation_drawing_mode"/>
   <Action shortcut="2" name="view_render_mode_facing"/>

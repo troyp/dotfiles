@@ -81,18 +81,16 @@ alias egrep='grep -iE --color=auto'
 #------------------------
 # WGET & RELATED ALIASES.
 #------------------------
-alias wgetm='wget -mkp -np'   # -m='-r -N -l inf --no-remove-listing'
+alias wgetm='wget -mkp -np -nH'   # -m='-r -N -l inf --no-remove-listing'
 alias wgetmf="wgetm --reject-regex '.*[?].*'"  # filter out URLs with params
-alias wgets='wgetm -nH'
-alias wgetsf='wgetmf -nH'
 # wgetm-incdirs: eg. wgetmincdirs /Tools,/Utilities domainname.com/Tools/index.html
-alias wgetm-incdirs='wget -mkp --include-directories'
-alias wgetmf-incdirs="wget -mkp --reject-regex '.*[?].*' --include-directories"
+alias wgetm-incdirs='wget -mkp -nH --include-directories'
+alias wgetmf-incdirs="wget -mkp -nH --reject-regex '.*[?].*' --include-directories"
 alias wgetm-conv='wgetm -E' 
 alias wgetm-conv-incdirs='wget -mkpE --include-directories'
-alias wgetmlimit='wget -rkpNE -np -l'  #eg wgetmlimit 2... (2 recurs lvls)
-alias wgetmcut='wgetm -nH --cut-dirs'  #eg wgetmcut 2 ... (removes root + top 2 subdirs)
-alias wgetmfcut='wgetmf -nH --cut-dirs'  #eg wgetmcut 2 ... (removes root + top 2 subdirs)
+alias wgetmlimit='wget -rkpNE -np -nH -l'  #eg wgetmlimit 2... (2 recurs lvls)
+alias wgetmcut='wgetm --cut-dirs'  #eg wgetmcut 2 ... (removes root + top 2 subdirs)
+alias wgetmfcut='wgetmf --cut-dirs'  #eg wgetmcut 2 ... (removes root + top 2 subdirs)
 alias wgetmflat='wgetm -nd'
 alias wgetmstealth='wgetm -e robots=off -U="Mozilla" -w 1'
 alias wgetmfstealth='wgetmf -e robots=off -U="Mozilla" -w 1'
@@ -150,6 +148,15 @@ alias emacs-bindings='set -o emacs'
 alias bashref='xrun ~/ebooks/coding/Shell\ Scripting/Bash\ Quick\ Reference.pdf &'
 
 
+# ---------------
+# PROCESS ALIASES
+# ---------------
+alias allprocs='ps aux'
+alias findproc='ps aux | grep'
+alias myprocs='ps uxf'
+alias myprocsbymem='ps -u $USER -O pid,user,s,tty,%mem,comm,start,cputime --sort -%mem'
+alias die='killall -vs9'
+
 #-----------------------
 # COLOUR PICKER ALIASES.
 #-----------------------
@@ -165,6 +172,19 @@ alias pickrgb='grabc 1>/dev/null | xsel -ib'
 alias cf='xclip-copyfile'
 alias xf='xclip-cutfile'
 alias pf='xclip-pastefile'
+
+# --------------
+# PAGER ALIASES.
+# --------------
+alias vip='vimpager'
+alias wvip='PAGER=vimpager'
+alias vman='MANPAGER=vimpager man'
+# follow appended data (like tail -f) in less
+alias fless='less +F'
+alias vless='vim -u $VIMRUNTIME/macros/less.sh'
+alias vmore='vim -u $HOME/.vim/vimrc.more'
+alias cless="LESSOPEN='|~/.lessfilter %s' less -R"
+
 
 #-----------------
 # ARCHIVE ALIASES.
@@ -203,6 +223,9 @@ alias factorlang='/opt/factor/factor'
 alias coline='command col'    # leave col free as a column selection command
 alias x='xdg-open'
 alias unmount='umount'
+alias jcons='/opt/j64-801/bin/jconsole'
+# alias handyoutliner='opt/handyoutliner/start-linux'
+alias handyoutliner='mono opt/handyoutliner/HandyOutliner.exe'
 
 #---------------------------------
 # APPLICATION DEFAULTS & VARIANTS.
@@ -222,12 +245,6 @@ alias esed='sed -r'
 alias sulocate='sudo locate'
 alias sudb='sudo updatedb'
 alias untgz='tar -zxvf'
-alias vip='vimpager'
-# follow appended data (like tail -f) in less
-alias fless='less +F'
-alias vless='vim -u $VIMRUNTIME/macros/less.sh'
-alias vmore='vim -u $HOME/.vim/vimrc.more'
-alias cless="LESSOPEN='|~/.lessfilter %s' less -R"
 alias grepc="grep --color=always"  # color grep for pipes
 alias dfh='df -h'
 alias rscopy='rsync -avzH --progress'
@@ -256,7 +273,6 @@ alias transpose='rs -T'
 alias align='column -t'
 # repeat character, eg.    rep '*' 20
 alias rep='jot -s "" -b'
-alias htmlcat='htmldoc -f html'
 
 # enable color support of ls, etc, and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
@@ -299,6 +315,13 @@ alias cppdecl='c++decl'
 alias pcgrep='pkg-config --list-all | grep'
 alias pkgc='pkg-config --libs'
 alias cpkgc='cmake --find-package -DLANGUAGE=C -DCOMPILER_ID=GNU -DMODE=COMPILE'   # eg. cpkgc -DNAME=LibXml2 
+
+# -----------------
+# HTML MANIPULATION
+# -----------------
+alias htmlcat='htmldoc -f html'
+alias makelinks='find . -type f -exec printf "<a href={}>{}</a><br>\n"  \; > index.html'
+alias href-relativize="sed -e 's/href=\"http:\/\/[^ \"]*\//href=\"/g'"
 
 # -----------
 # PDF ALIASES
@@ -352,9 +375,6 @@ alias dofiles='for x in *; do'
 # eg.     mapfiles printf "`pwd`/$x\n"; done
 alias mapfiles='for x in *; do echo "$x" |'
 alias locatedirs='cat|xargs locate|prdirs'
-alias myprocs='ps uxf'
-alias myprocsbymem='ps -u $USER -O pid,user,s,tty,%mem,comm,start,cputime --sort -%mem'
-alias die='killall -vs9'
 alias distro='cat /etc/lsb-release'
 alias ranalnum='tr -dc "[:lower:]0-9" < /dev/urandom | head -c'
 alias ranAlnum='tr -dc "[:alpha:]0-9" < /dev/urandom | head -c'
@@ -363,16 +383,18 @@ alias ranAlpha='tr -dc "[:alpha:]" < /dev/urandom | head -c'
 alias rannum='tr -dc "0-9" < /dev/urandom | head -c'
 alias deduppath="awk -F: '{for (i=1;i<=NF;i++) { if ( !x[\$i]++ ) printf(\"%s:\",\$i); }}'"
 alias pman='pinfo -m'
-alias starwars='telnet towel.blinkenlights.nl'
 alias remove-wayback-insert="sed -i '/BEGIN WAYBACK TOOLBAR INSERT/,/END WAYBACK TOOLBAR INSERT/d'"
 alias tabs2cols="column -t -s $'\t'"
-alias mihtm="tmp=$(mktemp); mediainfo --Output=HTML > $tmp; firefox $tmp"
-alias pc="python2 -c 'from math import *; from operator import *; from itertools import *; from functools import *; print "
+alias pyc="python2 -c 'from math import *; from operator import *; from itertools import *; from functools import *; print "
 alias systeminfo='DISTRO=$(cat /etc/os-release|command grep PRETTY); DISTRO="${DISTRO#PRETTY_NAME=\"}"; printf "DISTRO: ${DISTRO%\"}\nARCH:   $(uname -i)\nKERNEL: $(uname -r)\nNODE:   $(uname -n)\n"'
-alias makelinks='find . -type f -exec printf "<a href={}>{}</a><br>\n"  \; > index.html'
+
+# -------
+# NOVELTY
+# -------
+alias starwars='telnet towel.blinkenlights.nl'
 # http://www.reddit.com/r/commandline/comments/2ofb4e/star_trek_holodeck_noise_for_12_hours_with/
 alias startrek='play -n -c2 synth whitenoise lowpass -1 69 lowpass -1 50 lowpass -1 120 gain +15'
-alias href-relativize="sed -e 's/href=\"http:\/\/[^ \"]*\//href=\"/g'"
+
 
 # *********************
 # *                   *

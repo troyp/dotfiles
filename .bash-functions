@@ -123,3 +123,14 @@ function einfo {
     emacsclient --eval "(info \"$(findinfofile $1)\")"
 }
 
+function linkcount {
+    linkcount=$(ls -l "$1" | tr '\t' ' ' | tr -s ' ' | cut -d' ' -f2)
+    echo $linkcount
+}
+
+function mihtm {
+   tmp=$(mktemp)
+   mediainfo --Output=HTML "$1" > "$tmp"
+   ${BROWSER:-sensible-browser} "$tmp"
+}
+ 

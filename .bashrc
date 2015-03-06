@@ -63,6 +63,7 @@ paths=(
     $HOME/.linuxbrew/bin
     $HOME/.fzf
     $HOME/.emacs.d
+    $HOME/.scripts
 )
 for i in "${paths[@]}"; do pathappend "$i" ; done
 # pathappend "/opt/mozart/platform/unknown-unknown"
