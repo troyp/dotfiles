@@ -4,3 +4,9 @@ add Control = Control_L
 
 keycode 115 = Super_L
 add mod4 = Super_L
+
+keycode 133 = Mode_switch
+keysym j = j J Down
+keysym l = l L Right
+keysym h = h H Left
+keysym k = k K Up
