@@ -93,14 +93,25 @@ function dotsp {
 }
  
 function pdfbmarks-out {
-    # pdfmarks PDF_DOC > BMARKFILE
+    # pdfbmarks-out PDF_DOC > BMARKFILE
     pdftk "$1" dump_data
 }
 
 function pdfbmarks-in {
-    # pdfbmarks PDF_DOC BMARK_FILE
+    # pdfbmarks-in PDF_DOC BMARK_FILE
     # produces new pdf 'out.pdf'
     pdftk "$1" update_info "$2" output out.pdf
+}
+
+function djbmarks-out {
+    # djbmarks-out PDF_DOC  BMARKFILE
+    djvused "$1" -e 'print-outline' > "$2"
+}
+
+function djbmarks-in {
+    # djbmarks-in PDF_DOC BMARK_FILE
+    # produces new pdf 'out.pdf'
+    djvused "$1" -e "set-outline \"$2\"; save"
 }
 
 function quick-diffdir {

@@ -225,7 +225,7 @@ alias x='xdg-open'
 alias unmount='umount'
 alias jcons='/opt/j64-801/bin/jconsole'
 # alias handyoutliner='opt/handyoutliner/start-linux'
-alias handyoutliner='mono opt/handyoutliner/HandyOutliner.exe'
+alias handyoutliner='mono /opt/handyoutliner/HandyOutliner.exe'
 
 #---------------------------------
 # APPLICATION DEFAULTS & VARIANTS.
