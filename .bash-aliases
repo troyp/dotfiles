@@ -212,7 +212,9 @@ alias update-fonts='fc-cache -vf ~/.fonts/'
 # HARDWARE ALIASES.
 # -----------------
 alias lstab='cat /etc/mtab'  # list mounted partitions / filesystems in fstab format 
+alias etab='sudo $(echo ${EDITOR:-vim}) /etc/fstab' # customize auto-mounted partitions / filesystems in fstab file 
 alias uuids='ls -al /dev/disk/by-uuid/'  # list /dev partitions with UUIDs
+alias uuid='ls -al /dev/disk/by-uuid/ | grep'  # list a /dev partition with its UUID
 alias lshws='lshw -short'    # list hardware in compact format
 alias blkid='sudo blkid'     # list mounted partitions
 

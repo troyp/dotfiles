@@ -92,26 +92,46 @@ function dotsp {
     fi
 }
  
-function pdfbmarks-out {
-    # pdfbmarks-out PDF_DOC > BMARKFILE
+function pdfoutline-out {
+    # pdfoutline-out PDF_DOC > BMARKFILE
     pdftk "$1" dump_data
 }
 
-function pdfbmarks-in {
-    # pdfbmarks-in PDF_DOC BMARK_FILE
+function pdfoutline-in {
+    # pdfoutline-in PDF_DOC BMARK_FILE
     # produces new pdf 'out.pdf'
     pdftk "$1" update_info "$2" output out.pdf
 }
 
-function djbmarks-out {
-    # djbmarks-out PDF_DOC  BMARKFILE
+function pdfoutline-edit {
+    # pdfoutline-edit PDF_DOC 
+    # edit bookmarks of PDF_DOC
+    outline=$(mktemp)
+    output=$(mktemp)
+    pdftk "$1" dump_data > $outline
+    `echo ${EDITOR:-vim} $outline`
+    pdftk "$1" update_info $outline output $output
+    mv $output "$1"
+}
+
+function djoutline-out {
+    # djoutline-out DJVU_DOC BMARKFILE
     djvused "$1" -e 'print-outline' > "$2"
 }
 
-function djbmarks-in {
-    # djbmarks-in PDF_DOC BMARK_FILE
+function djoutline-in {
+    # djoutline-in DJVU_DOC BMARK_FILE
     # produces new pdf 'out.pdf'
     djvused "$1" -e "set-outline \"$2\"; save"
+}
+
+function djoutline-edit {
+    # djoutline-edit DJVU_DOC 
+    # edit bookmarks of DJVU_DOC
+    outline=$(mktemp)
+    djvused "$1" -e 'print-outline' > $outline
+    `echo ${EDITOR:-vim} $outline`
+    djvused "$1" -e "set-outline $outline; save"
 }
 
 function quick-diffdir {
@@ -145,3 +165,11 @@ function mihtm {
    ${BROWSER:-sensible-browser} "$tmp"
 }
  
+function uuid2dev {
+    line=$(ls -al /dev/disk/by-uuid/ | grep $1)
+    echo ${line##*/}
+}
+
+function dev2uuid {
+    ls -n /dev/disk/by-uuid/ | grep $1 | cut -d' ' -f9
+}
