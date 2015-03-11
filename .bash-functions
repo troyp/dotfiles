@@ -171,5 +171,9 @@ function uuid2dev {
 }
 
 function dev2uuid {
-    ls -n /dev/disk/by-uuid/ | grep $1 | cut -d' ' -f9
+    line=`ls -n  /dev/disk/by-uuid/ | grep $1`
+    # extract substring:
+    # echo $line | cut -d' ' -f9    # depends on #cols in ls -n
+    # echo $line | sed -r 's/.* ([-0-9a-f]+) -> \.\.\/\.\.\/\w+/\1/'    # sed e-regexp
+    echo $line | grep -Po '(?<= )([-0-9a-f]+)(?= ->)'    # grep w/ Perl-compat regexp
 }
