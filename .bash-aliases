@@ -228,6 +228,8 @@ alias unmount='umount'
 alias jcons='/opt/j64-801/bin/jconsole'
 # alias handyoutliner='opt/handyoutliner/start-linux'
 alias handyoutliner='mono /opt/handyoutliner/HandyOutliner.exe'
+alias clock='cairo-clock -deops -x 1695 -y 104 -w 200 -h 200 -r 1 -t radium'
+alias gremclock='cairo-clock -deops -x 1695 -y 104 -w 200 -h 200 -r 1 -t gremlin'
 
 #---------------------------------
 # APPLICATION DEFAULTS & VARIANTS.

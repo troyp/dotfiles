@@ -1,0 +1,24 @@
+textEncoding UTF-8
+textEOL unix
+
+enableFreeType yes
+antialias yes
+
+#psPaperSize A4
+
+urlCommand "firefox %s"
+
+bind h any scrollLeft(35)
+bind l any scrollRight(35)
+bind k any scrollUpPrevPage(35)
+bind j any scrollDownNextPage(35)
+bind ctrl-f any scrollDownNextPage(320)
+bind ctrl-b any scrollUpPrevPage(320)  
+bind ctrl-d any scrollDownNextPage(160)
+bind ctrl-u any scrollUpPrevPage(160)  
+                                       
+bind g  any gotoPage(1)            
+bind G  any gotoLastPage               
+bind /  any find               
+
+bind l any "run(ls -l)"

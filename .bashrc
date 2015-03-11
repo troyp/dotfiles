@@ -11,6 +11,18 @@ pathappend() {
     fi
 }
 
+
+# ***************
+# *             *
+# * ENVIRONMENT *
+# * VARIABLES   *
+# *             *
+# ***************
+
+# ------
+# PATHS.
+# ------
+
 PATH=${PATH%:.}  # remove . from end of $PATH
 paths=(
     $HOME/local/bin
@@ -64,17 +76,9 @@ paths=(
     $HOME/.fzf
     $HOME/.emacs.d
     $HOME/.scripts
+    # /opt/mozart/platform/unknown-unknown
 )
 for i in "${paths[@]}"; do pathappend "$i" ; done
-# pathappend "/opt/mozart/platform/unknown-unknown"
-
-
-# ***************
-# *             *
-# * ENVIRONMENT *
-# * VARIABLES   *
-# *             *
-# ***************
 
 infopaths=(
     /usr/local/texlive/2014/texmf-dist/doc/info
@@ -83,29 +87,44 @@ infopaths=(
 )
 for i in "${infopaths[@]}"; do append-to-path-var "INFOPATH" "$i" ; done
 
+manpaths=(
+    /usr/local/texlive/2014/texmf-dist/doc/man
+    $HOME/.linuxbrew/share/man
+)
+for i in "${manpaths[@]}"; do append-to-path-var "MANPATH" "$i" ; done
+
+cdpaths=(
+    $HOME/.cdpath/
+    $HOME/ebooks/
+    $HOME/Downloads
+)
+for i in "${cdpaths[@]}"; do append-to-path-var "CDPATH" "$i" ; done
+
+LD_LIBRARY_PATH=/usr/local/lib
+CLASSPATH=$CLASSPATH:.
+FACTOR_ROOTS=$FACTOR_ROOTS:$HOME/code/factor
+
+# ---------
+# LOCATIONS
+# ---------
 
 BASHALIASFILE=$HOME/.bash-aliases
-LD_LIBRARY_PATH=/usr/local/lib
-MANPATH=$MANPATH:/usr/local/texlive/2014/texmf-dist/doc/man
-MANPATH=$MANPATH:$HOME/.linuxbrew/share/man
-CLASSPATH=$CLASSPATH:.
-# OZHOME=/opt/mozart2
+GTAGSCONF=/usr/share/doc/global/examples/gtags.conf
+VIMPAGER_RC=/opt/vimpager/vimpagerrc
 OZHOME=/usr
-FACTOR_ROOTS=$FACTOR_ROOTS:$HOME/code/factor
-XDG_CONFIG_HOME=$HOME/.config
-CDPATH=.:$HOME/.cdpath/:$HOME/ebooks/:$HOME/Downloads
 REDLINE_HOME=/opt/redline
+XDG_CONFIG_HOME=$HOME/.config
+
+# ------
+# OTHER.
+# ------
+
 HISTCONTROL=ignorespace:erasedups
 HISTSIZE=2000
 HISTFILESIZE=2000
-#PAGER=vimpager
-#MANPAGER=vimpager
 EDITOR=vim
-#OZEMACS="z:\\programs\\XEmacs\\XEmacs-21.4.22\\i586-pc-win32\\xemacs.exe"
 _JAVA_AWT_WM_NONREPARENTING=1; export _JAVA_AWT_WM_NONREPARENTING
 LIBOVERLAY_SCROLLBAR=0
-GTAGSCONF=/usr/share/doc/global/examples/gtags.conf
-VIMPAGER_RC=/opt/vimpager/vimpagerrc
 SWEAVE_STYLEPATH_DEFAULT="TRUE"
 
 
@@ -230,6 +249,7 @@ if [ -f ~/.bash-aliases ]; then . ~/.bash-aliases; fi
 if [ -f ~/.bash-prompt ]; then . ~/.bash-prompt; fi
 if [ -f ~/.bash-functions ]; then . ~/.bash-functions; fi
 if [ -f ~/.rvm/scripts/rvm ]; then . ~/.rvm/scripts/rvm; fi
+if [ -f /etc/profile.d/bash_completion.sh ]; then . /etc/profile.d/bash_completion.sh; fi
 
 
 # *************
