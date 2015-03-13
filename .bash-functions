@@ -177,3 +177,27 @@ function dev2uuid {
     # echo $line | sed -r 's/.* ([-0-9a-f]+) -> \.\.\/\.\.\/\w+/\1/'    # sed e-regexp
     echo $line | grep -Po '(?<= )([-0-9a-f]+)(?= ->)'    # grep w/ Perl-compat regexp
 }
+
+function loc1 { locate "$1" | head -n1; }
+
+function tohtml {
+    # usage:    tohtml [ PORT [ STYLE DECLARATIONS ] ]
+    # eg:       ls -l | tohtml 8000 "color: blue"
+    tmp=$(mktemp)
+
+    printf 'HTTP/1.1 200 OK\n\n' >> $tmp
+    printf '<html><body style="' >> $tmp
+    echo -n "$2" >> $tmp
+    printf '">' >> $tmp
+    while read -r line
+    do
+	printf "$line" | htent >> $tmp
+	printf "</br>\n" >> $tmp
+    done
+    printf '</body></html>' >> $tmp
+
+    while true
+    do
+	cat $tmp | nc -l ${1:-8080}
+    done   
+}

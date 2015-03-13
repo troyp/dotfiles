@@ -10,6 +10,7 @@ set strictfocus=mail.google.com:laissez-faire,'chrome:*':laissez-faire,*:moderat
 set newtab=all
 " make yanks go to clipboard
 js editor.defaultRegister="+"
+set! browser.tabs.closeWindowWithLastTab=false
 
 map -g user -b , @:
 
@@ -117,9 +118,11 @@ set passkeys+='class.coursera.org/.*/lecture/':'hp-+fc<up><down><left><right>'
 
 " Autopager
 command! apoff :js autopagerMain.enabledThisSite()
+command! ap :js autopagerMain.onEnable()
 
 " Pages
 command! ac :winopen about:config
 
-
+" Print What You Like
+command! prwul :o javascript:(function(){if(window['ppw']&&ppw['bookmarklet']){ppw.bookmarklet.toggle();}else{window._pwyl_home=%22http://www.printwhatyoulike.com/%22;_pwyl_bmkl=document.createElement('script');_pwyl_bmkl.setAttribute('type','text/javascript');_pwyl_bmkl.setAttribute('src',_pwyl_home+'static/compressed/pwyl_bookmarklet_10.js');_pwyl_bmkl.setAttribute('pwyl','true');document.getElementsByTagName('head')[0].appendChild(_pwyl_bmkl);}})();
 

@@ -19,9 +19,9 @@ alias aptcp='apt-cache policy'
 alias aptcsh='apt-cache show'
 alias aptgetkey='sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys'  # Ubuntu
 alias aptsh='sudo aptsh'
-alias sdi='sudo dpkg -i'
-alias sdr='sudo dpkg -r'
-alias sar='sudo apt-add-repository'
+alias sdebi='sudo dpkg -i'
+alias sdebr='sudo dpkg -r'
+alias saptar='sudo apt-add-repository'
 alias listinstalled-manual="comm -23 <(apt-mark showmanual | sort -u) <(gzip -dc /var/log/installer/initial-status.gz | sed -n 's/^Package: //p' | sort -u)"
 alias synaptic_enable_quicksearch='sudo apt-get install apt-xapian-index; sudo update-apt-xapian-index -vf'
 
@@ -208,83 +208,22 @@ alias lspath='echo $PATH|tr ":" "\n"'
 alias install-desktop-files='xdg-desktop-menu install --novendor'
 alias update-fonts='fc-cache -vf ~/.fonts/'
 
-# -----------------
-# HARDWARE ALIASES.
-# -----------------
+# --------------------------
+# SYSTEM / HARDWARE ALIASES.
+# --------------------------
+alias hdd='df -hT'
+alias partitionlist='fdisk -l'
+alias distro='cat /etc/lsb-release'
+alias systeminfo='DISTRO=$(cat /etc/os-release|command grep PRETTY); DISTRO="${DISTRO#PRETTY_NAME=\"}"; printf "DISTRO: ${DISTRO%\"}\nARCH:   $(uname -i)\nKERNEL: $(uname -r)\nNODE:   $(uname -n)\n"'
 alias lstab='cat /etc/mtab'  # list mounted partitions / filesystems in fstab format 
 alias etab='sudo $(echo ${EDITOR:-vim}) /etc/fstab' # customize auto-mounted partitions / filesystems in fstab file 
 alias uuids='ls -al /dev/disk/by-uuid/'  # list /dev partitions with UUIDs
 alias uuid='ls -al /dev/disk/by-uuid/ | grep'  # list a /dev partition with its UUID
-alias lshws='lshw -short'    # list hardware in compact format
 alias blkid='sudo blkid'     # list mounted partitions
-
-#---------------------
-# APPLICATION ALIASES.
-#---------------------
-alias factorlang='/opt/factor/factor'
-alias coline='command col'    # leave col free as a column selection command
-alias x='xdg-open'
-alias unmount='umount'
-alias jcons='/opt/j64-801/bin/jconsole'
-# alias handyoutliner='opt/handyoutliner/start-linux'
-alias handyoutliner='mono /opt/handyoutliner/HandyOutliner.exe'
-alias clock='cairo-clock -deops -x 1695 -y 104 -w 200 -h 200 -r 1 -t radium'
-alias gremclock='cairo-clock -deops -x 1695 -y 104 -w 200 -h 200 -r 1 -t gremlin'
-
-#---------------------------------
-# APPLICATION DEFAULTS & VARIANTS.
-#---------------------------------
-alias vi='nvi'
-alias enw='emacs -nw'
-alias e='emacsclient -nw'
-alias roxterm-display='roxterm --hide-menubar -T "Roxterm Display" -z 1.3 --geometry=70x40'
-alias nautilus='nautilus --no-desktop'
-alias ack='ack-grep'
-alias mc='mc -S gotar'
-alias diff='colordiff -u'
-alias diffdir='diff -rqb'
-alias bc='bc -l'
-alias echoe='echo -e'
-alias esed='sed -r'
-alias sulocate='sudo locate'
-alias sudb='sudo updatedb'
-alias untgz='tar -zxvf'
-alias grepc="grep --color=always"  # color grep for pipes
-alias dfh='df -h'
-alias rscopy='rsync -avzH --progress'
-alias rsupdate='rsync -auvzH --progress'
-#alias info='pinfo'
-alias edx-dl='edx-dl -s'
-alias info='info --vi-keys'
-alias pdfgrep='pdfgrep -n'
-alias symlink='ln -s'
-alias sln='ln -s'
-alias octave='octave --quiet'
-alias qiv='qiv -e'
-# ------------------------------------------------------
-# rs variants:
-# ------------
-# row2col: eg.    echo 1 2 3 | row2col
-# equivalent to row2col='xargs printf "%d\n"'
-alias row2col='rs 0 1'
-alias r2c='rs 0 1'
-alias col2row='rs 1 0'
-alias c2r='rs 1 0'
-# transpose: eg.    printf "1 2 3\n4 5 6\n" | transpose
-alias transpose='rs -T'
-# ------------------------------------------------------
-# align columns
-alias align='column -t'
-# repeat character, eg.    rep '*' 20
-alias rep='jot -s "" -b'
-
-# enable color support of ls, etc, and also add handy aliases
-if [ -x /usr/bin/dircolors ]; then
-    test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
-    # alias ls='ls --color=auto'
-    #alias dir='dir --color=auto'
-    #alias vdir='vdir --color=auto'
-fi
+alias lshws='lshw -short'    # list hardware in compact format
+alias xevkb="xev | grep -A2 --line-buffered '^KeyRelease' | sed -n '/keycode /s/^.*keycode \([0-9]*\).* (.*, \(.*\)).*$/\1 \2/p'"
+alias capslockoff='sudo setleds -D -caps < /dev/console'  # turn off capslock if xset doesn't work. Requires chmod 666 /dev/console (otherwise su - must used rather than sudo)
+alias capslockon='sudo setleds -D +caps < /dev/console'  # turn off capslock if xset doesn't work. Requires chmod 666 /dev/console (otherwise su - must used rather than sudo)
 
 #-----------------------------
 # EDITORS & PROGRAMMING TOOLS.
@@ -319,6 +258,7 @@ alias cppdecl='c++decl'
 alias pcgrep='pkg-config --list-all | grep'
 alias pkgc='pkg-config --libs'
 alias cpkgc='cmake --find-package -DLANGUAGE=C -DCOMPILER_ID=GNU -DMODE=COMPILE'   # eg. cpkgc -DNAME=LibXml2 
+alias pyc="python2 -c 'from math import *; from operator import *; from itertools import *; from functools import *; print "
 
 # -----------------
 # HTML MANIPULATION
@@ -326,11 +266,16 @@ alias cpkgc='cmake --find-package -DLANGUAGE=C -DCOMPILER_ID=GNU -DMODE=COMPILE'
 alias htmlcat='htmldoc -f html'
 alias makelinks='find . -type f -exec printf "<a href={}>{}</a><br>\n"  \; > index.html'
 alias href-relativize="sed -e 's/href=\"http:\/\/[^ \"]*\//href=\"/g'"
+alias dehtent="perl -n -mHTML::Entities -e ' ; print HTML::Entities::decode_entities(\$_) ;'"
+alias htent="perl -n -mHTML::Entities -e ' ; print HTML::Entities::encode_entities(\$_) ;'"
+alias remove-wayback-insert="sed -i '/BEGIN WAYBACK TOOLBAR INSERT/,/END WAYBACK TOOLBAR INSERT/d'"
+
 
 # -----------
 # PDF ALIASES
 # -----------
 alias pdfdiff='diffpdf'
+alias pdfgrep='pdfgrep -n'
 alias pdfg='pdfgrep -n'
 alias concatpdfs='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=out.pdf' # joins pdfs (and bookmarks) in order
 alias sej='sejda-console'
@@ -341,56 +286,119 @@ alias sejsplit='sejda-console splitbypages'
 alias sejpptojpeg='sejda-console pdftojpeg'
 alias sejpptotext='sejda-console extractpages'
 alias sejtotext='sejda-console extracttext'
+alias gs-pstopdf='gs -q -dBATCH -dAutoFilterColorImages=false -sColorImageFilter=FlateEncode -dNOPAUSE -sDEVICE=pdfwrite -sOutputFile=out.pdf'
 
 # ------------------
 # PIPELINE OPERATORS
 # ------------------
+# alias maplines='xargs -d "\n" -n 1'
 alias maplines='xargs -L1'
 # eg.     ls|dolines printf "`pwd`/$x\n"; done
 alias dolines='while read -r x; do'
-# prdirs: print a list of target directories (ie. resolve symlinks) of files 
-alias prdirs='while read -r line; do dirname "`readlink -f "$line"`"; done | sort | uniq'
+# uniqdirs: print a list of target directories (ie. resolve symlinks) of files 
+alias uniqdirs='while read -r line; do dirname "`readlink -f "$line"`"; done | sort | uniq'
 # eg.              ls -l | dofields echo $x9; done
 # equivalent to:   ls -l | awk '{ print $9 }'
 alias dofields='while read -r x1 x2 x3 x4 x5 x6 x7 x8 x9; do'
 # while read -r x; do echo "stmts using $x"; done
 alias imaplines='xargs -d "\n" -n 1 -p'
 alias filterexec='dolines if [[ -x "$x" ]]; then echo "$x"; fi; done'
+alias locatedirs='cat|xargs locate|uniqdirs'
+alias pipechoose='iselect -ma | xargs cat'
 
-#---------------
-# OTHER ALIASES.
-#---------------
-alias iselect='iselect -kj:KEY_DOWN -kk:KEY_UP'
-alias choose='iselect -ma'
-alias choose-and-show='iselect -ma | xargs cat'
-alias hdd='df -hT'
+# -----------
+# FORMATTING.
+# -----------
 alias onespace="tr '\t' ' ' | tr -s ' '"  # collapse tabs/spaces into a single space (good with cut)
 alias tolines='tr " \t" "\n\n"'
 alias joinlines='tr "\n" " "'
-alias splitpath='tr ":" "\n"'
 alias firstcol="cut -d' ' -f1"
+alias splitpath='tr ":" "\n"'
+alias deduppath="awk -F: '{for (i=1;i<=NF;i++) { if ( !x[\$i]++ ) printf(\"%s:\",\$i); }}'"
+alias tabs2cols="column -t -s $'\t'"
+# ------------
+# rs variants:
+# ------------
+# row2col: eg.    echo 1 2 3 | row2col
+# equivalent to row2col='xargs printf "%d\n"'
+alias row2col='rs 0 1'
+alias r2c='rs 0 1'
+alias col2row='rs 1 0'
+alias c2r='rs 1 0'
+# transpose: eg.    printf "1 2 3\n4 5 6\n" | transpose
+alias transpose='rs -T'
+alias align='column -t'   # align columns
+
+# --------------------------
+# FILE MANIPULATION ALIASES.
+# --------------------------
 alias append='cat >>'
-alias say='spd-say -r -40 -t male2'
-alias xevkb="xev | grep -A2 --line-buffered '^KeyRelease' | sed -n '/keycode /s/^.*keycode \([0-9]*\).* (.*, \(.*\)).*$/\1 \2/p'"
 # alias mans='man -k . | grep'  # use whatis -r (or -w) instead
-alias partitionlist='fdisk -l'
-# alias maplines='xargs -d "\n" -n 1'
 alias dofiles='for x in *; do'
-# eg.     mapfiles printf "`pwd`/$x\n"; done
+# eg.  mapfiles printf "`pwd`/$x\n"; done
 alias mapfiles='for x in *; do echo "$x" |'
-alias locatedirs='cat|xargs locate|prdirs'
-alias distro='cat /etc/lsb-release'
+
+# -------
+# RANDOM.
+# -------
 alias ranalnum='tr -dc "[:lower:]0-9" < /dev/urandom | head -c'
 alias ranAlnum='tr -dc "[:alpha:]0-9" < /dev/urandom | head -c'
 alias ranalpha='tr -dc "[:lower:]" < /dev/urandom | head -c'
 alias ranAlpha='tr -dc "[:alpha:]" < /dev/urandom | head -c'
 alias rannum='tr -dc "0-9" < /dev/urandom | head -c'
-alias deduppath="awk -F: '{for (i=1;i<=NF;i++) { if ( !x[\$i]++ ) printf(\"%s:\",\$i); }}'"
+
+#---------------------
+# APPLICATION ALIASES.
+#---------------------
+alias vi='nvi'
+alias coline='command col'    # leave col free as a column selection command
+alias factorlang='/opt/factor/factor'
+alias x='xdg-open'
+alias unmount='umount'
+alias jcons='/opt/j64-801/bin/jconsole'
+#---------------------------------
+# APPLICATION DEFAULTS & VARIANTS.
+#---------------------------------
+alias ack='ack-grep'
+alias enw='emacs -nw'
+alias e='emacsclient -nw'
+alias roxterm-display='roxterm --hide-menubar -T "Roxterm Display" -z 1.3 --geometry=70x40'
+alias nautilus='nautilus --no-desktop'
+alias mc='mc -S gotar'
+alias diff='colordiff -u'
+alias diffdir='diff -rqb'
+alias bc='bc -l'
+alias echoe='echo -e'
+alias esed='sed -r'
+alias sulocate='sudo locate'
+alias sudb='sudo updatedb'
+alias untgz='tar -zxvf'
+alias grepc="grep --color=always"  # color grep for pipes
+alias dfh='df -h'
+alias rscopy='rsync -avzH --progress'
+alias rsupdate='rsync -auvzH --progress'
+#alias info='pinfo'
+alias edx-dl='edx-dl -s'
+alias info='info --vi-keys'
+alias symlink='ln -s'
+alias sln='ln -s'
+alias octave='octave --quiet'
+alias qiv='qiv -e'
+# alias handyoutliner='opt/handyoutliner/start-linux'
+alias handyoutliner='mono /opt/handyoutliner/HandyOutliner.exe'
+alias clock='cairo-clock -deops -x 1695 -y 104 -w 200 -h 200 -r 1 -t radium'
+alias gremclock='cairo-clock -deops -x 1695 -y 104 -w 200 -h 200 -r 1 -t gremlin'
 alias pman='pinfo -m'
-alias remove-wayback-insert="sed -i '/BEGIN WAYBACK TOOLBAR INSERT/,/END WAYBACK TOOLBAR INSERT/d'"
-alias tabs2cols="column -t -s $'\t'"
-alias pyc="python2 -c 'from math import *; from operator import *; from itertools import *; from functools import *; print "
-alias systeminfo='DISTRO=$(cat /etc/os-release|command grep PRETTY); DISTRO="${DISTRO#PRETTY_NAME=\"}"; printf "DISTRO: ${DISTRO%\"}\nARCH:   $(uname -i)\nKERNEL: $(uname -r)\nNODE:   $(uname -n)\n"'
+# repeat character, eg.    rep '*' 20
+alias rep='jot -s "" -b'
+alias iselect='iselect -kj:KEY_DOWN -kk:KEY_UP'
+alias choose='iselect -ma'
+alias say='spd-say -r -40 -t male2'
+
+# --------------
+# OTHER ALIASES.
+# --------------
+
 
 # -------
 # NOVELTY
