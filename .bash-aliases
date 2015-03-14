@@ -222,8 +222,8 @@ alias uuid='ls -al /dev/disk/by-uuid/ | grep'  # list a /dev partition with its 
 alias blkid='sudo blkid'     # list mounted partitions
 alias lshws='lshw -short'    # list hardware in compact format
 alias xevkb="xev | grep -A2 --line-buffered '^KeyRelease' | sed -n '/keycode /s/^.*keycode \([0-9]*\).* (.*, \(.*\)).*$/\1 \2/p'"
-alias capslockoff='sudo setleds -D -caps < /dev/console'  # turn off capslock if xset doesn't work. Requires chmod 666 /dev/console (otherwise su - must used rather than sudo)
 alias capslockon='sudo setleds -D +caps < /dev/console'  # turn off capslock if xset doesn't work. Requires chmod 666 /dev/console (otherwise su - must used rather than sudo)
+alias capslockoff='capslockon; sudo setleds -D -caps < /dev/console' # see capslockon; sometimes you need to use capslockon first or the light won't clear.
 
 #-----------------------------
 # EDITORS & PROGRAMMING TOOLS.

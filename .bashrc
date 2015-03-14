@@ -180,9 +180,14 @@ xmodmap -e "keycode 115 = End NoSymbol End"
 # *******
 git config --global core.excludesfile ~/.gitignore_global
 # https://coderwall.com/p/euwpig/a-better-git-log
-git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
 git config --global core.pager 'less -+F -RSX'
-
+git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
+git config --global alias.filestoadd "diff --stat"
+git config --global alias.changestoadd "diff"
+git config --global alias.filestocommit "status"
+git config --global alias.changestocommit "diff --cached"
+git config --global alias.filestopush "push --dry-run"
+git config --global alias.changestopush "diff HEAD origin/master"
 
 # **********
 # *        *

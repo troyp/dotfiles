@@ -1,0 +1,36 @@
+set show-rev-graph = yes
+set show-changes = yes
+
+# ----------------
+# Vi like binding.
+# ----------------
+# from: https://github.com/fatih/dotfiles/blob/master/tigrc
+#bind generic <Ctrl-u> scroll-page-up
+#bind generic <Ctrl-d> scroll-page-down
+bind generic y scroll-line-up
+bind generic e scroll-line-down
+bind generic g move-first-line
+bind generic G move-last-line
+bind generic o enter
+# Allow moving in the main menu while displaying a diff in the bottom of the screen.
+bind generic J next
+bind generic K previous
+
+
+# ------- 
+# Colors. 
+# ------- 
+# from https://github.com/jtheoof/dotfiles/blob/master/.tigrc
+color cursor white black
+color status white default
+color title-focus white black
+color date yellow default
+color author green default
+color main-head magenta default
+color main-tag magenta default
+color stat-staged green default
+color stat-unstaged red default
+color stat-untracked yellow default
+color tree.header white default
+color tree.directory cyan default
+
