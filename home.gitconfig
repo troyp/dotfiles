@@ -1,0 +1,22 @@
+[core]
+	excludesfile = /home/troy/.gitignore_global
+	pager = less -+F -RSX
+	autocrlf = input
+[include]
+	path = /home/troy/.gitconfig_personal
+[alias]
+	s = status
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	ll = log --stat --abbrev-commit	
+	d = diff --color-words
+	filestoadd = diff --stat
+	changestoadd = diff
+	filestocommit = status
+	changestocommit = diff --cached
+	filestopush = diff --stat HEAD origin/master
+	changestopush = diff HEAD origin/master
+[color]
+	ui = auto # covers diff = true, status = auto, branch = auto
+	interactive = auto
+[diff]
+	tool = vimdiff
