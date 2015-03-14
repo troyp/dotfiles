@@ -182,6 +182,7 @@ command! Clipoff set clipboard=
 command! Bc bnext | bdelete #
 " Sudo write
 command! W w !sudo tee % > /dev/null
+command! XC quit | quit | quit | quit
 
 
 "------------------------------------------------------
