@@ -186,7 +186,7 @@ git config --global alias.filestoadd "diff --stat"
 git config --global alias.changestoadd "diff"
 git config --global alias.filestocommit "status"
 git config --global alias.changestocommit "diff --cached"
-git config --global alias.filestopush "push --dry-run"
+git config --global alias.filestopush "diff --stat HEAD origin/master"
 git config --global alias.changestopush "diff HEAD origin/master"
 
 # **********
