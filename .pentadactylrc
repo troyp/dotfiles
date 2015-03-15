@@ -98,6 +98,7 @@ nmap -g user -b <C-S-X> <C-a>
 " Search
 " clear the search term highlighting
 map -g user -b <C-/> :noh<CR>
+map -g user -b s/ /\r
 
 " Add hints for anchor elements whose class attribute starts with "vote"
 set hinttags+=a[class^='vote']
