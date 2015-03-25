@@ -58,7 +58,7 @@ alias cbzq='cbz > /dev/null'
 
 # compress directory as .tgz
 function maff {
-    if [ ! -f index.html ]
+    if [ ! -f "$1/index.html" ]
     then
 	echo "No index.html file. Enter relative Path of file to redirect to."
 	printf "main page: "
