@@ -334,6 +334,7 @@ alias splitpath='tr ":" "\n"'
 alias deduppath="awk -F: '{for (i=1;i<=NF;i++) { if ( !x[\$i]++ ) printf(\"%s:\",\$i); }}'"
 alias tabs2cols="column -t -s $'\t'"
 alias cuts="onespace | cut -d' '"
+# eg.:    ls -Al | cuts -f2,9    # list filenames and number of hard links
 
 # ------------
 # rs variants:

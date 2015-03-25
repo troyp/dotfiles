@@ -58,6 +58,17 @@ alias cbzq='cbz > /dev/null'
 
 # compress directory as .tgz
 function maff {
+    if [ ! -f index.html ]
+    then
+	echo "No index.html file. Enter relative Path of file to redirect to."
+	printf "main page: "
+	startfile=`line`
+	> "$1/index.html" echo '<html>'
+	>>"$1/index.html" echo '  <head>'
+	>>"$1/index.html" echo "    <meta http-equiv=\"refresh\" content=\"0; url=$startfile\" />"
+	>>"$1/index.html" echo '  </head>'
+	>>"$1/index.html" echo '</html>'
+    fi
     archive_name="${1%/}.maff"
     7z a -tzip "$archive_name" "$1"
 }
@@ -70,6 +81,7 @@ function maffus {
 function man2text { man "$1" | col -bx; }
 
 function ussp {
+    # convert underscores to spaces
     converted_name=${1//_/ }
     if [ ! -f "$converted_name" ]; then 
 	mv "$1" "$converted_name"
@@ -77,6 +89,7 @@ function ussp {
 }
  
 function spus {
+    # convert spaces to underscores
     converted_name=${1// /_}
     if [ ! -f "$converted_name" ]; then 
 	mv "$1" "$converted_name"
@@ -84,6 +97,7 @@ function spus {
 }
  
 function dotsp {
+    # convert underscores to spaces
     extension="${1##*.}"
     base_name="${1%.*}"
     converted_name="${base_name//./ }.$extension"
