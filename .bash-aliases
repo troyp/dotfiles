@@ -57,6 +57,8 @@ alias lsvdirs='ls -p | command grep -o ^.*/$ | xargs ls -d --color=auto'  # visi
 alias lldirs='ls -lp | GREP_OPTIONS="" grep ".*/$"'       # list details of directories only
 alias lsfiles='ls -p | GREP_OPTIONS="" grep -v ".*/$"'    # list details of files only
 alias llfiles='ls -lp | GREP_OPTIONS="" grep -v ".*/$"'   # list details of files only
+alias llfilesbysize='llfiles | sort -k 5nr'    # list files with details, from largest down
+
 alias lsod='LC_COLLATE=C ls'      # sort dotfiles, then UC, then LC
 alias laod='LC_COLLATE=C ls -la'
 alias lsatimes='for x in *; do stat -c"%n	%x" "$x"; done | tabs2cols' # if broken, check tab
@@ -81,31 +83,44 @@ alias egrep='grep -iE --color=auto'
 #------------------------
 # WGET & RELATED ALIASES.
 #------------------------
+# multiple hosts: use -H; restrict domains with -D dom1.com,dom2.org
 alias wgetm='wget -mkp -np -nH'   # -m='-r -N -l inf --no-remove-listing'
 alias wgetmf="wgetm --reject-regex '.*[?].*'"  # filter out URLs with params
+alias wgetmff="wgetm --reject-regex '.*[?$].*'"  # filter out URLs with params
 # wgetm-incdirs: eg. wgetmincdirs /Tools,/Utilities domainname.com/Tools/index.html
 alias wgetm-incdirs='wget -mkp -nH --include-directories'
 alias wgetmf-incdirs="wget -mkp -nH --reject-regex '.*[?].*' --include-directories"
+alias wgetmff-incdirs="wget -mkp -nH --reject-regex '.*[?$].*' --include-directories"
+alias wgetm-incdirs-span='wget -mkp -nH -H --include-directories'  
 alias wgetm-conv='wgetm -E' 
-alias wgetm-conv-incdirs='wget -mkpE --include-directories'
+alias wgetmf-conv='wgetmf -E' 
+alias wgetmff-conv='wgetmff -E' 
 alias wgetmlimit='wget -rkpNE -np -nH -l'  #eg wgetmlimit 2... (2 recurs lvls)
 alias wgetmcut='wgetm --cut-dirs'  #eg wgetmcut 2 ... (removes root + top 2 subdirs)
 alias wgetmfcut='wgetmf --cut-dirs'  #eg wgetmcut 2 ... (removes root + top 2 subdirs)
+alias wgetmffcut='wgetmff --cut-dirs'  #eg wgetmcut 2 ... (removes root + top 2 subdirs)
 alias wgetmflat='wgetm -nd'
 alias wgetmstealth='wgetm -e robots=off -U="Mozilla" -w 1'
 alias wgetmfstealth='wgetmf -e robots=off -U="Mozilla" -w 1'
 alias wget1='wget -rNkpE -l 1'
 alias wgetp='wget -NkpE'
+alias wgetpcut='wget -NkpE -nH --cut-dirs'
 alias wgetcat='wget -pE -O' # usage: wgetcat <filename> <filename> ... <url> #UNTESTED
 alias listhttplinks='xargs elinks --dump | grep "http" | sed "s/.*http/http/g"' # Waits for url from stdin then lists http links on page. echo url | listhttplinks. Pipe to wget.
 alias listhttplinks2='xargs wget -O - 2>&1 | grep -i "http:" | sed "s/^.*http/http/\" | cut -d"\"" -f1 | sort -u'
 
-#------------------------
-# BROWSER/SERVER ALIASES.
-#------------------------
+# ------------
+# MAN ALIASES.
+# ------------
 # currently problem with man -H: use manh function (works via man2html)
 # alias manht='man -Hfirefox'   # problem with grohtml images
 # alias manht='man -Hchromium-browser'   # problem with grohtml images
+alias gitman='git help'
+alias erlman='erl -man'
+
+#------------------------
+# BROWSER/SERVER ALIASES.
+#------------------------
 alias archm='sudo archmage -p'    # eg. archm 81 myfile.chm
 alias ff='firefox -no-remote -P'
 alias ffmain='firefox no-remote -P default'
@@ -306,17 +321,20 @@ alias imaplines='xargs -d "\n" -n 1 -p'
 alias filterexec='dolines if [[ -x "$x" ]]; then echo "$x"; fi; done'
 alias locatedirs='cat|xargs locate|uniqdirs'
 alias pipechoose='iselect -ma | xargs cat'
+alias suniq='sort -u'
 
 # -----------
 # FORMATTING.
 # -----------
-alias onespace="tr '\t' ' ' | tr -s ' '"  # collapse tabs/spaces into a single space (good with cut)
+alias onespace="tr '\t' ' ' | tr -s ' '"  # collapse whitespace (tabs/spaces) into a single space (good with cut)
 alias tolines='tr " \t" "\n\n"'
 alias joinlines='tr "\n" " "'
 alias firstcol="cut -d' ' -f1"
 alias splitpath='tr ":" "\n"'
 alias deduppath="awk -F: '{for (i=1;i<=NF;i++) { if ( !x[\$i]++ ) printf(\"%s:\",\$i); }}'"
 alias tabs2cols="column -t -s $'\t'"
+alias cuts="onespace | cut -d' '"
+
 # ------------
 # rs variants:
 # ------------
@@ -357,6 +375,7 @@ alias factorlang='/opt/factor/factor'
 alias x='xdg-open'
 alias unmount='umount'
 alias jcons='/opt/j64-801/bin/jconsole'
+alias trash-restore='restore-trash'
 #---------------------------------
 # APPLICATION DEFAULTS & VARIANTS.
 #---------------------------------
@@ -395,6 +414,8 @@ alias rep='jot -s "" -b'
 alias iselect='iselect -kj:KEY_DOWN -kk:KEY_UP'
 alias choose='iselect -ma'
 alias say='spd-say -r -40 -t male2'
+alias gemu='gem update --system'
+alias pandoc-md='pandoc -f markdown -t html5 --toc'  # pandoc-md infile.md > outfile.html
 
 # --------------
 # OTHER ALIASES.

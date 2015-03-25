@@ -34,3 +34,6 @@ sphinx
 jedi
 livestreamer
 livedumper
+beautifulsoup4
+argcomplete
+docopt

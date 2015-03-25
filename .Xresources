@@ -1,3 +1,10 @@
+! **************
+! *            *
+! * Xresources *
+! *            *
+! **************
+! reload .Xresources with:   xrdb ~/.Xresources
+
 !Xft.dpi:                      121
  Xft.antialias:                 true
  Xft.hinting:                   true
@@ -14,7 +21,7 @@
  !	E M A C S - Setting
  !
  !
- Emacs*useXIM: false 
+ Emacs*useXIM: true 
 
  !-------------------------------------------------------------------------------
  !

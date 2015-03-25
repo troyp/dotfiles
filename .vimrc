@@ -29,6 +29,7 @@ set hidden                   " hide buffers instead of unloading
 inoremap <C-d> <Esc>
 noremap <C-d> <Esc>
 
+set shell=/bin/bash
 set clipboard=unnamed
 
 " .GVIMRC: nnoremap <C-z> :"suspending disabled <CR>

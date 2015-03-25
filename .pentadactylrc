@@ -1,5 +1,6 @@
 set runtimepath=~/.pentadactyl
 set guioptions=bBCrMNsT
+" js dactyl.plugins.buftabs.buftabs._options=true   
 set hintkeys="jfkdls;ahgnvurieow"
 set incfind
 set hlfind
@@ -30,6 +31,7 @@ map -g user -b <C-c><C-n> :set guioptions!=T<CR>
 map -g user -b <C-c><C-b> :set guioptions!=B<CR>
 map -g user -b <C-c><C-s> :set guioptions!=B<CR>
 map -g user -b <C-S-d> :dialog downloads<CR>
+map -g user -b <C-c><C-f> :buftabs<CR>
 
 " Restart with C-c C-r
 map -g user -b <C-c><C-r> :restart<CR>
@@ -66,7 +68,7 @@ map -g user -b <A-Left> :tabmove! -1<CR>
 map -g user -b <A-Right> :tabmove! +1<CR>
 map -g user -b <A-J> :tabnext<CR>
 map -g user -b <A-K> :tabprevious<CR>
-nmap -builtin -g user -b <C-b> :sidebar bookmarks<CR>
+" nmap -builtin -g user -b <C-b> :sidebar bookmarks<CR>
 command! d tabduplicate
 command! unpinall tabdo unpintab
 

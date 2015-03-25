@@ -1,3 +1,5 @@
+[ -z "$PS1" ] && return
+
 set -a
 
 function append-to-path-var {
