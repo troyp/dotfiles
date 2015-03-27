@@ -223,6 +223,7 @@ alias setopts='set -o | grep "on$"'
 alias lspath='echo $PATH|tr ":" "\n"'
 alias install-desktop-files='xdg-desktop-menu install --novendor'
 alias update-fonts='fc-cache -vf ~/.fonts/'
+alias choose-input-method='im-config -c'
 
 # --------------------------
 # SYSTEM / HARDWARE ALIASES.
@@ -322,6 +323,10 @@ alias filterexec='dolines if [[ -x "$x" ]]; then echo "$x"; fi; done'
 alias locatedirs='cat|xargs locate|uniqdirs'
 alias pipechoose='iselect -ma | xargs cat'
 alias suniq='sort -u'
+alias tolowercase="tr '[:upper:]' '[:lower:]'"
+alias touppercase="tr '[:lower:]' '[:upper:]'"
+alias tohilitcase="perl -MText::Autoformat -e'undef $/; print autoformat +<>, { case => \"highlight\" }'"
+alias totitlecase="perl -MText::Autoformat -e'undef $/; print autoformat +<>, { case => \"title\" }'"
 
 # -----------
 # FORMATTING.
@@ -354,9 +359,9 @@ alias align='column -t'   # align columns
 # --------------------------
 alias append='cat >>'
 # alias mans='man -k . | grep'  # use whatis -r (or -w) instead
-alias dofiles='for x in *; do'
+alias dofiles='for x in *; do'    # process each file in current directory
 # eg.  mapfiles printf "`pwd`/$x\n"; done
-alias mapfiles='for x in *; do echo "$x" |'
+alias mapfiles='for x in *; do echo "$x" |'    # print each file in current directory
 
 # -------
 # RANDOM.
@@ -454,3 +459,5 @@ alias startrek='play -n -c2 synth whitenoise lowpass -1 69 lowpass -1 50 lowpass
 # numutils
 # suckless-tools
 # jot, enum, rs, randomize-lines
+# window scripting: devilspie, devilspie2, gdevilspie, kpie
+# window properties: xprop

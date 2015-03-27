@@ -106,6 +106,7 @@ LD_LIBRARY_PATH=/usr/local/lib
 CLASSPATH=$CLASSPATH:.
 FACTOR_ROOTS=$FACTOR_ROOTS:$HOME/code/factor
 
+
 # ---------
 # LOCATIONS
 # ---------
