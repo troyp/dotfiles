@@ -24,10 +24,14 @@ alias sdebr='sudo dpkg -r'
 alias saptar='sudo apt-add-repository'
 alias listinstalled-manual="comm -23 <(apt-mark showmanual | sort -u) <(gzip -dc /var/log/installer/initial-status.gz | sed -n 's/^Package: //p' | sort -u)"
 alias synaptic_enable_quicksearch='sudo apt-get install apt-xapian-index; sudo update-apt-xapian-index -vf'
+alias enable-beep='sudo modprobe pcspkr'
+alias disable-beep='sudo modprobe -r pcspkr'
+
 
 #---------------------
 # CD & MKDIR ALIASES.
 #---------------------
+alias -- -='cd -'
 alias ..='cd ..'
 alias ...='cd ...'
 alias ....='cd ....'

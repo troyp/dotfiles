@@ -223,3 +223,13 @@ function tohtml {
 	cat $tmp | nc -l ${1:-8080}
     done   
 }
+
+function comment-out {
+    # search for a pattern in a script or configuration file and comment it out
+    # by prefixing with '# '
+    pattern=$1
+    file=$2
+    tmpfile=`tempfile`
+    sed -E "s/$pattern/# \\0/" "$file" > $tmpfile
+    cp $tmpfile "$file"
+}

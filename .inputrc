@@ -1,5 +1,6 @@
 # reload .inputrc with C-x C-r ("reload-init-file" function)
 set completion-ignore-case On
+set bell-style none
 "\e[A": history-search-backward   # up-arrow
 "\C-p": history-search-backward
 "\e[B": history-search-forward    # down-arrow

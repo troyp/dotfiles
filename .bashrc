@@ -228,9 +228,8 @@ if [ -f /opt/scripts/bashmarks.sh ]; then source /opt/scripts/bashmarks.sh; fi
 # if [ -x /usr/bin/dircolors ]; then test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)" fi
 
 # ---run xcape---
-# if ! pgrep xcape >/dev/null; then xcape & fi 
-if pgrep xcape >/dev/null; then pkill xcape; fi
-xcape & 
+if ! pgrep xcape >/dev/null; then xcape & fi 
+# if pgrep xcape >/dev/null; then pkill xcape; fi; xcape & 
 
 # ---ULIMIT---
 #ulimit -c unlimited
