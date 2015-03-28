@@ -362,6 +362,8 @@ alias append='cat >>'
 alias dofiles='for x in *; do'    # process each file in current directory
 # eg.  mapfiles printf "`pwd`/$x\n"; done
 alias mapfiles='for x in *; do echo "$x" |'    # print each file in current directory
+alias lowercase-files='dofiles mv "$x" "$(echo "$x" | tolowercase)"; done'
+alias hilitcase-files='dofiles mv "$x" "$(echo "${x%.*}" | tohilitcase).${x##*.}"; done'
 
 # -------
 # RANDOM.
