@@ -69,15 +69,31 @@ command! tabhrefs :normal t> <C-c>0
 map -g user -b t. :tabhrefs<CR>
 "
 " Open in new tab
-map -g user -b tt :tabopen<SPACE>
+" t<SPACE> starts :tabopen (redundant since t is bound to tabopen by default,
+" so an unknown key following t will trigger the builtin binding)
+map -g user -b t<SPACE> :tabopen<SPACE>
+" open DuckDuckGo search in new tab
+map -g user -b ts :tabopen d<SPACE>
+" open Google search in new tab
 map -g user -b tg :tabopen g<SPACE>
+" open Wikipedia search in new tab
 map -g user -b tw :tabopen w<SPACE>
+" open Wolfram Alpha search in new tab
 map -g user -b ta :tabopen wa<SPACE>
+" open W3C Wiki search in new tab
 map -g user -b t3 :tabopen w3<SPACE>
+" open New Tab Page
 map -g user -b tn :tabopen about:newtab<CR>
+" switch to first buffer matching argument (cycle through with gb, gB)
+map -g user -b tt b
+" switch to previously selected buffer
+map -g user -b t- <C-^>
+" toggle pinning of current tab
 map -g user -b tp :pintab!<CR>
+" duplicate current tab
 map -g user -b td :tabduplicate<CR>
-map -g user -b to :tabonly<CR>
+" close other tabs
+map -g user -b t1 :tabonly<CR>
 "
 " Tab moving helpers
 " map -g user -b -arg <C-m>t :tabmove <arg><CR>
@@ -145,5 +161,4 @@ command! ac :winopen about:config
 
 " Print What You Like
 command! prwul :o javascript:(function(){if(window['ppw']&&ppw['bookmarklet']){ppw.bookmarklet.toggle();}else{window._pwyl_home=%22http://www.printwhatyoulike.com/%22;_pwyl_bmkl=document.createElement('script');_pwyl_bmkl.setAttribute('type','text/javascript');_pwyl_bmkl.setAttribute('src',_pwyl_home+'static/compressed/pwyl_bookmarklet_10.js');_pwyl_bmkl.setAttribute('pwyl','true');document.getElementsByTagName('head')[0].appendChild(_pwyl_bmkl);}})();
-
 
