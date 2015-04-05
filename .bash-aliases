@@ -219,7 +219,8 @@ alias 7zip='7z a -tzip'  # 7zip myarchive.zip myarchive/
 #------------------
 # SETTINGS ALIASES.
 #------------------
-alias pralias='cat $BASHALIASFILE'
+alias pralias='cat $BASH_ALIAS_FILE'
+alias search-my-commands='cat $BASH_ALIAS_FILE $BASH_FUNCTION_FILE $SCRIPTS_DIRECTORY/* 2> /dev/null | grep'
 alias gitalias="git config --get-regexp '^alias\.' | cut -c 7- | sed 's/ /\t/' | column -s'	' -t"
 alias editalias='${EDITOR:-vim} $BASHALIASFILE; source $BASHALIASFILE'
 alias xres='xrdb ~/.Xresources'
@@ -368,6 +369,7 @@ alias dofiles='for x in *; do'    # process each file in current directory
 alias mapfiles='for x in *; do echo "$x" |'    # print each file in current directory
 alias lowercase-files='dofiles mv "$x" "$(echo "$x" | tolowercase)"; done'
 alias hilitcase-files='dofiles mv "$x" "$(echo "${x%.*}" | tohilitcase).${x##*.}"; done'
+alias sed-file='sed -i.bak'    # sed-file 's/old/new/g' filename.ext
 
 # -------
 # RANDOM.
@@ -388,10 +390,12 @@ alias x='xdg-open'
 alias unmount='umount'
 alias jcons='/opt/j64-801/bin/jconsole'
 alias trash-restore='restore-trash'
+alias ack='ack-grep'
+alias noi='noice'
+
 #---------------------------------
 # APPLICATION DEFAULTS & VARIANTS.
 #---------------------------------
-alias ack='ack-grep'
 alias enw='emacs -nw'
 alias e='emacsclient -nw'
 alias roxterm-display='roxterm --hide-menubar -T "Roxterm Display" -z 1.3 --geometry=70x40'
@@ -428,6 +432,14 @@ alias choose='iselect -ma'
 alias say='spd-say -r -40 -t male2'
 alias gemu='gem update --system'
 alias pandoc-md='pandoc -f markdown -t html5 --toc'  # pandoc-md infile.md > outfile.html
+alias feh-im='feh --magick-timeout 0'  # give image-magick enough time to convert files
+alias zmessage='zenity --info --text'  # pop-up message box (like xmessage)
+
+# -----------------
+# DOWNLOAD ALIASES.
+# -----------------
+alias dl-noice='git clone http://git.2f30.org/noice/'
+alias install-noice='dl-noice; cd noice; make; cp noice /opt/bin/'
 
 # --------------
 # OTHER ALIASES.

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configurations xmlns="http://launchy.mozdev.org/configurations">
+        <application>
+	        <label>Google Chrome</label>
+		    <type>1</type>
+        	<command>/usr/bin/google-chrome</command>
+    	</application>
+        <application>
+                <label>Lynx</label>
+                <type>1</type>
+                <command>/usr/bin/lynx</command>
+                <arguments></arguments>
+        </application>
+        <application>
+               <label>Kget</label>
+               <type>5</type>
+               <command>/usr/bin/kget</command>
+               <arguments></arguments>
+        </application>
+</configurations>

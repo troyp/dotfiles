@@ -111,7 +111,9 @@ FACTOR_ROOTS=$FACTOR_ROOTS:$HOME/code/factor
 # LOCATIONS
 # ---------
 
-BASHALIASFILE=$HOME/.bash-aliases
+BASH_ALIAS_FILE=$HOME/.bash-aliases
+BASH_FUNCTION_FILE=$HOME/.bash-functions
+SCRIPTS_DIRECTORY=$HOME/.scripts
 GTAGSCONF=/usr/share/doc/global/examples/gtags.conf
 VIMPAGER_RC=/opt/vimpager/vimpagerrc
 OZHOME=/usr

@@ -15,6 +15,9 @@ set! browser.tabs.closeWindowWithLastTab=false
 
 map -g user -b , @:
 
+" Copying
+map -g user -b <A-w> Y
+
 " C-w closes tab; if last in window closes window.
 map -g user -b <C-w> :q<CR>
 map -g user -b J <C-d>
@@ -128,4 +131,7 @@ command! ac :winopen about:config
 
 " Print What You Like
 command! prwul :o javascript:(function(){if(window['ppw']&&ppw['bookmarklet']){ppw.bookmarklet.toggle();}else{window._pwyl_home=%22http://www.printwhatyoulike.com/%22;_pwyl_bmkl=document.createElement('script');_pwyl_bmkl.setAttribute('type','text/javascript');_pwyl_bmkl.setAttribute('src',_pwyl_home+'static/compressed/pwyl_bookmarklet_10.js');_pwyl_bmkl.setAttribute('pwyl','true');document.getElementsByTagName('head')[0].appendChild(_pwyl_bmkl);}})();
+
+" Output list of tab hrefs
+command! tabhrefs :tabdo :execute "!echo >> \"Pentadactyl Output " + Date().slice(0,15) + "\" " + content.location.href
 
