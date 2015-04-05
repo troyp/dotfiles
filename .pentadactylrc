@@ -53,6 +53,21 @@ map -g user -b sa :addons<CR>
 " Sidebar selection with s, close with S
 map -g user -b si :sidebar<SPACE>
 
+" Output newline in 'Pentadactyl Output <Date>' file
+command! outputnewline :execute "!echo >> \"Pentadactyl Output " + Date().slice(0,15) + "\""
+map -g user -b <C-c>0 :outputnewline<CR>
+
+" ------
+"  TABS
+" ------
+"
+" Output list of tab hrefs
+command! outputtabhrefs :tabdo :execute "!echo >> \"Pentadactyl Output " + Date().slice(0,15) + "\" " + content.location.href
+map -g user -b t> :outputtabhrefs<CR>
+" Output list of tab hrefs followed by a blank line
+command! tabhrefs :normal t> <C-c>0
+map -g user -b t. :tabhrefs<CR>
+"
 " Open in new tab
 map -g user -b tt :tabopen<SPACE>
 map -g user -b tg :tabopen g<SPACE>
@@ -63,7 +78,7 @@ map -g user -b tn :tabopen about:newtab<CR>
 map -g user -b tp :pintab!<CR>
 map -g user -b td :tabduplicate<CR>
 map -g user -b to :tabonly<CR>
-
+"
 " Tab moving helpers
 " map -g user -b -arg <C-m>t :tabmove <arg><CR>
 map -g user -b tm :tabmove<SPACE>
@@ -71,8 +86,6 @@ map -g user -b <A-Left> :tabmove! -1<CR>
 map -g user -b <A-Right> :tabmove! +1<CR>
 map -g user -b <A-J> :tabnext<CR>
 map -g user -b <A-K> :tabprevious<CR>
-" nmap -builtin -g user -b <C-b> :sidebar bookmarks<CR>
-command! d tabduplicate
 command! unpinall tabdo unpintab
 
 " Command mode and insert mode
@@ -97,8 +110,9 @@ vmap -g user -b <C-S-Y> <C-e>
 " 6. press v to enter visual mode
 " 7. use visual mode keys j,k,h,l,C-a,C-e, etc to extend selection
 
-" replace builtin <C-a> binding: BROKEN
-nmap -g user -b <C-S-X> <C-a>
+" replace builtin <C-a> binding: ,<C-x> increases URL by 1 (opposite of <C-x>)
+" (note: <C-S-> bindings not working, so I can't use <C-S-X>)
+nmap -g user -b ,<C-x> <C-a>
 
 " Search
 " clear the search term highlighting
@@ -132,6 +146,4 @@ command! ac :winopen about:config
 " Print What You Like
 command! prwul :o javascript:(function(){if(window['ppw']&&ppw['bookmarklet']){ppw.bookmarklet.toggle();}else{window._pwyl_home=%22http://www.printwhatyoulike.com/%22;_pwyl_bmkl=document.createElement('script');_pwyl_bmkl.setAttribute('type','text/javascript');_pwyl_bmkl.setAttribute('src',_pwyl_home+'static/compressed/pwyl_bookmarklet_10.js');_pwyl_bmkl.setAttribute('pwyl','true');document.getElementsByTagName('head')[0].appendChild(_pwyl_bmkl);}})();
 
-" Output list of tab hrefs
-command! tabhrefs :tabdo :execute "!echo >> \"Pentadactyl Output " + Date().slice(0,15) + "\" " + content.location.href
 
