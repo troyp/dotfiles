@@ -50,8 +50,11 @@ map -g user -b st :buffer<SPACE>
 map -g user -b sj :jumps<CR>
 map -g user -b sa :addons<CR>
 
-" Sidebar selection with s, close with S
+" Sidebar selection with si, toggle with S
 map -g user -b si :sidebar<SPACE>
+map -g user -b S :sidebar!<CR>
+" Moji sidebar
+map -g user -b sM :sidebar Moji<SPACE>
 
 " Output newline in 'Pentadactyl Output <Date>' file
 command! outputnewline :execute "!echo >> \"Pentadactyl Output " + Date().slice(0,15) + "\""
