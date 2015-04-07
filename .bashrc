@@ -169,13 +169,32 @@ xset r rate 250 50  # X key repeat: xset r rate <ms delay> <char per sec>
 # fix End key (mapped to SuperL for unknown reason)
 xmodmap -e "keycode 115 = End NoSymbol End"
 
-# #---xinput---
-# # swap middle-button(2) and thumb1 (8)
-# MOUSE_ID=`xinput list | grep -i STORM\ SENTINEL | head -n 1 -`
-# MOUSE_ID=${MOUSE_ID##*=}; MOUSE_ID=${MOUSE_ID%%[*}
-# #xinput set-button-map $MOUSE_ID 1 8 3 4 5 6 7 2 9
-# #xinput set-button-map $MOUSE_ID 1 2 3 4 5 6 7 2 8
-# xinput set-button-map $MOUSE_ID 1 2 3 4 5 6 7 2 2
+#---xinput---
+function sentinel-swap-middle-button () {
+    # swap middle-button(2) and thumb1 (8)
+    opts=($@)
+    for opt in $opts; do
+	if [ $opt == '--verbose' ]; then VERBOSE='true'; fi
+	if [ $opt == '--undo' ] || [ $opt == '-u' ]; then UNDO='true'; fi
+    done
+    MOUSE_ID=`xinput list | grep -i STORM\ SENTINEL | tail -n1 | cut -f2`
+    MOUSE_ID=${MOUSE_ID#id=}
+    if [ $VERBOSE ]; then
+	echo -ne "Storm Sentinel Mouse ID:\t"
+	echo $MOUSE_ID
+    fi
+    if [ ! -z $MOUSE_ID ]; then
+	if [ -z $UNDO ]; then
+	    xinput set-button-map $MOUSE_ID 1 8 3 4 5 6 7 2 9;
+	else
+	    xinput set-button-map $MOUSE_ID 1 2 3 4 5 6 7 8 9;
+	fi
+    fi
+    if [ $VERBOSE ]; then
+	echo -ne "Storm Sentinel Button Map:\t"
+	xinput get-button-map ${MOUSE_ID#id=}
+    fi
+}
 
 
 # *******

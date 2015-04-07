@@ -129,9 +129,9 @@ vmap -g user -b <C-S-Y> <C-e>
 " 6. press v to enter visual mode
 " 7. use visual mode keys j,k,h,l,C-a,C-e, etc to extend selection
 
-" replace builtin <C-a> binding: ,<C-x> increases URL by 1 (opposite of <C-x>)
-" (note: <C-S-> bindings not working, so I can't use <C-S-X>)
-nmap -g user -b ,<C-x> <C-a>
+" replace builtin <C-a> and <C-x> bindings with ]; and [; (inrease/decrease URL by 1)
+nmap -g user -b ]; <C-a>
+nmap -g user -b [; <C-x>
 
 " Search
 " clear the search term highlighting
