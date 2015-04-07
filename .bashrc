@@ -172,25 +172,33 @@ xmodmap -e "keycode 115 = End NoSymbol End"
 #---xinput---
 function sentinel-swap-middle-button () {
     # swap middle-button(2) and thumb1 (8)
-    opts=($@)
-    for opt in $opts; do
-	if [ $opt == '--verbose' ]; then VERBOSE='true'; fi
-	if [ $opt == '--undo' ] || [ $opt == '-u' ]; then UNDO='true'; fi
+    VERBOSE='false'
+    UNDO='false'
+    for opt in "$@"; do
+	case $opt in
+	  -v|--verbose )
+	    echo setting verbose
+	    VERBOSE='true'
+	    ;;
+	  -u|--undo )
+	    UNDO='true'
+	    ;;
+	esac
     done
     MOUSE_ID=`xinput list | grep -i STORM\ SENTINEL | tail -n1 | cut -f2`
     MOUSE_ID=${MOUSE_ID#id=}
-    if [ $VERBOSE ]; then
+    if [ $VERBOSE == 'true' ]; then
 	echo -ne "Storm Sentinel Mouse ID:\t"
 	echo $MOUSE_ID
     fi
     if [ ! -z $MOUSE_ID ]; then
-	if [ -z $UNDO ]; then
-	    xinput set-button-map $MOUSE_ID 1 8 3 4 5 6 7 2 9;
-	else
+	if [ $UNDO == 'true' ]; then
 	    xinput set-button-map $MOUSE_ID 1 2 3 4 5 6 7 8 9;
+	else
+	    xinput set-button-map $MOUSE_ID 1 8 3 4 5 6 7 2 9;
 	fi
     fi
-    if [ $VERBOSE ]; then
+    if [ $VERBOSE == 'true' ]; then
 	echo -ne "Storm Sentinel Button Map:\t"
 	xinput get-button-map ${MOUSE_ID#id=}
     fi
