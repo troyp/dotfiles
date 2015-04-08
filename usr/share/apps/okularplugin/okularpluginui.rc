@@ -1,0 +1,12 @@
+<!DOCTYPE kpartgui SYSTEM 'kpartgui.dtd'>
+<kpartgui name="okularpluginui" version="100">
+ <MenuBar noMerge="1">
+  <!-- 
+    Note: To ignore settings from ui_standards.rc the version number 
+          of this file must be higher than that in ui_standards.rc 
+  -->
+  <!-- we don't want a menubar -->
+ </MenuBar>
+ <ToolBar noMerge="1" name="mainToolBar"><text>Main Toolbar</text>
+ </ToolBar>
+</kpartgui>

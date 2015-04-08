@@ -17,6 +17,8 @@
    <Action name="file_quit"/>
   </Menu>
   <Merge/>
+  <Separator weakSeparator="1"/>
+  <Separator weakSeparator="1"/>
   <Menu noMerge="1" name="settings" alreadyVisited="1">
    <text>&amp;Settings</text>
    <Action name="options_show_menubar"/>
@@ -46,18 +48,21 @@
   </Menu>
  </MenuBar>
  <ToolBar noMerge="1" name="mainToolBar" alreadyVisited="1">
+  <Action name="fullscreen"/>
   <Action name="file_open_recent"/>
   <Action name="options_show_menubar"/>
   <text>Main Toolbar</text>
   <!--Action name="file_open_recent" /-->
   <!--Action name="file_print" /-->
+  <Separator name="separator_0"/>
+  <Action name="options_configure_keybinding"/>
  </ToolBar>
  <ActionProperties scheme="Default">
-  <Action shortcut="Ctrl+Shift+F; F11" name="fullscreen"/>
+  <Action priority="0" name="fullscreen"/>
   <Action shortcut="Ctrl+M; Alt+M" priority="0" name="options_show_menubar"/>
-  <Action iconText="Recent" shortcut="Ctrl+Shift+O" name="file_open_recent"/>
+  <Action iconText="Recent" shortcut="Ctrl+Shift+O" priority="0" name="file_open_recent"/>
   <Action shortcut="F1; Ctrl+H" name="help_contents"/>
-  <Action shortcut="S" name="options_configure_keybinding"/>
+  <Action shortcut="S" priority="0" name="options_configure_keybinding"/>
   <Action shortcut="P" name="file_print"/>
   <Action shortcut="Alt+J" name="tab-next"/>
   <Action shortcut="Alt+K" name="tab-previous"/>

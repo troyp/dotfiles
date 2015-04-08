@@ -12,3 +12,4 @@ pointful
 pointfree
 TypeCompose
 HList
+ghc-core

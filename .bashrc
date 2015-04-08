@@ -120,13 +120,25 @@ OZHOME=/usr
 REDLINE_HOME=/opt/redline
 XDG_CONFIG_HOME=$HOME/.config
 
+# --------
+# HISTORY.
+# --------
+HISTCONTROL=ignorespace:ignoredups:erasedups
+HISTFILESIZE=100000
+HISTSIZE=100000
+PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
+# history-refresh function (in ~/.bash-functions): refreshes history (brings
+# in commands that have been typed in other shells since the shell started)
+shopt -q -s cmdhist
+shopt -q -s histappend
+shopt -q -s histreedit
+shopt -q -s histverify
+shopt -q -s lithist
+
 # ------
 # OTHER.
 # ------
 
-HISTCONTROL=ignorespace:erasedups
-HISTSIZE=2000
-HISTFILESIZE=2000
 EDITOR=vim
 _JAVA_AWT_WM_NONREPARENTING=1; export _JAVA_AWT_WM_NONREPARENTING
 LIBOVERLAY_SCROLLBAR=0
@@ -136,18 +148,18 @@ SWEAVE_STYLEPATH_DEFAULT="TRUE"
 # *****************
 # *               *
 # * SHELL OPTIONS *
+# *   (other)     *
 # *               *
 # *****************
 
 shopt -q -s dotglob
 shopt -q -s extglob
-#shopt -q -s failglob
 shopt -q -s globstar
-shopt -q -s histappend
-shopt -q -s histreedit
-shopt -q -s histverify
-shopt -q -s lithist
-#shopt -q -s nullglob  # prevents eg, find . -iname *string* without quotes
+# -------------------------------------------
+# result of glob expansion matching no files:
+# -------------------------------------------
+# shopt -q -s failglob    # error
+shopt -q -s nullglob    # null string
 
 
 # *********

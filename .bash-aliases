@@ -327,7 +327,8 @@ alias imaplines='xargs -d "\n" -n 1 -p'
 alias filterexec='dolines if [[ -x "$x" ]]; then echo "$x"; fi; done'
 alias locatedirs='cat|xargs locate|uniqdirs'
 alias pipechoose='iselect -ma | xargs cat'
-alias suniq='sort -u'
+alias dedup="awk '!a[$0]++'"   # remove repeated lines (need not be adjacent)
+alias suniq='sort -u'   # sort and remove repeated lines 
 alias tolowercase="tr '[:upper:]' '[:lower:]'"
 alias touppercase="tr '[:lower:]' '[:upper:]'"
 alias tohilitcase="perl -MText::Autoformat -e'undef $/; print autoformat +<>, { case => \"highlight\" }'"

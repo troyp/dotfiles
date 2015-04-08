@@ -1,3 +1,10 @@
+function history-refresh {
+    # refreshes history (brings in commands that have been typed
+    # in other shells since the shell started)
+    history -c
+    history -r
+}
+
 function manh {
     firefox -P default "localhost//cgi-bin/man/man2html?query=$1"
 }
