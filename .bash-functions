@@ -240,3 +240,13 @@ function comment-out {
     sed -E "s/$pattern/# \\0/" "$file" > $tmpfile
     cp $tmpfile "$file"
 }
+
+function videodl {
+    # videodl QUALITY URL
+    # Download video URL with livedumper; args swapped to allow aliases.
+    # requires:
+    #   rtmpdump:      apt or git://git.ffmpeg.org/rtmpdump 
+    #   livestreamer:  https://github.com/chrippa/livestreamer
+    #   livedumper:    pip or https://github.com/m45t3r/livedumper
+    livedumper "$2" mid
+}

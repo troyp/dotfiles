@@ -170,11 +170,18 @@ alias bashref='xrun ~/ebooks/coding/Shell\ Scripting/Bash\ Quick\ Reference.pdf 
 # ---------------
 # PROCESS ALIASES
 # ---------------
-alias allprocs='ps aux'
-alias findproc='ps aux | grep'
+alias psall='ps aux'
+alias psgrep='ps aux | grep'
+alias psname2pid='ps -o pid= -C'  # equivalent to pgrep
+alias psbyname='ps -C'
+alias psname2args='ps -o args= -C'
+alias pspid2name='ps -o comm= -p'
+alias psbypid='ps -p'
+alias psbyparent='ps --ppid'
 alias myprocs='ps uxf'
 alias myprocsbymem='ps -u $USER -O pid,user,s,tty,%mem,comm,start,cputime --sort -%mem'
 alias die='killall -vs9'
+
 
 #-----------------------
 # COLOUR PICKER ALIASES.
@@ -435,6 +442,10 @@ alias gemu='gem update --system'
 alias pandoc-md='pandoc -f markdown -t html5 --toc'  # pandoc-md infile.md > outfile.html
 alias feh-im='feh --magick-timeout 0'  # give image-magick enough time to convert files
 alias zmessage='zenity --info --text'  # pop-up message box (like xmessage)
+alias videodl-worst='videodl worst'
+alias videodl-low='videodl low'
+alias videodl-mid='videodl mid'
+alias videodl-high='videodl high'
 
 # -----------------
 # DOWNLOAD ALIASES.
@@ -463,8 +474,7 @@ alias startrek='play -n -c2 synth whitenoise lowpass -1 69 lowpass -1 50 lowpass
 # These entries are to facilitate grepping the alias file for a forgotten command
 
 # xdg-desktop-menu : refresh register desktop files for applications
-# fuser : list open files, ids and processes 
-# lsof, fuser : list processes accessing a file or socket
+# lsof, fuser : list processes accessing a file or socket, open files for process, etc
 # jot -s'' -b'*' 10 : print 10 *s 
 # gcp: cp with additional functionality, incl. progress, munging to handle FAT restrictions,...
 

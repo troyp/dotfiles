@@ -13,6 +13,7 @@ set newtab=all
 js editor.defaultRegister="+"
 set! browser.tabs.closeWindowWithLastTab=false
 
+" PREFIX KEYS: s, ss, t, b, <C-c>
 map -g user -b , @:
 
 " Copying
@@ -32,6 +33,7 @@ map -g user -b <C-c><C-m> :set guioptions!=m<CR>
 map -g user -b <C-c><C-t> :set showtabline!=always,never<CR>
 map -g user -b <C-c><C-n> :set guioptions!=T<CR>
 map -g user -b <C-c><C-b> :set guioptions!=B<CR>
+map -g user -b bb :set guioptions!=B<CR>
 map -g user -b <C-c><C-s> :set guioptions!=B<CR>
 map -g user -b <C-S-d> :dialog downloads<CR>
 map -g user -b <C-c><C-f> :buftabs<CR>
@@ -43,18 +45,36 @@ map -g user -b <C-c><C-r> :restart<CR>
 map -g user -b s <pass>
 map -g user -b sk :bmarks!<SPACE>
 map -g user -b s;k :bmarks<SPACE>
-map -g user -b ss :set guioptions!=B<CR>
 map -g user -b sh :history!<SPACE>
 map -g user -b s;h :history<SPACE>
 map -g user -b st :buffer<SPACE>
 map -g user -b sj :jumps<CR>
 map -g user -b sa :addons<CR>
 
-" Sidebar selection with si, toggle with S
+" Manual sidebar selection with si, toggle with S
 map -g user -b si :sidebar<SPACE>
-map -g user -b S :sidebar!<CR>
-" Moji sidebar
-map -g user -b sM :sidebar Moji<SPACE>
+" map -g user -b S :sidebar!<CR>
+" Open/close AiOS, switch focus
+map -g user -b S :js aios_toggleSidebar()<CR><f6><f6>
+" Open AiOS, switch focus and enter passthrough
+map -g user -b sS :js aios_toggleSidebar()<CR><f6><f6><C-z>
+
+" Sidebar selection
+map -g user -b sA :sidebar Add-ons<CR>
+map -g user -b ssA :sidebar Add-ons<CR><f6><f6><C-z>
+map -g user -b sM :sidebar Bookmarks<CR>
+map -g user -b ssM :sidebar Bookmarks<CR><f6><f6><C-z>
+map -g user -b sD :sidebar Downloads<CR>
+map -g user -b ssD :sidebar Downloads<CR><f6><f6><C-z>
+map -g user -b sH :sidebar History<CR>
+map -g user -b ssH :sidebar History<CR><f6><f6><C-z>
+map -g user -b sM :sidebar Moji<CR>
+map -g user -b ssM :sidebar Moji<CR><f6><f6><C-z>
+map -g user -b sO :sidebar HeadingsMap<CR>
+map -g user -b ssO :sidebar HeadingsMap<CR><f6><f6><C-z>
+map -g user -b sP :sidebar Preferences<CR>
+map -g user -b ssP :sidebar Preferences<CR><f6><f6><C-z>
+
 
 " Output newline in 'Pentadactyl Output <Date>' file
 command! outputnewline :execute "!echo >> \"Pentadactyl Output " + Date().slice(0,15) + "\""
