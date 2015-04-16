@@ -73,6 +73,9 @@ paths=(
     /opt/sejda-console/bin
     /opt/jpdfbookmarks
     /opt/info2html
+    /opt/SublimeText2
+    /opt/peazip
+    /opt/peazip/res
     $HOME/.rvm/bin
     $HOME/.linuxbrew/bin
     $HOME/.fzf

@@ -47,8 +47,10 @@ alias rn='source ranger ranger'    # navigate to new dir with ranger
 #------------
 # LS ALIASES.
 #------------
-alias ls='ls --group-directories-first --color=auto'
+alias ls='ls --group-directories-first --color=auto --time-style=+" %d.%m.%y "'
 alias ll='ls -l'   # list details
+alias lll='ls -l --time-style=+"           %a %d.%b.%y ''
+ %T  %a %d.%b.%y "'  # detailed list with weekday, plus mod. time for recent files
 alias lln='ls -lv'   # detailed list natural sort 
 alias llt='ls -lt'   # detailed list sort by last modified
 alias llx='ls -lX'   # detailed list sort by extension
@@ -240,19 +242,30 @@ alias choose-input-method='im-config -c'
 # --------------------------
 # SYSTEM / HARDWARE ALIASES.
 # --------------------------
-alias hdd='df -hT'
-alias partitionlist='fdisk -l'
 alias distro='cat /etc/lsb-release'
 alias systeminfo='DISTRO=$(cat /etc/os-release|command grep PRETTY); DISTRO="${DISTRO#PRETTY_NAME=\"}"; printf "DISTRO: ${DISTRO%\"}\nARCH:   $(uname -i)\nKERNEL: $(uname -r)\nNODE:   $(uname -n)\n"'
+alias xevkb="xev | grep -A2 --line-buffered '^KeyRelease' | sed -n '/keycode /s/^.*keycode \([0-9]*\).* (.*, \(.*\)).*$/\1 \2/p'"
+alias capslockon='sudo setleds -D +caps < /dev/console'  # turn off capslock if xset doesn't work. Requires chmod 666 /dev/console (otherwise su - must used rather than sudo)
+alias capslockoff='capslockon; sudo setleds -D -caps < /dev/console' # see capslockon; sometimes you need to use capslockon first or the light won't clear.
+alias hdd='df -hT'
+alias partitionlist='fdisk -l'
 alias lstab='cat /etc/mtab'  # list mounted partitions / filesystems in fstab format 
 alias etab='sudo $(echo ${EDITOR:-vim}) /etc/fstab' # customize auto-mounted partitions / filesystems in fstab file 
 alias uuids='ls -al /dev/disk/by-uuid/'  # list /dev partitions with UUIDs
 alias uuid='ls -al /dev/disk/by-uuid/ | grep'  # list a /dev partition with its UUID
 alias blkid='sudo blkid'     # list mounted partitions
-alias lshws='lshw -short'    # list hardware in compact format
-alias xevkb="xev | grep -A2 --line-buffered '^KeyRelease' | sed -n '/keycode /s/^.*keycode \([0-9]*\).* (.*, \(.*\)).*$/\1 \2/p'"
-alias capslockon='sudo setleds -D +caps < /dev/console'  # turn off capslock if xset doesn't work. Requires chmod 666 /dev/console (otherwise su - must used rather than sudo)
-alias capslockoff='capslockon; sudo setleds -D -caps < /dev/console' # see capslockon; sometimes you need to use capslockon first or the light won't clear.
+alias ssmart='sudo smartctl'  # hard drive testing
+alias disable-wd-headparking='sudo idle3ctl -d'
+alias hw-list='sudo lshw -short'    # list hardware in compact format
+alias hw-listusb='lsusb'
+alias hw-listpci='lspci'
+alias hw-memusage='cat /proc/meminfo'
+alias hw-cpuinfo='sudo dmidecode --type processor'
+alias hw-coreinfo='cat /proc/cpuinfo'
+alias hw-meminfo='sudo dmidecode --type memory'
+alias hw-biosinfo='sudo dmidecode --type bios'
+alias hw-connectorinfo='sudo dmidecode --type connector'
+
 
 #-----------------------------
 # EDITORS & PROGRAMMING TOOLS.
@@ -340,6 +353,9 @@ alias tolowercase="tr '[:upper:]' '[:lower:]'"
 alias touppercase="tr '[:lower:]' '[:upper:]'"
 alias tohilitcase="perl -MText::Autoformat -e'undef $/; print autoformat +<>, { case => \"highlight\" }'"
 alias totitlecase="perl -MText::Autoformat -e'undef $/; print autoformat +<>, { case => \"title\" }'"
+alias first='head -n1'
+alias last='tail -n1'
+alias rest='tail -n+2'
 
 # -----------
 # FORMATTING.
@@ -400,6 +416,9 @@ alias jcons='/opt/j64-801/bin/jconsole'
 alias trash-restore='restore-trash'
 alias ack='ack-grep'
 alias noi='noice'
+alias lastu='last'    # leave last free for alias
+alias PeaExtractor='/opt/peazip/res/pealauncher'
+alias PeaUtils='/opt/peazip/res/pea'
 
 #---------------------------------
 # APPLICATION DEFAULTS & VARIANTS.
@@ -446,6 +465,8 @@ alias videodl-worst='videodl worst'
 alias videodl-low='videodl low'
 alias videodl-mid='videodl mid'
 alias videodl-high='videodl high'
+alias videodl-best='videodl best'
+
 
 # -----------------
 # DOWNLOAD ALIASES.
@@ -477,6 +498,8 @@ alias startrek='play -n -c2 synth whitenoise lowpass -1 69 lowpass -1 50 lowpass
 # lsof, fuser : list processes accessing a file or socket, open files for process, etc
 # jot -s'' -b'*' 10 : print 10 *s 
 # gcp: cp with additional functionality, incl. progress, munging to handle FAT restrictions,...
+
+# disk usage viewers: gdmap, filelight, jdiskreport (proprietary), baobab, k4dirstat, ncdu (ncurses)
 
 # *******************
 # *                 *
