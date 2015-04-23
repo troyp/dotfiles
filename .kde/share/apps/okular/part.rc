@@ -134,8 +134,8 @@
   <Action shortcut="Shift+G; Alt+>" priority="0" name="last_page"/>
   <Action shortcut="C" name="view_continuous"/>
   <Action shortcut="G; '" priority="0" name="go_goto_page"/>
-  <Action shortcut="Space; ]" priority="0" name="go_next"/>
-  <Action shortcut="Backspace; [" priority="0" name="go_previous"/>
+  <Action shortcut="Space; ." priority="0" name="go_next"/>
+  <Action shortcut="Backspace; ," priority="0" name="go_previous"/>
   <Action shortcut="Ctrl+Right; Ctrl+J" name="next_bookmark"/>
   <Action shortcut="Ctrl+Left; Ctrl+K" name="previous_bookmark"/>
   <Action shortcut="Alt+Down" name="view_scroll_down"/>

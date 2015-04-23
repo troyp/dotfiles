@@ -42,3 +42,5 @@ fookebox
 beets
 python-mpd
 grip
+docutils
+Sphinx

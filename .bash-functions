@@ -1,19 +1,19 @@
-function history-refresh {
+history-refresh () {
     # refreshes history (brings in commands that have been typed
     # in other shells since the shell started)
     history -c
     history -r
 }
 
-function manh {
+manh () {
     firefox -P default "localhost//cgi-bin/man/man2html?query=$1"
 }
 
-function grepdict {
+grepdict () {
     grep $1 /usr/share/dict/words
 }
 
-function irm {
+irm () {
     echo $(ls $1)
     n=$(ls $1 | wc -l)
     read -p "Delete $n files?" -n 1 CONFIRM
@@ -22,32 +22,32 @@ function irm {
     fi
 }
 
-function explode {
+explode () {
     printf $1 | grep -o .
 }
 
-function remove-last {
+remove-last () {
     head -n -1 $1 > temp-remove-last
     mv temp-remove-last $1
 }
 
 # TODO: handle aliases, functions, failure, multiple matches (eg. alias and command)
 # TODO: probably best to convert to script
-function prsource {
+prsource () {
     cat $(which $1)
 }
 # prsource with syntax highlighting via colz alias
-function prsrc {
+prsrc () {
     cat $(which $1) | colz
 }
 
 # compress directory as .tgz
-function tgz {
+tgz () {
     tar czf "${1%/}.tgz" "$1"
 }
 
 # convert directory to .cbz
-function cbz {
+cbz () {
     pushd "$1" || return
     # n=`ls -v | tail -n1 | awk -F'.' '{ print(length($1)) }'`
     n=`ls -pv | GREP_OPTIONS="" grep -v ".*/$" | tail -n1 | awk -F'.' '{ print(length($1)) }'`;
@@ -64,7 +64,7 @@ function cbz {
 alias cbzq='cbz > /dev/null'
 
 # compress directory as .tgz
-function maff {
+maff () {
     if [ ! -f "$1/index.html" ]
     then
 	echo "No index.html file. Enter relative Path of file to redirect to."
@@ -80,14 +80,14 @@ function maff {
     7z a -tzip "$archive_name" "$1"
 }
 
-function maffus {
+maffus () {
     archive_name=`echo "${1%/}" | sed -e 's/ /_/g'`.maff
     7z a -tzip "$archive_name" "$1"
 }
 
-function man2text { man "$1" | col -bx; }
+man2text () { man "$1" | col -bx; }
 
-function ussp {
+ussp () {
     # convert underscores to spaces in filename
     converted_name=${1//_/ }
     if [ ! -f "$converted_name" ]; then 
@@ -95,7 +95,7 @@ function ussp {
     fi
 }
  
-function spus {
+spus () {
     # convert spaces to underscores in filename
     converted_name=${1// /_}
     if [ ! -f "$converted_name" ]; then 
@@ -103,7 +103,7 @@ function spus {
     fi
 }
  
-function dashus {
+dashus () {
     # convert dashes to spaces in filename
     converted_name=${1//-/ }
     if [ ! -f "$converted_name" ]; then 
@@ -111,7 +111,7 @@ function dashus {
     fi
 }
  
-function dotsp {
+dotsp () {
     # convert underscores to spaces in filename
     extension="${1##*.}"
     base_name="${1%.*}"
@@ -121,18 +121,18 @@ function dotsp {
     fi
 }
  
-function pdfoutline-out {
+pdfoutline-out () {
     # pdfoutline-out PDF_DOC > BMARKFILE
     pdftk "$1" dump_data
 }
 
-function pdfoutline-in {
+pdfoutline-in () {
     # pdfoutline-in PDF_DOC BMARK_FILE
     # produces new pdf 'out.pdf'
     pdftk "$1" update_info "$2" output out.pdf
 }
 
-function pdfoutline-edit {
+pdfoutline-edit () {
     # pdfoutline-edit PDF_DOC 
     # edit bookmarks of PDF_DOC
     outline=$(mktemp)
@@ -143,18 +143,18 @@ function pdfoutline-edit {
     mv $output "$1"
 }
 
-function djoutline-out {
+djoutline-out () {
     # djoutline-out DJVU_DOC BMARKFILE
     djvused "$1" -e 'print-outline' > "$2"
 }
 
-function djoutline-in {
+djoutline-in () {
     # djoutline-in DJVU_DOC BMARK_FILE
     # produces new pdf 'out.pdf'
     djvused "$1" -e "set-outline \"$2\"; save"
 }
 
-function djoutline-edit {
+djoutline-edit () {
     # djoutline-edit DJVU_DOC 
     # edit bookmarks of DJVU_DOC
     outline=$(mktemp)
@@ -163,43 +163,43 @@ function djoutline-edit {
     djvused "$1" -e "set-outline $outline; save"
 }
 
-function quick-diffdir {
+quick-diffdir () {
     diff <(cd "$1" && find | sort) <(cd "$2" && find | sort)
 }
 
-function findinfilename {
+findinfilename () {
     find * -regextype posix-extended -type f -iregex "^[^.]*$1[^/]*$"
 }
 
-function findinfofile {
+findinfofile () {
     locate --regex "/$1\.info(\.gz)?$"
 }
 
-function apt-install-from-file {
+apt-install-from-file () {
     sudo apt-get install `cat $1 | tr '\n' ' '`
 }
 
-function einfo {
+einfo () {
     emacsclient --eval "(info \"$(findinfofile $1)\")"
 }
 
-function linkcount {
+linkcount () {
     linkcount=$(ls -l "$1" | tr '\t' ' ' | tr -s ' ' | cut -d' ' -f2)
     echo $linkcount
 }
 
-function mihtm {
+mihtm () {
    tmp=$(mktemp)
    mediainfo --Output=HTML "$1" > "$tmp"
    ${BROWSER:-sensible-browser} "$tmp"
 }
  
-function uuid2dev {
+uuid2dev () {
     line=$(ls -al /dev/disk/by-uuid/ | grep $1)
     echo ${line##*/}
 }
 
-function dev2uuid {
+dev2uuid () {
     line=`ls -n  /dev/disk/by-uuid/ | grep $1`
     # extract substring:
     # echo $line | cut -d' ' -f9    # depends on #cols in ls -n
@@ -207,9 +207,9 @@ function dev2uuid {
     echo $line | grep -Po '(?<= )([-0-9a-f]+)(?= ->)'    # grep w/ Perl-compat regexp
 }
 
-function loc1 { locate "$1" | head -n1; }
+loc1 () { locate "$1" | head -n1; }
 
-function tohtml {
+tohtml () {
     # usage:    tohtml [ PORT [ STYLE DECLARATIONS ] ]
     # eg:       ls -l | tohtml 8000 "color: blue"
     tmp=$(mktemp)
@@ -231,7 +231,7 @@ function tohtml {
     done   
 }
 
-function comment-out {
+comment-out () {
     # search for a pattern in a script or configuration file and comment it out
     # by prefixing with '# '
     pattern=$1
@@ -241,7 +241,7 @@ function comment-out {
     cp $tmpfile "$file"
 }
 
-function videodl {
+videodl () {
     # videodl QUALITY URL
     # Download video URL with livedumper; args swapped to allow aliases.
     # requires:
@@ -251,7 +251,7 @@ function videodl {
     livedumper "$2" "$1"
 }
 
-function jar-version {
+jar-version () {
     # print version string from jar manifest file
     wd=`pwd`
     tempdir=`mktemp -d`
