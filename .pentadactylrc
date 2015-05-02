@@ -6,6 +6,7 @@ set incfind
 set hlfind
 set findcase=smart
 set showstatuslinks=status
+set wildmode=list:longest,list:full
 set strictfocus=mail.google.com:laissez-faire,'chrome:*':laissez-faire,*:moderate
 " Ex commands output in a new tab by default (prefs, addons...)
 set newtab=all
@@ -21,6 +22,9 @@ map -g user -b <A-w> Y
 
 " A-Esc: Pass-through Escape
 map -g user -b <A-Esc> <C-v><Esc>
+
+" C-' Firefox link search
+map -g user -b "<C-'>" <C-v>'
 
 " C-w closes tab; if last in window closes window.
 map -g user -b <C-w> :q<CR>
@@ -113,7 +117,8 @@ map -g user -b tn :tabopen about:newtab<CR>
 " switch to first buffer matching argument (cycle through with gb, gB)
 map -g user -b tt b
 " switch to previously selected buffer
-map -g user -b t- <C-^>
+map -g user -b t; <C-^>
+nmap -g user -b <A-;> <C-^>
 " toggle pinning of current tab
 map -g user -b tp :pintab!<CR>
 " duplicate current tab
@@ -190,3 +195,9 @@ command! prwul :o javascript:(function(){if(window['ppw']&&ppw['bookmarklet']){p
 
 " Jisho.org
 command! toggleromaji :execute "open " + (function(){var newurl=buffer.URL;var romtag="%23romaji";if(newurl.contains(romtag)){newurl=newurl.replace(romtag,"");}else {newurl+=romtag;} return newurl; })()
+" jkanji, jsentences: first select word via the 'details' link using ;y then execute command
+command! jkanji :execute "open " + readFromClipboard().replace("/word/","/search/") + "%23kanji"
+command! jsentences :execute "open " + readFromClipboard().replace("/word/","/search/") + "%23sentences"
+
+
+command! xx S

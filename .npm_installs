@@ -9,3 +9,5 @@ jshint
 marked
 node
 node-css
+js-beautify
+tern

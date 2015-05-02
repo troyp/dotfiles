@@ -146,6 +146,7 @@ alias ip-addr="lwp-request -o text checkip.dyndns.org | awk '{ print $NF }'"
 #-------------------
 # OPEN & SU ALIASES.
 #-------------------
+alias x='xdg-open'
 alias xrun='xdg-open'
 alias grun='gnome-open'
 alias krun='kde-open'
@@ -213,7 +214,6 @@ alias vless='vim -u $VIMRUNTIME/macros/less.sh'
 alias vmore='vim -u $HOME/.vim/vimrc.more'
 alias cless="LESSOPEN='|~/.lessfilter %s' less -R"
 
-
 #-----------------
 # ARCHIVE ALIASES.
 #-----------------
@@ -236,6 +236,12 @@ alias xres='xrdb ~/.Xresources'
 alias setopts='set -o | grep "on$"'
 alias lspath='echo $PATH|tr ":" "\n"'
 alias install-desktop-files='xdg-desktop-menu install --novendor'
+alias install-desktop-files-strict='xdg-desktop-menu install'
+alias mimetype='xdg-mime query filetype'
+alias mimeapp='xdg-mime query default'
+alias mimelist='cat /usr/share/mime/types'
+alias mimegrep='cat /usr/share/mime/types | grep'
+alias mimedefault='xdg-mime default'
 alias update-fonts='fc-cache -vf ~/.fonts/'
 alias choose-input-method='im-config -c'
 
@@ -265,6 +271,7 @@ alias hw-coreinfo='cat /proc/cpuinfo'
 alias hw-meminfo='sudo dmidecode --type memory'
 alias hw-biosinfo='sudo dmidecode --type bios'
 alias hw-connectorinfo='sudo dmidecode --type connector'
+alias mimetypes2mailcap='< /etc/mime.types cut -f1 | grep -E "^[^#]" | dolines echo "$x; xdg-open '%s'"; done'   # save to ~/.mailcap
 
 
 #-----------------------------
@@ -354,8 +361,11 @@ alias touppercase="tr '[:lower:]' '[:upper:]'"
 alias tohilitcase="perl -MText::Autoformat -e'undef $/; print autoformat +<>, { case => \"highlight\" }'"
 alias totitlecase="perl -MText::Autoformat -e'undef $/; print autoformat +<>, { case => \"title\" }'"
 alias first='head -n1'
-alias last='tail -n1'
+alias last='tail -n1'   # system command last is available as alias lastu
 alias rest='tail -n+2'
+alias xaless='xargs less'
+alias xavip='xargs vimpage'
+alias xavi='xargs vipipe'
 
 # -----------
 # FORMATTING.
@@ -410,7 +420,6 @@ alias rannum='tr -dc "0-9" < /dev/urandom | head -c'
 alias vi='nvi'
 alias coline='command col'    # leave col free as a column selection command
 alias factorlang='/opt/factor/factor'
-alias x='xdg-open'
 alias unmount='umount'
 alias jcons='/opt/j64-801/bin/jconsole'
 alias trash-restore='restore-trash'
@@ -419,6 +428,7 @@ alias noi='noice'
 alias lastu='last'    # leave last free for alias
 alias PeaExtractor='/opt/peazip/res/pealauncher'
 alias PeaUtils='/opt/peazip/res/pea'
+alias xa='xargs'
 
 #---------------------------------
 # APPLICATION DEFAULTS & VARIANTS.
@@ -453,7 +463,7 @@ alias clock='cairo-clock -deops -x 1695 -y 104 -w 200 -h 200 -r 1 -t radium'
 alias gremclock='cairo-clock -deops -x 1695 -y 104 -w 200 -h 200 -r 1 -t gremlin'
 alias pman='pinfo -m'
 # repeat character, eg.    rep '*' 20
-alias rep='jot -s "" -b'
+alias rep="jot -s '' -b"
 alias iselect='iselect -kj:KEY_DOWN -kk:KEY_UP'
 alias choose='iselect -ma'
 alias say='spd-say -r -40 -t male2'
@@ -496,7 +506,6 @@ alias startrek='play -n -c2 synth whitenoise lowpass -1 69 lowpass -1 50 lowpass
 
 # xdg-desktop-menu : refresh register desktop files for applications
 # lsof, fuser : list processes accessing a file or socket, open files for process, etc
-# jot -s'' -b'*' 10 : print 10 *s 
 # gcp: cp with additional functionality, incl. progress, munging to handle FAT restrictions,...
 
 # disk usage viewers: gdmap, filelight, jdiskreport (proprietary), baobab, k4dirstat, ncdu (ncurses)
@@ -511,5 +520,10 @@ alias startrek='play -n -c2 synth whitenoise lowpass -1 69 lowpass -1 50 lowpass
 # numutils
 # suckless-tools
 # jot, enum, rs, randomize-lines
-# window scripting: devilspie, devilspie2, gdevilspie, kpie
+# window scripting: devilspie, devilspie2, gdevilspie, kpie, wmctrl
 # window properties: xprop
+# xdg-open replacements:
+#     https://github.com/march-linux/mimi 
+#     http://xyne.archlinux.ca/projects/mimeo/
+#     http://mcfadzean.org.uk/appstogo/linux.html#whippet and #ayr
+#     https://git.fleshless.org/sx-open

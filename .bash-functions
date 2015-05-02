@@ -260,3 +260,30 @@ jar-version () {
     grep -i "^Version\|Implementation-Version" META-INF/MANIFEST.MF
     cd "$wd"
 }
+
+list-dependencies-safe () {
+    # list-dependencies-safe EXECUTABLE
+    # List shared libraries that are direct dependencies of EXECUTABLE.
+    # Unlike ldd, this is safe to use on an untrusted executable.
+    # Alternatives: ldd, readelf -d
+    objdump -p $1 | grep NEEDED
+}
+
+nthline () { sed -n "`printf "%dp;" $@`"; }
+
+catnth () {
+    # catenate files on specified lines of the input
+    # eg. locate foo | catnth 3 5
+    #     catenates 3rd and 5th files returned by locate
+    tmp=`mktemp`
+    cat > $tmp
+    while [ $# -gt 0 ]; do
+	cat `sed "${1}q;d" $tmp`
+	shift
+    done
+}
+
+fileapp () {
+    # return default application for file
+    xdg-mime query default `xdg-mime query filetype "$1"`
+}

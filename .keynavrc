@@ -22,7 +22,7 @@ e grid-nav toggle
 Tab restart
 super+semicolon start
 #ctrl+semicolon start,cut-left .95, cut-up .95, move-right 50, move-down 20
-alt+semicolon start,move-right
+#alt+semicolon start,move-right
 Escape end
 ctrl+bracketleft end
 h cut-left
