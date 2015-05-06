@@ -193,6 +193,8 @@ command! moveTR :js self.moveTo(screen.availWidth-self.window.outerWidth, 0)
 command! moveBL :js self.moveTo(0, screen.availHeight-self.window.outerHeight)
 command! moveBR :js self.moveTo(screen.availWidth-self.window.outerWidth, screen.availHeight-self.window.outerHeight)
 
+command! showsource -nargs=1 -js (alert(self[args[0]].toString()))
+
 " EdX
 command! edx :so ~/.pentadactyl/edx.pentadactyl
 command! edxe viewsource! file:/home/troy/.pentadactyl/edx.pentadactyl
@@ -214,9 +216,12 @@ command! prwul :o javascript:(function(){if(window['ppw']&&ppw['bookmarklet']){p
 " Jisho.org
 command! toggleromaji :execute "open " + (function(){var newurl=buffer.URL;var romtag="%23romaji";if(newurl.contains(romtag)){newurl=newurl.replace(romtag,"");}else {newurl+=romtag;} return newurl; })()
 " jkanji, jsentences: first select word via the 'details' link using ;y then execute command
-command! jkanji :execute "open " + readFromClipboard().replace("/word/","/search/") + "%23kanji"
-command! jsentences :execute "open " + readFromClipboard().replace("/word/","/search/") + "%23sentences"
+command! jkanji :open javascript:(function(url){ window.location.href=url.replace("/word/","/search/") + "%2523kanji"; })(decodeURIComponent(top.location));
+command! jsentences :open javascript:(function(url){ window.location.href=url.replace("/word/","/search/") + "%2523sentences"; })(decodeURIComponent(top.location));
 
 " DownThemAll
 command! dtamanager -js self.DTA.openManager()
+
+" :js ... code operates in chrome window namespace
+" :open javascript:(function(){ ... })() code operates in document window namespace
 
