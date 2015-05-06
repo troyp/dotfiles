@@ -1,4 +1,18 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
+<!-- label: The name of the application required -->
+<!-- command: The full path to the executable for the application required -->
+<!-- arguments: The arguments for the application optional -->
+<!-- type: The type of application required. The following types are supported: -->
+<!--   1  Browsers (e.g. Mozilla Firefox) -->
+<!--   2  Mail clients (e.g. Mozilla Thunderbird) -->
+<!--   3  Media clients (e.g. Windows Media Player) -->
+<!--   4  FTP clients (e.g. WS_FTP) -->
+<!--   5  Download Managers (e.g. FlashGet) -->
+<!--   6  File Explorers (e.g. Windows Explorer) -->
+<!--   7  Editors (e.g. UltraEdit) -->
+<!--   8  View Viewers (e.g. XnView) -->
+
 <configurations xmlns="http://launchy.mozdev.org/configurations">
         <application>
 	        <label>Google Chrome</label>
@@ -10,6 +24,12 @@
                 <type>1</type>
                 <command>/usr/bin/lynx</command>
                 <arguments></arguments>
+        </application>
+        <application>
+               <label>VLC Player</label>
+               <type>3</type>
+               <command>/usr/bin/vlc</command>
+               <arguments></arguments>
         </application>
         <application>
                <label>Kget</label>

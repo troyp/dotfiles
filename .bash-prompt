@@ -86,7 +86,7 @@ case "$TERM" in
 	PS1="$mblue┌─($orange\u@\h \$(date \"+%a, %d %b %y\")$mblue)─\${fill}─($orange\$newPWD\
 $mblue)─┐\n$mblue└─($orange\$(date \"+%H:%M\") \$$mblue)─>$white "
 	;;    
-    eterm-color)
+    eterm-color|Eterm|xterm-256color)
 	# emacs/ansi-term emacs/multi-term
 	PS1=">> "
 	;;

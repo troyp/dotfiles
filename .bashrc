@@ -76,6 +76,7 @@ paths=(
     /opt/SublimeText2
     /opt/peazip
     /opt/peazip/res
+    /opt/lilyterm/bin
     $HOME/.rvm/bin
     $HOME/.linuxbrew/bin
     $HOME/.fzf

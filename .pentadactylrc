@@ -125,6 +125,8 @@ map -g user -b tp :pintab!<CR>
 map -g user -b td :tabduplicate<CR>
 " close other tabs
 map -g user -b t1 :tabonly<CR>
+" undo recent closed tab from list
+map -g user -b U :undo<SPACE>
 "
 " Tab moving helpers
 " map -g user -b -arg <C-m>t :tabmove <arg><CR>
@@ -157,9 +159,11 @@ vmap -g user -b <C-S-Y> <C-e>
 " 6. press v to enter visual mode
 " 7. use visual mode keys j,k,h,l,C-a,C-e, etc to extend selection
 
-" replace builtin <C-a> and <C-x> bindings with ]; and [; (inrease/decrease URL by 1)
+" replace builtin <C-a> and <C-x> bindings (inrease/decrease URL by 1)
 nmap -g user -b ]; <C-a>
 nmap -g user -b [; <C-x>
+nmap -g user -b ,, <C-x>
+nmap -g user -b ,. <C-a>
 
 " Search
 " clear the search term highlighting
@@ -174,6 +178,20 @@ set hinttags+=a[class^='speed']
 hi Hint font-family: "Monospace"; line-height: 14px; text-shadow: 1px 1px 1px #888; padding: 5px 8px 6px; font-size: 18px; font-weight: bold; text-transform: uppercase; color: rgb(200, 0, 0); background-color: rgba(240, 255, 240, 0.80); -moz-border-radius: 1em;
 hi HintElem background-color: rgba(55, 255, 50, 0.15) !important; -moz-border-radius: 2px;
 hi HintActive background-color: rgba(54, 255, 250, 0.2) !important; color: black !important; -moz-border-radius: 2px;
+
+" Resizing and moving
+command! resize -nargs=* -js self.resizeTo(args[0], args[1])
+command! resizeby -nargs=* -js self.resizeBy(args[0], args[1])
+command! maximize -js self.maximize()
+command! maximizeH -js self.resizeTo(self.outerWidth, screen.availHeight)
+command! maximizeW -js self.resizeTo(screen.availWidth, self.outerHeight)
+command! minimize -js self.minimize()
+command! move -nargs=* -js self.moveBy(args[0], args[1])
+command! moveto -nargs=* -js self.moveTo(args[0], args[1])
+command! moveTL :js self.moveTo(0,0)
+command! moveTR :js self.moveTo(screen.availWidth-self.window.outerWidth, 0)
+command! moveBL :js self.moveTo(0, screen.availHeight-self.window.outerHeight)
+command! moveBR :js self.moveTo(screen.availWidth-self.window.outerWidth, screen.availHeight-self.window.outerHeight)
 
 " EdX
 command! edx :so ~/.pentadactyl/edx.pentadactyl
@@ -199,5 +217,6 @@ command! toggleromaji :execute "open " + (function(){var newurl=buffer.URL;var r
 command! jkanji :execute "open " + readFromClipboard().replace("/word/","/search/") + "%23kanji"
 command! jsentences :execute "open " + readFromClipboard().replace("/word/","/search/") + "%23sentences"
 
+" DownThemAll
+command! dtamanager -js self.DTA.openManager()
 
-command! xx S

@@ -287,3 +287,8 @@ fileapp () {
     # return default application for file
     xdg-mime query default `xdg-mime query filetype "$1"`
 }
+
+xfont-select () {
+    # find X11 font name using xfontsel
+    xfontsel -print -pattern \*$1\*
+}
