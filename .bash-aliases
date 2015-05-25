@@ -123,6 +123,7 @@ alias listhttplinks2='xargs wget -O - 2>&1 | grep -i "http:" | sed "s/^.*http/ht
 # alias manht='man -Hchromium-browser'   # problem with grohtml images
 alias gitman='git help'
 alias erlman='erl -man'
+alias bashman='mangrep bash'  # see .bash-functions. eg. bashman type
 
 #------------------------
 # BROWSER/SERVER ALIASES.
@@ -137,29 +138,29 @@ alias dirserve='python2 -m SimpleHTTPServer'  # serve current dir tree on port 8
 #--------------------
 # NETWORKING ALIASES.
 #--------------------
-alias tracert='traceroute'
+alias tracert=traceroute
 alias ports='netstat -tunp'
 # from: http://unix.stackexchange.com/questions/22615/
 alias ip-addr="lwp-request -o text checkip.dyndns.org | awk '{ print $NF }'"
 
-
 #-------------------
 # OPEN & SU ALIASES.
 #-------------------
-alias x='xdg-open'
-alias xrun='xdg-open'
-alias grun='gnome-open'
-alias krun='kde-open'
-alias ksu='kdesudo'
+alias x=xdg-open
+alias xrun=xdg-open
+alias grun=gnome-open
+alias krun=kde-open
+alias ksu=kdesudo
 
 #-------------------
 # CLIPBOARD ALIASES.
 #-------------------
-alias c='copyq'
+alias c=copyq
 alias cb='xsel -ob'      # for i in `seq 5`; do echo $(cb); done  # prints clipboard 5x
 alias 2cb='xsel -ib'     # uptime | 2cb    # puts uptime in clipboard
 # xsel or xclip copies stdin to selection
 alias 2sel='xsel -ip'
+alias qn='copyq tab notes add'
 
 
 #--------------
@@ -189,7 +190,7 @@ alias die='killall -vs9'
 #-----------------------
 # COLOUR PICKER ALIASES.
 #-----------------------
-alias eyed='gpick'
+alias eyed=gpick
 alias grabhexcol='grabc 2>/dev/null'
 alias grabrgbcol='grabc 1>/dev/null'
 alias pick='grabc 2>/dev/null | xsel -ib'
@@ -198,21 +199,23 @@ alias pickrgb='grabc 1>/dev/null | xsel -ib'
 #-------------------
 # CUT & PASTE FILES.
 #-------------------
-alias cf='xclip-copyfile'
-alias xf='xclip-cutfile'
-alias pf='xclip-pastefile'
+alias cf=xclip-copyfile
+alias xf=xclip-cutfile
+alias pf=xclip-pastefile
 
 # --------------
 # PAGER ALIASES.
 # --------------
-alias vip='vimpager'
+alias vip=vimpager
 alias wvip='PAGER=vimpager'
 alias vman='MANPAGER=vimpager man'
 # follow appended data (like tail -f) in less
 alias fless='less +F'
-alias vless='vim -u $VIMRUNTIME/macros/less.sh'
+alias vless=/usr/share/vim/vim74/macros/less.sh
 alias vmore='vim -u $HOME/.vim/vimrc.more'
 alias cless="LESSOPEN='|~/.lessfilter %s' less -R"
+alias lesr='less -R'   # raw ANSI color escapes
+alias lesrr='less -r'  # raw control chars
 
 #-----------------
 # ARCHIVE ALIASES.
@@ -274,6 +277,18 @@ alias hw-connectorinfo='sudo dmidecode --type connector'
 alias mimetypes2mailcap='< /etc/mime.types cut -f1 | grep -E "^[^#]" | dolines echo "$x; xdg-open '%s'"; done'   # save to ~/.mailcap
 
 
+# --------------------------------------
+# SYNTAX HIGHLIGHTING & PRETTY PRINTING.
+# --------------------------------------
+alias colzl='pygmentize -f terminal256 -O style=native -l'  # syntax highlighting, eg. "cat file | colzl perl"
+alias colorizelang='source-highlight -f esc -s'  # syntax highlighting, eg. "cat file | colorizelang perl"
+alias colz='pygmentize -f terminal256 -O style=native -g'  # syntax highlighting (guess lang), eg. "cat file | colz"
+# JS/JSON pretty printing:
+alias ppjson='python -m json.tool'
+alias ppjs='underscore print'   # js/json pretty printing
+alias ppcjs='underscore print --outfmt pretty'  # js/json pretty printing & syntax highlighting
+# also: prettyjson(pp/sh)
+
 #-----------------------------
 # EDITORS & PROGRAMMING TOOLS.
 #-----------------------------
@@ -283,11 +298,6 @@ alias ipylab='ipython --pylab'
 alias mzscheme='rlwrap /opt/racket/bin/mzscheme'
 alias sml='rlwrap sml'
 alias ocaml='rlwrap ocaml'
-alias colorizelang='pygmentize -f terminal256 -O style=native -l'  # eg. "cat file | colorizelang c"
-alias colzl='pygmentize -f terminal256 -O style=native -l'  # eg. "cat file | colorizelang c"
-# alias colorizelang='source-highlight -f esc -s'  # eg. "cat file | colorizelang c"
-alias colorize='pygmentize -f terminal256 -O style=native -g'  # eg. "cat file | colorize -g"
-alias colz='pygmentize -f terminal256 -O style=native -g'  # eg. "cat file | colorize -g"
 alias etags_rec_el_c_h='find . -type f -iregex '.*[.]\(c\|h\|el\)' | etags -'
 alias etags_sudo_rec_el_c_h='find . -type f -iregex '.*[.]\(c\|h\|el\)' | sudo etags -'
 alias extract_elisp='find . -name "*.el.gz" | xargs sudo gunzip'
@@ -303,11 +313,12 @@ alias xracket='racket -il xrepl'
 alias rkt='racket -e "(require readline)" -i'
 # the code to install scribble-emacs (from scribble docs) seems to be broken
 alias update-scribble-mode='racket -e "(require (planet neil/scribble-emacs:1:2/install-in-my-emacs))"'
-alias cppdecl='c++decl'
+alias cppdecl=c++decl
 alias pcgrep='pkg-config --list-all | grep'
 alias pkgc='pkg-config --libs'
 alias cpkgc='cmake --find-package -DLANGUAGE=C -DCOMPILER_ID=GNU -DMODE=COMPILE'   # eg. cpkgc -DNAME=LibXml2 
 alias pyc="python2 -c 'from math import *; from operator import *; from itertools import *; from functools import *; print "
+alias pipu='sudo -H pip install --upgrade'
 
 # -----------------
 # HTML MANIPULATION
@@ -323,11 +334,11 @@ alias remove-wayback-insert="sed -i '/BEGIN WAYBACK TOOLBAR INSERT/,/END WAYBACK
 # -----------
 # PDF ALIASES
 # -----------
-alias pdfdiff='diffpdf'
+alias pdfdiff=diffpdf
 alias pdfgrep='pdfgrep -n'
 alias pdfg='pdfgrep -n'
 alias concatpdfs='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=out.pdf' # joins pdfs (and bookmarks) in order
-alias sej='sejda-console'
+alias sej=sejda-console
 alias pdfmergeall='sejda-console merge -f *.pdf -o out.pdf'
 alias sejmerge='sejda-console merge' # eg. sejmerge -f file1.pdf file2.pdf -o newfile.pdf
 # unlike pdfjoin, sejda-console merge preserves bookmarks
@@ -366,6 +377,8 @@ alias rest='tail -n+2'
 alias xaless='xargs less'
 alias xavip='xargs vimpage'
 alias xavi='xargs vipipe'
+alias xakill='xargs kill'
+alias recol='pr -t --columns'  # recolumnate single-column data
 
 # -----------
 # FORMATTING.
@@ -417,18 +430,18 @@ alias rannum='tr -dc "0-9" < /dev/urandom | head -c'
 #---------------------
 # APPLICATION ALIASES.
 #---------------------
-alias vi='nvi'
+alias vi=nvi
 alias coline='command col'    # leave col free as a column selection command
-alias factorlang='/opt/factor/factor'
-alias unmount='umount'
-alias jcons='/opt/j64-801/bin/jconsole'
-alias trash-restore='restore-trash'
-alias ack='ack-grep'
-alias noi='noice'
-alias lastu='last'    # leave last free for alias
-alias PeaExtractor='/opt/peazip/res/pealauncher'
-alias PeaUtils='/opt/peazip/res/pea'
-alias xa='xargs'
+alias factorlang=/opt/factor/factor
+alias unmount=umount
+alias jcons=/opt/j64-801/bin/jconsole
+alias trash-restore=restore-trash
+alias ack=ack-grep
+alias noi=noice
+alias lastu=last    # leave last free for alias
+alias PeaExtractor=/opt/peazip/res/pealauncher
+alias PeaUtils=/opt/peazip/res/pea
+alias xa=xargs
 
 #---------------------------------
 # APPLICATION DEFAULTS & VARIANTS.
@@ -449,6 +462,8 @@ alias untgz='tar -zxvf'
 alias grepc="grep --color=always"  # color grep for pipes
 alias dfh='df -h'
 alias rscopy='rsync -avzH --progress'
+alias rsdiff='rsync -rvnc --delete'  # compare two directories by simulating the process of copying the first to overwrite the second
+alias rscopyto='rsync -rvc --delete .'  # copy current directory to another directory, deleting its original contents
 alias rsupdate='rsync -auvzH --progress'
 #alias info='pinfo'
 alias edx-dl='edx-dl -s'
@@ -476,6 +491,9 @@ alias videodl-low='videodl low'
 alias videodl-mid='videodl mid'
 alias videodl-high='videodl high'
 alias videodl-best='videodl best'
+alias ibus-start='ibus-daemon -drx'
+alias sort-natural='sort -bdV'
+alias sort-icase-natural='sort -bdfV'
 
 
 # -----------------
@@ -507,23 +525,3 @@ alias startrek='play -n -c2 synth whitenoise lowpass -1 69 lowpass -1 50 lowpass
 # xdg-desktop-menu : refresh register desktop files for applications
 # lsof, fuser : list processes accessing a file or socket, open files for process, etc
 # gcp: cp with additional functionality, incl. progress, munging to handle FAT restrictions,...
-
-# disk usage viewers: gdmap, filelight, jdiskreport (proprietary), baobab, k4dirstat, ncdu (ncurses)
-
-# *******************
-# *                 *
-# * USEFUL PACKAGES *
-# *                 *
-# *******************
-# moreutils
-# filo
-# numutils
-# suckless-tools
-# jot, enum, rs, randomize-lines
-# window scripting: devilspie, devilspie2, gdevilspie, kpie, wmctrl
-# window properties: xprop
-# xdg-open replacements:
-#     https://github.com/march-linux/mimi 
-#     http://xyne.archlinux.ca/projects/mimeo/
-#     http://mcfadzean.org.uk/appstogo/linux.html#whippet and #ayr
-#     https://git.fleshless.org/sx-open

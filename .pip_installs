@@ -45,3 +45,9 @@ grip
 docutils
 Sphinx
 livestreamer
+livedumper
+--upgrade
+certifi
+sexpdata
+hy
+toolz

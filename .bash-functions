@@ -85,7 +85,7 @@ maffus () {
     7z a -tzip "$archive_name" "$1"
 }
 
-man2text () { man "$1" | col -bx; }
+man2text () { man "$1" | \col -bx; }
 
 ussp () {
     # convert underscores to spaces in filename
@@ -144,8 +144,8 @@ pdfoutline-edit () {
 }
 
 djoutline-out () {
-    # djoutline-out DJVU_DOC BMARKFILE
-    djvused "$1" -e 'print-outline' > "$2"
+    # djoutline-out DJVU_DOC > BMARKFILE
+    djvused "$1" -e 'print-outline'
 }
 
 djoutline-in () {
@@ -283,12 +283,31 @@ catnth () {
     done
 }
 
-fileapp () {
-    # return default application for file
-    xdg-mime query default `xdg-mime query filetype "$1"`
+# fileapp FILE: return default application for FILE
+fileapp () { xdg-mime query default `xdg-mime query filetype "$1"`; }
+
+# xfont-select PATTERN: find X11 font name using xfontsel
+xfont-select () { xfontsel -print -pattern \*$1\*; }
+
+proconport () { lsof -i:$1 | awk 'NR>1 { print $2 }'; }
+
+# tree-html DIRECTORY OUTPUTFILE
+tree-html () { tree -aC -H "`pwd`/$1" -o "$2" "$1"; }
+
+mangrep () { man $1 | less -p "^ +$2 "; }
+
+totmp () {
+    tmp=`mktemp`
+    while read -r x; do 
+	echo $x >> $tmp
+    done
+    echo $tmp
 }
 
-xfont-select () {
-    # find X11 font name using xfontsel
-    xfontsel -print -pattern \*$1\*
+pidfiles () { lsof -p $1 | less; }
+
+pdf-extract-images () {
+    imgdir="${1}-images"
+    mkdir "$imgdir"
+    pdfimages "$1" "$imgdir"/out
 }

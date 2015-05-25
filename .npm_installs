@@ -12,3 +12,6 @@ node-css
 js-beautify
 tern
 mime
+prettyjson
+underscore-cli
+oniguruma

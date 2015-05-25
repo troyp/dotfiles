@@ -33,15 +33,46 @@ map sx :sbclose<CR>
 map <C-c><C-r> :restart<CR>
 
 " Tab moving helpers
-map tm :tabmove<SPACE>
+command! tm :tabmove<SPACE>
 map <A-Left> :tabmove! -1<CR>
 map <A-Right> :tabmove! +1<CR>
-map td :tabduplicate<CR>
+command! d :tabduplicate<CR>
 
 
 map J <C-PageDown>
 map K <C-PageUp>
 nnoremap <C-b> :sidebar bookmarks<CR>
 
-cabbrev d tabduplicate
+nnoremap  gh :backt<CR>
+nnoremap  gl :forwardt<CR>
+
+command! backt -description "Duplicate tab and go back in the browser history" :js backt();
+:js <<EOF
+  backt = function() {
+      var currT = gBrowser.selectedTab;
+      var dupT = gBrowser.duplicateTab(currT);
+      var dupTB = gBrowser.getBrowserForTab(dupT);
+      var backtListener = function () { 
+          gBrowser.goBack(); 
+          dupTB.removeEventListener("DOMContentLoaded", backtListener);
+      };          
+      dupTB.addEventListener("DOMContentLoaded", backtListener);
+      gBrowser.selectedTab = dupT;
+  }
+EOF
+
+command! forwardt -description "Duplicate tab and go forward in the browser history" :js forwardt();
+:js <<EOF
+  forwardt = function() {
+      var currT = gBrowser.selectedTab;
+      var dupT = gBrowser.duplicateTab(currT);
+      var dupTB = gBrowser.getBrowserForTab(dupT);
+      var forwardtListener = function () {
+          gBrowser.goForward();
+          dupTB.removeEventListener("DOMContentLoaded", forwardtListener);
+      };
+      dupTB.addEventListener("DOMContentLoaded", forwardtListener);
+      gBrowser.selectedTab = dupT;
+    }
+EOF
 

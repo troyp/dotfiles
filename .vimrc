@@ -26,14 +26,12 @@ filetype plugin on           " enable extensions
 filetype plugin indent on    " filetype detection & indentation settings
 set hidden                   " hide buffers instead of unloading
 
-inoremap <C-d> <Esc>
-noremap <C-d> <Esc>
-
 set shell=/bin/bash
 set clipboard=unnamed
 
 " .GVIMRC: nnoremap <C-z> :"suspending disabled <CR>
 
+set smartcase                " Smart-case search - override with \c or \C
 set encoding=utf-8
 set cf                       " Enable error files & error jumping.
 set clipboard+=unnamed       " Yanks go on clipboard instead.
@@ -49,6 +47,8 @@ autocmd BufNewFile,BufRead *.vimperator set filetype=vim
 autocmd BufNewFile,BufRead .vimperatorrc set filetype=vim
 
 set rtp+=~/.fzf              " add fzf to runtimepath
+
+set wildchar=<Tab> wildmenu wildmode=full
 
 "------------------------------------------------------
 
@@ -78,8 +78,8 @@ set expandtab
 
 syntax on                    " syntax highlighting
 set background=dark          " use colours that suit a dark background
-colorscheme twilight         
-"others: evening, desert, bubblegum, bubblegum, vividchalk, zenburn
+colorscheme evening         
+"others: evening, jellybeans, twilight, desert, bubblegum, vividchalk, zenburn
 set laststatus=2             " always display status line
 set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
 set ruler                    " Ruler on
@@ -118,7 +118,33 @@ set ttymouse=xterm2            " set terminal mouse support codes
 let g:Powerline_symbols = 'fancy'
 
 let g:airline_powerline_fonts = 1    "for airline
-let g:airline_theme='bubblegum'
+"let g:airline_theme='bubblegum'
+"let g:airline_theme='dark'
+
+"------------------------------------------------------
+
+" ---------
+" NerdTree.
+" ---------
+
+" Don't open on startup
+let g:nerdtree_tabs_open_on_gui_startup=0
+" Open on startup if no files chosen
+autocmd StdinReadPre * let s:std_in=1
+autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" Close Vim if only NerdTree remains
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" Toggle
+map <C-n> :NERDTreeToggle<CR>
+
+"------------------------------------------------------
+
+" ------
+" CtrlP.
+"-------
+
+set runtimepath^=~/.vim/bundle/ctrlp.vim
+
 
 "------------------------------------------------------
 
@@ -153,6 +179,9 @@ let g:neocomplete#enable_at_startup = 1
 " Keybindings.
 "-------------
 
+noremap <C-e> $
+nnoremap <C-S-Y> <C-e>
+
 " Fast saving
 nnoremap <leader>w :w!<cr>
 
@@ -162,13 +191,36 @@ noremap <leader>eg :e! ~/.gvimrc<cr>
 noremap <leader>sv :so ~/.vimrc<cr>
 noremap <leader>sg :so ~/.gvimrc<cr>
 
+" Windows
+noremap <leader>x0 :hide<cr>
+noremap <leader>x1 :only<cr>
+noremap <leader>x2 :split<cr>
+noremap <leader>x3 :vsplit<cr>
+
 " Close buffer but not window
 noremap <leader>bd :bp<bar>sp<bar>bn<bar>bd<CR>
 
 " F2 = Move rest of line to new line
-noremap <F2> i<CR><ESC>
+noremap <C-j> i<CR><ESC>
 
-inoremap <C-l> <Del>
+" -----------
+" Smart Home.
+" -----------
+"
+" http://vim.wikia.com/wiki/Smart_home
+function! SmartHome()
+  let first_nonblank = match(getline('.'), '\S') + 1
+  if first_nonblank == 0
+    return col('.') + 1 >= col('$') ? '0' : '^'
+  endif
+  if col('.') == first_nonblank
+    return '0'  " if at first nonblank, go to start line
+  endif
+  return &wrap && wincol() > 1 ? 'g^' : '^'
+endfunction
+"
+noremap <expr> <silent> <C-a> SmartHome()
+imap <silent> <C-a> <C-O><Home>
 
 "------------------------------------------------------
 "

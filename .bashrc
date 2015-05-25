@@ -2,11 +2,19 @@
 
 set -a
 
+# ---------------------------
+#  PATH appending functions.
+# ---------------------------
+# note: If the path-var is initially empty, the first directory added will be
+# appended after the empty string.
+# Hence the path-var will begin with separator ":"
+
 function append-to-path-var {
     if [ -d "$2" ] && [[ ":$(printenv $1):" != *":$2:"*  ]]; then
         eval "$1=\${$1}:$2"
     fi
 }
+
 pathappend() {
     if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
         PATH="$PATH:$1"
@@ -82,6 +90,7 @@ paths=(
     $HOME/.fzf
     $HOME/.emacs.d
     $HOME/.scripts
+    $HOME/code/working
     # /opt/mozart/platform/unknown-unknown
 )
 for i in "${paths[@]}"; do pathappend "$i" ; done
@@ -96,6 +105,7 @@ for i in "${infopaths[@]}"; do append-to-path-var "INFOPATH" "$i" ; done
 manpaths=(
     /usr/local/texlive/2014/texmf-dist/doc/man
     $HOME/.linuxbrew/share/man
+    /opt/man
 )
 for i in "${manpaths[@]}"; do append-to-path-var "MANPATH" "$i" ; done
 
@@ -120,6 +130,7 @@ BASH_FUNCTION_FILE=$HOME/.bash-functions
 SCRIPTS_DIRECTORY=$HOME/.scripts
 GTAGSCONF=/usr/share/doc/global/examples/gtags.conf
 VIMPAGER_RC=/opt/vimpager/vimpagerrc
+SUDO_ASKPASS=/usr/bin/gksu
 OZHOME=/usr
 REDLINE_HOME=/opt/redline
 XDG_CONFIG_HOME=$HOME/.config
@@ -143,6 +154,7 @@ shopt -q -s lithist
 # OTHER.
 # ------
 
+MANPAGER=less
 EDITOR=vim
 _JAVA_AWT_WM_NONREPARENTING=1; export _JAVA_AWT_WM_NONREPARENTING
 LIBOVERLAY_SCROLLBAR=0
@@ -251,6 +263,13 @@ CLOJURE_EXT=~/.clojure
 pathappend "/opt/clojure-contrib/launchers/bash"
 alias clj=clj-env-dir
 
+# *********
+# *       *
+# * GNOME *
+# *       *
+# *********
+# gconftool --set -t string /desktop/gnome/interface/gtk_key_theme Vim
+# gconftool --set -t string /desktop/gnome/interface/gtk_key_theme Emacs
 
 # ********
 # *      *
