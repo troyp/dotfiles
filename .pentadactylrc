@@ -1,13 +1,23 @@
-"  _______________ 
-" |               |
-" | PENTADACTYLRC |
-" |_______________|
+"     ___________________ 
+"    /                   \
+"    | ,---------------, |
+"    | | PENTADACTYLRC | |
+"    | '---------------' |
+"    \___________________/
+"
+"
+group! default
+source ~/.pentadactylrc.js
 
+
+" --------------------------------------------------------------------------- 
+" ,---------,
+" | Options |
+" '---------'
+"
 set runtimepath=~/.pentadactyl
 set guioptions=bBCrMNsT
 " js dactyl.plugins.buftabs.buftabs._options=true   
-set hintkeys="jfkdls;ahgnvurieow"
-set hinttags+='svg'
 set incfind
 set hlfind
 set findcase=smart
@@ -21,7 +31,10 @@ js editor.defaultRegister="+"
 set! browser.tabs.closeWindowWithLastTab=false
 set editor='roxterm --replace -e vim -f +<line> +"sil! call cursor(0, <column>)" <file>'
 
-source ~/.pentadactylrc.js
+" --------------------------------------------------------------------------- 
+" ,-------------,
+" | Keybindings |
+" '-------------'
 
 " PREFIX KEYS: c e s ss x, <C-c>
 " c : site-specific bindings
@@ -47,19 +60,6 @@ map -g user -b J <C-d>
 map -g user -b K <C-u>
 map -g user -b <C-m><C-m> :emenu<SPACE>
 
-" M-Up toggles the navigation and bookmarks toolbars:
-map -g user -b <A-Up> :set guioptions-=mTB | set showtabline=never<CR>
-map -g user -b <A-Down> :set guioptions+=TB | set showtabline=always<CR>
-map -g user -b <C-c><C-a> :set guioptions!=TB | set showtabline!=always,never<CR>
-map -g user -b <C-c><C-m> :set guioptions!=m<CR>
-map -g user -b <C-c><C-t> :set showtabline!=always,never<CR>
-map -g user -b <C-c><C-n> :set guioptions!=T<CR>
-map -g user -b <C-c><C-b> :set guioptions!=B<CR>
-map -g user -b bb :set guioptions!=B<CR>
-map -g user -b <C-c><C-s> :set guioptions!=B<CR>
-map -g user -b <C-S-d> :dialog downloads<CR>
-"map -g user -b <C-c><C-f> :buftabs<CR>
-
 " Restart with C-c C-c:
 " (note: C-c C-r broke for unknown reason)
 map -g user -b <C-c><C-c> :restart<CR>
@@ -77,6 +77,187 @@ map -g user -b sj :jumps<CR>
 map -g user -b sa :addons<CR>
 map -g user -b sc :set<SPACE>
 map -g user -b sc :set!<SPACE>
+
+" replace builtin <C-a> and <C-x> bindings (inrease/decrease URL by 1)
+nmap -g user -b ]; <C-a>
+nmap -g user -b [; <C-x>
+nmap -g user -b ,, <C-a>
+nmap -g user -b ,. <C-x>
+
+" Search:
+" clear the search term highlighting
+map -g user -b <C-/> :noh<CR>
+map -g user -b s/ /\r
+
+" --------------------------------------------------------------------------- 
+" ,----------,
+" | Commands |
+" '----------'
+
+command! showsource -nargs=1 -js (alert(self[args[0]].toString()))
+
+" Stop page from intercepting key events:
+command! nointercept -js document.addEventListener('keydown', function(e) { e.stopImmediatePropagation(); return false;}, true);
+
+" Open in Google Chrome:
+command! ochrome :exec '! google-chrome "' + buffer.URL + '"'
+map -g user -b xc :ochrome<CR>
+
+" --------------------------------------------------------------------------- 
+" ,------------------------------,
+" | Command mode and insert mode |
+" '------------------------------'
+
+cmap -g user -b <C-Y> <C-V><C-V>
+imap -g user -b <C-Y> <C-V><C-V>
+command! rc source ~/.pentadactylrc
+"command! rce viewsource! file:/home/troy/.pentadactylrc
+command! rce !gvim ~/.pentadactylrc 2> /dev/null
+
+" Visual mode:
+" C-e end of line, C-a start of line.
+" C-y scroll down, C-Y scroll up.
+vmap -g user -b <C-a> 0
+vmap -g user -b <C-e> $
+vmap -g user -b <C-S-Y> <C-e>
+" to search and select:
+" 1. press / and type search term
+" 2. when satisfied, press enter
+" 3. press C-/ to clear highlighting of other matches
+" 4. press i to enter insert mode
+" 5. press <left> to move to start of match
+" 6. press v to enter visual mode
+" 7. use visual mode keys j,k,h,l,C-a,C-e, etc to extend selection
+
+
+" =========================================================================== 
+"       ________ 
+"      |        |
+"      |  TABS  |
+"      |________|
+"
+"
+" Select buffer:  b  (cycle with gb, gB)
+" switch to previously selected buffer: A-;
+:nmap -g user -b <A-;> <C-^>
+" toggle pinning of current tab
+map -g user -b ! :pintab!<CR>
+" close other tabs
+map -g user -b x1 :tabonly<CR>
+" close tabs to right
+map -g user -b x> -js closeAllToRight()
+" undo recent closed tab from list
+map -g user -b U :undo<SPACE>
+"
+" Duplicate tab, Back/Forward in New Tab
+map -g user -ex C :tabduplicate
+map -g user -ex gh :backt
+map -g user -ex gl :forwardt
+
+" Tab moving helpers:
+" map -g user -b -arg <C-m>t :tabmove <arg><CR>
+command! T tabdo :tabmove<SPACE>
+map -g user -b <A-Left> :tabmove! -1<CR>
+map -g user -b <A-Right> :tabmove! +1<CR>
+map -g user -b <A-J> :tabnext<CR>
+map -g user -b <A-K> :tabprevious<CR>
+command! unpinall tabdo unpintab
+
+
+" =========================================================================== 
+"       _________ 
+"      |         |
+"      |  HINTS  |
+"      |_________|
+
+" ,----------,
+" | hinttags |
+" '----------'
+"
+set hinttags+='svg'
+" Add hints for anchor elements whose class attribute starts with "vote":
+set hinttags+=a[class^='vote']
+set hinttags+=a[class^='speed']
+
+" ,------------------,
+" | extendedhinttags |
+" '------------------'
+"
+" FIXME: can't activate context menu on 'body' hint
+":set eht+=[c]:body,':-moz-any-link',area,button,iframe,input:not([type=hidden]),label[for],select,textarea,[onclick],[onmouseover],[onmousedown],[onmouseup],[oncommand],[tabindex],[role=link],[role=button],[contenteditable=true]
+
+" ,-------------------,
+" | Styling for hints |
+" '-------------------'
+"
+set hintkeys="jfkdls;ahgnvurieow"
+"
+highlight Hint
+    \ font-family: "Courier New"; 
+    \ line-height: 14px; 
+    \ text-shadow: 1px 1px 1px #888; 
+    \ padding: 5px 8px 6px; 
+    \ font-size: 18px; 
+    \ font-weight: bold; 
+    \ text-transform: uppercase; 
+    \ color: rgb(150, 0, 0); 
+    \ background-color: rgba(280, 280, 300, 0.45) !important; 
+    \ border-radius: 5px;
+" HintImage: ?
+highlight HintImage 
+    \ background-color: rgba(255, 0, 255, 1) !important; 
+    \ border-radius: 5px;
+" HintElem: styling for elements when hinted
+highlight HintElem 
+    \ border-radius: 2px;
+" HintActive: styling for active element when hinted
+highlight -a HintActive
+    \ background-color: rgba(255, 255, 0, 0.5) !important; 
+    \ color: blue !important; 
+    \ border-radius: 2px;
+" Hint[Active]: styling for hint on active element
+highlight -a Hint[Active]
+    \ background-color: rgba(255, 255, 0, 0) !important; 
+    \ color: rgba(200, 0, 0, 0); 
+    \ font-size: 18px; 
+    \ border-radius: 5px;
+
+
+" =========================================================================== 
+"       _______ 
+"      |       |
+"      |  GUI  |
+"      |_______|
+
+" ,----------,
+" | Toolbars |
+" '----------'
+
+" <A-Up>:     show the navigation and bookmarks toolbars:
+" <A-Down>:   hide the navigation and bookmarks toolbars:
+" <C-c><C-a>: toggle the navigation and bookmarks toolbars:
+map -g user -b <A-Up> :set guioptions-=mTB | set showtabline=never<CR>
+map -g user -b <A-Down> :set guioptions+=TB | set showtabline=always<CR>
+map -g user -b <C-c><C-a> :set guioptions!=TB | set showtabline!=always,never<CR>
+" <C-c><C-m|t|n|b>: toggle the menu|tab|navigation|bookmark toolbars:
+map -g user -b <C-c><C-m> :set guioptions!=m<CR>
+map -g user -b <C-c><C-t> :set showtabline!=always,never<CR>
+map -g user -b <C-c><C-n> :set guioptions!=T<CR>
+map -g user -b <C-c><C-b> :set guioptions!=B<CR>
+"map -g user -b <C-c><C-f> :buftabs<CR>
+
+" --------------------------------------------------------------------------- 
+" ,---------,
+" | Dialogs |
+" '---------'
+
+map -g user -b <C-S-d> :dialog downloads<CR>
+command! ac :winopen about:config
+	  
+" --------------------------------------------------------------------------- 
+" ,--------------,
+" | AiOS SideBar |
+" '--------------'
 
 " Manual sidebar selection with si, toggle with S
 map -g user -b si :sidebar<SPACE>
@@ -102,125 +283,11 @@ map -g user -b ssO :sidebar HeadingsMap<CR><f6><f6><C-z>
 map -g user -b sP :sidebar Preferences<CR>
 map -g user -b ssP :sidebar Preferences<CR><f6><f6><C-z>
 
+" --------------------------------------------------------------------------- 
+" ,---------------------,
+" | Resizing and moving |
+" '---------------------'
 
-" Output newline in 'Pentadactyl Output <Date>' file:
-command! outputnewline :execute "!echo >> \"Pentadactyl Output " + Date().slice(0,15) + "\""
-map -g user -b <C-c>0 :outputnewline<CR>
-
-" ------
-"  TABS:
-" ------
-"
-" DuckDuckGo search:    d
-" Google search:        g
-" Wikipedia search:     w
-" Wolfram Alph search:  wa
-" W3C Wiki search:      3
-" New tab page:         n
-" 
-" Select buffer:  b  (cycle with gb, gB)
-" switch to previously selected buffer: A-;
-nmap -g user -b <A-;> <C-^>
-" toggle pinning of current tab
-map -g user -b ! :pintab!<CR>
-" close other tabs
-map -g user -b x1 :tabonly<CR>
-" close tabs to right
-map -g user -b x> -js closeAllToRight()
-" undo recent closed tab from list
-map -g user -b U :undo<SPACE>
-"
-" Duplicate tab, Back/Forward in New Tab
-map -g user -ex C :tabduplicate
-"unmap gh
-map -g user -ex gh :backt
-map -g user -ex gl :forwardt
-
-" Tab moving helpers:
-" map -g user -b -arg <C-m>t :tabmove <arg><CR>
-command! T tabdo :tabmove<SPACE>
-map -g user -b <A-Left> :tabmove! -1<CR>
-map -g user -b <A-Right> :tabmove! +1<CR>
-map -g user -b <A-J> :tabnext<CR>
-map -g user -b <A-K> :tabprevious<CR>
-command! unpinall tabdo unpintab
-
-" Command mode and insert mode:
-cmap -g user -b <C-Y> <C-V><C-V>
-imap -g user -b <C-Y> <C-V><C-V>
-command! rc source ~/.pentadactylrc
-"command! rce viewsource! file:/home/troy/.pentadactylrc
-command! rce !gvim ~/.pentadactylrc 2> /dev/null
-
-" Visual mode:
-" C-e end of line, C-a start of line.
-" C-y scroll down, C-Y scroll up.
-vmap -g user -b <C-a> 0
-vmap -g user -b <C-e> $
-vmap -g user -b <C-S-Y> <C-e>
-" to search and select:
-" 1. press / and type search term
-" 2. when satisfied, press enter
-" 3. press C-/ to clear highlighting of other matches
-" 4. press i to enter insert mode
-" 5. press <left> to move to start of match
-" 6. press v to enter visual mode
-" 7. use visual mode keys j,k,h,l,C-a,C-e, etc to extend selection
-
-" replace builtin <C-a> and <C-x> bindings (inrease/decrease URL by 1)
-nmap -g user -b ]; <C-a>
-nmap -g user -b [; <C-x>
-nmap -g user -b ,, <C-a>
-nmap -g user -b ,. <C-x>
-
-" Search:
-" clear the search term highlighting
-map -g user -b <C-/> :noh<CR>
-map -g user -b s/ /\r
-
-" ----------------------------------------------------------------------
-" ,-------,
-" | HINTS |
-" '-------'
-
-" Add hints for anchor elements whose class attribute starts with "vote":
-set hinttags+=a[class^='vote']
-set hinttags+=a[class^='speed']
-
-" styling for hints
-highlight Hint
-    \ font-family: "Monospace"; 
-    \ line-height: 14px; 
-    \ text-shadow: 1px 1px 1px #888; 
-    \ padding: 5px 8px 6px; 
-    \ font-size: 18px; 
-    \ font-weight: bold; 
-    \ text-transform: uppercase; 
-    \ color: rgb(200, 0, 0); 
-    \ background-color: rgba(100, 100, 200, 0.15) !important; 
-    \ border-radius: 5px;
-" HintImage: ?
-highlight HintImage 
-    \ background-color: rgba(255, 0, 255, 1) !important; 
-    \ border-radius: 5px;
-" HintElem: styling for elements when hinted
-highlight -a HintElem 
-    \ border-radius: 2px;
-" HintActive: styling for active element when hinted
-highlight -a HintActive
-    \ background-color: rgba(255, 255, 0, 0.5) !important; 
-    \ color: blue !important; 
-    \ border-radius: 2px;
-" Hint[Active]: styling for hint on active element
-highlight -a Hint[Active]
-    \ background-color: rgba(255, 255, 0, 0) !important; 
-    \ color: rgba(200, 0, 0, 0); 
-    \ font-size: 18px; 
-    \ border-radius: 5px;
-
-" ----------------------------------------------------------------------
-
-" Resizing and moving:
 command! resize -nargs=* -js self.resizeTo(args[0], args[1])
 command! resizeby -nargs=* -js self.resizeBy(args[0], args[1])
 command! maximize -js self.maximize()
@@ -234,21 +301,17 @@ command! moveTR :js self.moveTo(screen.availWidth-self.window.outerWidth, 0)
 command! moveBL :js self.moveTo(0, screen.availHeight-self.window.outerHeight)
 command! moveBR :js self.moveTo(screen.availWidth-self.window.outerWidth, screen.availHeight-self.window.outerHeight)
 
-command! showsource -nargs=1 -js (alert(self[args[0]].toString()))
 
-" Stop page from intercepting key events:
-command! nointercept -js document.addEventListener('keydown', function(e) { e.stopImmediatePropagation(); return false;}, true);
+" =========================================================================== 
+"       ___________ 
+"      |           |
+"      |  ADD-ONS  |
+"      |___________|
 
-" Open in Google Chrome:
-command! ochrome :exec '! google-chrome "' + buffer.URL + '"'
-map -g user -b xc :ochrome<CR>
 
 " Autopager:
 command! apoff :js autopagerMain.enabledThisSite()
 command! ap :js autopagerMain.onEnable()
-
-" Pages:
-command! ac :winopen about:config
 
 " Print What You Like:
 command! prwul :o javascript:(function(){if(window['ppw']&&ppw['bookmarklet']){ppw.bookmarklet.toggle();}else{window._pwyl_home=%22http://www.printwhatyoulike.com/%22;_pwyl_bmkl=document.createElement('script');_pwyl_bmkl.setAttribute('type','text/javascript');_pwyl_bmkl.setAttribute('src',_pwyl_home+'static/compressed/pwyl_bookmarklet_10.js');_pwyl_bmkl.setAttribute('pwyl','true');document.getElementsByTagName('head')[0].appendChild(_pwyl_bmkl);}})();
@@ -260,22 +323,51 @@ command! dtamaagr -js self.DTA.openManager()
 command! pocket :open javascript:(function(){var%20e=function(t,n,r,i,s){var%20o=[3526112,5522661,1460314,3450302,5361262,5114635,2897350,3675444,1446118,2801611];var%20i=i||0,u=0,n=n||[],r=r||0,s=s||0;;var%20a={'a':97,'b';:98,'c':99,'d':100,'e':101,'f':102,'g':103,'h':104,'i':105,'j':106,'k':107,'l':108,'m':109,'n':110,'o':111,'p':112,'q':113,'r':114,'s':115,'t':116,'u':117,'v':118,'w':119,'x':120,'y':121,'z':122,'A':65,'B':66,'C':67,'D':68,'E':69,'F':70,'G':71,'H':72,'I':73,'J':74,'K':75,'L':76,'M':77,'N':78,'O':79,'P':80,'Q':81,'R':82,'S':83,'T':84,'U':85,'V':86,'W':87,'X':88,'Y':89,'Z':90,'0':48,'1':49,'2':50,'3':51,'4':52,'5':53,'6':54,'7':55,'8':56,'9':57,'\/':47,':':58,'?':63,'=':61,'-':45,'_':95,'&':38,'$':36,'!':33,'.':46};if(!s||s==0){t=o[0]+t}for(var%20f=0;f<t.length;f++){var%20l=function(e,t){return%20a[e[t]]?a[e[t]]:e.charCodeAt(t)}(t,f);if(!l*1)l=3;var%20c=l*(o[i]+l*o[u%o.length]);n[r]=(n[r]?n[r]+c:c)+s+u;var%20p=c%(50*1);if(n[p]){var%20d=n[r];n[r]=n[p];n[p]=d}u+=c;r=r==50?0:r+1;i=i==o.length-1?0:i+1}if(s==166){var%20v='';for(var%20f=0;f<n.length;f++){v+=String.fromCharCode(n[f]%(25*1)+97)}o=function(){};return%20v+'ce5c747776'}else{return%20e(u+'',n,r,i,s+1)}};var%20t=document,n=t.location.href,r=t.title;var%20i=e(n);var%20s=t.createElement('script');s.type='text/javascript';s.src='https://getpocket.com/b/r4.js?h='+i+'&u='+encodeURIComponent(n)+'&t='+encodeURIComponent(r);e=i=function(){};var%20o=t.getElementsByTagName('head')[0]||t.documentElement;o.appendChild(s)})()
 command! pocketall -js RIL.saveTabs()
 
+
+" =========================================================================
+"       _________________________ 
+"      |                         |
+"      | COMMAND IMPLEMENTATIONS |
+"      |_________________________|
 "  ______________________________________________________________________________________ 
-" |                                                                                      |
+" /                                                                                      \
 " | JAVASCRIPT                                                                           |
-" | *  :js ... code operates in chrome window namespace                                  |
+" | *  js ... code operates in chrome window namespace                                  |
 " | *  :open javascript:(function(){ ... })() code operates in document window namespace |
 " | note: FF's browser console <C-S-J> can be used to try out code in the chrome window  |
 " |       (although some Pentadactyl variables aren't available)                         |
-" |______________________________________________________________________________________|
+" \______________________________________________________________________________________/
 
-" -----------------------------------
-" Javascript Command Implementations:
-" -----------------------------------
-"
-command! backt
-    \ -description "Duplicate tab and go back in the browser history"
-    \ -js <<EOF
+command! undob -description "Undo tab in background" -js undob()
+command! backt -description "Duplicate tab and go back in the browser history" -js backt()
+command! forwardt -description "Duplicate tab and go forward in the browser history" -js forwardt()
+
+js <<EOF
+closeAllToRight = function (ord) {
+    if (typeof(ord)==="undefined") ord = tabs.getTab().dactylOrdinal;
+    // convert 0- to 1-based: -1, start from next tab: +1 ... cancel out
+    dactyl.closeTabsFrom(ord)  
+}
+EOF
+
+js <<EOF
+undob = function() {
+    var currT = gBrowser.selectedTab;
+    var altT = tabs.alternate;
+    var ssService = Components.interfaces.nsISessionStore;
+    var ssClass = Components.classes['@mozilla.org/browser/sessionstore;1']
+    var ss = ssClass.getService(ssService);
+    var closedTabs = JSON.parse(ss.getClosedTabData(window));
+    var ct0 = closedTabs[0];
+    ss.undoCloseTab(window, ct0);
+    gBrowser.selectedTab = altT;
+    gBrowser.selectedTab = currT;
+}
+EOF
+
+js <<EOF
+function backt() { 
+    // Duplicate tab and go back in the browser history
     var currT = gBrowser.selectedTab;
     var dupT = gBrowser.duplicateTab(currT);
     var dupTB = gBrowser.getBrowserForTab(dupT);
@@ -285,11 +377,12 @@ command! backt
     };          
     dupTB.addEventListener("DOMContentLoaded", backtListener);
     gBrowser.selectedTab = dupT;
+}
 EOF
-
-command! forwardt 
-    \ -description "Duplicate tab and go forward in the browser history"
-    \ -js <<EOF
+ 
+js <<EOF
+forwardt = function() {
+    // Duplicate tab and go forward in the browser history
     var currT = gBrowser.selectedTab;
     var dupT = gBrowser.duplicateTab(currT);
     var dupTB = gBrowser.getBrowserForTab(dupT);
@@ -299,21 +392,50 @@ command! forwardt
     };
     dupTB.addEventListener("DOMContentLoaded", forwardtListener);
     gBrowser.selectedTab = dupT;
+}
 EOF
 
-" --------------
-" SITE SPECIFIC:
-" --------------
 
-" EdX:
-command! edx :so ~/.pentadactyl/edx.pentadactyl
-command! edxe viewsource! file:/home/troy/.pentadactyl/edx.pentadactyl
-edx
+" =========================================================================== 
 
-" Coursera:
+" shortcut to Wikipedia episode lists.
+command! eplist -nargs=1 -js (eplist(args[0]))
+
+js <<EOF
+String.prototype.capitalize = function() {
+    return this.replace(/\b\w/g,
+                        function (c) { return c.toUpperCase(); });
+}
+function eplist (s) {
+    var sConv = s.capitalize().replace(" ", "_");
+    dactyl.open("www.wikipedia.org/wiki/List_of_" + sConv + "_episodes");
+}
+EOF
+
+" =========================================================================== 
+"       _______________ 
+"      |               |
+"      | SITE SPECIFIC |
+"      |_______________|
+
+" --------------------------------------------------------------------------- 
+" ,-----,
+" | EdX |
+" '-----'
+command! edx :so ~/.pentadactyl/edx.penta
+command! edxe viewsource! file:/home/troy/.pentadactyl/edx.penta
+:edx
+
+" --------------------------------------------------------------------------- 
+" ,----------,
+" | Coursera |
+" '----------'
 set passkeys+='class.coursera.org/.*/lecture/':'hp-+fc<up><down><left><right>'
 
-" Jisho.org:
+" --------------------------------------------------------------------------- 
+" ,-----------,
+" | Jisho.org |
+" '-----------'
 group jisho -locations jisho.org
 
 " toggleromaji: adds/removes #romaji tag to toggle between kana and romaji:
@@ -325,23 +447,76 @@ map -g user -b ck :jkanji<CR>
 command! jsentences :open javascript:(function(url){ window.location.href=url.replace("/word/","/search/") + "%2523sentences"; })(decodeURIComponent(top.location));
 map -g user -b cs :jsentences<CR>
 
-" ----------------
-" USEFUL COMMANDS:
-" ----------------
+" Hints modes.
+js <<EOF
+    \ hints.addMode(
+    \   'k','open kanji details',
+    \   function(e) { 
+    \     dactyl.open(decodeURIComponent(e.href.replace("/word/","/search/") + "%2523kanji"));
+    \   }
+    \ );
+EOF
+js <<EOF
+    \ hints.addMode(
+    \   'x','open sentence examples',
+    \   function(e) { 
+    \     dactyl.open(decodeURIComponent(e.href.replace("/word/","/search/") + "%2523sentences"));
+    \   }
+    \ );
+EOF
+js <<EOF
+    \ hints.addMode(
+    \   'K','open kanji details in new tab',
+    \   function(e) { 
+    \     dactyl.open(decodeURIComponent(e.href.replace("/word/","/search/") + "%2523kanji"), {where:dactyl.NEW_TAB});
+    \   }
+    \ );
+EOF
+js <<EOF
+    \ hints.addMode(
+    \   'X','open sentence examples in new tab',
+    \   function(e) { 
+    \     dactyl.open(decodeURIComponent(e.href.replace("/word/","/search/") + "%2523sentences"), {where:dactyl.NEW_TAB});
+    \   }
+    \ );
+EOF
+
+
+" =========================================================================== 
+"       _______ 
+"      |       |
+"      | NOTES |
+"      |_______|
+
+" ,-----------------,
+" | USEFUL COMMANDS |
+" '-----------------'
 "
+" call function defined in document: content.wrappedJSObject.page_func()
+" echo in dactyl status bar: dactyl.echo(''); 
 " current tab:  tabs.getTab()
 " current tab number:  tabs.getTab().dactylOrdinal
 " alternative to :execute: :js CommandExMode().open(exCommandString) 
 
 " js hints.addMode('0','Force open in current tab',function(elem) dactyl.open(elem.href));
 
-" -----------------
-" Removed Commands:
-" -----------------
+
+" ,------------------,
+" | Removed Commands |
+" '------------------'
+
 "command! outputtabhrefs :tabdo :execute "!echo >> \"Pentadactyl Output " + Date().slice(0,15) + "\" " + content.location.href
 "" Output list of tab hrefs
 "map -g user -b t> :outputtabhrefs<CR>
 "" Output list of tab hrefs followed by a blank line
 "command! tabhrefs :normal t> <C-c>0
 "map -g user -b t. :tabhrefs<CR>
+
+"" Output newline in 'Pentadactyl Output <Date>' file:
+"command! outputnewline :execute "!echo >> \"Pentadactyl Output " + Date().slice(0,15) + "\""
+"map -g user -b <C-c>0 :outputnewline<CR>
+
+
+" =========================================================================== 
+
 

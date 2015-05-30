@@ -10,6 +10,11 @@ set smartcase
 " Ex commands output in a new tab by default (prefs, addons...)
 set newtab=all
 
+"source ~/.vimperatorrc.js
+source ~/.vimperator_commands
+command! rc :source ~/.vimperatorrc
+command! rce :! gvim ~/.vimperatorrc
+
 map <C-m><C-m> :emenu<SPACE>
 " M-Up toggles the navigation and bookmarks toolbars
 map <A-Up> :set toolbars=invnavigation,invbookmarks,invmenu,invtabs<CR>
@@ -45,6 +50,7 @@ nnoremap <C-b> :sidebar bookmarks<CR>
 
 nnoremap  gh :backt<CR>
 nnoremap  gl :forwardt<CR>
+
 
 command! backt -description "Duplicate tab and go back in the browser history" :js backt();
 :js <<EOF

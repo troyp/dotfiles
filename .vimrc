@@ -182,7 +182,10 @@ let g:neocomplete#enable_at_startup = 1
 noremap <C-e> $
 nnoremap <C-S-Y> <C-e>
 
-" Fast saving
+" Files
+nnoremap <C-x><C-f> :e<space>
+nnoremap <C-x><C-s> :w<cr>
+nnoremap <C-x><C-w> :w<cr>
 nnoremap <leader>w :w!<cr>
 
 " Fast editing of the .vimrc
@@ -198,7 +201,7 @@ noremap <leader>x2 :split<cr>
 noremap <leader>x3 :vsplit<cr>
 
 " Close buffer but not window
-noremap <leader>bd :bp<bar>sp<bar>bn<bar>bd<CR>
+noremap <leader>xk :bp<bar>sp<bar>bn<bar>bd<CR>
 
 " F2 = Move rest of line to new line
 noremap <C-j> i<CR><ESC>
@@ -236,6 +239,9 @@ command! Bc bnext | bdelete #
 " Sudo write
 command! W w !sudo tee % > /dev/null
 command! XC quit | quit | quit | quit
+command! RevertBuffer edit!
+command! AutoRevertBuffer set autoread
+command! NoAutoRevertBuffer set noautoread
 
 
 "------------------------------------------------------
