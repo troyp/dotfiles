@@ -179,13 +179,16 @@ let g:neocomplete#enable_at_startup = 1
 " Keybindings.
 "-------------
 
+inoremap <C-l> <Del>
 noremap <C-e> $
-nnoremap <C-S-Y> <C-e>
+inoremap <C-S-Y> <C-e>
 
 " Files
 nnoremap <C-x><C-f> :e<space>
 nnoremap <C-x><C-s> :w<cr>
+inoremap <C-x><C-s> <Esc>:w<cr>i
 nnoremap <C-x><C-w> :w<cr>
+inoremap <C-x><C-w> <Esc>:w<cr>i
 nnoremap <leader>w :w!<cr>
 
 " Fast editing of the .vimrc

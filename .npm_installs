@@ -15,3 +15,4 @@ mime
 prettyjson
 underscore-cli
 oniguruma
+http-server

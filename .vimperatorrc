@@ -82,3 +82,4 @@ command! forwardt -description "Duplicate tab and go forward in the browser hist
     }
 EOF
 
+command! reloadPlugins :js liberator.pluginFiles = {}; liberator.loadPlugins();

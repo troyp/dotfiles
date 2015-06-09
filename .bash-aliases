@@ -132,8 +132,9 @@ alias archm='sudo archmage -p'    # eg. archm 81 myfile.chm
 alias ff='firefox -no-remote -P'
 alias ffmain='firefox no-remote -P default'
 alias ffsearch='firefox -search'
-alias dirserve='python2 -m SimpleHTTPServer'  # serve current dir tree on port 8000
-# alias dirserve='python3 -m http.server'  # serve current dir tree on port 8000
+alias pydirserve='python2 -m SimpleHTTPServer'  # serve current dir tree on port 8000
+# alias pydirserve='python3 -m http.server'  # serve current dir tree on port 8000
+alias dirserve=http-server   # serve current dir tree (or ./public) on port 8080 (or set with -p)
 
 #--------------------
 # NETWORKING ALIASES.
@@ -292,12 +293,14 @@ alias ppcjs='underscore print --outfmt pretty'  # js/json pretty printing & synt
 #-----------------------------
 # EDITORS & PROGRAMMING TOOLS.
 #-----------------------------
-alias viminstall='cd ~/.vim/bundle; git clone'
-alias pynote='ipython notebook --pylab=inline'
-alias ipylab='ipython --pylab'
 alias mzscheme='rlwrap /opt/racket/bin/mzscheme'
 alias sml='rlwrap sml'
 alias ocaml='rlwrap ocaml'
+alias sbcl='rlwrap sbcl'
+alias viminstall='cd ~/.vim/bundle; git clone'
+alias pynote='ipython notebook --pylab=inline'
+alias ipylab='ipython --pylab'
+alias py='ipython --pylab'
 alias etags_rec_el_c_h='find . -type f -iregex '.*[.]\(c\|h\|el\)' | etags -'
 alias etags_sudo_rec_el_c_h='find . -type f -iregex '.*[.]\(c\|h\|el\)' | sudo etags -'
 alias extract_elisp='find . -name "*.el.gz" | xargs sudo gunzip'
@@ -320,16 +323,17 @@ alias cpkgc='cmake --find-package -DLANGUAGE=C -DCOMPILER_ID=GNU -DMODE=COMPILE'
 alias pyc="python2 -c 'from math import *; from operator import *; from itertools import *; from functools import *; print "
 alias pipu='sudo -H pip install --upgrade'
 
-# -----------------
-# HTML MANIPULATION
-# -----------------
+# -----------------------
+# HTML & XML MANIPULATION
+# -----------------------
 alias htmlcat='htmldoc -f html'
 alias makelinks='find . -type f -exec printf "<a href={}>{}</a><br>\n"  \; > index.html'
 alias href-relativize="sed -e 's/href=\"http:\/\/[^ \"]*\//href=\"/g'"
 alias dehtent="perl -n -mHTML::Entities -e ' ; print HTML::Entities::decode_entities(\$_) ;'"
 alias htent="perl -n -mHTML::Entities -e ' ; print HTML::Entities::encode_entities(\$_) ;'"
 alias remove-wayback-insert="sed -i '/BEGIN WAYBACK TOOLBAR INSERT/,/END WAYBACK TOOLBAR INSERT/d'"
-
+alias xstar=xmlstarlet
+alias xq=xqilla
 
 # -----------
 # PDF ALIASES
@@ -505,6 +509,7 @@ alias install-noice='dl-noice; cd noice; make; cp noice /opt/bin/'
 # --------------
 # OTHER ALIASES.
 # --------------
+alias lscompose='cat /usr/share/X11/locale/en_US.UTF-8/Compose'  # compose key combinations
 
 
 # -------
