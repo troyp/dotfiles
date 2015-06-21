@@ -283,9 +283,11 @@ if [ -f /opt/scripts/bashmarks.sh ]; then source /opt/scripts/bashmarks.sh; fi
 # ---enable color support of ls---
 # if [ -x /usr/bin/dircolors ]; then test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)" fi
 
+xmodmap -e "keycode 127 = Pause"
 # ---run xcape---
-if ! pgrep xcape >/dev/null; then xcape & fi 
-# if pgrep xcape >/dev/null; then pkill xcape; fi; xcape & 
+if ! pgrep xcape >/dev/null; then
+    xcape -e 'Control_L=Escape;Super_R=Menu;Control_R=Pause' &
+fi 
 
 # ---ULIMIT---
 #ulimit -c unlimited

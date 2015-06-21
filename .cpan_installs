@@ -7,3 +7,4 @@ Term::ReadLine::Gnu
 File::Next
 B::Keywords
 Text::Autoformat
+Encode::Guess

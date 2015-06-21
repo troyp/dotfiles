@@ -1,0 +1,14 @@
+/* Show "List all Tabs" button */
+#alltabs-button {
+    width: 10px;
+    visibility: visible !important;
+    padding: 0;
+    border: thin solid #5A86BF;
+    border-radius: 5px;
+}
+/* Links that open in new tab/window */
+:link[target="_blank"], :visited[target="_blank"],
+:link[target="_new"],   :visited[target="_new"]    {
+    cursor: crosshair;
+}
+

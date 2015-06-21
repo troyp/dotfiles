@@ -48,7 +48,9 @@ alias rn='source ranger ranger'    # navigate to new dir with ranger
 # LS ALIASES.
 #------------
 alias ls='ls --group-directories-first --color=auto --time-style=+" %d.%m.%y "'
+alias lsc='ls --color=always'
 alias ll='ls -l'   # list details
+alias llc='ll --color=always'
 alias lll='ls -l --time-style=+"           %a %d.%b.%y ''
  %T  %a %d.%b.%y "'  # detailed list with weekday, plus mod. time for recent files
 alias lln='ls -lv'   # detailed list natural sort 
@@ -265,6 +267,8 @@ alias uuids='ls -al /dev/disk/by-uuid/'  # list /dev partitions with UUIDs
 alias uuid='ls -al /dev/disk/by-uuid/ | grep'  # list a /dev partition with its UUID
 alias blkid='sudo blkid'     # list mounted partitions
 alias ssmart='sudo smartctl'  # hard drive testing
+alias evdev='sudo evdev' # show keyboard codes
+alias showkey='sudo showkey' # query/monitor input devices (eg. key codes)
 alias disable-wd-headparking='sudo idle3ctl -d'
 alias hw-list='sudo lshw -short'    # list hardware in compact format
 alias hw-listusb='lsusb'
@@ -276,6 +280,7 @@ alias hw-meminfo='sudo dmidecode --type memory'
 alias hw-biosinfo='sudo dmidecode --type bios'
 alias hw-connectorinfo='sudo dmidecode --type connector'
 alias mimetypes2mailcap='< /etc/mime.types cut -f1 | grep -E "^[^#]" | dolines echo "$x; xdg-open '%s'"; done'   # save to ~/.mailcap
+alias mousecodes='xev | grep button'
 
 
 # --------------------------------------
@@ -378,6 +383,7 @@ alias totitlecase="perl -MText::Autoformat -e'undef $/; print autoformat +<>, { 
 alias first='head -n1'
 alias last='tail -n1'   # system command last is available as alias lastu
 alias rest='tail -n+2'
+alias xacat='xargs cat'
 alias xaless='xargs less'
 alias xavip='xargs vimpage'
 alias xavi='xargs vipipe'
@@ -498,6 +504,7 @@ alias videodl-best='videodl best'
 alias ibus-start='ibus-daemon -drx'
 alias sort-natural='sort -bdV'
 alias sort-icase-natural='sort -bdfV'
+alias diskusage='gdmap -f'
 
 
 # -----------------

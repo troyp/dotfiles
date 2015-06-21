@@ -16,3 +16,4 @@ prettyjson
 underscore-cli
 oniguruma
 http-server
+ultra-repl

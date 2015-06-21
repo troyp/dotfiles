@@ -23,7 +23,6 @@ call plug#end()
 
 set nocompatible             " enable vim improvements
 filetype plugin on           " enable extensions
-filetype plugin indent on    " filetype detection & indentation settings
 set hidden                   " hide buffers instead of unloading
 
 set shell=/bin/bash
@@ -31,6 +30,7 @@ set clipboard=unnamed
 
 " .GVIMRC: nnoremap <C-z> :"suspending disabled <CR>
 
+set ignorecase
 set smartcase                " Smart-case search - override with \c or \C
 set encoding=utf-8
 set cf                       " Enable error files & error jumping.
@@ -65,8 +65,10 @@ set shiftwidth=4             " Tabs under smart indent
 set cinoptions=:0,p0,t0
 set cinwords=if,else,while,do,for,switch,case
 set formatoptions=tcqr
-set cindent
+
 set autoindent
+filetype plugin indent on    " filetype detection & indentation settings
+
 set smarttab
 set expandtab
 
@@ -181,7 +183,10 @@ let g:neocomplete#enable_at_startup = 1
 
 inoremap <C-l> <Del>
 noremap <C-e> $
+inoremap <A-y> <C-e>
+" C-y and C-S-Y bindings override each other...?
 inoremap <C-S-Y> <C-e>
+inoremap <C-y> <C-y>
 
 " Files
 nnoremap <C-x><C-f> :e<space>
@@ -245,6 +250,7 @@ command! XC quit | quit | quit | quit
 command! RevertBuffer edit!
 command! AutoRevertBuffer set autoread
 command! NoAutoRevertBuffer set noautoread
+command! ShowIndentOptions verbose set ai? cin? cink? cino? si? inde? indk?
 
 
 "------------------------------------------------------

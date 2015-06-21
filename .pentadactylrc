@@ -6,25 +6,28 @@
 "    \___________________/
 "
 "
-group! default
-source ~/.pentadactyl/utils.js
+group default
+" load javascript utilities
+runtime! utils.js
+" load utils into current context
+js var utils = dactyl.utils.getPlugin("utils");
 " load personal details
-source ~/.pentadactyl/personal.js
+runtime! personal.js
 
 
-" --------------------------------------------------------------------------- 
+" -----------------------------------------------------------------------------
 " ,---------,
 " | Options |
 " '---------'
 "
-set runtimepath=~/.pentadactyl
+set runtimepath=/home/troy/.pentadactyl
 set guioptions=bBCrMNsT
-" js dactyl.plugins.buftabs.buftabs._options=true   
 set incfind
 set hlfind
 set findcase=smart
 set showstatuslinks=status
-set wildmode=list:longest,list:full
+set altwildmode=list:longest,list:full
+set altwildmode=full
 set strictfocus=mail.google.com:laissez-faire,'chrome:*':laissez-faire,*:moderate
 " Ex commands output in a new tab by default (prefs, addons...)
 set newtab=all
@@ -34,111 +37,121 @@ set! browser.tabs.closeWindowWithLastTab=false
 set editor='roxterm --replace -e vim -f +<line> +"sil! call cursor(0, <column>)" <file>'
 
 
-" ===========================================================================
-"        ______________ 
-"       |              |
-"       | KEY BINDINGS |
-"       |______________|
+" =============================================================================
+"                                   ______________ 
+"                                  |              |
+"                                  | KEY BINDINGS |
+"                                  |______________|
 
 " ,--------------------------,
 " | Normal mode key bindings |
 " '--------------------------'
 
-" PREFIX KEYS: c e s ss x , \ <C-c>
+" PREFIX KEYS: c e s ss x , \ <C-x>
 " c : site-specific bindings
 " x : global bindings
 " s : selection bindings
-" <C-c> : GUI commands, etc.
+" <C-x> : GUI commands, etc.
 
 " REPLACE DEFAULT BINDINGS:
-" free C-h, C-l
-map -g user -b <C-h> <Nop>
-map -g user -b <C-l> <Nop>
-map -g user -b <C-c><C-h> <C-S-H>
-map -g user -b <C-c><C-l> <C-l>
+" free C-h, use C-h, C-l to replace h, l
+map -b <C-x><C-h> <Nop>
+map -b <C-h> h
+map -b <C-l> l
+" use h, l for tab changing
+map -b h gT
+map -b l gt
 " free C-N, C-P bindings for tab movement
-map -g user -b <C-S-P> <Nop>
-map -g user -b <C-S-N> <Nop>
-" bind C-c C-s as :viewsource, free gf for g;b
-map -g user -b gf <Nop>
-map -g user -b <C-c><C-s> gf
+map -b <C-S-P> <Nop>
+map -b <C-S-N> <Nop>
+" bind gs as :viewsource, free gf for g;b
+map -b gf <Nop>
+map -b gs gf
 " replace builtin <C-a> and <C-x> bindings (inrease/decrease URL by 1)
-map -g user -b <C-x> <Nop>
-map -g user -b <C-a> <Nop>
-map -g user -b <A-=> <C-a>
-map -g user -b <A--> <C-x>
+map -b <C-x> <Nop>
+map -b <C-a> <Nop>
+map -b <A-=> <C-a>
+map -b <A--> <C-x>
 
 " Miscellaneous Bindings:
 " Repeat last ex command
-map -g user -b g. @:
+map -b g. @:
 " Copying
-map -g user -b <A-w> Y
+map -b <A-w> Y
 " A-Esc: Pass-through Escape
-map -g user -b <A-Esc> <C-v><Esc>
+map -b <A-Esc> <C-v><Esc>
 " C-w closes tab; if last in window closes window.
-map -g user -b <C-w> :q<CR>
+map -b <C-w> :q<CR>
 " movement
-map -g user -b J <C-d>
-map -g user -b K <C-u>
+map -b J <C-d>
+map -b K <C-u>
 " Restart with C-c C-c:
-map -g user -b <C-c><C-c> :restart<CR>
+map -b <C-x><C-x> :restart<CR>
 " reload .pentadactylrc
-map -g user -b <C-c>l :rc<CR>
+map -b <C-x>l :rc<CR>
 " select all
-nmap -g user -b <C-x>h iGvggy
+nmap -b <C-x>h iGvggy
+" second input area
+map -b xgi 2gi
+" single-page pentadactyl help
+map -b xh :helpall<CR>
 
 
 " Search:
 " clear the search term highlighting
-map -g user -b <C-/> :noh<CR>
+map -b <C-/> :noh<CR>
 " Regex search
-map -g user -b g/ /\r
-map -g user -b g? ?\r
+map -b g/ /\r
+map -b g? ?\r
 " Link search
-map -g user -b s/ /\l
-map -g user -b s? ?\l
+map -b s/ /\l
+map -b s? ?\l
 " Search from top of page
-map -g user -b <C-c>/ /\L
+map -b <C-x>/ /\L
 " C-' Firefox link search
-map -g user -b "<C-'>" <C-v>'
+map -b "<C-'>" <C-v>'
 
 " Select:
-map -g user -b s <Nop>
-map -g user -b sk :bmarks!<SPACE>
-map -g user -b s;k :bmarks<SPACE>
-map -g user -b sh :history!<SPACE>
-map -g user -b s;h :history<SPACE>
-map -g user -b sb :buffer<SPACE>
-map -g user -b sj :jumps<CR>
-map -g user -b sa :addons<CR>
-map -g user -b sc :set<SPACE>
-map -g user -b sc :set!<SPACE>
-map -g user -b sm :emenu<SPACE>
+map -b s <Nop>
+map -b sk :bmarks!<SPACE>
+map -b s;k :bmarks<SPACE>
+map -b sh :history<SPACE>
+map -b s;h :history!<SPACE>
+map -b sb :buffer<SPACE>
+map -b sj :jumps<CR>
+map -b sa :addons<CR>
+map -b sc :set<SPACE>
+map -b sc :set!<SPACE>
+map -b sm :emenu<SPACE>
 
-" ---------------------------------------------------------------------------
-" ,---------------------------------------,
-" | Command mode and insert mode bindings |
-" '---------------------------------------'
+" -----------------------------------------------------------------------------
+" ,---------------------------------------,  MAP COMMANDS.
+" | Command mode and insert mode bindings |  cmap: command-line mode
+" '---------------------------------------'  imap: insert mode
 
-map -g user -modes command-line,insert -b <C-y> <C-v><C-v>
-map -g user -modes command-line -b <C-,> <Tab>
-map -g user -modes command-line -b <C-.> <S-Tab>
-cmap -g user -b <C-p> <Up>
-cmap -g user -b <C-n> <Down>
-cmap -g user -b <C-S-P> <S-Up>
-cmap -g user -b <C-S-N> <S-Down>
+cmap -b <C-,> <Tab>
+cmap -b <C-.> <S-Tab>
+map -modes command-line,insert -b <C-y> <C-v><C-v>
+map -modes command-line,insert -b <C-p> <Up>
+map -modes command-line,insert -b <C-n> <Down>
+map -modes command-line,insert -b <C-S-P> <S-Up>
+map -modes command-line,insert -b <C-S-N> <S-Down>
+execute "map -modes command-line,insert -b <C-m> " + user.myemail
+execute "map -modes command-line,insert -b <C-S-I> " + user.myname
+execute "map -modes command-line,insert -b <C-S-W> " + user.mymasterpw
 
-" ---------------------------------------------------------------------------
-" ,--------------------------------,
-" | Caret and visual mode bindings |
+
+" -----------------------------------------------------------------------------
+" ,--------------------------------,  MAP COMMANDS.     
+" | Caret and visual mode bindings |  vmap: visual mode
 " '--------------------------------'
 
 " Caret and Visual mode:
 " C-e end of line, C-a start of line.
 " C-y scroll down, C-Y scroll up.
-map -g user -modes caret,visual -b <C-a> 0
-map -g user -modes caret,visual -b <C-e> $
-map -g user -modes caret,visual -b <C-S-Y> <C-e>
+map -modes caret,visual -b <C-a> 0
+map -modes caret,visual -b <C-e> $
+map -modes caret,visual -b <C-S-Y> <C-e>
 " to search and select:
 " 1. press / and type search term
 " 2. when satisfied, press enter
@@ -148,17 +161,28 @@ map -g user -modes caret,visual -b <C-S-Y> <C-e>
 " 6. press v to enter visual mode
 " 7. use visual mode keys j,k,h,l,C-a,C-e, etc to extend selection
 
-" ---------------------------------------------------------------------------
+" -----------------------------------------------------------------------------
 " ,--------------------,
 " | Menu mode bindings |
 " '--------------------'
 
-map -g user -modes menu -b <C-n> <Down>
-map -g user -modes menu -b <C-p> <Up>
-map -g user -modes menu -b <C-h> <Left>
-map -g user -modes menu -b <C-l> <Right>
+map -modes menu -b <C-n> <Down>
+map -modes menu -b <C-p> <Up>
+map -modes menu -b <C-h> <Left>
+map -modes menu -b <C-l> <Right>
 
-" --------------------------------------------------------------------------- 
+" -----------------------------------------------------------------------------
+" ,--------------------------------------,
+" | Text-edit and operator mode bindings |
+" '--------------------------------------'
+
+map -modes text-edit,operator -b <C-a> ^
+map -modes text-edit,operator -b <C-e> $
+map -modes text-edit,operator -b <A-=> <C-a>
+map -modes text-edit,operator -b <A--> <C-x>
+
+
+" ----------------------------------------------------------------------------- 
 " ,----------,
 " | Commands |
 " '----------'
@@ -174,85 +198,99 @@ command! nointercept -js document.addEventListener('keydown', function(e) { e.st
 
 " Open in Google Chrome:
 command! ochrome :exec '! google-chrome "' + buffer.URL + '"'
-map -g user -b xc :ochrome<CR>
+map -b xc :ochrome<CR>
 
 
-" =========================================================================== 
-"       ________ 
-"      |        |
-"      |  TABS  |
-"      |________|
+" =============================================================================
+"                                       ______ 
+"                                      |      |
+"                                      | TABS |
+"                                      |______|
 "
-"
-" ---------------------------------------------------------------------------
+" -----------------------------------------------------------------------------
 " ,------------------,
 " | Buffer Selection |
 " '------------------'
 " Select buffer:  b  (cycle with gb, gB)
 " switch to previously selected buffer: A-;
-:nmap -g user -b <A-;> <C-^>
-imap -g user -b <C-n> <Esc>gt
-imap -g user -b <C-p> <Esc>gT
-map -g user -b <C-,> g0
-map -g user -b <C-.> g$
-imap -g user -b <A-j> <Esc>gt
-imap -g user -b <A-k> <Esc>gT
+map -modes command,embed -b <A-;> <C-^>
+map -modes input -b <A-;> <Esc><C-^>
+map -b \< g0
+map -b \> g$
 
-" ---------------------------------------------------------------------------
+" -----------------------------------------------------------------------------
 " ,--------------,
 " | Pinning Tabs |
 " '--------------'
 command! unpinall tabdo unpintab
 " toggle pinning of current tab
-map -g user -b ! :pintab!<CR>
+map -b ! :pintab!<CR>
 
-" ---------------------------------------------------------------------------
+" -----------------------------------------------------------------------------
 " ,--------------,
 " | Closing Tabs |
 " '--------------'
 
 " close other tabs
-map -g user -b x1 :tabonly<CR>
+map -b x1 :tabonly<CR>
+" close tabs to left
+map -b x< -js closeAllToLeft()
 " close tabs to right
-map -g user -b x> -js closeAllToRight()
+map -b x> -js closeAllToRight()
 " undo recent closed tab from list
-map -g user -b U :undo<SPACE>
+map -b U :undo<SPACE>
 "
-" ---------------------------------------------------------------------------
+" -----------------------------------------------------------------------------
 " ,----------,
 " | New Tabs |
 " '----------'
 " Duplicate tab, Back/Forward in New Tab
-map -g user -ex C :tabdupa
-map -g user -ex gh :backt
-map -g user -ex gl :forwardt
+map -ex C :tabdupa
+map -ex gh :backt
+map -ex gl :forwardt
 " Open multiple hints in background tabs
-map -g user -b gf g;b
+map -b gf g;b
 
-" ---------------------------------------------------------------------------
+" -----------------------------------------------------------------------------
 " ,-------------,
 " | Moving Tabs |
 " '-------------'
-" map -g user -b -arg <C-m>t :tabmove <arg><CR>
-map -g user -b gt :tabmove!<SPACE>
-map -g user -b <A-Left> :tabmove! -1<CR>
-map -g user -b <A-Right> :tabmove! +1<CR>
-map -g user -b <C-S-P> :tabmove! -1<CR>
-map -g user -b <C-S-N> :tabmove! +1<CR>
-map -g user -b <C-\<> :tabmove! 1<CR>
-map -g user -b <C-\>> :tabmove! $<CR>
-map -g user -b g\> :tabmove! $<CR>
+" map -b -arg <C-m>t :tabmove <arg><CR>
+map -b gt :tabmove!<SPACE>
+map -b <C-S-P> :tabmove! -1<CR>
+map -b <C-S-N> :tabmove! +1<CR>
+map -b <C-,> :tabmove! -1<CR>
+map -b <C-.> :tabmove! +1<CR>
+map -b <C-\<> :tabmove! 1<CR>
+map -b <C-\>> :tabmove! $<CR>
+map -b g\> :tabmove! $<CR>
+
+" -----------------------------------------------------------------------------
+" ,------------,
+" | Tab Groups |
+" '------------'
+
+command! tginit :runtime! tabgroups.penta
 
 
-" =========================================================================== 
-"       _________ 
-"      |         |
-"      |  HINTS  |
-"      |_________|
+" =============================================================================
+"                                       _______ 
+"                                      |       |
+"                                      | HINTS |
+"                                      |_______|
 
-"map -g user -b gf g;t
+"map -b gf g;t
 
-js hints.addMode('m','mouseover',dactyl.utils.simulateMouseover);
+set eht=[iI]:img,[asOTvVWy]:':-moz-any-link',area[href],img[src],iframe[src],[A]:[id],a[name],[f]:body,[F]:body,code,div,html,p,pre,span,[S]:'input:not([type=hidden])',textarea,button,select)
+js hints.addMode('m','mouseover',utils.simulateMouseover);
+" remove elements
+set eht+=[x]:div,iframe
+js hints.addMode('x','make div invisible',utils.undisplay);
+set eht+=[X]:div,iframe
+js hints.addMode('X','shift div off screen',utils.removeFromView);
+set eht+=[p]:p,xpath:div/p,img,h1,h2,h3,h4,ol,ul,table,div,frame,iframe,input
+js hints.addMode('p','make element invisible',utils.undisplay);
+
 
 " ,----------,
 " | hinttags |
@@ -306,7 +344,7 @@ highlight -a Hint[Active]
     \ border-color: rgb(91, 58, 26);
 
 
-" =========================================================================== 
+" ============================================================================= 
 "       _______ 
 "      |       |
 "      |  GUI  |
@@ -318,55 +356,69 @@ highlight -a Hint[Active]
 
 " <A-Up>:     show the navigation and bookmarks toolbars:
 " <A-Down>:   hide the navigation and bookmarks toolbars:
-" <C-c><C-a>: toggle the navigation and bookmarks toolbars:
-map -g user -b <A-Up> :set guioptions-=mTB | set showtabline=never<CR>
-map -g user -b <A-Down> :set guioptions+=TB | set showtabline=always<CR>
-map -g user -b <C-c><C-a> :set guioptions!=TB | set showtabline!=always,never<CR>
-" <C-c><C-m|t|n|b>: toggle the menu|tab|navigation|bookmark toolbars:
-map -g user -b <C-c><C-m> :set guioptions!=m<CR>
-map -g user -b <C-c><C-t> :set showtabline!=always,never<CR>
-map -g user -b <C-c><C-n> :set guioptions!=T<CR>
-map -g user -b <C-c><C-b> :set guioptions!=B<CR>
-"map -g user -b <C-c><C-f> :buftabs<CR>
+" <C-x><C-a>: toggle the navigation and bookmarks toolbars:
+map -b <A-Up> :set guioptions-=mTB | set showtabline=never<CR>
+map -b <A-Down> :set guioptions+=TB | set showtabline=always<CR>
+map -b <C-x><C-a> :set guioptions!=TB | set showtabline!=always,never<CR>
+" <C-x><C-m|t|e|b|d|s|o>: toggle toolbars/menubars
+"(  menu|tab|navigation|bookmark|developer toolbar )
+map -b <C-x><C-m> :set guioptions!=m<CR>
+map -b <C-x><C-t> :set showtabline!=always,never<CR>
+map -b <C-x><C-e> :set guioptions!=T<CR>
+map -b <C-x><C-b> :set guioptions!=B<CR>
+map -b <C-x><C-d> :toolbartoggle Web Developer Toolbar<CR>
+map -b <C-x><C-s> :set guioptions!=s<CR>
+map -b <C-x><C-o> :toolbartoggle Add-on Bar<CR>
+"map -b <C-x><C-f> :buftabs<CR>
+"
+"DOM Inspector
+map -b <C-x><C-i> :emenu Tools.Web Developer.DOM Inspector<CR>
+" Toggle FF Developer command line
+map -modes base -b <A-x> <S-f2><Esc>
 
-" --------------------------------------------------------------------------- 
+
+" ----------------------------------------------------------------------------- 
 " ,---------,
 " | Dialogs |
 " '---------'
 
-map -g user -b <C-S-d> :dialog downloads<CR>
+" downloads
+map -b <C-S-d> :dialog downloads<CR>
+" about:config
 command! ac :winopen about:config
+" history
+command! historydialog :feedkeys <C-S-H>
 	  
-" --------------------------------------------------------------------------- 
+" ----------------------------------------------------------------------------- 
 " ,--------------,
 " | AiOS SideBar |
 " '--------------'
 
 " Manual sidebar selection with si, toggle with S
-map -g user -b si :sidebar<SPACE>
-" map -g user -b S :sidebar!<CR>
+map -b si :sidebar<SPACE>
+" map -b S :sidebar!<CR>
 " Open/close AiOS, switch focus
-"map -g user -b S :js aios_toggleSidebar()<CR><f6><f6>
+"map -b S :js aios_toggleSidebar()<CR><f6><f6>
 " Open AiOS, switch focus and enter passthrough
-"map -g user -b sS :js aios_toggleSidebar()<CR><f6><f6><C-z>
+"map -b sS :js aios_toggleSidebar()<CR><f6><f6><C-z>
 
 " Sidebar selection:
-map -g user -b sA :sidebar! Add-ons<CR>
-map -g user -b ssA :sidebar! Add-ons<CR><f6><f6><C-z>
-map -g user -b sM :sidebar! Bookmarks<CR>
-map -g user -b ssM :sidebar! Bookmarks<CR><f6><f6><C-z>
-map -g user -b sD :sidebar! Downloads<CR>
-map -g user -b ssD :sidebar! Downloads<CR><f6><f6><C-z>
-map -g user -b sH :sidebar! History<CR>
-map -g user -b ssH :sidebar! History<CR><f6><f6><C-z>
-map -g user -b sM :sidebar! Moji<CR>
-map -g user -b ssM :sidebar! Moji<CR><f6><f6><C-z>
-map -g user -b sO :sidebar! HeadingsMap<CR>
-map -g user -b ssO :sidebar! HeadingsMap<CR><f6><f6><C-z>
-map -g user -b sP :sidebar! Preferences<CR>
-map -g user -b ssP :sidebar! Preferences<CR><f6><f6><C-z>
+map -b sA :sidebar! Add-ons<CR>
+map -b ssA :sidebar! Add-ons<CR><f6><f6><C-z>
+map -b sM :sidebar! Bookmarks<CR>
+map -b ssM :sidebar! Bookmarks<CR><f6><f6><C-z>
+map -b sD :sidebar! Downloads<CR>
+map -b ssD :sidebar! Downloads<CR><f6><f6><C-z>
+map -b sH :sidebar! History<CR>
+map -b ssH :sidebar! History<CR><f6><f6><C-z>
+map -b sM :sidebar! Moji<CR>
+map -b ssM :sidebar! Moji<CR><f6><f6><C-z>
+map -b sO :sidebar! HeadingsMap<CR>
+map -b ssO :sidebar! HeadingsMap<CR><f6><f6><C-z>
+map -b sP :sidebar! Preferences<CR>
+map -b ssP :sidebar! Preferences<CR><f6><f6><C-z>
 
-" --------------------------------------------------------------------------- 
+" ----------------------------------------------------------------------------- 
 " ,---------------------,
 " | Resizing and moving |
 " '---------------------'
@@ -385,12 +437,64 @@ command! moveBL :js self.moveTo(0, screen.availHeight-self.window.outerHeight)
 command! moveBR :js self.moveTo(screen.availWidth-self.window.outerWidth, screen.availHeight-self.window.outerHeight)
 
 
-" =========================================================================== 
-"       ___________ 
-"      |           |
-"      |  ADD-ONS  |
-"      |___________|
+" =============================================================================
+"                            ___________________                               
+"                           |                   |
+"                           | DEVELOPMENT TOOLS |
+"                           |___________________|
+                            
+group developer
 
+" -----------------------------------------------------------------------------
+" ,-------------------------,
+" | Mozilla Developer Tools |
+" '-------------------------'
+command! webide :feedkeys! <S-f8>
+command! browserconsole :feedkeys! <C-S-J>
+
+" -----------------------------------------------------------------------------
+" ,---------------,
+" | DOM Inspector |
+" '---------------'
+command! dominspector :js inspectDOMDocument(buffer.URL)
+command! dominspectorchrome :js inspectDOMDocument("chrome://browser/content/browser.xul")
+" restore C-S-I shortcut for DOM Inspector (stolen by dev tools inspector)
+map -b <C-S-I> :dominspector<CR>
+
+" -----------------------------------------------------------------------------
+" ,---------,
+" | Firebug |
+" '---------'
+command! firebug :feedkeys! <C-f12>
+
+" -----------------------------------------------------------------------------
+" ,-----------------------,
+" | Web Developer Toolbar |
+" '-----------------------'
+command! magnifier
+    \ -bang
+    \ -description "Display magnifier (! toggles)"
+    \ -js bang ? toggleMagnifier() : WebDeveloper.PageMagnifier.createPageMagnifier();
+command! magnifieroff
+    \ -description "Turns off magnifier"
+    \ -js WebDeveloper.PageMagnifier.removePageMagnifier();
+
+js <<EOF
+function toggleMagnifier() {
+    if (document.getElementById("web-developer-page-magnifier-container").hidden)
+        WebDeveloper.PageMagnifier.createPageMagnifier();
+    else
+        WebDeveloper.PageMagnifier.removePageMagnifier();
+}
+EOF
+
+group user
+
+" =============================================================================
+"                                 __________________ 
+"                                |                  |
+"                                | OTHER EXTENSIONS |
+"                                |__________________|
 
 " Autopager:
 command! apoff :js autopagerMain.enabledThisSite()
@@ -402,17 +506,12 @@ command! prwul :o javascript:(function(){if(window['ppw']&&ppw['bookmarklet']){p
 " DownThemAll:
 command! dtamaagr -js self.DTA.openManager()
 
-" Pocket:
-" converted from bookmarklet
-command! pocket :open javascript:(function(){var%20e=function(t,n,r,i,s){var%20o=[3526112,5522661,1460314,3450302,5361262,5114635,2897350,3675444,1446118,2801611];var%20i=i||0,u=0,n=n||[],r=r||0,s=s||0;;var%20a={'a':97,'b';:98,'c':99,'d':100,'e':101,'f':102,'g':103,'h':104,'i':105,'j':106,'k':107,'l':108,'m':109,'n':110,'o':111,'p':112,'q':113,'r':114,'s':115,'t':116,'u':117,'v':118,'w':119,'x':120,'y':121,'z':122,'A':65,'B':66,'C':67,'D':68,'E':69,'F':70,'G':71,'H':72,'I':73,'J':74,'K':75,'L':76,'M':77,'N':78,'O':79,'P':80,'Q':81,'R':82,'S':83,'T':84,'U':85,'V':86,'W':87,'X':88,'Y':89,'Z':90,'0':48,'1':49,'2':50,'3':51,'4':52,'5':53,'6':54,'7':55,'8':56,'9':57,'\/':47,':':58,'?':63,'=':61,'-':45,'_':95,'&':38,'$':36,'!':33,'.':46};if(!s||s==0){t=o[0]+t}for(var%20f=0;f<t.length;f++){var%20l=function(e,t){return%20a[e[t]]?a[e[t]]:e.charCodeAt(t)}(t,f);if(!l*1)l=3;var%20c=l*(o[i]+l*o[u%o.length]);n[r]=(n[r]?n[r]+c:c)+s+u;var%20p=c%(50*1);if(n[p]){var%20d=n[r];n[r]=n[p];n[p]=d}u+=c;r=r==50?0:r+1;i=i==o.length-1?0:i+1}if(s==166){var%20v='';for(var%20f=0;f<n.length;f++){v+=String.fromCharCode(n[f]%(25*1)+97)}o=function(){};return%20v+'ce5c747776'}else{return%20e(u+'',n,r,i,s+1)}};var%20t=document,n=t.location.href,r=t.title;var%20i=e(n);var%20s=t.createElement('script');s.type='text/javascript';s.src='https://getpocket.com/b/r4.js?h='+i+'&u='+encodeURIComponent(n)+'&t='+encodeURIComponent(r);e=i=function(){};var%20o=t.getElementsByTagName('head')[0]||t.documentElement;o.appendChild(s)})()
-command! pocketall -js RIL.saveTabs()
 
-
-" =========================================================================
-"       _________________________ 
-"      |                         |
-"      | COMMAND IMPLEMENTATIONS |
-"      |_________________________|
+" =============================================================================
+"                              _________________________ 
+"                             |                         |
+"                             | COMMAND IMPLEMENTATIONS |
+"                             |_________________________|
 "  ______________________________________________________________________________________ 
 " /                                                                                      \
 " | JAVASCRIPT                                                                           |
@@ -428,10 +527,24 @@ command! forwardt -description "Create adjacent duplicate tab and go forward in 
 command! tabdupa -description "Create adjacent duplicate tab" -js tabdupa()
 
 js <<EOF
+closeAllToLeft = function (ord) {
+    if (typeof(ord)==="undefined") ord = tabs.getTab().dactylOrdinal;
+    // convert from 0- to 1-based  ==> -1  | 
+    // end at previous tab         ==> -1  | ==> -2
+    var ix = ord - 1;
+    var prevTabIx = ix - 1;
+    utils.closeTabsTo(prevTabIx)  
+}
+EOF
+
+js <<EOF
 closeAllToRight = function (ord) {
     if (typeof(ord)==="undefined") ord = tabs.getTab().dactylOrdinal;
-    // convert 0- to 1-based: -1, start from next tab: +1 ... cancel out
-    dactyl.utils.closeTabsFrom(ord)  
+    // convert from 0- to 1-based  ==> -1  | 
+    // start from next tab         ==> +1  | ... cancel out
+    var ix = ord - 1;
+    var nextTabIx = ix + 1;
+    utils.closeTabsFrom(nextTabIx)  
 }
 EOF
 
@@ -486,12 +599,12 @@ tabdupa = function() {
     var currT = gBrowser.selectedTab;
     var dupT = gBrowser.duplicateTab(currT);
     var dupTB = gBrowser.getBrowserForTab(dupT);
-    gBrowser.selectedTab = dupT;
+    getBrowser().moveTabForward();
 }
 EOF
 
 
-" --------------------------------------------------------------------------- 
+" ----------------------------------------------------------------------------- 
 
 " shortcut to Wikipedia episode lists.
 command! eplist -nargs=1 -js (eplist(args[0]))
@@ -508,11 +621,33 @@ function eplist (s) {
 EOF
 
 
-" --------------------------------------------------------------------------- 
+" ----------------------------------------------------------------------------- 
 
+map -b xw :toggleWayback<CR>
+command! toggleWayback 
+    \ -bang
+    \ -description "Toggle web page and archive.org copy"
+    \ -js bang ? toggleWayback({where: dactyl.NEW_TAB}) : toggleWayback()
+js <<EOF
+function toggleWayback(opts={}) {
+    var url = content.location.href.toLowerCase();
+    var waybackRegex = /https?:\/\/web\.archive\.org\/web\/(\d+)(id_)?\/(.*)/;
+    var match = waybackRegex.exec(url);
+    if (match) {
+        dactyl.open(match[3], opts);
+    }
+    else {
+        dactyl.open("http://web.archive.org/web/" + url, opts);
+    }
+}
+EOF
+
+" ----------------------------------------------------------------------------- 
+
+map -b cs :toggleHTTPS<CR>
 command! toggleHTTPS 
-            \ -description "Toggle protocol between HTTP and HTTPS" 
-            \ -js toggleHTTPS()
+   \ -description "Toggle protocol between HTTP and HTTPS" 
+   \ -js toggleHTTPS()
 js <<EOF
 function toggleHTTPS () {
     var url = content.location.href;
@@ -527,56 +662,171 @@ function toggleHTTPS () {
 }
 EOF
 
+" ----------------------------------------------------------------------------- 
 
-" =========================================================================== 
-"       _______________ 
-"      |               |
-"      | SITE SPECIFIC |
-"      |_______________|
+map -b xk :kanjisearch!<CR>
+command! kanjisearch 
+    \ -bang -description "kanji search on jisho.org" 
+    \ -js kanjiSearchJisho(dactyl.clipboardRead(), bang);
+js <<EOF
+function kanjiSearchJisho (s, newtab) {
+    if (newtab)
+        dactyl.open("http://jisho.org/search/"+s+"%20%23kanji",
+                    {where:dactyl.NEW_TAB});
+    else
+        dactyl.open("http://jisho.org/search/"+s+"%20%23kanji");
+}
+EOF
 
-" --------------------------------------------------------------------------- 
+" ----------------------------------------------------------------------------- 
+
+" =============================================================================
+"                                   _______________ 
+"                                  |               |
+"                                  | SITE SPECIFIC |
+"                                  |_______________|
+
+" ----------------------------------------------------------------------------- 
 " ,-----,
 " | EdX |
 " '-----'
-command! edx :so ~/.pentadactyl/edx.penta
-command! edxe viewsource! file:/home/troy/.pentadactyl/edx.penta
+command! edx :runtime! edx.penta
 :edx
 
-" --------------------------------------------------------------------------- 
+" ----------------------------------------------------------------------------- 
 " ,----------,
 " | Coursera |
 " '----------'
 set passkeys+='class.coursera.org/.*/lecture/':'hp-+fc<up><down><left><right>'
 
-" --------------------------------------------------------------------------- 
+" -----------------------------------------------------------------------------
+" ,-------------,
+" | Archive.org |
+" '-------------'
+group wayback -locations=archive.org
+
+map -g wayback -b ct :toggleWaybackToolbar<CR>
+map -g wayback -b gct :toggleWaybackToolbar!<CR>
+
+command! toggleWaybackToolbar
+    \ -bang
+    \ -description "Hides/shows Wayback Machine toolbar. With [!], toggles between regular and no-toolbar URLs"
+    \ -js bang ? toggleWaybackToolbarUrl() : toggleWaybackToolbar();
+js <<EOF
+function toggleWaybackToolbar() {
+    var url = content.location.href
+    var waybackRegex = /(https?:\/\/web\.archive\.org\/web\/\d+)(id_)?(\/.*)/;
+    var match = waybackRegex.exec(url);
+    if (match[2]) {
+        dactyl.open(match[1] + match[3]);
+    }
+    else {
+        var toolbar = content.document.getElementById("wm-ipp");        
+        if (toolbar.style.display == "none")
+            toolbar.style.display = "block";
+        else 
+            toolbar.style.display = "none";
+    }
+}
+function toggleWaybackToolbarUrl() {
+    var url = content.location.href
+    var waybackRegex = /(https?:\/\/web\.archive\.org\/web\/\d+)(id_)?(\/.*)/;
+    var match = waybackRegex.exec(url);
+    if (match[2]) {
+        dactyl.open(match[1] + match[3]);
+    }
+    else {
+        dactyl.open(match[1] + "id_" + match[3]);
+    }
+}
+EOF
+
+group user
+
+" -----------------------------------------------------------------------------
+" ,------------,
+" | Github.com |
+" '------------'
+group github -locations=github.com,githubusercontent.com,rawgit.com
+
+map -b ch :togglehtmlview<CR>
+
+command! togglehtmlview 
+     \ -description "Toggle between HTML file and rendered view"
+     \ -js toggleHTMLView();
+js <<EOF
+function toggleHTMLView () {
+    var url = buffer.URL.toLowerCase();
+    var newurl;
+    if (url.contains("https://github.com")) {
+        var rx = /https:\/\/github.com\/([^/\s]+\/[^/\s]+)\/blob(\/.*)/;
+        var match = rx.exec(url);
+        newurl = "https://rawgit.com/" + match[1] + match[2];
+    }
+    else if (url.contains("https://raw.githubusercontent.com"))
+        newurl = url.replace("raw.githubusercontent", "rawgit");
+    else if (url.contains("https://rawgit.com")) {
+        var rx = /https:\/\/rawgit.com\/([^/\s]+\/[^/\s]+)(\/.*)/;
+        var match = rx.exec(url);
+        newurl = "https://github.com/" + match[1] + "/blob" + match[2];
+    }
+    dactyl.open(newurl);
+}
+EOF
+
+group user
+
+" -----------------------------------------------------------------------------
+" ,-----------------,
+" | Userscripts.org |
+" '-----------------'
+
+js <<EOF
+function userscriptsToMirror() {
+    alert("triggered");
+    var url = buffer.URL;
+    var rx = /https?:\/\/userscripts.org\/(.*)/;
+    var newurl;
+    var match = rx.exec(url.toLowerCase());
+    if (match)
+        dactyl.open("http://userscripts-mirror.org/" + match[1]);
+    else
+        dactyl.message("userScriptsToMirror: Address doesn't match: " + url);
+}
+EOF
+
+autocmd LocationChange userscripts.org :js userScriptsToMirror();
+
+
+" ----------------------------------------------------------------------------- 
 " ,-----------,
 " | Jisho.org |
 " '-----------'
-group jisho -locations jisho.org
+"
+group jisho -locations=jisho.org
+" remove all existing jisho autocmds
+autocmd! -group jisho
+
+map -b cr :toggleromaji<CR>
 
 " toggleromaji: adds/removes #romaji tag to toggle between kana and romaji:
+command! toggleromaji 
+     \ -description "Toggle between kana and romaji"
+     \ -js toggleRomaji();
 js <<EOF
 var toggleRomaji = function() {
-    var newurl=buffer.URL;
-    var romtag="%23romaji";
-    if (newurl.contains(romtag)) {
-        newurl=newurl.replace(romtag,"");
-    } else {
-        var i=newurl.indexOf("%");
-        if (i === -1) {
-            newurl += romtag;
-        } else {
-            newurl = newurl.slice(0,i) + romtag + newurl.slice(i);
-        }
-    } 
+    var url = buffer.URL;
+    var romtag = "%23romaji";
+    if (url.contains(romtag))
+        newurl = url.replace(romtag,"");
+    else
+        newurl = url + "%23romaji";
     dactyl.open(newurl)
 }
 EOF
-command! toggleromaji -description "Toggle between kana and romaji" -js toggleRomaji();
-map -g user -b cr :toggleromaji<CR>
 
 " Hints modes.
-set eht+=[kxKX]:span[class=text]
+set eht+=[keKE]:span[class=text]
 set eht+=[l]:a[class="concept_light-status_link"]
 
 js <<EOF
@@ -591,7 +841,7 @@ js <<EOF
 EOF
 js <<EOF
     \ hints.addMode(
-    \   'x','open sentence examples',
+    \   'e','open sentence examples',
     \   function(e) { 
     \     dactyl.open(decodeURIComponent("http://jisho.org/search/" +
     \                                    e.textContent +
@@ -612,7 +862,7 @@ js <<EOF
 EOF
 js <<EOF
     \ hints.addMode(
-    \   'X','open sentence examples in new tab',
+    \   'E','open sentence examples in new tab',
     \   function(e) { 
     \     dactyl.open(decodeURIComponent("http://jisho.org/search/" +
     \                                    e.textContent +
@@ -637,13 +887,84 @@ js <<EOF
     \ );
 EOF
 
+" Kanji style
+style -name=kanji_light
+    \ jisho.org 
+    \ .kanji .character, .kanji_light .character {
+    \     font-family: "HiraMinPro-W3","Hiragino Mincho Pro W3","Hiragino Mincho Pro","ヒラギノ明朝 Pro W3","游明朝",YuMincho,"HG明朝E","ＭＳ Ｐ明朝","MS PMincho","MS 明朝","MS Mincho",serif !important;
+    \ } 
+    \ .kanji .character:hover, .kanji_light .character:hover {
+    \     font-family:  "HiraKakuPro-W3","Hiragino Kaku Gothic Pro W3","Hiragino Kaku Gothic Pro","ヒラギノ角ゴ Pro W3","メイリオ",Meiryo,"游ゴシック",YuGothic,"ＭＳ Ｐゴシック","MS PGothic","ＭＳ ゴシック","MS Gothic",sans,sans-serif !important;
+    \ }
+command! kanjilight
+    \ -description "Light style kanji"
+    \ styleenable -group jisho -name kanji_light
+command! kanjiheavy
+    \ -description "Heavy style kanji"
+    \ styledisable -group jisho -name kanji_light
+command! kanjitoggle
+    \ -description "Toggle heavy/light kanji style"
+    \ styletoggle -group jisho -name kanji_light
+
+
+" Remove arrows from details links
+
+js <<EOF
+function fixDetailsLinks() {
+    var links = content.document.getElementsByClassName("light-details_link")
+    for (i=0; i<links.length; ++i)
+        links[i].textContent = links[i].textContent.slice(0, -2);
+}
+EOF
+
+command! fixdetailslinks 
+     \ -description "Remove arrows from `details' links"
+     \ -js fixDetailsLinks();
+autocmd DOMLoad jisho.org :fixdetailslinks
+
+
+js <<EOF
+function processEntries () {
+    document.extraSearchEngines = {
+        "tangorin search": "http://tangorin.com/dict.php?dict=general&s=%s",
+        "Forvo pronunciation": "http://www.forvo.com/search/%s",
+        "Tatoeba example sentences": "http://tatoeba.org/eng/sentences/search?query=%s"
+    }
+    document.verbSearchEngines = {
+        "Verbix verb conjugation": "http://www.verbix.com/webverbix/go.php?T1=%s&D1=51&H1=151",
+        "Japanese Verb Conjugator": "http://www.japaneseverbconjugator.com/VerbDetails.asp?txtVerb=%s"
+    }
+    document.kanjiSearchEngines = {
+        "SLJFAQ kanji search": "http://kanji.sljfaq.org/soft-keyboard.html#?=%s",
+        "Red Finch kanji search": "http://redfinchjapanese.com/?action=kanji_dictionary?=%s"
+    }
+    document.entryNodes = content.document.getElementsByClassName("concept_light");
+    function getEntryName(x) {
+        return String.trim(x.getElementsByClassName("text")[0].textContent);
+    }
+    document.results = map(document.entryNodes, getEntry);
+    function getEntryStatusLinks(x) {
+        return x.getElementsByClassName("concept_light-status_link");
+    }
+    function getEntryLinksDropdown(x) {
+        var links = getEntryStatusLinks(x);
+        var dropdownId;
+        for (i=0; i<links.length; ++i) {
+            if (links[i].textContent == "Links")
+                dropdownId = links[i].getAttribute("data-dropdown");
+        return document.getElementById(dropdownId);
+        }
+    }
+}
+EOF
+
 group user
 
-" =========================================================================== 
-"       _______ 
-"      |       |
-"      | NOTES |
-"      |_______|
+" =============================================================================
+"                                       _______ 
+"                                      |       |
+"                                      | NOTES |
+"                                      |_______|
 
 " ,-----------------,
 " | USEFUL COMMANDS |
@@ -655,25 +976,23 @@ group user
 " current tab number:  tabs.getTab().dactylOrdinal
 " alternative to :execute: :js CommandExMode().open(exCommandString) 
 
-" js hints.addMode('0','Force open in current tab',function(elem) dactyl.open(elem.href));
-
-
 " ,------------------,
 " | Removed Commands |
 " '------------------'
 
+" js hints.addMode('0','Force open in current tab',function(elem) dactyl.open(elem.href));
 "command! outputtabhrefs :tabdo :execute "!echo >> \"Pentadactyl Output " + Date().slice(0,15) + "\" " + content.location.href
 "" Output list of tab hrefs
-"map -g user -b t> :outputtabhrefs<CR>
+"map -b t> :outputtabhrefs<CR>
 "" Output list of tab hrefs followed by a blank line
-"command! tabhrefs :normal t> <C-c>0
-"map -g user -b t. :tabhrefs<CR>
+"command! tabhrefs :normal t> <C-x>0
+"map -b t. :tabhrefs<CR>
 
 "" Output newline in 'Pentadactyl Output <Date>' file:
 "command! outputnewline :execute "!echo >> \"Pentadactyl Output " + Date().slice(0,15) + "\""
-"map -g user -b <C-c>0 :outputnewline<CR>
+"map -b <C-x>0 :outputnewline<CR>
 
 
-" =========================================================================== 
+" ============================================================================= 
 
 
