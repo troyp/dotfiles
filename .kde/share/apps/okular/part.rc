@@ -178,5 +178,6 @@
   <Action priority="0" name="view_render_mode"/>
   <Action priority="0" name="edit_find"/>
   <Action priority="0" name="options_configure_annotations"/>
+  <Action shortcut="Ctrl+Shift+B" name="options_configure_generators"/>
  </ActionProperties>
 </kpartgui>

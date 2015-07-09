@@ -18,6 +18,9 @@ alias aptcs='apt-cache search'
 alias aptcp='apt-cache policy'
 alias aptcsh='apt-cache show'
 alias aptgetkey='sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys'  # Ubuntu
+alias dplist='dpkg -l'   # list package names matching pattern, eg. dplsit 'dbus*'
+alias dpfiles='dpkg -L'  # list files installed by a package
+alias dpfind='dpkg -S'   # find package, location, man file location of a command
 alias aptsh='sudo aptsh'
 alias sdebi='sudo dpkg -i'
 alias sdebr='sudo dpkg -r'
@@ -88,6 +91,18 @@ alias ecp="qcp -e 'emacsclient -nw'"          # copies files with emacs/qcp
 alias grep='grep -i --color=auto'
 alias egrep='grep -iE --color=auto'
 
+# -----------------------
+# HTML & XML MANIPULATION
+# -----------------------
+alias htmlcat='htmldoc -f html'
+alias makelinks='find . -type f -exec printf "<a href={}>{}</a><br>\n"  \; > index.html'
+alias href-relativize="sed -e 's/href=\"http:\/\/[^ \"]*\//href=\"/g'"
+alias dehtent="perl -n -mHTML::Entities -e ' ; print HTML::Entities::decode_entities(\$_) ;'"
+alias htent="perl -n -mHTML::Entities -e ' ; print HTML::Entities::encode_entities(\$_) ;'"
+alias remove-wayback-insert="sed -i '/BEGIN WAYBACK TOOLBAR INSERT/,/END WAYBACK TOOLBAR INSERT/d'"
+alias xstar=xmlstarlet
+alias xq=xqilla
+
 #------------------------
 # WGET & RELATED ALIASES.
 #------------------------
@@ -117,16 +132,6 @@ alias wgetcat='wget -pE -O' # usage: wgetcat <filename> <filename> ... <url> #UN
 alias listhttplinks='xargs elinks --dump | grep "http" | sed "s/.*http/http/g"' # Waits for url from stdin then lists http links on page. echo url | listhttplinks. Pipe to wget.
 alias listhttplinks2='xargs wget -O - 2>&1 | grep -i "http:" | sed "s/^.*http/http/\" | cut -d"\"" -f1 | sort -u'
 
-# ------------
-# MAN ALIASES.
-# ------------
-# currently problem with man -H: use manh function (works via man2html)
-# alias manht='man -Hfirefox'   # problem with grohtml images
-# alias manht='man -Hchromium-browser'   # problem with grohtml images
-alias gitman='git help'
-alias erlman='erl -man'
-alias bashman='mangrep bash'  # see .bash-functions. eg. bashman type
-
 #------------------------
 # BROWSER/SERVER ALIASES.
 #------------------------
@@ -145,6 +150,17 @@ alias tracert=traceroute
 alias ports='netstat -tunp'
 # from: http://unix.stackexchange.com/questions/22615/
 alias ip-addr="lwp-request -o text checkip.dyndns.org | awk '{ print $NF }'"
+alias htheaders='lynx -dump -head'
+
+# ------------
+# MAN ALIASES.
+# ------------
+# currently problem with man -H: use manh function (works via man2html)
+# alias manht='man -Hfirefox'   # problem with grohtml images
+# alias manht='man -Hchromium-browser'   # problem with grohtml images
+alias gitman='git help'
+alias erlman='erl -man'
+alias bashman='mangrep bash'  # see .bash-functions. eg. bashman type
 
 #-------------------
 # OPEN & SU ALIASES.
@@ -257,6 +273,7 @@ alias choose-input-method='im-config -c'
 alias distro='cat /etc/lsb-release'
 alias systeminfo='DISTRO=$(cat /etc/os-release|command grep PRETTY); DISTRO="${DISTRO#PRETTY_NAME=\"}"; printf "DISTRO: ${DISTRO%\"}\nARCH:   $(uname -i)\nKERNEL: $(uname -r)\nNODE:   $(uname -n)\n"'
 alias xevkb="xev | grep -A2 --line-buffered '^KeyRelease' | sed -n '/keycode /s/^.*keycode \([0-9]*\).* (.*, \(.*\)).*$/\1 \2/p'"
+alias preparesetleds='sudo chmod 666 /dev/console'
 alias capslockon='sudo setleds -D +caps < /dev/console'  # turn off capslock if xset doesn't work. Requires chmod 666 /dev/console (otherwise su - must used rather than sudo)
 alias capslockoff='capslockon; sudo setleds -D -caps < /dev/console' # see capslockon; sometimes you need to use capslockon first or the light won't clear.
 alias hdd='df -hT'
@@ -327,18 +344,6 @@ alias pkgc='pkg-config --libs'
 alias cpkgc='cmake --find-package -DLANGUAGE=C -DCOMPILER_ID=GNU -DMODE=COMPILE'   # eg. cpkgc -DNAME=LibXml2 
 alias pyc="python2 -c 'from math import *; from operator import *; from itertools import *; from functools import *; print "
 alias pipu='sudo -H pip install --upgrade'
-
-# -----------------------
-# HTML & XML MANIPULATION
-# -----------------------
-alias htmlcat='htmldoc -f html'
-alias makelinks='find . -type f -exec printf "<a href={}>{}</a><br>\n"  \; > index.html'
-alias href-relativize="sed -e 's/href=\"http:\/\/[^ \"]*\//href=\"/g'"
-alias dehtent="perl -n -mHTML::Entities -e ' ; print HTML::Entities::decode_entities(\$_) ;'"
-alias htent="perl -n -mHTML::Entities -e ' ; print HTML::Entities::encode_entities(\$_) ;'"
-alias remove-wayback-insert="sed -i '/BEGIN WAYBACK TOOLBAR INSERT/,/END WAYBACK TOOLBAR INSERT/d'"
-alias xstar=xmlstarlet
-alias xq=xqilla
 
 # -----------
 # PDF ALIASES

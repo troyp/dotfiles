@@ -43,6 +43,7 @@ set editor='roxterm --replace -e vim -f +<line> +"sil! call cursor(0, <column>)"
 "                                  | KEY BINDINGS |
 "                                  |______________|
 
+" ----------------------------------------------------------------------------- 
 " ,--------------------------,
 " | Normal mode key bindings |
 " '--------------------------'
@@ -54,10 +55,10 @@ set editor='roxterm --replace -e vim -f +<line> +"sil! call cursor(0, <column>)"
 " <C-x> : GUI commands, etc.
 
 " REPLACE DEFAULT BINDINGS:
-" free C-h, use C-h, C-l to replace h, l
+" free C-h, use C-,, C-. to replace h, l
 map -b <C-x><C-h> <Nop>
-map -b <C-h> h
-map -b <C-l> l
+map -b <C-,> h
+map -b <C-.> l
 " use h, l for tab changing
 map -b h gT
 map -b l gt
@@ -116,6 +117,7 @@ map -b s <Nop>
 map -b sk :bmarks!<SPACE>
 map -b s;k :bmarks<SPACE>
 map -b sh :history<SPACE>
+map -b ch :history<CR>
 map -b s;h :history!<SPACE>
 map -b sb :buffer<SPACE>
 map -b sj :jumps<CR>
@@ -136,7 +138,10 @@ map -modes command-line,insert -b <C-p> <Up>
 map -modes command-line,insert -b <C-n> <Down>
 map -modes command-line,insert -b <C-S-P> <S-Up>
 map -modes command-line,insert -b <C-S-N> <S-Down>
+map -modes command-line,insert -b <C-f> <Right>
+map -modes command-line,insert -b <C-b> <Left>
 execute "map -modes command-line,insert -b <C-m> " + user.myemail
+execute "map -modes command-line,insert -b <C-S-m> " + user.myemail2
 execute "map -modes command-line,insert -b <C-S-I> " + user.myname
 execute "map -modes command-line,insert -b <C-S-W> " + user.mymasterpw
 
@@ -168,6 +173,8 @@ map -modes caret,visual -b <C-S-Y> <C-e>
 
 map -modes menu -b <C-n> <Down>
 map -modes menu -b <C-p> <Up>
+map -modes menu -b <C-j> <Down>
+map -modes menu -b <C-k> <Up>
 map -modes menu -b <C-h> <Left>
 map -modes menu -b <C-l> <Right>
 
@@ -180,6 +187,14 @@ map -modes text-edit,operator -b <C-a> ^
 map -modes text-edit,operator -b <C-e> $
 map -modes text-edit,operator -b <A-=> <C-a>
 map -modes text-edit,operator -b <A--> <C-x>
+
+
+" -----------------------------------------------------------------------------
+" ,----------------------------,
+" | Pass-through mode bindings |
+" '----------------------------'
+
+map -modes pass-through -b <A-;> :normal "<Esc><C-^>"<CR>
 
 
 " ----------------------------------------------------------------------------- 
@@ -199,6 +214,16 @@ command! nointercept -js document.addEventListener('keydown', function(e) { e.st
 " Open in Google Chrome:
 command! ochrome :exec '! google-chrome "' + buffer.URL + '"'
 map -b xc :ochrome<CR>
+
+" Show all marks (quickmarks and url/local marks)
+command! allmarks,amarks,am :qmarks | marks
+
+" Set/unset autoplay
+command! autoplayon,autop :set! media.autoplay.enabled=true
+command! autoplayoff,noautop :set! media.autoplay.enabled=false
+
+" Troubleshooting information
+command! info :tabopen about:support<CR>
 
 
 " =============================================================================
@@ -250,6 +275,10 @@ map -ex gh :backt
 map -ex gl :forwardt
 " Open multiple hints in background tabs
 map -b gf g;b
+" New tab
+map -b gN  tabout:newtab<CR>
+map -b gON oabout:newtab<CR>
+"      gH : open home page in new tab
 
 " -----------------------------------------------------------------------------
 " ,-------------,
@@ -259,8 +288,8 @@ map -b gf g;b
 map -b gt :tabmove!<SPACE>
 map -b <C-S-P> :tabmove! -1<CR>
 map -b <C-S-N> :tabmove! +1<CR>
-map -b <C-,> :tabmove! -1<CR>
-map -b <C-.> :tabmove! +1<CR>
+map -b <C-h> :tabmove! -1<CR>
+map -b <C-l> :tabmove! +1<CR>
 map -b <C-\<> :tabmove! 1<CR>
 map -b <C-\>> :tabmove! $<CR>
 map -b g\> :tabmove! $<CR>
@@ -289,9 +318,10 @@ js hints.addMode('x','make div invisible',utils.undisplay);
 set eht+=[X]:div,iframe
 js hints.addMode('X','shift div off screen',utils.removeFromView);
 set eht+=[p]:p,xpath:div/p,img,h1,h2,h3,h4,ol,ul,table,div,frame,iframe,input
-js hints.addMode('p','make element invisible',utils.undisplay);
+" replace ;t with function for ;b (open in background)
+js hints.addMode("t", "Follow hint in a background tab", elem => buffer.followLink(elem, dactyl.NEW_BACKGROUND_TAB))
 
-
+" ----------------------------------------------------------------------------- 
 " ,----------,
 " | hinttags |
 " '----------'
@@ -301,6 +331,7 @@ set hinttags+='svg'
 set hinttags+=a[class^='vote']
 set hinttags+=a[class^='speed']
 
+" ----------------------------------------------------------------------------- 
 " ,------------------,
 " | extendedhinttags |
 " '------------------'
@@ -308,6 +339,7 @@ set hinttags+=a[class^='speed']
 " FIXME: can't activate context menu on 'body' hint
 ":set eht+=[c]:body,':-moz-any-link',area,button,iframe,input:not([type=hidden]),label[for],select,textarea,[onclick],[onmouseover],[onmousedown],[onmouseup],[oncommand],[tabindex],[role=link],[role=button],[contenteditable=true]
 
+" ----------------------------------------------------------------------------- 
 " ,-------------------,
 " | Styling for hints |
 " '-------------------'
@@ -323,7 +355,7 @@ highlight Hint
     \ font-weight: bold; 
     \ text-transform: uppercase; 
     \ color: rgb(91, 58, 26);
-    \ background-color: rgba(280, 280, 300, 0.45) !important; 
+    \ background-color: rgba(255, 255, 255, 0.45) !important; 
     \ border-radius: 5px;
 " HintImage: ?
 highlight HintImage 
@@ -334,11 +366,15 @@ highlight HintElem
     \ border-radius: 2px;
 " HintActive: styling for active element when hinted
 highlight -a HintActive
-    \ background-color: rgba(255, 255, 0, 0.5) !important; 
+    \ background-color: rgba(255, 255, 255, 0.1) !important; 
     \ color: blue !important; 
+    \ border-style: dashed;
+    \ border-color: rgba(255, 0, 0, 0.4);
+    \ border-width: 1px;
     \ border-radius: 2px;
 " Hint[Active]: styling for hint on active element
 highlight -a Hint[Active]
+    \ background-color: rgba(255, 255, 0, 0.4) !important; 
     \ color: rgb(91, 58, 26);
     \ border-style: solid;
     \ border-color: rgb(91, 58, 26);
@@ -350,6 +386,7 @@ highlight -a Hint[Active]
 "      |  GUI  |
 "      |_______|
 
+" ----------------------------------------------------------------------------- 
 " ,----------,
 " | Toolbars |
 " '----------'
@@ -386,9 +423,20 @@ map -modes base -b <A-x> <S-f2><Esc>
 map -b <C-S-d> :dialog downloads<CR>
 " about:config
 command! ac :winopen about:config
+
 " history
 command! historydialog :feedkeys <C-S-H>
 	  
+map -b ea tabout:addons<CR>
+map -b ec tabout:config<CR>
+map -b ed tabout:downloads<CR>
+map -b ek tchrome://browser/content/places/places.xul<CR>
+map -b ep tabout:plugins<CR>
+map -b er tabout:sessionrestore<CR>
+map -b es tabout:support<CR>
+map -b es tabout:support<CR>
+
+
 " ----------------------------------------------------------------------------- 
 " ,--------------,
 " | AiOS SideBar |
@@ -451,6 +499,7 @@ group developer
 " '-------------------------'
 command! webide :feedkeys! <S-f8>
 command! browserconsole :feedkeys! <C-S-J>
+map -b xd :emenu Tools.Web Developer.Eyedropper<CR>
 
 " -----------------------------------------------------------------------------
 " ,---------------,
@@ -505,6 +554,12 @@ command! prwul :o javascript:(function(){if(window['ppw']&&ppw['bookmarklet']){p
 
 " DownThemAll:
 command! dtamaagr -js self.DTA.openManager()
+
+" Rikaisama:
+command! rikLbOn -js rcxMain.lbToggle()
+command! rikLbOff -js rcxMain.lbHide()
+map -b cr :rikLbOn<CR>
+map -b cR :rikLbOff<CR>
 
 
 " =============================================================================
@@ -680,6 +735,25 @@ EOF
 
 " ----------------------------------------------------------------------------- 
 
+command! popjisyo
+    \ -bang
+    \ -description "Add hints for Japanese via POPjisyo.com. With !, adds hints for English"
+    \ -js bang ? popJisyoEtoJ() : popJisyo();
+
+js <<EOF
+popJisyoUrl = 'http://www.popjisyo.com/WebHint/AddHint.aspx?r=e';
+function popJisyo(url) {
+    if (!url) 
+        url = content.location.href;
+    location.href = popJisyoUrl + '&d=7&du=' + encodeURIComponent(url);
+}
+function popJisyoEtoJ(url) {
+    if (!url) 
+        url = content.location.href;
+    location.href = popJisyoUrl + '&d=1&du=' + encodeURIComponent(url);
+}
+EOF
+
 " =============================================================================
 "                                   _______________ 
 "                                  |               |
@@ -698,6 +772,25 @@ command! edx :runtime! edx.penta
 " | Coursera |
 " '----------'
 set passkeys+='class.coursera.org/.*/lecture/':'hp-+fc<up><down><left><right>'
+
+" -----------------------------------------------------------------------------
+" ,----------,
+" | about: * |
+" '----------'
+
+group about -locations=about:*,chrome:*
+
+map -g about -b j <C-v><Down>
+map -g about -b k <C-v><Up>
+"
+map -g about  J <C-v><PageDown>
+map -g about  K <C-v><PageUp>
+map -g about  <C-d> <C-v><PageDown>
+map -g about  <C-u> <C-v><PageUp>
+map -g about  gg <C-v><Home>
+map -g about  G <C-v><End>
+
+group user
 
 " -----------------------------------------------------------------------------
 " ,-------------,
@@ -744,6 +837,40 @@ EOF
 group user
 
 " -----------------------------------------------------------------------------
+" ,--------,
+" | BookZZ |
+" '--------'
+group bookzz -locations=bookzz.org
+
+map -b cz :loginAndSearch<CR>
+
+command! loginAndSearch
+    \ -description "Sign in and repeat search for ID in input field"
+    \ -js loginAndSearch(getSearchField());
+map -b xz 
+    \ -description "Sign in and repeat search for ID in input field"
+    \ -js loginAndSearch(getSearchField());
+
+js <<EOF
+var signinurl = "http://singlelogin.org/";
+function loginAndSearch() {
+    var searchId = content.document.getElementsByTagName("input")[0].value;
+    var curT = gBrowser.selectedTab;
+    var curTB = gBrowser.getBrowserForTab(curT);
+    function searchForId() {
+	var searchFields = content.document.getElementsByTagName("input");
+	searchFields[0].value = searchId;
+	searchFields[1].click();
+	curTB.removeEventListener("DOMContentLoaded", searchForId);
+    } 
+    curTB.loadURI(signinurl);
+    curTB.addEventListener("DOMContentLoaded", searchForId);
+}
+EOF
+
+group user
+
+" -----------------------------------------------------------------------------
 " ,------------,
 " | Github.com |
 " '------------'
@@ -777,26 +904,52 @@ EOF
 group user
 
 " -----------------------------------------------------------------------------
-" ,-----------------,
-" | Userscripts.org |
-" '-----------------'
+" ,-----------,
+" | JSBin.com |
+" '-----------'
+
+group jsbin -locations=jsbin.com
+" remove all existing jsbin autocmds
+autocmd! -group jsbin
+
+map -b xm -js toggleMenu();
+"map -modes pass-through -b <A-1> <C-1>
+"map -modes pass-through -b <A-2> <C-2>
+"map -modes pass-through -b <A-3> <C-3>
+"map -modes pass-through -b <A-4> <C-4>
+"map -modes pass-through -b <A-5> <C-5>
+"map -modes pass-through -b <A-6> <C-6>
+"map -modes pass-through -b <A-7> <C-7>
+"map -modes pass-through -b <A-8> <C-8>
+"map -modes pass-through -b <A-9> <C-9>
 
 js <<EOF
-function userscriptsToMirror() {
-    alert("triggered");
-    var url = buffer.URL;
-    var rx = /https?:\/\/userscripts.org\/(.*)/;
-    var newurl;
-    var match = rx.exec(url.toLowerCase());
-    if (match)
-        dactyl.open("http://userscripts-mirror.org/" + match[1]);
+function toggleMenu() {
+    var menu = content.document.getElementsByClassName('menu')[0];
+    if (menu.className.endsWith(' open'))
+        menu.className = menu.className.slice(0,-5);
     else
-        dactyl.message("userScriptsToMirror: Address doesn't match: " + url);
+        menu.className += ' open';
 }
 EOF
 
-autocmd LocationChange userscripts.org :js userScriptsToMirror();
+set eht+=[m]:.menu,select[id=library]
 
+js <<EOF
+    \ hints.addMode(
+    \   'm','JSBin menu',
+    \   function(e) { 
+    \     if (e.className.contains('toppanel-hide'))
+    \       e.click();
+    \     else if (e.className.contains(' open'))
+    \         e.className = e.className.replace(' open', '');
+    \     else
+    \         e.className += ' open';
+    \   }
+    \ );
+EOF
+
+group user
 
 " ----------------------------------------------------------------------------- 
 " ,-----------,
@@ -826,6 +979,10 @@ var toggleRomaji = function() {
 EOF
 
 " Hints modes.
+" TODO: work out site/group-specific hinting.
+"       - autocmd to reset eht and hints.addMode?
+"       - use common dispatch function in hints.addMode?
+"
 set eht+=[keKE]:span[class=text]
 set eht+=[l]:a[class="concept_light-status_link"]
 
@@ -960,12 +1117,37 @@ EOF
 
 group user
 
+" -----------------------------------------------------------------------------
+" ,-----------------,
+" | Userscripts.org |
+" '-----------------'
+
+" FIXME
+"
+js <<EOF
+function userscriptsToMirror() {
+    alert("triggered");
+    var url = buffer.URL;
+    var rx = /https?:\/\/userscripts.org\/(.*)/;
+    var newurl;
+    var match = rx.exec(url.toLowerCase());
+    if (match)
+        dactyl.open("http://userscripts-mirror.org/" + match[1]);
+    else
+        dactyl.message("userScriptsToMirror: Address doesn't match: " + url);
+}
+EOF
+
+autocmd LocationChange userscripts.org :js userScriptsToMirror();
+
+
 " =============================================================================
 "                                       _______ 
 "                                      |       |
 "                                      | NOTES |
 "                                      |_______|
 
+" ----------------------------------------------------------------------------- 
 " ,-----------------,
 " | USEFUL COMMANDS |
 " '-----------------'
@@ -976,6 +1158,7 @@ group user
 " current tab number:  tabs.getTab().dactylOrdinal
 " alternative to :execute: :js CommandExMode().open(exCommandString) 
 
+" ----------------------------------------------------------------------------- 
 " ,------------------,
 " | Removed Commands |
 " '------------------'

@@ -263,6 +263,14 @@ CLOJURE_EXT=~/.clojure
 pathappend "/opt/clojure-contrib/launchers/bash"
 alias clj=clj-env-dir
 
+# **********
+# *        *
+# * NODEJS *
+# *        *
+# **********
+source ~/.nvm/nvm.sh
+nvm alias default stable
+
 # *********
 # *       *
 # * GNOME *
@@ -328,8 +336,8 @@ if [ -f /etc/profile.d/bash_completion.sh ]; then . /etc/profile.d/bash_completi
 
 
 function cnd {
-    mkdir "$1"
-    cd "$1"
+    mkdir "$@"
+    cd "${@: -1}"
 }
 
 function lsd {

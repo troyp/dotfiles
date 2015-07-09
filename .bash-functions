@@ -311,3 +311,9 @@ pdf-extract-images () {
     mkdir "$imgdir"
     pdfimages "$1" "$imgdir"/out
 }
+
+# fftempfiles PROF: print temp directory of profile PROF, eg. `fftempfiles default`
+fftempfiles () {
+    echo ~/.cache/mozilla/firefox/*.$1*/cache2/entries/
+}
+
