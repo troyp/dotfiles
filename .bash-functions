@@ -312,8 +312,15 @@ pdf-extract-images () {
     pdfimages "$1" "$imgdir"/out
 }
 
+# ffprof PROF: print profile directory of profile PROF, eg. `ffprof default`
+ffprof () {
+    echo ~/.mozilla/firefox/*.$1*/
+}
 # fftempfiles PROF: print temp directory of profile PROF, eg. `fftempfiles default`
 fftempfiles () {
     echo ~/.cache/mozilla/firefox/*.$1*/cache2/entries/
 }
 
+npmi () {
+    npm install -g "$@" && echo "$@" >> $HOME/.npm_installs
+}

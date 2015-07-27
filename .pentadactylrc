@@ -48,13 +48,15 @@ set editor='roxterm --replace -e vim -f +<line> +"sil! call cursor(0, <column>)"
 " | Normal mode key bindings |
 " '--------------------------'
 
-" PREFIX KEYS: c e s ss x , \ <C-x>
+" PREFIX KEYS: a c e s ss x , \ <C-x>
 " c : site-specific bindings
 " x : global bindings
 " s : selection bindings
 " <C-x> : GUI commands, etc.
 
 " REPLACE DEFAULT BINDINGS:
+" free a
+map -b a <Nop>
 " free C-h, use C-,, C-. to replace h, l
 map -b <C-x><C-h> <Nop>
 map -b <C-,> h
@@ -108,23 +110,12 @@ map -b g? ?\r
 map -b s/ /\l
 map -b s? ?\l
 " Search from top of page
-map -b <C-x>/ /\L
+map -b <C-x>/ gg/
 " C-' Firefox link search
 map -b "<C-'>" <C-v>'
-
-" Select:
-map -b s <Nop>
-map -b sk :bmarks!<SPACE>
-map -b s;k :bmarks<SPACE>
-map -b sh :history<SPACE>
-map -b ch :history<CR>
-map -b s;h :history!<SPACE>
-map -b sb :buffer<SPACE>
-map -b sj :jumps<CR>
-map -b sa :addons<CR>
-map -b sc :set<SPACE>
-map -b sc :set!<SPACE>
-map -b sm :emenu<SPACE>
+" Search using search keyword
+map -b xs :<C-v><C-v><Home>tabopen<Space><Space><Left>
+map -b xS :<C-v><C-v><Home>open<Space><Space><Left>
 
 " -----------------------------------------------------------------------------
 " ,---------------------------------------,  MAP COMMANDS.
@@ -140,6 +131,15 @@ map -modes command-line,insert -b <C-S-P> <S-Up>
 map -modes command-line,insert -b <C-S-N> <S-Down>
 map -modes command-line,insert -b <C-f> <Right>
 map -modes command-line,insert -b <C-b> <Left>
+
+" SPACES (TODO)
+" TODO: Work out how to get current textarea. See insertAtCaret()
+" nbsp
+map -modes command-line,insert <C-s> -js alert("not implemented");
+" em-space
+" FIXME: Doesn't work.
+"execute "map -modes command-line,insert -b <C-Space> " + '\u2003'
+
 execute "map -modes command-line,insert -b <C-m> " + user.myemail
 execute "map -modes command-line,insert -b <C-S-m> " + user.myemail2
 execute "map -modes command-line,insert -b <C-S-I> " + user.myname
@@ -212,7 +212,7 @@ command! showsource -nargs=1 -js (alert(self[args[0]].toString()))
 command! nointercept -js document.addEventListener('keydown', function(e) { e.stopImmediatePropagation(); return false;}, true);
 
 " Open in Google Chrome:
-command! ochrome :exec '! google-chrome "' + buffer.URL + '"'
+command! ochrome :exec '! google-chrome ' + buffer.URL + ' &'
 map -b xc :ochrome<CR>
 
 " Show all marks (quickmarks and url/local marks)
@@ -224,6 +224,13 @@ command! autoplayoff,noautop :set! media.autoplay.enabled=false
 
 " Troubleshooting information
 command! info :tabopen about:support<CR>
+
+" Unicode code of character
+command! uni 
+   \ -js dactyl.echo(
+   \     dactyl.clipboardRead().charCodeAt(0).toString() +
+   \     "\tU+" +
+   \     dactyl.clipboardRead().charCodeAt(0).toString(16));
 
 
 " =============================================================================
@@ -290,9 +297,20 @@ map -b <C-S-P> :tabmove! -1<CR>
 map -b <C-S-N> :tabmove! +1<CR>
 map -b <C-h> :tabmove! -1<CR>
 map -b <C-l> :tabmove! +1<CR>
+map -b <C-Left> :tabmove! -1<CR>
+map -b <C-Right> :tabmove! +1<CR>
 map -b <C-\<> :tabmove! 1<CR>
 map -b <C-\>> :tabmove! $<CR>
 map -b g\> :tabmove! $<CR>
+map -b <A-S-1> :tabmove! 1<CR>
+map -b <A-S-2> :tabmove! 2<CR>
+map -b <A-S-3> :tabmove! 3<CR>
+map -b <A-S-4> :tabmove! 4<CR>
+map -b <A-S-5> :tabmove! 5<CR>
+map -b <A-S-6> :tabmove! 6<CR>
+map -b <A-S-7> :tabmove! 7<CR>
+map -b <A-S-8> :tabmove! 8<CR>
+map -b <A-S-9> :tabmove! $<CR>
 
 " -----------------------------------------------------------------------------
 " ,------------,
@@ -398,7 +416,7 @@ map -b <A-Up> :set guioptions-=mTB | set showtabline=never<CR>
 map -b <A-Down> :set guioptions+=TB | set showtabline=always<CR>
 map -b <C-x><C-a> :set guioptions!=TB | set showtabline!=always,never<CR>
 " <C-x><C-m|t|e|b|d|s|o>: toggle toolbars/menubars
-"(  menu|tab|navigation|bookmark|developer toolbar )
+"(  menu|tab|navigation|bookmark|web-developer toolbar )
 map -b <C-x><C-m> :set guioptions!=m<CR>
 map -b <C-x><C-t> :set showtabline!=always,never<CR>
 map -b <C-x><C-e> :set guioptions!=T<CR>
@@ -408,10 +426,13 @@ map -b <C-x><C-s> :set guioptions!=s<CR>
 map -b <C-x><C-o> :toolbartoggle Add-on Bar<CR>
 "map -b <C-x><C-f> :buftabs<CR>
 "
-"DOM Inspector
-map -b <C-x><C-i> :emenu Tools.Web Developer.DOM Inspector<CR>
 " Toggle FF Developer command line
-map -modes base -b <A-x> <S-f2><Esc>
+" <S-f2> requires <Esc> to enter normal mode after toggling off.
+" <S-f2><Esc> cannot restore focus to command line once lost.
+" <S-f2><Tab> is mostly fine, but has the drawback that when 
+"             restoring focus, it will select the current
+"             tab-completion candidate, if one is visible.
+map -modes base -b <A-x> <S-f2><Tab>
 
 
 " ----------------------------------------------------------------------------- 
@@ -435,7 +456,23 @@ map -b ep tabout:plugins<CR>
 map -b er tabout:sessionrestore<CR>
 map -b es tabout:support<CR>
 map -b es tabout:support<CR>
+command! appcache :tabopen about:cache?storage=appcache
 
+" Select:
+map -b s <Nop>
+
+map -b sj :jumps<CR>
+map -b s;h :history!<SPACE>
+map -b sa :addons<CR>
+map -b sm :emenu<SPACE>
+map -b sp :set<SPACE>
+map -b sc :set!<SPACE>
+map -b s;k :bmarks!<SPACE>
+
+" List:
+map -b sb :buffers<SPACE>
+map -b sh :history<SPACE>
+map -b sk :bmarks<SPACE>
 
 " ----------------------------------------------------------------------------- 
 " ,--------------,
@@ -499,14 +536,20 @@ group developer
 " '-------------------------'
 command! webide :feedkeys! <S-f8>
 command! browserconsole :feedkeys! <C-S-J>
+command! devtools :emenu Tools.Web Developer.Toggle Tools
+command! storageinspector :emenu Tools.Web Developer.Storage Inspector
 map -b xd :emenu Tools.Web Developer.Eyedropper<CR>
 
 " -----------------------------------------------------------------------------
 " ,---------------,
 " | DOM Inspector |
 " '---------------'
-command! dominspector :js inspectDOMDocument(buffer.URL)
-command! dominspectorchrome :js inspectDOMDocument("chrome://browser/content/browser.xul")
+" inspect current content document
+map -b <C-x><C-i> :emenu Tools.Web Developer.DOM Inspector<CR>
+command! dominspector :js inspectDOMDocument(content.document.URL)
+" inspect current chrome document - chrome://browser/content/browser.xul
+command! dominspectorchrome :js inspectDOMDocument(document.URL)
+" 
 " restore C-S-I shortcut for DOM Inspector (stolen by dev tools inspector)
 map -b <C-S-I> :dominspector<CR>
 
@@ -556,6 +599,9 @@ command! prwul :o javascript:(function(){if(window['ppw']&&ppw['bookmarklet']){p
 command! dtamaagr -js self.DTA.openManager()
 
 " Rikaisama:
+" CSS - chrome://rikaichan/skin/popup-blue.css
+" keybindings: stored as ASCII codes in rcxConfig.kb* entries
+map -b xx -js rcxMain.saveToFile()
 command! rikLbOn -js rcxMain.lbToggle()
 command! rikLbOff -js rcxMain.lbHide()
 map -b cr :rikLbOn<CR>
@@ -753,6 +799,58 @@ function popJisyoEtoJ(url) {
     location.href = popJisyoUrl + '&d=1&du=' + encodeURIComponent(url);
 }
 EOF
+
+" http://stackoverflow.com/questions/1064089
+js <<EOF
+function insertAtCaret(element, text) {
+    if (document.selection) {
+        element.focus();
+        var sel = document.selection.createRange();
+        sel.text = text;
+        element.focus();
+    } else if (element.selectionStart || element.selectionStart === 0) {
+        var startPos = element.selectionStart;
+        var endPos = element.selectionEnd;
+        var scrollTop = element.scrollTop;
+        element.value = element.value.substring(0, startPos) + text + element.value.substring(endPos, element.value.length);
+        element.focus();
+        element.selectionStart = startPos + text.length;
+        element.selectionEnd = startPos + text.length;
+        element.scrollTop = scrollTop;
+    } else {
+        element.value += text;
+        element.focus();
+    }
+}
+EOF
+
+command! appendlinks
+            \ -description "Append link destinations to end of page"
+    \ -js appendLinks();
+
+js <<EOF
+function appendLinks () {
+    tmpStr = '';
+    d = content.document;
+    s = d.getElementsByTagName('A');
+    la = new Array(s.length);
+    lc=0;
+    for(i = 0;i<s.length;i++)
+        if(s[i].innerText != '' && s[i].innerText!= ' ') {
+            lc++;
+            la[lc] = s[i];
+        }
+    for(i = 1; i<=lc; i++)
+        tmpStr += '<a href=' + la[i].href + '>' + la[i].href + '</a><br>';
+    d.body.insertAdjacentHTML(
+        'beforeEnd', 
+        '<br style = clear:both;><div><hr>Link Footnotes:<hr><ol>' + tmpStr + '</ol></div><hr>'
+    );
+}
+EOF
+
+" ----------------------------------------------------------------------------- 
+
 
 " =============================================================================
 "                                   _______________ 

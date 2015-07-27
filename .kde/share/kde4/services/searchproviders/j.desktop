@@ -1,0 +1,8 @@
+[Desktop Entry]
+Charset=
+Hidden=false
+Keys=j
+Name=jisho
+Query=http://jisho.org/search/\\{@}
+ServiceTypes=SearchProvider
+Type=Service

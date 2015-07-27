@@ -51,8 +51,14 @@ semicolon warp,end
 #3 cell-select 2x1,warp,end
 #4 cell-select 2x2,warp,end
 
+a cut-left
+s cut-down
+w cut-up
+d cut-right
+
 # Zoom to the current window
-w windowzoom
+# w windowzoom
+z windowzoom
 c cursorzoom 100 100
 #ctrl+w windowzoom
 
@@ -65,6 +71,11 @@ ctrl+y cut-left,cut-up
 ctrl+u cut-right,cut-up
 ctrl+b cut-left,cut-down
 ctrl+n cut-right,cut-down
+
+period       windowzoom,cut-right,warp,click 1,end
+super+period windowzoom,cut-right,warp,click 1,end
+comma        windowzoom,cut-left,warp,click 1,end
+super+comma  windowzoom,cut-left,warp,click 1,end
 
 ### Example using the 'sh' command.
 # This xdotool invocation require xdotool >= 2.20100623 for 'command chaining'

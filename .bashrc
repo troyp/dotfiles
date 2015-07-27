@@ -85,6 +85,7 @@ paths=(
     /opt/peazip
     /opt/peazip/res
     /opt/lilyterm/bin
+    /opt/phantomjs-2.0.0/bin
     $HOME/.rvm/bin
     $HOME/.linuxbrew/bin
     $HOME/.fzf
@@ -269,7 +270,7 @@ alias clj=clj-env-dir
 # *        *
 # **********
 source ~/.nvm/nvm.sh
-nvm alias default stable
+nvm alias default stable > /dev/null
 
 # *********
 # *       *

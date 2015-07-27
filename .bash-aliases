@@ -36,9 +36,9 @@ alias disable-beep='sudo modprobe -r pcspkr'
 #---------------------
 alias -- -='cd -'
 alias ..='cd ..'
-alias ...='cd ...'
-alias ....='cd ....'
-alias .....='cd .....'
+alias ...='cd ../..'
+alias ....='cd ../../..'
+alias .....='cd ../../../..'
 alias cd..='cd ..'
 alias cd...='cd ../..'
 alias cd....='cd ../../..'
@@ -46,6 +46,7 @@ alias cd.....='cd ../../../..'
 alias md='mkdir -p'
 alias md='mkdir -pv'
 alias rn='source ranger ranger'    # navigate to new dir with ranger
+alias cdffdir='cd `ffprof default`'    # cd to Firefox profile directory
 
 #------------
 # LS ALIASES.
@@ -77,6 +78,15 @@ alias sortatimes='for x in *; do stat -c"%x	%n" "$x"; done | tabs2cols | sort'
 # alias lsexec='lsfiles | dolines if [[ -x "$x" ]]; then echo "$x"; fi; done'
 alias lsexec='lsfiles | filterexec'
 
+
+# --------------------
+# ENVIRONMENT ALIASES.
+# --------------------
+alias lsenv='export | less'    # list environment variables (alphabetical)
+alias lsenvf='set | less'      # list environment variables and functions (alphabetical)
+alias lsenvall='env | less'    # list entire environment 
+
+
 #-----------------------
 # FILE RENAMING ALIASES.
 #-----------------------
@@ -85,11 +95,18 @@ alias emdir="env EDITOR='emacs -fh' vidir"    # rename files with emacs/vidir
 alias emv="qmv -e 'emacsclient -nw'"          # rename files with emacs/qmv
 alias ecp="qcp -e 'emacsclient -nw'"          # copies files with emacs/qcp
 
-# ------------
-# GREP ALIASES
-# ------------
-alias grep='grep -i --color=auto'
-alias egrep='grep -iE --color=auto'
+
+# --------------------
+# FILE SEARCH ALIASES.
+# --------------------
+alias gr='grep -inE --color=auto'    # color, line no.s, case-insensitive, extended RE
+alias grepc="grep --color=always"  # color grep for pipes
+alias sudb='sudo updatedb'
+alias locater='locate --regex'   # locate extended regex
+alias locatea='locate -A'        # locate files matching ALL patterns
+alias locatei='locate -i'        # locate files ignoring case`
+alias ffind='find -L'    # follow symlinks
+
 
 # -----------------------
 # HTML & XML MANIPULATION
@@ -151,6 +168,7 @@ alias ports='netstat -tunp'
 # from: http://unix.stackexchange.com/questions/22615/
 alias ip-addr="lwp-request -o text checkip.dyndns.org | awk '{ print $NF }'"
 alias htheaders='lynx -dump -head'
+alias lstcpservers='sudo netstat -plentv'
 
 # ------------
 # MAN ALIASES.
@@ -161,6 +179,7 @@ alias htheaders='lynx -dump -head'
 alias gitman='git help'
 alias erlman='erl -man'
 alias bashman='mangrep bash'  # see .bash-functions. eg. bashman type
+alias coreinf='info coreutils'   # eg.  coreinf 'env'
 
 #-------------------
 # OPEN & SU ALIASES.
@@ -204,6 +223,11 @@ alias psbyparent='ps --ppid'
 alias myprocs='ps uxf'
 alias myprocsbymem='ps -u $USER -O pid,user,s,tty,%mem,comm,start,cputime --sort -%mem'
 alias die='killall -vs9'
+alias lsofu='lsof -a -u troy'         # list files for user troy
+alias lsofp='lsof -a -p'              # list files for PID
+alias wof='lsof -r 2'                 # watch files
+alias wofu='lsof -r 2 -a -u troy'     # watch files for user troy
+alias wofp='lsof -r 2 -a -p'          # watch files for PID
 
 
 #-----------------------
@@ -472,9 +496,7 @@ alias bc='bc -l'
 alias echoe='echo -e'
 alias esed='sed -r'
 alias sulocate='sudo locate'
-alias sudb='sudo updatedb'
 alias untgz='tar -zxvf'
-alias grepc="grep --color=always"  # color grep for pipes
 alias dfh='df -h'
 alias rscopy='rsync -avzH --progress'
 alias rsdiff='rsync -rvnc --delete'  # compare two directories by simulating the process of copying the first to overwrite the second

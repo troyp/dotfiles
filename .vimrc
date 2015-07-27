@@ -211,6 +211,13 @@ noremap <leader>x3 :vsplit<cr>
 " Close buffer but not window
 noremap <leader>xk :bp<bar>sp<bar>bn<bar>bd<CR>
 
+" Save buffers and quit
+noremap <C-x><C-c> :wq<cr>
+noremap <leader>xc :wq<cr>
+
+" Quit
+noremap <leader>xx :q<cr>
+
 " F2 = Move rest of line to new line
 noremap <C-j> i<CR><ESC>
 

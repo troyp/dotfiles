@@ -1,0 +1,8 @@
+[Desktop Entry]
+Charset=
+Hidden=false
+Keys=gj
+Name=Google Translate ja->En
+Query=https://translate.google.com.au/#ja/en/\\{@}
+ServiceTypes=SearchProvider
+Type=Service

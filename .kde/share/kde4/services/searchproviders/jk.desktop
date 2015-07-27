@@ -1,0 +1,8 @@
+[Desktop Entry]
+Charset=
+Hidden=false
+Keys=jk
+Name=Jisho Kanji
+Query=http://jisho.org/search/\\{@}%23kanji
+ServiceTypes=SearchProvider
+Type=Service
