@@ -45,7 +45,7 @@ alias cd....='cd ../../..'
 alias cd.....='cd ../../../..'
 alias md='mkdir -p'
 alias md='mkdir -pv'
-alias rn='source ranger ranger'    # navigate to new dir with ranger
+alias rd='source ranger ranger'    # navigate to new dir with ranger
 alias cdffdir='cd `ffprof default`'    # cd to Firefox profile directory
 
 #------------
@@ -90,6 +90,8 @@ alias lsenvall='env | less'    # list entire environment
 #-----------------------
 # FILE RENAMING ALIASES.
 #-----------------------
+alias rn='mv -iT'    # use mv to rename (ask before overwrite, treat dest as filename, not dir)
+alias ren=rename
 # alternatives to wdired (C-x d <directory> C-x C-q)
 alias emdir="env EDITOR='emacs -fh' vidir"    # rename files with emacs/vidir
 alias emv="qmv -e 'emacsclient -nw'"          # rename files with emacs/qmv
@@ -125,16 +127,18 @@ alias xq=xqilla
 #------------------------
 # multiple hosts: use -H; restrict domains with -D dom1.com,dom2.org
 alias wgetm='wget -mkp -np -nH'   # -m='-r -N -l inf --no-remove-listing'
-alias wgetmf="wgetm --reject-regex '.*[?].*'"  # filter out URLs with params
-alias wgetmff="wgetm --reject-regex '.*[?$].*'"  # filter out URLs with params
+alias wgetmcont='wget -mkp -np -nH -c -N'    # continue, changed/new files only
+alias wgetmnc='wget   -mkp -np -nH -c -nc'   # continue, new files only
+alias wgetmf="wgetm --reject-regex '.*[?$].*'"  # filter out URLs with params
 # wgetm-incdirs: eg. wgetmincdirs /Tools,/Utilities domainname.com/Tools/index.html
 alias wgetm-incdirs='wget -mkp -nH --include-directories'
 alias wgetmf-incdirs="wget -mkp -nH --reject-regex '.*[?].*' --include-directories"
 alias wgetmff-incdirs="wget -mkp -nH --reject-regex '.*[?$].*' --include-directories"
 alias wgetm-incdirs-span='wget -mkp -nH -H --include-directories'  
-alias wgetm-conv='wgetm -E' 
-alias wgetmf-conv='wgetmf -E' 
-alias wgetmff-conv='wgetmff -E' 
+alias wgetm-conv='wgetm -E'          # wgetm w. adjust-extension (-E)
+alias wgetm-kconv='wgetm -E -K'      # wgetm w. adjust-extension (-E) and orig bkup (-K) 
+alias wgetmf-conv='wgetmf -E'        # wgetmf w. adjust-extension (-E)
+alias wgetmf-kconv='wgetmf -E -K'    # wgetmf w. adjust-extension (-E) and orig bkup (-K) 
 alias wgetmlimit='wget -rkpNE -np -nH -l'  #eg wgetmlimit 2... (2 recurs lvls)
 alias wgetmcut='wgetm --cut-dirs'  #eg wgetmcut 2 ... (removes root + top 2 subdirs)
 alias wgetmfcut='wgetmf --cut-dirs'  #eg wgetmcut 2 ... (removes root + top 2 subdirs)
@@ -142,8 +146,9 @@ alias wgetmffcut='wgetmff --cut-dirs'  #eg wgetmcut 2 ... (removes root + top 2 
 alias wgetmflat='wgetm -nd'
 alias wgetmstealth='wgetm -e robots=off -U="Mozilla" -w 1'
 alias wgetmfstealth='wgetmf -e robots=off -U="Mozilla" -w 1'
-alias wget1='wget -rNkpE -l 1'
+alias wget1='wget -rNkpE -l 1 -H'
 alias wgetp='wget -NkpE'
+alias wgetpp='wget -kpEH'
 alias wgetpcut='wget -NkpE -nH --cut-dirs'
 alias wgetcat='wget -pE -O' # usage: wgetcat <filename> <filename> ... <url> #UNTESTED
 alias listhttplinks='xargs elinks --dump | grep "http" | sed "s/.*http/http/g"' # Waits for url from stdin then lists http links on page. echo url | listhttplinks. Pipe to wget.
@@ -277,7 +282,7 @@ alias 7zip='7z a -tzip'  # 7zip myarchive.zip myarchive/
 alias pralias='cat $BASH_ALIAS_FILE'
 alias search-my-commands='cat $BASH_ALIAS_FILE $BASH_FUNCTION_FILE $SCRIPTS_DIRECTORY/* 2> /dev/null | grep'
 alias gitalias="git config --get-regexp '^alias\.' | cut -c 7- | sed 's/ /\t/' | column -s'	' -t"
-alias editalias='${EDITOR:-vim} $BASHALIASFILE; source $BASHALIASFILE'
+alias editalias='${EDITOR:-vim} $BASH_ALIAS_FILE; source $BASH_ALIAS_FILE'
 alias xres='xrdb ~/.Xresources'
 alias setopts='set -o | grep "on$"'
 alias lspath='echo $PATH|tr ":" "\n"'
@@ -304,6 +309,7 @@ alias hdd='df -hT'
 alias partitionlist='fdisk -l'
 alias lstab='cat /etc/mtab'  # list mounted partitions / filesystems in fstab format 
 alias etab='sudo $(echo ${EDITOR:-vim}) /etc/fstab' # customize auto-mounted partitions / filesystems in fstab file 
+alias retab='sudo mount -a'  # mount all partitions in fstab
 alias uuids='ls -al /dev/disk/by-uuid/'  # list /dev partitions with UUIDs
 alias uuid='ls -al /dev/disk/by-uuid/ | grep'  # list a /dev partition with its UUID
 alias blkid='sudo blkid'     # list mounted partitions
@@ -322,6 +328,14 @@ alias hw-biosinfo='sudo dmidecode --type bios'
 alias hw-connectorinfo='sudo dmidecode --type connector'
 alias mimetypes2mailcap='< /etc/mime.types cut -f1 | grep -E "^[^#]" | dolines echo "$x; xdg-open '%s'"; done'   # save to ~/.mailcap
 alias mousecodes='xev | grep button'
+alias volume='amixer set playback Master'
+alias volup='amixer set Master playback 5%+'
+alias voldown='amixer set Master playback 5%-'
+alias volmax='amixer set Master playback 100%'
+alias volmute='amixer -D pulse set Master playback mute'
+alias volunmute='amixer -D pulse set Master playback unmute'
+alias voltoggle='amixer -D pulse set Master playback toggle'
+alias alsareload='sudo alsa --force-reload'    # may fix no sound issue
 
 
 # --------------------------------------
@@ -418,6 +432,8 @@ alias xavip='xargs vimpage'
 alias xavi='xargs vipipe'
 alias xakill='xargs kill'
 alias recol='pr -t --columns'  # recolumnate single-column data
+alias fromjis='iconv -f SHIFT-JIS -t UTF-8'
+alias tojis='iconv -f UTF-8 -t SHIFT-JIS'
 
 # -----------
 # FORMATTING.
@@ -469,6 +485,8 @@ alias rannum='tr -dc "0-9" < /dev/urandom | head -c'
 #---------------------
 # APPLICATION ALIASES.
 #---------------------
+alias e=leafpad
+alias mv='mv -i'
 alias vi=nvi
 alias coline='command col'    # leave col free as a column selection command
 alias factorlang=/opt/factor/factor
@@ -532,6 +550,7 @@ alias ibus-start='ibus-daemon -drx'
 alias sort-natural='sort -bdV'
 alias sort-icase-natural='sort -bdfV'
 alias diskusage='gdmap -f'
+alias ibusd='IBUS_ENABLE_SYNC_MODE=1 ibus-daemon -drx'
 
 
 # -----------------

@@ -13,6 +13,7 @@ runtime! utils.js
 js var utils = dactyl.utils.getPlugin("utils");
 " load personal details
 runtime! personal.js
+set passkeys=
 
 
 " -----------------------------------------------------------------------------
@@ -35,6 +36,10 @@ set newtab=all
 js editor.defaultRegister="+"
 set! browser.tabs.closeWindowWithLastTab=false
 set editor='roxterm --replace -e vim -f +<line> +"sil! call cursor(0, <column>)" <file>'
+" nextpattern, previouspattern
+" default: '^\s*Next Page\s*$','^\s*Next [>»]','\bnext\b',^>$,'^(>>|»)$','^(>|»)','(>|»)$','\bmore\b',
+" default: '^\s*Prev(ious)? Page\s*$','[<«] Prev\s*$','\bprev(ious)?\b',^<$,'^(<<|«)$','^(<|«)',
+set nextpattern='^\s*Next Page\s*$','^\s*Next [>»]','\bnext\b',^>$,'^(>>|»)$','^(>|»)','(>|»)$','\bMore Words\b','\bmore\b',
 
 
 " =============================================================================
@@ -48,7 +53,7 @@ set editor='roxterm --replace -e vim -f +<line> +"sil! call cursor(0, <column>)"
 " | Normal mode key bindings |
 " '--------------------------'
 
-" PREFIX KEYS: a c e s ss x , \ <C-x>
+" PREFIX KEYS: c e s ss x , \ <C-x>
 " c : site-specific bindings
 " x : global bindings
 " s : selection bindings
@@ -59,8 +64,8 @@ set editor='roxterm --replace -e vim -f +<line> +"sil! call cursor(0, <column>)"
 map -b a <Nop>
 " free C-h, use C-,, C-. to replace h, l
 map -b <C-x><C-h> <Nop>
-map -b <C-,> h
-map -b <C-.> l
+map -b <C-,> <Left>
+map -b <C-.> <Right>
 " use h, l for tab changing
 map -b h gT
 map -b l gt
@@ -75,8 +80,14 @@ map -b <C-x> <Nop>
 map -b <C-a> <Nop>
 map -b <A-=> <C-a>
 map -b <A--> <C-x>
+" swap p and P
+map -b p P
+map -b P p
 
 " Miscellaneous Bindings:
+" Passthrough
+map -b a <C-v>
+map -b <C-a> <C-z>
 " Repeat last ex command
 map -b g. @:
 " Copying
@@ -92,12 +103,16 @@ map -b K <C-u>
 map -b <C-x><C-x> :restart<CR>
 " reload .pentadactylrc
 map -b <C-x>l :rc<CR>
+" redraw screen
+map -b gR :redraw<CR>
 " select all
 nmap -b <C-x>h iGvggy
 " second input area
 map -b xgi 2gi
 " single-page pentadactyl help
 map -b xh :helpall<CR>
+" yank page title
+map -b xy -js dactyl.clipboardWrite(buffer.title)
 
 
 " Search:
@@ -111,6 +126,10 @@ map -b s/ /\l
 map -b s? ?\l
 " Search from top of page
 map -b <C-x>/ gg/
+" Search for word starting with...
+map -b x/ /\r\w*<Left><Left><left>
+" Search for word containing...
+map -b X/ /\r\w*\w*<Left><Left><left>
 " C-' Firefox link search
 map -b "<C-'>" <C-v>'
 " Search using search keyword
@@ -133,12 +152,18 @@ map -modes command-line,insert -b <C-f> <Right>
 map -modes command-line,insert -b <C-b> <Left>
 
 " SPACES (TODO)
+" insert space with C-SPACE (When typing search keywords in
+" a japanese IME, double-width spaces don't work. If F10
+" won't convert spaces to single width, C-SPACE can be used.
+map -modes command-line,insert -b <C-SPACE> <SPACE>
 " TODO: Work out how to get current textarea. See insertAtCaret()
 " nbsp
-map -modes command-line,insert <C-s> -js alert("not implemented");
+map -modes command-line,insert <C-S-s> -js alert("not implemented");
 " em-space
 " FIXME: Doesn't work.
-"execute "map -modes command-line,insert -b <C-Space> " + '\u2003'
+"map -modes insert -b <C-s> \u2003
+"execute "map -modes insert -b <C-s> \u2003"
+"execute "map -modes command-line,insert -b <C-s> " + '\u2003'
 
 execute "map -modes command-line,insert -b <C-m> " + user.myemail
 execute "map -modes command-line,insert -b <C-S-m> " + user.myemail2
@@ -208,6 +233,10 @@ command! rce !gvim ~/.pentadactylrc 2> /dev/null
 
 command! showsource -nargs=1 -js (alert(self[args[0]].toString()))
 
+" enable/disable javascript
+command! jsenable  :set! javascript.enabled=true
+command! jsdisable :set! javascript.enabled=false
+
 " Stop page from intercepting key events:
 command! nointercept -js document.addEventListener('keydown', function(e) { e.stopImmediatePropagation(); return false;}, true);
 
@@ -231,6 +260,8 @@ command! uni
    \     dactyl.clipboardRead().charCodeAt(0).toString() +
    \     "\tU+" +
    \     dactyl.clipboardRead().charCodeAt(0).toString(16));
+
+command! yanktitle js dactyl.clipboardWrite(buffer.title)
 
 
 " =============================================================================
@@ -292,6 +323,7 @@ map -b gON oabout:newtab<CR>
 " | Moving Tabs |
 " '-------------'
 " map -b -arg <C-m>t :tabmove <arg><CR>
+map -b xm :tabmove<SPACE>
 map -b gt :tabmove!<SPACE>
 map -b <C-S-P> :tabmove! -1<CR>
 map -b <C-S-N> :tabmove! +1<CR>
@@ -338,6 +370,17 @@ js hints.addMode('X','shift div off screen',utils.removeFromView);
 set eht+=[p]:p,xpath:div/p,img,h1,h2,h3,h4,ol,ul,table,div,frame,iframe,input
 " replace ;t with function for ;b (open in background)
 js hints.addMode("t", "Follow hint in a background tab", elem => buffer.followLink(elem, dactyl.NEW_BACKGROUND_TAB))
+"" swap ;f and ;F
+"js <<EOF
+"Ci = Components.interfaces;
+"isScrollable = (elem) => isinstance(elem, [Ci.nsIDOMHTMLFrameElement, 
+                                           "Ci.nsIDOMHTMLIFrameElement])
+                         "|| Buffer.isScrollable(elem, 0, true) 
+                         "|| Buffer.isScrollable(elem, 0, false);
+"EOF
+"js hints.addMode("F", "Focus frame", elem => dactyl.focus(elem.ownerDocument.defaultView));
+"js hints.addMode("f", "Focus frame or pseudo-frame", buffer.bound.focusElement, isScrollable);
+map -b xf ;F
 
 " ----------------------------------------------------------------------------- 
 " ,----------,
@@ -530,6 +573,8 @@ command! moveBR :js self.moveTo(screen.availWidth-self.window.outerWidth, screen
                             
 group developer
 
+map -b xj :js!<CR>
+
 " -----------------------------------------------------------------------------
 " ,-------------------------,
 " | Mozilla Developer Tools |
@@ -607,6 +652,10 @@ command! rikLbOff -js rcxMain.lbHide()
 map -b cr :rikLbOn<CR>
 map -b cR :rikLbOff<CR>
 
+" USERSCRIPTS
+" word highlight
+map -b ch :emenu Tools.Greasemonkey.word highlight<CR>
+
 
 " =============================================================================
 "                              _________________________ 
@@ -616,11 +665,18 @@ map -b cR :rikLbOff<CR>
 "  ______________________________________________________________________________________ 
 " /                                                                                      \
 " | JAVASCRIPT                                                                           |
-" | *  js ... code operates in chrome window namespace                                  |
+" | *  js ... code operates in chrome window namespace                                   |
 " | *  :open javascript:(function(){ ... })() code operates in document window namespace |
 " | note: FF's browser console <C-S-J> can be used to try out code in the chrome window  |
 " |       (although some Pentadactyl variables aren't available)                         |
+" |                                                                                      |
+" | settings:                                                                            |
+" |   dom.event.contextmenu.enabled                                                      | 
+" |   dom.disable_window_flip (allow window raising/lowering)                            |
+" |   dom.disable_window_move_resize                                                     |
+" |                                                                                      |
 " \______________________________________________________________________________________/
+
 
 command! undob -description "Undo tab in background" -js undob()
 command! backt -description "Create adjacent duplicate tab and go back in the browser history" -js backt()
@@ -800,33 +856,13 @@ function popJisyoEtoJ(url) {
 }
 EOF
 
-" http://stackoverflow.com/questions/1064089
-js <<EOF
-function insertAtCaret(element, text) {
-    if (document.selection) {
-        element.focus();
-        var sel = document.selection.createRange();
-        sel.text = text;
-        element.focus();
-    } else if (element.selectionStart || element.selectionStart === 0) {
-        var startPos = element.selectionStart;
-        var endPos = element.selectionEnd;
-        var scrollTop = element.scrollTop;
-        element.value = element.value.substring(0, startPos) + text + element.value.substring(endPos, element.value.length);
-        element.focus();
-        element.selectionStart = startPos + text.length;
-        element.selectionEnd = startPos + text.length;
-        element.scrollTop = scrollTop;
-    } else {
-        element.value += text;
-        element.focus();
-    }
-}
-EOF
 
 command! appendlinks
-            \ -description "Append link destinations to end of page"
+            \ -description "Append links to end of page"
     \ -js appendLinks();
+command! appendlinkurls
+            \ -description "Append link destinations to end of page"
+    \ -js appendLinkUrls();
 
 js <<EOF
 function appendLinks () {
@@ -844,12 +880,49 @@ function appendLinks () {
         tmpStr += '<a href=' + la[i].href + '>' + la[i].href + '</a><br>';
     d.body.insertAdjacentHTML(
         'beforeEnd', 
-        '<br style = clear:both;><div><hr>Link Footnotes:<hr><ol>' + tmpStr + '</ol></div><hr>'
+        '<br style = clear:both;><div><hr>Link Footnotes:<hr>' + tmpStr + '</div><hr>'
+    );
+}
+function appendLinkUrls () {
+    tmpStr = '';
+    d = content.document;
+    s = d.getElementsByTagName('A');
+    la = new Array(s.length);
+    lc=0;
+    for(i = 0;i<s.length;i++)
+        if(s[i].innerText != '' && s[i].innerText!= ' ') {
+            lc++;
+            la[lc] = s[i];
+        }
+    for(i = 1; i<=lc; i++)
+        tmpStr += la[i].href + '<br>';
+    d.body.insertAdjacentHTML(
+        'beforeEnd', 
+        '<br style = clear:both;><div><hr>Link Footnotes:<hr><p>' + tmpStr + '</div><hr>'
     );
 }
 EOF
 
 " ----------------------------------------------------------------------------- 
+
+js <<EOF
+function toggleUrl (x, y, x_canon, y_canon) {
+    " General purpose URL toggle function: swaps x and y in URL "
+    " If an argument is a regex, then canonical strings corresponding "
+    " to x and y must be provided to be used in replacement."
+    " If one of the search expressions may be a substring of the other,"
+    " the larger must be passed as the first argument x."
+    if (x_canon === undefined) x_canon = x;
+    if (y_canon === undefined) y_canon = y;
+    var url = content.location.href;
+    var newurl;
+    if (url.search(x) >= 0)
+        newurl = url.replace(x, y_canon);
+    else if (url.search(y) >= 0)
+        newurl = url.replace(y, x_canon);
+    dactyl.open(newurl);
+}
+EOF
 
 
 " =============================================================================
@@ -869,7 +942,7 @@ command! edx :runtime! edx.penta
 " ,----------,
 " | Coursera |
 " '----------'
-set passkeys+='class.coursera.org/.*/lecture/':'hp-+fc<up><down><left><right>'
+set passkeys+='https://class.coursera.org/.*/lecture/.*':'hp-+fc<up><down><left><right>'
 
 " -----------------------------------------------------------------------------
 " ,----------,
@@ -1213,6 +1286,42 @@ function processEntries () {
 }
 EOF
 
+command! shrinksod
+     \ -description "Halve the dimensions of stroke order diagrams"
+     \ -js shrinkSOD();
+command! ss
+     \ -description "Halve the dimensions of stroke order diagrams"
+     \ -js shrinkSOD();
+autocmd DOMLoad jisho.org :shrinksod
+autocmd LocationChange jisho.org :shrinksod
+
+js <<EOF
+function shrinkSOD() {
+    var svgelts=content.document.getElementsByTagName("svg");
+
+    // NOTE: sod class must be first or only class
+    function isSOD(x) {
+        return x.getAttribute('class').slice(0,20)=="stroke_order_diagram";
+    }
+    var sods = [].filter.call(svgelts, isSOD);
+
+    // NOTE: assume length unit is "px" or other 2-char unit
+    for (i=0; i<sods.length; ++i) {
+        var style = sods[i].style;
+        var newheight = parseInt(style.height) / 2;
+        var newwidth = parseInt(style.width) / 2;
+        // NOTE: crude test to see if previously shrunken
+        if (newheight < 40) continue;
+        var hunit = style.height.slice(-2); 
+        var wunit = style.width.slice(-2);
+        sods[i].setAttribute(
+            "style", 
+            "height: " + newheight + hunit + "; width: " + newwidth + wunit + ";"
+        );
+    }
+}
+EOF
+
 group user
 
 " -----------------------------------------------------------------------------
@@ -1254,7 +1363,14 @@ autocmd LocationChange userscripts.org :js userScriptsToMirror();
 " echo in dactyl status bar: dactyl.echo(''); 
 " current tab:  tabs.getTab()
 " current tab number:  tabs.getTab().dactylOrdinal
+" current selection: buffer.currentWord
+" current URL: buffer.URL
 " alternative to :execute: :js CommandExMode().open(exCommandString) 
+" number of tabs: tabs.count
+" get tab with index i: tabs.getTab(i)
+" NOTE: index used in tabs.getTab is zero-based
+"       ordinal returned from .dactylOrdinal is 1-based
+"
 
 " ----------------------------------------------------------------------------- 
 " ,------------------,

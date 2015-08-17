@@ -29,6 +29,21 @@ pathappend() {
 # *             *
 # ***************
 
+# ---------
+# LOCATIONS
+# ---------
+
+BASH_ALIAS_FILE=$HOME/.bash-aliases
+BASH_FUNCTION_FILE=$HOME/.bash-functions
+SCRIPTS_DIRECTORY=$HOME/.scripts
+GTAGSCONF=/usr/share/doc/global/examples/gtags.conf
+VIMPAGER_RC=/opt/vimpager/vimpagerrc
+SUDO_ASKPASS=/usr/bin/gksu
+OZHOME=/usr
+REDLINE_HOME=/opt/redline
+XDG_CONFIG_HOME=$HOME/.config
+ANDROID_HOME='/home/troy/Android/Sdk'
+
 # ------
 # PATHS.
 # ------
@@ -93,6 +108,8 @@ paths=(
     $HOME/.scripts
     $HOME/code/working
     # /opt/mozart/platform/unknown-unknown
+    $ANDROID_HOME/tools
+    $ANDROID_HOME/platform-tools
 )
 for i in "${paths[@]}"; do pathappend "$i" ; done
 
@@ -121,20 +138,6 @@ LD_LIBRARY_PATH=/usr/local/lib
 CLASSPATH=$CLASSPATH:.
 FACTOR_ROOTS=$FACTOR_ROOTS:$HOME/code/factor
 
-
-# ---------
-# LOCATIONS
-# ---------
-
-BASH_ALIAS_FILE=$HOME/.bash-aliases
-BASH_FUNCTION_FILE=$HOME/.bash-functions
-SCRIPTS_DIRECTORY=$HOME/.scripts
-GTAGSCONF=/usr/share/doc/global/examples/gtags.conf
-VIMPAGER_RC=/opt/vimpager/vimpagerrc
-SUDO_ASKPASS=/usr/bin/gksu
-OZHOME=/usr
-REDLINE_HOME=/opt/redline
-XDG_CONFIG_HOME=$HOME/.config
 
 # --------
 # HISTORY.
@@ -298,6 +301,7 @@ if ! pgrep xcape >/dev/null; then
     xcape -e 'Control_L=Escape;Super_R=Menu;Control_R=Pause' &
 fi 
 
+
 # ---ULIMIT---
 #ulimit -c unlimited
 
@@ -357,5 +361,3 @@ function col {
 
 set +a
 
-echo ".bashrc done"
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash

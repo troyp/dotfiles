@@ -46,22 +46,62 @@ tgz () {
     tar czf "${1%/}.tgz" "$1"
 }
 
+renumber () {
+    # renumber DIR START# EXT
+    pushd "${1:-.}" || return
+    n0="${2:-0}"
+    i=$n0;
+    n=`\ls -Af | wc -l`
+    for fname in *; do 
+	if [ -n "$3" ]; then   # if 3rd arg is given and nonzero
+	    ext=".$3"
+	elif [[ $fname =~ \. ]] && [[ -z "${3+1}" ]]; then
+	    # if filename has extension and no 3rd arg is given
+	    ext=".${fname##*.}"
+	else
+	    # if file has no extension or if 3rd arg is explicit empty string
+	    ext=""
+	fi
+	padded=`printf "%0${#n}d%s" "$i" "$ext"`
+	mv -i "$fname" "$padded"
+	i=`expr $i + 1`;
+    done
+    popd
+}
+
 # convert directory to .cbz
+# cbz DIRNAME [EXT]
 cbz () {
+    # cbz DIR [START#] [EXT]
+    if [ -f "$1.cbz" ]; then
+        echo ".cbz file exists" 
+        return 1
+    fi
+    renumber "$1" "${2:-1}" "${3:-jpg}"
+    zip -r "${1%/}.cbz" "$1" 
+}
+# cbz quiet
+alias cbzq='cbz > /dev/null'
+
+zipcbz () { zip -r "${1%/}.cbz" "$1"; }
+
+# convert directory to .cbz, order by first number in file names
+# cbz-by-num DIRNAME [EXT]
+cbz-by-num () {
     pushd "$1" || return
     # n=`ls -v | tail -n1 | awk -F'.' '{ print(length($1)) }'`
     n=`ls -pv | GREP_OPTIONS="" grep -v ".*/$" | tail -n1 | awk -F'.' '{ print(length($1)) }'`;
     for fname in *; do 
 	fnum="${fname%.*}"
-	padded=`printf "%0${n}d.%s" "$(expr $fnum + 0)" "${fname##*.}"`
-	mv "$fname" "$padded"
+	fext="${fname##*.}"
+	ext="${2:-$fext}"
+	padded=`printf "%0${n}d.%s" "$(expr $fnum + 0)" "$ext"`
+	mv -i "$fname" "$padded"
 	# echo "$fname    $padded"
     done
     popd
     zip -r "${1%/}.cbz" "$1" 
 }
-# cbz quiet
-alias cbzq='cbz > /dev/null'
 
 # compress directory as .tgz
 maff () {
@@ -321,6 +361,22 @@ fftempfiles () {
     echo ~/.cache/mozilla/firefox/*.$1*/cache2/entries/
 }
 
+chrometempfiles () {
+    echo ~/.cache/google-chrome/Profile $1/Cache/
+}
+
 npmi () {
     npm install -g "$@" && echo "$@" >> $HOME/.npm_installs
+}
+
+copypath () {
+    realpath "$1" | xsel -ib
+}
+
+hex () {
+    printf "%x" "$1"
+}
+
+fromhex () {
+    echo $((0x$1))
 }
