@@ -29,6 +29,7 @@ alias listinstalled-manual="comm -23 <(apt-mark showmanual | sort -u) <(gzip -dc
 alias synaptic_enable_quicksearch='sudo apt-get install apt-xapian-index; sudo update-apt-xapian-index -vf'
 alias enable-beep='sudo modprobe pcspkr'
 alias disable-beep='sudo modprobe -r pcspkr'
+alias list-repos='inxi -r'
 
 
 #---------------------
@@ -47,6 +48,7 @@ alias md='mkdir -p'
 alias md='mkdir -pv'
 alias rd='source ranger ranger'    # navigate to new dir with ranger
 alias cdffdir='cd `ffprof default`'    # cd to Firefox profile directory
+alias cdchrometempdir='"cd `chrometempfiles 3`"'  # cd to Firefox temp directory
 
 #------------
 # LS ALIASES.
@@ -121,6 +123,9 @@ alias htent="perl -n -mHTML::Entities -e ' ; print HTML::Entities::encode_entiti
 alias remove-wayback-insert="sed -i '/BEGIN WAYBACK TOOLBAR INSERT/,/END WAYBACK TOOLBAR INSERT/d'"
 alias xstar=xmlstarlet
 alias xq=xqilla
+alias delete-before-doctype="sed -i -ne '/<!DOCTYPE/,$ p'"
+alias urlenc='xargs urlencode'
+alias urldeenc='xargs urlencode -d'
 
 #------------------------
 # WGET & RELATED ALIASES.
@@ -141,9 +146,10 @@ alias wgetmf-conv='wgetmf -E'        # wgetmf w. adjust-extension (-E)
 alias wgetmf-kconv='wgetmf -E -K'    # wgetmf w. adjust-extension (-E) and orig bkup (-K) 
 alias wgetmlimit='wget -rkpNE -np -nH -l'  #eg wgetmlimit 2... (2 recurs lvls)
 alias wgetmcut='wgetm --cut-dirs'  #eg wgetmcut 2 ... (removes root + top 2 subdirs)
-alias wgetmfcut='wgetmf --cut-dirs'  #eg wgetmcut 2 ... (removes root + top 2 subdirs)
-alias wgetmffcut='wgetmff --cut-dirs'  #eg wgetmcut 2 ... (removes root + top 2 subdirs)
+alias wgetmfcut="wgetmf --reject-regex '.*[?].*' ---cut-dirs"  #eg wgetmcut 2 ... (removes root + top 2 subdirs)
+alias wgetmffcut="wgetmff --reject-regex '.*[?$].*' ---cut-dirs"  #eg wgetmcut 2 ... (removes root + top 2 subdirs)
 alias wgetmflat='wgetm -nd'
+alias wgetstealth='wget robots=off -U=Mozilla -w 1'
 alias wgetmstealth='wgetm -e robots=off -U="Mozilla" -w 1'
 alias wgetmfstealth='wgetmf -e robots=off -U="Mozilla" -w 1'
 alias wget1='wget -rNkpE -l 1 -H'
@@ -382,6 +388,7 @@ alias pkgc='pkg-config --libs'
 alias cpkgc='cmake --find-package -DLANGUAGE=C -DCOMPILER_ID=GNU -DMODE=COMPILE'   # eg. cpkgc -DNAME=LibXml2 
 alias pyc="python2 -c 'from math import *; from operator import *; from itertools import *; from functools import *; print "
 alias pipu='sudo -H pip install --upgrade'
+alias nvm-copy-global='nodebindir=`which node`; nodedir=${nodebindir%/bin/node}; chmod -R 755 $nodedir/bin/*; sudo cp -r $nodedir/{bin,lib,share} /usr/local/'
 
 # -----------
 # PDF ALIASES
@@ -499,6 +506,7 @@ alias lastu=last    # leave last free for alias
 alias PeaExtractor=/opt/peazip/res/pealauncher
 alias PeaUtils=/opt/peazip/res/pea
 alias xa=xargs
+alias gd=grepdict   # see .bash-functions:q
 
 #---------------------------------
 # APPLICATION DEFAULTS & VARIANTS.
@@ -551,6 +559,7 @@ alias sort-natural='sort -bdV'
 alias sort-icase-natural='sort -bdfV'
 alias diskusage='gdmap -f'
 alias ibusd='IBUS_ENABLE_SYNC_MODE=1 ibus-daemon -drx'
+alias thumbsdb='vinetto -o ./.thumbnails ./?humbs.db'
 
 
 # -----------------

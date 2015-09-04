@@ -105,6 +105,8 @@ map -b <C-x><C-x> :restart<CR>
 map -b <C-x>l :rc<CR>
 " redraw screen
 map -b gR :redraw<CR>
+" (Re-)Maximize window (when Pentadactyl pushes command line offscreen)
+map -b gx -js window.restore(); window.maximize();
 " select all
 nmap -b <C-x>h iGvggy
 " second input area
@@ -262,6 +264,9 @@ command! uni
    \     dactyl.clipboardRead().charCodeAt(0).toString(16));
 
 command! yanktitle js dactyl.clipboardWrite(buffer.title)
+
+" Show extended hints modes
+command! listhintmodes -js hints.modes
 
 
 " =============================================================================
@@ -615,6 +620,20 @@ command! magnifier
 command! magnifieroff
     \ -description "Turns off magnifier"
     \ -js WebDeveloper.PageMagnifier.removePageMagnifier();
+command! stylesoff
+    \ -description "Turns off styles via Web Developer 'Toggle all Stylesheets'"
+    \ -js WebDeveloper.CSS.toggleAllStyleSheets(true, content.document);
+command! styleson
+    \ -description "Turns on styles previously disabled via Web Developer 'Toggle all Stylesheets'"
+    \ -js WebDeveloper.CSS.toggleAllStyleSheets(false, content.document);
+command! styleinfo
+    \ -description "Show styles for selected element"
+    \ :emenu Tools.Web Developer Extension.CSS.Display Style Information
+command! togglestylesembedded :emenu Tools.Web Developer Extension.CSS.Disable Styles.Disable Embedded Styles
+command! togglestyleslinked emenu Tools.Web Developer Extension.CSS.Disable Styles.Disable Linked Style Sheets
+command! togglestylesinline :emenu Tools.Web Developer Extension.CSS.Disable Styles.Disable Inline Styles
+command! togglestylesall :emenu Tools.Web Developer Extension.CSS.Disable Styles.Disable All Styles
+command! togglestylesbrowser :emenu Tools.Web Developer Extension.CSS.Disable Styles.Disable Browser Default Styles
 
 js <<EOF
 function toggleMagnifier() {
@@ -624,6 +643,9 @@ function toggleMagnifier() {
         WebDeveloper.PageMagnifier.removePageMagnifier();
 }
 EOF
+
+map -b so :togglestylesall<CR>
+map -b xz :magnifier!<CR>
 
 group user
 
@@ -655,6 +677,10 @@ map -b cR :rikLbOff<CR>
 " USERSCRIPTS
 " word highlight
 map -b ch :emenu Tools.Greasemonkey.word highlight<CR>
+
+" WEB APPS
+" MS Translate
+map -b xt -js (function(){var s=content.document.createElement('script'); s.type='text/javascript'; s.src='http://labs.microsofttranslator.com/bookmarklet/default.aspx?f=js&to=en'; content.document.body.insertBefore(s, content.document.body.firstChild);})();
 
 
 " =============================================================================
@@ -971,6 +997,11 @@ group wayback -locations=archive.org
 
 map -g wayback -b ct :toggleWaybackToolbar<CR>
 map -g wayback -b gct :toggleWaybackToolbar!<CR>
+
+" Wayback Toolbar Go To Previous Capture:
+" ( Searches for a year (starting with '20' using FF link search,
+"   then tabs backwards twice to land on back link and activates )
+map -g wayback -b cb <C-v>'20<S-Tab><S-Tab><CR>
 
 command! toggleWaybackToolbar
     \ -bang
@@ -1321,6 +1352,18 @@ function shrinkSOD() {
     }
 }
 EOF
+
+js <<EOF
+function repositionModal() {
+    var modal = content.document.getElementsByClassName('reveal-modal')[0];
+    var ypos = content.window.pageYOffset + 100;
+    modal.style.top = ypos + "px";
+}
+EOF
+command! repositionmodal
+     \ -description "Reposition modal box to scroll position"
+     \ -js repositionModal();
+
 
 group user
 

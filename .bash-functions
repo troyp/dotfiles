@@ -380,3 +380,29 @@ hex () {
 fromhex () {
     echo $((0x$1))
 }
+
+#FIXME
+video-extract () {
+    file="$1"
+    out="$2"
+    if [ $# -gt 3 ]; then
+        start="-ss $3"
+        end="-t $4"
+    else
+        start="-ss 00:00:00"
+        end="-t $3"
+    fi
+    echo $file
+    echo $out
+    echo $start
+    echo $end
+    # avconv $start $end -i "$file" -c:a copy -c:v copy "$out"
+    avconv $start -i "$file" $end -codec copy "$out"
+}
+
+remove-recursive () {
+    file="$1"
+    dir="${2:-.}"
+    find "$dir" -type d -exec rm {}/"$file" \;
+}
+
