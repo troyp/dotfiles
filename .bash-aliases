@@ -131,7 +131,8 @@ alias urldeenc='xargs urlencode -d'
 # WGET & RELATED ALIASES.
 #------------------------
 # multiple hosts: use -H; restrict domains with -D dom1.com,dom2.org
-alias wgetm='wget -mkp -np -nH'   # -m='-r -N -l inf --no-remove-listing'
+alias wgetm='wget -rkpN -l inf -np -nH --no-remove-listing'
+alias wgetmh='wget -rkpN -l inf -np -H --no-remove-listing'
 alias wgetmcont='wget -mkp -np -nH -c -N'    # continue, changed/new files only
 alias wgetmnc='wget   -mkp -np -nH -c -nc'   # continue, new files only
 alias wgetmf="wgetm --reject-regex '.*[?$].*'"  # filter out URLs with params
@@ -342,6 +343,7 @@ alias volmute='amixer -D pulse set Master playback mute'
 alias volunmute='amixer -D pulse set Master playback unmute'
 alias voltoggle='amixer -D pulse set Master playback toggle'
 alias alsareload='sudo alsa --force-reload'    # may fix no sound issue
+alias kvm-ready-check="file /sbin/init | egrep -o '[0-9]+-bit'; printf 'CPU KVM support (0 means no support): '; egrep -c '(vmx|svm)' /proc/cpuinfo; kvm-ok"
 
 
 # --------------------------------------

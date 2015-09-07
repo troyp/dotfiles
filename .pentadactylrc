@@ -747,7 +747,7 @@ undob = function() {
 EOF
 
 js <<EOF
-function backt() { 
+backt = function () { 
     // Create adjacent duplicate tab and go back in the browser history
     var currT = gBrowser.selectedTab;
     var dupT = gBrowser.duplicateTab(currT);
@@ -784,6 +784,30 @@ tabdupa = function() {
     var dupTB = gBrowser.getBrowserForTab(dupT);
     getBrowser().moveTabForward();
 }
+EOF
+
+command! pwhash
+    \ -description "Open Password Hasher"
+    \ -nargs=0
+    \ -js <<EOF
+    var newtab = gBrowser.addTab('file:///opt/webapps/password-hasher.html');
+    gBrowser.selectedTab = newtab;    
+    var tb = gBrowser.getBrowserForTab(newtab);
+    tb.addEventListener("DOMContentLoaded", function () {
+	var keyfield = content.document.getElementById('master-key')
+	keyfield.value=user.mymasterpw;	
+	var sitefield = content.document.getElementById('site-tag')
+	sitefield.focus();	
+    });
+EOF
+map -b xp :pwhash<CR>
+
+command! tr
+    \ -description "Translate: tr FROM TO TEXT"
+    \ -nargs=*
+    \ -js <<EOF
+    dactyl.open("https://translate.google.com.au/#" + args[0] + "/" + args[1] + "/" + args[2],
+                {where:dactyl.NEW_TAB});
 EOF
 
 
@@ -950,6 +974,21 @@ function toggleUrl (x, y, x_canon, y_canon) {
 }
 EOF
 
+" -----------------------------------------------------------------------------
+
+js <<EOF
+function imgToDataUri(img) {
+    var canvas = content.document.createElement("canvas");
+    canvas.width = img.width;
+    canvas.height = img.height;
+    var ctx = canvas.getContext("2d");
+    ctx.drawImage(img, 0, 0);
+    var dataUri = canvas.toDataURL("image/png");
+    // data only, return dataUri.replace(/^data:image\/(png|jpg);base64,/, "");
+    return dataUri;
+}
+dactyl.utils.imgToDataUri = imgToDataUri;
+EOF
 
 " =============================================================================
 "                                   _______________ 
@@ -1389,6 +1428,13 @@ function userscriptsToMirror() {
 EOF
 
 autocmd LocationChange userscripts.org :js userScriptsToMirror();
+
+" -----------------------------------------------------------------------------
+" ,---------------,
+" | Wikipedia.org |
+" '---------------'
+
+command! wpapplycss :source ~/.pentadactyl/wikipedia.css
 
 
 " =============================================================================
