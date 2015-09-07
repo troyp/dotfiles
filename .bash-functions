@@ -406,3 +406,18 @@ remove-recursive () {
     find "$dir" -type d -exec rm {}/"$file" \;
 }
 
+github-co-subdir () {
+    # Checkout subdirectory as svn repo (using svn since it's not supported by git)
+    url=${1/tree\/master/trunk}
+    defaultname=`basename $1`
+    dest=${2:-$defaultname}
+    svn checkout "$url" "$dest"
+}
+
+github-export-subdir () {
+    # Export subdirectory (using svn since it's not supported by git)
+    url=${1/tree\/master/trunk}
+    defaultname=`basename $1`
+    dest=${2:-$defaultname}
+    svn export "$url" "$dest"
+}
