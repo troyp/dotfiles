@@ -1,20 +1,25 @@
 [core]
 	excludesfile = /home/troy/.gitignore_global
-	pager = less -+F -RSX
 	autocrlf = input
+	pager = less -+F -RSX
 [include]
 	path = /home/troy/.gitconfig_personal
 [alias]
-	s = status
-	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	a = add -A
+	c = commit -m
+	d = diff --color-words                                    
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbev-commit
 	ll = log --stat --abbrev-commit	
-	d = diff --color-words
+	s = status
 	filestoadd = diff --stat
 	changestoadd = diff
 	filestocommit = status
 	changestocommit = diff --cached
 	filestopush = diff --stat HEAD origin/master
 	changestopush = diff HEAD origin/master
+	undoadd = reset HEAD
+	undocommit = reset HEAD~1
+	correctcommit = commit --amend
 [color]
 	ui = auto # covers diff = true, status = auto, branch = auto
 	interactive = auto

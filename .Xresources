@@ -195,8 +195,11 @@ URxvt*color15: #917649
  !Aterm*scrollBar_right:	true
  Aterm*transpscrollbar:		true
  Aterm*borderwidth:		0
- Aterm*font:                    -lfp-gamow-medium-r-normal-*-*-90-*-*-c-*-iso8859-5
- Aterm*geometry:                80x25
+ !Aterm*font:                    -lfp-gamow-medium-r-normal-*-*-90-*-*-c-*-iso8859-5
+ !Aterm*font:                    -artwiz-anorexia-medium-r-normal--11-110-75-75-p-90-iso8859-1
+ Aterm*boldFont:                *-*-fixed-bold-r-normal--*-*-140-*-*-*-*-iso8859-1
+ Aterm*font:                    -adobe-courier-medium-r-*-*-17-120-*-*-m-*-*-*
+ !Aterm*geometry:                80x25
  Aterm*fading:			70  
  
  !colors
