@@ -21,6 +21,7 @@ let promptsize=$(echo -n "┌(nnnn|bash--n jobs--ddd, DD mmm YY)(${PWD})-┐" \
 let fillsize=$((COLUMNS-promptsize-taskbarsize))
 
 fill=$(printf "%0.s─" $(seq $fillsize))
+asciifill=$(printf "%0.s-" $(seq $fillsize))
 
 if [ "$fillsize" -lt "0" ]
 then
@@ -90,6 +91,10 @@ $mblue)─┐\n$mblue└─($orange\$(date \"+%H:%M\") \$$mblue)─>$white "
 	# emacs/ansi-term emacs/multi-term
 	PS1=">> "
 	;;
+    linux)
+        PS1="|-(\u@\h \$(date \"+%a, %d %b %y\"))-\${asciifill}-(\$newPWD\
+)-|\n|-(\$(date \"+%H:%M\") \$)-> "
+        ;;
     *)
 	PS1="┌─(\u@\h \$(date \"+%a, %d %b %y\"))─\${fill}─(\$newPWD\
 )─┐\n└─(\$(date \"+%H:%M\") \$)─> "

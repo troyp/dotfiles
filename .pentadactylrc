@@ -233,6 +233,8 @@ command! rc source ~/.pentadactylrc
 "command! rce viewsource! file:/home/troy/.pentadactylrc
 command! rce !gvim ~/.pentadactylrc 2> /dev/null
 
+command! loadutils runtime! utils.js | js var utils = dactyl.utils.getPlugin("utils");
+
 command! showsource -nargs=1 -js (alert(self[args[0]].toString()))
 
 " enable/disable javascript
@@ -267,6 +269,10 @@ command! yanktitle js dactyl.clipboardWrite(buffer.title)
 
 " Show extended hints modes
 command! listhintmodes -js hints.modes
+
+" Text encodings
+command! encuni :execute "emenu View.Text Encoding.Unicode"
+command! encjis :execute "emenu View.Text Encoding.Japanese (Shift_JIS)"
 
 
 " =============================================================================
@@ -307,6 +313,7 @@ map -b x< -js closeAllToLeft()
 map -b x> -js closeAllToRight()
 " undo recent closed tab from list
 map -b U :undo<SPACE>
+
 "
 " -----------------------------------------------------------------------------
 " ,----------,
@@ -569,6 +576,19 @@ command! moveTR :js self.moveTo(screen.availWidth-self.window.outerWidth, 0)
 command! moveBL :js self.moveTo(0, screen.availHeight-self.window.outerHeight)
 command! moveBR :js self.moveTo(screen.availWidth-self.window.outerWidth, screen.availHeight-self.window.outerHeight)
 
+" =============================================================================
+"                                      _________ 
+"                                     |         |
+"                                     | STYLING |
+"                                     |_________|
+
+group temp
+" define temp group for use by temp styles, etc
+group user
+
+map -b gc y:style -group=temp <C-v><C-v><Space>
+map -b xgs :emenu View.Page Style.
+map -b x<C-s> :emenu View.Page Style.No Style<CR>
 
 " =============================================================================
 "                            ___________________                               
@@ -586,16 +606,16 @@ map -b xj :js!<CR>
 " '-------------------------'
 command! webide :feedkeys! <S-f8>
 command! browserconsole :feedkeys! <C-S-J>
-command! devtools :emenu Tools.Web Developer.Toggle Tools
-command! storageinspector :emenu Tools.Web Developer.Storage Inspector
-map -b xd :emenu Tools.Web Developer.Eyedropper<CR>
+command! devtools :execute "emenu Tools.Web Developer.Toggle Tools"
+command! storageinspector :execute "emenu Tools.Web Developer.Storage Inspector"
+map -b xd -ex emenu Tools.Web Developer.Eyedropper<CR>
 
 " -----------------------------------------------------------------------------
 " ,---------------,
 " | DOM Inspector |
 " '---------------'
 " inspect current content document
-map -b <C-x><C-i> :emenu Tools.Web Developer.DOM Inspector<CR>
+map -b <C-x><C-i> -ex emenu Tools.Web Developer.DOM Inspector<CR>
 command! dominspector :js inspectDOMDocument(content.document.URL)
 " inspect current chrome document - chrome://browser/content/browser.xul
 command! dominspectorchrome :js inspectDOMDocument(document.URL)
@@ -628,12 +648,13 @@ command! styleson
     \ -js WebDeveloper.CSS.toggleAllStyleSheets(false, content.document);
 command! styleinfo
     \ -description "Show styles for selected element"
-    \ :emenu Tools.Web Developer Extension.CSS.Display Style Information
-command! togglestylesembedded :emenu Tools.Web Developer Extension.CSS.Disable Styles.Disable Embedded Styles
-command! togglestyleslinked emenu Tools.Web Developer Extension.CSS.Disable Styles.Disable Linked Style Sheets
-command! togglestylesinline :emenu Tools.Web Developer Extension.CSS.Disable Styles.Disable Inline Styles
-command! togglestylesall :emenu Tools.Web Developer Extension.CSS.Disable Styles.Disable All Styles
-command! togglestylesbrowser :emenu Tools.Web Developer Extension.CSS.Disable Styles.Disable Browser Default Styles
+    \ :execute "emenu Tools.Web Developer Extension.CSS.Display Style Information"
+command! togglestylesembedded :execute "emenu Tools.Web Developer Extension.CSS.Disable Styles.Disable Embedded Styles"
+command! togglestyleslinked execute "emenu Tools.Web Developer Extension.CSS.Disable Styles.Disable Linked Style Sheets"
+command! togglestylesinline :execute "emenu Tools.Web Developer Extension.CSS.Disable Styles.Disable Inline Styles"
+" note: toggle all styles has binding <Alt-Shift-A>
+command! togglestylesall :execute "emenu Tools.Web Developer Extension.CSS.Disable Styles.Disable All Styles"
+command! togglestylesbrowser :execute "emenu Tools.Web Developer Extension.CSS.Disable Styles.Disable Browser Default Styles"
 
 js <<EOF
 function toggleMagnifier() {
@@ -676,7 +697,7 @@ map -b cR :rikLbOff<CR>
 
 " USERSCRIPTS
 " word highlight
-map -b ch :emenu Tools.Greasemonkey.word highlight<CR>
+map -b ch -ex execute "emenu Tools.Greasemonkey.word highlight<CR>"
 
 " WEB APPS
 " MS Translate
@@ -730,6 +751,18 @@ closeAllToRight = function (ord) {
     utils.closeTabsFrom(nextTabIx)  
 }
 EOF
+
+" FIXME: 
+" :tc START END : close tabs starting with START and ending with the tabs before END
+js <<EOF
+var closeTabRange = function (firstSpec, endSpec) {
+    firstSpec = firstSpec - 1;
+    endSpec = endSpec - 1;
+    utils.closeTabsFromTo(firstSpec, endSpec, spec='');
+}
+EOF
+
+command! tc -nargs=* -js closeTabRange(args[0], args[1]);
 
 js <<EOF
 undob = function() {
@@ -913,6 +946,11 @@ command! appendlinks
 command! appendlinkurls
             \ -description "Append link destinations to end of page"
     \ -js appendLinkUrls();
+" trigger listlinks keyword bookmarklet
+command! listlinks
+            \ -description "List all links in page"
+            \ :open listlinks
+
 
 js <<EOF
 function appendLinks () {
@@ -1008,6 +1046,15 @@ command! edx :runtime! edx.penta
 " | Coursera |
 " '----------'
 set passkeys+='https://class.coursera.org/.*/lecture/.*':'hp-+fc<up><down><left><right>'
+
+" -----------------------------------------------------------------------------
+" ,-----------------,
+" | AnimeLyrics.com |
+" '-----------------'
+group animelyrics -locations=animelyrics.com
+
+" Go to "Print view with kanji" if it exists, or else "Print view"
+map cP <C-v>'Print<Space>view<f3><CR>
 
 " -----------------------------------------------------------------------------
 " ,----------,
@@ -1402,6 +1449,7 @@ EOF
 command! repositionmodal
      \ -description "Reposition modal box to scroll position"
      \ -js repositionModal();
+map -b xM :repositionmodal<CR>
 
 
 group user

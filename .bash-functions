@@ -1,3 +1,25 @@
+# *************
+# *           *
+# * FUNCTIONS *
+# *           *
+# *************
+
+cnd () {
+    mkdir "$@"
+    cd "${@: -1}"
+}
+
+lsd () {
+    base=${1%/}
+    ls -d "$base"/*/
+}
+
+pe () { $( echo "printenv ${1^^}" ); }
+
+col () {
+    awk -- "{print \$$1}";
+}
+
 history-refresh () {
     # refreshes history (brings in commands that have been typed
     # in other shells since the shell started)
@@ -83,7 +105,7 @@ cbz () {
 # cbz quiet
 alias cbzq='cbz > /dev/null'
 
-zipcbz () { zip -r "${1%/}.cbz" "$1"; }
+zcbz () { zip -r "${1%/}.cbz" "$1"; }
 
 # convert directory to .cbz, order by first number in file names
 # cbz-by-num DIRNAME [EXT]
@@ -420,4 +442,37 @@ github-export-subdir () {
     defaultname=`basename $1`
     dest=${2:-$defaultname}
     svn export "$url" "$dest"
+}
+
+animelyrics () {
+    # This function takes either an URL (http://www.animelyrics.com/section/group/song.htm) or a JIS-encoded text file (song.jis.txt)
+    # If an URL is given, the function downloads the kanji print view version (song.jis.txt) of the file.
+    # The JIS-encoded file is then converted to UTF8, except for the ASCII art heading, which is left unchanged.
+    # The result is saved as a song.utf8.txt file.
+    if [[ "$1" =~ ^http://www.animelyrics.com/ ]]; then
+	url="${1/%.htm/.jis.txt}"
+	fname="${url##*/}"
+	curl "$url" > "$fname"
+    else
+	fname="$1"
+    fi
+    out="${fname/%.jis.txt/.utf8.txt}"
+    head -n8 "$fname" > "$out"
+    tail -n+8 "$fname" | iconv -f SHIFT-JIS -t UTF-8 >> "$out"
+}
+
+updateln () {
+    targets="${1:-.hardlink-targets}"
+    for f in `cat "$targets"`; do
+	ln -i "$f" ./
+    done
+}
+
+inrange () {
+    # inrange NUM RANGE
+    # uses expandranges script from ~/.scripts
+    # prints NUM if it is in the range, nothing otherwise (allow use as filter)
+    number="$1"
+    range="$2"
+    grep -q "^$number$" <(expandranges "$range") && printf "$number\n"
 }

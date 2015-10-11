@@ -48,6 +48,7 @@ alias md='mkdir -p'
 alias md='mkdir -pv'
 alias rd='source ranger ranger'    # navigate to new dir with ranger
 alias cdffdir='cd `ffprof default`'    # cd to Firefox profile directory
+alias cdffcache='cd `fftempfiles default`'  # cd to Firefox cache directory
 alias cdchrometempdir='"cd `chrometempfiles 3`"'  # cd to Firefox temp directory
 
 #------------
@@ -98,6 +99,7 @@ alias ren=rename
 alias emdir="env EDITOR='emacs -fh' vidir"    # rename files with emacs/vidir
 alias emv="qmv -e 'emacsclient -nw'"          # rename files with emacs/qmv
 alias ecp="qcp -e 'emacsclient -nw'"          # copies files with emacs/qcp
+alias add-png-ext="rename 's/\s*$/.png/' *"
 
 
 # --------------------
@@ -116,7 +118,8 @@ alias ffind='find -L'    # follow symlinks
 # HTML & XML MANIPULATION
 # -----------------------
 alias htmlcat='htmldoc -f html'
-alias makelinks='find . -type f -exec printf "<a href={}>{}</a><br>\n"  \; > index.html'
+alias makelinks='make-links'    # ~/.scripts/make-links
+alias makelinks-dirtree-flatten='find . -type f -exec printf "<a href={}>{}</a><br>\n"  \;'
 alias href-relativize="sed -e 's/href=\"http:\/\/[^ \"]*\//href=\"/g'"
 alias dehtent="perl -n -mHTML::Entities -e ' ; print HTML::Entities::decode_entities(\$_) ;'"
 alias htent="perl -n -mHTML::Entities -e ' ; print HTML::Entities::encode_entities(\$_) ;'"
@@ -124,8 +127,8 @@ alias remove-wayback-insert="sed -i '/BEGIN WAYBACK TOOLBAR INSERT/,/END WAYBACK
 alias xstar=xmlstarlet
 alias xq=xqilla
 alias delete-before-doctype="sed -i -ne '/<!DOCTYPE/,$ p'"
-alias urlenc='xargs urlencode'
-alias urldeenc='xargs urlencode -d'
+alias urlenc='xargs -0 urlencode'
+alias urldeenc='xargs -0 urlencode -d'
 
 #------------------------
 # WGET & RELATED ALIASES.
@@ -154,6 +157,8 @@ alias wgetstealth='wget robots=off -U=Mozilla -w 1'
 alias wgetmstealth='wgetm -e robots=off -U="Mozilla" -w 1'
 alias wgetmfstealth='wgetmf -e robots=off -U="Mozilla" -w 1'
 alias wget1='wget -rNkpE -l 1 -H'
+alias wget1stealthconv='wget -rNkpE -l 1 -H -e robots=off -U=Mozilla -w 1'
+alias wget1flatstealthconv='wget -rNkpE -nd -l 1 -H -e robots=off -U=Mozilla -w 1'
 alias wgetp='wget -NkpE'
 alias wgetpp='wget -kpEH'
 alias wgetpcut='wget -NkpE -nH --cut-dirs'
@@ -171,6 +176,7 @@ alias ffsearch='firefox -search'
 alias pydirserve='python2 -m SimpleHTTPServer'  # serve current dir tree on port 8000
 # alias pydirserve='python3 -m http.server'  # serve current dir tree on port 8000
 alias dirserve=http-server   # serve current dir tree (or ./public) on port 8080 (or set with -p)
+alias lsportprocs='lsof -i'  # list processes on given port [range], eg. lsportprocs TCP:8081
 
 #--------------------
 # NETWORKING ALIASES.
@@ -211,6 +217,7 @@ alias 2cb='xsel -ib'     # uptime | 2cb    # puts uptime in clipboard
 # xsel or xclip copies stdin to selection
 alias 2sel='xsel -ip'
 alias qn='copyq tab notes add'
+alias cbdl='cb | dolines wget "$x"; done'   # download a list of file urls from clipboard
 
 
 #--------------
@@ -219,11 +226,13 @@ alias qn='copyq tab notes add'
 alias vi-bindings='set -o vi'
 alias emacs-bindings='set -o emacs'
 alias bashref='xrun ~/ebooks/coding/Shell\ Scripting/Bash\ Quick\ Reference.pdf &'
+alias locatefn='declare -F'    # requires shopt -s extdebug
 
 
 # ---------------
 # PROCESS ALIASES
 # ---------------
+alias t=htop
 alias psall='ps aux'
 alias psgrep='ps aux | grep'
 alias psname2pid='ps -o pid= -C'  # equivalent to pgrep
@@ -295,6 +304,7 @@ alias setopts='set -o | grep "on$"'
 alias lspath='echo $PATH|tr ":" "\n"'
 alias install-desktop-files='xdg-desktop-menu install --novendor'
 alias install-desktop-files-strict='xdg-desktop-menu install'
+alias install-local-desktop-files='xdg-desktop-menu install --novendor ~/.local/share/applications/*'
 alias mimetype='xdg-mime query filetype'
 alias mimeapp='xdg-mime query default'
 alias mimelist='cat /usr/share/mime/types'
@@ -344,6 +354,7 @@ alias volunmute='amixer -D pulse set Master playback unmute'
 alias voltoggle='amixer -D pulse set Master playback toggle'
 alias alsareload='sudo alsa --force-reload'    # may fix no sound issue
 alias kvm-ready-check="file /sbin/init | egrep -o '[0-9]+-bit'; printf 'CPU KVM support (0 means no support): '; egrep -c '(vmx|svm)' /proc/cpuinfo; kvm-ok"
+alias lsof-noroot='lsof -u^root'
 
 
 # --------------------------------------
@@ -354,7 +365,7 @@ alias colorizelang='source-highlight -f esc -s'  # syntax highlighting, eg. "cat
 alias colz='pygmentize -f terminal256 -O style=native -g'  # syntax highlighting (guess lang), eg. "cat file | colz"
 # JS/JSON pretty printing:
 alias ppjson='python -m json.tool'
-alias ppjs='underscore print'   # js/json pretty printing
+alias ppjs='underscore print'   # js/json pretty printing (requires node module underscore-cli)
 alias ppcjs='underscore print --outfmt pretty'  # js/json pretty printing & syntax highlighting
 # also: prettyjson(pp/sh)
 
@@ -409,6 +420,15 @@ alias sejpptotext='sejda-console extractpages'
 alias sejtotext='sejda-console extracttext'
 alias gs-pstopdf='gs -q -dBATCH -dAutoFilterColorImages=false -sColorImageFilter=FlateEncode -dNOPAUSE -sDEVICE=pdfwrite -sOutputFile=out.pdf'
 
+# -------------
+# IMAGE ALIASES
+# -------------
+alias img-inplace-mod-bright-sat-hue='mogrify -modulate'    # requires imagemagick. In place.
+alias img-tograyscale='convert -colorspace Gray'
+alias img-tobw='convert -monochrome'
+alias img-tochannels='convert -separate'
+alias img-avg='convert -average'
+
 # ------------------
 # PIPELINE OPERATORS
 # ------------------
@@ -426,7 +446,7 @@ alias imaplines='xargs -d "\n" -n 1 -p'
 alias filterexec='dolines if [[ -x "$x" ]]; then echo "$x"; fi; done'
 alias locatedirs='cat|xargs locate|uniqdirs'
 alias pipechoose='iselect -ma | xargs cat'
-alias dedup="awk '!a[$0]++'"   # remove repeated lines (need not be adjacent)
+alias dedup='perl -ne '"'"'$H{$_}++ or print'"'"   # remove repeated lines (need not be adjacent)
 alias suniq='sort -u'   # sort and remove repeated lines 
 alias tolowercase="tr '[:upper:]' '[:lower:]'"
 alias touppercase="tr '[:lower:]' '[:upper:]'"
@@ -435,6 +455,7 @@ alias totitlecase="perl -MText::Autoformat -e'undef $/; print autoformat +<>, { 
 alias first='head -n1'
 alias last='tail -n1'   # system command last is available as alias lastu
 alias rest='tail -n+2'
+alias choosexa='choose | xargs'
 alias xacat='xargs cat'
 alias xaless='xargs less'
 alias xavip='xargs vimpage'

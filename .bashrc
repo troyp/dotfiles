@@ -43,6 +43,7 @@ OZHOME=/usr
 REDLINE_HOME=/opt/redline
 XDG_CONFIG_HOME=$HOME/.config
 ANDROID_HOME='/home/troy/Android/Sdk'
+ANDROID_SDK_HOME='/home/troy/Android/Sdk'
 
 # ------
 # PATHS.
@@ -171,6 +172,8 @@ SWEAVE_STYLEPATH_DEFAULT="TRUE"
 # *   (other)     *
 # *               *
 # *****************
+
+shopt -q -s extdebug
 
 shopt -q -s dotglob
 shopt -q -s extglob
@@ -331,30 +334,6 @@ if [ -f ~/.bash-prompt ]; then . ~/.bash-prompt; fi
 if [ -f ~/.bash-functions ]; then . ~/.bash-functions; fi
 if [ -f ~/.rvm/scripts/rvm ]; then . ~/.rvm/scripts/rvm; fi
 if [ -f /etc/profile.d/bash_completion.sh ]; then . /etc/profile.d/bash_completion.sh; fi
-
-
-# *************
-# *           *
-# * FUNCTIONS *
-# *           *
-# *************
-
-
-function cnd {
-    mkdir "$@"
-    cd "${@: -1}"
-}
-
-function lsd {
-    base=${1%/}
-    ls -d "$base"/*/
-}
-
-function pe { $( echo "printenv ${1^^}" ); }
-
-function col {
-    awk -- "{print \$$1}";
-}
 
 
 # ----------------------------------------------------------------------------

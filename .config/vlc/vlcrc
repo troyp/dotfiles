@@ -1,5 +1,5 @@
 ﻿###
-###  vlc 2.1.4
+###  vlc 2.1.6
 ###
 
 ###
@@ -395,10 +395,10 @@
 #sout-x264-stats=x264_2pass.log
 
 # Default preset setting used (string)
-sout-x264-preset=ultrafast
+#sout-x264-preset=
 
 # Default tune setting used (string)
-sout-x264-tune=film
+#sout-x264-tune=
 
 # x264 advanced options. (string)
 #sout-x264-options=
@@ -649,6 +649,26 @@ sout-x264-tune=film
 
 # Disable DVD subtitle transparency (boolean)
 #dvdsub-transparency=0
+
+[fluidsynth] # FluidSynth MIDI synthesizer
+
+# Sound fonts (string)
+#soundfont=
+
+# Chorus (boolean)
+#synth-chorus=1
+
+# Synthesis gain (float)
+#synth-gain=0.500000
+
+# Polyphony (integer)
+#synth-polyphony=256
+
+# Reverb (boolean)
+#synth-reverb=1
+
+# Sample rate (integer)
+#synth-sample-rate=44100
 
 [dvbsub] # DVB subtitles decoder
 
@@ -1427,7 +1447,7 @@ sout-x264-tune=film
 [freetype] # Freetype2 font renderer
 
 # Font (string)
-freetype-font=DejaVu Sans
+freetype-font=Ubuntu
 
 # Monospace Font (string)
 #freetype-monofont=Monospace
@@ -1757,7 +1777,7 @@ freetype-font=DejaVu Sans
 [ncurses] # Ncurses interface
 
 # Filebrowser starting point (string)
-#browse-dir=
+browse-dir=/media/troy/video
 
 [qt4] # Qt interface
 
@@ -1798,7 +1818,7 @@ qt-video-autoresize=0
 #qt-recentplay-filter=
 
 # Embed the file browser in open dialog (boolean)
-#qt-embedded-open=0
+qt-embedded-open=1
 
 # Show advanced preferences over simple ones (boolean)
 #qt-advanced-pref=0
@@ -1828,7 +1848,7 @@ qt-privacy-ask=0
 #qt-icon-change=1
 
 # Maximum Volume displayed (integer)
-#qt-max-volume=125
+qt-max-volume=140
 
 [skins2] # Skinnable Interface
 
@@ -1839,7 +1859,7 @@ qt-privacy-ask=0
 #skins2-config=
 
 # Enable transparency effects (boolean)
-#skins2-transparency=0
+skins2-transparency=1
 
 # Use a skinned playlist (boolean)
 #skinned-playlist=1
@@ -3373,10 +3393,10 @@ qt-privacy-ask=0
 #atmo-edgeweightning=3
 
 # Brightness (integer)
-atmo-brightness=83
+#atmo-brightness=100
 
 # Darkness limit (integer)
-atmo-darknesslimit=1
+#atmo-darknesslimit=3
 
 # Hue windowing (integer)
 #atmo-huewinsize=3
@@ -3459,7 +3479,7 @@ atmo-darknesslimit=1
 [rotate] # Rotate video filter
 
 # Angle in degrees (float)
-rotate-angle=0.000000
+#rotate-angle=30.000000
 
 # Use motion sensors (boolean)
 #rotate-use-motion=0
@@ -3591,7 +3611,7 @@ rotate-angle=0.000000
 #audio-time-stretch=1
 
 # Audio output module (string)
-aout=any
+#aout=
 
 # Audio filters (string)
 #audio-filter=
@@ -3654,7 +3674,7 @@ aout=any
 #mouse-hide-timeout=1000
 
 # Video snapshot directory (or filename) (string)
-#snapshot-path=
+snapshot-path=/home/troy/Pictures
 
 # Video snapshot file prefix (string)
 #snapshot-prefix=vlcsnap-
@@ -3666,7 +3686,7 @@ aout=any
 #snapshot-preview=1
 
 # Use sequential numbers instead of timestamps (boolean)
-#snapshot-sequential=0
+snapshot-sequential=1
 
 # Video snapshot width (integer)
 #snapshot-width=-1
@@ -3732,7 +3752,7 @@ aout=any
 vout=any
 
 # Video filter module (string)
-video-filter=rotate
+#video-filter=
 
 # Video splitter module (string)
 #video-splitter=
@@ -3840,7 +3860,7 @@ video-filter=rotate
 #http-host=
 
 # HTTP server port (integer)
-#http-port=8080
+#http-port=9090
 
 # HTTPS server port (integer)
 #https-port=8443
@@ -3984,7 +4004,7 @@ video-filter=rotate
 #mux=
 
 # Access output module (string)
-#access_output=
+access_output=any
 
 # Hop limit (TTL) (integer)
 #ttl=-1
@@ -3999,7 +4019,7 @@ video-filter=rotate
 #packetizer=
 
 # VoD server module (string)
-#vod-server=
+vod-server=any
 
 # Use a plugins cache (boolean)
 #plugins-cache=1
@@ -4050,7 +4070,7 @@ video-filter=rotate
 #media-library=0
 
 # Display playlist tree (boolean)
-#playlist-tree=0
+playlist-tree=1
 
 # Default stream (string)
 #open=
@@ -4089,7 +4109,7 @@ album-art=2
 #intf=
 
 # Extra interface modules (string)
-#extraintf=
+extraintf=lua:http:telnet
 
 # Control interfaces (string)
 #control=
@@ -4173,13 +4193,13 @@ album-art=2
 #global-key-stop=
 
 # Stop (string)
-key-stop=Ctrl+.
+key-stop=
 
 # Position (string)
 #global-key-position=
 
 # Position (string)
-key-position=Shift+?
+#key-position=t
 
 # Very short backwards jump (string)
 #global-key-jump-extrashort=
@@ -4233,7 +4253,7 @@ key-position=Shift+?
 #global-key-frame-next=
 
 # Next frame (string)
-key-frame-next=,
+#key-frame-next=e	Browser Next
 
 # Activate (string)
 #global-key-nav-activate=
@@ -4245,25 +4265,25 @@ key-frame-next=,
 #global-key-nav-up=
 
 # Navigate up (string)
-key-nav-up=k
+#key-nav-up=Up
 
 # Navigate down (string)
 #global-key-nav-down=
 
 # Navigate down (string)
-key-nav-down=j
+#key-nav-down=Down
 
 # Navigate left (string)
 #global-key-nav-left=
 
 # Navigate left (string)
-key-nav-left=h
+#key-nav-left=Left
 
 # Navigate right (string)
 #global-key-nav-right=
 
 # Navigate right (string)
-key-nav-right=l
+#key-nav-right=Right
 
 # Go to the DVD menu (string)
 #global-key-disc-menu=
@@ -4323,67 +4343,67 @@ key-nav-right=l
 #global-key-subdelay-up=
 
 # Subtitle delay up (string)
-key-subdelay-up=Ctrl+h
+#key-subdelay-up=h
 
 # Subtitle delay down (string)
 #global-key-subdelay-down=
 
 # Subtitle delay down (string)
-key-subdelay-down=Ctrl+l
+#key-subdelay-down=g
 
 # Subtitle sync / bookmark audio timestamp (string)
 #global-key-subsync-markaudio=
 
 # Subtitle sync / bookmark audio timestamp (string)
-key-subsync-markaudio=y
+#key-subsync-markaudio=Shift+h
 
 # Subtitle sync / bookmark subtitle timestamp (string)
 #global-key-subsync-marksub=
 
 # Subtitle sync / bookmark subtitle timestamp (string)
-key-subsync-marksub=Shift+y
+#key-subsync-marksub=Shift+j
 
 # Subtitle sync / synchronize audio & subtitle timestamps (string)
 #global-key-subsync-apply=
 
 # Subtitle sync / synchronize audio & subtitle timestamps (string)
-key-subsync-apply=Ctrl+y
+#key-subsync-apply=Shift+k
 
 # Subtitle sync / reset audio & subtitle synchronization (string)
 #global-key-subsync-reset=
 
 # Subtitle sync / reset audio & subtitle synchronization (string)
-key-subsync-reset=Ctrl+Shift+y
+#key-subsync-reset=Ctrl+Shift+k
 
 # Subtitle position up (string)
 #global-key-subpos-up=
 
 # Subtitle position up (string)
-key-subpos-up=Ctrl+k
+#key-subpos-up=
 
 # Subtitle position down (string)
 #global-key-subpos-down=
 
 # Subtitle position down (string)
-key-subpos-down=Ctrl+j
+#key-subpos-down=
 
 # Audio delay up (string)
 #global-key-audiodelay-up=
 
 # Audio delay up (string)
-key-audiodelay-up=Shift+h
+#key-audiodelay-up=k
 
 # Audio delay down (string)
 #global-key-audiodelay-down=
 
 # Audio delay down (string)
-key-audiodelay-down=Shift+l
+#key-audiodelay-down=j
 
 # Cycle audio track (string)
 #global-key-audio-track=
 
 # Cycle audio track (string)
-#key-audio-track=b
+key-audio-track=a
 
 # Cycle through audio devices (string)
 #global-key-audiodevice-cycle=
@@ -4413,7 +4433,7 @@ key-subtitle-track=s
 #global-key-aspect-ratio=
 
 # Cycle source aspect ratio (string)
-#key-aspect-ratio=a
+key-aspect-ratio=
 
 # Cycle video crop (string)
 #global-key-crop=
@@ -4557,7 +4577,7 @@ key-subtitle-track=s
 #global-key-loop=
 
 # Normal/Loop/Repeat (string)
-key-loop=Shift+"
+#key-loop=l
 
 # 1:4 Quarter (string)
 #global-key-zoom-quarter=
