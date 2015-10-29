@@ -37,7 +37,7 @@ js editor.defaultRegister="+"
 set! browser.tabs.closeWindowWithLastTab=false
 set editor='roxterm --replace -e vim -f +<line> +"sil! call cursor(0, <column>)" <file>'
 " nextpattern, previouspattern
-" default: '^\s*Next Page\s*$','^\s*Next [>»]','\bnext\b',^>$,'^(>>|»)$','^(>|»)','(>|»)$','\bmore\b',
+" default: '^\s*Next Page\s*$','^\s*Njapanese_table_111215ext [>»]','\bnext\b',^>$,'^(>>|»)$','^(>|»)','(>|»)$','\bmore\b',
 " default: '^\s*Prev(ious)? Page\s*$','[<«] Prev\s*$','\bprev(ious)?\b',^<$,'^(<<|«)$','^(<|«)',
 set nextpattern='^\s*Next Page\s*$','^\s*Next [>»]','\bnext\b',^>$,'^(>>|»)$','^(>|»)','(>|»)$','\bMore Words\b','\bmore\b',
 
@@ -57,6 +57,7 @@ set nextpattern='^\s*Next Page\s*$','^\s*Next [>»]','\bnext\b',^>$,'^(>>|»)$',
 " c : site-specific bindings
 " x : global bindings
 " s : selection bindings
+" ss : sidebar bindings
 " <C-x> : GUI commands, etc.
 
 " REPLACE DEFAULT BINDINGS:
@@ -69,6 +70,9 @@ map -b <C-.> <Right>
 " use h, l for tab changing
 map -b h gT
 map -b l gt
+" replace h, l with A-k, A-j for horizontal movement
+map -b <A-j> l
+map -b <A-k> h
 " free C-N, C-P bindings for tab movement
 map -b <C-S-P> <Nop>
 map -b <C-S-N> <Nop>
@@ -115,7 +119,10 @@ map -b xgi 2gi
 map -b xh :helpall<CR>
 " yank page title
 map -b xy -js dactyl.clipboardWrite(buffer.title)
-
+" yank buffer URL (unencoded)
+map -b gy -ex yanktrueURL
+" yank filename or buffer URL (unencoded)
+map -b xgy -ex yankfilenameorURL
 
 " Search:
 " clear the search term highlighting
@@ -361,7 +368,9 @@ map -b <A-S-9> :tabmove! $<CR>
 " | Tab Groups |
 " '------------'
 
-command! tginit :runtime! tabgroups.penta
+command! tginit 
+    \ description "Initialize pentadactyl tabgroups commands"
+    \ :runtime! tabgroups.penta
 
 
 " =============================================================================
@@ -382,17 +391,11 @@ js hints.addMode('X','shift div off screen',utils.removeFromView);
 set eht+=[p]:p,xpath:div/p,img,h1,h2,h3,h4,ol,ul,table,div,frame,iframe,input
 " replace ;t with function for ;b (open in background)
 js hints.addMode("t", "Follow hint in a background tab", elem => buffer.followLink(elem, dactyl.NEW_BACKGROUND_TAB))
-"" swap ;f and ;F
-"js <<EOF
-"Ci = Components.interfaces;
-"isScrollable = (elem) => isinstance(elem, [Ci.nsIDOMHTMLFrameElement, 
-                                           "Ci.nsIDOMHTMLIFrameElement])
-                         "|| Buffer.isScrollable(elem, 0, true) 
-                         "|| Buffer.isScrollable(elem, 0, false);
-"EOF
-"js hints.addMode("F", "Focus frame", elem => dactyl.focus(elem.ownerDocument.defaultView));
-"js hints.addMode("f", "Focus frame or pseudo-frame", buffer.bound.focusElement, isScrollable);
+
+" focus frame
 map -b xf ;F
+" open multiple links in background tabs
+map -b <C-;> g;b
 
 " ----------------------------------------------------------------------------- 
 " ,----------,
@@ -496,13 +499,20 @@ map -modes base -b <A-x> <S-f2><Tab>
 " '---------'
 
 " downloads
-map -b <C-S-d> :dialog downloads<CR>
+map -b <C-S-D> :dialog downloads<CR>
 " about:config
-command! ac :winopen about:config
+command! ac 
+    \ -description "Open about:config in new window" 
+    \ :winopen about:config
 
 " history
-command! historydialog :feedkeys <C-S-H>
+command! historydialog 
+    \ -description "Open history dialog"
+    \ :feedkeys <C-S-H>
 	  
+" TODO: places.xul doesn't allow keyboard navigation. Can it be fixed?
+"       In the meantime, use the bookmarks dialog window instead.
+
 map -b ea tabout:addons<CR>
 map -b ec tabout:config<CR>
 map -b ed tabout:downloads<CR>
@@ -511,7 +521,9 @@ map -b ep tabout:plugins<CR>
 map -b er tabout:sessionrestore<CR>
 map -b es tabout:support<CR>
 map -b es tabout:support<CR>
-command! appcache :tabopen about:cache?storage=appcache
+command! appcache 
+    \ -description "Open about:cache in new tab" 
+    \ :tabopen about:cache?storage=appcache
 
 " Select:
 map -b s <Nop>
@@ -563,18 +575,30 @@ map -b ssP :sidebar! Preferences<CR><f6><f6><C-z>
 " | Resizing and moving |
 " '---------------------'
 
-command! resize -nargs=* -js self.resizeTo(args[0], args[1])
-command! resizeby -nargs=* -js self.resizeBy(args[0], args[1])
-command! maximize -js self.maximize()
-command! maximizeH -js self.resizeTo(self.outerWidth, screen.availHeight)
-command! maximizeW -js self.resizeTo(screen.availWidth, self.outerHeight)
-command! minimize -js self.minimize()
-command! move -nargs=* -js self.moveBy(args[0], args[1])
-command! moveto -nargs=* -js self.moveTo(args[0], args[1])
-command! moveTL :js self.moveTo(0,0)
-command! moveTR :js self.moveTo(screen.availWidth-self.window.outerWidth, 0)
-command! moveBL :js self.moveTo(0, screen.availHeight-self.window.outerHeight)
-command! moveBR :js self.moveTo(screen.availWidth-self.window.outerWidth, screen.availHeight-self.window.outerHeight)
+command! resize -description "Resize window to X Y"
+    \ -nargs=* -js self.resizeTo(args[0], args[1])
+command! resizeby -description "Resize window by X Y"
+    \ -nargs=* -js self.resizeBy(args[-3], args[0])
+command! maximize -description "Maximize window"
+    \ -js self.maximize()
+command! maximizeH -description "Maximize window height"
+    \ -js self.resizeTo(self.outerWidth, screen.availHeight)
+command! maximizeW -description "Maximize window width"
+    \ -js self.resizeTo(screen.availWidth, self.outerHeight)
+command! minimize -description "Minimize window"
+    \ -js self.minimize()
+command! move -description "Move window by X Y"
+    \ -nargs=* -js self.moveBy(args[0], args[1])
+command! moveto -description "Move window to X Y"
+    \ -nargs=* -js self.moveTo(args[0], args[1])
+command! moveTL -description "Move window to top left"
+    \ :js self.moveTo(0,0)
+command! moveTR -description "Move window to top right"
+    \ :js self.moveTo(screen.availWidth-self.window.outerWidth, 0)
+command! moveBL -description "Move window to bottom left"
+    \ :js self.moveTo(0, screen.availHeight-self.window.outerHeight)
+command! moveBR -description "Move window to bottom right"
+    \ :js self.moveTo(screen.availWidth-self.window.outerWidth, screen.availHeight-self.window.outerHeight)
 
 " =============================================================================
 "                                      _________ 
@@ -677,21 +701,27 @@ group user
 "                                |__________________|
 
 " Autopager:
-command! apoff :js autopagerMain.enabledThisSite()
-command! ap :js autopagerMain.onEnable()
+command! apoff -description "Autopager off"
+    \ :js autopagerMain.enabledThisSite()
+command! ap -description "Autopager on"
+    \ :js autopagerMain.onEnable()
 
 " Print What You Like:
-command! prwul :o javascript:(function(){if(window['ppw']&&ppw['bookmarklet']){ppw.bookmarklet.toggle();}else{window._pwyl_home=%22http://www.printwhatyoulike.com/%22;_pwyl_bmkl=document.createElement('script');_pwyl_bmkl.setAttribute('type','text/javascript');_pwyl_bmkl.setAttribute('src',_pwyl_home+'static/compressed/pwyl_bookmarklet_10.js');_pwyl_bmkl.setAttribute('pwyl','true');document.getElementsByTagName('head')[0].appendChild(_pwyl_bmkl);}})();
+command! prwul -description "run PrintWhatYouLike"
+    \ :o javascript:(function(){if(window['ppw']&&ppw['bookmarklet']){ppw.bookmarklet.toggle();}else{window._pwyl_home=%22http://www.printwhatyoulike.com/%22;_pwyl_bmkl=document.createElement('script');_pwyl_bmkl.setAttribute('type','text/javascript');_pwyl_bmkl.setAttribute('src',_pwyl_home+'static/compressed/pwyl_bookmarklet_10.js');_pwyl_bmkl.setAttribute('pwyl','true');document.getElementsByTagName('head')[0].appendChild(_pwyl_bmkl);}})();
 
 " DownThemAll:
-command! dtamaagr -js self.DTA.openManager()
+command! dtamaagr -description "Open DownThemAll manager"
+    \ -js self.DTA.openManager()
 
 " Rikaisama:
 " CSS - chrome://rikaichan/skin/popup-blue.css
 " keybindings: stored as ASCII codes in rcxConfig.kb* entries
 map -b xx -js rcxMain.saveToFile()
-command! rikLbOn -js rcxMain.lbToggle()
-command! rikLbOff -js rcxMain.lbHide()
+command! rikLbOn -description "Rikaisama lookupbar on"
+    \ -js rcxMain.lbToggle()
+command! rikLbOff -description "Rikaisama lookupbar off"
+    \ -js rcxMain.lbHide()
 map -b cr :rikLbOn<CR>
 map -b cR :rikLbOff<CR>
 
@@ -752,17 +782,19 @@ closeAllToRight = function (ord) {
 }
 EOF
 
-" FIXME: 
 " :tc START END : close tabs starting with START and ending with the tabs before END
 js <<EOF
 var closeTabRange = function (firstSpec, endSpec) {
     firstSpec = firstSpec - 1;
-    endSpec = endSpec - 1;
+    endSpec = endSpec;
     utils.closeTabsFromTo(firstSpec, endSpec, spec='');
 }
 EOF
 
-command! tc -nargs=* -js closeTabRange(args[0], args[1]);
+command! tc 
+    \ -description "close tab range from START to END inclusive"
+    \ -nargs=*
+    \ -js closeTabRange(args[0], args[1]);
 
 js <<EOF
 undob = function() {
@@ -819,6 +851,13 @@ tabdupa = function() {
 }
 EOF
 
+command! yanktrueURL
+    \ -description "Yank the uncoded URL of the current buffer"
+    \ -js dactyl.clipboardWrite(decodeURIComponent(buffer.URL));
+command! yankfilenameorURL
+    \ -description "Yank the unencoded filename or the hierarchical part of the current buffer's URL. Removes queries and fragments."
+    \ -js dactyl.clipboardWrite(decodeURIComponent(buffer.URL.replace(/^file:\/\//,'').replace(/[?#].*/,'')));
+
 command! pwhash
     \ -description "Open Password Hasher"
     \ -nargs=0
@@ -842,6 +881,7 @@ command! tr
     dactyl.open("https://translate.google.com.au/#" + args[0] + "/" + args[1] + "/" + args[2],
                 {where:dactyl.NEW_TAB});
 EOF
+
 
 
 " ----------------------------------------------------------------------------- 
@@ -1034,6 +1074,19 @@ EOF
 "                                  | SITE SPECIFIC |
 "                                  |_______________|
 
+" -----------------------------------------------------------------------------
+" ,--------,
+" | Google |
+" '--------'
+group google -locations=google.com,google.com.*
+
+" restrict search to pages in a specific language
+map -g google -b cgl O&lr=lang_
+" restrict search to pages originating in a specific country
+map -g google -b cgc O&cr=
+
+group user
+
 " ----------------------------------------------------------------------------- 
 " ,-----,
 " | EdX |
@@ -1122,6 +1175,20 @@ function toggleWaybackToolbarUrl() {
 }
 EOF
 
+group user
+
+"OTHER SITES:
+
+group tipsonjap -locations=meadowlake001.blogspot.jp
+" Tips on Japanese
+" http://meadowlake001.blogspot.jp
+command widenSidebar -group tipsonjap
+    \ -js <<EOF 
+    var s=content.document.getElementById('sidebar');
+    var c=content.document.getElementById('content');
+    s.style.width='400px';
+    c.style['margin-left']='400px';
+EOF
 group user
 
 " -----------------------------------------------------------------------------

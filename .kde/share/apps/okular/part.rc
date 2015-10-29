@@ -122,6 +122,7 @@
   <Action name="zoom_to"/>
   <Separator name="separator_4"/>
   <Action name="mouse_drag"/>
+  <Action name="mouse_selecttools"/>
   <Action name="mouse_tableselect"/>
   <Action name="edit_undo"/>
  </ToolBar>

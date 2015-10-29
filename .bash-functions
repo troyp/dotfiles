@@ -35,15 +35,6 @@ grepdict () {
     grep $1 /usr/share/dict/words
 }
 
-irm () {
-    echo $(ls $1)
-    n=$(ls $1 | wc -l)
-    read -p "Delete $n files?" -n 1 CONFIRM
-    if [[ $CONFIRM =~ ^[Yy]$ ]]; then
-	rm $1
-    fi
-}
-
 explode () {
     printf $1 | grep -o .
 }
@@ -445,10 +436,15 @@ github-export-subdir () {
 }
 
 animelyrics () {
-    # This function takes either an URL (http://www.animelyrics.com/section/group/song.htm) or a JIS-encoded text file (song.jis.txt)
-    # If an URL is given, the function downloads the kanji print view version (song.jis.txt) of the file.
-    # The JIS-encoded file is then converted to UTF8, except for the ASCII art heading, which is left unchanged.
+    # Takes either an URL (http://www.animelyrics.com/section/group/song.htm)
+    #   or a JIS-encoded text file (song.jis.txt).
+    # If an URL is given, the kanji print view version (song.jis.txt) of the
+    #   file is downloaded.
+    # The JIS-encoded file is then converted to UTF8, except for the ASCII art
+    #   heading, which is left unchanged.
+    # Finally, line endings are converted to unix format.
     # The result is saved as a song.utf8.txt file.
+    # Requires: iconv (from glibc-common), dos2unix.
     if [[ "$1" =~ ^http://www.animelyrics.com/ ]]; then
 	url="${1/%.htm/.jis.txt}"
 	fname="${url##*/}"
@@ -459,6 +455,8 @@ animelyrics () {
     out="${fname/%.jis.txt/.utf8.txt}"
     head -n8 "$fname" > "$out"
     tail -n+8 "$fname" | iconv -f SHIFT-JIS -t UTF-8 >> "$out"
+    # ^M characters from line endings
+    dos2unix "$out"
 }
 
 updateln () {
@@ -475,4 +473,58 @@ inrange () {
     number="$1"
     range="$2"
     grep -q "^$number$" <(expandranges "$range") && printf "$number\n"
+}
+
+dllist () {
+    list="$1"
+    shift
+    wgetopts="${*:--e robots=off -U=Mozilla -w 1}"
+
+    for f in `cat "$list"`; do
+    	wget  `echo "$wgetopts"` "$f"
+    done
+}
+
+function pdfpagerange () {
+    # requres qpdf
+    # eg. pdfpagerange "input.pdf" 75-77
+    #     pdfpagerange "input.pdf" 75-77 "output.pdf"
+    # NOTE: Page ranges use absolute numbering starting from page 1, not the page numbers specified in the pdf.
+    input="$1"
+    range="$2"
+    output="${3:-$input [pages $range]}"
+    qpdf --pages "$input" "$range" -- "$input" "$output"
+}
+
+function imgrot () {
+    # requires imagemagick/graphicsmagick
+    infile="$1"
+    cw_angle="$2"
+    outfile="${3:-${infile}_rot_$2}"
+    if [ -f "$outfile" ]; then
+        echo "File '$outfile' exists." 
+	confirm "Overwrite?" || return 1
+    fi
+    convert "$infile" -rotate "$cw_angle" "$outfile"
+}
+
+function confirm () {
+    Q="${1:-Are you sure?}"
+    read -p "$Q " -n 1; echo
+    if [[ $REPLY =~ [yY] ]]; then
+		return 0
+    else
+		return 1
+    fi
+}
+
+function mkvtracks () {
+	file="$1"
+	mkvinfo "$file" | grep -ie '\(track\|codec id\)'
+}
+
+function mkvextract-ass () {
+	file="$1"
+	trackID="$2"
+	mkvextract tracks "$file" "$trackID":"${file%.*}.ass"
 }

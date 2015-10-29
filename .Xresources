@@ -21,8 +21,8 @@
  !	E M A C S - Setting
  !
  !
- ! Emacs*useXIM: true 
- Emacs*XIM: none 
+ Emacs*useXIM: true 
+ ! Emacs*XIM: none 
 
  !-------------------------------------------------------------------------------
  !

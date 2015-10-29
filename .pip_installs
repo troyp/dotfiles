@@ -53,3 +53,5 @@ hy
 toolz
 pygments
 csvkit
+ftfy
+chardet

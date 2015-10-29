@@ -14,9 +14,12 @@ alias sapt='sudo apt-get'
 alias saptu='sudo apt-get update'
 alias sapti='sudo apt-get install'
 alias aptc='apt-cache'
-alias aptcs='apt-cache search'
+alias aptf='apt-file'
+alias aptcs='apt-cache search'  # find matching packages
+alias aptff='apt-file find'  # find packages containing matching files
 alias aptcp='apt-cache policy'
-alias aptcsh='apt-cache show'
+alias aptcsh='apt-cache show'  # show package records
+alias aptfl='apt-file list'  # list contents of matching packages
 alias aptgetkey='sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys'  # Ubuntu
 alias dplist='dpkg -l'   # list package names matching pattern, eg. dplsit 'dbus*'
 alias dpfiles='dpkg -L'  # list files installed by a package
@@ -113,6 +116,19 @@ alias locatea='locate -A'        # locate files matching ALL patterns
 alias locatei='locate -i'        # locate files ignoring case`
 alias ffind='find -L'    # follow symlinks
 
+# --------------------------
+# FILE MANIPULATION ALIASES.
+# --------------------------
+alias append='cat >>'
+# alias mans='man -k . | grep'  # use whatis -r (or -w) instead
+alias dofiles='for x in *; do'    # process each file in current directory
+# eg.  mapfiles printf "`pwd`/$x\n"; done
+alias mapfiles='for x in *; do echo "$x" |'    # print each file in current directory
+alias lowercase-files='dofiles mv "$x" "$(echo "$x" | tolowercase)"; done'
+alias hilitcase-files='dofiles mv "$x" "$(echo "${x%.*}" | tohilitcase).${x##*.}"; done'
+alias sed-file='sed -i.bak'    # sed-file 's/old/new/g' filename.ext
+alias irm='rm -i'  # interactive rm: prompt before removal
+
 
 # -----------------------
 # HTML & XML MANIPULATION
@@ -153,7 +169,7 @@ alias wgetmcut='wgetm --cut-dirs'  #eg wgetmcut 2 ... (removes root + top 2 subd
 alias wgetmfcut="wgetmf --reject-regex '.*[?].*' ---cut-dirs"  #eg wgetmcut 2 ... (removes root + top 2 subdirs)
 alias wgetmffcut="wgetmff --reject-regex '.*[?$].*' ---cut-dirs"  #eg wgetmcut 2 ... (removes root + top 2 subdirs)
 alias wgetmflat='wgetm -nd'
-alias wgetstealth='wget robots=off -U=Mozilla -w 1'
+alias wgetstealth='wget robots=off -U=Mozilla'
 alias wgetmstealth='wgetm -e robots=off -U="Mozilla" -w 1'
 alias wgetmfstealth='wgetmf -e robots=off -U="Mozilla" -w 1'
 alias wget1='wget -rNkpE -l 1 -H'
@@ -187,6 +203,7 @@ alias ports='netstat -tunp'
 alias ip-addr="lwp-request -o text checkip.dyndns.org | awk '{ print $NF }'"
 alias htheaders='lynx -dump -head'
 alias lstcpservers='sudo netstat -plentv'
+alias monitor-http-requests="sudo tcpdump -i eth0 -A -s 5000 'tcp port 80 and (((ip[2:2] - ((ip[0]&0xf)<<2)) - ((tcp[12]&0xf0)>>2)) != 0)'"
 
 # ------------
 # MAN ALIASES.
@@ -249,6 +266,7 @@ alias lsofp='lsof -a -p'              # list files for PID
 alias wof='lsof -r 2'                 # watch files
 alias wofu='lsof -r 2 -a -u troy'     # watch files for user troy
 alias wofp='lsof -r 2 -a -p'          # watch files for PID
+alias pk='pkill -9'
 
 
 #-----------------------
@@ -491,18 +509,6 @@ alias c2r='rs 1 0'
 alias transpose='rs -T'
 alias align='column -t'   # align columns
 
-# --------------------------
-# FILE MANIPULATION ALIASES.
-# --------------------------
-alias append='cat >>'
-# alias mans='man -k . | grep'  # use whatis -r (or -w) instead
-alias dofiles='for x in *; do'    # process each file in current directory
-# eg.  mapfiles printf "`pwd`/$x\n"; done
-alias mapfiles='for x in *; do echo "$x" |'    # print each file in current directory
-alias lowercase-files='dofiles mv "$x" "$(echo "$x" | tolowercase)"; done'
-alias hilitcase-files='dofiles mv "$x" "$(echo "${x%.*}" | tohilitcase).${x##*.}"; done'
-alias sed-file='sed -i.bak'    # sed-file 's/old/new/g' filename.ext
-
 # -------
 # RANDOM.
 # -------
@@ -534,6 +540,7 @@ alias gd=grepdict   # see .bash-functions:q
 #---------------------------------
 # APPLICATION DEFAULTS & VARIANTS.
 #---------------------------------
+alias greps='grep -Hn --color=always'
 alias enw='emacs -nw'
 alias e='emacsclient -nw'
 alias roxterm-display='roxterm --hide-menubar -T "Roxterm Display" -z 1.3 --geometry=70x40'

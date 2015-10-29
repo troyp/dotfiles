@@ -204,49 +204,6 @@ xset r rate 250 50  # X key repeat: xset r rate <ms delay> <char per sec>
 # fix End key (mapped to SuperL for unknown reason)
 xmodmap -e "keycode 115 = End NoSymbol End"
 
-#---xinput---
-function sentinel-swap-middle-button () {
-    # swap middle-button(2) and thumb1 (8)
-    VERBOSE='false'
-    UNDO='false'
-    for opt in "$@"; do
-	case $opt in
-	  -v|--verbose )    VERBOSE='true'    ;;
-	  -d|--duplicate )  DUPLICATE='true'  ;;
-	  -u|--undo )       UNDO='true'       ;;
-	esac
-    done
-    MOUSE_ID=`xinput list | grep -i STORM\ SENTINEL | tail -n1 | cut -f2`
-    MOUSE_ID=${MOUSE_ID#id=}
-    if [ $VERBOSE == 'true' ]; then echo -ne "Storm Sentinel Mouse ID:\t$MOUSE_ID\n"; fi
-    if [ ! -z $MOUSE_ID ]; then
-	if   [ $DUPLICATE == 'true' ]; then xinput set-button-map $MOUSE_ID 1 2 3 4 5 6 7 2 9;
-	elif [ $UNDO == 'true' ];      then xinput set-button-map $MOUSE_ID 1 2 3 4 5 6 7 8 9;
-	else                                xinput set-button-map $MOUSE_ID 1 8 3 4 5 6 7 2 9;
-	fi
-    fi
-    if [ $VERBOSE == 'true' ]; then
-	echo -ne "Storm Sentinel Button Map:\t"
-	xinput get-button-map ${MOUSE_ID#id=}
-    fi
-}
-
-
-# *******
-# *     *
-# * GIT *
-# *     *
-# *******
-git config --global core.excludesfile ~/.gitignore_global
-# https://coderwall.com/p/euwpig/a-better-git-log
-git config --global core.pager 'less -+F -RSX'
-git config --global alias.lg "log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit"
-git config --global alias.filestoadd "diff --stat"
-git config --global alias.changestoadd "diff"
-git config --global alias.filestocommit "status"
-git config --global alias.changestocommit "diff --cached"
-git config --global alias.filestopush "diff --stat HEAD origin/master"
-git config --global alias.changestopush "diff HEAD origin/master"
 
 # **********
 # *        *
