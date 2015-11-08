@@ -27,8 +27,8 @@ set incfind
 set hlfind
 set findcase=smart
 set showstatuslinks=status
-set altwildmode=list:longest,list:full
-set altwildmode=full
+set wildmode=list:longest,list:full
+set altwildmode=list:full
 set strictfocus=mail.google.com:laissez-faire,'chrome:*':laissez-faire,*:moderate
 " Ex commands output in a new tab by default (prefs, addons...)
 set newtab=all
@@ -123,6 +123,8 @@ map -b xy -js dactyl.clipboardWrite(buffer.title)
 map -b gy -ex yanktrueURL
 " yank filename or buffer URL (unencoded)
 map -b xgy -ex yankfilenameorURL
+" jumplist
+map -b <C-j> -ex jumps
 
 " Search:
 " clear the search term highlighting
@@ -150,8 +152,12 @@ map -b xS :<C-v><C-v><Home>open<Space><Space><Left>
 " | Command mode and insert mode bindings |  cmap: command-line mode
 " '---------------------------------------'  imap: insert mode
 
+" use c_<C-,>, c_<C-.> for cycling WildMode completion
 cmap -b <C-,> <Tab>
 cmap -b <C-.> <S-Tab>
+" use c_<C-Space> for AltWildMode completion
+map -b -modes=command-line <C-Space> <A-Tab>
+
 map -modes command-line,insert -b <C-y> <C-v><C-v>
 map -modes command-line,insert -b <C-p> <Up>
 map -modes command-line,insert -b <C-n> <Down>
@@ -318,6 +324,8 @@ map -b x1 :tabonly<CR>
 map -b x< -js closeAllToLeft()
 " close tabs to right
 map -b x> -js closeAllToRight()
+" close tab range
+map -b x: :tc<SPACE>
 " undo recent closed tab from list
 map -b U :undo<SPACE>
 
@@ -652,6 +660,30 @@ map -b <C-S-I> :dominspector<CR>
 " | Firebug |
 " '---------'
 command! firebug :feedkeys! <C-f12>
+
+" -----------------------------------------------------------------------------
+" ,----------,
+" | TileView |
+" '----------'
+js <<EOF
+function viewTiledOn() {
+    tileView.viewTiled = true; 
+    tileView.drawTiledLayout();
+}
+function viewTiledOff() {
+    tileView.viewTiled = false; 
+    tileView.drawSelectedPanel();
+}
+function viewTiledToggle() {
+    if (tileView.viewTiled) 
+        viewTiledOff();
+    else 
+        viewTiledOn();
+}
+EOF
+
+command! toggleViewTiled -js viewTiledToggle(); 
+map <A-f1> -js viewTiledToggle()
 
 " -----------------------------------------------------------------------------
 " ,-----------------------,
@@ -1098,7 +1130,22 @@ command! edx :runtime! edx.penta
 " ,----------,
 " | Coursera |
 " '----------'
+group coursera -locations=www.coursera.org
+
 set passkeys+='https://class.coursera.org/.*/lecture/.*':'hp-+fc<up><down><left><right>'
+
+js <<EOF
+function togglePaused() {
+    var v = content.document.getElementById('c-video_html5_api');
+    if (v.paused)
+        v.play();
+    else
+        v.pause();
+}
+EOF
+map -b <Space> -js togglePaused();
+
+group user
 
 " -----------------------------------------------------------------------------
 " ,-----------------,
@@ -1182,7 +1229,7 @@ group user
 group tipsonjap -locations=meadowlake001.blogspot.jp
 " Tips on Japanese
 " http://meadowlake001.blogspot.jp
-command widenSidebar -group tipsonjap
+command! widenSidebar -group tipsonjap
     \ -js <<EOF 
     var s=content.document.getElementById('sidebar');
     var c=content.document.getElementById('content');

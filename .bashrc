@@ -52,24 +52,36 @@ ANDROID_SDK_HOME='/home/troy/Android/Sdk'
 PATH=${PATH%:.}  # remove . from end of $PATH
 paths=(
     $HOME/local/bin
-    /opt/scripts
+    $HOME/local/bin/node
+    $HOME/.rvm/bin
+    $HOME/.linuxbrew/bin
+    $HOME/.fzf
+    $HOME/.emacs.d
+    $HOME/.scripts
+    $HOME/.cabal/bin
+    $HOME/.nimble/bin
+    $HOME/.cask/bin
+    $HOME/.lein/bin
+    $HOME/code/working
+    $HOME/code/scripts
+    $ANDROID_HOME/tools
+    $ANDROID_HOME/platform-tools
+    ${SCALA_HOME:-/opt/scala}/bin
+    # /opt/mozart/platform/unknown-unknown
+    # /opt/node/bin
+    /opt
     /opt/bin
+    /opt/scripts
     /opt/firefox
     /opt/calibre
-    /opt
-    $HOME/code/scripts
-    $HOME/.cabal/bin
     /opt/j64-602/bin
     /opt/j64-701/bin
     /opt/xcape
     /opt/LightTable
-    # /opt/node/bin
-    ${SCALA_HOME:-/opt/scala}/bin
     /opt/sbt/bin
     /opt/mozart2/bin
     /opt/racket/bin
     /opt/leiningen
-    $HOME/.lein/bin
     /opt/eclipse
     /opt/smlnj/bin
     /var/lib/gems/1.8/bin
@@ -79,12 +91,8 @@ paths=(
     /opt/redline
     /opt/epub2pdf
     /opt/nim/bin
-    $HOME/.nimble/bin
     /opt/gcolor3/src
     /opt/utorrent-server-v3_0
-    $HOME/local/bin
-    $HOME/local/bin/node
-    $HOME/.cask/bin
     /opt/clean/bin
     /opt/rstudio/bin
     /opt/processing
@@ -102,15 +110,7 @@ paths=(
     /opt/peazip/res
     /opt/lilyterm/bin
     /opt/phantomjs-2.0.0/bin
-    $HOME/.rvm/bin
-    $HOME/.linuxbrew/bin
-    $HOME/.fzf
-    $HOME/.emacs.d
-    $HOME/.scripts
-    $HOME/code/working
-    # /opt/mozart/platform/unknown-unknown
-    $ANDROID_HOME/tools
-    $ANDROID_HOME/platform-tools
+	/opt/icon/bin
 )
 for i in "${paths[@]}"; do pathappend "$i" ; done
 

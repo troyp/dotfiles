@@ -129,11 +129,11 @@
  <ActionProperties scheme="Default">
   <Action shortcut="Shift+H; Shift+Left" priority="0" name="go_document_back"/>
   <Action shortcut="Shift+L; Shift+Right" priority="0" name="go_document_forward"/>
-  <Action shortcut="|" name="view_fit_to_page"/>
+  <Action shortcut="|; ]" name="view_fit_to_page"/>
   <Action shortcut="\" name="view_fit_to_width"/>
   <Action shortcut="Ctrl+G; Alt+&lt;" priority="0" name="first_page"/>
   <Action shortcut="Shift+G; Alt+>" priority="0" name="last_page"/>
-  <Action shortcut="C" name="view_continuous"/>
+  <Action shortcut="C; ScrollLock" name="view_continuous"/>
   <Action shortcut="G; '" priority="0" name="go_goto_page"/>
   <Action shortcut="Space; ." priority="0" name="go_next"/>
   <Action shortcut="Backspace; ," priority="0" name="go_previous"/>
@@ -160,7 +160,7 @@
   <Action shortcut="" name="switch_blackscreen_mode"/>
   <Action shortcut="Shift+J; Shift+Down" name="view_scroll_page_down"/>
   <Action shortcut="Ctrl+6; M" name="mouse_magnifier"/>
-  <Action shortcut="#" name="page_number"/>
+  <Action shortcut="#; 0" name="page_number"/>
   <Action shortcut="Ctrl+Space" name="presentation_play_pause"/>
   <Action shortcut="?" name="view_orientation_original"/>
   <Action shortcut="&lt;" name="view_orientation_rotate_ccw"/>

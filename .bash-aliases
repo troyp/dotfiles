@@ -50,8 +50,6 @@ alias cd.....='cd ../../../..'
 alias md='mkdir -p'
 alias md='mkdir -pv'
 alias rd='source ranger ranger'    # navigate to new dir with ranger
-alias cdffdir='cd `ffprof default`'    # cd to Firefox profile directory
-alias cdffcache='cd `fftempfiles default`'  # cd to Firefox cache directory
 alias cdchrometempdir='"cd `chrometempfiles 3`"'  # cd to Firefox temp directory
 
 #------------
@@ -115,6 +113,7 @@ alias locater='locate --regex'   # locate extended regex
 alias locatea='locate -A'        # locate files matching ALL patterns
 alias locatei='locate -i'        # locate files ignoring case`
 alias ffind='find -L'    # follow symlinks
+alias findfile='find . -type f -iname'   # find files with (case-insens) name PATTERN.
 
 # --------------------------
 # FILE MANIPULATION ALIASES.
@@ -128,6 +127,7 @@ alias lowercase-files='dofiles mv "$x" "$(echo "$x" | tolowercase)"; done'
 alias hilitcase-files='dofiles mv "$x" "$(echo "${x%.*}" | tohilitcase).${x##*.}"; done'
 alias sed-file='sed -i.bak'    # sed-file 's/old/new/g' filename.ext
 alias irm='rm -i'  # interactive rm: prompt before removal
+alias editchoose='iselect -ma | xargs emacsclient'
 
 
 # -----------------------
@@ -181,14 +181,27 @@ alias wgetpcut='wget -NkpE -nH --cut-dirs'
 alias wgetcat='wget -pE -O' # usage: wgetcat <filename> <filename> ... <url> #UNTESTED
 alias listhttplinks='xargs elinks --dump | grep "http" | sed "s/.*http/http/g"' # Waits for url from stdin then lists http links on page. echo url | listhttplinks. Pipe to wget.
 alias listhttplinks2='xargs wget -O - 2>&1 | grep -i "http:" | sed "s/^.*http/http/\" | cut -d"\"" -f1 | sort -u'
+# alias cbdl (clipboard aliases)
+
+
+# ----------------
+# FIREFOX ALIASES.
+# ----------------
+alias firefox=/opt/firefox/firefox
+alias ff='firefox --new-tab'
+alias ffw='firefox --new-window'
+alias ffp='firefox -P'
+alias ffpm='firefox --ProfileManager'
+alias ffd='firefox -P default'
+alias ffmain='firefox -P default'
+alias ffsearch='firefox -search'
+alias cdffdir='cd `ffprof default`'    # cd to Firefox profile directory
+alias cdffcache='cd `fftempfiles default`'  # cd to Firefox cache directory
 
 #------------------------
 # BROWSER/SERVER ALIASES.
 #------------------------
 alias archm='sudo archmage -p'    # eg. archm 81 myfile.chm
-alias ff='firefox -no-remote -P'
-alias ffmain='firefox no-remote -P default'
-alias ffsearch='firefox -search'
 alias pydirserve='python2 -m SimpleHTTPServer'  # serve current dir tree on port 8000
 # alias pydirserve='python3 -m http.server'  # serve current dir tree on port 8000
 alias dirserve=http-server   # serve current dir tree (or ./public) on port 8080 (or set with -p)
@@ -316,6 +329,7 @@ alias 7zip='7z a -tzip'  # 7zip myarchive.zip myarchive/
 alias pralias='cat $BASH_ALIAS_FILE'
 alias search-my-commands='cat $BASH_ALIAS_FILE $BASH_FUNCTION_FILE $SCRIPTS_DIRECTORY/* 2> /dev/null | grep'
 alias gitalias="git config --get-regexp '^alias\.' | cut -c 7- | sed 's/ /\t/' | column -s'	' -t"
+alias gitsetupignore="git config --global core.excludesfile '~/.gitignore'"
 alias editalias='${EDITOR:-vim} $BASH_ALIAS_FILE; source $BASH_ALIAS_FILE'
 alias xres='xrdb ~/.Xresources'
 alias setopts='set -o | grep "on$"'
@@ -420,6 +434,7 @@ alias cpkgc='cmake --find-package -DLANGUAGE=C -DCOMPILER_ID=GNU -DMODE=COMPILE'
 alias pyc="python2 -c 'from math import *; from operator import *; from itertools import *; from functools import *; print "
 alias pipu='sudo -H pip install --upgrade'
 alias nvm-copy-global='nodebindir=`which node`; nodedir=${nodebindir%/bin/node}; chmod -R 755 $nodedir/bin/*; sudo cp -r $nodedir/{bin,lib,share} /usr/local/'
+alias iconi='/opt/icon/bin/icon /opt/icon/pl/progs/qei.icn'  # REPL for Icon programming language
 
 # -----------
 # PDF ALIASES
@@ -437,6 +452,7 @@ alias sejpptojpeg='sejda-console pdftojpeg'
 alias sejpptotext='sejda-console extractpages'
 alias sejtotext='sejda-console extracttext'
 alias gs-pstopdf='gs -q -dBATCH -dAutoFilterColorImages=false -sColorImageFilter=FlateEncode -dNOPAUSE -sDEVICE=pdfwrite -sOutputFile=out.pdf'
+alias jpdftweak='java -jar /opt/jpdftweak/jpdftweak.jar'  # can renumber pages in PDFs (loses bmarks)
 
 # -------------
 # IMAGE ALIASES
@@ -446,6 +462,11 @@ alias img-tograyscale='convert -colorspace Gray'
 alias img-tobw='convert -monochrome'
 alias img-tochannels='convert -separate'
 alias img-avg='convert -average'
+
+# -------------------
+# FILE FORMAT ALIASES
+# -------------------
+alias rtf2txt='unrtf --text'
 
 # ------------------
 # PIPELINE OPERATORS
@@ -463,7 +484,8 @@ alias dofields='while read -r x1 x2 x3 x4 x5 x6 x7 x8 x9; do'
 alias imaplines='xargs -d "\n" -n 1 -p'
 alias filterexec='dolines if [[ -x "$x" ]]; then echo "$x"; fi; done'
 alias locatedirs='cat|xargs locate|uniqdirs'
-alias pipechoose='iselect -ma | xargs cat'
+alias pipechoose='iselect -ma | xargs'
+alias catchoose='iselect -ma | xargs cat'
 alias dedup='perl -ne '"'"'$H{$_}++ or print'"'"   # remove repeated lines (need not be adjacent)
 alias suniq='sort -u'   # sort and remove repeated lines 
 alias tolowercase="tr '[:upper:]' '[:lower:]'"
@@ -473,6 +495,7 @@ alias totitlecase="perl -MText::Autoformat -e'undef $/; print autoformat +<>, { 
 alias first='head -n1'
 alias last='tail -n1'   # system command last is available as alias lastu
 alias rest='tail -n+2'
+alias xaa='xargs bash -ic'
 alias choosexa='choose | xargs'
 alias xacat='xargs cat'
 alias xaless='xargs less'
@@ -522,7 +545,6 @@ alias rannum='tr -dc "0-9" < /dev/urandom | head -c'
 # APPLICATION ALIASES.
 #---------------------
 alias e=leafpad
-alias mv='mv -i'
 alias vi=nvi
 alias coline='command col'    # leave col free as a column selection command
 alias factorlang=/opt/factor/factor
@@ -540,9 +562,11 @@ alias gd=grepdict   # see .bash-functions:q
 #---------------------------------
 # APPLICATION DEFAULTS & VARIANTS.
 #---------------------------------
+alias mv='mv -i'
 alias greps='grep -Hn --color=always'
 alias enw='emacs -nw'
 alias e='emacsclient -nw'
+alias ec='emacsclient'
 alias roxterm-display='roxterm --hide-menubar -T "Roxterm Display" -z 1.3 --geometry=70x40'
 alias nautilus='nautilus --no-desktop'
 alias mc='mc -S gotar'
@@ -590,6 +614,7 @@ alias sort-icase-natural='sort -bdfV'
 alias diskusage='gdmap -f'
 alias ibusd='IBUS_ENABLE_SYNC_MODE=1 ibus-daemon -drx'
 alias thumbsdb='vinetto -o ./.thumbnails ./?humbs.db'
+alias kanjitomo='java -Xmx1000m -jar /opt/KanjiTomo/KanjiTomo.jar -run'
 
 
 # -----------------

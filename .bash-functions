@@ -528,3 +528,50 @@ function mkvextract-ass () {
 	trackID="$2"
 	mkvextract tracks "$file" "$trackID":"${file%.*}.ass"
 }
+
+function findfilebyext () {
+	# usage: findfilebyext EXT [INAME]
+	#   Finds files in current directory subtree with extension EXT and iname INAME.
+	# eg.  findfilebyext jar
+	# eg.  findfilebyext jar "*lib*"
+	ftype="$1"
+	file="${2:-*}"
+	find . -type f -iname "*.$ftype" -iname "$file"
+}
+
+function mediainfo-browse () {
+	# usage: mediainfo-browse $FILE
+	# open mediainfo data on $FILE in HTML format in browser
+	file="$1"
+	sensibleb_or_null=''
+	browser="${BROWSER:-${sensibleb_or_null:-firefox}}"
+	output=`mktemp`
+	mediainfo --Output=HTML "$file"  > $output
+	$browser "$output"
+}
+
+dirtree-permissions () {
+	dir="${1:-.}"
+	perm="${2:-755}"
+	find "$dir" -type d -print0 -exec chmod "$perm" {} \+
+}
+
+dirtree-fileperms () {
+	dir="${1:-.}"
+	perm="${2:-644}"
+	find "$dir" -type f -print0 -exec chmod "$perm" {} \+
+}
+
+dirtree () {
+	dir="${1:-.}"
+	shift
+	comm="${*:-echo}"
+	find "$dir" -type d -print0 -exec "$comm" {} \;
+}
+
+dirtree-file () {
+	dir="${1:-.}"
+	shift
+	comm="${*:-echo}"
+	find "$dir" -type f -print0 -exec "$comm" {} \;
+}
