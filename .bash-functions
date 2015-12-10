@@ -575,3 +575,35 @@ dirtree-file () {
 	comm="${*:-echo}"
 	find "$dir" -type f -print0 -exec "$comm" {} \;
 }
+
+jlc () {
+	# J language command
+	cmd="$*"
+	$JHOME/bin/jconsole -js "echo $cmd" "exit''"
+}
+
+blankpage () {
+	case "$#" in
+	  0)
+		size="1000x1600";
+		col="xc:white";
+		out="out.jpg";
+		;;
+	  1)
+		size="1000x1600";
+		col="xc:white";
+		out="$1";
+		;;
+	  2)
+		size="$1";
+		col="xc:white";
+		out="$2";
+		;;
+	  3)
+		size="$1";
+		col="xc:$2";
+		out="$3";
+		;;
+	esac
+	convert -size "$size" "$col" "$out"
+}

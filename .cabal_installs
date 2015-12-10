@@ -14,3 +14,8 @@ TypeCompose
 HList
 ghc-core
 yeganesh
+utility-ht
+hdevtools
+ghc-mod
+hlint
+ghci-ng

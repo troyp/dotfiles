@@ -1,11 +1,18 @@
 # reload .inputrc with C-x C-r ("reload-init-file" function)
+
 set completion-ignore-case On
 set bell-style none
-"\e[A": history-search-backward   # up-arrow
-"\C-p": history-search-backward
-"\e[B": history-search-forward    # down-arrow
-"\C-n": history-search-forward 
-"\e[3;5~": kill-whole-line        # Ctrl-Delete
-Control-u: universal-argument
 
+# up-arrow, C-p
+"\e[A": history-search-backward   
+"\C-p": history-search-backward
+
+# down-arrow, C-n
+"\e[B": history-search-forward    
+"\C-n": history-search-forward 
+
+# Ctrl-Delete
+"\e[3;5~": kill-whole-line        
+
+Control-u: universal-argument
 "^[i": universal-argument

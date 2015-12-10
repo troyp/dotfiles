@@ -17,14 +17,24 @@ clear      # clear all previous keybindings
 
 q record ~/.keynav_macros
 shift+at playback
-#ctrl+semicolon start, sh "exec transset-df -i $(xdotool search --class keynav) 0.3"
-e grid-nav toggle
-Tab restart
-super+semicolon start
+# ctrl+semicolon start, sh "exec transset-df -i $(xdotool search --class keynav) 0.6"
+
+super+semicolon start, grid 4x4
 #ctrl+semicolon start,cut-left .95, cut-up .95, move-right 50, move-down 20
 #alt+semicolon start,move-right
+Tab restart
+
 Escape end
 ctrl+bracketleft end
+period       windowzoom,cut-right,warp,click 1,end
+super+period windowzoom,cut-right,warp,click 1,end
+comma        windowzoom,cut-left,warp,click 1,end
+super+comma  windowzoom,cut-left,warp,click 1,end
+space warp,click 1,end
+semicolon warp,end
+
+e grid-nav toggle
+
 h cut-left
 j cut-down
 k cut-up
@@ -41,8 +51,9 @@ shift+y move-left,move-up
 shift+u move-right,move-up
 shift+b move-left,move-down
 shift+n move-right,move-down
-space warp,click 1,end
-semicolon warp,end
+quote warp,drag 1
+apostrophe warp,drag 1
+shift+apostrophe drag 2
 1 click 1
 2 click 2
 3 click 3
@@ -72,11 +83,6 @@ ctrl+u cut-right,cut-up
 ctrl+b cut-left,cut-down
 ctrl+n cut-right,cut-down
 
-period       windowzoom,cut-right,warp,click 1,end
-super+period windowzoom,cut-right,warp,click 1,end
-comma        windowzoom,cut-left,warp,click 1,end
-super+comma  windowzoom,cut-left,warp,click 1,end
-
 ### Example using the 'sh' command.
 # This xdotool invocation require xdotool >= 2.20100623 for 'command chaining'
 g sh "xdotool search --title -- '- Google Chrome' windowactivate key --window 0 --clearmodifiers ctrl+l",end
@@ -96,7 +102,7 @@ t sh "xdotool search --title -- '- Google Chrome' windowactivate --sync key --wi
 #w warp
 
 ### History
-a history-back
+slash history-back
 
 ### Example of cut and move without the default values
 #h cut-left .75

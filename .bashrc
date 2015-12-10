@@ -44,6 +44,8 @@ REDLINE_HOME=/opt/redline
 XDG_CONFIG_HOME=$HOME/.config
 ANDROID_HOME='/home/troy/Android/Sdk'
 ANDROID_SDK_HOME='/home/troy/Android/Sdk'
+GOPATH=$HOME/gowork
+JHOME=/opt/j64-804
 
 # ------
 # PATHS.
@@ -62,11 +64,13 @@ paths=(
     $HOME/.nimble/bin
     $HOME/.cask/bin
     $HOME/.lein/bin
+	$HOME/gowork/bin
     $HOME/code/working
     $HOME/code/scripts
     $ANDROID_HOME/tools
     $ANDROID_HOME/platform-tools
     ${SCALA_HOME:-/opt/scala}/bin
+	$JHOME/bin
     # /opt/mozart/platform/unknown-unknown
     # /opt/node/bin
     /opt
@@ -74,8 +78,6 @@ paths=(
     /opt/scripts
     /opt/firefox
     /opt/calibre
-    /opt/j64-602/bin
-    /opt/j64-701/bin
     /opt/xcape
     /opt/LightTable
     /opt/sbt/bin
@@ -111,6 +113,7 @@ paths=(
     /opt/lilyterm/bin
     /opt/phantomjs-2.0.0/bin
 	/opt/icon/bin
+	/opt/pdfsandich
 )
 for i in "${paths[@]}"; do pathappend "$i" ; done
 
@@ -123,8 +126,8 @@ for i in "${infopaths[@]}"; do append-to-path-var "INFOPATH" "$i" ; done
 
 manpaths=(
     /usr/local/texlive/2014/texmf-dist/doc/man
-    $HOME/.linuxbrew/share/man
-    /opt/man
+    $HOME/.linuxbrew/share/man/
+    /opt/man/
 )
 for i in "${manpaths[@]}"; do append-to-path-var "MANPATH" "$i" ; done
 

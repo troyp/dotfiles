@@ -13,6 +13,7 @@ runtime! utils.js
 js var utils = dactyl.utils.getPlugin("utils");
 " load personal details
 runtime! personal.js
+runtime! jquery.min.js
 set passkeys=
 
 
@@ -27,8 +28,9 @@ set incfind
 set hlfind
 set findcase=smart
 set showstatuslinks=status
-set wildmode=list:longest,list:full
-set altwildmode=list:full
+"set wildmode=list:longest,list:full
+set wildmode=list:full
+set altwildmode=list:longest,list:full
 set strictfocus=mail.google.com:laissez-faire,'chrome:*':laissez-faire,*:moderate
 " Ex commands output in a new tab by default (prefs, addons...)
 set newtab=all
@@ -40,6 +42,7 @@ set editor='roxterm --replace -e vim -f +<line> +"sil! call cursor(0, <column>)"
 " default: '^\s*Next Page\s*$','^\s*Njapanese_table_111215ext [>»]','\bnext\b',^>$,'^(>>|»)$','^(>|»)','(>|»)$','\bmore\b',
 " default: '^\s*Prev(ious)? Page\s*$','[<«] Prev\s*$','\bprev(ious)?\b',^<$,'^(<<|«)$','^(<|«)',
 set nextpattern='^\s*Next Page\s*$','^\s*Next [>»]','\bnext\b',^>$,'^(>>|»)$','^(>|»)','(>|»)$','\bMore Words\b','\bmore\b',
+set wildignore='~$','^(.*/)?\..*\.sw[m-p]$','^(.*/)?#.+#$'
 
 
 " =============================================================================
@@ -284,8 +287,10 @@ command! yanktitle js dactyl.clipboardWrite(buffer.title)
 command! listhintmodes -js hints.modes
 
 " Text encodings
-command! encuni :execute "emenu View.Text Encoding.Unicode"
-command! encjis :execute "emenu View.Text Encoding.Japanese (Shift_JIS)"
+"command! encuni :execute "emenu View.Text Encoding.Unicode"
+"command! encjis :execute "emenu View.Text Encoding.Japanese (Shift_JIS)"
+command! encuni :emenu View.Text Encoding.Unicode
+command! encjis :emenu View.Text Encoding.Japanese (Shift_JIS)
 
 
 " =============================================================================
@@ -400,6 +405,11 @@ set eht+=[p]:p,xpath:div/p,img,h1,h2,h3,h4,ol,ul,table,div,frame,iframe,input
 " replace ;t with function for ;b (open in background)
 js hints.addMode("t", "Follow hint in a background tab", elem => buffer.followLink(elem, dactyl.NEW_BACKGROUND_TAB))
 
+" svg: FIXME
+runtime! svg-pan-zoom.min.js
+set eht+=[G]:svg
+js hints.addMode('G','pan & zoom SVG',alert);
+
 " focus frame
 map -b xf ;F
 " open multiple links in background tabs
@@ -478,7 +488,7 @@ highlight -a Hint[Active]
 " <A-Up>:     show the navigation and bookmarks toolbars:
 " <A-Down>:   hide the navigation and bookmarks toolbars:
 " <C-x><C-a>: toggle the navigation and bookmarks toolbars:
-map -b <A-Up> :set guioptions-=mTB | set showtabline=never<CR>
+map -b <A-Up> :set guioptions-=TB | set showtabline=never<CR>
 map -b <A-Down> :set guioptions+=TB | set showtabline=always<CR>
 map -b <C-x><C-a> :set guioptions!=TB | set showtabline!=always,never<CR>
 " <C-x><C-m|t|e|b|d|s|o>: toggle toolbars/menubars
@@ -529,6 +539,7 @@ map -b ep tabout:plugins<CR>
 map -b er tabout:sessionrestore<CR>
 map -b es tabout:support<CR>
 map -b es tabout:support<CR>
+map -b eh -ex open ~/.pentadactyl/docs/help/index.html
 command! appcache 
     \ -description "Open about:cache in new tab" 
     \ :tabopen about:cache?storage=appcache
@@ -765,6 +776,24 @@ map -b ch -ex execute "emenu Tools.Greasemonkey.word highlight<CR>"
 " MS Translate
 map -b xt -js (function(){var s=content.document.createElement('script'); s.type='text/javascript'; s.src='http://labs.microsofttranslator.com/bookmarklet/default.aspx?f=js&to=en'; content.document.body.insertBefore(s, content.document.body.firstChild);})();
 
+" PageZipper
+" activate pagezipper bookmark (keyword pz)
+map <A-p> :open pz<CR>
+"command! pz -description "PageZipper"
+    "\ -ex open javascript:(function(){if(window['pgzp']){_pgzpToggleBookmarklet();}else{window._page_zipper_is_bookmarklet=true;window._page_zipper=document.createElement('script');window._page_zipper.type='text/javascript';window._page_zipper.src='//www.printwhatyoulike.com/static/pagezipper/pagezipper_10.js';document.getElementsByTagName('head')[0].appendChild(window._page_zipper);}})();
+
+"" TODO: finish
+"js <<EOF
+"(function() {
+    "if (window['pgzp']) { 
+        "_pgzpToggleBookmarklet();
+    "} else {
+        "window._page_zipper_is_bookmarklet = true;
+
+        "window._page_zipper = document.createElement('script');
+        "window._page_zipper.type='text/javascript';window._page_zipper.src='//www.printwhatyoulike.com/static/pagezipper/pagezipper_10.js';document.getElementsByTagName('head')[0].appendChild(window._page_zipper);}})();
+"EOF
+
 
 " =============================================================================
 "                              _________________________ 
@@ -815,6 +844,7 @@ closeAllToRight = function (ord) {
 EOF
 
 " :tc START END : close tabs starting with START and ending with the tabs before END
+" doesn't work on last tab
 js <<EOF
 var closeTabRange = function (firstSpec, endSpec) {
     firstSpec = firstSpec - 1;
@@ -843,39 +873,33 @@ undob = function() {
 }
 EOF
 
+" Create adjacent duplicate tab and go back in the browser history
 js <<EOF
 backt = function () { 
-    // Create adjacent duplicate tab and go back in the browser history
-    var currT = gBrowser.selectedTab;
-    var dupT = gBrowser.duplicateTab(currT);
-    var dupTB = gBrowser.getBrowserForTab(dupT);
+    tabs.cloneTab(tabs.getTab(), true);
     var backtListener = function () { 
         gBrowser.goBack(); 
-        dupTB.removeEventListener("DOMContentLoaded", backtListener);
+        document.removeEventListener("DOMContentLoaded", backtListener, false);
     };          
-    dupTB.addEventListener("DOMContentLoaded", backtListener);
-    gBrowser.selectedTab = dupT;
+    document.addEventListener("DOMContentLoaded", backtListener, false);
 }
 EOF
  
+" Create adjacent duplicate tab and go forward in the browser history
 js <<EOF
 forwardt = function() {
-    // Create adjacent duplicate tab and go forward in the browser history
-    var currT = gBrowser.selectedTab;
-    var dupT = gBrowser.duplicateTab(currT);
-    var dupTB = gBrowser.getBrowserForTab(dupT);
+    tabs.cloneTab(tabs.getTab(), true);
     var forwardtListener = function () {
         gBrowser.goForward();
         dupTB.removeEventListener("DOMContentLoaded", forwardtListener);
     };
     dupTB.addEventListener("DOMContentLoaded", forwardtListener);
-    gBrowser.selectedTab = dupT;
 }
 EOF
 
+" Create adjacent duplicate tab
 js <<EOF
 tabdupa = function() {
-    // Create adjacent duplicate tab
     var currT = gBrowser.selectedTab;
     var dupT = gBrowser.duplicateTab(currT);
     var dupTB = gBrowser.getBrowserForTab(dupT);
@@ -1124,7 +1148,7 @@ group user
 " | EdX |
 " '-----'
 command! edx :runtime! edx.penta
-:edx
+autocmd DOMload courses.edx.org :edx
 
 " ----------------------------------------------------------------------------- 
 " ,----------,
@@ -1565,6 +1589,18 @@ command! repositionmodal
      \ -js repositionModal();
 map -b xM :repositionmodal<CR>
 
+
+group user
+
+
+" -----------------------------------------------------------------------------
+" ,-------------------,
+" | StackOverflow.com |
+" '-------------------'
+
+group stackexchange -locations=stackoverflow.com,stackexchange.com,superuser.com
+
+map -modes insert <A-k> <S-<>kbd<S->><S-<>/kbd<S->><Left><Left><Left><Left><Left><Left>
 
 group user
 
