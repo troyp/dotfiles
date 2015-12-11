@@ -106,10 +106,12 @@ alias emdir="env EDITOR='emacs -fh' vidir"    # rename files with emacs/vidir
 alias emv="qmv -e 'emacsclient -nw'"          # rename files with emacs/qmv
 alias ecp="qcp -e 'emacsclient -nw'"          # copies files with emacs/qcp
 alias add-png-ext="rename 's/\s*$/.png/' *"
-# ren-year-to-end: eg. rename '(2000)  file name.more.pdf' to 'file name.more (2000).pdf'
+# ren-year-to-end: eg. rename '(2000)  file name.more.pdf' -> 'file name.more (2000).pdf'
 alias ren-year-to-end='rename '"'"'s/^(\(\d+\)) *-? *(.*)\.(.+)$/$2 $1.$3/'"'"''
 alias ren-dot-to-space="rename 's/\.(?=.*\.)/ /g'"
 alias ren-underscore-to-space="rename 's/_/ /g'"
+# ren-strip-extra-from-year: eg. rename 'file (extra-info, 2000).pdf' -> 'file (2000).pdf'
+alias ren-strip-extra-from-year='rename '"'"'s/\([-\w_.'"'"']+, ?(\d\d\d\d)\)\.(\w+)$/($1).$2/'"'"''
 
 
 # --------------------
@@ -137,7 +139,10 @@ alias hilitcase-files='dofiles mv -i "$x" "$(echo "${x%.*}" | tohilitcase).${x##
 alias sed-file='sed -i.bak'    # sed-file 's/old/new/g' filename.ext
 alias irm='rm -i'  # interactive rm: prompt before removal
 alias editchoose='iselect -ma | xargs emacsclient'
-
+alias files-from-url-0='while read -r f; do printf "${f#file://}\0"; done'
+alias files-from-url-nl='while read -r f; do printf "${f#file://}\n"; done'
+alias docbfiles='xsel -ob | files-from-url | dolines'
+alias name2fat='perl -pe '"'"'s/\+|:/ - /g and s/\[<>\/\\?+:"\]//g'"'"''
 
 # -----------------------
 # HTML & XML MANIPULATION
@@ -470,6 +475,7 @@ alias sejpptotext='sejda-console extractpages'
 alias sejtotext='sejda-console extracttext'
 alias gs-pstopdf='gs -q -dBATCH -dAutoFilterColorImages=false -sColorImageFilter=FlateEncode -dNOPAUSE -sDEVICE=pdfwrite -sOutputFile=out.pdf'
 alias jpdftweak='java -jar /opt/jpdftweak/jpdftweak.jar'  # can renumber pages in PDFs (loses bmarks)
+alias pdfimg='pdfimages -j'
 # OCR: use pdfocr for OCR; much better than pdfsandwich (default settings)
 
 # -------------

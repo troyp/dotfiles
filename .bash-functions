@@ -41,7 +41,7 @@ explode () {
 
 remove-last () {
     head -n -1 $1 > temp-remove-last
-    mv temp-remove-last $1
+    mv -i temp-remove-last $1
 }
 
 # TODO: handle aliases, functions, failure, multiple matches (eg. alias and command)
@@ -144,7 +144,7 @@ ussp () {
     # convert underscores to spaces in filename
     converted_name=${1//_/ }
     if [ ! -f "$converted_name" ]; then 
-	mv "$1" "$converted_name"
+	mv -i "$1" "$converted_name"
     fi
 }
  
@@ -152,7 +152,7 @@ spus () {
     # convert spaces to underscores in filename
     converted_name=${1// /_}
     if [ ! -f "$converted_name" ]; then 
-	mv "$1" "$converted_name"
+	mv -i "$1" "$converted_name"
     fi
 }
  
@@ -160,7 +160,7 @@ dashus () {
     # convert dashes to spaces in filename
     converted_name=${1//-/ }
     if [ ! -f "$converted_name" ]; then 
-	mv "$1" "$converted_name"
+	mv -i "$1" "$converted_name"
     fi
 }
  
@@ -170,7 +170,7 @@ dotsp () {
     base_name="${1%.*}"
     converted_name="${base_name//./ }.$extension"
     if [ ! -f "$converted_name" ]; then 
-	mv "$1" "$converted_name"
+	mv -i "$1" "$converted_name"
     fi
 }
  
@@ -193,7 +193,7 @@ pdfoutline-edit () {
     pdftk "$1" dump_data > $outline
     `echo ${EDITOR:-vim} $outline`
     pdftk "$1" update_info $outline output $output
-    mv $output "$1"
+    mv -i $output "$1"
 }
 
 djoutline-out () {
@@ -606,4 +606,28 @@ blankpage () {
 		;;
 	esac
 	convert -size "$size" "$col" "$out"
+}
+
+files-from-url () {
+	sep="\n"
+	for arg in "$@"; do
+		case "$arg" in
+		  -0)
+			sep="\0";
+			;;
+		esac
+	done
+	while read -r f; do
+		printf "${f#file://}$sep"
+	done
+}
+
+rename-prefix-dir () {
+	for arg in "$@"; do
+		filename="${arg##*/}";
+		filepath=`readlink -f "$arg"`;
+		dirpath="${filepath%/*}";
+		dirname="${dirpath##*/}";
+		mv -i "$arg" "$dirname - $filename"; 
+	done
 }

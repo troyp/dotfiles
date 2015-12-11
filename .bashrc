@@ -296,6 +296,16 @@ if [ -f ~/.rvm/scripts/rvm ]; then . ~/.rvm/scripts/rvm; fi
 if [ -f /etc/profile.d/bash_completion.sh ]; then . /etc/profile.d/bash_completion.sh; fi
 
 
+# # ********************
+# # *                  *
+# # * EXPORT FUNCTIONS *
+# # *                  *
+# # ********************
+
+# for fn in `declare -F | tr -s ' ' | cut -d' ' -f3 | grep '^[^_]'`; do
+# 	export -f $fn >/dev/null
+# done
+
 # ----------------------------------------------------------------------------
 
 set +a
