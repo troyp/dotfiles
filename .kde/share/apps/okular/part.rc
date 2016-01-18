@@ -123,6 +123,9 @@
   <Separator name="separator_4"/>
   <Action name="mouse_drag"/>
   <Action name="mouse_selecttools"/>
+  <Action name="mouse_textselect"/>
+  <Action name="mouse_select"/>
+  <Action name="edit_select_all"/>
   <Action name="mouse_tableselect"/>
   <Action name="edit_undo"/>
  </ToolBar>
@@ -149,9 +152,9 @@
   <Action shortcut="Ctrl+3" name="view_render_mode_facing_center_first"/>
   <Action shortcut="Ctrl+1" name="view_render_mode_single"/>
   <Action shortcut="_" name="view_trim_margins"/>
-  <Action shortcut="Shift+V" name="mouse_select"/>
+  <Action shortcut="Shift+V" priority="0" name="mouse_select"/>
   <Action shortcut="Ctrl+V" priority="0" name="mouse_tableselect"/>
-  <Action shortcut="V" name="mouse_textselect"/>
+  <Action shortcut="V" priority="0" name="mouse_textselect"/>
   <Action shortcut="+; =" priority="0" name="view_zoom_in"/>
   <Action shortcut="-" priority="0" name="view_zoom_out"/>
   <Action shortcut="F2" name="rename_bookmark"/>
@@ -180,5 +183,6 @@
   <Action priority="0" name="edit_find"/>
   <Action priority="0" name="options_configure_annotations"/>
   <Action shortcut="Ctrl+Shift+B" name="options_configure_generators"/>
+  <Action priority="0" name="edit_select_all"/>
  </ActionProperties>
 </kpartgui>

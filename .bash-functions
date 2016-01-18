@@ -602,6 +602,7 @@ blankpage () {
 	  3)
 		size="$1";
 		col="xc:$2";
+        
 		out="$3";
 		;;
 	esac
@@ -630,4 +631,12 @@ rename-prefix-dir () {
 		dirname="${dirpath##*/}";
 		mv -i "$arg" "$dirname - $filename"; 
 	done
+}
+
+rename-strip-extra-from-year () {
+    options=""; if [ "$1" == "-n" ]; then options="-n"; shift; fi
+    files="$@"
+    str='s/[(][-\w_.'"'"']+, ?(\d{4})[)](?=\.\w+)$/($1)/'
+    echo "Renaming with Perl expression: $str"
+    rename "$options" "$str" "$@";
 }

@@ -61,6 +61,7 @@ alias cdchrometempdir='"cd `chrometempfiles 3`"'  # cd to Firefox temp directory
 #------------
 alias lsg='ls | grep'
 alias ls='ls --group-directories-first --color=auto --time-style=+" %d.%m.%y "'
+alias ls1='ls -1'
 alias lsc='ls --color=always'
 alias ll='ls -l'   # list details
 alias llc='ll --color=always'
@@ -86,6 +87,7 @@ alias lsatimes='for x in *; do stat -c"%n	%x" "$x"; done | tabs2cols' # if broke
 alias sortatimes='for x in *; do stat -c"%x	%n" "$x"; done | tabs2cols | sort'
 # alias lsexec='lsfiles | dolines if [[ -x "$x" ]]; then echo "$x"; fi; done'
 alias lsexec='lsfiles | filterexec'
+alias lsi='du -hsc'    # list total sizes of files and directories
 
 
 # --------------------
@@ -101,24 +103,40 @@ alias lsenvall='env | less'    # list entire environment
 #-----------------------
 alias rn='mv -iT'    # use mv to rename (ask before overwrite, treat dest as filename, not dir)
 alias ren=rename
+alias renn='rename -n'    # rename preview (dry-run)
 # alternatives to wdired (C-x d <directory> C-x C-q)
-alias emdir="env EDITOR='emacs -fh' vidir"    # rename files with emacs/vidir
-alias emv="qmv -e 'emacsclient -nw'"          # rename files with emacs/qmv
-alias ecp="qcp -e 'emacsclient -nw'"          # copies files with emacs/qcp
+alias emdir="env EDITOR=emacs vidir"                        # emacs/vidir rename
+alias qmv="qmv -f 'do'"                                     # vim/qmv rename
+alias qmv2="qmv -f 'dc' -o autowidth,spaces,width=80,swap"  # vim/qmv 2 col rename
+alias emv="qmv -f 'do' -e 'emacsclient -nw'"                # emacs/qmv rename
+alias emv2="qmv -f 'dc' -o autowidth,spaces,width=80,swap -e 'emacsclient -nw'" # 2 col rename
+alias ecp="qcp -f 'do' -e 'emacsclient -nw'"                # emacs/qcp copy
+alias ecp2="qcp -f 'dc' -o autowidth,spaces,width=80,swap -e 'emacsclient -nw'" # 2 col copy
 alias add-png-ext="rename 's/\s*$/.png/' *"
 # ren-year-to-end: eg. rename '(2000)  file name.more.pdf' -> 'file name.more (2000).pdf'
 alias ren-year-to-end='rename '"'"'s/^(\(\d+\)) *-? *(.*)\.(.+)$/$2 $1.$3/'"'"''
-alias ren-dot-to-space="rename 's/\.(?=.*\.)/ /g'"
-alias ren-underscore-to-space="rename 's/_/ /g'"
+alias ren-year-to-end-preview='rename -n '"'"'s/^(\(\d+\)) *-? *(.*)\.(.+)$/$2 $1.$3/'"'"''
+alias ren-dot-to-space='rename '"'"'s/\.(?=[^.]+\.)/ /g unless /^\./'"'"''
+alias ren-dot-to-space-preview='rename -n '"'"'s/\.(?=[^.]+\.)/ /g unless /^\./'"'"''
+alias ren-space-to-dot="rename 'tr/ /./'"
+alias ren-underscore-to-space="rename 'tr/_/ /'"
+alias ren-space-to-underscore="rename 'tr/ /_/'"
+alias ren-uppercase="rename 'tr/a-z/A-Z/'"
+alias ren-lowercase="rename 'tr/A-Z/a-z/'"
+# FIXME:
 # ren-strip-extra-from-year: eg. rename 'file (extra-info, 2000).pdf' -> 'file (2000).pdf'
-alias ren-strip-extra-from-year='rename '"'"'s/\([-\w_.'"'"']+, ?(\d\d\d\d)\)\.(\w+)$/($1).$2/'"'"''
+alias ren-strip-extra-from-year="rename 's/\([-\w_.']+, ?(\d\d\d\d)\)\.(\w+)"'$/($1).$2/'
+alias ren-strip-extra-from-year-preview="rename -n '"'s/[(][-\w_.'"'"']+, ?(\d{4})[)](?=\.\w+)$/($1)/'
+alias ren-strip-left-of-number='rename '"'"'s/[^0-9]*(?=\d+)//'"'"
+alias ren-strip-left-of-number-preview='rename -n '"'"'s/[^0-9]*(?=\d+)//'"'"
 
 
 # --------------------
 # FILE SEARCH ALIASES.
 # --------------------
 alias gr='grep -inE --color=auto'    # color, line no.s, case-insensitive, extended RE
-alias grepc="grep --color=always"  # color grep for pipes
+alias grepc="grep --color=always"    # color grep for pipes
+alias grepp='grep -P'                # grep with  perl syntax
 alias sudb='sudo updatedb'
 alias locater='locate --regex'   # locate extended regex
 alias locatea='locate -A'        # locate files matching ALL patterns
@@ -129,7 +147,6 @@ alias findfile='find . -type f -iname'   # find files with (case-insens) name PA
 # --------------------------
 # FILE MANIPULATION ALIASES.
 # --------------------------
-alias append='cat >>'
 # alias mans='man -k . | grep'  # use whatis -r (or -w) instead
 alias dofiles='for x in *; do'    # process each file in current directory
 # eg.  mapfiles printf "`pwd`/$x\n"; done
@@ -143,6 +160,14 @@ alias files-from-url-0='while read -r f; do printf "${f#file://}\0"; done'
 alias files-from-url-nl='while read -r f; do printf "${f#file://}\n"; done'
 alias docbfiles='xsel -ob | files-from-url | dolines'
 alias name2fat='perl -pe '"'"'s/\+|:/ - /g and s/\[<>\/\\?+:"\]//g'"'"''
+alias mv='mv -i'
+alias rscopy='rsync -avzH --progress'
+alias rsdiff='rsync -rvnc --delete'  # compare two directories by simulating the process of copying the first to overwrite the second
+alias rscopyto='rsync -rvc --delete .'  # copy current directory to another directory, deleting its original contents
+alias rsupdate='rsync -auvzH --progress'
+alias symlink='ln -s'
+alias sln='ln -s'
+alias msymlink='mmv -s'  # mmv multiple symlink using wildcards, eg.  msymlink *.pdf #1_link.pdf
 
 # -----------------------
 # HTML & XML MANIPULATION
@@ -441,8 +466,16 @@ alias cljload='java -jar ~/.clojure/clojure.jar'
 alias fregec='java -Xss1m -jar /opt/frege/fregec.jar -d build'
 alias fregerepl='/opt/frege-repl/gradlew --no-daemon --console plain :frege-repl-core:run'
 alias java-setdefault='sudo update-alternatives --config java'
-alias pl='perl -e'
-alias plp='perl -pe'
+alias pl='perl -e'        # execute perl code
+alias pln='perl -ne'      # execute within loop
+alias plnl='perl -nle'    # execute within loop, add newlines
+alias plp='perl -pe'      # execute within loop, with print
+alias plpl='perl -ple'    # execute within loop, with print, add newlines
+alias Pl='perl -E'        # execute perl code (enable features)
+alias Pln='perl -nE'      # execute within loop (enable features)
+alias Plnl='perl -nlE'    # execute within loop, add newlines (enable features)
+alias Plp='perl -pE'      # execute within loop, with print (enable features)
+alias Plpl='perl -plE'    # execute within loop, with print, add newlines (enable features)
 alias perlrepl='perl -de 0'
 alias phprepl='php --interactive'
 alias xracket='racket -il xrepl'
@@ -541,8 +574,13 @@ alias firstcol="cut -d' ' -f1"
 alias splitpath='tr ":" "\n"'
 alias deduppath="awk -F: '{for (i=1;i<=NF;i++) { if ( !x[\$i]++ ) printf(\"%s:\",\$i); }}'"
 alias tabs2cols="column -t -s $'\t'"
-alias cuts="onespace | cut -d' '"
+alias cutsp="onespace | cut -d' '"
 # eg.:    ls -Al | cuts -f2,9    # list filenames and number of hard links
+alias evenlines="awk 'NR%2==0'"  # print even lines (starting at line 0)
+alias oddlines="awk 'NR%2==1'"
+alias concat='tr -d "\n"'        # join lines into string
+alias tabify-table="perl -ple 's/\s+/\t/g'"    # whitespace-delim table -> tab-delim
+
 
 # ------------
 # rs variants:
@@ -583,11 +621,11 @@ alias PeaExtractor=/opt/peazip/res/pealauncher
 alias PeaUtils=/opt/peazip/res/pea
 alias xa=xargs
 alias gd=grepdict   # see .bash-functions:q
+alias alts=galternatives    # graphical alternatives editor
 
 #---------------------------------
 # APPLICATION DEFAULTS & VARIANTS.
 #---------------------------------
-alias mv='mv -i'
 alias greps='grep -Hn --color=always'
 alias enw='emacs -nw'
 alias e='emacsclient -nw'
@@ -603,15 +641,9 @@ alias esed='sed -r'
 alias sulocate='sudo locate'
 alias untgz='tar -zxvf'
 alias dfh='df -h'
-alias rscopy='rsync -avzH --progress'
-alias rsdiff='rsync -rvnc --delete'  # compare two directories by simulating the process of copying the first to overwrite the second
-alias rscopyto='rsync -rvc --delete .'  # copy current directory to another directory, deleting its original contents
-alias rsupdate='rsync -auvzH --progress'
 #alias info='pinfo'
 alias edx-dl='edx-dl -s'
 alias info='info --vi-keys'
-alias symlink='ln -s'
-alias sln='ln -s'
 alias octave='octave --quiet'
 alias qiv='qiv -e'
 # alias handyoutliner='opt/handyoutliner/start-linux'

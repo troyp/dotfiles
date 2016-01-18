@@ -160,6 +160,7 @@ cmap -b <C-,> <Tab>
 cmap -b <C-.> <S-Tab>
 " use c_<C-Space> for AltWildMode completion
 map -b -modes=command-line <C-Space> <A-Tab>
+map -b -modes=command-line <C-S-Space> <A-S-Tab>
 
 map -modes command-line,insert -b <C-y> <C-v><C-v>
 map -modes command-line,insert -b <C-p> <Up>
@@ -261,7 +262,7 @@ command! jsdisable :set! javascript.enabled=false
 command! nointercept -js document.addEventListener('keydown', function(e) { e.stopImmediatePropagation(); return false;}, true);
 
 " Open in Google Chrome:
-command! ochrome :exec '! google-chrome ' + buffer.URL + ' &'
+command! ochrome :exec '!google-chrome ' + buffer.URL
 map -b xc :ochrome<CR>
 
 " Show all marks (quickmarks and url/local marks)
@@ -401,9 +402,10 @@ set eht+=[x]:div,iframe
 js hints.addMode('x','make div invisible',utils.undisplay);
 set eht+=[X]:div,iframe
 js hints.addMode('X','shift div off screen',utils.removeFromView);
-set eht+=[p]:p,xpath:div/p,img,h1,h2,h3,h4,ol,ul,table,div,frame,iframe,input
 " replace ;t with function for ;b (open in background)
 js hints.addMode("t", "Follow hint in a background tab", elem => buffer.followLink(elem, dactyl.NEW_BACKGROUND_TAB))
+set eht+=[p]:div,section,ol,ul,table,frame,iframe,img,h1,h2,h3,h4,input,xpath:div/p
+js hints.addMode('p','lmnpop',elem => { lmnpop(elem); });
 
 " svg: FIXME
 runtime! svg-pan-zoom.min.js
@@ -723,7 +725,7 @@ command! togglestylesinline :execute "emenu Tools.Web Developer Extension.CSS.Di
 command! togglestylesall :execute "emenu Tools.Web Developer Extension.CSS.Disable Styles.Disable All Styles"
 command! togglestylesbrowser :execute "emenu Tools.Web Developer Extension.CSS.Disable Styles.Disable Browser Default Styles"
 
-js <<EOF
+ js <<EOF
 function toggleMagnifier() {
     if (document.getElementById("web-developer-page-magnifier-container").hidden)
         WebDeveloper.PageMagnifier.createPageMagnifier();
@@ -738,16 +740,30 @@ map -b xz :magnifier!<CR>
 group user
 
 " =============================================================================
+"                                      _________ 
+"                                     |         |
+"                                     | CONTENT |
+"                                     |_________|
+
+" TODO: Write command to work on remote PDFs being viewed
+"       - preferably by accessing file in cache
+"       - otherwise by re-downloading
+
+" PDF (local): view in Okular
+command! oku -description "Open local PDF in Okular"
+    \ execute 'run okular "' + decodeURIComponent(buffer.URL.substring(7)) + '"'
+
+
+" =============================================================================
+
+
 "                                 __________________ 
 "                                |                  |
 "                                | OTHER EXTENSIONS |
 "                                |__________________|
 
-" Autopager:
-command! apoff -description "Autopager off"
-    \ :js autopagerMain.enabledThisSite()
-command! ap -description "Autopager on"
-    \ :js autopagerMain.onEnable()
+" Autopagerize:
+map gp -ex open javascript:(function(){if(window['pgzp']){_pgzpToggleBookmarklet();}else{window._page_zipper_is_bookmarklet=true;window._page_zipper=document.createElement('script');window._page_zipper.type='text/javascript';window._page_zipper.src='//www.printwhatyoulike.com/static/pagezipper/pagezipper_10.js';document.getElementsByTagName('head')[0].appendChild(window._page_zipper);}})();
 
 " Print What You Like:
 command! prwul -description "run PrintWhatYouLike"
@@ -770,7 +786,8 @@ map -b cR :rikLbOff<CR>
 
 " USERSCRIPTS
 " word highlight
-map -b ch -ex execute "emenu Tools.Greasemonkey.word highlight<CR>"
+"map -b ch -ex execute "emenu Tools.Greasemonkey.word highlight<CR>"
+map ch -ex emenu Tools.Greasemonkey.word highlight
 
 " WEB APPS
 " MS Translate
@@ -857,6 +874,10 @@ command! tc
     \ -description "close tab range from START to END inclusive"
     \ -nargs=*
     \ -js closeTabRange(args[0], args[1]);
+command! tcto
+    \ -description "close tab range from current tab to END inclusive"
+    \ -nargs=1
+    \ -js closeTabRange(gBrowser.mCurrentTab.dactylOrdinal, args[0]);
 
 js <<EOF
 undob = function() {
@@ -1046,6 +1067,9 @@ command! appendlinkurls
 command! listlinks
             \ -description "List all links in page"
             \ :open listlinks
+
+command! table2csv
+    \ :open javascript:(function(){$('table').each(function(){var%20$table=$(this);$('<textarea>').css('width',$table.width()).css('height','400px').html($.map($table.find('tr'),function(tr){return%20$.map($(tr).find('th,%20td'),function(e){return'"'+$(e).text().replace('"','""').replace('\n','%20')+'"'}).join(',')}).join('&#13;&#10;')).insertAfter($table);})})()
 
 
 js <<EOF
@@ -1621,7 +1645,7 @@ function userscriptsToMirror() {
     if (match)
         dactyl.open("http://userscripts-mirror.org/" + match[1]);
     else
-        dactyl.message("userScriptsToMirror: Address doesn't match: " + url);
+        dactyl.utils.message("userScriptsToMirror: Address doesn't match: " + url);
 }
 EOF
 
