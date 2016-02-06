@@ -640,3 +640,17 @@ rename-strip-extra-from-year () {
     echo "Renaming with Perl expression: $str"
     rename "$options" "$str" "$@";
 }
+
+rename-adjust-numbers () {
+    #FIXME: only works with -n option
+    options=""; if [ "$1" == "-n" ]; then options="-n"; shift; fi
+    SEP=" "; if [ "$1" == "-sep" ]; then SEP="$2"; shift 2; fi
+    NUM_START="$1"
+    NUM_LEN="$2"
+    NUM_ADJUST="$3"
+    NAME_START="$4"
+    shift 4
+    str='$_=(substr($_,'"$NUM_START,$NUM_LEN)+$NUM_ADJUST).'$SEP'"'.substr($_,'"$NAME_START)"
+    echo "rename $options '$str'"
+    rename "$options" "$str" "$@"
+}

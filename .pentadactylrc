@@ -104,6 +104,7 @@ map -b <A-Esc> <C-v><Esc>
 " C-w closes tab; if last in window closes window.
 map -b <C-w> :q<CR>
 " movement
+map -b <C-S-D> <C-u>
 map -b J <C-d>
 map -b K <C-u>
 " Restart with C-c C-c:
@@ -118,8 +119,6 @@ map -b gx -js window.restore(); window.maximize();
 nmap -b <C-x>h iGvggy
 " second input area
 map -b xgi 2gi
-" single-page pentadactyl help
-map -b xh :helpall<CR>
 " yank page title
 map -b xy -js dactyl.clipboardWrite(buffer.title)
 " yank buffer URL (unencoded)
@@ -519,13 +518,13 @@ map -modes base -b <A-x> <S-f2><Tab>
 " '---------'
 
 " downloads
-map -b <C-S-D> :dialog downloads<CR>
+map -b ewd :dialog downloads<CR>
 " about:config
 command! ac 
     \ -description "Open about:config in new window" 
     \ :winopen about:config
 
-" history
+" history (better dialog than `:dialog history`)
 command! historydialog 
     \ -description "Open history dialog"
     \ :feedkeys <C-S-H>
@@ -533,7 +532,7 @@ command! historydialog
 " TODO: places.xul doesn't allow keyboard navigation. Can it be fixed?
 "       In the meantime, use the bookmarks dialog window instead.
 
-map -b ea tabout:addons<CR>
+map -b ea -ex dialog addons
 map -b ec tabout:config<CR>
 map -b ed tabout:downloads<CR>
 map -b ek tchrome://browser/content/places/places.xul<CR>
@@ -541,10 +540,16 @@ map -b ep tabout:plugins<CR>
 map -b er tabout:sessionrestore<CR>
 map -b es tabout:support<CR>
 map -b es tabout:support<CR>
-map -b eh -ex open ~/.pentadactyl/docs/help/index.html
 command! appcache 
     \ -description "Open about:cache in new tab" 
     \ :tabopen about:cache?storage=appcache
+
+" help
+map -b eh -ex open ~/.pentadactyl/docs/help/index.html
+" single-page pentadactyl help
+"map -b xh :helpall<CR>
+map -b xh -ex open ~/.pentadactyl/docs/all.html
+
 
 " Select:
 map -b s <Nop>
@@ -660,13 +665,12 @@ map -b xd -ex emenu Tools.Web Developer.Eyedropper<CR>
 " | DOM Inspector |
 " '---------------'
 " inspect current content document
-map -b <C-x><C-i> -ex emenu Tools.Web Developer.DOM Inspector<CR>
-command! dominspector :js inspectDOMDocument(content.document.URL)
+command! dominspector :dialog dominspector
 " inspect current chrome document - chrome://browser/content/browser.xul
 command! dominspectorchrome :js inspectDOMDocument(document.URL)
 " 
 " restore C-S-I shortcut for DOM Inspector (stolen by dev tools inspector)
-map -b <C-S-I> :dominspector<CR>
+map -b <C-S-I> -ex dominspector
 
 " -----------------------------------------------------------------------------
 " ,---------,

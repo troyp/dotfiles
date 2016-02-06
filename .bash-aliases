@@ -1,7 +1,8 @@
 # to override: use \ or '' (eg. \ls or 'ls')
-# to "escape" ' (when you need both ' and " in alias): use '"'"'
+# to "escape" ' inside '' (when you need both ' and " in alias): use '"'"'
 #    (doesn't really escape - it ends string, concatenates string "'" (a single
 #     quote) and concatenates a new string that extends to the end of the alias)
+#   or: use '\'' (end string, concatenate character ', open string)
 # C-A-e ("shell-expand-line") does inline alias, word and history expansion
 #     (note: will recursively expand aliases in a history expansion.)
 #     (note: "alias-expand-line" and "history-and-alias-expand-line" are also
@@ -33,6 +34,8 @@ alias synaptic_enable_quicksearch='sudo apt-get install apt-xapian-index; sudo u
 alias enable-beep='sudo modprobe pcspkr'
 alias disable-beep='sudo modprobe -r pcspkr'
 alias list-repos='inxi -r'
+alias alts='sudo update-alternatives --config'
+alias galts=galternatives    # graphical alternatives editor
 
 # ----------------------
 #  KDE-SPECIFIC ALIASES.
@@ -101,10 +104,12 @@ alias lsenvall='env | less'    # list entire environment
 #-----------------------
 # FILE RENAMING ALIASES.
 #-----------------------
+
 alias rn='mv -iT'    # use mv to rename (ask before overwrite, treat dest as filename, not dir)
-alias ren=rename
-alias renn='rename -n'    # rename preview (dry-run)
-# alternatives to wdired (C-x d <directory> C-x C-q)
+alias lowercase-files='dofiles mv -i "$x" "$(echo "$x" | tolowercase)"; done'
+alias hilitcase-files='dofiles mv -i "$x" "$(echo "${x%.*}" | tohilitcase).${x##*.}"; done'
+
+# ALTERNATIVES TO WDIRED (C-x d <directory> C-x C-q)
 alias emdir="env EDITOR=emacs vidir"                        # emacs/vidir rename
 alias qmv="qmv -f 'do'"                                     # vim/qmv rename
 alias qmv2="qmv -f 'dc' -o autowidth,spaces,width=80,swap"  # vim/qmv 2 col rename
@@ -112,6 +117,10 @@ alias emv="qmv -f 'do' -e 'emacsclient -nw'"                # emacs/qmv rename
 alias emv2="qmv -f 'dc' -o autowidth,spaces,width=80,swap -e 'emacsclient -nw'" # 2 col rename
 alias ecp="qcp -f 'do' -e 'emacsclient -nw'"                # emacs/qcp copy
 alias ecp2="qcp -f 'dc' -o autowidth,spaces,width=80,swap -e 'emacsclient -nw'" # 2 col copy
+
+# RENAME (PERL)
+alias ren=rename
+alias renn='rename -n'    # rename preview (dry-run)
 alias add-png-ext="rename 's/\s*$/.png/' *"
 # ren-year-to-end: eg. rename '(2000)  file name.more.pdf' -> 'file name.more (2000).pdf'
 alias ren-year-to-end='rename '"'"'s/^(\(\d+\)) *-? *(.*)\.(.+)$/$2 $1.$3/'"'"''
@@ -123,12 +132,24 @@ alias ren-underscore-to-space="rename 'tr/_/ /'"
 alias ren-space-to-underscore="rename 'tr/ /_/'"
 alias ren-uppercase="rename 'tr/a-z/A-Z/'"
 alias ren-lowercase="rename 'tr/A-Z/a-z/'"
-# FIXME:
+   # FIXME:
 # ren-strip-extra-from-year: eg. rename 'file (extra-info, 2000).pdf' -> 'file (2000).pdf'
 alias ren-strip-extra-from-year="rename 's/\([-\w_.']+, ?(\d\d\d\d)\)\.(\w+)"'$/($1).$2/'
 alias ren-strip-extra-from-year-preview="rename -n '"'s/[(][-\w_.'"'"']+, ?(\d{4})[)](?=\.\w+)$/($1)/'
 alias ren-strip-left-of-number='rename '"'"'s/[^0-9]*(?=\d+)//'"'"
 alias ren-strip-left-of-number-preview='rename -n '"'"'s/[^0-9]*(?=\d+)//'"'"
+# ren-titlecase: note - removes newlines from titles
+alias ren-titlecase='rename '\''use Text::Autoformat; my @parts=split /\./; my $n=$#parts; my @newparts = map {autoformat( $_, {case=>qw(highlight)})} @parts[0..$n]; $newparts[$n] = $parts[$n]; $_ = join(".",@newparts); s/\n//g'\'
+alias ren-titlecase-preview='rename -n '\''use Text::Autoformat; my @parts=split /\./; my $n=$#parts; my @newparts = map {autoformat( $_, {case=>qw(highlight)})} @parts[0..$n]; $newparts[$n] = $parts[$n]; $_ = join(".",@newparts); s/\n//g'\'
+
+## MMV
+# mmv: eg.   mmv '*.bk.*' '#1.#2'
+# note: wildcards don't match leading ".", need to specify explicitly
+alias mmv-move='mmv -x'       # move source to target
+alias mmv-copy='mmv -c'       # copy source to target
+alias mmv-append='mmv -a'     # append source to target
+alias mmv-link='mmv -a'       # link source to target
+alias mmv-symlink='mmv -a'    # symlink source to target
 
 
 # --------------------
@@ -149,10 +170,8 @@ alias findfile='find . -type f -iname'   # find files with (case-insens) name PA
 # --------------------------
 # alias mans='man -k . | grep'  # use whatis -r (or -w) instead
 alias dofiles='for x in *; do'    # process each file in current directory
-# eg.  mapfiles printf "`pwd`/$x\n"; done
-alias mapfiles='for x in *; do echo "$x" |'    # print each file in current directory
-alias lowercase-files='dofiles mv -i "$x" "$(echo "$x" | tolowercase)"; done'
-alias hilitcase-files='dofiles mv -i "$x" "$(echo "${x%.*}" | tohilitcase).${x##*.}"; done'
+# eg.  mapfiles printf "`pwd`/$x\n"
+alias mapfiles='for x in *; do echo "$x" |'    # for each file in current directory (end with `done`)...
 alias sed-file='sed -i.bak'    # sed-file 's/old/new/g' filename.ext
 alias irm='rm -i'  # interactive rm: prompt before removal
 alias editchoose='iselect -ma | xargs emacsclient'
@@ -168,6 +187,8 @@ alias rsupdate='rsync -auvzH --progress'
 alias symlink='ln -s'
 alias sln='ln -s'
 alias msymlink='mmv -s'  # mmv multiple symlink using wildcards, eg.  msymlink *.pdf #1_link.pdf
+alias diff='colordiff -u'
+alias diffdir='colordiff -rqb'
 
 # -----------------------
 # HTML & XML MANIPULATION
@@ -283,22 +304,26 @@ alias ksu=kdesudo
 #-------------------
 # CLIPBOARD ALIASES.
 #-------------------
-alias c=copyq
-alias cb='xsel -ob'      # for i in `seq 5`; do echo $(cb); done  # prints clipboard 5x
-alias 2cb='xsel -ib'     # uptime | 2cb    # puts uptime in clipboard
 # xsel or xclip copies stdin to selection
-alias 2sel='xsel -ip'
-alias qn='copyq tab notes add'
+# for i in `seq 5`; do echo $(cb); done  # prints clipboard 5x
+alias cb='xsel -ob'      #  cb #  prints clipboard; ...|cb  # pipes input into clipboard
+alias 2cb='xsel -ib'     #  uptime|2cb  # uptime to clipboard; 2cb  # user input to clipboard
+alias 2sel='xsel -ip'     #  uptime|2cb  # uptime to selection; 2cb  # user input to selection
+alias c=copyq
+alias qn='copyq tab "&notes" add'       # add to copyq notes tab
+alias qsn='copyq tab "&snippets" add'   # add to copyq snippets tab
 alias cbdl='cb | dolines wget "$x"; done'   # download a list of file urls from clipboard
 
 
-#--------------
-# BASH ALIASES.
-#--------------
+#--------------------
+# BASH/SHELL ALIASES.
+#--------------------
 alias vi-bindings='set -o vi'
 alias emacs-bindings='set -o emacs'
 alias bashref='xrun ~/ebooks/coding/Shell\ Scripting/Bash\ Quick\ Reference.pdf &'
 alias locatefn='declare -F'    # requires shopt -s extdebug
+alias runfromhere='export PATH="./:$PATH"'
+alias listopts='echo "$SHELLOPTS:$BASHOPTS" | tr ":" "\n"'
 
 
 # ---------------
@@ -466,16 +491,21 @@ alias cljload='java -jar ~/.clojure/clojure.jar'
 alias fregec='java -Xss1m -jar /opt/frege/fregec.jar -d build'
 alias fregerepl='/opt/frege-repl/gradlew --no-daemon --console plain :frege-repl-core:run'
 alias java-setdefault='sudo update-alternatives --config java'
-alias pl='perl -e'        # execute perl code
-alias pln='perl -ne'      # execute within loop
-alias plnl='perl -nle'    # execute within loop, add newlines
-alias plp='perl -pe'      # execute within loop, with print
-alias plpl='perl -ple'    # execute within loop, with print, add newlines
-alias Pl='perl -E'        # execute perl code (enable features)
-alias Pln='perl -nE'      # execute within loop (enable features)
-alias Plnl='perl -nlE'    # execute within loop, add newlines (enable features)
-alias Plp='perl -pE'      # execute within loop, with print (enable features)
-alias Plpl='perl -plE'    # execute within loop, with print, add newlines (enable features)
+alias pl=perl
+alias ple='pl -e'       # execute perl code from next argument
+alias pln='ple -n'      # execute within loop
+alias plnl='ple -nl'    # execute within loop, strip/add newlines
+alias plp='ple -p'      # execute within loop, with print
+alias plpl='ple -pl'    # execute within loop, with print, strip/add newlines
+alias Ple='ple -E'      # execute perl code (enable features)
+alias Pln='Ple -n'      # execute within loop (enable features)
+alias Plnl='Ple -nl'    # execute within loop, strip/add newlines (enable features)
+alias Plp='Ple -p'      # execute within loop, with print (enable features)
+alias Plpl='Ple -pl'    # execute within loop, with print, strip/add newlines (enable features)
+alias Pl=Ple
+alias perl-warnings-on="alias ple='perl -ew'; alias Ple='perl -wE'"
+alias perl-warnings-off="alias ple='perl -e'; alias Ple='perl -E'"
+alias perlEOF="perl -w <(cat <<'EOF'"    # multiline perl command: end with: EOF\n)
 alias perlrepl='perl -de 0'
 alias phprepl='php --interactive'
 alias xracket='racket -il xrepl'
@@ -580,7 +610,7 @@ alias evenlines="awk 'NR%2==0'"  # print even lines (starting at line 0)
 alias oddlines="awk 'NR%2==1'"
 alias concat='tr -d "\n"'        # join lines into string
 alias tabify-table="perl -ple 's/\s+/\t/g'"    # whitespace-delim table -> tab-delim
-
+alias number-lines='perl -wnle '\''print "$.\t$_"'\'    # add numbers to left of lines
 
 # ------------
 # rs variants:
@@ -621,7 +651,6 @@ alias PeaExtractor=/opt/peazip/res/pealauncher
 alias PeaUtils=/opt/peazip/res/pea
 alias xa=xargs
 alias gd=grepdict   # see .bash-functions:q
-alias alts=galternatives    # graphical alternatives editor
 
 #---------------------------------
 # APPLICATION DEFAULTS & VARIANTS.
@@ -633,8 +662,6 @@ alias ec='emacsclient'
 alias roxterm-display='roxterm --hide-menubar -T "Roxterm Display" -z 1.3 --geometry=70x40'
 alias nautilus='nautilus --no-desktop'
 alias mc='mc -S gotar'
-alias diff='colordiff -u'
-alias diffdir='colordiff -rqb'
 alias bc='bc -l'
 alias echoe='echo -e'
 alias esed='sed -r'

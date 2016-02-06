@@ -9,6 +9,7 @@ host=$(echo -n $HOSTNAME | sed -e "s/[\.].*//")
 datenow=$(date "+%a, %d %b %y")
 if [[ $TERM == "cygwin" ]]
 then taskbarsize=3
+else taskbarsize=
 fi
 
 ### FIXME ###

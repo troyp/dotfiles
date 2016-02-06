@@ -259,10 +259,11 @@ if [ -f /opt/scripts/bashmarks.sh ]; then source /opt/scripts/bashmarks.sh; fi
 # if [ -x /usr/bin/dircolors ]; then test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)" fi
 
 xmodmap -e "keycode 127 = Pause"
-# ---run xcape---
-if ! pgrep xcape >/dev/null; then
-    xcape -e 'Control_L=Escape;Super_R=Menu;Control_R=Pause' &
-fi 
+
+# # ---run xcape---
+# if ! pgrep xcape >/dev/null; then
+#     xcape -e 'Control_L=Escape;Super_R=Menu;Control_R=Pause' &
+# fi 
 
 
 # ---ULIMIT---
