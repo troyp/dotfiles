@@ -245,6 +245,14 @@ map -modes pass-through -b <A-;> :normal "<Esc><C-^>"<CR>
 " | Commands |
 " '----------'
 
+command! undob -description "Undo tab in background" -js undob()
+command! backt -description "Create adjacent duplicate tab and go back in the browser history" -js backt()
+command! forwardt -description "Create adjacent duplicate tab and go forward in the browser history" -js forwardt()
+command! tabdupa -description "Create adjacent duplicate tab" -js tabdupa()
+
+command! pasteall -description "open all links in clipboard" -js openAllLinksInCB();
+map gp :pasteall<CR>
+
 command! rc source ~/.pentadactylrc
 "command! rce viewsource! file:/home/troy/.pentadactylrc
 command! rce !gvim ~/.pentadactylrc 2> /dev/null
@@ -739,7 +747,7 @@ function toggleMagnifier() {
 EOF
 
 map -b so :togglestylesall<CR>
-map -b xz :magnifier!<CR>
+map -b zx :magnifier!<CR>
 
 group user
 
@@ -767,7 +775,7 @@ command! oku -description "Open local PDF in Okular"
 "                                |__________________|
 
 " Autopagerize:
-map gp -ex open javascript:(function(){if(window['pgzp']){_pgzpToggleBookmarklet();}else{window._page_zipper_is_bookmarklet=true;window._page_zipper=document.createElement('script');window._page_zipper.type='text/javascript';window._page_zipper.src='//www.printwhatyoulike.com/static/pagezipper/pagezipper_10.js';document.getElementsByTagName('head')[0].appendChild(window._page_zipper);}})();
+map xz -ex open javascript:(function(){if(window['pgzp']){_pgzpToggleBookmarklet();}else{window._page_zipper_is_bookmarklet=true;window._page_zipper=document.createElement('script');window._page_zipper.type='text/javascript';window._page_zipper.src='//www.printwhatyoulike.com/static/pagezipper/pagezipper_10.js';document.getElementsByTagName('head')[0].appendChild(window._page_zipper);}})();
 
 " Print What You Like:
 command! prwul -description "run PrintWhatYouLike"
@@ -837,11 +845,6 @@ map <A-p> :open pz<CR>
 " \______________________________________________________________________________________/
 
 
-command! undob -description "Undo tab in background" -js undob()
-command! backt -description "Create adjacent duplicate tab and go back in the browser history" -js backt()
-command! forwardt -description "Create adjacent duplicate tab and go forward in the browser history" -js forwardt()
-command! tabdupa -description "Create adjacent duplicate tab" -js tabdupa()
-
 js <<EOF
 closeAllToLeft = function (ord) {
     if (typeof(ord)==="undefined") ord = tabs.getTab().dactylOrdinal;
@@ -871,6 +874,15 @@ var closeTabRange = function (firstSpec, endSpec) {
     firstSpec = firstSpec - 1;
     endSpec = endSpec;
     utils.closeTabsFromTo(firstSpec, endSpec, spec='');
+}
+EOF
+
+js <<EOF
+var openAllLinksInCB = function () {
+    var a = window.readFromClipboard().split(/[ \t\n]+/); 
+    for (i = 1; i < a.length; ++i) { 
+        dactyl.open(a[i], {where:dactyl.NEW_TAB}); 
+    };
 }
 EOF
 

@@ -654,3 +654,35 @@ rename-adjust-numbers () {
     echo "rename $options '$str'"
     rename "$options" "$str" "$@"
 }
+
+bci () {
+    read -r -d '' prelude <<'EOF'
+scale=20;
+pi=4*a(1);
+define t(x) { return s(x)/c(x); }
+define acos(x) {
+  if (x==0) { return pi/2; }
+  if (x>0)  { return a(sqrt((1/(x^2))-1)); }
+  if (x<0)  { return pi-a(sqrt((1/(x^2))-1)); }
+}
+define ac(x) { return acos(x); }
+define asin(x) { return 2*a(x/(1+sqrt(1-x^2))); }
+define as(x) { return asin(x); }
+define atan(x) { return a(x); }
+define sin(x) { return s(x); }
+define cos(x) { return c(x); }
+define tan(x) { return t(x); }
+EOF
+    echo "$prelude $*" | bc -l;
+}
+
+bcx () {
+    # note the '10' in 'obase=10' here is already in hex, so obase=0x10=16
+    code=`echo $* | tr 'a-f' 'A-F'`;
+    echo "ibase=16; obase=10; $code" | bc;
+}
+
+bc2 () {
+    # note the '10' in 'obase=10' here is already in binary, so obase=0b10=2
+    echo "ibase=2; obase=10; $*" | bc;
+}
