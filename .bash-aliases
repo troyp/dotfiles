@@ -138,9 +138,12 @@ alias ren-strip-extra-from-year="rename 's/\([-\w_.']+, ?(\d\d\d\d)\)\.(\w+)"'$/
 alias ren-strip-extra-from-year-preview="rename -n '"'s/[(][-\w_.'"'"']+, ?(\d{4})[)](?=\.\w+)$/($1)/'
 alias ren-strip-left-of-number='rename '"'"'s/[^0-9]*(?=\d+)//'"'"
 alias ren-strip-left-of-number-preview='rename -n '"'"'s/[^0-9]*(?=\d+)//'"'"
+alias ren-extract-number='ren '\''s/[^1-9]*(\d+).*\.ts/$1.ts/'\'
+alias ren-extract-number-preview='ren -n '\''s/[^1-9]*(\d+).*\.ts/$1.ts/'\'
 # ren-titlecase: note - removes newlines from titles
 alias ren-titlecase='rename '\''use Text::Autoformat; my @parts=split /\./; my $n=$#parts; my @newparts = map {autoformat( $_, {case=>qw(highlight)})} @parts[0..$n]; $newparts[$n] = $parts[$n]; $_ = join(".",@newparts); s/\n//g'\'
 alias ren-titlecase-preview='rename -n '\''use Text::Autoformat; my @parts=split /\./; my $n=$#parts; my @newparts = map {autoformat( $_, {case=>qw(highlight)})} @parts[0..$n]; $newparts[$n] = $parts[$n]; $_ = join(".",@newparts); s/\n//g'\'
+alias ren-manga-add-leading-zero='rename '\''s/第(\d+)巻/第0$1巻/'\'
 
 ## MMV
 # mmv: eg.   mmv '*.bk.*' '#1.#2'
@@ -551,6 +554,7 @@ alias img-tobw='convert -monochrome'
 alias img-tochannels='convert -separate'
 alias img-avg='convert -average'
 alias display_with_srgb='display -profile /usr/share/ghostscript/9.*/iccprofiles/srgb.icc'
+alias img-info=identify
 
 # -------------------
 # FILE FORMAT ALIASES

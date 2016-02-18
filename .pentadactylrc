@@ -187,6 +187,9 @@ execute "map -modes command-line,insert -b <C-m> " + user.myemail
 execute "map -modes command-line,insert -b <C-S-m> " + user.myemail2
 execute "map -modes command-line,insert -b <C-S-I> " + user.myname
 execute "map -modes command-line,insert -b <C-S-W> " + user.mymasterpw
+execute "map -modes command-line,insert -b <C-S-A> " + user.mystreet
+execute "map -modes command-line,insert -b <C-S-S> " + user.mysuburb
+execute "map -modes command-line,insert -b <C-S-D> " + user.myaddress
 
 
 " -----------------------------------------------------------------------------
@@ -300,6 +303,16 @@ command! listhintmodes -js hints.modes
 command! encuni :emenu View.Text Encoding.Unicode
 command! encjis :emenu View.Text Encoding.Japanese (Shift_JIS)
 
+" ALIAS COMMAND
+" FIXME
+js <<EOF
+createAlias = function(alias, def) {
+  var cmd = "dactyl.execute(\"'" + def + "' + (bang ? '! ' : ' ') + ' '.join(args);\")"
+  dactyl.execute("command! " + alias + " -nargs=* -bang -js " + cmd); 
+}
+EOF
+command! alias -nargs=+ 
+    \ -js createAlias(args[0], args[1]);
 
 " =============================================================================
 "                                       ______ 
@@ -338,7 +351,19 @@ map -b x< -js closeAllToLeft()
 " close tabs to right
 map -b x> -js closeAllToRight()
 " close tab range
+" :tc START END : close tabs starting with START and ending with the tabs before END
+" doesn't work on last tab
+command! tc 
+    \ -description "close tab range from START to END inclusive"
+    \ -nargs=*
+    \ -js closeTabRange(args[0], args[1]);
+command! tcto
+    \ -description "close tab range from current tab to END inclusive"
+    \ -nargs=1
+    \ -js closeTabRange(gBrowser.mCurrentTab.dactylOrdinal, args[0]);
 map -b x: :tc<SPACE>
+map -b x; :tcto<SPACE>
+
 " undo recent closed tab from list
 map -b U :undo<SPACE>
 
@@ -362,6 +387,9 @@ map -b gON oabout:newtab<CR>
 " ,-------------,
 " | Moving Tabs |
 " '-------------'
+" alias tt=tabmove
+command! tt -nargs=1 -bang 
+    \ -js dactyl.execute("tabmove" + (bang ? "! " : " ") + args[0]); 
 " map -b -arg <C-m>t :tabmove <arg><CR>
 map -b xm :tabmove<SPACE>
 map -b gt :tabmove!<SPACE>
@@ -553,10 +581,10 @@ command! appcache
     \ :tabopen about:cache?storage=appcache
 
 " help
-map -b eh -ex open ~/.pentadactyl/docs/help/index.html
+map -b eh -ex tabopen ~/.pentadactyl/docs/help/index.html
 " single-page pentadactyl help
 "map -b xh :helpall<CR>
-map -b xh -ex open ~/.pentadactyl/docs/all.html
+map -b xh -ex tabopen ~/.pentadactyl/docs/all.html
 
 
 " Select:
@@ -646,7 +674,8 @@ group user
 
 map -b gc y:style -group=temp <C-v><C-v><Space>
 map -b xgs :emenu View.Page Style.
-map -b x<C-s> :emenu View.Page Style.No Style<CR>
+" map -b x<C-s> :emenu View.Page Style.No Style<CR>
+map -b x<C-s> :set usermode!<CR>
 
 " =============================================================================
 "                            ___________________                               
@@ -775,6 +804,8 @@ command! oku -description "Open local PDF in Okular"
 "                                |__________________|
 
 " Autopagerize:
+command! pagezipper :open javascript:(function(){if(window['pgzp']){_pgzpToggleBookmarklet();}else{window._page_zipper_is_bookmarklet=true;window._page_zipper=document.createElement('script');window._page_zipper.type='text/javascript';window._page_zipper.src='//www.printwhatyoulike.com/static/pagezipper/pagezipper_10.js';document.getElementsByTagName('head')[0].appendChild(window._page_zipper);}})();<CR>
+command! pagezipper opz<CR>
 map xz -ex open javascript:(function(){if(window['pgzp']){_pgzpToggleBookmarklet();}else{window._page_zipper_is_bookmarklet=true;window._page_zipper=document.createElement('script');window._page_zipper.type='text/javascript';window._page_zipper.src='//www.printwhatyoulike.com/static/pagezipper/pagezipper_10.js';document.getElementsByTagName('head')[0].appendChild(window._page_zipper);}})();
 
 " Print What You Like:
@@ -867,8 +898,6 @@ closeAllToRight = function (ord) {
 }
 EOF
 
-" :tc START END : close tabs starting with START and ending with the tabs before END
-" doesn't work on last tab
 js <<EOF
 var closeTabRange = function (firstSpec, endSpec) {
     firstSpec = firstSpec - 1;
@@ -885,15 +914,6 @@ var openAllLinksInCB = function () {
     };
 }
 EOF
-
-command! tc 
-    \ -description "close tab range from START to END inclusive"
-    \ -nargs=*
-    \ -js closeTabRange(args[0], args[1]);
-command! tcto
-    \ -description "close tab range from current tab to END inclusive"
-    \ -nargs=1
-    \ -js closeTabRange(gBrowser.mCurrentTab.dactylOrdinal, args[0]);
 
 js <<EOF
 undob = function() {
@@ -1177,9 +1197,9 @@ EOF
 group google -locations=google.com,google.com.*
 
 " restrict search to pages in a specific language
-map -g google -b cgl O&lr=lang_
+map -b cgl O&lr=lang_
 " restrict search to pages originating in a specific country
-map -g google -b cgc O&cr=
+map -b cgc O&cr=
 
 group user
 
@@ -1366,6 +1386,43 @@ function toggleHTMLView () {
     dactyl.open(newurl);
 }
 EOF
+
+group user
+
+" -----------------------------------------------------------------------------
+" ,-----------------------------,
+" | Google Translate (Japanese) |
+" '-----------------------------'
+
+group gtransja -locations=translate.google.com/#ja,translate.google.com.au/#ja
+
+js <<EOF
+var showHandWriteInput = function() {
+    content.document.getElementsByClassName("ita-hwt-ime")[0].style = "left: 28px; top: 364px;"
+}
+var hideHandWriteInput = function() {
+    content.document.getElementsByClassName("ita-hwt-ime")[0].style = "-moz-user-select: none; left: 28px; top: 364px; display: none;"
+}
+var isVisibleHandWriteInput = function() {
+    var hwBox = content.document.getElementsByClassName("ita-hwt-ime")[0];
+    return ! hwBox.style.cssText.contains('display: none');
+}
+var toggleHandWriteInput = function() {
+    if (isVisibleHandWriteInput())
+        hideHandWriteInput();
+    else
+        showHandWriteInput();
+}
+EOF
+
+command! handwrite -description "Show Handwritten Input box. With [!], toggle."
+    \ -bang
+    \ -js bang ? toggleHandWriteInput() : showHandWriteInput();
+command! nohandwrite -description "Hide Handwritten Input box." -js hideHandWriteInput();
+
+" map -b <SPACE><SPACE> <SPACE><SPACE>
+" unmap -group gtransja <SPACE><SPACE>
+map -b <SPACE><SPACE> -js showHandWriteInput();
 
 group user
 
