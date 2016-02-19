@@ -705,3 +705,12 @@ bc2 () {
     # note the '10' in 'obase=10' here is already in binary, so obase=0b10=2
     echo "ibase=2; obase=10; $*" | bc;
 }
+
+lnpath () {
+    # link a relative filepath into a dir, creating necessary directories
+    file="$1";
+    dest="${2%/}";
+    relpath="${file%/*}"
+    mkdir -pv "$dest/$relpath";
+    ln "$file" "$dest/$file"
+}

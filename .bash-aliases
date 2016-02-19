@@ -190,6 +190,7 @@ alias rscopy='rsync -avzH --progress'
 alias rsdiff='rsync -rvnc --delete'  # compare two directories by simulating the process of copying the first to overwrite the second
 alias rscopyto='rsync -rvc --delete .'  # copy current directory to another directory, deleting its original contents
 alias rsupdate='rsync -auvzH --progress'
+alias cppath='cp --parents'   # copy a relative file-path into a dir
 
 # --- linking files ---
 alias symlink='ln -s'
