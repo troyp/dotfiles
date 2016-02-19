@@ -41,6 +41,8 @@ alias galts=galternatives    # graphical alternatives editor
 #  KDE-SPECIFIC ALIASES.
 # ----------------------
 alias kderepl='qdbus org.kde.plasma-desktop /MainApplication showInteractiveKWinConsole'
+alias kde-view-places-file='/home/troy/.local/share/user-places.xbel'
+alias kde-view-bookmarks-file='view /home/troy/.kde/share/apps/kfile/bookmarks.xml'
 
 #---------------------
 # CD & MKDIR ALIASES.
