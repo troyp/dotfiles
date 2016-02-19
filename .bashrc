@@ -46,6 +46,8 @@ ANDROID_HOME='/home/troy/Android/Sdk'
 ANDROID_SDK_HOME='/home/troy/Android/Sdk'
 GOPATH=$HOME/gowork
 JHOME=/opt/j64-804
+KDE_PLACES_FILE='/home/troy/.local/share/user-places.xbel'
+KDE_BOOKMARKS_FILE='/home/troy/.kde/share/apps/kfile/bookmarks.xml'
 
 # ------
 # PATHS.
@@ -252,9 +254,6 @@ nvm alias default stable > /dev/null
 # *      *
 # ********
 
-# ---bashmarks---
-if [ -f /opt/scripts/bashmarks.sh ]; then source /opt/scripts/bashmarks.sh; fi
-
 # ---enable color support of ls---
 # if [ -x /usr/bin/dircolors ]; then test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)" fi
 
@@ -297,6 +296,10 @@ if [ -f ~/.rvm/scripts/rvm ]; then . ~/.rvm/scripts/rvm; fi
 if [ -f /etc/profile.d/bash_completion.sh ]; then . /etc/profile.d/bash_completion.sh; fi
 if [ -n "$LOAD_SCRATCH" ] && [ -f ~/.bash-scratch ]; then . ~/.bash-scratch; fi
 
+# ---bashmarks---
+# source .bashmarks-setup.sh after .bash-functions
+if [ -f ~/.bashmarks-setup.sh ]; then . ~/.bashmarks-setup.sh; fi
+
 
 # # ********************
 # # *                  *
@@ -311,6 +314,5 @@ if [ -n "$LOAD_SCRATCH" ] && [ -f ~/.bash-scratch ]; then . ~/.bash-scratch; fi
 # ----------------------------------------------------------------------------
 
 set +a
-
 
 [ -f ~/.fzf.bash ] && source ~/.fzf.bash
