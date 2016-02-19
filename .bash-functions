@@ -35,6 +35,21 @@ grepdict () {
     grep $1 /usr/share/dict/words
 }
 
+alias-function () 
+{ 
+    old=$1;
+    new=$2;
+    eval "$(echo "$new ()"; declare -f $old | tail -n +2)";
+}
+
+rename-function () 
+{ 
+    old=$1;
+    new=$2;
+    eval "$(echo "$new ()"; declare -f $old | tail -n +2)";
+    unset -f $old
+}
+
 explode () {
     printf $1 | grep -o .
 }

@@ -211,7 +211,7 @@ inoremap <C-l> <Del>
 noremap <C-e> $
 inoremap <A-y> <C-e>
 " C-y and C-S-Y bindings override each other...?
-inoremap <C-S-Y> <C-e>
+" inoremap <C-S-Y> <C-e>
 inoremap <C-y> <C-y>
 
 " Files
