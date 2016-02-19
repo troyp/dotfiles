@@ -312,3 +312,5 @@ if [ -n "$LOAD_SCRATCH" ] && [ -f ~/.bash-scratch ]; then . ~/.bash-scratch; fi
 
 set +a
 
+
+[ -f ~/.fzf.bash ] && source ~/.fzf.bash

@@ -145,7 +145,7 @@ alias ren-titlecase='rename '\''use Text::Autoformat; my @parts=split /\./; my $
 alias ren-titlecase-preview='rename -n '\''use Text::Autoformat; my @parts=split /\./; my $n=$#parts; my @newparts = map {autoformat( $_, {case=>qw(highlight)})} @parts[0..$n]; $newparts[$n] = $parts[$n]; $_ = join(".",@newparts); s/\n//g'\'
 alias ren-manga-add-leading-zero='rename '\''s/第(\d+)巻/第0$1巻/'\'
 
-## MMV
+## MMV: simple wildcard-based renaming
 # mmv: eg.   mmv '*.bk.*' '#1.#2'
 # note: wildcards don't match leading ".", need to specify explicitly
 alias mmv-move='mmv -x'       # move source to target
