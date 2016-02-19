@@ -635,16 +635,10 @@ blankpage () {
 }
 
 files-from-url () {
-	sep="\n"
-	for arg in "$@"; do
-		case "$arg" in
-		  -0)
-			sep="\0";
-			;;
-		esac
-	done
+    # convert a list of 'file://' URLs to filenames
+	sep="${1-\n}";
 	while read -r f; do
-		printf "${f#file://}$sep"
+		printf "${f#file://}$sep";
 	done
 }
 

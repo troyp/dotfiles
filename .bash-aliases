@@ -173,25 +173,31 @@ alias findfile='find . -type f -iname'   # find files with (case-insens) name PA
 # --------------------------
 # FILE MANIPULATION ALIASES.
 # --------------------------
-# alias mans='man -k . | grep'  # use whatis -r (or -w) instead
+# --- looping over files ---
 alias dofiles='for x in *; do'    # process each file in current directory
 # eg.  mapfiles printf "`pwd`/$x\n"
-alias mapfiles='for x in *; do echo "$x" |'    # for each file in current directory (end with `done`)...
-alias sed-file='sed -i.bak'    # sed-file 's/old/new/g' filename.ext
-alias irm='rm -i'  # interactive rm: prompt before removal
-alias editchoose='iselect -ma | xargs emacsclient'
-alias files-from-url-0='while read -r f; do printf "${f#file://}\0"; done'
-alias files-from-url-nl='while read -r f; do printf "${f#file://}\n"; done'
-alias docbfiles='xsel -ob | files-from-url | dolines'
-alias name2fat='perl -pe '"'"'s/\+|:/ - /g and s/\[<>\/\\?+:"\]//g'"'"''
+alias mapfiles='for x in *; do echo "$x" |'    # for each file in cur dir (end with `done`)...
+alias docbfiles='xsel -ob | files-from-url | dolines' # loop over files copied in clipboard
+
+# --- editing files ---
+alias sed-file='sed -i.bak' # edit file in-place (makes backup) sed-file 's/old/new/g' f.ext
+alias editchoose='iselect -ma | xargs emacsclient' # select a file to edit in emacs
+
+# --- copying files ---
+alias name2fat='perl -pe '"'"'s/\+|:/ - /g and s/\[<>\/\\?+:"\]//g'"'"''  # filename -> FAT-compat
 alias mv='mv -i'
 alias rscopy='rsync -avzH --progress'
 alias rsdiff='rsync -rvnc --delete'  # compare two directories by simulating the process of copying the first to overwrite the second
 alias rscopyto='rsync -rvc --delete .'  # copy current directory to another directory, deleting its original contents
 alias rsupdate='rsync -auvzH --progress'
+
+# --- linking files ---
 alias symlink='ln -s'
 alias sln='ln -s'
 alias msymlink='mmv -s'  # mmv multiple symlink using wildcards, eg.  msymlink *.pdf #1_link.pdf
+
+# --- other ---
+alias irm='rm -i'  # interactive rm: prompt before removal
 alias diff='colordiff -u'
 alias diffdir='colordiff -rqb'
 
@@ -296,6 +302,7 @@ alias gitman='git help'
 alias erlman='erl -man'
 alias bashman='mangrep bash'  # see .bash-functions. eg. bashman type
 alias coreinf='info coreutils'   # eg.  coreinf 'env'
+# alias mans='man -k . | grep'  # use whatis -r (or -w) instead
 
 #-------------------
 # OPEN & SU ALIASES.
