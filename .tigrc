@@ -31,6 +31,6 @@ color main-tag magenta default
 color stat-staged green default
 color stat-unstaged red default
 color stat-untracked yellow default
-color tree.header white default
-color tree.directory cyan default
+color tree.head white default
+color tree.dir cyan default
 
