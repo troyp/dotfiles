@@ -295,7 +295,7 @@ command! uni
 command! yanktitle js dactyl.clipboardWrite(buffer.title)
 
 " Show extended hints modes
-command! listhintmodes -js hints.modes
+command! listhintmodes :echo hints.modes
 
 " Text encodings
 "command! encuni :execute "emenu View.Text Encoding.Unicode"
@@ -449,8 +449,8 @@ js hints.addMode('G','pan & zoom SVG',alert);
 
 " focus frame
 map -b xf ;F
-" open multiple links in background tabs
-map -b <C-;> g;b
+
+map <yank_desc> ;Y
 
 " ----------------------------------------------------------------------------- 
 " ,----------,
@@ -583,8 +583,8 @@ command! appcache
 " help
 map -b eh -ex tabopen ~/.pentadactyl/docs/help/index.html
 " single-page pentadactyl help
-"map -b xh :helpall<CR>
-map -b xh -ex tabopen ~/.pentadactyl/docs/all.html
+"map -b e<f1> :helpall<CR>
+map -b e<f1> -ex tabopen ~/.pentadactyl/docs/all.html
 
 
 " Select:
@@ -966,10 +966,14 @@ EOF
 
 command! yanktrueURL
     \ -description "Yank the uncoded URL of the current buffer"
-    \ -js dactyl.clipboardWrite(decodeURIComponent(buffer.URL));
+    \ -js var text=decodeURIComponent(buffer.URL);
+    \     dactyl.clipboardWrite(text);
+    \     dactyl.utils.message(text);
 command! yankfilenameorURL
     \ -description "Yank the unencoded filename or the hierarchical part of the current buffer's URL. Removes queries and fragments."
-    \ -js dactyl.clipboardWrite(decodeURIComponent(buffer.URL.replace(/^file:\/\//,'').replace(/[?#].*/,'')));
+    \ -js var text=decodeURIComponent(buffer.URL.replace(/^file:\/\//,'').replace(/[?#].*/,''));
+    \     dactyl.clipboardWrite(text);
+    \     dactyl.utils.message(text);
 
 command! pwhash
     \ -description "Open Password Hasher"
@@ -1425,6 +1429,29 @@ command! nohandwrite -description "Hide Handwritten Input box." -js hideHandWrit
 map -b <SPACE><SPACE> -js showHandWriteInput();
 
 group user
+
+" -----------------------------------------------------------------------------
+" ,----------------,
+" | Graphemica.com |
+" '----------------'
+
+js <<EOF
+var graphemicaCharSelect = function (words) {
+    var s = words.join(' ');
+    dactyl.execute('tabopen http://graphemica.com/search?q='+s);
+    var charselectListener = function () {
+        dactyl.execute('normal <link_desc>');
+        document.removeEventListener("DOMContentLoaded", charselectListener, false);
+    };
+    document.addEventListener("DOMContentLoaded", charselectListener, false);
+}
+EOF
+
+command! graphemicacharselect 
+    \ -desc "Search for a character on Graphemica.com and select with hints to copy to clipboard."
+    \ -nargs=*
+    \ -js graphemicaCharSelect(args);
+
 
 " -----------------------------------------------------------------------------
 " ,-----------,
