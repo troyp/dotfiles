@@ -293,6 +293,7 @@ if [ -f ~/.bash-aliases ]; then . ~/.bash-aliases; fi
 if [ -f ~/.bash-prompt ]; then . ~/.bash-prompt; fi
 if [ -f ~/.bash-functions ]; then . ~/.bash-functions; fi
 if [ -f ~/.rvm/scripts/rvm ]; then . ~/.rvm/scripts/rvm; fi
+if [ -f ~/.bash-functions-track-installs.sh ]; then . ~/.bash-functions-track-installs.sh; fi
 if [ -f /etc/profile.d/bash_completion.sh ]; then . /etc/profile.d/bash_completion.sh; fi
 if [ -n "$LOAD_SCRATCH" ] && [ -f ~/.bash-scratch ]; then . ~/.bash-scratch; fi
 

@@ -402,10 +402,6 @@ chrometempfiles () {
     echo ~/.cache/google-chrome/Profile $1/Cache/
 }
 
-npmi () {
-    npm install -g "$@" && echo "$@" >> $HOME/.npm_installs
-}
-
 copypath () {
     realpath "$1" | xsel -ib
 }

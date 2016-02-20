@@ -1,12 +1,11 @@
+B::Keywords
 CAM::PDF
-utop
 Devel::REPL
 Devel::REPL::Plugin::ReadLineHistory
+Encode::Guess
+File::Next
+Module::Refresh
 Term::ReadLine
 Term::ReadLine::Gnu
-File::Next
-B::Keywords
 Text::Autoformat
-Encode::Guess
-Module::Refresh
-Text::Autoformat
+utop
