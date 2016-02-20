@@ -714,3 +714,13 @@ lnpath () {
     mkdir -pv "$dest/$relpath";
     ln "$file" "$dest/$file"
 }
+
+tztime () {
+    # FIXME
+    zone=$(find /usr/share/zoneinfo/           \
+          | grep -i "$1"                       \
+          | iselect -kj:KEY_DOWN -kk:KEY_UP -ma)
+    prefix="${zone%/*/*}";
+    tz="${zone#$prefix/}";
+    TZ="$tz" date;
+}
