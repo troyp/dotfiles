@@ -1,4 +1,4 @@
-"     ___________________ 
+"p\     ___________________ 
 "    /                   \
 "    | ,---------------, |
 "    | | PENTADACTYLRC | |
@@ -90,6 +90,11 @@ map -b <A--> <C-x>
 " swap p and P
 map -b p P
 map -b P p
+" swap Space and \
+map -b <Space> \\
+map -b \\ <Space>
+map -b <S-Space> \|
+map -b \| <S-Space>
 
 " Miscellaneous Bindings:
 " Passthrough
@@ -831,6 +836,8 @@ map -b cR :rikLbOff<CR>
 " word highlight
 "map -b ch -ex execute "emenu Tools.Greasemonkey.word highlight<CR>"
 map ch -ex emenu Tools.Greasemonkey.word highlight
+" TeX The World
+map ct -ex emenu Tools.Greasemonkey.TeX the world
 
 " WEB APPS
 " MS Translate
