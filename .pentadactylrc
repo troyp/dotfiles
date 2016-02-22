@@ -1,4 +1,4 @@
-"p\     ___________________ 
+"     ___________________ 
 "    /                   \
 "    | ,---------------, |
 "    | | PENTADACTYLRC | |
@@ -51,6 +51,20 @@ set wildignore='~$','^(.*/)?\..*\.sw[m-p]$','^(.*/)?#.+#$'
 "                                  | KEY BINDINGS |
 "                                  |______________|
 
+
+map -b s <Nop>
+map -b <C-x><C-h> <Nop>
+map -b <C-x> <Nop>
+
+map e <goto>
+map c <site>
+map s <select>
+map S <sidebar>
+map x <extra>
+map X <S-extra>
+map <C-x> <option>
+
+
 " ----------------------------------------------------------------------------- 
 " ,--------------------------,
 " | Normal mode key bindings |
@@ -67,7 +81,6 @@ set wildignore='~$','^(.*/)?\..*\.sw[m-p]$','^(.*/)?#.+#$'
 " free a
 map -b a <Nop>
 " free C-h, use C-,, C-. to replace h, l
-map -b <C-x><C-h> <Nop>
 map -b <C-,> <Left>
 map -b <C-.> <Right>
 " use h, l for tab changing
@@ -83,7 +96,6 @@ map -b <C-S-N> <Nop>
 map -b gf <Nop>
 map -b gs gf
 " replace builtin <C-a> and <C-x> bindings (inrease/decrease URL by 1)
-map -b <C-x> <Nop>
 map -b <C-a> <Nop>
 map -b <A-=> <C-a>
 map -b <A--> <C-x>
@@ -123,13 +135,13 @@ map -b gx -js window.restore(); window.maximize();
 " select all
 nmap -b <C-x>h iGvggy
 " second input area
-map -b xgi 2gi
+map -b <extra>gi 2gi
 " yank page title
-map -b xy -js dactyl.clipboardWrite(buffer.title)
+map -b <extra>y -js dactyl.clipboardWrite(buffer.title)
 " yank buffer URL (unencoded)
 map -b gy -ex yanktrueURL
 " yank filename or buffer URL (unencoded)
-map -b xgy -ex yankfilenameorURL
+map -b <extra>gy -ex yankfilenameorURL
 " jumplist
 map -b <C-j> -ex jumps
 
@@ -140,19 +152,19 @@ map -b <C-/> :noh<CR>
 map -b g/ /\r
 map -b g? ?\r
 " Link search
-map -b s/ /\l
-map -b s? ?\l
+map -b <select>/ /\l
+map -b <select>? ?\l
 " Search from top of page
 map -b <C-x>/ gg/
 " Search for word starting with...
-map -b x/ /\r\w*<Left><Left><left>
+map -b <extra>/ /\r\w*<Left><Left><left>
 " Search for word containing...
 map -b X/ /\r\w*\w*<Left><Left><left>
 " C-' Firefox link search
 map -b "<C-'>" <C-v>'
 " Search using search keyword
-map -b xs :<C-v><C-v><Home>tabopen<Space><Space><Left>
-map -b xS :<C-v><C-v><Home>open<Space><Space><Left>
+map -b <extra>s :<C-v><C-v><Home>tabopen<Space><Space><Left>
+map -b <extra>S :<C-v><C-v><Home>open<Space><Space><Left>
 
 " -----------------------------------------------------------------------------
 " ,---------------------------------------,  MAP COMMANDS.
@@ -278,7 +290,7 @@ command! nointercept -js document.addEventListener('keydown', function(e) { e.st
 
 " Open in Google Chrome:
 command! ochrome :exec '!google-chrome ' + buffer.URL
-map -b xc :ochrome<CR>
+map -b <extra>c :ochrome<CR>
 
 " Show all marks (quickmarks and url/local marks)
 command! allmarks,amarks,am :qmarks | marks
@@ -350,11 +362,11 @@ map -b ! :pintab!<CR>
 " '--------------'
 
 " close other tabs
-map -b x1 :tabonly<CR>
+map -b <extra>1 :tabonly<CR>
 " close tabs to left
-map -b x< -js closeAllToLeft()
+map -b <extra>< -js closeAllToLeft()
 " close tabs to right
-map -b x> -js closeAllToRight()
+map -b <extra>> -js closeAllToRight()
 " close tab range
 " :tc START END : close tabs starting with START and ending with the tabs before END
 " doesn't work on last tab
@@ -366,8 +378,8 @@ command! tcto
     \ -description "close tab range from current tab to END inclusive"
     \ -nargs=1
     \ -js closeTabRange(gBrowser.mCurrentTab.dactylOrdinal, args[0]);
-map -b x: :tc<SPACE>
-map -b x; :tcto<SPACE>
+map -b <extra>: :tc<SPACE>
+map -b <extra>; :tcto<SPACE>
 
 " undo recent closed tab from list
 map -b U :undo<SPACE>
@@ -396,7 +408,7 @@ map -b gON oabout:newtab<CR>
 command! tt -nargs=1 -bang 
     \ -js dactyl.execute("tabmove" + (bang ? "! " : " ") + args[0]); 
 " map -b -arg <C-m>t :tabmove <arg><CR>
-map -b xm :tabmove<SPACE>
+map -b <extra>m :tabmove<SPACE>
 map -b gt :tabmove!<SPACE>
 map -b <C-S-P> :tabmove! -1<CR>
 map -b <C-S-N> :tabmove! +1<CR>
@@ -453,7 +465,7 @@ set eht+=[G]:svg
 js hints.addMode('G','pan & zoom SVG',alert);
 
 " focus frame
-map -b xf ;F
+map -b <extra>f ;F
 
 map <yank_desc> ;Y
 
@@ -559,7 +571,7 @@ map -modes base -b <A-x> <S-f2><Tab>
 " '---------'
 
 " downloads
-map -b ewd :dialog downloads<CR>
+map -b <goto>wd :dialog downloads<CR>
 " about:config
 command! ac 
     \ -description "Open about:config in new window" 
@@ -573,40 +585,39 @@ command! historydialog
 " TODO: places.xul doesn't allow keyboard navigation. Can it be fixed?
 "       In the meantime, use the bookmarks dialog window instead.
 
-map -b ea -ex dialog addons
-map -b ec tabout:config<CR>
-map -b ed tabout:downloads<CR>
-map -b ek tchrome://browser/content/places/places.xul<CR>
-map -b ep tabout:plugins<CR>
-map -b er tabout:sessionrestore<CR>
-map -b es tabout:support<CR>
-map -b es tabout:support<CR>
+map -b <goto>a -ex dialog addons
+map -b <goto>c tabout:config<CR>
+map -b <goto>d tabout:downloads<CR>
+map -b <goto>k tchrome://browser/content/places/places.xul<CR>
+map -b <goto>p tabout:plugins<CR>
+map -b <goto>r tabout:sessionrestore<CR>
+map -b <goto>s tabout:support<CR>
+map -b <goto>s tabout:support<CR>
 command! appcache 
     \ -description "Open about:cache in new tab" 
     \ :tabopen about:cache?storage=appcache
 
 " help
-map -b eh -ex tabopen ~/.pentadactyl/docs/help/index.html
+map -b <goto>h -ex tabopen ~/.pentadactyl/docs/help/index.html
 " single-page pentadactyl help
-"map -b e<f1> :helpall<CR>
-map -b e<f1> -ex tabopen ~/.pentadactyl/docs/all.html
+"map -b <goto><f1> :helpall<CR>
+map -b <goto><f1> -ex tabopen ~/.pentadactyl/docs/all.html
 
 
 " Select:
-map -b s <Nop>
 
-map -b sj :jumps<CR>
-map -b s;h :history!<SPACE>
-map -b sa :addons<CR>
-map -b sm :emenu<SPACE>
-map -b sp :set<SPACE>
-map -b sc :set!<SPACE>
-map -b s;k :bmarks!<SPACE>
+map -b <select>j :jumps<CR>
+map -b <select>;h :history!<SPACE>
+map -b <select>a :addons<CR>
+map -b <select>m :emenu<SPACE>
+map -b <select>p :set<SPACE>
+map -b <select>c :set!<SPACE>
+map -b <select>;k :bmarks!<SPACE>
 
 " List:
-map -b sb :buffers<SPACE>
-map -b sh :history<SPACE>
-map -b sk :bmarks<SPACE>
+map -b <select>b :buffers<SPACE>
+map -b <select>h :history<SPACE>
+map -b <select>k :bmarks<SPACE>
 
 " ----------------------------------------------------------------------------- 
 " ,--------------,
@@ -615,27 +626,27 @@ map -b sk :bmarks<SPACE>
 
 " Manual sidebar selection with si, toggle with S
 map -b si :sidebar<SPACE>
-" map -b S :sidebar!<CR>
+" map -b <sidebar> :sidebar!<CR>
 " Open/close AiOS, switch focus
-"map -b S :js aios_toggleSidebar()<CR><f6><f6>
+"map -b <sidebar> :js aios_toggleSidebar()<CR><f6><f6>
 " Open AiOS, switch focus and enter passthrough
-"map -b sS :js aios_toggleSidebar()<CR><f6><f6><C-z>
+"map -b <select>S :js aios_toggleSidebar()<CR><f6><f6><C-z>
 
 " Sidebar selection:
-map -b sA :sidebar! Add-ons<CR>
-map -b ssA :sidebar! Add-ons<CR><f6><f6><C-z>
-map -b sM :sidebar! Bookmarks<CR>
-map -b ssM :sidebar! Bookmarks<CR><f6><f6><C-z>
-map -b sD :sidebar! Downloads<CR>
-map -b ssD :sidebar! Downloads<CR><f6><f6><C-z>
-map -b sH :sidebar! History<CR>
-map -b ssH :sidebar! History<CR><f6><f6><C-z>
-map -b sM :sidebar! Moji<CR>
-map -b ssM :sidebar! Moji<CR><f6><f6><C-z>
-map -b sO :sidebar! HeadingsMap<CR>
-map -b ssO :sidebar! HeadingsMap<CR><f6><f6><C-z>
-map -b sP :sidebar! Preferences<CR>
-map -b ssP :sidebar! Preferences<CR><f6><f6><C-z>
+map -b <select>A :sidebar! Add-ons<CR>
+map -b <sidebar>A :sidebar! Add-ons<CR><f6><f6><C-z>
+map -b <select>M :sidebar! Bookmarks<CR>
+map -b SM :sidebar! Bookmarks<CR><f6><f6><C-z>
+map -b <select>D :sidebar! Downloads<CR>
+map -b SD :sidebar! Downloads<CR><f6><f6><C-z>
+map -b <select>H :sidebar! History<CR>
+map -b SH :sidebar! History<CR><f6><f6><C-z>
+map -b <select>M :sidebar! Moji<CR>
+map -b SM :sidebar! Moji<CR><f6><f6><C-z>
+map -b <select>O :sidebar! HeadingsMap<CR>
+map -b SO :sidebar! HeadingsMap<CR><f6><f6><C-z>
+map -b <select>P :sidebar! Preferences<CR>
+map -b SP :sidebar! Preferences<CR><f6><f6><C-z>
 
 " ----------------------------------------------------------------------------- 
 " ,---------------------,
@@ -678,9 +689,9 @@ group temp
 group user
 
 map -b gc y:style -group=temp <C-v><C-v><Space>
-map -b xgs :emenu View.Page Style.
-" map -b x<C-s> :emenu View.Page Style.No Style<CR>
-map -b x<C-s> :set usermode!<CR>
+map -b <extra>gs :emenu View.Page Style.
+" map -b <extra><C-s> :emenu View.Page Style.No Style<CR>
+map -b <extra><C-s> :set usermode!<CR>
 
 " =============================================================================
 "                            ___________________                               
@@ -690,7 +701,7 @@ map -b x<C-s> :set usermode!<CR>
                             
 group developer
 
-map -b xj :js!<CR>
+map -b <extra>j :js!<CR>
 
 " -----------------------------------------------------------------------------
 " ,-------------------------,
@@ -700,7 +711,7 @@ command! webide :feedkeys! <S-f8>
 command! browserconsole :feedkeys! <C-S-J>
 command! devtools :execute "emenu Tools.Web Developer.Toggle Tools"
 command! storageinspector :execute "emenu Tools.Web Developer.Storage Inspector"
-map -b xd -ex emenu Tools.Web Developer.Eyedropper<CR>
+map -b <extra>d -ex emenu Tools.Web Developer.Eyedropper<CR>
 
 " -----------------------------------------------------------------------------
 " ,---------------,
@@ -780,7 +791,6 @@ function toggleMagnifier() {
 }
 EOF
 
-map -b so :togglestylesall<CR>
 map -b zx :magnifier!<CR>
 
 group user
@@ -811,7 +821,7 @@ command! oku -description "Open local PDF in Okular"
 " Autopagerize:
 command! pagezipper :open javascript:(function(){if(window['pgzp']){_pgzpToggleBookmarklet();}else{window._page_zipper_is_bookmarklet=true;window._page_zipper=document.createElement('script');window._page_zipper.type='text/javascript';window._page_zipper.src='//www.printwhatyoulike.com/static/pagezipper/pagezipper_10.js';document.getElementsByTagName('head')[0].appendChild(window._page_zipper);}})();<CR>
 command! pagezipper opz<CR>
-map xz -ex open javascript:(function(){if(window['pgzp']){_pgzpToggleBookmarklet();}else{window._page_zipper_is_bookmarklet=true;window._page_zipper=document.createElement('script');window._page_zipper.type='text/javascript';window._page_zipper.src='//www.printwhatyoulike.com/static/pagezipper/pagezipper_10.js';document.getElementsByTagName('head')[0].appendChild(window._page_zipper);}})();
+map <extra>z -ex open javascript:(function(){if(window['pgzp']){_pgzpToggleBookmarklet();}else{window._page_zipper_is_bookmarklet=true;window._page_zipper=document.createElement('script');window._page_zipper.type='text/javascript';window._page_zipper.src='//www.printwhatyoulike.com/static/pagezipper/pagezipper_10.js';document.getElementsByTagName('head')[0].appendChild(window._page_zipper);}})();
 
 " Print What You Like:
 command! prwul -description "run PrintWhatYouLike"
@@ -824,24 +834,23 @@ command! dtamaagr -description "Open DownThemAll manager"
 " Rikaisama:
 " CSS - chrome://rikaichan/skin/popup-blue.css
 " keybindings: stored as ASCII codes in rcxConfig.kb* entries
-map -b xx -js rcxMain.saveToFile()
+map -b <extra>x -js rcxMain.saveToFile()
 command! rikLbOn -description "Rikaisama lookupbar on"
     \ -js rcxMain.lbToggle()
 command! rikLbOff -description "Rikaisama lookupbar off"
     \ -js rcxMain.lbHide()
-map -b cr :rikLbOn<CR>
-map -b cR :rikLbOff<CR>
+map -b <site>r :rikLbOn<CR>
+map -b <site>R :rikLbOff<CR>
 
 " USERSCRIPTS
 " word highlight
-"map -b ch -ex execute "emenu Tools.Greasemonkey.word highlight<CR>"
-map ch -ex emenu Tools.Greasemonkey.word highlight
+map <site>h -ex emenu Tools.Greasemonkey.word highlight
 " TeX The World
-map ct -ex emenu Tools.Greasemonkey.TeX the world
+map <site>t -ex emenu Tools.Greasemonkey.TeX the world
 
 " WEB APPS
 " MS Translate
-map -b xt -js (function(){var s=content.document.createElement('script'); s.type='text/javascript'; s.src='http://labs.microsofttranslator.com/bookmarklet/default.aspx?f=js&to=en'; content.document.body.insertBefore(s, content.document.body.firstChild);})();
+map -b <extra>t -js (function(){var s=content.document.createElement('script'); s.type='text/javascript'; s.src='http://labs.microsofttranslator.com/bookmarklet/default.aspx?f=js&to=en'; content.document.body.insertBefore(s, content.document.body.firstChild);})();
 
 " PageZipper
 " activate pagezipper bookmark (keyword pz)
@@ -996,7 +1005,7 @@ command! pwhash
 	sitefield.focus();	
     });
 EOF
-map -b xp :pwhash<CR>
+map -b <extra>p :pwhash<CR>
 
 command! tr
     \ -description "Translate: tr FROM TO TEXT"
@@ -1027,7 +1036,7 @@ EOF
 
 " ----------------------------------------------------------------------------- 
 
-map -b xw :toggleWayback<CR>
+map -b <extra>w :toggleWayback<CR>
 command! toggleWayback 
     \ -bang
     \ -description "Toggle web page and archive.org copy"
@@ -1048,7 +1057,7 @@ EOF
 
 " ----------------------------------------------------------------------------- 
 
-map -b cs :toggleHTTPS<CR>
+map -b <site>s :toggleHTTPS<CR>
 command! toggleHTTPS 
    \ -description "Toggle protocol between HTTP and HTTPS" 
    \ -js toggleHTTPS()
@@ -1068,7 +1077,7 @@ EOF
 
 " ----------------------------------------------------------------------------- 
 
-map -b xk :kanjisearch!<CR>
+map -b <extra>k :kanjisearch!<CR>
 command! kanjisearch 
     \ -bang -description "kanji search on jisho.org" 
     \ -js kanjiSearchJisho(dactyl.clipboardRead(), bang);
@@ -1208,9 +1217,9 @@ EOF
 group google -locations=google.com,google.com.*
 
 " restrict search to pages in a specific language
-map -b cgl O&lr=lang_
+map -b <site>gl O&lr=lang_
 " restrict search to pages originating in a specific country
-map -b cgc O&cr=
+map -b <site>gc O&cr=
 
 group user
 
@@ -1249,7 +1258,7 @@ group user
 group animelyrics -locations=animelyrics.com
 
 " Go to "Print view with kanji" if it exists, or else "Print view"
-map cP <C-v>'Print<Space>view<f3><CR>
+map <site>P <C-v>'Print<Space>view<f3><CR>
 
 " -----------------------------------------------------------------------------
 " ,----------,
@@ -1339,12 +1348,12 @@ group user
 " '--------'
 group bookzz -locations=bookzz.org
 
-map -b cz :loginAndSearch<CR>
+map -b <site>z :loginAndSearch<CR>
 
 command! loginAndSearch
     \ -description "Sign in and repeat search for ID in input field"
     \ -js loginAndSearch(getSearchField());
-map -b xz 
+map -b <extra>z 
     \ -description "Sign in and repeat search for ID in input field"
     \ -js loginAndSearch(getSearchField());
 
@@ -1373,7 +1382,7 @@ group user
 " '------------'
 group github -locations=github.com,githubusercontent.com,rawgit.com
 
-map -b ch :togglehtmlview<CR>
+map -b <site>h :togglehtmlview<CR>
 
 command! togglehtmlview 
      \ -description "Toggle between HTML file and rendered view"
@@ -1469,7 +1478,7 @@ group jsbin -locations=jsbin.com
 " remove all existing jsbin autocmds
 autocmd! -group jsbin
 
-map -b xm -js toggleMenu();
+map -b <extra>m -js toggleMenu();
 "map -modes pass-through -b <A-1> <C-1>
 "map -modes pass-through -b <A-2> <C-2>
 "map -modes pass-through -b <A-3> <C-3>
@@ -1517,7 +1526,7 @@ group jisho -locations=jisho.org
 " remove all existing jisho autocmds
 autocmd! -group jisho
 
-map -b cr :toggleromaji<CR>
+map -b <site>r :toggleromaji<CR>
 
 " toggleromaji: adds/removes #romaji tag to toggle between kana and romaji:
 command! toggleromaji 
@@ -1718,7 +1727,7 @@ EOF
 command! repositionmodal
      \ -description "Reposition modal box to scroll position"
      \ -js repositionModal();
-map -b xM :repositionmodal<CR>
+map -b <extra>M :repositionmodal<CR>
 
 
 group user
