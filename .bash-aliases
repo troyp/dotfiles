@@ -177,7 +177,9 @@ alias findfile='find . -type f -iname'   # find files with (case-insens) name PA
 alias dofiles='for x in *; do'    # process each file in current directory
 # eg.  mapfiles printf "`pwd`/$x\n"
 alias mapfiles='for x in *; do echo "$x" |'    # for each file in cur dir (end with `done`)...
-alias docbfiles='xsel -ob | files-from-url | dolines' # loop over files copied in clipboard
+alias docbfiles='xsel -ob | files-from-url | dolines' # loop over files copied in clipboard (convert from file:// URL)
+alias docburls='xsel -ob | dolines'                   # loop over urls copied to clipboard
+alias docburls-reversed='xsel -ob | tac | dolines'    # loop over urls copied to clipboard (reverse order)
 
 # --- editing files ---
 alias sed-file='sed -i.bak' # edit file in-place (makes backup) sed-file 's/old/new/g' f.ext
