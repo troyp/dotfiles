@@ -155,16 +155,16 @@ map -b g? ?\r
 map -b <select>/ /\l
 map -b <select>? ?\l
 " Search from top of page
-map -b <C-x>/ gg/
+map -b <option>/ gg/
 " Search for word starting with...
 map -b <extra>/ /\r\w*<Left><Left><left>
 " Search for word containing...
-map -b X/ /\r\w*\w*<Left><Left><left>
+map -b <S-extra>/ /\r\w*\w*<Left><Left><left>
 " C-' Firefox link search
 map -b "<C-'>" <C-v>'
-" Search using search keyword
-map -b <extra>s :<C-v><C-v><Home>tabopen<Space><Space><Left>
-map -b <extra>S :<C-v><C-v><Home>open<Space><Space><Left>
+" Search clipboard contents using search keyword
+map -b <leader>s :<C-v><C-v><Home>tabopen<Space><Space><Left>
+map -b <leader>S :<C-v><C-v><Home>open<Space><Space><Left>
 
 " -----------------------------------------------------------------------------
 " ,---------------------------------------,  MAP COMMANDS.
