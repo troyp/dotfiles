@@ -720,3 +720,35 @@ tztime () {
     tz="${zone#$prefix/}";
     TZ="$tz" date;
 }
+
+symlink-by-correspondence () {
+    # symlink-by-correspondence DIR TO_DIR:  Each subdirectory d in DIR/x is symlinked
+    # as TO_DIR/x/DIRNAME (where DIR is DIRPATH/DIRNAME)
+    # Options:
+    # -i        case-insensitive matching of TO subdirectories to DIR
+    #           subdirectories.
+    if [ "$1" == "-i" ]; then case_insensitive="true"; shift; fi;
+    A="${1%/}";
+    B="${2%/}";
+    A_NAME="${A##*/}";
+    echo "A: $A"
+    echo "B: $B"
+    echo "ANAME: $A_NAME"
+    for dir in "$B/"*/; do 
+        dir="${dir%/}";
+        if [ -n "$case_insensitive" ]; then
+            dir_lower=`echo "$dir_name" | tr "A-Z" "a-z"`;
+        fi;
+        echo "dir: $dir"
+        A_match=`find "$A" -maxdepth 1 -type d -iwholename "$dir"`;
+        A_match="${A_match%/}";
+        A_dir_name="${A_match##*/}";
+        if [[ -n "$A_match" ]]; then
+            if [[ "$A" =~ ^[^/] ]]; then                   # relative target
+                A=`python -c "import os.path; print os.path.relpath('$A', '$B/$dir_name')"`;
+            fi;
+            echo "$A/$A_dir_name  <---  $B/$dir_name/$A_NAME";
+            ln --symbolic -T "$A/$A_dir_name" "$B/$dir_name/$A_NAME";
+        fi;
+    done;
+}
