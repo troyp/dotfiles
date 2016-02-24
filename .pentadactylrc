@@ -63,6 +63,7 @@ map S <sidebar>
 map x <extra>
 map X <S-extra>
 map <C-x> <option>
+map , <leader>
 
 
 " ----------------------------------------------------------------------------- 
@@ -102,11 +103,6 @@ map -b <A--> <C-x>
 " swap p and P
 map -b p P
 map -b P p
-" swap Space and \
-map -b <Space> \\
-map -b \\ <Space>
-map -b <S-Space> \|
-map -b \| <S-Space>
 
 " Miscellaneous Bindings:
 " Passthrough
