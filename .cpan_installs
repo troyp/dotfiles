@@ -8,4 +8,3 @@ Module::Refresh
 Term::ReadLine
 Term::ReadLine::Gnu
 Text::Autoformat
-utop
