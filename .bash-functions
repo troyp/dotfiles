@@ -752,3 +752,11 @@ symlink-by-correspondence () {
         fi;
     done;
 }
+
+sortinplace() {
+    for file in "$@"; do
+        temp=`tempfile`;
+        cat "$file" > $temp;
+        sort -u $temp > "$file";
+    done;
+}
