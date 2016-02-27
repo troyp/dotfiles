@@ -115,7 +115,7 @@ EOF
 " close tabs to left
 map x< :js closeAllToLeft()<CR>
 " close tabs to right
-map x> .js closeAllToRight()<CR>
+map x> :js closeAllToRight()<CR>
 
 command! closealltoright :js closeAllToRight()
 command! closealltoleft :js closeAllToLeft()
