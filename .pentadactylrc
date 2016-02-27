@@ -39,7 +39,7 @@ js editor.defaultRegister="+"
 set! browser.tabs.closeWindowWithLastTab=false
 set editor='roxterm --replace -e vim -f +<line> +"sil! call cursor(0, <column>)" <file>'
 " nextpattern, previouspattern
-" default: '^\s*Next Page\s*$','^\s*Njapanese_table_111215ext [>»]','\bnext\b',^>$,'^(>>|»)$','^(>|»)','(>|»)$','\bmore\b',
+" default: '^\s*Next Page\s*$','^\s*Next [>»]','\bnext\b',^>$,'^(>>|»)$','^(>|»)','(>|»)$','\bmore\b',
 " default: '^\s*Prev(ious)? Page\s*$','[<«] Prev\s*$','\bprev(ious)?\b',^<$,'^(<<|«)$','^(<|«)',
 set nextpattern='^\s*Next Page\s*$','^\s*Next [>»]','\bnext\b',^>$,'^(>>|»)$','^(>|»)','(>|»)$','\bMore Words\b','\bmore\b',
 set wildignore='~$','^(.*/)?\..*\.sw[m-p]$','^(.*/)?#.+#$'
