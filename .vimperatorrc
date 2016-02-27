@@ -83,3 +83,39 @@ command! forwardt -description "Duplicate tab and go forward in the browser hist
 EOF
 
 command! reloadPlugins :js liberator.pluginFiles = {}; liberator.loadPlugins();
+
+
+" -------------------------------------------------------------------------------
+" ,------------------------------,
+" | Close All Tabs to Right/Left |
+" '------------------------------'
+
+js <<EOF
+
+closeAllToRight = function () {
+    var current = tabs.getTab();
+    var currentIx = tabs.index(current);
+    var nexttab = current.nextElementSibling;
+    var N = tabs.count;
+    var numToClose = N - (currentIx + 1);
+    tabs.remove(nexttab, numToClose);
+}
+
+closeAllToLeft = function () {
+    var current = tabs.getTab();
+    var currentIx = tabs.index(current);
+    var firsttab = tabs.getTab(0);
+    var N = tabs.count;
+    var numToClose = currentIx;
+    tabs.remove(firsttab, numToClose);
+}
+
+EOF
+
+" close tabs to left
+map x< :js closeAllToLeft()<CR>
+" close tabs to right
+map x> .js closeAllToRight()<CR>
+
+command! closealltoright :js closeAllToRight()
+command! closealltoleft :js closeAllToLeft()
