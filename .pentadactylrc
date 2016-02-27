@@ -199,10 +199,13 @@ map -modes command-line,insert <C-S-s> -js alert("not implemented");
 execute "map -modes command-line,insert -b <C-m> " + user.myemail
 execute "map -modes command-line,insert -b <C-S-m> " + user.myemail2
 execute "map -modes command-line,insert -b <C-S-I> " + user.myname
+execute "map -modes command-line,insert -b <C-S-T> " + user.myfirstname
+execute "map -modes command-line,insert -b <C-S-L> " + user.mylastname
 execute "map -modes command-line,insert -b <C-S-W> " + user.mymasterpw
 execute "map -modes command-line,insert -b <C-S-A> " + user.mystreet
 execute "map -modes command-line,insert -b <C-S-S> " + user.mysuburb
 execute "map -modes command-line,insert -b <C-S-D> " + user.myaddress
+execute "map -modes command-line,insert -b <C-S-P> " + user.myphone
 
 
 " -----------------------------------------------------------------------------
