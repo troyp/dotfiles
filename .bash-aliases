@@ -340,6 +340,8 @@ alias locatefn='declare -F'    # requires shopt -s extdebug
 alias runfromhere='export PATH="./:$PATH"'
 alias listopts='echo "$SHELLOPTS:$BASHOPTS" | tr ":" "\n"'
 alias readvar="read -r -d ''"
+alias typa='type -a'
+alias typp='type -p'
 
 
 # ---------------
