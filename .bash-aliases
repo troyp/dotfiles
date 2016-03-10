@@ -123,29 +123,33 @@ alias ecp2="qcp -f 'dc' -o autowidth,spaces,width=80,swap -e 'emacsclient -nw'" 
 # RENAME (PERL)
 alias ren=rename
 alias renn='rename -n'    # rename preview (dry-run)
-alias add-png-ext="rename 's/\s*$/.png/' *"
-# ren-year-to-end: eg. rename '(2000)  file name.more.pdf' -> 'file name.more (2000).pdf'
-alias ren-year-to-end='rename '"'"'s/^(\(\d+\)) *-? *(.*)\.(.+)$/$2 $1.$3/'"'"''
-alias ren-year-to-end-preview='rename -n '"'"'s/^(\(\d+\)) *-? *(.*)\.(.+)$/$2 $1.$3/'"'"''
-alias ren-dot-to-space='rename '"'"'s/\.(?=[^.]+\.)/ /g unless /^\./'"'"''
-alias ren-dot-to-space-preview='rename -n '"'"'s/\.(?=[^.]+\.)/ /g unless /^\./'"'"''
-alias ren-space-to-dot="rename 'tr/ /./'"
-alias ren-underscore-to-space="rename 'tr/_/ /'"
-alias ren-space-to-underscore="rename 'tr/ /_/'"
-alias ren-uppercase="rename 'tr/a-z/A-Z/'"
-alias ren-lowercase="rename 'tr/A-Z/a-z/'"
+alias add-png-ext="ren 's/\s*$/.png/' *"
+# ren-year-to-end: eg. ren '(2000)  file name.more.pdf' -> 'file name.more (2000).pdf'
+alias ren-year-to-end='ren '"'"'s/^(\([0-9]+\)) *-? *(.*)\.(.+)$/$2 $1.$3/'"'"''
+alias ren-year-to-end-preview='ren -n '"'"'s/^(\([0-9]+\)) *-? *(.*)\.(.+)$/$2 $1.$3/'"'"''
+alias ren-dot-to-space='ren '"'"'s/\.(?=[^.]+\.)/ /g unless /^\./'"'"''
+alias ren-dot-to-space-preview='ren -n '"'"'s/\.(?=[^.]+\.)/ /g unless /^\./'"'"''
+alias ren-space-to-dot="ren 'tr/ /./'"
+alias ren-underscore-to-space="ren 'tr/_/ /'"
+alias ren-space-to-underscore="ren 'tr/ /_/'"
+alias ren-uppercase="ren 'tr/a-z/A-Z/'"
+alias ren-lowercase="ren 'tr/A-Z/a-z/'"
    # FIXME:
 # ren-strip-extra-from-year: eg. rename 'file (extra-info, 2000).pdf' -> 'file (2000).pdf'
-alias ren-strip-extra-from-year="rename 's/\([-\w_.']+, ?(\d\d\d\d)\)\.(\w+)"'$/($1).$2/'
-alias ren-strip-extra-from-year-preview="rename -n '"'s/[(][-\w_.'"'"']+, ?(\d{4})[)](?=\.\w+)$/($1)/'
-alias ren-strip-left-of-number='rename '"'"'s/[^0-9]*(?=\d+)//'"'"
-alias ren-strip-left-of-number-preview='rename -n '"'"'s/[^0-9]*(?=\d+)//'"'"
-alias ren-extract-number='ren '\''s/[^1-9]*(\d+).*\.ts/$1.ts/'\'
-alias ren-extract-number-preview='ren -n '\''s/[^1-9]*(\d+).*\.ts/$1.ts/'\'
+alias ren-strip-extra-from-year="ren 's/\([-\w_.']+, ?([0-9]{4})\)\.(\w+)"'$/($1).$2/'
+alias ren-strip-extra-from-year-preview="ren -n '"'s/\([-\w_.'"'"']+, ?([0-9]{4})\)(?=\.\w+)$/($1)/'
+alias ren-strip-left-of-number='ren '"'"'s/[^0-9]*(?=[0-9]+)//'"'"
+alias ren-strip-left-of-number-preview='ren -n '"'"'s/[^0-9]*(?=[0-9]+)//'"'"
+alias ren-extract-number='ren '\''s/[^1-9]*([0-9]+).*?(([.][^.]+)?)/$1$2/'\'
+alias ren-extract-number-preview='ren -n '\''s/[^1-9]*([0-9]+).*?(([.][^.]+)?)/$1$2/'\'
+alias ren-extract-number-ext='ren '\''s/[^1-9]*([0-9]+).*(\.[^.]+)/$1$2/'\'
+alias ren-extract-number-ext-preview='ren -n '\''s/[^1-9]*([0-9]+).*(\.[^.]+)/$1$2/'\'
+alias ren-extract-number-no-ext='ren '\''s/[^1-9]*([0-9]+).*/$1/'\'
+alias ren-extract-number-no-ext-preview='ren -n '\''s/[^1-9]*([0-9]+).*/$1/'\'
 # ren-titlecase: note - removes newlines from titles
-alias ren-titlecase='rename '\''use Text::Autoformat; my @parts=split /\./; my $n=$#parts; my @newparts = map {autoformat( $_, {case=>qw(highlight)})} @parts[0..$n]; $newparts[$n] = $parts[$n]; $_ = join(".",@newparts); s/\n//g'\'
-alias ren-titlecase-preview='rename -n '\''use Text::Autoformat; my @parts=split /\./; my $n=$#parts; my @newparts = map {autoformat( $_, {case=>qw(highlight)})} @parts[0..$n]; $newparts[$n] = $parts[$n]; $_ = join(".",@newparts); s/\n//g'\'
-alias ren-manga-add-leading-zero='rename '\''s/第(\d+)巻/第0$1巻/'\'
+alias ren-titlecase='ren '\''use Text::Autoformat; my @parts=split /\./; my $n=$#parts; my @newparts = map {autoformat( $_, {case=>qw(highlight)})} @parts[0..$n]; $newparts[$n] = $parts[$n]; $_ = join(".",@newparts); s/\n//g'\'
+alias ren-titlecase-preview='ren -n '\''use Text::Autoformat; my @parts=split /\./; my $n=$#parts; my @newparts = map {autoformat( $_, {case=>qw(highlight)})} @parts[0..$n]; $newparts[$n] = $parts[$n]; $_ = join(".",@newparts); s/\n//g'\'
+alias ren-manga-add-leading-zero='ren '\''s/第([0-9]+)巻/第0$1巻/'\'
 
 ## MMV: simple wildcard-based renaming
 # mmv: eg.   mmv '*.bk.*' '#1.#2'
@@ -256,6 +260,12 @@ alias wgetcat='wget -pE -O' # usage: wgetcat <filename> <filename> ... <url> #UN
 alias listhttplinks='xargs elinks --dump | grep "http" | sed "s/.*http/http/g"' # Waits for url from stdin then lists http links on page. echo url | listhttplinks. Pipe to wget.
 alias listhttplinks2='xargs wget -O - 2>&1 | grep -i "http:" | sed "s/^.*http/http/\" | cut -d"\"" -f1 | sort -u'
 # alias cbdl (clipboard aliases)
+
+# -----------------
+# DOWNLOAD ALIASES.
+# -----------------
+alias dl-noice='git clone http://git.2f30.org/noice/'
+alias install-noice='dl-noice; cd noice; make; cp noice /opt/bin/'
 
 
 # ----------------
@@ -615,6 +625,7 @@ alias xakill='xargs kill'
 alias recol='pr -t --columns'  # recolumnate single-column data
 alias fromjis='iconv -f SHIFT-JIS -t UTF-8'
 alias tojis='iconv -f UTF-8 -t SHIFT-JIS'
+alias translit='iconv -f utf-8 -t ascii//translit'  # transliterate western characters
 
 # -----------
 # FORMATTING.
@@ -722,12 +733,6 @@ alias ibusd='IBUS_ENABLE_SYNC_MODE=1 ibus-daemon -drx'
 alias thumbsdb='vinetto -o ./.thumbnails ./?humbs.db'
 alias kanjitomo='java -Xmx1000m -jar /opt/KanjiTomo/KanjiTomo.jar -run'
 
-
-# -----------------
-# DOWNLOAD ALIASES.
-# -----------------
-alias dl-noice='git clone http://git.2f30.org/noice/'
-alias install-noice='dl-noice; cd noice; make; cp noice /opt/bin/'
 
 # --------------
 # OTHER ALIASES.
