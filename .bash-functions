@@ -760,3 +760,18 @@ sortinplace() {
         sort -u $temp > "$file";
     done;
 }
+
+github-clone-with-wiki() {
+    repo="${1:-`xsel -ob`}";
+    if [[ ! $repo =~ \.git$ ]]; then
+        # if arg is missing .git ending, add it
+        repo="${repo}.git";
+    fi;
+    if [[ ! $repo =~ ^https://github.com/ ]]; then
+        # assume arg is either github.com/user/repo.git or user/repo.git
+        repo="https://github.com/${repo#github.com/}";
+    fi;
+    wiki="${repo%.git}.wiki.git";
+    git clone "$repo";
+    git clone "$wiki";
+}
