@@ -528,6 +528,25 @@ function img-rot () {
     convert "$infile" -rotate "$cw_angle" "$outfile"
 }
 
+function img-rot () {
+    # requires imagemagick/graphicsmagick
+    infile="$1"
+    cw_angle="$2"
+    outfile="${3:-${infile}_rot_$2}"
+    if [ -f "$outfile" ]; then
+        echo "File '$outfile' exists." 
+	confirm "Overwrite?" || return 1
+    fi
+    convert "$infile" -rotate "$cw_angle" "$outfile"
+}
+
+function img-resize () {
+    infile="$1"
+    size="$2"
+    outfile="${3:=${infile}_resized"
+    convert "$infile" -resize "$size" "$outfile"
+}
+
 function confirm () {
     Q="${1:-Are you sure?}"
     read -p "$Q " -n 1; echo
@@ -603,6 +622,13 @@ jlc () {
 }
 
 blankpage () {
+    help="
+blankpage                - creates a white 1000x1600 page called 'out.jpg'
+blankpage NAME           - creates a white 1000x1600 page called NAME
+blankpage SIZE NAME      - creates a white page of size SIZE called NAME
+blankpage SIZE COL NAME  - creates a page of size SIZE and colour COL, called NAME
+";
+    if [[ "$1" =~ ^--?h(elp)?$ ]]; then echo "$help"; shift; fi;
     # requires imagemagick/graphicsmagick
 	case "$#" in
 	  0)
