@@ -1,3 +1,4 @@
+#                                                           -*- shell-script -*-
 # *************
 # *           *
 # * FUNCTIONS *
@@ -35,15 +36,15 @@ grepdict () {
     grep $1 /usr/share/dict/words
 }
 
-alias-function () 
-{ 
+alias-function ()
+{
     old=$1;
     new=$2;
     eval "$(echo "$new ()"; declare -f $old | tail -n +2)";
 }
 
-rename-function () 
-{ 
+rename-function ()
+{
     old=$1;
     new=$2;
     eval "$(echo "$new ()"; declare -f $old | tail -n +2)";
@@ -543,7 +544,7 @@ function img-rot () {
 function img-resize () {
     infile="$1"
     size="$2"
-    outfile="${3:=${infile}_resized"
+    outfile="${3:=${infile}_resized}"
     convert "$infile" -resize "$size" "$outfile"
 }
 
@@ -649,7 +650,7 @@ blankpage SIZE COL NAME  - creates a page of size SIZE and colour COL, called NA
 	  3)
 		size="$1";
 		col="xc:$2";
-        
+
 		out="$3";
 		;;
 	esac
@@ -670,7 +671,7 @@ rename-prefix-dir () {
 		filepath=`readlink -f "$arg"`;
 		dirpath="${filepath%/*}";
 		dirname="${dirpath##*/}";
-		mv -i "$arg" "$dirname - $filename"; 
+		mv -i "$arg" "$dirname - $filename";
 	done
 }
 
@@ -680,20 +681,6 @@ rename-strip-extra-from-year () {
     str='s/[(][-\w_.'"'"']+, ?(\d{4})[)](?=\.\w+)$/($1)/'
     echo "Renaming with Perl expression: $str"
     rename "$options" "$str" "$@";
-}
-
-rename-adjust-numbers () {
-    #FIXME: only works with -n option
-    options=""; if [ "$1" == "-n" ]; then options="-n"; shift; fi
-    SEP=" "; if [ "$1" == "-sep" ]; then SEP="$2"; shift 2; fi
-    NUM_START="$1"
-    NUM_LEN="$2"
-    NUM_ADJUST="$3"
-    NAME_START="$4"
-    shift 4
-    str='$_=(substr($_,'"$NUM_START,$NUM_LEN)+$NUM_ADJUST).'$SEP'"'.substr($_,'"$NAME_START)"
-    echo "rename $options '$str'"
-    rename "$options" "$str" "$@"
 }
 
 bci () {
@@ -760,7 +747,7 @@ symlink-by-correspondence () {
     echo "A: $A"
     echo "B: $B"
     echo "ANAME: $A_NAME"
-    for dir in "$B/"*/; do 
+    for dir in "$B/"*/; do
         dir="${dir%/}";
         if [ -n "$case_insensitive" ]; then
             dir_lower=`echo "$dir_name" | tr "A-Z" "a-z"`;
