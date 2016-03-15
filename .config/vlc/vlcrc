@@ -68,7 +68,7 @@
 #lua-config=
 
 # Password (string)
-#http-password=
+http-password=ithaca
 
 # Source directory (string)
 #http-src=
@@ -89,7 +89,7 @@
 #telnet-port=4212
 
 # Password (string)
-#telnet-password=
+telnet-password=ithaca
 
 [gestures] # Mouse gestures control interface
 
@@ -1812,7 +1812,7 @@ qt-video-autoresize=0
 #qt-fs-controller=1
 
 # Save the recently played items in the menu (boolean)
-#qt-recentplay=1
+qt-recentplay=0
 
 # List of words separated by | to filter (string)
 #qt-recentplay-filter=
@@ -3593,7 +3593,7 @@ skins2-transparency=1
 #audio-desync=0
 
 # Audio resampler (string)
-#audio-resampler=
+audio-resampler=any
 
 # Replay gain mode (string)
 #audio-replay-gain-mode=none
@@ -3797,10 +3797,10 @@ vout=any
 #audio-track=-1
 
 # Subtitle track (integer)
-#sub-track=-1
+sub-track=1
 
 # Audio language (string)
-#audio-language=
+audio-language=JP,Japanese,Jap,392,GB,US,En,English,826,uk,any
 
 # Subtitle language (string)
 #sub-language=
@@ -3860,7 +3860,7 @@ vout=any
 #http-host=
 
 # HTTP server port (integer)
-#http-port=9090
+#http-port=8080
 
 # HTTPS server port (integer)
 #https-port=8443
@@ -4109,7 +4109,7 @@ album-art=2
 #intf=
 
 # Extra interface modules (string)
-extraintf=lua:http:telnet
+extraintf=lua:http:telnet:oldrc
 
 # Control interfaces (string)
 #control=
@@ -4133,7 +4133,7 @@ extraintf=lua:http:telnet
 #global-key-play-pause=
 
 # Play/Pause (string)
-#key-play-pause=Space	Media Play Pause
+key-play-pause=Space
 
 # Pause only (string)
 #global-key-pause=
