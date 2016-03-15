@@ -1,3 +1,4 @@
+#                                                                 -*- shell-script -*-
 # to override: use \ or '' (eg. \ls or 'ls')
 # to "escape" ' inside '' (when you need both ' and " in alias): use '"'"'
 #    (doesn't really escape - it ends string, concatenates string "'" (a single
@@ -402,6 +403,7 @@ alias pf=xclip-pastefile
 alias vip=vimpager
 alias wvip='PAGER=vimpager'
 alias vman='MANPAGER=vimpager man'
+alias less='less -i'
 # follow appended data (like tail -f) in less
 alias fless='less +F'
 alias vless=/usr/share/vim/vim74/macros/less.sh
@@ -692,6 +694,7 @@ alias greps='grep -Hn --color=always'
 alias enw='emacs -nw'
 alias e='emacsclient -nw'
 alias ec='emacsclient'
+alias emacs-spacemacs-toggle='if [[ -d ~/.emacs.d.spacemacs ]]; then mv -T ~/.emacs.d ~/.emacs.d.plain; mv -T ~/.emacs.d.spacemacs ~/.emacs.d; echo "Spacemacs active"; else mv -T ~/.emacs.d ~/.emacs.d.spacemacs; mv -T ~/.emacs.d.plain ~/.emacs.d; echo "Plain Emacs active"; fi;'
 alias roxterm-display='roxterm --hide-menubar -T "Roxterm Display" -z 1.3 --geometry=70x40'
 alias nautilus='nautilus --no-desktop'
 alias mc='mc -S gotar'
