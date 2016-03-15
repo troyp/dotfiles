@@ -1,3 +1,4 @@
+#                                                           -*- shell-script -*-
 [ -z "$PS1" ] && return
 
 set -a
