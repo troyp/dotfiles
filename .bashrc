@@ -179,7 +179,8 @@ SWEAVE_STYLEPATH_DEFAULT="TRUE"
 # *               *
 # *****************
 
-shopt -q -s extdebug
+# extdebug option causes error in Spacemacs - bash: _Dbg_filenames[$fullname]: bad array subscript
+#shopt -q -s extdebug
 
 shopt -q -s dotglob
 shopt -q -s extglob
