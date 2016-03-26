@@ -261,10 +261,10 @@ nvm alias default stable > /dev/null
 
 xmodmap -e "keycode 127 = Pause"
 
-# # ---run xcape---
-# if ! pgrep xcape >/dev/null; then
-#     xcape -e 'Control_L=Escape;Super_R=Menu;Control_R=Multi_key' &
-# fi 
+# ---run xcape---
+if ! pgrep xcape >/dev/null; then
+    xcape -e 'Control_L=Escape;Super_R=Menu;Control_R=Multi_key' &
+fi 
 
 
 # ---ULIMIT---
