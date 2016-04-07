@@ -314,7 +314,7 @@ alias monitor-http-requests="sudo tcpdump -i eth0 -A -s 5000 'tcp port 80 and ((
 # alias manht='man -Hchromium-browser'   # problem with grohtml images
 alias gitman='git help'
 alias erlman='erl -man'
-alias bashman='mangrep bash'  # see .bash-functions. eg. bashman type
+alias bashman='mangrep bash'  # see .sh-functions. eg. bashman type
 alias coreinf='info coreutils'   # eg.  coreinf 'env'
 # alias mans='man -k . | grep'  # use whatis -r (or -w) instead
 
@@ -356,6 +356,7 @@ alias listopts='echo "$SHELLOPTS:$BASHOPTS" | tr ":" "\n"'
 alias readvar="read -r -d ''"
 alias typa='type -a'
 alias typp='type -p'
+alias custom-prompt='PS1="$mblue┌─($orange$mblue\!|$orange \s--\j jobs--\$(date \"+%a, %d %b %y\")$mblue)─\${fill}─($orange\$newPWD$mblue)─┐\n$mblue└─($orange\$(date \"+%H:%M\")$mblue)─>$unset "'
 
 
 # ---------------
@@ -696,7 +697,7 @@ alias lastu=last    # leave last free for alias
 alias PeaExtractor=/opt/peazip/res/pealauncher
 alias PeaUtils=/opt/peazip/res/pea
 alias xa=xargs
-alias gd=grepdict   # see .bash-functions:q
+alias gd=grepdict   # see .sh-functions:q
 
 #---------------------------------
 # APPLICATION DEFAULTS & VARIANTS.

@@ -1,5 +1,4 @@
 #                                                           -*- shell-script -*-
-[ -z "$PS1" ] && return
 
 set -a
 
@@ -34,8 +33,8 @@ pathappend() {
 # LOCATIONS
 # ---------
 
-BASH_ALIAS_FILE=$HOME/.bash-aliases
-BASH_FUNCTION_FILE=$HOME/.bash-functions
+BASH_ALIAS_FILE=$HOME/.sh-aliases
+BASH_FUNCTION_FILE=$HOME/.sh-functions
 SCRIPTS_DIRECTORY=$HOME/.scripts
 GTAGSCONF=/usr/share/doc/global/examples/gtags.conf
 VIMPAGER_RC=/opt/vimpager/vimpagerrc

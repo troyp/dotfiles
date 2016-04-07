@@ -31,7 +31,7 @@ HISTCONTROL=ignorespace:ignoredups:erasedups
 HISTFILESIZE=100000
 HISTSIZE=100000
 PROMPT_COMMAND="history -a; $PROMPT_COMMAND"
-# history-refresh function (in ~/.bash-functions): refreshes history (brings
+# history-refresh function (in ~/.sh-functions): refreshes history (brings
 # in commands that have been typed in other shells since the shell started)
 shopt -q -s cmdhist
 shopt -q -s histappend
@@ -80,16 +80,16 @@ bind -x '"\C-x\C-m": "xmodmap $HOME/.Xmodmap"'
 # *                  *
 # ********************
 
-if [ -f ~/.bash-aliases ]; then . ~/.bash-aliases; fi
+if [ -f ~/.sh-aliases ]; then . ~/.sh-aliases; fi
 if [ -f ~/.bash-prompt ]; then . ~/.bash-prompt; fi
-if [ -f ~/.bash-functions ]; then . ~/.bash-functions; fi
+if [ -f ~/.sh-functions ]; then . ~/.sh-functions; fi
 if [ -f ~/.rvm/scripts/rvm ]; then . ~/.rvm/scripts/rvm; fi
-if [ -f ~/.bash-functions-track-installs.sh ]; then . ~/.bash-functions-track-installs.sh; fi
-# if [ -f /etc/profile.d/bash_completion.sh ]; then . /etc/profile.d/bash_completion.sh; fi
+if [ -f ~/.sh-functions-track-installs.sh ]; then . ~/.sh-functions-track-installs.sh; fi
+if [ -f /etc/profile.d/bash_completion.sh ]; then . /etc/profile.d/bash_completion.sh; fi
 if [ -n "$LOAD_SCRATCH" ] && [ -f ~/.bash-scratch ]; then . ~/.bash-scratch; fi
 
 # ---bashmarks---
-# source .bashmarks-setup.sh after .bash-functions
+# source .bashmarks-setup.sh after .sh-functions
 if [ -f ~/.bashmarks-setup.sh ]; then . ~/.bashmarks-setup.sh; fi
 
 
@@ -107,4 +107,4 @@ if [ -f ~/.bashmarks-setup.sh ]; then . ~/.bashmarks-setup.sh; fi
 
 set +a
 
-[ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# [ -f ~/.fzf.bash ] && source ~/.fzf.bash
