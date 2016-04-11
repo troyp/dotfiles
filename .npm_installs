@@ -29,3 +29,4 @@ underscore-node
 xml2json-command
 zombie --save-dev
 csvtojson
+tern
