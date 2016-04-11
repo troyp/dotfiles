@@ -155,6 +155,20 @@ _JAVA_AWT_WM_NONREPARENTING=1; export _JAVA_AWT_WM_NONREPARENTING
 LIBOVERLAY_SCROLLBAR=0
 SWEAVE_STYLEPATH_DEFAULT="TRUE"
 
+# ********************
+# *                  *
+# * KEYBOARD / INPUT *
+# *                  *
+# ********************
+
+# Fix Pause button
+xmodmap -e "keycode 127 = Pause"
+
+# ---run xcape---
+if ! pgrep xcape >/dev/null; then
+    xcape -e 'Control_L=Escape;Super_R=Menu;Control_R=Multi_key' &
+fi
+
 
 # **********
 # *        *

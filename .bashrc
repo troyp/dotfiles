@@ -49,14 +49,6 @@ shopt -q -s lithist
 # ---enable color support of ls---
 # if [ -x /usr/bin/dircolors ]; then test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)" fi
 
-xmodmap -e "keycode 127 = Pause"
-
-# ---run xcape---
-if ! pgrep xcape >/dev/null; then
-    xcape -e 'Control_L=Escape;Super_R=Menu;Control_R=Multi_key' &
-fi
-
-
 # ---ULIMIT---
 #ulimit -c unlimited
 
