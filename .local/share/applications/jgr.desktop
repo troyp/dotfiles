@@ -1,0 +1,9 @@
+[Desktop Entry]
+Exec=/opt/scripts/jgr
+MimeType=text/R;application/R
+Name=JGR
+Comment=Java-based IDE for the R statistical programming language
+NoDisplay=true
+Type=Application
+Categories=Development;IDE;Statistics
+Icon=/home/troy/R/x86_64-pc-linux-gnu-library/3.0/JGR/icons/JGR.png

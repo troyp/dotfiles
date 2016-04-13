@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=jpdfbookmarks
+Path=/opt/jpdfbookmarks/
+Exec=/opt/jpdfbookmarks/jpdfbookmarks
+Terminal=false
+MimeType=application/pdf;
+Type=Application
+Categories=Office;Utility;

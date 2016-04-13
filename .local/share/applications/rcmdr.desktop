@@ -1,0 +1,10 @@
+[Desktop Entry]
+Categories=Education;Science;Math;Development;
+Comment=Graphical interface to the R environment for statistical computing 
+#Exec=sh -e "/opt/scripts/rcmdr"
+Exec=/opt/scripts/rcmdr
+Icon=/usr/lib/R/site-library/Rcmdr/etc/linux/Rcmdr.svg
+Name=R Commander
+Terminal=true
+Type=Application
+X-KDE-SubstituteUID=false

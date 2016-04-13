@@ -1,0 +1,18 @@
+[Desktop Entry]
+GenericName=Advanced Text Editor
+GenericName[en_GB]=Advanced Text Editor
+Name=Kate
+Name[en_GB]=Kate
+MimeType=text/plain;
+Exec=kate %U
+X-KDE-StartupNotify=true
+X-KDE-HasTempFileOption=true
+Icon=kate.svgz
+X-DocPath=kate/index.html
+Type=Application
+Terminal=false
+InitialPreference=9
+X-DBUS-StartupType=Multi
+X-DBUS-ServiceName=org.kde.kate
+Categories=Qt;KDE;Utility;TextEditor;
+X-Desktop-File-Install-Version=0.22

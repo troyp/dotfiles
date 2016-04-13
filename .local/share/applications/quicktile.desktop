@@ -1,0 +1,7 @@
+[Desktop Entry]
+Type=Application
+Name=QuickTile
+GenericName=Window-Tiling Helper
+Version=1.0
+Exec=/opt/quicktile/quicktile.py --daemonize
+Categories=Utility;

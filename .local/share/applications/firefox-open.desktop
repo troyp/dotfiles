@@ -1,0 +1,21 @@
+[Desktop Entry]
+Comment[en_US]=
+Comment=
+Exec=firefox -new-tab "%f"
+Icon=/opt/firefox/browser/icons/mozicon128.png
+GenericName[en_US]=Web Browser
+GenericName=Web Browser
+MimeType=inode/directory;
+Name[en_US]=firefox-open
+Name=firefox-open
+NoDisplay=true
+Path=/home/troy
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+Categories=System;
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=

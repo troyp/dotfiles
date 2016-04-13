@@ -1,0 +1,6 @@
+[Desktop Entry]
+Exec=/usr/local/bin/mcomix
+MimeType=application/x-cbz;
+Name=mcomix
+NoDisplay=true
+Type=Application

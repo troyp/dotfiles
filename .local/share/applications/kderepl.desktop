@@ -1,0 +1,12 @@
+[Desktop Entry]
+Exec=qdbus org.kde.plasma-desktop /MainApplication showInteractiveKWinConsole
+GenericName=KDE Plasma Scripting Console
+MimeType=
+Name=KdeRepl
+NoDisplay=true
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+Categories=Development;

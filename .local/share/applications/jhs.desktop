@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=J HTTP Server
+Comment=J Programming Language
+Icon=/opt/j64-701/bin/icons/jblue.png
+Exec=/opt/j64-701/bin/jconsole ~addons/ide/jhs/core.ijs -js " init_jhs_'' "
+Terminal=false
+Categories=Development

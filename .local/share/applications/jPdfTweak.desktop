@@ -1,0 +1,19 @@
+[Desktop Entry]
+Comment[en_US]=
+Comment=
+Exec=java -jar /opt/jpdftweak/jpdftweak.jar
+GenericName[en_US]=
+GenericName=
+MimeType=application/pdf;
+Name[en_US]=jPdfTweak
+Name=jPdfTweak
+NoDisplay=true
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=

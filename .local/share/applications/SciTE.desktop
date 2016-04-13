@@ -1,0 +1,14 @@
+[Desktop Entry]
+
+Name=SciTE Text Editor
+Comment=Edit your source files
+GenericName=Text Editor
+Type=Application
+Exec=SciTE %F
+Icon=Sci48M
+Terminal=false
+StartupNotify=true
+Categories=TextEditor;Development;GTK;
+Keywords=Text;Editor;
+MimeType=text/plain;
+

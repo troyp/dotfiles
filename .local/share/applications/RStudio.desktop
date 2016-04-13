@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=RStudio
+Comment=RStudio IDE
+Icon=/opt/rstudio/rstudio.png
+Exec=/opt/rstudio/bin/rstudio
+Terminal=false
+Categories=Development;R;Statistics

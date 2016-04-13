@@ -1,0 +1,12 @@
+[Desktop Entry]
+Exec=/usr/bin/xzgv %F
+GenericName=Image Viewer/Editor
+MimeType=inode/directory;image/gif;image/jpeg;image/png;image/bmp;image/x-ico;image/x-portable-bitmap;image/x-portable-graymap;image/x-portable-pixmap;image/x-xbitmap;image/x-xpixmap;image/tiff;
+Name=xzgv
+NoDisplay=true
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+Categories=Graphics;Viewer;

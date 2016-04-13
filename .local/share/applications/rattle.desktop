@@ -1,0 +1,9 @@
+[Desktop Entry]
+Exec=/opt/scripts/rattle
+MimeType=text/R;application/R;
+Name=JGR
+Comment=IDE for the R statistical programming language
+NoDisplay=true
+Type=Application
+Categories=Development;IDE;
+Icon=/home/troy/.local/share/icons/rattle.png

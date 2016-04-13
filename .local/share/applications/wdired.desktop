@@ -1,0 +1,20 @@
+[Desktop Entry]
+Comment[en_US]=
+Comment=
+Exec=~/.scripts/wdired %f
+Icon=/usr/share/icons/hicolor/scalable/apps/emacs24.svg
+GenericName[en_US]=
+GenericName=
+MimeType=inode/directory;
+Name[en_US]=wdired
+Name=dired
+NoDisplay=true
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=

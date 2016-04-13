@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=Processing
+Comment=Processing IDE
+Icon=/opt/racket/collects/icons/racket-logo-plastic-256x256.png
+Exec=/opt/processing/processing//opt/processing/lib/icons/pde-256.png
+Terminal=false
+Categories=Development;IDE;
+

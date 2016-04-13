@@ -1,0 +1,20 @@
+[Desktop Entry]
+Categories=Utility;TerminalEmulator;System;
+Comment=Rxvt-Unicode Terminal Emulator 
+Encoding=UTF-8
+Exec=/usr/bin/rxvt-unicode
+GenericName=Terminal Emulator
+Icon=/usr/share/pixmaps/urxvt_48x48.xpm
+MimeType=
+Name=URXVT
+Name=Rxvt-Unicode
+Path=
+ServiceTypes=
+SwallowExec=
+SwallowTitle=
+Terminal=False
+TerminalOptions=
+Type=Application
+URL=
+X-KDE-SubstituteUID=false
+X-KDE-Username=

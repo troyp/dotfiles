@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=J QT Console
+Comment=J Programming Language
+Icon=/opt/j64-804/bin/icons/jblue.png
+Exec=/opt/j64-804/bin/jqt
+Terminal=false
+Categories=Development

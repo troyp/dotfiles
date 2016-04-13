@@ -1,0 +1,19 @@
+[Desktop Entry]
+Categories=Utility;TerminalEmulator;System;
+Comment=Eterm Terminal Emulator 
+# Encoding=UTF-8
+Exec=/usr/bin/Eterm
+GenericName=Terminal Emulator
+Icon=/usr/share/icons/Humanity/apps/64/Etermutilities-terminal.svg
+MimeType=
+Name=Eterm
+Path=
+ServiceTypes=
+SwallowExec=
+SwallowTitle=
+Terminal=False
+TerminalOptions=
+Type=Application
+URL=
+X-KDE-SubstituteUID=false
+X-KDE-Username=

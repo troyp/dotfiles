@@ -1,0 +1,13 @@
+[Desktop Entry]
+Encoding=UTF-8
+Terminal=0
+Exec=/opt/XnView/xnview.sh
+Icon=/opt/XnView/xnview.png
+Type=Application
+Categories=Graphics;
+StartupNotify=true
+Name=XnView Multi Platform
+GenericName=Proprietary image viewer/converter/browser
+StartupNotify=true
+MimeType=image/bmp;image/jpeg;image/png;image/tiff;image/gif;
+

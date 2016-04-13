@@ -1,0 +1,17 @@
+[Desktop Entry]
+Comment=Open directory in dired via emacsclient
+Exec=~/.scripts/dired %f
+Icon=/usr/share/icons/hicolor/scalable/apps/emacs24.svg
+GenericName=Emacs File Manager
+MimeType=inode/directory;
+Name[en_US]=dired
+Name=dired
+NoDisplay=true
+Path=/home/troy
+StartupNotify=true
+Terminal=false
+Type=Application
+X-DBUS-ServiceName=dbus-service-emacs
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=troy

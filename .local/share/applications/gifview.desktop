@@ -1,0 +1,13 @@
+[Desktop Entry]
+Exec=/usr/bin/gifview -a --geometry +400+400 %F
+Icon=/home/troy/.local/share/icons/gifsicle.png
+GenericName=GIF Viewer/Editor
+MimeType=image/gif;
+Name=gifview
+NoDisplay=true
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+Categories=Graphics;

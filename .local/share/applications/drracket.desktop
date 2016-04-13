@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Dr Racket
+Comment=Dr Racket IDE
+Icon=/opt/racket/share/drracket-exe-icon.png
+Exec=/opt/racket/bin/drracket
+Terminal=false
+Categories=Development;IDE;Lisp

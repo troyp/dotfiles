@@ -1,0 +1,17 @@
+[Desktop Entry]
+Comment=Open directory in dired via emacsclient
+Exec=roxterm --directory %f
+Icon=/usr/share/icons/hicolor/scalable/apps/roxterm.svg
+GenericName=Terminal Emulator
+MimeType=inode/directory;
+Name=roxterm-open-in-directory
+NoDisplay=true
+Path=/home/troy
+StartupNotify=true
+Terminal=false
+Type=Application
+Categories=System;
+X-DBUS-ServiceName=dbus-service-emacs
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=troy

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=J GTK Console
+Comment=J Programming Language
+Icon=/opt/j64-701/bin/icons/jred.png
+Exec=/opt/j64-701/bin/jgtk
+Terminal=false
+Categories=Development

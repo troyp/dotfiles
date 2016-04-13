@@ -1,0 +1,19 @@
+[Desktop Entry]
+Comment= Opens the Firefox Profile Manager for choosing and editing user profiles.
+Exec=/opt/firefox/firefox -ProfileManager
+GenericName[en_US]=Web Browser
+GenericName=Web Browser
+Icon=/opt/firefox/browser/chrome/icons/default/default48.png
+Categories=Network;
+MimeType=
+Name=Firefox Profile Manager
+NoDisplay=false
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=

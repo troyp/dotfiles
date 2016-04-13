@@ -1,0 +1,6 @@
+[Desktop Entry]
+Exec=/opt/calibre/ebook-viewer
+MimeType=application/epub+zip;
+Name=ebook-viewer
+NoDisplay=true
+Type=Application

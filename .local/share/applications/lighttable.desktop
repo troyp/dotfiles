@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Light Table
+Comment=Light Table IDE
+Icon=/opt/LightTable/core/img/lticon.png
+Exec=/opt/LightTable/LightTable %F
+Terminal=false
+Categories=Development;IDE;Javascript;Clojure

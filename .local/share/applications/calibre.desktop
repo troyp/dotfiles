@@ -1,0 +1,9 @@
+[Desktop Entry]
+Exec=/opt/calibre/calibre
+MimeType=application/epub+zip;
+MimeType=application/x-mobipocket-ebook
+MimeType=application/x-sony-bbeb
+MimeType=text/lrs
+Name=Calibre
+NoDisplay=false
+Type=Application

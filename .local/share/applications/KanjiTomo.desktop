@@ -1,0 +1,9 @@
+[Desktop Entry]
+Type=Application
+Name=KanjiTomo
+Comment=OCR Program for identifying Japanese text.
+Icon=/home/troy/.icons/kanji-mincho-128.png
+Path=/opt/KanjiTomo/
+Exec=java -Xmx1000m -jar /opt/KanjiTomo/KanjiTomo.jar -run
+Terminal=false
+Categories=Education;Languages;

@@ -1,0 +1,8 @@
+[Desktop Entry]
+Type=Application
+Name=Frepl
+Comment=Graphical Frege REPL
+Icon=/opt/frepl/Frege_logo.svg
+Exec=/opt/frepl/bin/frepl
+Terminal=false
+Categories=Development;IDE;Haskell

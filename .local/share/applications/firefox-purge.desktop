@@ -1,0 +1,21 @@
+[Desktop Entry]
+Comment[en_US]=
+Comment=
+Exec=/opt/firefox/firefox -purge-caches
+GenericName[en_US]=Web Browser
+GenericName=Web Browser
+Icon=/opt/firefox/browser/chrome/icons/default/default48.png
+Categories=Internet
+MimeType=
+Name[en_US]=Firefox
+Name=Firefox
+NoDisplay=false
+Path=
+StartupNotify=true
+Terminal=false
+TerminalOptions=
+Type=Application
+X-DBUS-ServiceName=
+X-DBUS-StartupType=
+X-KDE-SubstituteUID=false
+X-KDE-Username=
