@@ -201,4 +201,9 @@ nvm alias default stable > /dev/null
 
 # ----------------------------------------------------------------------------
 
+if [ -f ~/.sh-aliases ]; then source ~/.sh-aliases; fi
+if [ -f ~/.sh-functions ]; then source ~/.sh-functions; fi
+if [ -f ~/.rvm/scripts/rvm ]; then source ~/.rvm/scripts/rvm; fi
+if [ -f ~/.sh-functions-track-installs.sh ]; then source ~/.sh-functions-track-installs.sh; fi
+
 set +a
