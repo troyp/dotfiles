@@ -565,6 +565,7 @@ alias eq='emacs -Q -nw'
 alias eqw='emacs -Q'
 alias ec="emacsclient -cna ''"
 alias emacs-spacemacs-toggle='if [[ -d ~/.emacs.d.spacemacs ]]; then mv -T ~/.emacs.d ~/.emacs.d.plain; mv -T ~/.emacs.d.spacemacs ~/.emacs.d; echo "Spacemacs active"; else mv -T ~/.emacs.d ~/.emacs.d.spacemacs; mv -T ~/.emacs.d.plain ~/.emacs.d; echo "Plain Emacs active"; fi;'
+alias emint='pkill --signal SIGINT emacs'
 
 # -----------
 # PDF ALIASES
