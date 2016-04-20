@@ -1,16 +1,23 @@
 [core]
-	excludesfile = /home/troy/.gitignore_global
+	excludesfile = ~/.gitignore
 	autocrlf = input
 	pager = less -+F -RSX
 [include]
 	path = /home/troy/.gitconfig_personal
 [alias]
+	cl = clone
+	# clone repository in clipboard
+	g = !git clone $(xsel -ob)
 	a = add -A
 	c = commit -m
 	d = diff --color-words                                    
+	da = diff --cached --color-words                                    
+	dc = diff HEAD --color-words                                    
+	# https://coderwall.com/p/euwpig/a-better-git-log
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	ll = log --stat --abbrev-commit	
 	s = status
+	subdir = filter-branch --prune-empty --subdirectory-filter
 	filestoadd = diff --stat
 	changestoadd = diff
 	filestocommit = status
