@@ -8,9 +8,9 @@ export TERM="xterm-256color"
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
-# ZSH_THEME="robbyrussell"
+ZSH_THEME="robbyrussell"
 # ZSH_THEME="powerlevel9k-modified/powerlevel9k"
-ZSH_THEME="troyp/troyp"
+# ZSH_THEME="troyp/troyp"
 POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(history time dir rbenv vcs root_indicator)
 POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(history status os_icon)
 POWERLEVEL9K_MODE='awesome-fontconfig'
@@ -73,6 +73,14 @@ zsh_URL=https://sourceforge.net/projects/zsh/files/latest/download?source=typ_re
 
 bindkey "^P" up-line-or-search
 bindkey "^N" down-line-or-search
+
+zstyle ':completion:*' list-prompt   ''
+zstyle ':completion:*' select-prompt ''
+autoload -Uz compinit
+compinit
+
+autoload -Uz promptinit
+promptinit
 
 # You may need to manually set your language environment
 # export LANG=en_US.UTF-8
