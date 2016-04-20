@@ -21,6 +21,20 @@ col () {
     awk -- "{print \$$1}";
 }
 
+add_hook() {
+    hook="$1";
+    cmd="$2";
+    hookv=`\$$(echo "$hook")`;
+    printf "%s\n%s\n" "$hook" "$cmd";
+    # appendhook="";
+    # if [[ -z $appendhook ]]; then
+    #     newhook="'$cmd;$hookv'";
+    # else
+        newhook="'$hookv;$cmd'";
+    # fi;
+    eval $hook="$newhook";
+}
+
 history-refresh () {
     # refreshes history (brings in commands that have been typed
     # in other shells since the shell started)
