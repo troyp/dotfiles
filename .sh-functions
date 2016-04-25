@@ -802,3 +802,20 @@ github-clone-with-wiki() {
     git clone "$repo";
     git clone "$wiki";
 }
+
+grepview() {
+    n=3;
+    if [ "$1" =~ "^-n" ]; then n="${1#-n}"; shift; fi;
+    pattern="$1";
+    shift;
+    grep -i -P -A$n -B$n "$pattern" "$@" | less +/"$pattern";
+}
+
+highlight-pattern() {
+    if [ $# -gt 1 ]; then
+        # note "$1|", "$|^", "$|\b" etc also works
+        grep -P --color "$1|$" "$@";
+    else
+        grep -P --color "$1|$" -;
+    fi;
+}
