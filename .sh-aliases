@@ -354,14 +354,9 @@ alias cbdl='cb | dolines wget "$x"; done'   # download a list of file urls from 
 #--------------------
 alias vi-bindings='set -o vi'
 alias emacs-bindings='set -o emacs'
-alias bashref='xrun ~/ebooks/coding/Shell\ Scripting/Bash\ Quick\ Reference.pdf &'
-alias locatefn='declare -F'    # requires shopt -s extdebug
 alias runfromhere='export PATH="./:$PATH"'
-alias listopts='echo "$SHELLOPTS:$BASHOPTS" | tr ":" "\n"'
-alias readvar="read -r -d ''"
 alias typa='type -a'
 alias typp='type -p'
-alias custom-prompt='PS1="$mblue┌─($orange$mblue\!|$orange \s--\j jobs--\$(date \"+%a, %d %b %y\")$mblue)─\${fill}─($orange\$newPWD$mblue)─┐\n$mblue└─($orange\$(date \"+%H:%M\")$mblue)─>$unset "'
 
 
 # ---------------

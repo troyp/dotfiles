@@ -1,0 +1,12 @@
+#                                                                 -*- shell-script -*-
+
+#--------------------
+# BASH/SHELL ALIASES.
+#--------------------
+alias bashref='xrun ~/ebooks/coding/Shell\ Scripting/Bash\ Quick\ Reference.pdf &'
+alias locatefn='declare -F'    # requires shopt -s extdebug
+alias listopts='echo "$SHELLOPTS:$BASHOPTS" | tr ":" "\n"'
+alias readvar="read -r -d ''"
+alias custom-prompt='PS1="$mblue┌─($orange$mblue\!|$orange \s--\j jobs--\$(date \"+%a, %d %b %y\")$mblue)─\${fill}─($orange\$newPWD$mblue)─┐\n$mblue└─($orange\$(date \"+%H:%M\")$mblue)─>$unset "'
+# loop over bash functions
+alias dofunctions='# for fn in `declare -F | tr -s ' ' | cut -d' ' -f3 | grep '^[^_]'`; do'
