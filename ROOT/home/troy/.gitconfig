@@ -10,6 +10,7 @@
 	g = !git clone $(xsel -ob)
 	a = add -A
 	c = commit -m
+	cu = commit -m "update"
 	d = diff --color-words                                    
 	da = diff --cached --color-words                                    
 	dc = diff HEAD --color-words                                    
@@ -17,6 +18,8 @@
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	ll = log --stat --abbrev-commit	
 	s = status
+	# initialize folder as repository and push to newly-created github repo whose URL is in clipboard
+	gh = "!f(){ git init; touch README.md; git add README.md; git commit -m 'initial commit'; git remote add origin $(xsel -ob); git push -u origin master; };f"
 	subdir = filter-branch --prune-empty --subdirectory-filter
 	filestoadd = diff --stat
 	changestoadd = diff
