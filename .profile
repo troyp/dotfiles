@@ -24,3 +24,5 @@ fi
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 export TZ='Australia/Sydney';    # time zone
+
+[ -e ~/.sh-profile ] && source ~/.sh-profile;
