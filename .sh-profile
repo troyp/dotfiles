@@ -1,17 +1,17 @@
 #                                                                 -*- shell-script -*-
 
-set -a
-
-# Load the default .profile
-[[ -s "$HOME/.profile" ]] && source "$HOME/.profile"
 # Load RVM into a shell session *as a function*
 [[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-# .vim.ana configurations #
-source ~/.bash_vim_append
+
+# ***************
+# *             *
+# * ENVIRONMENT *
+# *             *
+# ***************
+set -a
 
 # ---run ibus-daemon---
-IBUS_ENABLE_SYNC_MODE=1 ibus-daemon -xrd
-
+pgrep ibus-daemon || IBUS_ENABLE_SYNC_MODE=1 ibus-daemon -xrd
 
 # *********
 # *       *
