@@ -813,9 +813,19 @@ grepview() {
 
 highlight-pattern() {
     if [ $# -gt 1 ]; then
-        # note "$1|", "$|^", "$|\b" etc also works
+        # note "$1|" also works
         grep -P --color "$1|$" "$@";
     else
         grep -P --color "$1|$" -;
     fi;
+}
+
+dpkg-list-executables() {
+    pkg="$1";
+    searchpath="${2:-$ubuntu_default_PATH}";
+    dpkg -L "$pkg" |
+        grep -E `echo ${searchpath//:/\/.+\|}` |
+        while read -r x; do
+            echo "${x##*/}";
+        done;
 }
