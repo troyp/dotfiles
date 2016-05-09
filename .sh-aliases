@@ -18,7 +18,7 @@ alias sapti='sudo apt-get install'
 alias aptc='apt-cache'
 alias aptf='apt-file'
 alias aptcs='apt-cache search'  # find matching packages
-alias aptff='apt-file find'  # find packages containing matching files
+alias aptff='apt-file find'  # (find==search) find packages containing matching files
 alias aptcp='apt-cache policy'
 alias aptcsh='apt-cache show'  # show package records
 alias aptfl='apt-file list'  # list contents of matching packages
@@ -37,6 +37,10 @@ alias disable-beep='sudo modprobe -r pcspkr'
 alias list-repos='inxi -r'
 alias alts='sudo update-alternatives --config'
 alias galts=galternatives    # graphical alternatives editor
+# filter-in-default-PATH: filters list of paths/programs for those on path (note: will match substrings)
+# TODO: only pass when directory matches exactly
+alias filter-in-default-PATH='grep -E `echo ${ubuntu_default_PATH//:/\|}`'
+alias filter-exec-in-default-PATH='grep -E `echo ${ubuntu_default_PATH//:/\/.+\|}`'
 
 # ----------------------
 #  KDE-SPECIFIC ALIASES.
