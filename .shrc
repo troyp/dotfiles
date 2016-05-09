@@ -51,6 +51,8 @@ KDE_BOOKMARKS_FILE='/home/troy/.kde/share/apps/kfile/bookmarks.xml'
 # PATHS.
 # ------
 
+ubuntu_default_PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+
 PATH=${PATH%:.}  # remove . from end of $PATH
 paths=(
     $HOME/local/bin
@@ -114,6 +116,7 @@ paths=(
     /opt/phantomjs-2.0.0/bin
 	  /opt/icon/bin
 	  /opt/pdfsandich
+    /opt/activator-dist/bin
 )
 for i in "${paths[@]}"; do pathappend "$i" ; done
 
@@ -197,6 +200,16 @@ alias clj=clj-env-dir
 source ~/.nvm/nvm.sh
 nvm alias default stable > /dev/null
 
+# ********
+# *      *
+# * JAVA *
+# *      *
+# ********
+# gradle
+GRADLE_HOME=/opt/gradle
+pathappend $GRADLE_HOME/bin
+
+
 # ----------------------------------------------------------------------------
 # *******************
 # *                 *
@@ -204,9 +217,9 @@ nvm alias default stable > /dev/null
 # *                 *
 # *******************
 
-if [ -f ~/.sh-aliases ];                      then source ~/.sh-aliases;                      fi
-if [ -f ~/.sh-functions ];                    then source ~/.sh-functions;                    fi
-if [ -f ~/.rvm/scripts/rvm ];                 then source ~/.rvm/scripts/rvm;                 fi
-if [ -f ~/.sh-functions-track-installs.sh ];  then source ~/.sh-functions-track-installs.sh;  fi
+[ -f ~/.sh-aliases ]                      &&  source ~/.sh-aliases;
+[ -f ~/.sh-functions ]                    &&  source ~/.sh-functions;
+[ -f ~/.rvm/scripts/rvm ]                 &&  source ~/.rvm/scripts/rvm;
+[ -f ~/.sh-functions-track-installs.sh ]  &&  source ~/.sh-functions-track-installs.sh;
 
 set +a
