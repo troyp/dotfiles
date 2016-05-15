@@ -63,7 +63,11 @@ alias cd....='cd ../../..'
 alias cd.....='cd ../../../..'
 alias md='mkdir -p'
 alias md='mkdir -pv'
-alias rd='source ranger ranger'    # navigate to new dir with ranger
+# alias rd='source ranger ranger'    # navigate to new dir with ranger
+alias rd='ranger --choosedir=$HOME/.ranger-choosedir; cd `cat $HOME/.ranger-choosedir`'
+alias rpick='ranger --choosefiles $HOME/.ranger-choosefiles'
+alias rpickone='ranger --choosefile $HOME/.ranger-choosefile'
+alias rpickdir='ranger --choosedir $HOME/.ranger-choosedir'
 alias cdchrometempdir='"cd `chrometempfiles 3`"'  # cd to Firefox temp directory
 
 #------------
