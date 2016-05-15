@@ -117,6 +117,7 @@ paths=(
 	  /opt/icon/bin
 	  /opt/pdfsandich
     /opt/activator-dist/bin
+    /opt/zed
 )
 for i in "${paths[@]}"; do pathappend "$i" ; done
 
