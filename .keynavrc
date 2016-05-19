@@ -31,6 +31,8 @@ super+period windowzoom,cut-right,warp,click 1,end
 comma        windowzoom,cut-left,warp,click 1,end
 super+comma  windowzoom,cut-left,warp,click 1,end
 space warp,click 1,end
+control+space warp,click 2,end
+shift+space warp,click 3,end
 semicolon warp,end
 
 e grid-nav toggle
@@ -51,6 +53,17 @@ shift+y move-left,move-up
 shift+u move-right,move-up
 shift+b move-left,move-down
 shift+n move-right,move-down
+
+ctrl+enter cursorzoom 20 20
+ctrl+h move-left 0.05
+ctrl+j move-down 0.05
+ctrl+k move-up 0.05
+ctrl+l move-right 0.05
+ctrl+y move-left,move-up 0.05
+ctrl+u move-right,move-up 0.05
+ctrl+b move-left,move-down 0.05
+ctrl+n move-right,move-down 0.05
+
 quote warp,drag 1
 apostrophe warp,drag 1
 shift+apostrophe drag 2
@@ -73,15 +86,15 @@ z windowzoom
 c cursorzoom 100 100
 #ctrl+w windowzoom
 
-# Handy for holding ctrl while using keynav:
-ctrl+h cut-left
-ctrl+j cut-down
-ctrl+k cut-up
-ctrl+l cut-right
-ctrl+y cut-left,cut-up
-ctrl+u cut-right,cut-up
-ctrl+b cut-left,cut-down
-ctrl+n cut-right,cut-down
+# Handy for holding super while using keynav:
+super+h cut-left
+super+j cut-down
+super+k cut-up
+super+l cut-right
+super+y cut-left,cut-up
+super+u cut-right,cut-up
+super+b cut-left,cut-down
+super+n cut-right,cut-down
 
 ### Example using the 'sh' command.
 # This xdotool invocation require xdotool >= 2.20100623 for 'command chaining'

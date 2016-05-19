@@ -687,6 +687,17 @@ telnet-password=ithaca
 # Encoding Y coordinate (integer)
 #sout-dvbsub-y=-1
 
+[de265] # HEVC/H.265 video decoder using libde265
+
+# Threads (integer)
+#libde265-threads=0
+
+# Disable deblocking? (boolean)
+#libde265-disable-deblocking=0
+
+# Disable SAO filter? (boolean)
+#libde265-disable-sao=0
+
 [schroedinger] # Dirac video decoder using libschroedinger
 
 # Rate control method (string)
@@ -1975,7 +1986,7 @@ skins2-transparency=1
 # Polarization (Voltage) (string)
 #dvb-polarization=
 
-#  (integer)
+# ? (integer)
 #dvb-voltage=13
 
 # High LNB voltage (boolean)
@@ -2609,6 +2620,35 @@ skins2-transparency=1
 # Show shoutcast adult content (boolean)
 #shoutcast-show-adult=0
 
+[ts] # MPEG Transport Stream demuxer with support for HEVC/H.265 video
+
+# Extra PMT (string)
+#ts-extra-pmt=
+
+# Set id of ES to PID (boolean)
+#ts-es-id-pid=1
+
+# Fast udp streaming (string)
+#ts-out=
+
+# MTU for out mode (integer)
+#ts-out-mtu=1400
+
+# CSA Key (string)
+#ts-csa-ck=
+
+# Second CSA Key (string)
+#ts-csa2-ck=
+
+# Packet size in bytes to decrypt (integer)
+#ts-csa-pkt=188
+
+# Separate sub-streams (boolean)
+#ts-split-es=1
+
+# Seek based on percent not time (boolean)
+#ts-seek-percent=0
+
 [rawaud] # Raw audio demuxer
 
 # Audio channels (integer)
@@ -2654,6 +2694,11 @@ skins2-transparency=1
 
 # Surround delay (ms) (integer)
 #mod-surround-delay=5
+
+[de265demux] # Raw HEVC/H.265 bitstream demuxer
+
+# Frames per Second (string)
+#libde265demux-fps=
 
 [rawdv] # DV (Digital Video) demuxer
 
@@ -4379,13 +4424,13 @@ key-stop=
 #global-key-subpos-up=
 
 # Subtitle position up (string)
-#key-subpos-up=
+key-subpos-up=Alt+k
 
 # Subtitle position down (string)
 #global-key-subpos-down=
 
 # Subtitle position down (string)
-#key-subpos-down=
+key-subpos-down=Alt+j
 
 # Audio delay up (string)
 #global-key-audiodelay-up=
