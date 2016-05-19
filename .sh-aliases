@@ -202,6 +202,8 @@ alias docburls-reversed='xsel -ob | tac | dolines'    # loop over urls copied to
 # --- editing files ---
 alias sed-file='sed -i.bak' # edit file in-place (makes backup) sed-file 's/old/new/g' f.ext
 alias editchoose='iselect -ma | xargs emacsclient' # select a file to edit in emacs
+alias scriptvi='edit-script vim'
+alias scriptem='edit-script emacsclient'
 
 # --- copying files ---
 alias name2fat='perl -pe '"'"'s/\+|:/ - /g and s/\[<>\/\\?+:"\]//g'"'"''  # filename -> FAT-compat
@@ -525,8 +527,6 @@ alias pynote='ipython notebook --pylab=inline'
 alias ipylab='ipython --pylab'
 alias py='ipython --pylab'
 alias bpy='bpython'
-alias etags_rec_el_c_h='find . -type f -iregex '.*[.]\(c\|h\|el\)' | etags -'
-alias etags_sudo_rec_el_c_h='find . -type f -iregex '.*[.]\(c\|h\|el\)' | sudo etags -'
 alias extract_elisp='find . -name "*.el.gz" | xargs sudo gunzip'
 alias core-on='ulimit -c unlimited'
 alias core-off='ulimit -c 0'
@@ -707,6 +707,7 @@ alias PeaExtractor=/opt/peazip/res/pealauncher
 alias PeaUtils=/opt/peazip/res/pea
 alias xa=xargs
 alias gd=grepdict   # see .sh-functions:q
+alias ucs=/opt/scripts/unicodesearch    # github.com/jpverkamp/dotfiles/blob/master/bin/uni
 
 #---------------------------------
 # APPLICATION DEFAULTS & VARIANTS.

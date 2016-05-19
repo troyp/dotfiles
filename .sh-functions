@@ -829,3 +829,11 @@ dpkg-list-executables() {
             echo "${x##*/}";
         done;
 }
+
+edit-script() {
+    "Edit (or otherwise pass to a program) an executable script."
+    editor="$1";
+    progname="$2";
+    prog=`which "$progname"`;
+    "$editor" "$prog";
+}

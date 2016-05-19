@@ -10,6 +10,13 @@
 # ***************
 set -a
 
+[ -e ~/.sh-env ] && source ~/.sh-env;
+
+# ********
+# *      *
+# * IBUS *
+# *      *
+# ********
 # ---run ibus-daemon---
 pgrep ibus-daemon || IBUS_ENABLE_SYNC_MODE=1 ibus-daemon -xrd
 

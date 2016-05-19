@@ -10,3 +10,9 @@ alias readvar="read -r -d ''"
 alias custom-prompt='PS1="$mblue┌─($orange$mblue\!|$orange \s--\j jobs--\$(date \"+%a, %d %b %y\")$mblue)─\${fill}─($orange\$newPWD$mblue)─┐\n$mblue└─($orange\$(date \"+%H:%M\")$mblue)─>$unset "'
 # loop over bash functions
 alias dofunctions='# for fn in `declare -F | tr -s ' ' | cut -d' ' -f3 | grep '^[^_]'`; do'
+
+# -----
+# ETAGS
+# -----
+alias etags_rec_el_c_h='find . -type f -iregex '.*[.]\(c\|h\|el\)' | etags -'
+alias etags_sudo_rec_el_c_h='find . -type f -iregex '.*[.]\(c\|h\|el\)' | sudo etags -'
