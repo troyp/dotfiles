@@ -16,13 +16,6 @@ if [ -n "$BASH_VERSION" ]; then
     fi
 fi
 
-# set PATH so it includes user's private bin if it exists
-if [ -d "$HOME/bin" ] ; then
-    PATH="$HOME/bin:$PATH"
-fi
+[ -e ~/.sh-profile ] && source ~/.sh-profile;
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-
-export TZ='Australia/Sydney';    # time zone
-
-[ -e ~/.sh-profile ] && source ~/.sh-profile;

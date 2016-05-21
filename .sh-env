@@ -8,6 +8,9 @@
 # ***************
 set -a
 
+export TZ='Australia/Sydney';    # time zone
+
+
 # ---------------------------
 #  PATH appending functions.
 # ---------------------------
@@ -55,6 +58,8 @@ ubuntu_default_PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 
 PATH=${PATH%:.}  # remove . from end of $PATH
 paths=(
+    $HOME/bin
+    $HOME/.rvm/bin
     $HOME/local/bin
     $HOME/local/bin/node
     $HOME/.rvm/bin

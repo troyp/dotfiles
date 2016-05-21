@@ -223,6 +223,7 @@ alias msymlink='mmv -s'  # mmv multiple symlink using wildcards, eg.  msymlink *
 alias irm='rm -i'  # interactive rm: prompt before removal
 alias diff='colordiff -u'
 alias diffdir='colordiff -rqb'
+alias chmodx='chmod a+x'
 
 # -----------------------
 # HTML & XML MANIPULATION
@@ -489,6 +490,8 @@ alias hw-coreinfo='cat /proc/cpuinfo'
 alias hw-meminfo='sudo dmidecode --type memory'
 alias hw-biosinfo='sudo dmidecode --type bios'
 alias hw-connectorinfo='sudo dmidecode --type connector'
+alias hw-memtotal='cat /proc/meminfo| grep MemTotal'
+alias hw-memsummary='top -b -n1 | grep Mem'
 alias mimetypes2mailcap='< /etc/mime.types cut -f1 | grep -E "^[^#]" | dolines echo "$x; xdg-open '%s'"; done'   # save to ~/.mailcap
 alias mousecodes='xev | grep button'
 alias volume='amixer set playback Master'
