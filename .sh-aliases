@@ -391,6 +391,7 @@ alias wof='lsof -r 2'                 # watch files
 alias wofu='lsof -r 2 -a -u troy'     # watch files for user troy
 alias wofp='lsof -r 2 -a -p'          # watch files for PID
 alias pk='pkill -9'
+alias pidtoname='ps -o comm= -p'
 
 
 #-----------------------
