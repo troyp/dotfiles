@@ -11,4 +11,12 @@
 [ -f ~/.rvm/scripts/rvm ]                 &&  source ~/.rvm/scripts/rvm;
 [ -f ~/.sh-functions-track-installs.sh ]  &&  source ~/.sh-functions-track-installs.sh;
 
-set +a
+# -------------------------------------------------------------------------------
+
+# *******
+# *     *
+# * RVM *
+# *     *
+# *******
+# Add RVM to PATH for scripting
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

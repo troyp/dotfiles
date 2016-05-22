@@ -1,8 +1,4 @@
 #                                                                 -*- shell-script -*-
-
-# Load RVM into a shell session *as a function*
-[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
-
 set -a
 
 # ********
@@ -40,6 +36,14 @@ xset r rate 250 50  # X key repeat: xset r rate <ms delay> <char per sec>
 
 # fix End key (mapped to SuperL for unknown reason)
 xmodmap -e "keycode 115 = End NoSymbol End"
+
+# *******
+# *     *
+# * RVM *
+# *     *
+# *******
+# Load RVM into a shell session *as a function*
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
 
 
 set +a
