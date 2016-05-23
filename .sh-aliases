@@ -566,6 +566,8 @@ alias cpkgc='cmake --find-package -DLANGUAGE=C -DCOMPILER_ID=GNU -DMODE=COMPILE'
 alias pyc="python2 -c 'from math import *; from operator import *; from itertools import *; from functools import *; print "
 alias pipu='sudo -H pip install --upgrade'
 alias nvm-copy-global='nodebindir=`which node`; nodedir=${nodebindir%/bin/node}; chmod -R 755 $nodedir/bin/*; sudo cp -r $nodedir/{bin,lib,share} /usr/local/'
+alias nvm-install='git clone https://github.com/creationix/nvm.git ~/.nvm && cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`; . ~/.nvm/nvm.sh'
+alias nvm-upgrade='cd "$NVM_DIR" && git fetch origin && git checkout `git describe --abbrev=0 --tags`; . $NVM_DIR/nvm.sh'
 alias iconi='/opt/icon/bin/icon /opt/icon/pl/progs/qei.icn'  # REPL for Icon programming language
 
 # --------------
@@ -578,6 +580,7 @@ alias eqw='emacs -Q'
 alias ec="emacsclient -cna ''"
 alias emacs-spacemacs-toggle='if [[ -d ~/.emacs.d.spacemacs ]]; then mv -T ~/.emacs.d ~/.emacs.d.plain; mv -T ~/.emacs.d.spacemacs ~/.emacs.d; echo "Spacemacs active"; else mv -T ~/.emacs.d ~/.emacs.d.spacemacs; mv -T ~/.emacs.d.plain ~/.emacs.d; echo "Plain Emacs active"; fi;'
 alias emint='pkill --signal SIGINT emacs'
+alias epipe=$HOME/.scripts/emacsclient
 
 # -----------
 # PDF ALIASES
