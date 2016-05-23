@@ -538,6 +538,8 @@ alias cljload='java -jar ~/.clojure/clojure.jar'
 alias fregec='java -Xss1m -jar /opt/frege/fregec.jar -d build'
 alias fregerepl='/opt/frege-repl/gradlew --no-daemon --console plain :frege-repl-core:run'
 alias java-setdefault='sudo update-alternatives --config java'
+# -------------------------------------------------------------------------------
+# Perl
 alias pl=perl
 alias ple='pl -e'       # execute perl code from next argument
 alias pln='ple -n'      # execute within loop
@@ -554,6 +556,14 @@ alias perl-warnings-on="alias ple='perl -ew'; alias Ple='perl -wE'"
 alias perl-warnings-off="alias ple='perl -e'; alias Ple='perl -E'"
 alias perlEOF="perl -w <(cat <<'EOF'"    # multiline perl command: end with: EOF\n)
 alias perlrepl='perl -de 0'
+# -------------------------------------------------------------------------------
+# Ruby
+alias rbe='ruby -e'       # execute ruby code from next argument
+alias rbln='rble -n'      # execute within loop
+alias rblp='rble -p'      # execute within loop, with print
+alias rblnl='rble -nl'    # execute within loop, strip/add newlines
+alias rblpl='rble -pl'    # execute within loop, with print, strip/add newlines
+# -------------------------------------------------------------------------------
 alias phprepl='php --interactive'
 alias xracket='racket -il xrepl'
 alias rkt='racket -e "(require readline)" -i'
