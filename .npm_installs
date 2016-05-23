@@ -30,3 +30,4 @@ xml2json-command
 zombie --save-dev
 csvtojson
 tern
+prismjs
