@@ -31,3 +31,5 @@ zombie --save-dev
 csvtojson
 tern
 prismjs
+underscore
+underscore-cli
