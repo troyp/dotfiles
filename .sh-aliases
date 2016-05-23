@@ -563,6 +563,8 @@ alias rbln='rble -n'      # execute within loop
 alias rblp='rble -p'      # execute within loop, with print
 alias rblnl='rble -nl'    # execute within loop, strip/add newlines
 alias rblpl='rble -pl'    # execute within loop, with print, strip/add newlines
+alias rbcol='ruby -rcolorize -e'    # eg rbcol 'puts "This is blue".colorize(:blue)'
+
 # -------------------------------------------------------------------------------
 alias phprepl='php --interactive'
 alias xracket='racket -il xrepl'
