@@ -81,11 +81,19 @@ end
 # colour prompt
 # =============
 PERSONAL_PROMPT = [
-  proc { |target_self, nest_level, pry|
-    "┌──❬".console_dark_green + "#{pry.input_array.size}".console_yellow + "❭───❬".console_dark_green +
-      "#{pry.config.prompt_name}".console_dark_yellow + "❭───❬".console_dark_green +
-      "#{Pry.view_clip(target_self)}".console_yellow + "❭───┤\n└─❭❭".console_dark_green
-  },
-  proc { |target_self, nest_level, pry| "╎--╎".console_dark_green }
+  proc do |target_self, nest_level, pry|
+    n = "#{pry.input_array.size}";
+    name = "#{pry.config.prompt_name}";
+    slf = "#{Pry.view_clip(target_self)}";
+    l = [n.length, 4].min;
+    "┌─❬".console_dark_green + n.console_yellow + ( "❭" + "─"*(4-l) + "─❬" ).console_dark_green +
+      name.console_dark_yellow + "❭──❬".console_dark_green + slf.console_yellow +
+      "❭─❭❭ ".console_dark_green
+  end,
+  proc do |target_self, nest_level, pry|
+    lname = "#{pry.config.prompt_name}".length;
+    lslf = "#{Pry.view_clip(target_self)}".length;
+    ( "╎" + "-"*(16+lname+lslf) + "╎ " ).console_dark_green
+  end
 ]
 Pry.config.prompt = PERSONAL_PROMPT;
