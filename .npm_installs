@@ -33,3 +33,5 @@ tern
 prismjs
 underscore
 underscore-cli
+doctoc
+marked-man
