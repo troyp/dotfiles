@@ -300,3 +300,8 @@ endif
 
 "------------------------------------------------------
 
+" =========
+" Vimpager.
+" =========
+" allows use of vimpager from vim with :Page command or <leader>v binding
+set rtp^=/opt/vimpager
