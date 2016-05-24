@@ -1,3 +1,4 @@
+# coding: utf-8
 # ===============================================================================
 #                                       _______
 #                                      |       |
@@ -39,12 +40,11 @@ end
 CodeRay.scan("example", :ruby).term # just to load necessary files
 
 TERM_TOKEN_COLORS = {
-  :symbol => '1;31' # will make symbols bolded and light red on my terminal
+  :comment => "\e[34m"
 }
 
-module CodeRay
-  module Encoders
-    class Term < Encoder
+module CodeRay module Encoders
+    class Terminal < Encoder
       # override old colors
       TERM_TOKEN_COLORS.each_pair do |key, value|
         TOKEN_COLORS[key] = value
@@ -76,3 +76,16 @@ class String
 
   def colorize(text, color_code)  "#{color_code}#{text}\e[0m" end
 end
+
+# =============
+# colour prompt
+# =============
+PERSONAL_PROMPT = [
+  proc { |target_self, nest_level, pry|
+    "┌──❬".console_dark_green + "#{pry.input_array.size}".console_yellow + "❭───❬".console_dark_green +
+      "#{pry.config.prompt_name}".console_dark_yellow + "❭───❬".console_dark_green +
+      "#{Pry.view_clip(target_self)}".console_yellow + "❭───┤\n└─❭❭".console_dark_green
+  },
+  proc { |target_self, nest_level, pry| "╎--╎".console_dark_green }
+]
+Pry.config.prompt = PERSONAL_PROMPT;
