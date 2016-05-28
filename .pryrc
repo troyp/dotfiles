@@ -7,6 +7,7 @@
 
 
 Pry.commands.alias_command 'ss', 'show-source -al'
+Pry.commands.alias_command 'sd', 'show-doc -al'
 
 # -------------------------------------------------------------------------------
 # ,--------,
@@ -96,4 +97,18 @@ PERSONAL_PROMPT = [
     ( "╎" + "-"*(16+lname+lslf) + "╎ " ).console_dark_green
   end
 ]
-Pry.config.prompt = PERSONAL_PROMPT;
+
+PRY_EMACS_PROMPT = [
+  proc do |target_self, nest_level, pry|
+    ">> ".console_green
+  end,
+  proc do |target_self, nest_level, pry|
+    "   "
+  end
+]
+
+if ENV["INSIDE_EMACS"]
+  Pry.config.prompt = PRY_EMACS_PROMPT
+else
+  Pry.config.prompt = PERSONAL_PROMPT
+end
