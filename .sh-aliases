@@ -224,6 +224,7 @@ alias irm='rm -i'  # interactive rm: prompt before removal
 alias diff='colordiff -u'
 alias diffdir='colordiff -rqb'
 alias chmodx='chmod a+x'
+alias file-owner='stat -c "%U"'
 
 # -----------------------
 # HTML & XML MANIPULATION
@@ -564,6 +565,9 @@ alias rblp='rble -p'      # execute within loop, with print
 alias rblnl='rble -nl'    # execute within loop, strip/add newlines
 alias rblpl='rble -pl'    # execute within loop, with print, strip/add newlines
 alias rbcol='ruby -rcolorize -e'    # eg rbcol 'puts "This is blue".colorize(:blue)'
+alias riv='PAGER=vimpager ri'
+alias ri='LESS="$LESS -r" ri --format ansi'
+alias rii='ri -i'
 
 # -------------------------------------------------------------------------------
 alias phprepl='php --interactive'
