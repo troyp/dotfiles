@@ -8,15 +8,29 @@
 
 [ -f ~/.sh-aliases ]                      &&  source ~/.sh-aliases;
 [ -f ~/.sh-functions ]                    &&  source ~/.sh-functions;
-[ -f ~/.rvm/scripts/rvm ]                 &&  source ~/.rvm/scripts/rvm;
 [ -f ~/.sh-functions-track-installs.sh ]  &&  source ~/.sh-functions-track-installs.sh;
+[ -f ~/.rvm/scripts/rvm ]                 &&  source ~/.rvm/scripts/rvm;
 
 # -------------------------------------------------------------------------------
 
-# *******
-# *     *
-# * RVM *
-# *     *
-# *******
-# Add RVM to PATH for scripting
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+# ********
+# *      *
+# * OPAM *
+# *      *
+# ********
+
+# Load the auto-complete scripts
+if tty -s >/dev/null 2>&1; then
+    current_shell=$(ps --no-headers -p $$);
+    if [[ "$current_shell" =~ "zsh" ]]; then
+        . /home/troy/.opam/opam-init/complete.zsh > /dev/null 2> /dev/null || true
+    elif [[ "$current_shell" =~ "bash" ]]; then
+        . /home/troy/.opam/opam-init/complete.sh > /dev/null 2> /dev/null || true
+    fi
+fi
+
+# Define the opam-switch-eval function (from .opam/opam-init/switch_eval.sh)
+function opam-switch-eval () {
+    opam switch "$@" --no-warning
+    eval $(opam config env)
+}

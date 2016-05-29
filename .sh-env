@@ -240,3 +240,14 @@ pathappend $GRADLE_HOME/bin
 pathappend "$PATH:$HOME/.rvm/bin"
 # Add path to gems at start of PATH
 pathprepend "$HOME/.rvm/gems/ruby-2.1.2/bin"
+
+# -------------------------------------------------------------------------------
+
+# ********
+# *      *
+# * OPAM *
+# *      *
+# ********
+
+# Load the environment variables
+. /home/troy/.opam/opam-init/variables.sh > /dev/null 2> /dev/null || true

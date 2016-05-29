@@ -3,6 +3,7 @@
 
 set -a
 
+# common startup files
 source ~/.shrc
 
 # *****************
@@ -39,7 +40,6 @@ shopt -q -s histreedit
 shopt -q -s histverify
 shopt -q -s lithist
 
-
 # ********
 # *      *
 # * MISC *
@@ -64,18 +64,16 @@ bind -x '"\C-x\C-m": "xmodmap $HOME/.Xmodmap"'
 # bindkey -M viins 'jj' vi-cmd-mode
 # bindkey '^R' history-incremental-search-backward
 
-
-
 # ********************
 # *                  *
 # * LOAD OTHER FILES *
 # *                  *
 # ********************
 
+if [ -f ~/.bash-aliases ]; then . ~/.bash-aliases; fi
 if [ -f ~/.sh-aliases ]; then . ~/.sh-aliases; fi
 if [ -f ~/.bash-prompt ]; then . ~/.bash-prompt; fi
 if [ -f ~/.sh-functions ]; then . ~/.sh-functions; fi
-if [ -f ~/.rvm/scripts/rvm ]; then . ~/.rvm/scripts/rvm; fi
 if [ -f ~/.sh-functions-track-installs.sh ]; then . ~/.sh-functions-track-installs.sh; fi
 if [ -f /etc/profile.d/bash_completion.sh ]; then . /etc/profile.d/bash_completion.sh; fi
 if [ -n "$LOAD_SCRATCH" ] && [ -f ~/.bash-scratch ]; then . ~/.bash-scratch; fi
@@ -83,7 +81,6 @@ if [ -n "$LOAD_SCRATCH" ] && [ -f ~/.bash-scratch ]; then . ~/.bash-scratch; fi
 # ---bashmarks---
 # source .bashmarks-setup.sh after .sh-functions
 if [ -f ~/.bashmarks-setup.sh ]; then . ~/.bashmarks-setup.sh; fi
-
 
 # # ********************
 # # *                  *
@@ -100,5 +97,3 @@ if [ -f ~/.bashmarks-setup.sh ]; then . ~/.bashmarks-setup.sh; fi
 set +a
 
 # [ -f ~/.fzf.bash ] && source ~/.fzf.bash
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

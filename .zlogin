@@ -1,7 +1,8 @@
 #                                                                 -*- shell-script -*-
 
 # .zlogin -> .sh-profile
-[[ -e ~/.sh-profile ]] && emulate sh -c 'source ~/.sh-profile'
+# [[ -e ~/.sh-profile ]] && emulate sh -c 'source ~/.sh-profile'
+[[ -e ~/.sh-profile ]] && source ~/.sh-profile
 
 # shell startup files
 [ -e ~/.zshrc ] && source ~/.zshrc;

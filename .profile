@@ -8,14 +8,24 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
-# if running bash
-if [ -n "$BASH_VERSION" ]; then
-    # include .bashrc if it exists
-    if [ -f "$HOME/.bashrc" ]; then
-	. "$HOME/.bashrc"
-    fi
+
+# if running bash, source .bashrc
+if [[ -n "$BASH_VERSION"]]; then
+        [[ -f "$HOME/.bashrc" ]] && . "$HOME/.bashrc"
+        [[ -f "$HOME/.bashenv" ]] && . "$HOME/.bashenv"
 fi
 
-[ -e ~/.sh-profile ] && source ~/.sh-profile;
+# .profile -> .sh-profile
+[ -e ~/.sh-profile ] && source ~/.sh-profile
+
+# fzf (https://github.com/junegunn/fzf)
+[ -e ~/.fzf.bash ] && source ~/.fzf.bash
+
+# .vim.ana configurations #
+[ -e ~/.bash_vim_append ] && source ~/.bash_vim_append
+
+
+# -------------------------------------------------------------------------------
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm" # Load RVM into a shell session *as a function*

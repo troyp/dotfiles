@@ -61,13 +61,10 @@ plugins=(git)
 
 # User configuration
 
-  # export PATH="/home/troy/.rvm/gems/ruby-2.1.2/bin:/home/troy/.rvm/gems/ruby-2.1.2@global/bin:/home/troy/.rvm/rubies/ruby-2.1.2/bin:/home/troy/.nvm/versions/node/v0.12.7/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games:/home/troy/.rvm/bin:/home/troy/.linuxbrew/bin:/home/troy/.fzf:/home/troy/.emacs.d:/home/troy/.scripts:/home/troy/.cabal/bin:/home/troy/.nimble/bin:/home/troy/gowork/bin:/home/troy/code/working:/home/troy/code/scripts:/home/troy/Android/Sdk/tools:/home/troy/Android/Sdk/platform-tools:/opt/scala/bin:/opt/j64-804/bin:/opt:/opt/bin:/opt/scripts:/opt/firefox:/opt/calibre:/opt/xcape:/opt/LightTable:/opt/sbt/bin:/opt/racket/bin:/opt/eclipse:/opt/nim/bin:/opt/clean/bin:/opt/rstudio/bin:/opt/processing:/opt/tor-browser:/opt/helpdeco:/opt/lfe-master/bin:/usr/local/texlive/2014/bin/x86_64-linux:/opt/pdf-diff:/opt/pdfdir:/opt/sejda-console/bin:/opt/jpdfbookmarks:/opt/info2html:/opt/SublimeText2:/opt/peazip:/opt/peazip/res:/opt/lilyterm/bin:/opt/phantomjs-2.0.0/bin:/opt/icon/bin:/home/troy/.fzf/bin"
-# export MANPATH="/usr/local/man:$MANPATH"
-
 if [ -f ~/.shrc ]; then            source ~/.shrc;            fi
 if [ -f $ZSH/oh-my-zsh.sh ]; then  source $ZSH/oh-my-zsh.sh;  fi
-if [ -f ~/.zsh-functions ]; then   source ~/.zsh-functions;   fi
 if [ -f ~/.zsh-aliases ]; then     source ~/.zsh-aliases;     fi
+if [ -f ~/.zsh-functions ]; then   source ~/.zsh-functions;   fi
 
 zsh_URL=https://sourceforge.net/projects/zsh/files/latest/download?source=typ_redirect
 
@@ -106,5 +103,3 @@ promptinit
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
-
-export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting

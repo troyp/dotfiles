@@ -37,6 +37,16 @@ xset r rate 250 50  # X key repeat: xset r rate <ms delay> <char per sec>
 # fix End key (mapped to SuperL for unknown reason)
 xmodmap -e "keycode 115 = End NoSymbol End"
 
+# ***************
+# *             *
+# * ENVIRONMENT *
+# *             *
+# ***************
+
+# load .sh-env
+[ -e ~/.sh-env ] && source ~/.sh-env
+
+
 # *******
 # *     *
 # * RVM *

@@ -385,6 +385,7 @@ alias psbypid='ps -p'
 alias psbyparent='ps --ppid'
 alias myprocs='ps uxf'
 alias myprocsbymem='ps -u $USER -O pid,user,s,tty,%mem,comm,start,cputime --sort -%mem'
+alias pkill9='pkill -9'
 alias die='killall -vs9'
 alias lsofu='lsof -a -u troy'         # list files for user troy
 alias lsofp='lsof -a -p'              # list files for PID
@@ -525,6 +526,9 @@ alias ppcjs='underscore print --outfmt pretty'  # js/json pretty printing & synt
 #-----------------------------
 alias mzscheme='rlwrap /opt/racket/bin/mzscheme'
 alias sml='rlwrap sml'
+alias ocamlbrew-install='curl -kL https://raw.github.com/hcarty/ocamlbrew/master/ocamlbrew-install | bash'
+alias ocamlbrew-install-track='tail -f /tmp/ocamlbrew.*'
+alias opam-install='wget https://raw.github.com/ocaml/opam/master/shell/opam_installer.sh -O - | sh -s /usr/local/bin'
 alias ocaml='rlwrap ocaml'
 alias sbcl='rlwrap sbcl'
 alias viminstall='cd ~/.vim/bundle; git clone'
@@ -539,6 +543,7 @@ alias cljload='java -jar ~/.clojure/clojure.jar'
 alias fregec='java -Xss1m -jar /opt/frege/fregec.jar -d build'
 alias fregerepl='/opt/frege-repl/gradlew --no-daemon --console plain :frege-repl-core:run'
 alias java-setdefault='sudo update-alternatives --config java'
+alias git-dir-is-dirty='[ `git diff --shortstat 2>>/dev/null | wc -l` != 0 ]'  # succeeds if dirty
 # -------------------------------------------------------------------------------
 # Perl
 alias pl=perl
