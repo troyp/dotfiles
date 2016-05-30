@@ -1,4 +1,6 @@
 #                                                           -*- shell-script -*-
+[[ ! -z $DEBUG  ]] && echo "sourcing .sh-functions"
+
 # *************
 # *           *
 # * FUNCTIONS *

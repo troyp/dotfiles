@@ -1,4 +1,6 @@
 #                                                          -*- shell-script -*-
+[[ ! -z $DEBUG  ]] && echo "sourcing .zshrc"
+
 export TERM="xterm-256color"
 
 # Path to your oh-my-zsh installation.
@@ -61,15 +63,23 @@ plugins=(git)
 
 # User configuration
 
-if [ -f ~/.shrc ]; then            source ~/.shrc;            fi
-if [ -f $ZSH/oh-my-zsh.sh ]; then  source $ZSH/oh-my-zsh.sh;  fi
-if [ -f ~/.zsh-aliases ]; then     source ~/.zsh-aliases;     fi
-if [ -f ~/.zsh-functions ]; then   source ~/.zsh-functions;   fi
+#     ,------------------,
+#     | LOAD OTHER FILES |
+#     '------------------'
+# startup files
+if [[ -f ~/.shrc ]];           then source ~/.shrc;            fi
+if [[ -f $ZSH/oh-my-zsh.sh ]]; then source $ZSH/oh-my-zsh.sh;  fi
+# aliases
+if [[ -f ~/.zsh-aliases ]];    then source ~/.zsh-aliases;     fi
+# functions
+if [[ -f ~/.zsh-functions ]];  then source ~/.zsh-functions;   fi
 
 zsh_URL=https://sourceforge.net/projects/zsh/files/latest/download?source=typ_redirect
 
 bindkey "^P" up-line-or-search
 bindkey "^N" down-line-or-search
+# override oh-my-zsh
+# bindkey -s '\el' down-case-word
 
 zstyle ':completion:*' list-prompt   ''
 zstyle ':completion:*' select-prompt ''

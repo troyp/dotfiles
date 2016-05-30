@@ -1,4 +1,5 @@
 #                                                           -*- shell-script -*-
+[[ ! -z $DEBUG  ]] && echo "sourcing .sh-env"
 
 # ***************
 # *             *
@@ -211,14 +212,6 @@ CLOJURE_EXT=~/.clojure
 pathappend "/opt/clojure-contrib/launchers/bash"
 alias clj=clj-env-dir
 
-# **********
-# *        *
-# * NODEJS *
-# *        *
-# **********
-source ~/.nvm/nvm.sh
-nvm alias default stable > /dev/null
-
 # ********
 # *      *
 # * JAVA *
@@ -251,3 +244,13 @@ pathprepend "$HOME/.rvm/gems/ruby-2.1.2/bin"
 
 # Load the environment variables
 . /home/troy/.opam/opam-init/variables.sh > /dev/null 2> /dev/null || true
+
+# -------------------------------------------------------------------------------
+
+# # **********
+# # *        *
+# # * NODEJS *
+# # *        *
+# # **********
+
+# source ~/.nvm/nvm.sh

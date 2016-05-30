@@ -1,10 +1,9 @@
 #                                                           -*- shell-script -*-
-[ -z "$PS1" ] && return
+[[ ! -z $DEBUG  ]] && echo "sourcing .bashrc"
+
+[[ -z "$PS1" ]] && return
 
 set -a
-
-# common startup files
-source ~/.shrc
 
 # *****************
 # *               *
@@ -70,17 +69,25 @@ bind -x '"\C-x\C-m": "xmodmap $HOME/.Xmodmap"'
 # *                  *
 # ********************
 
-if [ -f ~/.bash-aliases ]; then . ~/.bash-aliases; fi
-if [ -f ~/.sh-aliases ]; then . ~/.sh-aliases; fi
-if [ -f ~/.bash-prompt ]; then . ~/.bash-prompt; fi
-if [ -f ~/.sh-functions ]; then . ~/.sh-functions; fi
-if [ -f ~/.sh-functions-track-installs.sh ]; then . ~/.sh-functions-track-installs.sh; fi
-if [ -f /etc/profile.d/bash_completion.sh ]; then . /etc/profile.d/bash_completion.sh; fi
-if [ -n "$LOAD_SCRATCH" ] && [ -f ~/.bash-scratch ]; then . ~/.bash-scratch; fi
+# common startup files
+if [[ -f ~/.shrc ]]; then . ~/.shrc fi
+# aliases
+if [[ -f ~/.sh-aliases ]]; then . ~/.sh-aliases; fi
+if [[ -f ~/.bash-aliases ]]; then . ~/.bash-aliases; fi
+# functions
+if [[ -f ~/.sh-functions ]]; then . ~/.sh-functions; fi
+if [[ -f ~/.bash-functions ]]; then . ~/.bash-functions; fi
+if [[ -f ~/.sh-functions-track-installs.sh ]]; then . ~/.sh-functions-track-installs.sh; fi
+# prompt
+if [[ -f ~/.bash-prompt ]]; then . ~/.bash-prompt; fi
+# completion
+if [[ -f /etc/profile.d/bash_completion.sh ]]; then . /etc/profile.d/bash_completion.sh; fi
+# misc
+if [[ -n "$LOAD_SCRATCH" ]] && [[ -f ~/.bash-scratch ]]; then . ~/.bash-scratch; fi
 
 # ---bashmarks---
 # source .bashmarks-setup.sh after .sh-functions
-if [ -f ~/.bashmarks-setup.sh ]; then . ~/.bashmarks-setup.sh; fi
+if [[ -f ~/.bashmarks-setup.sh ]]; then . ~/.bashmarks-setup.sh; fi
 
 # # ********************
 # # *                  *
@@ -96,4 +103,4 @@ if [ -f ~/.bashmarks-setup.sh ]; then . ~/.bashmarks-setup.sh; fi
 
 set +a
 
-# [ -f ~/.fzf.bash ] && source ~/.fzf.bash
+# [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash

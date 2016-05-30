@@ -1,4 +1,5 @@
 #                                                                 -*- shell-script -*-
+[[ ! -z $DEBUG  ]] && echo "sourcing .bash-aliases"
 
 #--------------------
 # BASH/SHELL ALIASES.
@@ -9,7 +10,7 @@ alias listopts='echo "$SHELLOPTS:$BASHOPTS" | tr ":" "\n"'
 alias readvar="read -r -d ''"
 alias custom-prompt='PS1="$mblue┌─($orange$mblue\!|$orange \s--\j jobs--\$(date \"+%a, %d %b %y\")$mblue)─\${fill}─($orange\$newPWD$mblue)─┐\n$mblue└─($orange\$(date \"+%H:%M\")$mblue)─>$unset "'
 # loop over bash functions
-alias dofunctions='# for fn in `declare -F | tr -s ' ' | cut -d' ' -f3 | grep '^[^_]'`; do'
+# alias dofunctions='# for fn in `declare -F | tr -s ' ' | cut -d' ' -f3 | grep '^[^_]'`; do'
 
 # -----
 # ETAGS

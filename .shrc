@@ -1,4 +1,5 @@
 #                                                           -*- shell-script -*-
+[[ ! -z $DEBUG  ]] && echo "sourcing .shrc"
 
 # *******************
 # *                 *
@@ -6,10 +7,10 @@
 # *                 *
 # *******************
 
-[ -f ~/.sh-aliases ]                      &&  source ~/.sh-aliases;
-[ -f ~/.sh-functions ]                    &&  source ~/.sh-functions;
-[ -f ~/.sh-functions-track-installs.sh ]  &&  source ~/.sh-functions-track-installs.sh;
-[ -f ~/.rvm/scripts/rvm ]                 &&  source ~/.rvm/scripts/rvm;
+[[ -f ~/.sh-aliases ]]                      &&  source ~/.sh-aliases;
+[[ -f ~/.sh-functions ]]                    &&  source ~/.sh-functions;
+[[ -f ~/.sh-functions-track-installs.sh ]]  &&  source ~/.sh-functions-track-installs.sh;
+[[ -f ~/.rvm/scripts/rvm ]]                 &&  source ~/.rvm/scripts/rvm;
 
 # -------------------------------------------------------------------------------
 
