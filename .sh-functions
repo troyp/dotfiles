@@ -839,3 +839,27 @@ edit-script() {
     prog=`which "$progname"`;
     "$editor" "$prog";
 }
+
+findlinks() {
+    if [[ "$1" =~ ^--?h(elp)?$ ]]; then
+        cat <<EOF
+findlinks [-h] [-q] file [path]
+    Search for hard links in a directory heirarchy.
+
+    Finds hard links matching FILE in the directory tree rooted in PATH.
+    If PATH is not specified, it defaults to the current directory.
+
+    Options:
+      -h    display this help
+      -q    do not echo find command or display warnings
+EOF
+        shift;
+    fi;
+    if [[ "$1" =~ ^--?q(uite)?$ ]]; then quiet="-q "; shift; fi;
+    echo $1 $2
+    f="$1"
+    startdir="${2:-.}"
+    cmd="find $startdir -samefile $f ${quiet+ 2>/dev/null}"
+    [[ -z $quiet ]] &&  >&2 echo "$cmd"
+    eval "$cmd"
+}
