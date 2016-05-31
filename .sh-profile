@@ -16,7 +16,7 @@ xmodmap -e "keycode 127 = Pause"
 # =======
 # usage:    xcape [-d] [-t <timeout ms>] [-e <map-expression>]
 # where <map-expression> has the grammar:    MapExpression ::= ModKey=Key[|OtherKey][;MapExpression]
-# and Key/OtherKey names are as found in /usr/include/X11/keysymdef.h (with then XK_ prefixes removed)
+# and Key/OtherKey names are as found in /usr/include/X11/keysymdef.h (with the XK_ prefixes removed)
 if ! pgrep xcape >/dev/null; then
     xcape -e 'Control_L=Escape;Super_R=Menu;Control_R=Multi_key;Shift_L=parenleft;Shift_R=parenright' &
 fi
