@@ -1,6 +1,6 @@
 [Desktop Entry]
 Exec=/opt/calibre/ebook-viewer
-MimeType=application/epub+zip;
+MimeType=application/epub+zip;application/x-mobipocket-ebook;
 Name=ebook-viewer
 NoDisplay=true
 Type=Application
