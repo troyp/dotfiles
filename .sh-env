@@ -137,6 +137,8 @@ paths=(
     /opt/activator-dist/bin
     /opt/zed
     /opt/apache-maven-3.3.3/bin
+    /opt/google-code-support-tools/wiki_to_md
+    /opt/google-code-support-tools/googlecode-issues-exporter
 )
 for i in "${paths[@]}"; do pathappend "$i" ; done
 
