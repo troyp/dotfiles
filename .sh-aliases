@@ -600,6 +600,8 @@ alias e="emacsclient -ta ''"
 alias eq='emacs -Q -nw'
 alias eqw='emacs -Q'
 alias ec="emacsclient -cna ''"
+# emacsclient: geometry option isn't working - why not?
+alias eg="emacsclient -cna 'gvim' -F '((height . 43) (width . 97) (top . -63) (left . -35))'"
 alias emacs-spacemacs-toggle='if [[ -d ~/.emacs.d.spacemacs ]]; then mv -T ~/.emacs.d ~/.emacs.d.plain; mv -T ~/.emacs.d.spacemacs ~/.emacs.d; echo "Spacemacs active"; else mv -T ~/.emacs.d ~/.emacs.d.spacemacs; mv -T ~/.emacs.d.plain ~/.emacs.d; echo "Plain Emacs active"; fi;'
 alias emint='pkill --signal SIGINT emacs'
 alias epipe=$HOME/.scripts/emacsclient
@@ -722,7 +724,6 @@ alias rannum='tr -dc "0-9" < /dev/urandom | head -c'
 #---------------------
 # APPLICATION ALIASES.
 #---------------------
-alias e=leafpad
 alias vi=nvi
 alias coline='command col'    # leave col free as a column selection command
 alias factorlang=/opt/factor/factor
@@ -737,6 +738,7 @@ alias PeaUtils=/opt/peazip/res/pea
 alias xa=xargs
 alias gd=grepdict   # see .sh-functions:q
 alias ucs=/opt/scripts/unicodesearch    # github.com/jpverkamp/dotfiles/blob/master/bin/uni
+alias googlecodewiki2mediawiki=gw2mw.sh  # convert google code wiki --> mediawiki
 
 #---------------------------------
 # APPLICATION DEFAULTS & VARIANTS.
