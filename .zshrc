@@ -76,8 +76,10 @@ if [[ -f ~/.zsh-functions ]];  then source ~/.zsh-functions;   fi
 
 zsh_URL=https://sourceforge.net/projects/zsh/files/latest/download?source=typ_redirect
 
-bindkey "^P" up-line-or-search
-bindkey "^N" down-line-or-search
+bindkey "^P" history-beginning-search-backward
+bindkey "^N" history-beginning-search-forward
+bindkey "^[[A" up-line-or-search
+bindkey "^[[B" down-line-or-search
 # override oh-my-zsh
 # bindkey -s '\el' down-case-word
 
