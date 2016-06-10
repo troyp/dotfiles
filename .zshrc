@@ -59,7 +59,7 @@ POWERLEVEL9K_MODE='awesome-fontconfig'
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(git)
+plugins=(git dirhistory)
 
 # User configuration
 
@@ -68,7 +68,15 @@ plugins=(git)
 #     '------------------'
 # startup files
 if [[ -f ~/.shrc ]];           then source ~/.shrc;            fi
-if [[ -f $ZSH/oh-my-zsh.sh ]]; then source $ZSH/oh-my-zsh.sh;  fi
+if [[ -f $ZSH/oh-my-zsh.sh ]]; then
+    source $ZSH/oh-my-zsh.sh;
+    # reload prompt (since oh-my-zsh.sh doesn't do it properly)
+    if [[ -e "$ZSH_CUSTOM/$ZSH_THEME.zsh-theme" ]]; then
+        source "$ZSH_CUSTOM/$ZSH_THEME.zsh-theme"
+    elif [[ -e "$ZSH_CUSTOM/themes/$ZSH_THEME.zsh-theme" ]]; then
+        source "$ZSH_CUSTOM/themes/$ZSH_THEME.zsh-theme"
+    fi
+fi
 # aliases
 if [[ -f ~/.zsh-aliases ]];    then source ~/.zsh-aliases;     fi
 # functions
