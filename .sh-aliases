@@ -50,6 +50,7 @@ alias filter-exec-in-default-PATH='grep -E `echo ${ubuntu_default_PATH//:/\/.+\|
 alias kderepl='qdbus org.kde.plasma-desktop /MainApplication showInteractiveKWinConsole'
 alias kde-view-places-file='/home/troy/.local/share/user-places.xbel'
 alias kde-view-bookmarks-file='view /home/troy/.kde/share/apps/kfile/bookmarks.xml'
+alias plasmarestart4='kbuildsycoca4 && kquitapp plasma-desktop && kstart plasma-desktop'
 
 #---------------------
 # CD & MKDIR ALIASES.
