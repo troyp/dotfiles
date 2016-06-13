@@ -89,7 +89,8 @@ bindkey "^N" history-beginning-search-forward
 bindkey "^[[A" up-line-or-search
 bindkey "^[[B" down-line-or-search
 # override oh-my-zsh
-# bindkey -s '\el' down-case-word
+bindkey '\el' down-case-word
+bindkey -s '^x^z' ~/.oh-my-zsh/custom/
 
 zstyle ':completion:*' list-prompt   ''
 zstyle ':completion:*' select-prompt ''
