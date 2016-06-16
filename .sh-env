@@ -136,6 +136,7 @@ paths=(
 	  /opt/pdfsandich
     /opt/activator-dist/bin
     /opt/zed
+    /opt/jade
     /opt/apache-maven-3.3.3/bin
     /opt/google-code-support-tools/wiki_to_md
     /opt/google-code-support-tools/googlecode-issues-exporter
