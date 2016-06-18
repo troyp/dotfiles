@@ -1,0 +1,14 @@
+#                                                                 -*- shell-script -*-
+[[ ! -z $DEBUG ]] && echo "sourcing .zsh-aliases"
+
+#-------------------
+# ZSH/SHELL ALIASES.
+#-------------------
+alias help=run-help
+alias lscolors=spectrum_ls
+alias reloadtheme='source "$ZSH_CUSTOM/ZSH_THEME.zsh-theme" 2>/dev/null || source "$ZSH_CUSTOM/themes/$ZSH_THEME.zsh-theme"'
+alias dirl='dirs | tolines | number-lines'
+
+# alias splitpath='IFS=":" read -A arr <<<$IN; printf "%s\n" "${arr[@]}"'
+alias dopath='while IFS=":" read -A arr; do for x in "${arr[@]}"; do'
+alias donepath='done; done;'
