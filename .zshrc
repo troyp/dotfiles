@@ -88,9 +88,16 @@ bindkey "^P" history-beginning-search-backward
 bindkey "^N" history-beginning-search-forward
 bindkey "^[[A" up-line-or-search
 bindkey "^[[B" down-line-or-search
+bindkey "^R" history-incremental-pattern-search-backward
+bindkey "^S" history-incremental-pattern-search-forward
 # override oh-my-zsh
 bindkey '\el' down-case-word
 bindkey -s '^x^z' ~/.oh-my-zsh/custom/
+
+# foreground widget: C-z
+fgwidget() { fg }
+zle -N fgwidget
+bindkey '^Z' fgwidget
 
 zstyle ':completion:*' list-prompt   ''
 zstyle ':completion:*' select-prompt ''
