@@ -364,14 +364,15 @@ alias qsn='copyq tab "&snippets" add'   # add to copyq snippets tab
 alias cbdl='cb | dolines wget "$x"; done'   # download a list of file urls from clipboard
 
 
-#--------------------
-# BASH/SHELL ALIASES.
-#--------------------
+#---------------
+# SHELL ALIASES.
+#---------------
 alias vi-bindings='set -o vi'
 alias emacs-bindings='set -o emacs'
 alias runfromhere='export PATH="./:$PATH"'
 alias typa='type -a'
 alias typp='type -p'
+alias \?='echo'
 
 
 # ---------------
