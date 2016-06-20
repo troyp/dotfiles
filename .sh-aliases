@@ -548,6 +548,9 @@ alias fregec='java -Xss1m -jar /opt/frege/fregec.jar -d build'
 alias fregerepl='/opt/frege-repl/gradlew --no-daemon --console plain :frege-repl-core:run'
 alias java-setdefault='sudo update-alternatives --config java'
 alias git-dir-is-dirty='[ `git diff --shortstat 2>>/dev/null | wc -l` != 0 ]'  # succeeds if dirty
+# adapted from instmodsh script
+alias cpanlist="perl -MExtUtils::Installed -e '"'use vars qw($Inst @Modules);$Inst = ExtUtils::Installed->new();@Modules = $Inst->modules();print("Installed modules are:\n   ", join("\n   ", @Modules), "\n");'"'"
+alias npmlist='npm list'
 # -------------------------------------------------------------------------------
 # Perl
 alias pl=perl
