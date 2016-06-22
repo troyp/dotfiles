@@ -47,8 +47,12 @@ pathprepend() {
 # LOCATIONS
 # ---------
 
-BASH_ALIAS_FILE=$HOME/.sh-aliases
-BASH_FUNCTION_FILE=$HOME/.sh-functions
+SH_ALIAS_FILE=$HOME/.sh-aliases
+SH_FUNCTION_FILE=$HOME/.sh-functions
+ZSH_ALIAS_FILE=$HOME/.zsh-aliases
+ZSH_FUNCTION_FILE=$HOME/.zsh-functions
+BASH_ALIAS_FILE=$HOME/.bash-aliases
+BASH_FUNCTION_FILE=$HOME/.bash-functions
 SCRIPTS_DIRECTORY=$HOME/.scripts
 GTAGSCONF=/usr/share/doc/global/examples/gtags.conf
 VIMPAGER_RC=/opt/vimpager/vimpagerrc
