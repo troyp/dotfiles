@@ -849,3 +849,29 @@ googlecodewiki2gfm() {
     echo "$converter" --input_file "$infile" --output_file "$outfile"
     python2 "$converter" --input_file "$infile" --output_file "$outfile"
 }
+
+grepalias() {
+    if [[ "$1" =~ ^--?h(elp)?$ ]]; then
+        cat <<EOF
+grepalias [-h] pattern
+    Print a list of definitions for aliases matching PATTERN.
+    For example,
+        grepalias .
+    lists all single-character aliases.
+
+    Note that this commands greps the output of the alias listing, so an alias
+    using a question mark (?) character must be searched in quotation marks.
+    For example:
+        grepalias "'?.'"
+    will find 2-character aliases starting with ?.
+
+    Options:
+      -h --help     display this help
+EOF
+        shift;
+    fi;
+    pattern="$1"
+    re="^${pattern}="
+    echo 'alias | grep "'"$re"'"'
+    alias | grep "$re"
+}
