@@ -13,7 +13,6 @@
 [[ -f ~/.rvm/scripts/rvm ]]                 &&  source ~/.rvm/scripts/rvm;
 
 # -------------------------------------------------------------------------------
-
 # ********
 # *      *
 # * OPAM *
@@ -35,3 +34,14 @@ function opam-switch-eval () {
     opam switch "$@" --no-warning
     eval $(opam config env)
 }
+
+# -------------------------------------------------------------------------------
+# *********************
+# *                   *
+# * VIRTUALENVWRAPPER *
+# *                   *
+# *********************
+
+export WORKON_HOME=$HOME/.virtualenvs
+export PROJECT_HOME=$HOME/dev
+source /usr/local/bin/virtualenvwrapper_lazy.sh
