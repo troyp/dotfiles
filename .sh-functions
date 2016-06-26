@@ -552,8 +552,24 @@ function confirm () {
 }
 
 function mkvtracks () {
-	file="$1"
-	mkvinfo "$file" | grep -ie '\(track\|codec id\)'
+    if [[ "$1" =~ ^--?h(elp)?$ ]]; then
+        cat <<EOF
+mkvtracks [-h | -v] file
+    Print a list of tracks in an MKV file.
+
+    Options:
+      -h --help     display this help
+      -v --verbose  verbose listing
+EOF
+        shift
+        return 0
+    fi;
+    if [[ "$1" =~ ^--?v(erbose)?$ ]]; then
+        shift
+	      mkvinfo "$1" | grep -ie '\(track\|codec id\)'
+        return 0
+    fi;
+  mkvmerge -i "$1"
 }
 
 function mkvextract-ass () {
@@ -731,8 +747,7 @@ symlink-by-correspondence () {
     # symlink-by-correspondence DIR TO_DIR:  Each subdirectory d in DIR/x is symlinked
     # as TO_DIR/x/DIRNAME (where DIR is DIRPATH/DIRNAME)
     # Options:
-    # -i        case-insensitive matching of TO subdirectories to DIR
-    #           subdirectories.
+    # -i   case-insensitive matching of TO subdirectories to DIR subdirectories.
     if [ "$1" == "-i" ]; then case_insensitive="true"; shift; fi;
     A="${1%/}";
     B="${2%/}";
