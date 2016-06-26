@@ -536,10 +536,6 @@ alias opam-install='wget https://raw.github.com/ocaml/opam/master/shell/opam_ins
 alias ocaml='rlwrap ocaml'
 alias sbcl='rlwrap sbcl'
 alias viminstall='cd ~/.vim/bundle; git clone'
-alias pynote='ipython notebook --pylab=inline'
-alias ipylab='ipython --pylab'
-alias py='ipython --pylab'
-alias bpy='bpython'
 alias extract_elisp='find . -name "*.el.gz" | xargs sudo gunzip'
 alias core-on='ulimit -c unlimited'
 alias core-off='ulimit -c 0'
@@ -548,9 +544,15 @@ alias fregec='java -Xss1m -jar /opt/frege/fregec.jar -d build'
 alias fregerepl='/opt/frege-repl/gradlew --no-daemon --console plain :frege-repl-core:run'
 alias java-setdefault='sudo update-alternatives --config java'
 alias git-dir-is-dirty='[ `git diff --shortstat 2>>/dev/null | wc -l` != 0 ]'  # succeeds if dirty
-# adapted from instmodsh script
-alias cpanlist="perl -MExtUtils::Installed -e '"'use vars qw($Inst @Modules);$Inst = ExtUtils::Installed->new();@Modules = $Inst->modules();print("Installed modules are:\n   ", join("\n   ", @Modules), "\n");'"'"
 alias npmlist='npm list'
+# -------------------------------------------------------------------------------
+# Python
+alias pynote='ipython notebook --pylab=inline'
+alias ipylab='ipython --pylab'
+alias py='ipython --pylab'
+alias bpy='bpython'
+alias venv-activate='source ./bin/activate'
+alias venv-deactivate=deactivate
 # -------------------------------------------------------------------------------
 # Perl
 alias pl=perl
@@ -568,6 +570,8 @@ alias perl-warnings-on="alias ple='perl -ew'; alias Ple='perl -wE'"
 alias perl-warnings-off="alias ple='perl -e'; alias Ple='perl -E'"
 alias perlEOF="perl -w <(cat <<'EOF'"    # multiline perl command: end with: EOF\n)
 alias perlrepl='perl -de 0'
+# adapted from instmodsh script
+alias cpanlist="perl -MExtUtils::Installed -e '"'use vars qw($Inst @Modules);$Inst = ExtUtils::Installed->new();@Modules = $Inst->modules();print("Installed modules are:\n   ", join("\n   ", @Modules), "\n");'"'"
 # -------------------------------------------------------------------------------
 # Ruby
 alias rbe='ruby -e'       # execute ruby code from next argument
@@ -685,6 +689,8 @@ alias recol='pr -t --columns'  # recolumnate single-column data
 alias fromjis='iconv -f SHIFT-JIS -t UTF-8'
 alias tojis='iconv -f UTF-8 -t SHIFT-JIS'
 alias translit='iconv -f utf-8 -t ascii//translit'  # transliterate western characters
+# http://stackoverflow.com/questions/17998978/removing-colors-from-output - buggy
+alias stripcolors='sed -r "s/\x1B\[([0-9];)?([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g"'
 
 # -----------
 # FORMATTING.
@@ -789,6 +795,7 @@ alias diskusage='gdmap -f'
 alias ibusd='IBUS_ENABLE_SYNC_MODE=1 ibus-daemon -drx'
 alias thumbsdb='vinetto -o ./.thumbnails ./?humbs.db'
 alias kanjitomo='java -Xmx1000m -jar /opt/KanjiTomo/KanjiTomo.jar -run'
+alias subtitledl='subliminal download -l en'    # dl subs matching a video file - requires pip install subliminal
 
 
 # --------------
