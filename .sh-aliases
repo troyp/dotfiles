@@ -634,6 +634,8 @@ alias gs-pstopdf='gs -q -dBATCH -dAutoFilterColorImages=false -sColorImageFilter
 alias jpdftweak='java -jar /opt/jpdftweak/jpdftweak.jar'  # can renumber pages in PDFs (loses bmarks)
 alias pdfimg='pdfimages -j'
 # OCR: use pdfocr for OCR; much better than pdfsandwich (default settings)
+alias pdfjoin='pdfjam --fitpaper true --rotateoversize true --suffix joined'
+alias pdfjoin-norotate='pdfjam --fitpaper true --suffix joined'
 
 # -------------
 # IMAGE ALIASES
