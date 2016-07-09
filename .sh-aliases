@@ -1,6 +1,12 @@
 #                                                                 -*- shell-script -*-
 [[ ! -z $DEBUG  ]] && echo "sourcing .sh-aliases"
 
+# load private aliases
+[ -e ~/.sh-aliases-private ] && source ~/.sh-aliases-private
+
+#-------------
+# ALIAS NOTES.
+#-------------
 # to override: use \ or '' (eg. \ls or 'ls')
 # to "escape" ' inside '' (when you need both ' and " in alias): use '"'"'
 #    (doesn't really escape - it ends string, concatenates string "'" (a single
@@ -268,7 +274,7 @@ alias wgetmcut='wgetm --cut-dirs'  #eg wgetmcut 2 ... (removes root + top 2 subd
 alias wgetmfcut="wgetmf --reject-regex '.*[?].*' ---cut-dirs"  #eg wgetmcut 2 ... (removes root + top 2 subdirs)
 alias wgetmffcut="wgetmff --reject-regex '.*[?$].*' ---cut-dirs"  #eg wgetmcut 2 ... (removes root + top 2 subdirs)
 alias wgetmflat='wgetm -nd'
-alias wgetstealth='wget robots=off -U=Mozilla'
+alias wgetstealth='wget -e robots=off -U=Mozilla'
 alias wgetmstealth='wgetm -e robots=off -U="Mozilla" -w 1'
 alias wgetmfstealth='wgetmf -e robots=off -U="Mozilla" -w 1'
 alias wget1='wget -rNkpE -l 1 -H'
@@ -550,6 +556,7 @@ alias npmlist='npm list'
 alias pynote='ipython notebook --pylab=inline'
 alias ipylab='ipython --pylab'
 alias py='ipython --pylab'
+alias py3='ipython3 --pylab'
 alias bpy='bpython'
 alias venv-activate='source ./bin/activate'
 alias venv-deactivate=deactivate
