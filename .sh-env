@@ -77,8 +77,8 @@ PATH=${PATH%:.}  # remove . from end of $PATH
 paths=(
     $HOME/bin
     $HOME/.rvm/bin
-    $HOME/local/bin
-    $HOME/local/bin/node
+    $HOME/.local/bin
+    $HOME/.local/bin/node
     $HOME/.rvm/bin
     $HOME/.linuxbrew/bin
     $HOME/.fzf
