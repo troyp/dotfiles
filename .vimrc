@@ -284,6 +284,10 @@ command! RevertBuffer edit!
 command! AutoRevertBuffer set autoread
 command! NoAutoRevertBuffer set noautoread
 command! ShowIndentOptions verbose set ai? cin? cink? cino? si? inde? indk?
+" map query commands
+command! Nshow verbose nmap
+command! Vshow verbose vmap
+command! Ishow verbose imap
 
 
 "------------------------------------------------------
