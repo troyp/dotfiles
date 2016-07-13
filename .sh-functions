@@ -136,7 +136,7 @@ cbz-by-num () {
 
 # compress directory as .tgz
 maff () {
-    if [ ! -f "$1/index.html" ]
+    if [[ ! -f "$1/index.html" ]]
     then
 	echo "No index.html file. Enter relative Path of file to redirect to."
 	printf "main page: "
@@ -535,9 +535,38 @@ function img-rot () {
 }
 
 function img-resize () {
+    if [[ "$1" =~ ^--?h(elp)?$ ]]; then
+        cat <<EOF
+img-resize [-h | -v] INFILE WxH [OUTFILE]
+    Resize an image.
+
+    The new size is given in the format WIDTHxHEIGHT (as given by 'identify').
+    If the OUTFILE name is not specified, it is the same as the input file name,
+    but with '_resized' appended (before the extension).
+
+    For example: The command
+        img-resize myfile.jpg 50x100
+    will resize myfile.jpg to 50 pixels by 100 pixels and save the result as
+    myfile_resized.jpg.
+
+    Options:
+      -h --help     display this help
+      -v --verbose  verbose
+EOF
+        shift
+        return 0
+    fi;
+    if [[ "$1" =~ ^--?v(erbose)?$ ]]; then
+        verbose="true"
+        shift
+    fi
     infile="$1"
     size="$2"
-    outfile="${3:=${infile}_resized}"
+    default_out_name="${infile%.*}_resized.${infile##*.}"
+    outfile="${3:-$default_out_name}"
+    if [[ -n $verbose ]]; then
+        echo "convert \"$infile\" -resize \"$size\" \"$outfile\""
+    fi
     convert "$infile" -resize "$size" "$outfile"
 }
 
