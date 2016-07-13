@@ -494,7 +494,10 @@ alias ssmart='sudo smartctl'  # hard drive testing
 alias evdev='sudo evdev' # show keyboard codes
 alias showkey='sudo showkey' # query/monitor input devices (eg. key codes)
 alias disable-wd-headparking='sudo idle3ctl -d'
-alias hw-list='sudo lshw -short'    # list hardware in compact format
+alias hw-list='sudo lshw -short'    # list hardware in compact format using lshw
+alias hw-list2='hwinfo --short'    # list hardware in compact format using hwinfo
+alias hw-page='sudo lshw -short | less'    # list hardware in compact format using lshw
+alias hw-page2='hwinfo --short | less'    # list hardware in compact format using hwinfo
 alias hw-listusb='lsusb'
 alias hw-listpci='lspci'
 alias hw-memusage='cat /proc/meminfo'
@@ -564,14 +567,14 @@ alias venv-deactivate=deactivate
 # Perl
 alias pl=perl
 alias ple='pl -e'       # execute perl code from next argument
-alias pln='pl -n -e'      # execute within loop
-alias plnl='pl -nl -e'    # execute within loop, strip/add newlines
-alias plp='pl -p -e'      # execute within loop, with print
-alias plpl='pl -pl -e'    # execute within loop, with print, strip/add newlines
-alias pli='perl -i -e'      # execute perl code in-place on file(s)
-alias plin='perl -i -n -e'     # execute perl code in-place on file(s), within loop
-alias plip='perl -i -p -e'     # execute perl code in-place on file(s), with print
-alias plinp='perl -i -np -e'   # execute perl code in-place on file(s), with print, within loop
+alias pln='pl -ne'      # execute within loop
+alias plnl='pl -nle'    # execute within loop, strip/add newlines
+alias plp='pl -pe'      # execute within loop, with print
+alias plpl='pl -lpe'    # execute within loop, with print, strip/add newlines
+alias pli='perl -ie'      # execute perl code in-place on file(s)
+alias plin='perl -ine'     # execute perl code in-place on file(s), within loop
+alias plip='perl -ipe'     # execute perl code in-place on file(s), with print
+alias plinp='perl -inpe'   # execute perl code in-place on file(s), with print, within loop
 alias Pl='pl -E'      # perl (enable features)
 alias perl-warnings-on="alias ple='perl -ew'; alias Ple='perl -wE'"
 alias perl-warnings-off="alias ple='perl -e'; alias Ple='perl -E'"
