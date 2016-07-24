@@ -14,6 +14,9 @@
 	d = diff --color-words                                    
 	da = diff --cached --color-words                                    
 	dc = diff HEAD --color-words                                    
+	dw = !GIT_PAGER='less -r' git diff --color-words                                    
+	dwa = !GIT_PAGER='less -r' git diff --cached --color-words                                    
+	dwc = !GIT_PAGER='less -r' git diff HEAD --color-words                                    
 	# https://coderwall.com/p/euwpig/a-better-git-log
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	ll = log --stat --abbrev-commit	
