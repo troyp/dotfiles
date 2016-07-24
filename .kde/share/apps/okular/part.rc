@@ -184,5 +184,6 @@
   <Action priority="0" name="options_configure_annotations"/>
   <Action shortcut="Ctrl+Shift+B" name="options_configure_generators"/>
   <Action priority="0" name="edit_select_all"/>
+  <Action shortcut="Ctrl+S" name="file_save_copy"/>
  </ActionProperties>
 </kpartgui>

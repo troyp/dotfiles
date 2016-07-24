@@ -5,5 +5,7 @@ MimeType=application/x-mobipocket-ebook
 MimeType=application/x-sony-bbeb
 MimeType=text/lrs
 Name=Calibre
+Icon=/home/troy/.local/share/icons/Old_Calibre_Logo.png
 NoDisplay=false
 Type=Application
+Categories=Office;Viewer

@@ -1,5 +1,5 @@
 [Data]
-DataCount=25
+DataCount=27
 
 [Data_1]
 Comment=KMenuEdit Global Shortcuts
@@ -12,7 +12,7 @@ Type=ACTION_DATA_GROUP
 [Data_10]
 Comment=Comment
 Enabled=true
-Name=Shift+Up
+Name=End
 Type=SIMPLE_ACTION_DATA
 
 [Data_10Actions]
@@ -20,7 +20,7 @@ ActionsCount=1
 
 [Data_10Actions0]
 DestinationWindow=0
-Input=Shift+Up
+Input=End
 Type=KEYBOARD_INPUT
 
 [Data_10Conditions]
@@ -32,14 +32,14 @@ Comment=Simple_action
 TriggersCount=1
 
 [Data_10Triggers0]
-Key=Meta+Shift+K
+Key=Meta+E
 Type=SHORTCUT
-Uuid={23e3933d-4a4d-4e15-aa52-5b5ab9c93553}
+Uuid={c0928e9f-989b-4689-8c21-55632b0986dc}
 
 [Data_11]
 Comment=Comment
 Enabled=true
-Name=Shift+Left
+Name=Shift+Down
 Type=SIMPLE_ACTION_DATA
 
 [Data_11Actions]
@@ -47,7 +47,7 @@ ActionsCount=1
 
 [Data_11Actions0]
 DestinationWindow=0
-Input=Shift+Left
+Input=Shift+Down
 Type=KEYBOARD_INPUT
 
 [Data_11Conditions]
@@ -59,14 +59,14 @@ Comment=Simple_action
 TriggersCount=1
 
 [Data_11Triggers0]
-Key=Meta+Shift+H
+Key=Meta+Shift+J
 Type=SHORTCUT
-Uuid={d2dc6cf9-75cf-4d6d-9313-aaae2b58f982}
+Uuid={5b0d6ca1-5a21-4191-86a7-c5979e045408}
 
 [Data_12]
 Comment=Comment
 Enabled=true
-Name=Shift+Right
+Name=Shift+Up
 Type=SIMPLE_ACTION_DATA
 
 [Data_12Actions]
@@ -74,7 +74,7 @@ ActionsCount=1
 
 [Data_12Actions0]
 DestinationWindow=0
-Input=Shift+Right
+Input=Shift+Up
 Type=KEYBOARD_INPUT
 
 [Data_12Conditions]
@@ -86,14 +86,14 @@ Comment=Simple_action
 TriggersCount=1
 
 [Data_12Triggers0]
-Key=Meta+Shift+L
+Key=Meta+Shift+K
 Type=SHORTCUT
-Uuid={c7e7a986-b8a7-4ba5-8be7-ad1a989c33fc}
+Uuid={23e3933d-4a4d-4e15-aa52-5b5ab9c93553}
 
 [Data_13]
 Comment=Comment
 Enabled=true
-Name=Home
+Name=Shift+Left
 Type=SIMPLE_ACTION_DATA
 
 [Data_13Actions]
@@ -101,7 +101,7 @@ ActionsCount=1
 
 [Data_13Actions0]
 DestinationWindow=0
-Input=Home
+Input=Shift+Left
 Type=KEYBOARD_INPUT
 
 [Data_13Conditions]
@@ -113,14 +113,14 @@ Comment=Simple_action
 TriggersCount=1
 
 [Data_13Triggers0]
-Key=Meta+A
+Key=Meta+Shift+H
 Type=SHORTCUT
-Uuid={a0115ade-d964-4bf8-b225-9aa57e003f94}
+Uuid={d2dc6cf9-75cf-4d6d-9313-aaae2b58f982}
 
 [Data_14]
 Comment=Comment
 Enabled=true
-Name=End
+Name=Shift+Right
 Type=SIMPLE_ACTION_DATA
 
 [Data_14Actions]
@@ -128,7 +128,7 @@ ActionsCount=1
 
 [Data_14Actions0]
 DestinationWindow=0
-Input=End
+Input=Shift+Right
 Type=KEYBOARD_INPUT
 
 [Data_14Conditions]
@@ -140,14 +140,14 @@ Comment=Simple_action
 TriggersCount=1
 
 [Data_14Triggers0]
-Key=Meta+E
+Key=Meta+Shift+L
 Type=SHORTCUT
-Uuid={c0928e9f-989b-4689-8c21-55632b0986dc}
+Uuid={c7e7a986-b8a7-4ba5-8be7-ad1a989c33fc}
 
 [Data_15]
 Comment=Comment
-Enabled=false
-Name=Escape
+Enabled=true
+Name=Shift+Home
 Type=SIMPLE_ACTION_DATA
 
 [Data_15Actions]
@@ -155,7 +155,7 @@ ActionsCount=1
 
 [Data_15Actions0]
 DestinationWindow=0
-Input=Escape
+Input=Shift+Home
 Type=KEYBOARD_INPUT
 
 [Data_15Conditions]
@@ -167,22 +167,23 @@ Comment=Simple_action
 TriggersCount=1
 
 [Data_15Triggers0]
-Key=Ctrl+[
+Key=Meta+Shift+A
 Type=SHORTCUT
-Uuid={5ffee764-c260-4ca5-86ac-afa0ad466a2c}
+Uuid={a8cd5ac3-70ec-46f5-8ed4-e5f029b3423b}
 
 [Data_16]
 Comment=Comment
 Enabled=true
-Name=Roxterm
+Name=Shift+End
 Type=SIMPLE_ACTION_DATA
 
 [Data_16Actions]
 ActionsCount=1
 
 [Data_16Actions0]
-CommandURL=roxterm -p troy1
-Type=COMMAND_URL
+DestinationWindow=0
+Input=Shift+End
+Type=KEYBOARD_INPUT
 
 [Data_16Conditions]
 Comment=
@@ -193,14 +194,14 @@ Comment=Simple_action
 TriggersCount=1
 
 [Data_16Triggers0]
-Key=Meta+Return
+Key=Meta+Shift+E
 Type=SHORTCUT
-Uuid={38a3182b-429f-4d3b-a264-3f6ee13d192a}
+Uuid={6e5d9508-b691-4f30-8989-876283fbf49f}
 
 [Data_17]
 Comment=Comment
-Enabled=true
-Name=Delete
+Enabled=false
+Name=Escape
 Type=SIMPLE_ACTION_DATA
 
 [Data_17Actions]
@@ -208,7 +209,7 @@ ActionsCount=1
 
 [Data_17Actions0]
 DestinationWindow=0
-Input=Delete
+Input=Escape
 Type=KEYBOARD_INPUT
 
 [Data_17Conditions]
@@ -220,38 +221,22 @@ Comment=Simple_action
 TriggersCount=1
 
 [Data_17Triggers0]
-Key=Meta+D
+Key=Ctrl+[
 Type=SHORTCUT
-Uuid={2da5d263-6fd0-4b4c-bef5-1564e8923a93}
+Uuid={5ffee764-c260-4ca5-86ac-afa0ad466a2c}
 
 [Data_18]
 Comment=Comment
-Enabled=false
-Name=Scala IDE new block
+Enabled=true
+Name=Roxterm
 Type=SIMPLE_ACTION_DATA
 
 [Data_18Actions]
 ActionsCount=1
 
 [Data_18Actions0]
-DestinationWindow=1
-Input=Shift+[:Enter:Enter:Up:Tab
-Type=KEYBOARD_INPUT
-
-[Data_18Actions0DestinationWindow]
-Comment=
-WindowsCount=1
-
-[Data_18Actions0DestinationWindow0]
-Class=\s
-ClassType=0
-Comment=Scala IDE
-Role=
-RoleType=0
-Title=Scala IDE\s
-TitleType=1
-Type=SIMPLE
-WindowTypes=1
+CommandURL=roxterm -p troy1
+Type=COMMAND_URL
 
 [Data_18Conditions]
 Comment=
@@ -262,22 +247,23 @@ Comment=Simple_action
 TriggersCount=1
 
 [Data_18Triggers0]
-Key=Ctrl+J
+Key=Meta+Return
 Type=SHORTCUT
-Uuid={e901fcbe-10ea-45cf-9299-781ae653eb7a}
+Uuid={38a3182b-429f-4d3b-a264-3f6ee13d192a}
 
 [Data_19]
 Comment=Comment
 Enabled=true
-Name=New Action
+Name=Delete
 Type=SIMPLE_ACTION_DATA
 
 [Data_19Actions]
 ActionsCount=1
 
 [Data_19Actions0]
-CommandURL=xfce4-screenshooter
-Type=COMMAND_URL
+DestinationWindow=0
+Input=Delete
+Type=KEYBOARD_INPUT
 
 [Data_19Conditions]
 Comment=
@@ -288,9 +274,9 @@ Comment=Simple_action
 TriggersCount=1
 
 [Data_19Triggers0]
-Key=
+Key=Meta+D
 Type=SHORTCUT
-Uuid={e94e0ab1-a296-4121-9c4f-a8a7799ff3b7}
+Uuid={2da5d263-6fd0-4b4c-bef5-1564e8923a93}
 
 [Data_1Conditions]
 Comment=
@@ -334,16 +320,32 @@ Type=ACTION_DATA_GROUP
 
 [Data_20]
 Comment=Comment
-Enabled=true
-Name=screenshot
+Enabled=false
+Name=Scala IDE new block
 Type=SIMPLE_ACTION_DATA
 
 [Data_20Actions]
 ActionsCount=1
 
 [Data_20Actions0]
-CommandURL=xfce4-screenshooter
-Type=COMMAND_URL
+DestinationWindow=1
+Input=Shift+[:Enter:Enter:Up:Tab
+Type=KEYBOARD_INPUT
+
+[Data_20Actions0DestinationWindow]
+Comment=
+WindowsCount=1
+
+[Data_20Actions0DestinationWindow0]
+Class=\s
+ClassType=0
+Comment=Scala IDE
+Role=
+RoleType=0
+Title=Scala IDE\s
+TitleType=1
+Type=SIMPLE
+WindowTypes=1
 
 [Data_20Conditions]
 Comment=
@@ -354,21 +356,21 @@ Comment=Simple_action
 TriggersCount=1
 
 [Data_20Triggers0]
-Key=Meta+Print
+Key=Ctrl+J
 Type=SHORTCUT
-Uuid={7f53521e-2b93-4023-bd6d-6b5a067ee10b}
+Uuid={e901fcbe-10ea-45cf-9299-781ae653eb7a}
 
 [Data_21]
 Comment=Comment
 Enabled=true
-Name=xkill
+Name=screenshot
 Type=SIMPLE_ACTION_DATA
 
 [Data_21Actions]
 ActionsCount=1
 
 [Data_21Actions0]
-CommandURL=xkill
+CommandURL=xfce4-screenshooter
 Type=COMMAND_URL
 
 [Data_21Conditions]
@@ -380,21 +382,21 @@ Comment=Simple_action
 TriggersCount=1
 
 [Data_21Triggers0]
-Key=Meta+Del
+Key=Meta+Print
 Type=SHORTCUT
-Uuid={7b6de3e5-40e7-4bc0-bca9-6b7b0dc3bb7d}
+Uuid={7f53521e-2b93-4023-bd6d-6b5a067ee10b}
 
 [Data_22]
 Comment=Comment
 Enabled=true
-Name=Urxvt
+Name=xkill
 Type=SIMPLE_ACTION_DATA
 
 [Data_22Actions]
 ActionsCount=1
 
 [Data_22Actions0]
-CommandURL=rxvt-unicode
+CommandURL=xkill
 Type=COMMAND_URL
 
 [Data_22Conditions]
@@ -406,25 +408,22 @@ Comment=Simple_action
 TriggersCount=1
 
 [Data_22Triggers0]
-Key=Meta+Alt+Return
+Key=Meta+Del
 Type=SHORTCUT
-Uuid={5f1e3938-de51-4d91-8636-590b4565de4c}
+Uuid={7b6de3e5-40e7-4bc0-bca9-6b7b0dc3bb7d}
 
 [Data_23]
-Comment=By pressing Alt+Ctrl+W a D-Bus call will be performed that will show the minicli. You can use any kind of D-Bus call, just like using the command line 'qdbus' tool.
+Comment=Comment
 Enabled=true
-Name=Perform D-Bus call 'qdbus org.kde.krunner /App display'
+Name=Urxvt
 Type=SIMPLE_ACTION_DATA
 
 [Data_23Actions]
 ActionsCount=1
 
 [Data_23Actions0]
-Arguments=
-Call=popupExecuteCommand
-RemoteApp=org.kde.krunner
-RemoteObj=/App
-Type=DBUS
+CommandURL=rxvt-unicode
+Type=COMMAND_URL
 
 [Data_23Conditions]
 Comment=
@@ -435,22 +434,25 @@ Comment=Simple_action
 TriggersCount=1
 
 [Data_23Triggers0]
-Key=Meta+Ctrl+W
+Key=Meta+Alt+Return
 Type=SHORTCUT
-Uuid={85906a5c-7a03-4d9f-bac8-94014f15fc66}
+Uuid={5f1e3938-de51-4d91-8636-590b4565de4c}
 
 [Data_24]
-Comment=Comment
+Comment=By pressing Alt+Ctrl+W a D-Bus call will be performed that will show the minicli. You can use any kind of D-Bus call, just like using the command line 'qdbus' tool.
 Enabled=true
-Name=Drop-down terminal (s-f12)
+Name=Perform D-Bus call 'qdbus org.kde.krunner /App display'
 Type=SIMPLE_ACTION_DATA
 
 [Data_24Actions]
 ActionsCount=1
 
 [Data_24Actions0]
-CommandURL=altyo --toggle
-Type=COMMAND_URL
+Arguments=
+Call=popupExecuteCommand
+RemoteApp=org.kde.krunner
+RemoteObj=/App
+Type=DBUS
 
 [Data_24Conditions]
 Comment=
@@ -461,21 +463,21 @@ Comment=Simple_action
 TriggersCount=1
 
 [Data_24Triggers0]
-Key=Meta+F12
+Key=Meta+Ctrl+W
 Type=SHORTCUT
-Uuid={c8e2d862-465d-4200-ba83-2835f10aa7cb}
+Uuid={85906a5c-7a03-4d9f-bac8-94014f15fc66}
 
 [Data_25]
 Comment=Comment
 Enabled=true
-Name=Drop-down terminal (s-t)
+Name=Drop-down terminal (s-f12)
 Type=SIMPLE_ACTION_DATA
 
 [Data_25Actions]
 ActionsCount=1
 
 [Data_25Actions0]
-CommandURL=altyo --toggle
+CommandURL=yakuake
 Type=COMMAND_URL
 
 [Data_25Conditions]
@@ -487,9 +489,61 @@ Comment=Simple_action
 TriggersCount=1
 
 [Data_25Triggers0]
-Key=Meta+T
+Key=
 Type=SHORTCUT
-Uuid={941eabd1-4163-4a6a-bcf5-40442552da0f}
+Uuid={c8e2d862-465d-4200-ba83-2835f10aa7cb}
+
+[Data_26]
+Comment=Comment
+Enabled=true
+Name=Task Manager
+Type=SIMPLE_ACTION_DATA
+
+[Data_26Actions]
+ActionsCount=1
+
+[Data_26Actions0]
+CommandURL=ksysguard
+Type=COMMAND_URL
+
+[Data_26Conditions]
+Comment=
+ConditionsCount=0
+
+[Data_26Triggers]
+Comment=Simple_action
+TriggersCount=1
+
+[Data_26Triggers0]
+Key=Meta+F2
+Type=SHORTCUT
+Uuid={3cec825b-eb00-4bde-8e9a-7cc507af9123}
+
+[Data_27]
+Comment=Comment
+Enabled=true
+Name=New Action
+Type=SIMPLE_ACTION_DATA
+
+[Data_27Actions]
+ActionsCount=1
+
+[Data_27Actions0]
+CommandURL=
+Type=COMMAND_URL
+
+[Data_27Conditions]
+Comment=
+ConditionsCount=0
+
+[Data_27Triggers]
+Comment=Simple_action
+TriggersCount=1
+
+[Data_27Triggers0]
+Key=
+Type=SHORTCUT
+Uuid={18c25f29-df21-4a1f-b831-3be6955c72bc}
 
 [Data_2Conditions]
 Comment=
@@ -1420,7 +1474,7 @@ Uuid={c2172bf3-8ed1-4cd7-9389-9cc74279a263}
 [Data_9]
 Comment=Comment
 Enabled=true
-Name=Shift+Down
+Name=Home
 Type=SIMPLE_ACTION_DATA
 
 [Data_9Actions]
@@ -1428,7 +1482,7 @@ ActionsCount=1
 
 [Data_9Actions0]
 DestinationWindow=0
-Input=Shift+Down
+Input=Home
 Type=KEYBOARD_INPUT
 
 [Data_9Conditions]
@@ -1440,9 +1494,9 @@ Comment=Simple_action
 TriggersCount=1
 
 [Data_9Triggers0]
-Key=Meta+Shift+J
+Key=Meta+A
 Type=SHORTCUT
-Uuid={5b0d6ca1-5a21-4191-86a7-c5979e045408}
+Uuid={a0115ade-d964-4bf8-b225-9aa57e003f94}
 
 [Directories-default]
 prefixes[$d]
