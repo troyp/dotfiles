@@ -666,6 +666,8 @@ alias img-info=identify
 # FILE FORMAT ALIASES
 # -------------------
 alias rtf2txt='unrtf --text'
+alias libreconv=unoconv    # convert between libreoffice supported formats
+alias libreconv-pdf='unoconv -f pdf'    # convert from libreoffice supported format to pdf
 
 # ------------------
 # PIPELINE OPERATORS
