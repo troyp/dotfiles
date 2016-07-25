@@ -192,6 +192,11 @@ dotsp () {
     fi
 }
 
+# -------------------------------------------------------------------------------
+# ,---------------,
+# | PDF Functions |
+# '---------------'
+
 pdfoutline-out () {
     # pdfoutline-out PDF_DOC > BMARKFILE
     pdftk "$1" dump_data
@@ -213,6 +218,41 @@ pdfoutline-edit () {
     pdftk "$1" update_info $outline output $output
     mv -i $output "$1"
 }
+
+pdfdroplast () {
+    if [[ "$1" =~ ^--?h(elp)?$ ]]; then
+        cat <<EOF
+pdfdroplast [-o outfile] infile [last_page]
+    Create a new PDF by dropping the last page(s) of an input file.
+    PDF bookmarks are lost.
+
+    The new file is saved with the suffix '_out' (before the extension), unless
+    a name is given explicitly with the -o option.
+    Options:
+      -h --help     display this help
+      -o --outfile  save resulting file under the specified name
+EOF
+        shift
+        return 0
+    fi;
+    if [[ "$1" =~ ^--?o(utfile)?$ ]]; then
+        shift
+        outfile="$1"
+        shift
+    fi
+    infile="$1"
+    infile_base="${infile%.*}"
+    outfile="${outfile:-${infile_base}_out.pdf}"
+    n="${2:-1}"
+    m=$((n+1))
+    echo "pdftk '$infile' cat 1-r$m output '$outfile'"
+    eval "pdftk '$infile' cat 1-r$m output '$outfile'"
+}
+
+# -------------------------------------------------------------------------------
+# ,----------------,
+# | DJVU Functions |
+# '----------------'
 
 djoutline-out () {
     # djoutline-out DJVU_DOC > BMARKFILE
