@@ -455,6 +455,7 @@ alias 7zip='7z a -tzip'  # 7zip myarchive.zip myarchive/
 #------------------
 alias pralias='cat $SH_ALIAS_FILE'
 alias search-my-commands='cat -- $SH_ALIAS_FILE $SH_FUNCTION_FILE $SCRIPTS_DIRECTORY/* 2> /dev/null | grep'
+alias git=hub
 alias gitalias="git config --get-regexp '^alias\.' | cut -c 7- | sed 's/ /\t/' | column -s'	' -t"
 alias gitsetupignore="git config --global core.excludesfile '~/.gitignore'"
 alias editalias='${EDITOR:-vim} $SH_ALIAS_FILE; source $SH_ALIAS_FILE'
