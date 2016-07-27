@@ -157,7 +157,9 @@ alias ren-underscore-to-space="ren 'tr/_/ /'"
 alias ren-space-to-underscore="ren 'tr/ /_/'"
 alias ren-uppercase="ren 'tr/a-z/A-Z/'"
 alias ren-lowercase="ren 'tr/A-Z/a-z/'"
-   # FIXME:
+# ren-author-to-surname-first: eg. rename 'Greg Egan' -> 'Egan, Greg' Multiple middle names OK.
+alias ren-author-to-surname-first="ren '"'s/^(.*) ([-A-Za-z]+)$/$2, $1/'"'"
+# FIXME:
 # ren-strip-extra-from-year: eg. rename 'file (extra-info, 2000).pdf' -> 'file (2000).pdf'
 alias ren-strip-extra-from-year="ren 's/\([-\w_.']+, ?([0-9]{4})\)\.(\w+)"'$/($1).$2/'
 alias ren-strip-extra-from-year-preview="ren -n '"'s/\([-\w_.'"'"']+, ?([0-9]{4})\)(?=\.\w+)$/($1)/'
@@ -455,7 +457,6 @@ alias 7zip='7z a -tzip'  # 7zip myarchive.zip myarchive/
 #------------------
 alias pralias='cat $SH_ALIAS_FILE'
 alias search-my-commands='cat -- $SH_ALIAS_FILE $SH_FUNCTION_FILE $SCRIPTS_DIRECTORY/* 2> /dev/null | grep'
-alias git=hub
 alias gitalias="git config --get-regexp '^alias\.' | cut -c 7- | sed 's/ /\t/' | column -s'	' -t"
 alias gitsetupignore="git config --global core.excludesfile '~/.gitignore'"
 alias editalias='${EDITOR:-vim} $SH_ALIAS_FILE; source $SH_ALIAS_FILE'
