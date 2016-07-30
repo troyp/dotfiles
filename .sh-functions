@@ -197,6 +197,10 @@ dotsp () {
 # | PDF Functions |
 # '---------------'
 
+pdfcat () {
+    pdftotext "$1" -
+}
+
 pdfoutline-out () {
     # pdfoutline-out PDF_DOC > BMARKFILE
     pdftk "$1" dump_data
@@ -220,7 +224,7 @@ pdfoutline-edit () {
 }
 
 pdfdroplast () {
-    if [[ "$1" =~ ^--?h(elp)?$ ]]; then
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
         cat <<EOF
 pdfdroplast [-o outfile] infile [last_page]
     Create a new PDF by dropping the last page(s) of an input file.
@@ -235,7 +239,7 @@ EOF
         shift
         return 0
     fi;
-    if [[ "$1" =~ ^--?o(utfile)?$ ]]; then
+    if [[ "$1" =~ ^-o$\|^--outfile$ ]]; then
         shift
         outfile="$1"
         shift
@@ -247,6 +251,23 @@ EOF
     m=$((n+1))
     echo "pdftk '$infile' cat 1-r$m output '$outfile'"
     eval "pdftk '$infile' cat 1-r$m output '$outfile'"
+}
+
+pdf-extract-images () {
+    imgdir="${1}-images"
+    mkdir "$imgdir"
+    pdfimages "$1" "$imgdir"/out
+}
+
+function pdfpagerange () {
+    # requres qpdf
+    # eg. pdfpagerange "input.pdf" 75-77
+    #     pdfpagerange "input.pdf" 75-77 "output.pdf"
+    # NOTE: Page ranges use absolute numbering starting from page 1, not the page numbers specified in the pdf.
+    input="$1"
+    range="$2"
+    output="${3:-$input [pages $range]}"
+    qpdf --pages "$input" "$range" -- "$input" "$output"
 }
 
 # -------------------------------------------------------------------------------
@@ -417,12 +438,6 @@ totmp () {
 
 pidfiles () { lsof -p $1 | less; }
 
-pdf-extract-images () {
-    imgdir="${1}-images"
-    mkdir "$imgdir"
-    pdfimages "$1" "$imgdir"/out
-}
-
 # ffprof PROF: print profile directory of profile PROF, eg. `ffprof default`
 ffprof () {
     echo ~/.mozilla/firefox/*.$1*/
@@ -539,17 +554,6 @@ dllist () {
     done
 }
 
-function pdfpagerange () {
-    # requres qpdf
-    # eg. pdfpagerange "input.pdf" 75-77
-    #     pdfpagerange "input.pdf" 75-77 "output.pdf"
-    # NOTE: Page ranges use absolute numbering starting from page 1, not the page numbers specified in the pdf.
-    input="$1"
-    range="$2"
-    output="${3:-$input [pages $range]}"
-    qpdf --pages "$input" "$range" -- "$input" "$output"
-}
-
 function img-rot () {
     # requires imagemagick/graphicsmagick
     infile="$1"
@@ -575,7 +579,7 @@ function img-rot () {
 }
 
 function img-resize () {
-    if [[ "$1" =~ ^--?h(elp)?$ ]]; then
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
         cat <<EOF
 img-resize [-h | -v] INFILE WxH [OUTFILE]
     Resize an image.
@@ -596,7 +600,7 @@ EOF
         shift
         return 0
     fi;
-    if [[ "$1" =~ ^--?v(erbose)?$ ]]; then
+    if [[ "$1" =~ ^-v$\|^--verbose$ ]]; then
         verbose="true"
         shift
     fi
@@ -621,7 +625,7 @@ function confirm () {
 }
 
 function mkvtracks () {
-    if [[ "$1" =~ ^--?h(elp)?$ ]]; then
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
         cat <<EOF
 mkvtracks [-h | -v] file
     Print a list of tracks in an MKV file.
@@ -633,7 +637,7 @@ EOF
         shift
         return 0
     fi;
-    if [[ "$1" =~ ^--?v(erbose)?$ ]]; then
+    if [[ "$1" =~ ^-v$\|^--verbose$ ]]; then
         shift
 	      mkvinfo "$1" | grep -ie '\(track\|codec id\)'
         return 0
@@ -707,7 +711,7 @@ blankpage NAME           - creates a white 1000x1600 page called NAME
 blankpage SIZE NAME      - creates a white page of size SIZE called NAME
 blankpage SIZE COL NAME  - creates a page of size SIZE and colour COL, called NAME
 ";
-    if [[ "$1" =~ ^--?h(elp)?$ ]]; then echo "$help"; shift; fi;
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then echo "$help"; shift; fi;
     # requires imagemagick/graphicsmagick
 	case "$#" in
 	  0)
@@ -902,7 +906,7 @@ edit-script() {
 }
 
 findlinks() {
-    if [[ "$1" =~ ^--?h(elp)?$ ]]; then
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
         cat <<EOF
 findlinks [-h] [-q] file [path]
     Search for hard links in a directory heirarchy.
@@ -935,7 +939,7 @@ googlecodewiki2gfm() {
 }
 
 grepalias() {
-    if [[ "$1" =~ ^--?h(elp)?$ ]]; then
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
         cat <<EOF
 grepalias [-h] pattern
     Print a list of definitions for aliases matching PATTERN.
@@ -959,3 +963,4 @@ EOF
     echo 'alias | grep "'"$re"'"'
     alias | grep "$re"
 }
+
