@@ -11,15 +11,20 @@
 	a = add -A
 	c = commit -m
 	cu = commit -m "update"
-	d = diff --color-words                                    
-	da = diff --cached --color-words                                    
-	dc = diff HEAD --color-words                                    
-	dw = !GIT_PAGER='less -r' git diff --color-words                                    
-	dwa = !GIT_PAGER='less -r' git diff --cached --color-words                                    
-	dwc = !GIT_PAGER='less -r' git diff HEAD --color-words                                    
+	d = diff --color-words
+	da = diff --cached --color-words
+	dc = diff HEAD --color-words
+	dw  = !GIT_PAGER='less -r' git diff --color-words
+	dwa = !GIT_PAGER='less -r' git diff --cached --color-words
+	dwc = !GIT_PAGER='less -r' git diff HEAD --color-words
+	dg  = !GIT_EXTERNAL_DIFF='meld $2 $5 | cat' git diff --color-words
+	dga = !GIT_EXTERNAL_DIFF='meld $2 $5 | cat' git diff --cached --color-words
+	dgc = !GIT_EXTERNAL_DIFF='meld $2 $5 | cat' git diff HEAD --color-words
+	clearunstaged = checkout -- .
+	lastchangescommited = log -p --follow -1
 	# https://coderwall.com/p/euwpig/a-better-git-log
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-	ll = log --stat --abbrev-commit	
+	ll = log --stat --abbrev-commit
 	s = status
 	# initialize folder as repository and push to newly-created github repo whose URL is in clipboard
 	gh = "!f(){ git init; touch README.md; git add README.md; git commit -m 'initial commit'; git remote add origin $(xsel -ob); git push -u origin master; };f"
