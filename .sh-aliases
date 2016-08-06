@@ -546,6 +546,7 @@ alias ppcjs='underscore print --outfmt pretty'  # js/json pretty printing & synt
 # EDITORS & PROGRAMMING TOOLS.
 #-----------------------------
 alias mzscheme='rlwrap /opt/racket/bin/mzscheme'
+alias scheme48='rlwrap scheme48'
 alias sml='rlwrap sml'
 alias ocamlbrew-install='curl -kL https://raw.github.com/hcarty/ocamlbrew/master/ocamlbrew-install | bash'
 alias ocamlbrew-install-track='tail -f /tmp/ocamlbrew.*'
