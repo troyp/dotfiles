@@ -20,6 +20,10 @@
 	dg  = !GIT_EXTERNAL_DIFF='meld $2 $5 | cat' git diff --color-words
 	dga = !GIT_EXTERNAL_DIFF='meld $2 $5 | cat' git diff --cached --color-words
 	dgc = !GIT_EXTERNAL_DIFF='meld $2 $5 | cat' git diff HEAD --color-words
+	# uses diff-highlight perl script from git source tree
+	dh  = !git diff | diff-highlight
+	dha = !git --cached --color-words | diff-highlight
+	dhc = !diff HEAD --color-words | diff-highlight
 	clearunstaged = checkout -- .
 	lastchangescommited = log -p --follow -1
 	# https://coderwall.com/p/euwpig/a-better-git-log
