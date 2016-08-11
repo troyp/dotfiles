@@ -9,8 +9,12 @@
 	# clone repository in clipboard
 	g = !git clone $(xsel -ob)
 	a = add -A
+	b = branch
 	c = commit -m
 	cu = commit -m "update"
+	co = checkout
+
+	# ===DIFF===
 	d = diff --color-words
 	da = diff --cached --color-words
 	dc = diff HEAD --color-words
@@ -24,26 +28,35 @@
 	dh  = !git diff | diff-highlight
 	dha = !git --cached --color-words | diff-highlight
 	dhc = !diff HEAD --color-words | diff-highlight
-	clearunstaged = checkout -- .
-	lastchangescommited = log -p --follow -1
-	# https://coderwall.com/p/euwpig/a-better-git-log
-	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
-	ll = log --stat --abbrev-commit
-	s = status
-	# initialize folder as repository and push to newly-created github repo whose URL is in clipboard
-	gh = "!f(){ git init; touch README.md; git add README.md; git commit -m 'initial commit'; git remote add origin $(xsel -ob); git push -u origin master; };f"
-	subdir = filter-branch --prune-empty --subdirectory-filter
+	dl  = diff --color
+	dla = diff --cached --color
+	dlc = diff HEAD --color
 	filestoadd = diff --stat
 	changestoadd = diff
 	filestocommit = status
 	changestocommit = diff --cached
 	filestopush = diff --stat HEAD origin/master
 	changestopush = diff HEAD origin/master
+
+	showlastcommit = log -p --follow -1
+	# https://coderwall.com/p/euwpig/a-better-git-log
+	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
+	ll = log --stat --abbrev-commit
+	s = status
+
+	# initialize folder as repository and push to newly-created github repo whose URL is in clipboard
+	gh = "!f(){ git init; touch README.md; git add README.md; git commit -m 'initial commit'; git remote add origin $(xsel -ob); git push -u origin master; };f"
+	subdir = filter-branch --prune-empty --subdirectory-filter
+
+	clearunstaged = checkout -- .
 	undoadd = reset HEAD
 	undocommit = reset HEAD~1
+	# change a local commit message
 	correctcommit = commit --amend
 [color]
 	ui = auto # covers diff = true, status = auto, branch = auto
 	interactive = auto
 [diff]
 	tool = vimdiff
+[push]
+	default = simple
