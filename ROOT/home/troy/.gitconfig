@@ -42,6 +42,7 @@
 	# https://coderwall.com/p/euwpig/a-better-git-log
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	ll = log --stat --abbrev-commit
+	# also shell alias gitcommits
 	s = status
 
 	# initialize folder as repository and push to newly-created github repo whose URL is in clipboard
