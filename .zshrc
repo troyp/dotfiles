@@ -104,6 +104,15 @@ zstyle ':completion:*' select-prompt ''
 autoload -Uz compinit
 compinit
 
+# Force file-name completion
+complete-files () {
+    compadd - "$PREFIX"*
+}
+zle -C force-complete-files complete-word complete-files
+# TODO: make repeated file-completion key presses cycle
+# TODO: no space after completing a directory
+bindkey '^@' force-complete-files     # Ctrl-SPC
+
 autoload -Uz promptinit
 promptinit
 
