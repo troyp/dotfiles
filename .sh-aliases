@@ -192,8 +192,10 @@ alias mmv-symlink='mmv -a'    # symlink source to target
 # FILE SEARCH ALIASES.
 # --------------------
 alias gr='grep -inE --color=auto'    # color, line no.s, case-insensitive, extended RE
+alias greps="grep -F"
 alias grepc="grep --color=always"    # color grep for pipes
 alias grepp='grep -P'                # grep with  perl syntax
+alias grepn='grep -Hn --color=always'
 alias sudb='sudo updatedb'
 alias locater='locate --regex'   # locate extended regex
 alias locatea='locate -A'        # locate files matching ALL patterns
@@ -781,7 +783,6 @@ alias googlecodewiki2mediawiki=gw2mw.sh  # convert google code wiki --> mediawik
 #---------------------------------
 # APPLICATION DEFAULTS & VARIANTS.
 #---------------------------------
-alias greps='grep -Hn --color=always'
 alias roxterm-display='roxterm --hide-menubar -T "Roxterm Display" -z 1.3 --geometry=70x40'
 alias nautilus='nautilus --no-desktop'
 alias mc='mc -S gotar'
