@@ -456,13 +456,18 @@ alias 7zip='7z a -tzip'  # 7zip myarchive.zip myarchive/
 # tgz [name [files]]    make .tgz out of files
 # unar unarchive multiple formats
 
+# ------------
+# GIT ALIASES.
+# ------------
+alias gitalias="git config --get-regexp '^alias\.' | cut -c 7- | sed 's/ /\t/' | column -s'	' -t"
+alias gitsetupignore="git config --global core.excludesfile '~/.gitignore'"
+alias gitcommits='git log --oneline --color | perl -ne '"'"'printf "HEAD~%-3d %s", ++$i, "$_"'"'"'| less -r'
+
 #------------------
 # SETTINGS ALIASES.
 #------------------
 alias pralias='cat $SH_ALIAS_FILE'
 alias search-my-commands='cat -- $SH_ALIAS_FILE $SH_FUNCTION_FILE $SCRIPTS_DIRECTORY/* 2> /dev/null | grep'
-alias gitalias="git config --get-regexp '^alias\.' | cut -c 7- | sed 's/ /\t/' | column -s'	' -t"
-alias gitsetupignore="git config --global core.excludesfile '~/.gitignore'"
 alias editalias='${EDITOR:-vim} $SH_ALIAS_FILE; source $SH_ALIAS_FILE'
 alias xres='xrdb ~/.Xresources'
 alias setopts='set -o | grep "on$"'
