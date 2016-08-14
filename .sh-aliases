@@ -637,9 +637,15 @@ alias eqw='emacs -Q'
 alias ec="emacsclient -cna ''"
 # emacsclient: geometry option isn't working - why not?
 alias eg="emacsclient -cna 'gvim' -F '((height . 43) (width . 97) (top . -63) (left . -35))'"
-alias emacs-spacemacs-toggle='if [[ -d ~/.emacs.d.spacemacs ]]; then mv -T ~/.emacs.d ~/.emacs.d.plain; mv -T ~/.emacs.d.spacemacs ~/.emacs.d; echo "Spacemacs active"; else mv -T ~/.emacs.d ~/.emacs.d.spacemacs; mv -T ~/.emacs.d.plain ~/.emacs.d; echo "Plain Emacs active"; fi;'
 alias emint='pkill --signal SIGINT emacs'
 alias epipe=$HOME/.scripts/emacsclient
+# ===== CHOOSE EMACS CONFIG =====
+# alias emacs-spacemacs-toggle='if [[ -d ~/.emacs.d.spacemacs ]]; then mv -T ~/.emacs.d ~/.emacs.d.plain; mv -T ~/.emacs.d.spacemacs ~/.emacs.d; echo "Spacemacs active"; else mv -T ~/.emacs.d ~/.emacs.d.spacemacs; mv -T ~/.emacs.d.plain ~/.emacs.d; echo "Plain Emacs active"; fi;'
+# run from a directory containing an alternative .emacs.d directory
+alias emacs-from-here='HOME=. emacs'
+# set main .emacs.d folder to point to a given config
+alias emacs-set-config='userdir=$(for d in ~/.emacs.d.* ~/.emacs-*/.emacs.d; do echo "$d"; done | iselect -ma); echo "~/.emacs.d -> $userdir"; ln -f -s -T "$userdir" ~/.emacs.d'
+alias emacs-choose-config='for d in ~/.emacs.d.* ~/.emacs-*/.emacs.d; do echo "$d"; done | iselect -ma'
 
 # -----------
 # PDF ALIASES
