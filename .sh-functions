@@ -311,10 +311,6 @@ apt-install-from-file () {
     sudo apt-get install `cat $1 | tr '\n' ' '`
 }
 
-einfo () {
-    emacsclient --eval "(info \"$(findinfofile $1)\")"
-}
-
 linkcount () {
     linkcount=$(ls -l "$1" | tr '\t' ' ' | tr -s ' ' | cut -d' ' -f2)
     echo $linkcount
@@ -426,7 +422,58 @@ proconport () { lsof -i:$1 | awk 'NR>1 { print $2 }'; }
 # tree-html DIRECTORY OUTPUTFILE
 tree-html () { tree -aC -H "`pwd`/$1" -o "$2" "$1"; }
 
-mangrep () { man $1 | less -p "^ +$2 "; }
+mangrep () {
+    (
+        manfile=""
+
+        if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+            cat <<EOF
+mangrep [-s] manfile pattern
+mangrep --[bash|zsh|ksh] pattern
+    Find an individual pattern (eg. command or option) in a man page.
+    The pattern must occur as the first non-whitespace text on the line.
+
+    Options:
+      -h --help     display this help
+      -s --strict   pattern must occur after exactly 7 spaces
+      --bash        search for PATTERN in BASH(1)
+      --zsh         search for PATTERN in ZSHALL(1)
+      --ksh         search for PATTERN in KSH(1)
+EOF
+            return;
+        fi;
+        if [[ "$1" =~ ^-s$\|^--strict$ ]]; then
+            strict="true"
+            shift
+        fi
+        if [[ "$1" =~ ^--bash$ ]]; then
+            manfile="bash"
+            shift
+        fi
+        if [[ "$1" =~ ^--zsh$ ]]; then
+            manfile="zshall"
+            shift
+        fi
+        if [[ "$1" =~ ^--ksh$ ]]; then
+            manfile="ksh"
+            shift
+        fi
+
+        # consume manfile argument (if not set by options), then pattern argument
+        if [[ -z "$manfile" ]]; then
+            manfile="$1"
+            shift
+        fi
+        pattern="$1"
+
+
+        if [[ -n "$strict" ]]; then
+            man $manfile | less -p "^       $pattern ";
+        else
+            man $manfile | less -p "^ +$pattern ";
+        fi
+    )
+}
 
 totmp () {
     tmp=`mktemp`
@@ -964,3 +1011,26 @@ EOF
     alias | grep "$re"
 }
 
+# -------------------------------------------------------------------------------
+# ,-----------------,
+# | Emacs Functions |
+# '-----------------'
+
+einfo () {
+    emacsclient --eval "(info \"$(findinfofile $1)\")"
+}
+
+diredterm () {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+diredterm [-h] [directory]
+    Open an Emacs terminal window with a dired buffer showing DIRECTORY.
+    DIRECTORY defaults to the current working directory ($PWD).
+
+    Options:
+      -h --help     display this help
+EOF
+        shift;
+    fi;
+    emacsclient -t -e "(dired \"${1:-$PWD}\")"
+}
