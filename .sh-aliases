@@ -668,8 +668,8 @@ alias gs-pstopdf='gs -q -dBATCH -dAutoFilterColorImages=false -sColorImageFilter
 alias jpdftweak='java -jar /opt/jpdftweak/jpdftweak.jar'  # can renumber pages in PDFs (loses bmarks)
 alias pdfimg='pdfimages -j'
 # OCR: use pdfocr for OCR; much better than pdfsandwich (default settings)
-alias pdfjoin='pdfjam --fitpaper true --rotateoversize true --suffix joined'
-alias pdfjoin-norotate='pdfjam --fitpaper true --suffix joined'
+alias pdfjoin-rotate='pdfjam --fitpaper true --rotateoversize true --suffix joined'
+alias pdfjoin='pdfjam --fitpaper true --suffix joined'
 alias pdf-box-bounding='gs -sDEVICE=bbox -f'    # give corners of outermost printed marks on ea page
 alias pdf-box-pages='pdfinfo -box'    # give corners of pages
 alias pdfcrop-briss='java -jar /opt/jar/briss-0.9/briss-0.9.jar'
