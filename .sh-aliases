@@ -95,6 +95,7 @@ alias llt='ls -lt'   # detailed list sort by last modified
 alias llx='ls -lX'   # detailed list sort by extension
 alias lls='ls -lS'   # detailed list sort by file size
 alias la='ls -Al'    # detailed list dotfiles
+alias lacc='ls -Al --time=access'    # detailed list access-time dotfiles
 alias lr='ls -lR'    # detailed list recursive
 alias lc='ls -Cp'    # filenames only, append / to directories
 alias lsdirs='ls -d -- */'    # list subdirectories of current dir
@@ -387,6 +388,7 @@ alias runfromhere='export PATH="./:$PATH"'
 alias typa='type -a'
 alias typp='type -p'
 alias \?='echo'
+alias \?\?='help'
 
 
 # ---------------
@@ -672,6 +674,7 @@ alias pdf-box-bounding='gs -sDEVICE=bbox -f'    # give corners of outermost prin
 alias pdf-box-pages='pdfinfo -box'    # give corners of pages
 alias pdfcrop-briss='java -jar /opt/jar/briss-0.9/briss-0.9.jar'
 alias pdfcrop-quench=pdf_quench
+alias briss='java -jar /opt/jar/briss-0.9/briss-0.9.jar'
 
 # -------------
 # IMAGE ALIASES
