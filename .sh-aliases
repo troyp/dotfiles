@@ -571,7 +571,14 @@ alias fregec='java -Xss1m -jar /opt/frege/fregec.jar -d build'
 alias fregerepl='/opt/frege-repl/gradlew --no-daemon --console plain :frege-repl-core:run'
 alias java-setdefault='sudo update-alternatives --config java'
 alias git-dir-is-dirty='[ `git diff --shortstat 2>>/dev/null | wc -l` != 0 ]'  # succeeds if dirty
-alias npmlist='npm list'
+# Package Managers: list installed packages
+alias pkgs_npm='npm list'
+alias pkgs_raco='tree -L 2 ~/.racket/planet/300/packages/'
+alias pkgs_cpan='cpan -l'
+alias pkgs_cabal='ls ~/.cabal/packages/hackage.haskell.org/'
+alias pkgs_gem='gem list'
+alias pkgs_npm='ls ~/.npm'
+alias pkgs_pip='pip list'
 # -------------------------------------------------------------------------------
 # Python
 alias pynote='ipython notebook --pylab=inline'
