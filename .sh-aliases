@@ -117,6 +117,9 @@ alias lsi='du -hsc'    # list total sizes of files and directories
 # FILE INFO ALIASES.
 # ------------------
 alias showpermissions='stat --printf "%-20n  %a  %A\n"';
+alias basedir='basename $PWD'
+alias pwdb='basename $PWD'
+alias pwdp='dirname $PWD'
 
 
 # --------------------
@@ -341,9 +344,9 @@ alias htheaders='lynx -dump -head'
 alias lstcpservers='sudo netstat -plentv'
 alias monitor-http-requests="sudo tcpdump -i eth0 -A -s 5000 'tcp port 80 and (((ip[2:2] - ((ip[0]&0xf)<<2)) - ((tcp[12]&0xf0)>>2)) != 0)'"
 
-# ------------
-# MAN ALIASES.
-# ------------
+# -------------
+# HELP ALIASES.
+# -------------
 # currently problem with man -H: use manh function (works via man2html)
 # alias manht='man -Hfirefox'   # problem with grohtml images
 # alias manht='man -Hchromium-browser'   # problem with grohtml images
@@ -352,6 +355,10 @@ alias erlman='erl -man'
 alias bashman='mangrep bash'  # see .sh-functions. eg. bashman type
 alias coreinf='info coreutils'   # eg.  coreinf 'env'
 # alias mans='man -k . | grep'  # use whatis -r (or -w) instead
+alias what='whatis -w'   # one-line man descriptions, wildcard search
+alias whatr='whatis -r'   # one-line man descriptions, regex search
+alias exe_search='whence -afms'   # find all executables matching pattern
+alias exe_all='whence -acm'    # list all executables of a given name
 
 #-------------------
 # OPEN & SU ALIASES.
@@ -406,6 +413,7 @@ alias psbyparent='ps --ppid'
 alias myprocs='ps uxf'
 alias myprocsbymem='ps -u $USER -O pid,user,s,tty,%mem,comm,start,cputime --sort -%mem'
 alias pkill9='pkill -9'
+alias kill9='kill -9'
 alias die='killall -vs9'
 alias lsofu='lsof -a -u troy'         # list files for user troy
 alias lsofp='lsof -a -p'              # list files for PID
@@ -537,6 +545,9 @@ alias voltoggle='amixer -D pulse set Master playback toggle'
 alias alsareload='sudo alsa --force-reload'    # may fix no sound issue
 alias kvm-ready-check="file /sbin/init | egrep -o '[0-9]+-bit'; printf 'CPU KVM support (0 means no support): '; egrep -c '(vmx|svm)' /proc/cpuinfo; kvm-ok"
 alias lsof-noroot='lsof -u^root'
+alias print-display-manager='cat /etc/X11/default-display-manager | xargs basename'
+alias restartx="sudo restart `basename $(cat /etc/X11/default-display-manager)`"
+# alias restartx="sudo systemctl restart `basename $(cat /etc/X11/default-display-manager)`.service"    # for systemd
 
 
 # --------------------------------------
