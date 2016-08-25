@@ -214,6 +214,8 @@ inoremap <A-y> <C-e>
 " inoremap <C-S-Y> <C-e>
 inoremap <C-y> <C-y>
 
+inoremap <A-w> <C-c>
+
 " Files
 nnoremap <C-x><C-f> :e<space>
 nnoremap <C-x><C-s> :w<cr>
@@ -223,29 +225,41 @@ inoremap <C-x><C-w> <Esc>:w<cr>i
 nnoremap <leader>w :w!<cr>
 
 " Fast editing of the .vimrc
+noremap <leader>fed :e! ~/.vimrc<cr>
+noremap <leader>feR :so ~/.vimrc<cr>
+noremap <leader>f<C-e>d :e! ~/.gvimrc<cr>
+noremap <leader>f<C-e>R :so ~/.gvimrc<cr>
+
 noremap <leader>ev :e! ~/.vimrc<cr>
 noremap <leader>eg :e! ~/.gvimrc<cr>
 noremap <leader>sv :so ~/.vimrc<cr>
 noremap <leader>sg :so ~/.gvimrc<cr>
 
 " Windows
-noremap <leader>x0 :hide<cr>
-noremap <leader>x1 :only<cr>
-noremap <leader>x2 :split<cr>
-noremap <leader>x3 :vsplit<cr>
+noremap <C-x>0 :hide<cr>
+noremap <C-x>1 :only<cr>
+noremap <C-x>2 :split<cr>
+noremap <C-x>3 :vsplit<cr>
 
 " Close buffer but not window
-noremap <leader>xk :bp<bar>sp<bar>bn<bar>bd<CR>
+noremap <C-x>k :bp<bar>sp<bar>bn<bar>bd<space>
+noremap <leader>bd :bp<bar>sp<bar>bn<bar>bd<CR>
 
 " Save buffers and quit
 noremap <C-x><C-c> :wq<cr>
-noremap <leader>xc :wq<cr>
 
 " Quit
 noremap <leader>xx :q<cr>
 
 " F2 = Move rest of line to new line
 noremap <C-j> i<CR><ESC>
+
+" Line Numbers
+noremap <leader>tn :set invnumber<cr>
+
+" Undo
+" note: <C-/> is read as /
+noremap <C-_> :normal u<cr>
 
 " -----------
 " Smart Home.
