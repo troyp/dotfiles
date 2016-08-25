@@ -1012,22 +1012,44 @@ EOF
 }
 
 exeview() {
-    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
-        cat <<EOF
-exeview [-h] [-q] pattern
-    View an executable matching PATTERN.
+    (
+        matching='substring'
+        if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+            cat <<EOF
+exeview [-h] [-e|-m] pattern
+    View an executable containing substring PATTERN.
     If there are multiple matches, shows a selection screen.
 
     Options:
       -h --help     display this help
+      -e --exact    match PATTERN exactly
+      -m --match    match PATTERN as shell pattern
 EOF
-        shift;
-    fi;
+            shift;
+        fi;
+        if [[ "$1" =~ ^-m$\|^--match$ ]]; then
+            matching='glob'
+            shift
+        fi
+        if [[ "$1" =~ ^-e$\|^--exact$ ]]; then
+            matching='exact'
+            shift
+        fi
 
-    pattern="$1"
+        pattern="$1"
 
-    file=`whence -m "$pattern" | iselect -ma`
-    vimpager "$file"
+        if [[ $matching == "glob" ]]; then
+            file=`whence -m "$pattern" | iselect -ma`
+        elif [[ $matching == "substring" ]]; then
+            file=`whence -m "*$pattern*" | iselect -ma`
+        elif [[ $matching == "exact" ]]; then
+            file=`whence "$pattern" | iselect -ma`
+        fi
+
+        if [[ -n "$file" ]]; then
+            vimpager "$file"
+        fi
+    )
 }
 
 
