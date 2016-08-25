@@ -1011,6 +1011,26 @@ EOF
     alias | grep "$re"
 }
 
+exeview() {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+exeview [-h] [-q] pattern
+    View an executable matching PATTERN.
+    If there are multiple matches, shows a selection screen.
+
+    Options:
+      -h --help     display this help
+EOF
+        shift;
+    fi;
+
+    pattern="$1"
+
+    file=`whence -m "$pattern" | iselect -ma`
+    vimpager "$file"
+}
+
+
 # -------------------------------------------------------------------------------
 # ,-----------------,
 # | Emacs Functions |
