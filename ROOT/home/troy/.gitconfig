@@ -26,7 +26,7 @@
 	dgc = !GIT_EXTERNAL_DIFF='meld $2 $5 | cat' git diff HEAD --color-words
 	# uses diff-highlight perl script from git source tree
 	dh  = !git diff | diff-highlight
-	dha = !git --cached --color-words | diff-highlight
+	dha = !git diff --cached --color-words | diff-highlight
 	dhc = !diff HEAD --color-words | diff-highlight
 	dl  = diff --color
 	dla = diff --cached --color
