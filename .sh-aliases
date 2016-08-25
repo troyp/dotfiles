@@ -450,6 +450,7 @@ alias less='less -i'
 # follow appended data (like tail -f) in less
 alias fless='less +F'
 alias vless=/usr/share/vim/vim74/macros/less.sh
+alias vless_='vim -u /usr/share/vim/vim74/macros/less.vim'
 alias vmore='vim -u $HOME/.vim/vimrc.more'
 alias cless="LESSOPEN='|~/.lessfilter %s' less -R"
 alias lesr='less -R'   # raw ANSI color escapes
