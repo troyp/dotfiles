@@ -14,3 +14,6 @@ alias zkeys='bindkey | grep -F'
 # alias splitpath='IFS=":" read -A arr <<<$IN; printf "%s\n" "${arr[@]}"'
 alias dopath='while IFS=":" read -A arr; do for x in "${arr[@]}"; do'
 alias donepath='done; done;'
+
+alias exe_search='whence -afms'   # find all executables matching pattern
+alias exe_all='whence -acm'    # list all executables of a given name
