@@ -576,9 +576,10 @@ animelyrics () {
 }
 
 updateln () {
-    targets="${1:-.hardlink-targets}"
+    prefix="${1%/}"
+    targets="${2:-.hardlink-targets}"
     for f in `cat "$targets"`; do
-	ln -i "$f" ./
+	      ln -i -T "$prefix/$f" ./"$f"
     done
 }
 
