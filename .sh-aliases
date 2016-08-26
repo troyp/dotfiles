@@ -492,6 +492,7 @@ alias mimeapp='xdg-mime query default'
 alias mimelist='cat /usr/share/mime/types'
 alias mimegrep='cat /usr/share/mime/types | grep'
 alias mimedefault='xdg-mime default'
+alias update-mime-db-local='update-mime-database ~/.local/share/mime'
 alias update-fonts='fc-cache -vf ~/.fonts/'
 alias choose-input-method='im-config -c'
 
