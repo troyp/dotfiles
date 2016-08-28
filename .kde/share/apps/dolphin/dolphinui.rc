@@ -64,6 +64,7 @@
    <Action name="closed_tabs"/>
   </Menu>
   <Separator weakSeparator="1"/>
+  <Separator weakSeparator="1"/>
   <Menu noMerge="1" name="tools" alreadyVisited="1">
    <text>&amp;Tools</text>
    <Action name="show_filter_bar"/>
@@ -113,6 +114,7 @@
   <Action name="edit_find"/>
   <Action name="show_preview"/>
   <Action name="split_view"/>
+  <Action name="new_tab"/>
  </ToolBar>
  <State name="new_file">
   <disable>
