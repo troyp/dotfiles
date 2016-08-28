@@ -4,3 +4,4 @@ include "%L"   # import the default Compose file for your locale
 <Multi_key> <bar> <greater>                   : "▸"
 <Multi_key> <bracketleft> <bracketleft>       : "《"
 <Multi_key> <bracketright> <bracketright>     : "》"
+<Multi_key> <0> <minus>                       : "・"
