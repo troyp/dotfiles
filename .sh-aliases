@@ -82,7 +82,7 @@ alias cdchrometempdir='"cd `chrometempfiles 3`"'  # cd to Firefox temp directory
 #------------
 # LS ALIASES.
 #------------
-alias lsg='ls | grep'
+alias lsg='ls | grep -i'
 alias ls='ls --group-directories-first --color=auto --time-style=+" %d.%m.%y "'
 alias ls1='ls -1'
 alias lsc='ls --color=always'
@@ -195,11 +195,15 @@ alias mmv-symlink='mmv -a'    # symlink source to target
 # --------------------
 # FILE SEARCH ALIASES.
 # --------------------
-alias gr='grep -inE --color=auto'    # color, line no.s, case-insensitive, extended RE
-alias greps="grep -F"
-alias grepc="grep --color=always"    # color grep for pipes
-alias grepp='grep -P'                # grep with  perl syntax
-alias grepn='grep -Hn --color=always'
+alias gr='grep -inE --color=auto'       # color, line no.s, case-insensitive, extended RE
+alias greps="grep -F"                   # fixed string grep
+alias grepis="grep -F"                  # fixed string grep (case-insensitive)
+alias grepc="grep --color=always"       # color grep for pipes
+alias grepic="grep -i --color=always"   # color grep for pipes (case-insensitive)
+alias grepp='grep -P'                   # grep with perl syntax
+alias grepip='grep -iP'                 # grep with perl syntax (case-insensitive)
+alias grepn='grep -Hn --color=always'   # grep with filename and line no.
+alias grepin='grep -iHn --color=always' # grep with filename and line no. (case-insensitive)
 alias sudb='sudo updatedb'
 alias locater='locate --regex'   # locate extended regex
 alias locatea='locate -A'        # locate files matching ALL patterns
@@ -394,6 +398,7 @@ alias typa='type -a'
 alias typp='type -p'
 alias \?='echo'
 alias \?\?='help'
+alias lssetopt='set -o | grep "on$"'
 
 
 # ---------------
@@ -476,10 +481,9 @@ alias gitcommits='git log --oneline --color | perl -ne '"'"'printf "HEAD~%-3d %s
 # SETTINGS ALIASES.
 #------------------
 alias pralias='cat $SH_ALIAS_FILE'
-alias search-my-commands='cat -- $SH_ALIAS_FILE $SH_FUNCTION_FILE $SCRIPTS_DIRECTORY/* 2> /dev/null | grep'
+alias search-my-commands='cat -- $SH_ALIAS_FILE $SH_FUNCTION_FILE $SCRIPTS_DIRECTORY/* 2> /dev/null | grep -i'
 alias editalias='${EDITOR:-vim} $SH_ALIAS_FILE; source $SH_ALIAS_FILE'
 alias xres='xrdb ~/.Xresources'
-alias setopts='set -o | grep "on$"'
 alias lspath='echo $PATH|tr ":" "\n"'
 alias install-desktop-files='xdg-desktop-menu install --novendor'
 alias install-desktop-files-strict='xdg-desktop-menu install'
@@ -490,7 +494,7 @@ alias xdmenurefresh='for f in ~/.local/share/applications/*.desktop; do xdg-desk
 alias mimetype='xdg-mime query filetype'
 alias mimeapp='xdg-mime query default'
 alias mimelist='cat /usr/share/mime/types'
-alias mimegrep='cat /usr/share/mime/types | grep'
+alias mimegrep='cat /usr/share/mime/types | grep -i'
 alias mimedefault='xdg-mime default'
 alias update-mime-db-local='update-mime-database ~/.local/share/mime'
 alias update-fonts='fc-cache -vf ~/.fonts/'
@@ -637,7 +641,7 @@ alias rkt='racket -e "(require readline)" -i'
 # the code to install scribble-emacs (from scribble docs) seems to be broken
 alias update-scribble-mode='racket -e "(require (planet neil/scribble-emacs:1:2/install-in-my-emacs))"'
 alias cppdecl=c++decl
-alias pcgrep='pkg-config --list-all | grep'
+alias pcgrep='pkg-config --list-all | grep -i'
 alias pkgc='pkg-config --libs'
 alias cpkgc='cmake --find-package -DLANGUAGE=C -DCOMPILER_ID=GNU -DMODE=COMPILE'   # eg. cpkgc -DNAME=LibXml2
 alias pyc="python2 -c 'from math import *; from operator import *; from itertools import *; from functools import *; print "
@@ -671,8 +675,10 @@ alias emacs-choose-config='for d in ~/.emacs.d.* ~/.emacs-*/.emacs.d; do echo "$
 # PDF ALIASES
 # -----------
 alias pdfdiff=diffpdf
-alias pdfgrep='pdfgrep -n'
-alias pdfg='pdfgrep -n'
+alias pdfgrep='pdfgrep -nH'
+alias pdfgrepi='pdfgrep -i'
+alias pdfg='pdfgrep -nH'
+alias pdfgi='pdfgrep -inH'
 alias concatpdfs='gs -dBATCH -dNOPAUSE -q -sDEVICE=pdfwrite -sOutputFile=out.pdf' # joins pdfs (and bookmarks) in order
 alias sej=sejda-console
 alias pdfmergeall='sejda-console merge -f *.pdf -o out.pdf'
@@ -808,7 +814,7 @@ alias lastu=last    # leave last free for alias
 alias PeaExtractor=/opt/peazip/res/pealauncher
 alias PeaUtils=/opt/peazip/res/pea
 alias xa=xargs
-alias gd=grepdict   # see .sh-functions:q
+alias gd=grepdict   # see .sh-functions
 alias ucs=/opt/scripts/unicodesearch    # github.com/jpverkamp/dotfiles/blob/master/bin/uni
 alias googlecodewiki2mediawiki=gw2mw.sh  # convert google code wiki --> mediawiki
 
