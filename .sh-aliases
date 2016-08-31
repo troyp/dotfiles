@@ -361,6 +361,7 @@ alias coreinf='info coreutils'   # eg.  coreinf 'env'
 # alias mans='man -k . | grep'  # use whatis -r (or -w) instead
 alias what='whatis -w'   # one-line man descriptions, wildcard search
 alias whatr='whatis -r'   # one-line man descriptions, regex search
+alias whichman='man -a --where --where-cat'
 
 #-------------------
 # OPEN & SU ALIASES.
