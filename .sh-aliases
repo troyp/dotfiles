@@ -499,6 +499,8 @@ alias mimedefault='xdg-mime default'
 alias update-mime-db-local='update-mime-database ~/.local/share/mime'
 alias update-fonts='fc-cache -vf ~/.fonts/'
 alias choose-input-method='im-config -c'
+alias lscompose='cat /usr/share/X11/locale/en_US.UTF-8/Compose'  # compose key combinations
+alias lsxcompose='cat ~/.XCompose'                          # user compose key combinations
 
 # --------------------------
 # SYSTEM / HARDWARE ALIASES.
@@ -862,12 +864,6 @@ alias ibusd='IBUS_ENABLE_SYNC_MODE=1 ibus-daemon -drx'
 alias thumbsdb='vinetto -o ./.thumbnails ./?humbs.db'
 alias kanjitomo='java -Xmx1000m -jar /opt/KanjiTomo/KanjiTomo.jar -run'
 alias subtitledl='subliminal download -l en'    # dl subs matching a video file - requires pip install subliminal
-
-
-# --------------
-# OTHER ALIASES.
-# --------------
-alias lscompose='cat /usr/share/X11/locale/en_US.UTF-8/Compose'  # compose key combinations
 
 
 # -------
