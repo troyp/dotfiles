@@ -101,8 +101,12 @@ bindkey '^Z' fgwidget
 
 zstyle ':completion:*' list-prompt   ''
 zstyle ':completion:*' select-prompt ''
-autoload -Uz compinit
-compinit
+
+autoload -U +X compinit && compinit
+
+# Set up Haskell Stack autocompletion (after compinit line)
+autoload -U +X bashcompinit && bashcompinit
+eval "$(stack --bash-completion-script stack)"
 
 # Force file-name completion
 complete-files () {
