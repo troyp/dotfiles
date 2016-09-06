@@ -1053,6 +1053,19 @@ EOF
     )
 }
 
+tsvtotable () {
+    # TODO: finish
+    printf '<html>\n<head>\n'
+    printf '<meta http-equiv="content-type" content="text/html; charset=UTF-8">\n'
+    printf '<style>\ntable {\nborder-collapse="collapse";\n}\ntd {\n'
+    printf "border='1px solid black';\npadding='5px';\n"
+    printf '}\n</style>\n</head>\n<body>\n<div>\n<table>\n'
+    while read -r line; do
+        sed 's:^:<tr><td>:; s:\t:</td><td>:g; s:$:</td></tr>\n:'
+    done
+    printf '</table>\n</div>\n</body>\n</html>\n'
+}
+
 
 # -------------------------------------------------------------------------------
 # ,-----------------,
