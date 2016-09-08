@@ -295,6 +295,32 @@ djoutline-edit () {
     djvused "$1" -e "set-outline $outline; save"
 }
 
+# -------------------------------------------------------------------------------
+# ,-----------------,
+# | Emacs Functions |
+# '-----------------'
+
+einfo () {
+    emacsclient --eval "(info \"$(findinfofile $1)\")"
+}
+
+diredterm () {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+diredterm [-h] [directory]
+    Open an Emacs terminal window with a dired buffer showing DIRECTORY.
+    DIRECTORY defaults to the current working directory ($PWD).
+
+    Options:
+      -h --help     display this help
+EOF
+        shift;
+    fi;
+    emacsclient -t -e "(dired \"${1:-$PWD}\")"
+}
+
+# -------------------------------------------------------------------------------
+
 quick-diffdir () {
     diff <(cd "$1" && find | sort) <(cd "$2" && find | sort)
 }
@@ -1066,27 +1092,30 @@ tsvtotable () {
     printf '</table>\n</div>\n</body>\n</html>\n'
 }
 
-
-# -------------------------------------------------------------------------------
-# ,-----------------,
-# | Emacs Functions |
-# '-----------------'
-
-einfo () {
-    emacsclient --eval "(info \"$(findinfofile $1)\")"
-}
-
-diredterm () {
+filter() {
     if [[ "$1" =~ ^-h$\|^--help$ ]]; then
         cat <<EOF
-diredterm [-h] [directory]
-    Open an Emacs terminal window with a dired buffer showing DIRECTORY.
-    DIRECTORY defaults to the current working directory ($PWD).
+filter [-h] condition
+    Filter input according to a condition. Each line is accessible via the
+    variable $x and the condition is evaluated as though surrounded by
+    double brackets.
+
+    Example:
+        # find files starting with .zsh_
+        find . -maxdepth 1 | filter '$x =~ /.zsh_[^/]*$'
+        # find regular files with a hard link count of 2
+        ls -a | filter '-f "$x" && `stat -c -- "%h" "$x"` = 2'
 
     Options:
       -h --help     display this help
 EOF
         shift;
     fi;
-    emacsclient -t -e "(dired \"${1:-$PWD}\")"
+
+    # echo "[[ $* ]]"
+    while read -r x; do
+        if eval "[[ $* ]]"; then
+            echo "$x"
+        fi
+    done
 }
