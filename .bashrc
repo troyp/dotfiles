@@ -70,7 +70,7 @@ bind -x '"\C-x\C-m": "xmodmap $HOME/.Xmodmap"'
 # ********************
 
 # common startup files
-if [[ -f ~/.shrc ]]; then . ~/.shrc fi
+if [[ -f ~/.shrc ]]; then . ~/.shrc fi; fi
 # aliases
 if [[ -f ~/.sh-aliases ]]; then . ~/.sh-aliases; fi
 if [[ -f ~/.bash-aliases ]]; then . ~/.bash-aliases; fi
