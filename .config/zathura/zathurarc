@@ -1,0 +1,4 @@
+map <C-s> toggle_statusbar
+map <C-h> focus_inputbar ":exec roxterm -e man zathura zathurarc"
+map | adjust_window best-fit
+map \\ adjust_window width
