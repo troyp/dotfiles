@@ -138,14 +138,14 @@ cbz-by-num () {
 maff () {
     if [[ ! -f "$1/index.html" ]]
     then
-	echo "No index.html file. Enter relative Path of file to redirect to."
-	printf "main page: "
-	startfile=`line`
-	> "$1/index.html" echo '<html>'
-	>>"$1/index.html" echo '  <head>'
-	>>"$1/index.html" echo "    <meta http-equiv=\"refresh\" content=\"0; url=$startfile\" />"
-	>>"$1/index.html" echo '  </head>'
-	>>"$1/index.html" echo '</html>'
+	      echo "No index.html file. Enter relative Path of file to redirect to."
+	      printf "main page: "
+	      startfile=`line`
+	      > "$1/index.html" echo '<html>'
+	      >>"$1/index.html" echo '  <head>'
+	      >>"$1/index.html" echo "    <meta http-equiv=\"refresh\" content=\"0; url=$startfile\" />"
+	      >>"$1/index.html" echo '  </head>'
+	      >>"$1/index.html" echo '</html>'
     fi
     archive_name="${1%/}.maff"
     7z a -tzip "$archive_name" "$1"
@@ -1118,4 +1118,22 @@ EOF
             echo "$x"
         fi
     done
+}
+
+chm2html() {
+    file="$1"
+    dir="$2"
+    archmage "$file" "$dir"
+    # correct erroneous wrapping of index links
+    echo 'a { white-space: nowrap; }' >> "$dir"/arch_css.css
+}
+
+chm2maff() {
+    file="$1"
+    dir="$2"
+    archmage "$file" "$dir"
+    # correct erroneous wrapping of index links
+    echo 'a { white-space: nowrap; }' >> "$dir"/arch_css.css
+    7z a -tzip "$dir.maff" "$dir"
+    rm -Ir "$dir"
 }
