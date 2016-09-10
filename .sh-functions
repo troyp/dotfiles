@@ -1125,7 +1125,7 @@ chm2html() {
     dir="$2"
     archmage "$file" "$dir"
     # correct erroneous wrapping of index links
-    echo 'a { white-space: nowrap; }' >> "$dir"/arch_css.css
+    printf '\na { white-space: nowrap; }' >> "$dir"/arch_css.css
 }
 
 chm2maff() {
@@ -1133,7 +1133,7 @@ chm2maff() {
     dir="$2"
     archmage "$file" "$dir"
     # correct erroneous wrapping of index links
-    echo 'a { white-space: nowrap; }' >> "$dir"/arch_css.css
+    printf '\na { white-space: nowrap; }' >> "$dir"/arch_css.css
     7z a -tzip "$dir.maff" "$dir"
     rm -Ir "$dir"
 }
