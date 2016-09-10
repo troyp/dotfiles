@@ -197,6 +197,7 @@ alias mmv-symlink='mmv -a'    # symlink source to target
 # FILE SEARCH/INFO ALIASES.
 # -------------------------
 alias gr='grep -inE --color=auto'       # color, line no.s, case-insensitive, extended RE
+alias grepi="grep -i --color=auto"      # color, case-insensitive grep
 alias greps="grep -F"                   # fixed string grep
 alias grepis="grep -F"                  # fixed string grep (case-insensitive)
 alias grepc="grep --color=always"       # color grep for pipes
@@ -272,19 +273,19 @@ alias urldeenc='xargs -0 urlencode -d'
 # WGET & RELATED ALIASES.
 #------------------------
 # multiple hosts: use -H; restrict domains with -D dom1.com,dom2.org
-alias wgetm='wget -rkKpN -l inf -np -nH --no-remove-listing'
-alias wgetmh='wget -rkKpN -l inf -np -H --no-remove-listing'
-alias wgetmcont='wget -mkKp -np -nH -c -N'    # continue, changed/new files only
-alias wgetmnc='wget   -mkKp -np -nH -c -nc'   # continue, new files only
+alias wgetm='wget -nH -kKpN -rl inf -np --no-remove-listing'
+alias wgetmh='wget -H -kKpN -rl inf -np --no-remove-listing'
+alias wgetmcont='wgetm -c'    # continue, changed/new files only
+alias wgetmnc='wget -mkKp -np -nh -c -nc'   # continue, new files only
 alias wgetmf="wgetm --reject-regex '.*[?$].*'"  # filter out URLs with params
 # wgetm-incdirs: eg. wgetmincdirs /Tools,/Utilities domainname.com/Tools/index.html
-alias wgetm-incdirs='wget -mkKp -nH --include-directories'
-alias wgetmf-incdirs="wget -mkKp -nH --reject-regex '.*[?].*' --include-directories"
-alias wgetmff-incdirs="wget -mkKp -nH --reject-regex '.*[?$].*' --include-directories"
-alias wgetm-incdirs-span='wget -mkKp -nH -H --include-directories'
+alias wgetm-incdirs='wget -nH -mkKp --include-directories'
+alias wgetmf-incdirs="wget -nH -mkKp --reject-regex '.*[?].*' --include-directories"
+alias wgetmff-incdirs="wget -nH -mkKp --reject-regex '.*[?$].*' --include-directories"
+alias wgetm-incdirs-span='wget -H -mkKp --include-directories'
 alias wgetm-conv='wgetm -E'          # wgetm w. adjust-extension (-E)
 alias wgetmf-conv='wgetmf -E'        # wgetmf w. adjust-extension (-E)
-alias wgetmlimit='wget -rkpNE -np -nH -l'  #eg wgetmlimit 2... (2 recurs lvls)
+alias wgetmlimit='wget -kKpEN -np -nH -rl'  #eg wgetmlimit 2... (2 recurs lvls)
 alias wgetmcut='wgetm --cut-dirs'  #eg wgetmcut 2 ... (removes root + top 2 subdirs)
 alias wgetmfcut="wgetmf --reject-regex '.*[?].*' ---cut-dirs"  #eg wgetmcut 2 ... (removes root + top 2 subdirs)
 alias wgetmffcut="wgetmff --reject-regex '.*[?$].*' ---cut-dirs"  #eg wgetmcut 2 ... (removes root + top 2 subdirs)
@@ -292,12 +293,12 @@ alias wgetmflat='wgetm -nd'
 alias wgetstealth='wget -e robots=off -U=Mozilla'
 alias wgetmstealth='wgetm -e robots=off -U="Mozilla" -w 1'
 alias wgetmfstealth='wgetmf -e robots=off -U="Mozilla" -w 1'
-alias wget1='wget -rNkKpE -l 1 -H'
-alias wget1stealthconv='wget -rNkKpE -l 1 -H -e robots=off -U=Mozilla -w 1'
-alias wget1flatstealthconv='wget -rNkKpE -nd -l 1 -H -e robots=off -U=Mozilla -w 1'
-alias wgetp='wget -NkKpE'    # get page & prerequisites (same host only)
-alias wgetpp='wget -kKpEH'   # get page & prerequisites (span hosts)
-alias wgetpcut='wget -NkKpE -nH --cut-dirs'
+alias wget1='wget -kKpEHN -rl 1'
+alias wget1stealthconv='wget -kKpEHN -rl 1 -e robots=off -U=Mozilla -w 1'
+alias wget1flatstealthconv='wget -kKpEHN -nd -rl 1 -e robots=off -U=Mozilla -w 1'
+alias wgetp='wget -kKpEN'    # get page & prerequisites (same host only)
+alias wgetpp='wget -kKpEHN'   # get page & prerequisites (span hosts)
+alias wgetpcut='wget -kKpEN -nH --cut-dirs'
 alias wgetcat='wget -pE -O' # usage: wgetcat <filename> <filename> ... <url> #UNTESTED
 alias listhttplinks='xargs elinks --dump | grep "http" | sed "s/.*http/http/g"' # Waits for url from stdin then lists http links on page. echo url | listhttplinks. Pipe to wget.
 alias listhttplinks2='xargs wget -O - 2>&1 | grep -i "http:" | sed "s/^.*http/http/\" | cut -d"\"" -f1 | sort -u'
