@@ -202,14 +202,36 @@ pdfcat () {
 }
 
 pdfoutline-out () {
-    # pdfoutline-out PDF_DOC > BMARKFILE
-    pdftk "$1" dump_data
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+pdfoutline-out PDFFILE [OUTFILE]
+    Output the bookmarks (outline) of PDFFILE to text file OUTFILE.
+    If OUTFILE is -, the bookmarks are output to stdout.
+EOF
+        return
+    fi;
+    pdffile="$1"
+    outfile="${2:-${1%.pdf}.bmarks}"
+    if [[ "$outfile" == "-" ]]; then
+        pdftk "$1" dump_data
+    else
+        pdftk "$1" dump_data output "$outfile"
+    fi
 }
 
 pdfoutline-in () {
-    # pdfoutline-in PDF_DOC BMARK_FILE
-    # produces new pdf 'out.pdf'
-    pdftk "$1" update_info "$2" output out.pdf
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+pdfoutline-in PDFFILE BMARKS [OUTFILE]
+    Updates the bookmarks of PDFFILE to match those of the BMARKS file and saves
+    the result to OUTFILE.
+EOF
+        return
+    fi;
+    pdffile="$1"
+    bmarks="$2"
+    outfile="${3:-${1%.pdf}-updated.pdf}"
+    pdftk "$pdffile" update_info "$bmarks" output "$outfile"
 }
 
 pdfoutline-edit () {
@@ -275,24 +297,61 @@ function pdfpagerange () {
 # | DJVU Functions |
 # '----------------'
 
-djoutline-out () {
-    # djoutline-out DJVU_DOC > BMARKFILE
-    djvused "$1" -e 'print-outline'
+djvuoutline-out () {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+djvuoutline-out DJVUFILE [OUTFILE]
+    Output the bookmarks (outline) of DJVUFILE to text file OUTFILE.
+    If OUTFILE is -, the bookmarks are output to stdout.
+EOF
+        return
+    fi;
+    djvufile="$1"
+    outfile="${2:-${1%.djvu}.bmarks}"
+    if [[ "$outfile" == "-" ]]; then
+        djvused "$djvufile" -e 'print-outline'
+    else
+        djvused "$djvufile" -e 'print-outline' > "$outfile"
+    fi
 }
 
-djoutline-in () {
-    # djoutline-in DJVU_DOC BMARK_FILE
-    # produces new pdf 'out.pdf'
-    djvused "$1" -e "set-outline \"$2\"; save"
+djvuoutline-in () {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+djvuoutline-in DJVUFILE BMARKS [OUTFILE]
+    Updates the bookmarks of DJVUFILE to match those of the BMARKS file and
+    saves the result to OUTFILE.
+EOF
+        return
+    fi;
+    djvufile="$1"
+    bmarks="$2"
+    outfile="${3:-${1%.djvu}-updated.djvu}"
+    djvused "$djvufile" -e "set-outline \"$bmarks\"; save-bundled \"$outfile\""
 }
 
-djoutline-edit () {
+djvuoutline-edit () {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+djvuoutline-edit DJVUFILE [OUTFILE]
+    Edit the bookmarks (outline) of DJVUFILE and save to OUTFILE.
+    If OUTFILE is omitted, overwrite DJVUFILE.
+EOF
+        return
+    fi;
+    djvufile="$1"
+    outfile="$2"
     # djoutline-edit DJVU_DOC
     # edit bookmarks of DJVU_DOC
     outline=$(mktemp)
-    djvused "$1" -e 'print-outline' > $outline
+    djvused "$djvufile" -e 'print-outline' > $outline
     `echo ${EDITOR:-vim} $outline`
-    djvused "$1" -e "set-outline $outline; save"
+    echo "$outfile"
+    if [[ -z "$outfile" ]]; then
+        djvused "$djvufile" -e "set-outline $outline; save"
+    else
+        djvused "$djvufile" -e "set-outline $outline; save-bundled \"$outfile\""
+    fi
 }
 
 # -------------------------------------------------------------------------------
