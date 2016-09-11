@@ -104,3 +104,5 @@ if [[ -f ~/.bashmarks-setup.sh ]]; then . ~/.bashmarks-setup.sh; fi
 set +a
 
 # [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
