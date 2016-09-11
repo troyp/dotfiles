@@ -99,6 +99,11 @@ fgwidget() { fg }
 zle -N fgwidget
 bindkey '^Z' fgwidget
 
+# launch terminal on S-F4 (match Dolphin behaviour)
+launchterminal() { x-terminal-emulator & }
+zle -N launchterminal
+bindkey '^[O2S' launchterminal
+
 zstyle ':completion:*' list-prompt   ''
 zstyle ':completion:*' select-prompt ''
 
@@ -144,3 +149,5 @@ promptinit
 # Example aliases
 # alias zshconfig="mate ~/.zshrc"
 # alias ohmyzsh="mate ~/.oh-my-zsh"
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
