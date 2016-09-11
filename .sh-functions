@@ -1003,6 +1003,12 @@ github-clone-with-wiki() {
     git clone "$wiki";
 }
 
+grepcontext() {
+    n="$1"
+    shift
+    grep -A $n -B$n -n "$@"
+}
+
 grepview() {
     n=3;
     if [ "$1" =~ "^-n" ]; then n="${1#-n}"; shift; fi;
