@@ -61,7 +61,7 @@
   <Action priority="0" name="fullscreen"/>
   <Action shortcut="Ctrl+M; Alt+M" priority="0" name="options_show_menubar"/>
   <Action iconText="Recent" shortcut="Ctrl+Shift+O" priority="0" name="file_open_recent"/>
-  <Action shortcut="F1; Ctrl+H" name="help_contents"/>
+  <Action shortcut="F1; Ctrl+H, O" name="help_contents"/>
   <Action shortcut="S" priority="0" name="options_configure_keybinding"/>
   <Action shortcut="P" name="file_print"/>
   <Action shortcut="Alt+J" name="tab-next"/>

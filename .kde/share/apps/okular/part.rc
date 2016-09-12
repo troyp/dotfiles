@@ -147,7 +147,7 @@
   <Action shortcut="F3; Ctrl+N" name="edit_find_next"/>
   <Action shortcut="Shift+F3; Ctrl+Shift+N" name="edit_find_prev"/>
   <Action shortcut="Ctrl+Z; U" priority="0" name="edit_undo"/>
-  <Action shortcut="D" priority="0" name="presentation_drawing_mode"/>
+  <Action shortcut="Shift+F6" priority="0" name="presentation_drawing_mode"/>
   <Action shortcut="Ctrl+2" name="view_render_mode_facing"/>
   <Action shortcut="Ctrl+3" name="view_render_mode_facing_center_first"/>
   <Action shortcut="Ctrl+1" name="view_render_mode_single"/>
@@ -160,7 +160,7 @@
   <Action shortcut="F2" name="rename_bookmark"/>
   <Action iconText="Add Bookmark" shortcut="B" priority="0" name="bookmark_add"/>
   <Action shortcut="Shift+B" priority="0" name="mouse_drag"/>
-  <Action shortcut="" name="switch_blackscreen_mode"/>
+  <Action shortcut="Shift+F11" name="switch_blackscreen_mode"/>
   <Action shortcut="Shift+J; Shift+Down" name="view_scroll_page_down"/>
   <Action shortcut="Ctrl+6; M" name="mouse_magnifier"/>
   <Action shortcut="#; 0" name="page_number"/>
@@ -172,8 +172,8 @@
   <Action shortcut="Z" priority="0" name="zoom_to"/>
   <Action shortcut="Shift+Z" priority="0" name="mouse_zoom"/>
   <Action priority="0" name="mouse_selecttools"/>
-  <Action iconText="PS->PDF" name="import_ps"/>
-  <Action priority="0" name="view_auto_fit"/>
+  <Action iconText="PS->PDF" shortcut=":, P, S" name="import_ps"/>
+  <Action shortcut="Ctrl+\" priority="0" name="view_auto_fit"/>
   <Action shortcut="Ctrl+P" name="file_print_preview"/>
   <Action shortcut="Shift+S" priority="0" name="options_configure"/>
   <Action shortcut="Ctrl+Shift+Z; Ctrl+R" name="edit_redo"/>
@@ -185,5 +185,8 @@
   <Action shortcut="Ctrl+Shift+B" name="options_configure_generators"/>
   <Action priority="0" name="edit_select_all"/>
   <Action shortcut="Ctrl+S" name="file_save_copy"/>
+  <Action shortcut="Ctrl+H, P" name="properties"/>
+  <Action shortcut="Ctrl+H, S" name="view_pagesizes"/>
+  <Action shortcut="D" name="presentation_erase_drawings"/>
  </ActionProperties>
 </kpartgui>
