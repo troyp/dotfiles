@@ -143,6 +143,7 @@ paths=(
     /opt/google-code-support-tools/wiki_to_md
     /opt/google-code-support-tools/googlecode-issues-exporter
     /opt/hub/bin
+    /opt/i2p
 )
 for i in "${paths[@]}"; do pathappend "$i" ; done
 
