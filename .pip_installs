@@ -46,3 +46,5 @@ units
 virtualenv
 coursera
 subliminal
+python-Levenshtein
+Levenshtein
