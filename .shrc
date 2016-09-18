@@ -10,7 +10,6 @@
 [[ -f ~/.sh-aliases ]]                      &&  source ~/.sh-aliases;
 [[ -f ~/.sh-functions ]]                    &&  source ~/.sh-functions;
 [[ -f ~/.sh-functions-track-installs.sh ]]  &&  source ~/.sh-functions-track-installs.sh;
-[[ -f ~/.rvm/scripts/rvm ]]                 &&  source ~/.rvm/scripts/rvm;
 
 # -------------------------------------------------------------------------------
 # ********
@@ -44,4 +43,4 @@ function opam-switch-eval () {
 
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/dev
-source /usr/local/bin/virtualenvwrapper_lazy.sh
+source /usr/local/bin/virtualenvwrapper.sh
