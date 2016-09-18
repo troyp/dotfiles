@@ -10,6 +10,8 @@ set showcmd                  " show (partial) commands in last line
 set number                   " Line numbers on
 
 set incsearch                " show incsearch matches (leave showing: hls/nohls)
+set ignorecase               " case insensitive
+set smartcase                " case sensitive if uppercase is used
 
 set mouse=a                  " mouse support for all modes
 set ttymouse=xterm2            " set terminal mouse support codes
