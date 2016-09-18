@@ -206,6 +206,8 @@ alias grepp='grep -P'                   # grep with perl syntax
 alias grepip='grep -iP'                 # grep with perl syntax (case-insensitive)
 alias grepn='grep -Hn --color=always'   # grep with filename and line no.
 alias grepin='grep -iHn --color=always' # grep with filename and line no. (case-insensitive)
+alias grepr='grep -iHnr --color=always' # recursive grep with filename and line no. (case-insens)
+alias grepsys='sudo grep -r -D skip'    # recursive grep with sudo, skip device files
 alias sudb='sudo updatedb'
 alias locater='locate --regex'   # locate extended regex
 alias locatea='locate -A'        # locate files matching ALL patterns
@@ -256,7 +258,7 @@ alias file-owner='stat -c "%U"'
 # -----------------------
 # HTML & XML MANIPULATION
 # -----------------------
-alias htmlcat='htmldoc -f html'
+alias htmlcat=htmldoc
 alias makelinks='make-links'    # ~/.scripts/make-links
 alias makelinks-dirtree-flatten='find . -type f -exec printf "<a href={}>{}</a><br>\n"  \;'
 alias href-relativize="sed -e 's/href=\"http:\/\/[^ \"]*\//href=\"/g'"
@@ -452,7 +454,7 @@ alias pf=xclip-pastefile
 alias vip=vimpager
 alias wvip='PAGER=vimpager'
 alias vman='MANPAGER=vimpager man'
-alias less='less -i'
+alias less='less -isW'    # ignore case, squeeze blank lines, hilite unread
 # follow appended data (like tail -f) in less
 alias fless='less +F'
 alias vless=/usr/share/vim/vim74/macros/less.sh
@@ -502,8 +504,11 @@ alias mimedefault='xdg-mime default'
 alias update-mime-db-local='update-mime-database ~/.local/share/mime'
 alias update-fonts='fc-cache -vf ~/.fonts/'
 alias choose-input-method='im-config -c'
-alias lscompose='cat /usr/share/X11/locale/en_US.UTF-8/Compose'  # compose key combinations
-alias lsxcompose='cat ~/.XCompose'                          # user compose key combinations
+alias lscompose='cat /usr/share/X11/locale/en_US.UTF-8/Compose'                # default compose key combinations
+alias lsxcompose='cat ~/.XCompose'                                             # user compose key combinations
+alias lscomposeall='cat /usr/share/X11/locale/en_US.UTF-8/Compose ~/.XCompose' # all compose key combinations
+alias viewcompose='lscompose | less'
+alias viewcomposeall='lscomposeall | less'
 
 # --------------------------
 # SYSTEM / HARDWARE ALIASES.
