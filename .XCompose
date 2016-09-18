@@ -2,6 +2,20 @@ include "%L"   # import the default Compose file for your locale
 
 
 <Multi_key> <bar> <greater>                   : "▸"
+# japanese full-width
 <Multi_key> <bracketleft> <bracketleft>       : "《"
 <Multi_key> <bracketright> <bracketright>     : "》"
 <Multi_key> <0> <minus>                       : "・"
+# set operators
+<Multi_key> <braceleft> <u>                   : "∪"
+<Multi_key> <braceleft> <n>                   : "∩"
+<Multi_key> <braceleft> <e>                   : "∈"
+<Multi_key> <braceleft> <E>                   : "∉"
+<Multi_key> <braceleft> <+>                   : "⊕"
+<Multi_key> <braceleft> <c>                   : "⊂"
+<Multi_key> <braceleft> <C>                   : "⊄"
+<Multi_key> <braceleft> <comma>               : "⊆"
+<Multi_key> <braceleft> <less>                : "⊊"
+<Multi_key> <braceleft> <0>                   : "∅"
+<Multi_key> <braceleft> <'>                   : "′"
+<Multi_key> <braceleft> <x>                   : "⨯"
