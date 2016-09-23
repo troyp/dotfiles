@@ -13,7 +13,7 @@
 
 
 # if running bash, source .bashrc
-if [[ -n "$BASH_VERSION"]]; then
+if [[ -n "$BASH_VERSION" ]]; then
         [[ -f "$HOME/.bashrc" ]] && . "$HOME/.bashrc"
         [[ -f "$HOME/.bashenv" ]] && . "$HOME/.bashenv"
 fi
