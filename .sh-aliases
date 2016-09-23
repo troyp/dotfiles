@@ -889,6 +889,7 @@ alias ibus-start='ibus-daemon -drx'
 alias sort-natural='sort -bdV'
 alias sort-icase-natural='sort -bdfV'
 alias diskusage='gdmap -f'
+# alias dolphin='XDG_CURRENT_DESKTOP=kde dolphin'   # may fix ui if launched from other desktop environment
 alias ibusd='IBUS_ENABLE_SYNC_MODE=1 ibus-daemon -drx'
 alias thumbsdb='vinetto -o ./.thumbnails ./?humbs.db'
 alias kanjitomo='java -Xmx1000m -jar /opt/KanjiTomo/KanjiTomo.jar -run'
