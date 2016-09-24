@@ -661,11 +661,13 @@ animelyrics () {
 }
 
 updateln () {
-    prefix="${1%/}"
-    targets="${2:-.hardlink-targets}"
-    for f in `cat "$targets"`; do
-	      ln -i -T "$prefix/$f" ./"$f"
-    done
+    (
+        prefix="${1%/}"
+        targets="${2:-.hardlink-targets}"
+        for f in `cat "$targets"`; do
+	          ln -i -T "$prefix/$f" ./"$f"
+        done
+    )
 }
 
 inrange () {
