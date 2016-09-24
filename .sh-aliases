@@ -1,4 +1,4 @@
-#                                                                 -*- shell-script -*-
+#                                                            -*- shell-script -*-
 [[ ! -z $DEBUG  ]] && echo "sourcing .sh-aliases"
 
 # load private aliases
@@ -691,8 +691,8 @@ alias epipe=$HOME/.scripts/emacsclient
 # run from a directory containing an alternative .emacs.d directory
 alias emacs-from-here='HOME=. emacs'
 # set main .emacs.d folder to point to a given config
-alias emacs-set-config='userdir=$(for d in ~/.emacs.d.* ~/.emacs-*/.emacs.d; do echo "$d"; done | iselect -ma); echo "~/.emacs.d -> $userdir"; ln -f -s -T "$userdir" ~/.emacs.d'
-alias emacs-choose-config='for d in ~/.emacs.d.* ~/.emacs-*/.emacs.d; do echo "$d"; done | iselect -ma'
+alias emacs-set-config='( setopt nullglob; userdir=$(for d in ~/.emacs.d.* ~/.emacs-*/.emacs.d; do echo "$d"; done | iselect -ma); echo "~/.emacs.d -> $userdir"; ln -f -s -T "$userdir" ~/.emacs.d )'
+alias emacs-choose-config='( setopt nullglob; for d in ~/.emacs.d.* ~/.emacs-*/.emacs.d; do echo "$d"; done | iselect -ma )'
 
 # -----------
 # PDF ALIASES
