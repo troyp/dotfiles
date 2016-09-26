@@ -1,7 +1,7 @@
-<!DOCTYPE kpartgui>
-<kpartgui version="36" name="okular_part">
+<!DOCTYPE kpartgui SYSTEM 'kpartgui.dtd'>
+<kpartgui version="37" name="okular_part">
  <MenuBar>
-  <Menu noMerge="1" name="file">
+  <Menu name="file">
    <text>&amp;File</text>
    <Action group="file_open" name="get_new_stuff"/>
    <Action group="file_open" name="import_ps"/>
@@ -14,7 +14,7 @@
    <Action group="file_print" name="embedded_files"/>
    <Action group="file_print" name="file_export_as"/>
   </Menu>
-  <Menu noMerge="1" name="edit">
+  <Menu name="edit">
    <text>&amp;Edit</text>
    <Action name="edit_undo"/>
    <Action name="edit_redo"/>
@@ -27,7 +27,7 @@
    <Action name="edit_find_next"/>
    <Action name="edit_find_prev"/>
   </Menu>
-  <Menu noMerge="1" name="view">
+  <Menu name="view">
    <text>&amp;View</text>
    <Action name="presentation"/>
    <Separator/>
@@ -40,18 +40,18 @@
    <Action name="view_continuous"/>
    <Action name="view_render_mode"/>
    <Separator/>
-   <Menu noMerge="1" name="view_orientation">
+   <Menu name="view_orientation">
     <text>&amp;Orientation</text>
     <Action name="view_orientation_rotate_ccw"/>
     <Action name="view_orientation_rotate_cw"/>
     <Action name="view_orientation_original"/>
    </Menu>
    <Action name="view_pagesizes"/>
-   <Action name="view_trim_margins"/>
+   <Action name="view_trim_mode"/>
    <Separator/>
    <Action name="view_toggle_forms"/>
   </Menu>
-  <Menu noMerge="1" name="go">
+  <Menu name="go">
    <text>&amp;Go</text>
    <Action name="go_previous"/>
    <Action name="go_next"/>
@@ -64,7 +64,7 @@
    <Separator/>
    <Action name="go_goto_page"/>
   </Menu>
-  <Menu noMerge="1" name="bookmarks">
+  <Menu name="bookmarks">
    <text>&amp;Bookmarks</text>
    <Action name="bookmark_add"/>
    <Action name="rename_bookmark"/>
@@ -73,7 +73,7 @@
    <Separator/>
    <ActionList name="bookmarks_currentdocument"/>
   </Menu>
-  <Menu noMerge="1" name="tools">
+  <Menu name="tools">
    <text>&amp;Tools</text>
    <Action name="mouse_drag"/>
    <Action name="mouse_zoom"/>
@@ -88,14 +88,14 @@
    <Action name="speak_current_page"/>
    <Action name="speak_stop_all"/>
   </Menu>
-  <Menu noMerge="1" name="settings">
+  <Menu name="settings">
    <text>&amp;Settings</text>
    <Action group="show_merge" name="show_leftpanel"/>
    <Action group="show_merge" name="show_bottombar"/>
    <Action group="configure_merge" name="options_configure_generators"/>
    <Action group="configure_merge" name="options_configure"/>
   </Menu>
-  <Menu noMerge="1" name="help">
+  <Menu name="help">
    <text>&amp;Help</text>
    <Action group="about_merge" name="help_about_backend"/>
   </Menu>
@@ -129,64 +129,64 @@
   <Action name="mouse_tableselect"/>
   <Action name="edit_undo"/>
  </ToolBar>
- <ActionProperties scheme="Default">
+ <ActionProperties>
+  <Action iconText="Add Bookmark" shortcut="B" priority="0" name="bookmark_add"/>
+  <Action priority="0" name="edit_find"/>
+  <Action shortcut="F3; Ctrl+N" name="edit_find_next"/>
+  <Action shortcut="Shift+F3; Ctrl+Shift+N" name="edit_find_prev"/>
+  <Action shortcut="Ctrl+Shift+Z; Ctrl+R" name="edit_redo"/>
+  <Action priority="0" name="edit_select_all"/>
+  <Action shortcut="Ctrl+Z; U" priority="0" name="edit_undo"/>
+  <Action shortcut="Ctrl+P" name="file_print_preview"/>
+  <Action shortcut="Ctrl+S" name="file_save_copy"/>
+  <Action shortcut="Ctrl+G; Alt+&lt;" priority="0" name="first_page"/>
   <Action shortcut="Shift+H; Shift+Left" priority="0" name="go_document_back"/>
   <Action shortcut="Shift+L; Shift+Right" priority="0" name="go_document_forward"/>
-  <Action shortcut="|; ]" name="view_fit_to_page"/>
-  <Action shortcut="\" name="view_fit_to_width"/>
-  <Action shortcut="Ctrl+G; Alt+&lt;" priority="0" name="first_page"/>
-  <Action shortcut="Shift+G; Alt+>" priority="0" name="last_page"/>
-  <Action shortcut="C; ScrollLock" name="view_continuous"/>
   <Action shortcut="G; '" priority="0" name="go_goto_page"/>
   <Action shortcut="Space; ." priority="0" name="go_next"/>
   <Action shortcut="Backspace; ," priority="0" name="go_previous"/>
-  <Action shortcut="Ctrl+Right; Ctrl+J" name="next_bookmark"/>
-  <Action shortcut="Ctrl+Left; Ctrl+K" name="previous_bookmark"/>
-  <Action shortcut="Alt+Down" name="view_scroll_down"/>
-  <Action shortcut="Alt+Up" name="view_scroll_up"/>
-  <Action shortcut="F3; Ctrl+N" name="edit_find_next"/>
-  <Action shortcut="Shift+F3; Ctrl+Shift+N" name="edit_find_prev"/>
-  <Action shortcut="Ctrl+Z; U" priority="0" name="edit_undo"/>
-  <Action shortcut="Shift+F6" priority="0" name="presentation_drawing_mode"/>
-  <Action shortcut="Ctrl+2" name="view_render_mode_facing"/>
-  <Action shortcut="Ctrl+3" name="view_render_mode_facing_center_first"/>
-  <Action shortcut="Ctrl+1" name="view_render_mode_single"/>
-  <Action shortcut="_" name="view_trim_margins"/>
+  <Action iconText="PS->PDF" shortcut=":, P, S" name="import_ps"/>
+  <Action shortcut="Shift+G; Alt+>" priority="0" name="last_page"/>
+  <Action shortcut="Shift+B" priority="0" name="mouse_drag"/>
+  <Action shortcut="Ctrl+6; M" name="mouse_magnifier"/>
   <Action shortcut="Shift+V" priority="0" name="mouse_select"/>
+  <Action priority="0" name="mouse_selecttools"/>
   <Action shortcut="Ctrl+V" priority="0" name="mouse_tableselect"/>
   <Action shortcut="V" priority="0" name="mouse_textselect"/>
-  <Action shortcut="+; =" priority="0" name="view_zoom_in"/>
-  <Action shortcut="-" priority="0" name="view_zoom_out"/>
-  <Action shortcut="F2" name="rename_bookmark"/>
-  <Action iconText="Add Bookmark" shortcut="B" priority="0" name="bookmark_add"/>
-  <Action shortcut="Shift+B" priority="0" name="mouse_drag"/>
-  <Action shortcut="Shift+F11" name="switch_blackscreen_mode"/>
-  <Action shortcut="Shift+J; Shift+Down" name="view_scroll_page_down"/>
-  <Action shortcut="Ctrl+6; M" name="mouse_magnifier"/>
+  <Action shortcut="Shift+Z" priority="0" name="mouse_zoom"/>
+  <Action shortcut="Ctrl+Right; Ctrl+J" name="next_bookmark"/>
+  <Action shortcut="Shift+S" priority="0" name="options_configure"/>
+  <Action priority="0" name="options_configure_annotations"/>
+  <Action shortcut="Ctrl+Shift+B" name="options_configure_generators"/>
   <Action shortcut="#; 0" name="page_number"/>
+  <Action shortcut="Shift+F6" priority="0" name="presentation_drawing_mode"/>
+  <Action shortcut="D" name="presentation_erase_drawings"/>
   <Action shortcut="Ctrl+Space" name="presentation_play_pause"/>
+  <Action shortcut="Ctrl+Left; Ctrl+K" name="previous_bookmark"/>
+  <Action shortcut="Ctrl+H, P" name="properties"/>
+  <Action shortcut="F2" name="rename_bookmark"/>
+  <Action shortcut=";" name="show_bottombar"/>
+  <Action priority="0" name="show_leftpanel"/>
+  <Action shortcut="Shift+F11" name="switch_blackscreen_mode"/>
+  <Action shortcut="Ctrl+\" priority="0" name="view_auto_fit"/>
+  <Action shortcut="C; ScrollLock" name="view_continuous"/>
+  <Action shortcut="|; ]" name="view_fit_to_page"/>
+  <Action shortcut="\" name="view_fit_to_width"/>
   <Action shortcut="?" name="view_orientation_original"/>
   <Action shortcut="&lt;" name="view_orientation_rotate_ccw"/>
   <Action shortcut=">" name="view_orientation_rotate_cw"/>
-  <Action shortcut="Shift+K; Shift+Up" name="view_scroll_page_up"/>
-  <Action shortcut="Z" priority="0" name="zoom_to"/>
-  <Action shortcut="Shift+Z" priority="0" name="mouse_zoom"/>
-  <Action priority="0" name="mouse_selecttools"/>
-  <Action iconText="PS->PDF" shortcut=":, P, S" name="import_ps"/>
-  <Action shortcut="Ctrl+\" priority="0" name="view_auto_fit"/>
-  <Action shortcut="Ctrl+P" name="file_print_preview"/>
-  <Action shortcut="Shift+S" priority="0" name="options_configure"/>
-  <Action shortcut="Ctrl+Shift+Z; Ctrl+R" name="edit_redo"/>
-  <Action shortcut=";" name="show_bottombar"/>
-  <Action priority="0" name="show_leftpanel"/>
-  <Action priority="0" name="view_render_mode"/>
-  <Action priority="0" name="edit_find"/>
-  <Action priority="0" name="options_configure_annotations"/>
-  <Action shortcut="Ctrl+Shift+B" name="options_configure_generators"/>
-  <Action priority="0" name="edit_select_all"/>
-  <Action shortcut="Ctrl+S" name="file_save_copy"/>
-  <Action shortcut="Ctrl+H, P" name="properties"/>
   <Action shortcut="Ctrl+H, S" name="view_pagesizes"/>
-  <Action shortcut="D" name="presentation_erase_drawings"/>
+  <Action priority="0" name="view_render_mode"/>
+  <Action shortcut="Ctrl+2" name="view_render_mode_facing"/>
+  <Action shortcut="Ctrl+3" name="view_render_mode_facing_center_first"/>
+  <Action shortcut="Ctrl+1" name="view_render_mode_single"/>
+  <Action shortcut="Alt+Down" name="view_scroll_down"/>
+  <Action shortcut="Shift+J; Shift+Down" name="view_scroll_page_down"/>
+  <Action shortcut="Shift+K; Shift+Up" name="view_scroll_page_up"/>
+  <Action shortcut="Alt+Up" name="view_scroll_up"/>
+  <Action shortcut="_" name="view_trim_margins"/>
+  <Action shortcut="+; =" priority="0" name="view_zoom_in"/>
+  <Action shortcut="-" priority="0" name="view_zoom_out"/>
+  <Action shortcut="Z" priority="0" name="zoom_to"/>
  </ActionProperties>
 </kpartgui>
