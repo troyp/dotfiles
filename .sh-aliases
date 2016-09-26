@@ -49,6 +49,7 @@ alias galts=galternatives    # graphical alternatives editor
 # TODO: only pass when directory matches exactly
 alias filter-in-default-PATH='grep -E `echo ${ubuntu_default_PATH//:/\|}`'
 alias filter-exec-in-default-PATH='grep -E `echo ${ubuntu_default_PATH//:/\/.+\|}`'
+alias fix-kubuntu-1604-video-thumbs='for f in ffmpegthumbs.so gsthumbnail.so rawthumbnail.so; do sudo ln -s /usr/lib/x86_64-linux-gnu/plugins/$f /usr/lib/x86_64-linux-gnu/qt5/plugins/; done'
 
 # ----------------------
 #  KDE-SPECIFIC ALIASES.
@@ -531,6 +532,7 @@ alias preparesetleds='sudo chmod 666 /dev/console'
 alias capslockon='sudo setleds -D +caps < /dev/console'  # turn off capslock if xset doesn't work. Requires chmod 666 /dev/console (otherwise su - must used rather than sudo)
 alias capslockoff='capslockon; sudo setleds -D -caps < /dev/console' # see capslockon; sometimes you need to use capslockon first or the light won't clear.
 alias hdd='df -hT'
+alias hdd-info='sudo parted -l'
 alias partitionlist='fdisk -l'
 alias lstab='cat /etc/mtab'  # list mounted partitions / filesystems in fstab format
 alias etab='sudo $(echo ${EDITOR:-vim}) /etc/fstab' # customize auto-mounted partitions / filesystems in fstab file
