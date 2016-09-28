@@ -16,6 +16,7 @@
 #     (note: will recursively expand aliases in a history expansion.)
 #     (note: "alias-expand-line" and "history-and-alias-expand-line" are also
 #             available, but not bound by default.)
+# A trailing space in an alias causes the next word to be alias-expanded as well
 
 #-------------------------
 # DEBIAN-SPECIFIC ALIASES.
@@ -747,6 +748,8 @@ alias libreconv-pdf='unoconv -f pdf'    # convert from libreoffice supported for
 # ------------------
 # PIPELINE OPERATORS
 # ------------------
+alias iselect='iselect -kj:KEY_DOWN -kk:KEY_UP'
+alias choose='iselect -ma'
 # alias maplines='xargs -d "\n" -n 1'
 alias maplines='xargs -L1'
 # eg.     ls|dolines printf "`pwd`/$x\n"; done
@@ -760,24 +763,31 @@ alias dofields='while read -r x1 x2 x3 x4 x5 x6 x7 x8 x9; do'
 alias imaplines='xargs -d "\n" -n 1 -p'
 alias filterexec='dolines if [[ -x "$x" ]]; then echo "$x"; fi; done'
 alias locatedirs='cat|xargs locate|uniqdirs'
-alias pipechoose='iselect -ma | xargs'
-alias catchoose='iselect -ma | xargs cat'
 alias dedup='perl -ne '"'"'$H{$_}++ or print'"'"   # remove repeated lines (need not be adjacent)
 alias suniq='sort -u'   # sort and remove repeated lines
 alias tolowercase="tr '[:upper:]' '[:lower:]'"
 alias touppercase="tr '[:lower:]' '[:upper:]'"
 alias tohilitcase="perl -MText::Autoformat -e'undef $/; print autoformat +<>, { case => \"highlight\" }'"
 alias totitlecase="perl -MText::Autoformat -e'undef $/; print autoformat +<>, { case => \"title\" }'"
+# =====XARGS ALIASES=====
+alias xa='xargs '                  # trailing space in alias causes next word to be alias expanded as well
+alias chooseargs='iselect -ma | xargs'
 alias first='head -n1'
 alias last='tail -n1'   # system command last is available as alias lastu
 alias rest='tail -n+2'
 alias xaa='xargs bash -ic'
-alias choosexa='choose | xargs'
 alias xacat='xargs cat'
 alias xaless='xargs less'
 alias xavip='xargs vimpager'
 alias xavi='xargs vipipe'
 alias xakill='xargs kill'
+alias firstcat='head -n1 | xargs cat'
+alias lastcat='tail -n1 | xargs cat'
+alias choosecat='iselect -ma | xargs cat'
+alias firstless='head -n1 | xargs less'
+alias lastless='tail -n1 | xargs less'
+alias chooseless='iselect -ma | xargs less'
+#
 alias recol='pr -t --columns'  # recolumnate single-column data
 alias fromjis='iconv -f SHIFT-JIS -t UTF-8'
 alias tojis='iconv -f UTF-8 -t SHIFT-JIS'
@@ -841,7 +851,6 @@ alias noi=noice
 alias lastu=last    # leave last free for alias
 alias PeaExtractor=/opt/peazip/res/pealauncher
 alias PeaUtils=/opt/peazip/res/pea
-alias xa=xargs
 alias gd=grepdict   # see .sh-functions
 alias ucs=/opt/scripts/unicodesearch    # github.com/jpverkamp/dotfiles/blob/master/bin/uni
 alias u='unicode -max=0'        # search for unicode characters
@@ -876,8 +885,6 @@ alias gremclock='cairo-clock -deops -x 1695 -y 104 -w 200 -h 200 -r 1 -t gremlin
 alias pman='pinfo -m'
 # repeat character, eg.    rep '*' 20
 alias rep="jot -s '' -b"
-alias iselect='iselect -kj:KEY_DOWN -kk:KEY_UP'
-alias choose='iselect -ma'
 alias say='spd-say -r -40 -t male2'
 alias gemu='gem update --system'
 alias pandoc-md='pandoc -f markdown -t html5 --toc'  # pandoc-md infile.md > outfile.html
