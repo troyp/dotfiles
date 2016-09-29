@@ -1,5 +1,4 @@
-"set guifont=Courier\ New\ 14
-set guifont=Droid\ Sans\ Mono\ Dotted\ 14
+set lines=64 columns=81
 autocmd BufEnter *.c($|pp$) set guifont=Courier\ New\ 14
 set guioptions-=T
 set winaltkeys=no
