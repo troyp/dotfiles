@@ -5,7 +5,7 @@
 "----------
 " Pathogen.
 "----------
-execute pathogen#infect()
+execute pathogen#infect('bundle/{}')
 Helptags
 
 " ----------
@@ -19,11 +19,11 @@ call plug#end()
 " NeoBundle.
 " ----------
 if has('vim_starting')
-  if &compatible
-    set nocompatible               " Be iMproved
-  endif
-" Required:
-set runtimepath+=~/.vim/bundle/neobundle.vim/
+    if &compatible
+        set nocompatible               " Be iMproved
+    endif
+    " Required:
+    set runtimepath+=~/.vim/bundle/neobundle.vim/
 endif
 " Required:
 call neobundle#begin(expand('~/.vim/bundle/'))
@@ -96,8 +96,7 @@ set wildchar=<Tab> wildmenu wildmode=full
 
 if has("gui_running")
     set guifont="Deja Vu Sans Mono 10"
-fi
-
+endif
 
 "------------------------------------------------------
 
@@ -305,14 +304,14 @@ noremap <C-_> :normal u<cr>
 "
 " http://vim.wikia.com/wiki/Smart_home
 function! SmartHome()
-  let first_nonblank = match(getline('.'), '\S') + 1
-  if first_nonblank == 0
-    return col('.') + 1 >= col('$') ? '0' : '^'
-  endif
-  if col('.') == first_nonblank
-    return '0'  " if at first nonblank, go to start line
-  endif
-  return &wrap && wincol() > 1 ? 'g^' : '^'
+    let first_nonblank = match(getline('.'), '\S') + 1
+    if first_nonblank == 0
+        return col('.') + 1 >= col('$') ? '0' : '^'
+    endif
+    if col('.') == first_nonblank
+        return '0'  " if at first nonblank, go to start line
+    endif
+    return &wrap && wincol() > 1 ? 'g^' : '^'
 endfunction
 "
 noremap <expr> <silent> <C-a> SmartHome()
@@ -350,8 +349,8 @@ command! Ishow verbose imap
 
 "view changes in buffer
 if !exists(":DiffOrig")
-  command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
-               \ | wincmd p | diffthis
+    command DiffOrig vert new | set bt=nofile | r # | 0d_ | diffthis
+                \ | wincmd p | diffthis
 endif
 
 "------------------------------------------------------
@@ -373,3 +372,4 @@ execute "set rtp+=" . g:opamshare . "/merlin/vim"
 command! Opamupdatedocs :execute "helptags " . substitute(system('opam config var share'),'\n$','','''') .  "/merlin/vim/doc"
 " ocp-indent
 set rtp^="/home/troy/.opam/system/share/ocp-indent/vim"
+
