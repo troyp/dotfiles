@@ -32,14 +32,16 @@ function append-to-path-var {
 }
 
 pathappend() {
-    if [ -d "$1" ] && [[ ":$PATH:" != *":$1:"* ]]; then
-        PATH="$PATH:$1"
+    dir="${1%/}"
+    if [[ -d "$dir" ]] && ! [[ "$PATH:" =~ "^$dir:" ]]; then
+        PATH="$PATH:$dir"
     fi
 }
 pathprepend() {
     # prepend directory if not already at start of PATH
-    if [ -d "$1" ] && ! [[ "$PATH:" =~ "^$1:" ]]; then
-        PATH="$1:$PATH"
+    dir="${1%/}"
+    if [[ -d "$dir" ]] && ! [[ "$PATH:" =~ "^$dir:" ]]; then
+        PATH="$dir:$PATH"
     fi
 }
 
@@ -86,6 +88,7 @@ paths=(
     $HOME/.nimble/bin
     $HOME/.cask/bin
     $HOME/.lein/bin
+    $HOME/.npm-global/bin
 	  $HOME/gowork/bin
     $HOME/code/working
     $HOME/code/scripts
@@ -93,59 +96,61 @@ paths=(
     $ANDROID_HOME/platform-tools
     ${SCALA_HOME:-/opt/scala}/bin
 	  $JHOME/bin
+    /usr/local/texlive/2014/bin/x86_64-linux
+    /var/lib/gems/1.8/bin
     # /opt/mozart/platform/unknown-unknown
-    # /opt/node/bin
     /opt
     /opt/bin
     /opt/scripts
     /opt/firefox
-    /opt/calibre
-    /opt/xcape
-    /opt/LightTable
-    /opt/sbt/bin
-    /opt/mozart2/bin
-    /opt/racket/bin
-    /opt/leiningen
-    /opt/eclipse
-    /opt/smlnj/bin
-    /var/lib/gems/1.8/bin
-    /opt/google_appengine/
-    /opt/xulrunner
-    /opt/Amber/bin
-    /opt/redline
-    /opt/epub2pdf
-    /opt/nim/bin
-    /opt/gcolor3/src
-    /opt/utorrent-server-v3_0
-    /opt/clean/bin
-    /opt/rstudio/bin
-    /opt/processing
-    /opt/tor-browser
-    /opt/helpdeco
-    /opt/lfe-master/bin
-    /usr/local/texlive/2014/bin/x86_64-linux
-    /opt/pdf-diff
-    /opt/pdfdir
-    /opt/sejda-console/bin
-    /opt/jpdfbookmarks
-    /opt/info2html
-    /opt/SublimeText2
-    /opt/peazip
-    /opt/peazip/res
-    /opt/lilyterm/bin
-    /opt/phantomjs-2.0.0/bin
 	  /opt/icon/bin
 	  /opt/pdfsandich
+    /opt/Amber/bin
+    /opt/LightTable
+    /opt/SublimeText2
     /opt/activator-dist/bin
-    /opt/zed
-    /opt/jade
     /opt/apache-maven-3.3.3/bin
-    /opt/google-code-support-tools/wiki_to_md
+    /opt/calibre
+    /opt/clean/bin
+    /opt/eclipse
+    /opt/epub2pdf
+    /opt/gcolor3/src
     /opt/google-code-support-tools/googlecode-issues-exporter
+    /opt/google-code-support-tools/wiki_to_md
+    /opt/google_appengine/
+    /opt/helpdeco
     /opt/hub/bin
     /opt/i2p
+    /opt/info2html
+    /opt/jade
+    /opt/jpdfbookmarks
+    /opt/leiningen
+    /opt/lfe-master/bin
+    /opt/lilyterm/bin
+    /opt/mozart2/bin
+    /opt/nim/bin
+    # /opt/node/bin
+    /opt/pdf-diff
+    /opt/pdfdir
+    /opt/peazip
+    /opt/peazip/res
+    /opt/phantomjs-2.0.0/bin
+    /opt/processing
+    /opt/racket/bin
+    /opt/redline
+    /opt/rstudio/bin
+    /opt/sbt/bin
+    /opt/sejda-console/bin
+    /opt/smlnj/bin
+    /opt/tor-browser
+    /opt/utorrent-server-v3_0
+    /opt/xcape
+    /opt/xulrunner
+    /opt/zed
 )
-for i in "${paths[@]}"; do pathappend "$i" ; done
+for i in "${paths[@]}"; do
+    pathappend "$i"
+done
 
 infopaths=(
     /usr/local/texlive/2014/texmf-dist/doc/info
@@ -225,8 +230,8 @@ pathappend $GRADLE_HOME/bin
 # *      *
 # ********
 
-# Load the environment variables
-. /home/troy/.opam/opam-init/variables.sh > /dev/null 2> /dev/null || true
+# # Load the environment variables
+# . /home/troy/.opam/opam-init/variables.sh > /dev/null 2> /dev/null || true
 
 # -------------------------------------------------------------------------------
 
@@ -237,3 +242,6 @@ pathappend $GRADLE_HOME/bin
 # # **********
 
 # source ~/.nvm/nvm.sh
+
+# NPM: set global install directory (actually only needs to be set once)
+command -v npm >/dev/null 2>&1 && npm config set prefix '~/.npm-global'
