@@ -1,4 +1,4 @@
-set lines=64 columns=81
+set lines=53 columns=81
 autocmd BufEnter *.c($|pp$) set guifont=Courier\ New\ 14
 set guioptions-=T
 set winaltkeys=no
