@@ -581,6 +581,9 @@ alias lsof-noroot='lsof -u^root'
 alias print-display-manager='cat /etc/X11/default-display-manager | xargs basename'
 alias restartx="sudo restart `basename $(cat /etc/X11/default-display-manager)`"
 # alias restartx="sudo systemctl restart `basename $(cat /etc/X11/default-display-manager)`.service"    # for systemd
+alias has-virt-support="egrep -q 'vmx|svm' /proc/cpuinfo"
+alias has-64bit-cpu='egrep -q lm /proc/cpuinfo'
+alias has-64bit-kernel='[[ `uname -m` =~ 64 ]]'
 
 
 # --------------------------------------
