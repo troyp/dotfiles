@@ -421,6 +421,7 @@ alias typp='type -p'
 alias \?='echo'
 alias \?\?='help'
 alias lssetopt='set -o | grep "on$"'
+alias testprogexists='>/dev/null 2>&1 command -v'
 
 
 # ---------------
@@ -632,6 +633,7 @@ alias stacki='stack install'
 alias cabali='cabal install'
 alias opami='opam install'
 alias gemi='gem install'
+alias npmi='npm install -g'
 # -------------------------------------------------------------------------------
 # Python
 alias pynote='ipython notebook --pylab=inline'
