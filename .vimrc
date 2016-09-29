@@ -94,6 +94,11 @@ set rtp+=~/.fzf              " add fzf to runtimepath
 
 set wildchar=<Tab> wildmenu wildmode=full
 
+if has("gui_running")
+    set guifont="Deja Vu Sans Mono 10"
+fi
+
+
 "------------------------------------------------------
 
 "------------
@@ -145,6 +150,10 @@ set novisualbell             " No blinking.
 set noerrorbells             " No noise.
 
 map <C-tab> <C-w>w
+
+" Tabs
+tab sball
+set switchbuf=usetab,newtab
 
 "------------------------------------------------------
 
@@ -258,6 +267,17 @@ noremap <C-x>0 :hide<cr>
 noremap <C-x>1 :only<cr>
 noremap <C-x>2 :split<cr>
 noremap <C-x>3 :vsplit<cr>
+noremap <C-tab> <C-w>w
+
+" Tabs
+noremap <A-[> gT
+noremap <A-]> gt
+noremap <A-1> :tabn 1<cr>
+noremap <A-2> :tabn 2<cr>
+noremap <A-3> :tabn 3<cr>
+noremap <A-4> :tabn 4<cr>
+noremap <A-5> :tabn 5<cr>
+noremap <A-6> :tabn 6<cr>
 
 " Close buffer but not window
 noremap <C-x>k :bp<bar>sp<bar>bn<bar>bd<space>
