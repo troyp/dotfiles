@@ -151,3 +151,6 @@ promptinit
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+# OPAM configuration
+. /home/troy/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
