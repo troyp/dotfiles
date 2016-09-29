@@ -35,6 +35,7 @@ alias aptgetkey='sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys' 
 alias dplist='dpkg -l'   # list package names matching pattern, eg. dplsit 'dbus*'
 alias dpfiles='dpkg -L'  # list files installed by a package
 alias dpfind='dpkg -S'   # find package, location, man file location of a command
+alias dp-remove-broken-package='dpkg --remove --force-remove-reinstreq'
 alias aptsh='sudo aptsh'
 alias sdebi='sudo dpkg -i'
 alias sdebr='sudo dpkg -r'
@@ -199,29 +200,29 @@ alias mmv-symlink='mmv -a'    # symlink source to target
 # FILE SEARCH/INFO ALIASES.
 # -------------------------
 alias gr='pcregrep -in --color=auto'    # color, line no.s, case-insensitive, PCRE
-alias grep= "grep --color=auto"
-alias grepi="grep -i --color=auto"      # color, case-insensitive grep
-alias greps="grep -F"                   # fixed string grep
-alias grepis="grep -F"                  # fixed string grep (case-insensitive)
-alias grepc="grep --color=always"       # color grep for pipes
-alias grepic="grep -i --color=always"   # color grep for pipes (case-insensitive)
+alias grep='grep --color=auto'
+alias grepi='grep -i --color=auto'      # color, case-insensitive grep
+alias greps='grep -F'                   # fixed string grep
+alias grepis='grep -F'                  # fixed string grep (case-insensitive)
+alias grepc='grep --color=always'       # color grep for pipes
+alias grepic='grep -i --color=always'   # color grep for pipes (case-insensitive)
 alias grepn='grep -Hn --color=always'   # grep with filename and line no.
 alias grepin='grep -iHn --color=always' # grep with filename and line no. (case-insensitive)
 alias grepr='grep -iHnr --color=always' # recursive grep with filename and line no. (case-insens)
 alias grepsys='sudo grep -r -D skip'    # recursive grep with sudo, skip device files
 # alias grepp='grep -P'                   # grep with perl syntax
 alias grepp=pcregrep                         # PCRE-based grep variant
-alias greppi="pcregrep -i --color=auto"      # color, case-insensitive pcregrep
-alias grepps="pcregrep -F"                   # fixed string pcregrep
-alias greppis="pcregrep -F"                  # fixed string pcregrep (case-insensitive)
-alias greppc="pcregrep --color=always"       # color pcregrep for pipes
-alias greppic="pcregrep -i --color=always"   # color pcregrep for pipes (case-insensitive)
+alias greppi='pcregrep -i --color=auto'      # color, case-insensitive pcregrep
+alias grepps='pcregrep -F'                   # fixed string pcregrep
+alias greppis='pcregrep -F'                  # fixed string pcregrep (case-insensitive)
+alias greppc='pcregrep --color=always'       # color pcregrep for pipes
+alias greppic='pcregrep -i --color=always'   # color pcregrep for pipes (case-insensitive)
 alias greppn='pcregrep -Hn --color=always'   # pcregrep with filename and line no.
 alias greppin='pcregrep -iHn --color=always' # pcregrep with filename and line no. (case-insensitive)
 alias greppr='pcregrep -iHnr --color=always' # recursive pcregrep with filename and line no. (case-insens)
 alias greppsys='sudo pcregrep -r -D skip'    # recursive pcregrep with sudo, skip device files
-alias greppm="pcregrep -M --color=auto"      # color multiline pcregrep
-alias greppmi="pcregrep -iM --color=auto"    # color, case-insensitive multiline pcregrep
+alias greppm='pcregrep -M --color=auto'      # color multiline pcregrep
+alias greppmi='pcregrep -iM --color=auto'    # color, case-insensitive multiline pcregrep
 alias sudb='sudo updatedb'
 alias locater='locate --regex'   # locate extended regex
 alias locatea='locate -A'        # locate files matching ALL patterns
@@ -261,6 +262,8 @@ alias cppath='cp --parents'   # copy a relative file-path into a dir
 alias symlink='ln -s'
 alias sln='ln -s'
 alias msymlink='mmv -s'  # mmv multiple symlink using wildcards, eg.  msymlink *.pdf #1_link.pdf
+alias ln-in-dir-from-file='ln -t'
+alias ln-from-file-to-file='ln -T'
 
 # --- other ---
 alias irm='rm -i'  # interactive rm: prompt before removal
@@ -621,6 +624,14 @@ alias pkgs_cabal='ls ~/.cabal/packages/hackage.haskell.org/'
 alias pkgs_gem='gem list'
 alias pkgs_npm='ls ~/.npm'
 alias pkgs_pip='pip list'
+# Package Managers: install
+alias pipi='pip install'
+alias pipi2='pip2 install'
+alias pipi3='pip3 install'
+alias stacki='stack install'
+alias cabali='cabal install'
+alias opami='opam install'
+alias gemi='gem install'
 # -------------------------------------------------------------------------------
 # Python
 alias pynote='ipython notebook --pylab=inline'
