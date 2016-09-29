@@ -278,9 +278,15 @@ noremap <A-4> :tabn 4<cr>
 noremap <A-5> :tabn 5<cr>
 noremap <A-6> :tabn 6<cr>
 
+" Buffers
+nnoremap <Leader>bb :ls<CR>:b<Space>
+nnoremap <Leader><tab> :bNext<cr>
+" :bprevious is doing the same as :bNext??
+"nnoremap <Leader><S-Tab> :bprevious<cr>
+
 " Close buffer but not window
 noremap <C-x>k :bp<bar>sp<bar>bn<bar>bd<space>
-noremap <leader>bd :bp<bar>sp<bar>bn<bar>bd<CR>
+nnoremap <leader>bd :bp<bar>sp<bar>bn<bar>bd<CR>
 
 " Save buffers and quit
 noremap <C-x><C-c> :wq<cr>
