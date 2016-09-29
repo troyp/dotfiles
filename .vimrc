@@ -42,6 +42,24 @@ filetype plugin indent on
 NeoBundleCheck
 
 "------------------------------------------------------
+" -----
+" Dein.
+" -----
+set runtimepath+=~/.vim/dein/repos/github.com/Shougo/dein.vim/
+call dein#begin(expand('~/.vim/dein')) " plugins' root path
+call dein#add('Shougo/dein.vim')
+
+" fzf
+" ./install --all so the interactive script doesn't block
+" you can check the other command line options  in the install file
+call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 }) 
+call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
+
+" and a lot more plugins.....
+
+call dein#end()
+
+"------------------------------------------------------
 
 "----------------
 " Basic Settings.
@@ -323,3 +341,15 @@ endif
 " =========
 " allows use of vimpager from vim with :Page command or <leader>v binding
 set rtp^=/opt/vimpager
+
+"------------------------------------------------------
+
+" -----------
+" Ocaml/OPAM.
+" -----------
+" merlin
+let g:opamshare = substitute(system('opam config var share'),'\n$','','''')
+execute "set rtp+=" . g:opamshare . "/merlin/vim"
+command! Opamupdatedocs :execute "helptags " . substitute(system('opam config var share'),'\n$','','''') .  "/merlin/vim/doc"
+" ocp-indent
+set rtp^="/home/troy/.opam/system/share/ocp-indent/vim"
