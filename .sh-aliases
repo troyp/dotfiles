@@ -482,6 +482,15 @@ alias cless="LESSOPEN='|~/.lessfilter %s' less -R"
 alias lesr='less -R'   # raw ANSI color escapes
 alias lesrr='less -r'  # raw control chars
 
+# =============
+# MOZC ALIASES.
+# =============
+alias mozc-config='/usr/lib/mozc/mozc_tool --mode=config_dialog'
+alias mozc-dictionary='/usr/lib/mozc/mozc_tool --mode=dictionary_tool'
+alias mozc-word-register='/usr/lib/mozc/mozc_tool --mode=word_register_dialog'
+alias mozc-handwriting='/usr/lib/mozc/mozc_tool --mode=hand_writing'
+alias mozc-character-palette='/usr/lib/mozc/mozc_tool --mode=character_palette'
+
 #-----------------
 # ARCHIVE ALIASES.
 #-----------------
