@@ -28,7 +28,17 @@ fi
 # *      *
 # ********
 # ---run ibus-daemon---
-pgrep ibus-daemon || IBUS_ENABLE_SYNC_MODE=1 ibus-daemon -xrd
+# pgrep ibus-daemon || IBUS_ENABLE_SYNC_MODE=1 ibus-daemon -xrd
+
+# *********
+# *       *
+# * FCITX *
+# *       *
+# *********
+export GTK_IM_MODULE=fcitx
+export QT_IM_MODULE=fcitx
+export XMODIFIERS=@im=fcitx
+
 
 # *********
 # *       *
