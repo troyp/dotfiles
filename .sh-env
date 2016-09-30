@@ -120,6 +120,7 @@ paths=(
     /opt/google_appengine/
     /opt/helpdeco
     /opt/hub/bin
+    /opt/icdiff
     /opt/i2p
     /opt/info2html
     /opt/jade
