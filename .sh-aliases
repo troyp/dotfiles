@@ -22,10 +22,12 @@
 # DEBIAN-SPECIFIC ALIASES.
 #-------------------------
 alias sapt='sudo apt-get'
+alias apd=aptitude
 alias saptu='sudo apt-get update'
 alias sapti='sudo apt-get install'
 alias aptc='apt-cache'
 alias aptf='apt-file'
+alias apds='aptitude search'    # find matching packages
 alias aptcs='apt-cache search'  # find matching packages
 alias aptff='apt-file find'  # (find==search) find packages containing matching files
 alias aptcp='apt-cache policy'
@@ -36,6 +38,7 @@ alias dplist='dpkg -l'   # list package names matching pattern, eg. dplsit 'dbus
 alias dpfiles='dpkg -L'  # list files installed by a package
 alias dpfind='dpkg -S'   # find package, location, man file location of a command
 alias dp-remove-broken-package='dpkg --remove --force-remove-reinstreq'
+alias dpregex='ara'
 alias aptsh='sudo aptsh'
 alias sdebi='sudo dpkg -i'
 alias sdebr='sudo dpkg -r'
@@ -330,6 +333,7 @@ alias dl-noice='git clone http://git.2f30.org/noice/'
 alias install-noice='dl-noice; cd noice; make; cp noice /opt/bin/'
 # https://calibre-ebook.com/download_linux
 alias install-calibre='sudo -v && wget -nv -O- https://raw.githubusercontent.com/kovidgoyal/calibre/master/setup/linux-installer.py | sudo python -c "import sys; main=lambda x:sys.stderr.write(\"Download failed\n\"); exec(sys.stdin.read()); main(\"/opt\")"'
+alias install-youtube-dl='sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl;sudo chmod a+rx /usr/local/bin/youtube-dl'
 
 
 # ----------------
@@ -422,6 +426,7 @@ alias \?='echo'
 alias \?\?='help'
 alias lssetopt='set -o | grep "on$"'
 alias testprogexists='>/dev/null 2>&1 command -v'
+alias g='dolphin `pwd`'    # note: oh-my-zsh git plugin will overwrite this with g=git
 
 
 # ---------------
@@ -885,6 +890,7 @@ alias ucd='unicode -max=0 -d'   # decimal search for unicode characters
 alias ucc='unicode -max=0 -s'   # describe unicode characters in string
 alias nconv='numconv -f all -t Western_Lower'  # convert number to decimal
 alias googlecodewiki2mediawiki=gw2mw.sh  # convert google code wiki --> mediawiki
+alias thesaurus=aiksaurus
 
 #---------------------------------
 # APPLICATION DEFAULTS & VARIANTS.
