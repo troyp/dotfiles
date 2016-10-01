@@ -101,6 +101,7 @@ alias llt='ls -lt'   # detailed list sort by last modified
 alias llx='ls -lX'   # detailed list sort by extension
 alias lls='ls -lS'   # detailed list sort by file size
 alias la='ls -Al'    # detailed list dotfiles
+alias lac='ls -Al --color=always'  # detailed list dotfiles, colored output to pipe
 alias lacc='ls -Al --time=access'    # detailed list access-time dotfiles
 alias lr='ls -lR'    # detailed list recursive
 alias lc='ls -Cp'    # filenames only, append / to directories
@@ -335,6 +336,8 @@ alias install-noice='dl-noice; cd noice; make; cp noice /opt/bin/'
 # https://calibre-ebook.com/download_linux
 alias install-calibre='sudo -v && wget -nv -O- https://raw.githubusercontent.com/kovidgoyal/calibre/master/setup/linux-installer.py | sudo python -c "import sys; main=lambda x:sys.stderr.write(\"Download failed\n\"); exec(sys.stdin.read()); main(\"/opt\")"'
 alias install-youtube-dl='sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl;sudo chmod a+rx /usr/local/bin/youtube-dl'
+# alias install-vimpager='(cd /opt && if [[ -d vimpager ]]; then rm -rI vimpager && git clone git://github.com/rkitover/vimpager && cd vimpager && sudo make install)'
+alias install-vimpager-deb='(cd /opt && if [[ -d vimpager ]]; then rm -rI vimpager && git clone git://github.com/rkitover/vimpager && cd vimpager && sudo make install-deb)'
 # ===== other download aliases =====
 alias ytdl='youtube-dl -citk'
 
@@ -758,6 +761,7 @@ alias pdf-box-pages='pdfinfo -box'    # give corners of pages
 alias pdfcrop-briss='java -jar /opt/jar/briss-0.9/briss-0.9.jar'
 alias pdfcrop-quench=pdf_quench
 alias briss='java -jar /opt/jar/briss-0.9/briss-0.9.jar'
+alias pdftotextl='pdftotext -layout'
 
 # -------------
 # IMAGE ALIASES
