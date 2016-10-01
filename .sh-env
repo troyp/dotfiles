@@ -204,14 +204,14 @@ PYTHONPATH=$PYTHONPATH:/usr/share/sip
 #PYTHONPATH=$PYTHONPATH:/usr/share/pyshared:$HOME/code/python
 #PYTHONPATH=$PYTHONPATH:/usr/share/pyshared
 
-# ***********
-# *         *
-# * CLOJURE *
-# *         *
-# ***********
-CLOJURE_EXT=~/.clojure
-pathappend "/opt/clojure-contrib/launchers/bash"
-alias clj=clj-env-dir
+# # ***********
+# # *         *
+# # * CLOJURE *
+# # *         *
+# # ***********
+# CLOJURE_EXT=~/.clojure
+# pathappend "/opt/clojure-contrib/launchers/bash"
+# alias clj=clj-env-dir
 
 # ********
 # *      *
