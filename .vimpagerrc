@@ -3,7 +3,7 @@ let vimpager_disable_x11 = 1
 
 inoremap <C-d> <Esc>
 
-colorscheme desert
+colorscheme shine
 
 set ruler                    " Ruler on
 set showcmd                  " show (partial) commands in last line
