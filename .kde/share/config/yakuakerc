@@ -1,0 +1,26 @@
+[$Version]
+update_info=yakuake.upd:2.9.9-startupnotification
+
+[Desktop Entry]
+DefaultProfile=Shell.profile
+
+[Shortcuts]
+new-session-two-horizontal=Ctrl+W, V
+new-session-two-vertical=Ctrl+W, H
+next-session=Shift+Right; Ctrl+Tab
+next-terminal=Ctrl+Shift+Down; Alt+]
+previous-session=Shift+Left; Ctrl+Shift+Tab
+previous-terminal=Ctrl+Shift+Up; Alt+[
+split-left-right=Ctrl+(; Ctrl+X, 3
+split-top-bottom=Ctrl+); Ctrl+X, 2
+switch-to-session-1=Alt+1
+switch-to-session-2=Alt+2
+switch-to-session-3=Alt+3
+switch-to-session-4=Alt+4
+switch-to-session-5=Alt+5
+switch-to-session-6=Alt+6
+
+[Window]
+Height=40
+KeepOpen=true
+Width=100
