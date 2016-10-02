@@ -63,6 +63,8 @@ alias kderepl='qdbus org.kde.plasma-desktop /MainApplication showInteractiveKWin
 alias kde-view-places-file='/home/troy/.local/share/user-places.xbel'
 alias kde-view-bookmarks-file='view /home/troy/.kde/share/apps/kfile/bookmarks.xml'
 alias plasmarestart4='kbuildsycoca4 && kquitapp plasma-desktop && kstart plasma-desktop'
+alias kfconf=kf5-config
+alias kfconflist='kf5-config --types'
 
 #---------------------
 # CD & MKDIR ALIASES.
