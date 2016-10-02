@@ -70,7 +70,7 @@ JHOME=/opt/j64-804
 KDE_PLACES_FILE='/home/troy/.local/share/user-places.xbel'
 KDE_BOOKMARKS_FILE='/home/troy/.kde/share/apps/kfile/bookmarks.xml'
 kde4_system_config_dir='/usr/share/kde4'
-kde4_local_config_dir='~/.kde4/share'
+kde4_local_config_dirs='~/.kde4/share:~/.kde/share:~/.local/share'
 
 # ------
 # PATHS.
