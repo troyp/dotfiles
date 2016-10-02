@@ -48,7 +48,8 @@ pathprepend() {
 # ---------
 # LOCATIONS
 # ---------
-
+# all-caps locations used for settings
+# lowercase locations only used as documentation
 SH_ALIAS_FILE=$HOME/.sh-aliases
 SH_FUNCTION_FILE=$HOME/.sh-functions
 ZSH_ALIAS_FILE=$HOME/.zsh-aliases
@@ -68,6 +69,8 @@ GOPATH=$HOME/gowork
 JHOME=/opt/j64-804
 KDE_PLACES_FILE='/home/troy/.local/share/user-places.xbel'
 KDE_BOOKMARKS_FILE='/home/troy/.kde/share/apps/kfile/bookmarks.xml'
+kde4_system_config_dir='/usr/share/kde4'
+kde4_local_config_dir='~/.kde4/share'
 
 # ------
 # PATHS.
