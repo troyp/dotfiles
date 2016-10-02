@@ -7,6 +7,12 @@
 # *           *
 # *************
 
+khelp () {khelpcenter "help:/$1"}
+-h () {eval "$1 --help"}
+pe () { $( echo "printenv ${1^^}" ); }
+manh () {firefox -P default "localhost//cgi-bin/man/man2html?query=$1"}
+grepdict () {grep $1 /usr/share/dict/words}
+
 cnd () {
     mkdir "$@"
     cd "${@: -1}"
@@ -16,8 +22,6 @@ lsd () {
     base=${1%/}
     ls -d "$base"/*/
 }
-
-pe () { $( echo "printenv ${1^^}" ); }
 
 col () {
     awk -- "{print \$$1}";
@@ -42,14 +46,6 @@ history-refresh () {
     # in other shells since the shell started)
     history -c
     history -r
-}
-
-manh () {
-    firefox -P default "localhost//cgi-bin/man/man2html?query=$1"
-}
-
-grepdict () {
-    grep $1 /usr/share/dict/words
 }
 
 alias-function ()
