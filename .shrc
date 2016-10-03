@@ -9,7 +9,6 @@
 
 [[ -f ~/.sh-aliases ]]                      &&  source ~/.sh-aliases;
 [[ -f ~/.sh-functions ]]                    &&  source ~/.sh-functions;
-[[ -f ~/.sh-functions-track-installs.sh ]]  &&  source ~/.sh-functions-track-installs.sh;
 
 # -------------------------------------------------------------------------------
 # ********
