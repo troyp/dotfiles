@@ -340,6 +340,7 @@ alias install-calibre='sudo -v && wget -nv -O- https://raw.githubusercontent.com
 alias install-youtube-dl='sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl;sudo chmod a+rx /usr/local/bin/youtube-dl'
 # alias install-vimpager='(cd /opt && if [[ -d vimpager ]]; then rm -rI vimpager && git clone git://github.com/rkitover/vimpager && cd vimpager && sudo make install)'
 alias install-vimpager-deb='(cd /opt && if [[ -d vimpager ]]; then rm -rI vimpager && git clone git://github.com/rkitover/vimpager && cd vimpager && sudo make install-deb)'
+alias install-qarma='(git clone https://github.com/luebking/qarma.git && cd qarma/qarma-zenity && qmake .. && make && install qarma /opt/bin || return 1)'
 # ===== other download aliases =====
 alias ytdl='youtube-dl -citk'
 
