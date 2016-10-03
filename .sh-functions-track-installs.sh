@@ -51,6 +51,6 @@ raco pkg install "$1" && grep -qF "$1" || echo "$1" >> $HOME/.raco_installs
 
 opami () {
     for name in $@; do
-        opam install "$name" && grep -qF "$1" || echo "$name" >> $HOME/.cpan_installs;
+        opam install "$name" && grep -qF "$1" || echo "$name" >> $HOME/.opam_installs;
     done
 }
