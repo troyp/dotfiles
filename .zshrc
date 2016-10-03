@@ -67,20 +67,16 @@ plugins=(dirhistory)
 #     | LOAD OTHER FILES |
 #     '------------------'
 # startup files
-if [[ -f ~/.shrc ]];           then source ~/.shrc;            fi
+[[ -f ~/.shrc ]] && source ~/.shrc;      # .shrc sources .sh-aliases, .sh-functions
 if [[ -f $ZSH/oh-my-zsh.sh ]]; then
     source $ZSH/oh-my-zsh.sh;
     # reload prompt (since oh-my-zsh.sh doesn't do it properly)
-    if   [[ -e "$ZSH_CUSTOM/$ZSH_THEME.zsh-theme" ]]; then
-        source "$ZSH_CUSTOM/$ZSH_THEME.zsh-theme"
-    elif [[ -e "$ZSH_CUSTOM/themes/$ZSH_THEME.zsh-theme" ]]; then
-        source "$ZSH_CUSTOM/themes/$ZSH_THEME.zsh-theme"
-    fi
+    [[ -e "$ZSH_CUSTOM/$ZSH_THEME.zsh-theme" ]]        && source "$ZSH_CUSTOM/$ZSH_THEME.zsh-theme"
+    [[ -e "$ZSH_CUSTOM/themes/$ZSH_THEME.zsh-theme" ]] && source "$ZSH_CUSTOM/themes/$ZSH_THEME.zsh-theme"
 fi
-# aliases
-if [[ -f ~/.zsh-aliases ]];    then source ~/.zsh-aliases;     fi
-# functions
-if [[ -f ~/.zsh-functions ]];  then source ~/.zsh-functions;   fi
+# ZSH-specific aliases and functions
+[[ -f ~/.zsh-aliases ]]   && source ~/.zsh-aliases;
+[[ -f ~/.zsh-functions ]] && source ~/.zsh-functions;
 
 zsh_URL=https://sourceforge.net/projects/zsh/files/latest/download?source=typ_redirect
 
