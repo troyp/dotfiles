@@ -70,14 +70,11 @@ bind -x '"\C-x\C-m": "xmodmap $HOME/.Xmodmap"'
 # ********************
 
 # common startup files
-if [[ -f ~/.shrc ]]; then . ~/.shrc fi; fi
+if [[ -f ~/.shrc ]]; then . ~/.shrc fi; fi      # .shrc sources .sh-aliases, .sh-functions
 # aliases
-if [[ -f ~/.sh-aliases ]]; then . ~/.sh-aliases; fi
 if [[ -f ~/.bash-aliases ]]; then . ~/.bash-aliases; fi
 # functions
-if [[ -f ~/.sh-functions ]]; then . ~/.sh-functions; fi
 if [[ -f ~/.bash-functions ]]; then . ~/.bash-functions; fi
-if [[ -f ~/.sh-functions-track-installs.sh ]]; then . ~/.sh-functions-track-installs.sh; fi
 # prompt
 if [[ -f ~/.bash-prompt ]]; then . ~/.bash-prompt; fi
 # completion
