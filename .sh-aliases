@@ -893,11 +893,11 @@ alias PeaExtractor=/opt/peazip/res/pealauncher
 alias PeaUtils=/opt/peazip/res/pea
 alias gd=grepdict   # see .sh-functions
 alias ucs=/opt/scripts/unicodesearch    # github.com/jpverkamp/dotfiles/blob/master/bin/uni
-alias u='unicode -max=0'        # search for unicode characters
-alias ucr='unicode -max=0 -r'   # regex search for unicode characters
-alias ucx='unicode -max=0 -x'   # hexadecimal search for unicode characters
-alias ucd='unicode -max=0 -d'   # decimal search for unicode characters
-alias ucc='unicode -max=0 -s'   # describe unicode characters in string
+alias u='unicode --max=0'        # search for unicode characters
+alias ucr='unicode --max=0 -r'   # regex search for unicode characters
+alias ucx='unicode --max=0 -x'   # hexadecimal search for unicode characters
+alias ucd='unicode --max=0 -d'   # decimal search for unicode characters
+alias ucc='unicode --max=0 -s'   # describe unicode characters in string
 alias nconv='numconv -f all -t Western_Lower'  # convert number to decimal
 alias googlecodewiki2mediawiki=gw2mw.sh  # convert google code wiki --> mediawiki
 alias thesaurus=aiksaurus
