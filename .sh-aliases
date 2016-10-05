@@ -50,6 +50,7 @@ alias disable-beep='sudo modprobe -r pcspkr'
 alias list-repos='inxi -r'
 alias alts='sudo update-alternatives --config'
 alias galts=galternatives    # graphical alternatives editor
+alias lsalts='update-alternatives --get-selections | vimpager'
 # filter-in-default-PATH: filters list of paths/programs for those on path (note: will match substrings)
 # TODO: only pass when directory matches exactly
 alias filter-in-default-PATH='grep -E `echo ${ubuntu_default_PATH//:/\|}`'
