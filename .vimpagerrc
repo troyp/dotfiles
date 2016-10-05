@@ -23,6 +23,7 @@ let mapleader = ","
 " Keybindings
 inoremap <C-l> <Del>
 noremap <C-e> $
+noremap <A-;> ,
 inoremap <A-y> <C-e>
 inoremap <C-y> <C-y>
 inoremap <A-w> <C-c>
@@ -45,3 +46,12 @@ noremap <leader>tn :set invnumber<cr>
 
 noremap <C-_> :normal u<cr>
 
+" *****************
+" *               *
+" * VIMPAGER-ONLY *
+" *               *
+" *****************
+"
+noremap q :quit<ex>
+noremap <f3> q
+noremap <f5> :Page<cr>
