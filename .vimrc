@@ -235,6 +235,7 @@ let g:neocomplete#enable_at_startup = 1
 
 inoremap <C-l> <Del>
 noremap <C-e> $
+noremap <A-;> ,
 inoremap <A-y> <C-e>
 " C-y and C-S-Y bindings override each other...?
 " inoremap <C-S-Y> <C-e>
