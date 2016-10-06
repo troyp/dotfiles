@@ -2,7 +2,7 @@
 [[ ! -z $DEBUG  ]] && echo "sourcing .sh-aliases"
 
 # load private aliases
-[ -e ~/.sh-aliases-private ] && source ~/.sh-aliases-private
+[[ -e ~/.sh-aliases-private ]] && source ~/.sh-aliases-private
 
 #-------------
 # ALIAS NOTES.
@@ -947,6 +947,10 @@ alias thumbsdb='vinetto -o ./.thumbnails ./?humbs.db'
 alias kanjitomo='java -Xmx1000m -jar /opt/KanjiTomo/KanjiTomo.jar -run'
 alias subtitledl='subliminal download -l en'    # dl subs matching a video file - requires pip install subliminal
 alias surft='surf -t'
+alias shoot='shutter -s -e'    # screenshot rectangular selection and exit
+alias shootwin='shutter -w -e'    # screenshot window and exit
+alias shootmenu='shutter -m -e'    # screenshot menu and exit
+alias shootagain='shutter -r -e'   # repeat last screenshot - not working?
 
 
 # -------
