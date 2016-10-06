@@ -110,9 +110,10 @@ alias lr='ls -lR'    # detailed list recursive
 alias lc='ls -Cp'    # filenames only, append / to directories
 alias lsdirs='ls -d -- */'    # list subdirectories of current dir
 alias lsvdirs='ls -p | command grep -o ^.*/$ | xargs ls -d --color=auto'  # visible only
-alias lldirs='ls -lp | GREP_OPTIONS="" grep ".*/$"'       # list details of directories only
-alias lsfiles='ls -p | GREP_OPTIONS="" grep -v ".*/$"'    # list details of files only
-alias llfiles='ls -lp | GREP_OPTIONS="" grep -v ".*/$"'   # list details of files only
+alias lldirs='ls -lp | GREP_OPTIONS="" grep -P "(\S ?)+/$"'       # list details of directories only
+alias lldirsl='ls -lp | GREP_OPTIONS="" grep -P "(\S ?)+/$|(\S ?)+ (?=-> (\S ?)+$)"'  # list details: dirs/links
+alias lsfiles='ls -p | GREP_OPTIONS="" grep -v "/$"'    # list details of files only (inc. links)
+alias llfiles='ls -lp | GREP_OPTIONS="" grep -v "/$"'   # list details of files only (inc. links)
 alias llfilesbysize='llfiles | sort -k 5nr'    # list files with details, from largest down
 
 alias lsod='LC_COLLATE=C ls'      # sort dotfiles, then UC, then LC
