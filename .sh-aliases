@@ -342,6 +342,7 @@ alias install-youtube-dl='sudo curl -L https://yt-dl.org/downloads/latest/youtub
 # alias install-vimpager='(cd /opt && if [[ -d vimpager ]]; then rm -rI vimpager && git clone git://github.com/rkitover/vimpager && cd vimpager && sudo make install)'
 alias install-vimpager-deb='(cd /opt && if [[ -d vimpager ]]; then rm -rI vimpager && git clone git://github.com/rkitover/vimpager && cd vimpager && sudo make install-deb)'
 alias install-qarma='(git clone https://github.com/luebking/qarma.git && cd qarma/qarma-zenity && qmake .. && make && install qarma /opt/bin || return 1)'
+alias install-perlbrew='\curl -L https://install.perlbrew.pl | bash'
 # ===== other download aliases =====
 alias ytdl='youtube-dl -citk'
 
@@ -945,6 +946,7 @@ alias ibusd='IBUS_ENABLE_SYNC_MODE=1 ibus-daemon -drx'
 alias thumbsdb='vinetto -o ./.thumbnails ./?humbs.db'
 alias kanjitomo='java -Xmx1000m -jar /opt/KanjiTomo/KanjiTomo.jar -run'
 alias subtitledl='subliminal download -l en'    # dl subs matching a video file - requires pip install subliminal
+alias surft='surf -t'
 
 
 # -------
