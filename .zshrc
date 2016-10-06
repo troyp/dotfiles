@@ -89,6 +89,7 @@ bindkey "^S" history-incremental-pattern-search-forward
 # override oh-my-zsh
 bindkey '\el' down-case-word
 bindkey -s '^x^z' ~/.oh-my-zsh/custom/
+bindkey "^[a" _expand_alias  # Alt-A
 
 # foreground widget: C-z
 fgwidget() { fg }
