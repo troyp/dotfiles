@@ -43,3 +43,14 @@
 export WORKON_HOME=$HOME/.virtualenvs
 export PROJECT_HOME=$HOME/dev
 [[ -f /usr/local/bin/virtualenvwrapper.sh ]] && source /usr/local/bin/virtualenvwrapper.sh
+
+# -------------------------------------------------------------------------------
+# ************
+# *          *
+# * PERLBREW *
+# *          *
+# ************
+
+# These scripts work for both bash and zsh:
+source /opt/perlbrew/etc/basrc
+source /opt/perlbrew/etc/perlbrew-completion.bash
