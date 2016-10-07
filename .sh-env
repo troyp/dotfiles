@@ -134,6 +134,7 @@ paths=(
     /opt/mozart2/bin
     /opt/nim/bin
     # /opt/node/bin
+    /opt/pick
     /opt/pdf-diff
     /opt/pdfdir
     /opt/peazip
