@@ -472,8 +472,8 @@ alias pidtoname='ps -o comm= -p'
 alias eyed=gpick
 alias grabhexcol='grabc 2>/dev/null'
 alias grabrgbcol='grabc 1>/dev/null'
-alias pick='grabc 2>/dev/null | xsel -ib'
-alias pickrgb='grabc 1>/dev/null | xsel -ib'
+alias colpick='grabc 2>/dev/null | xsel -ib; xsel -ob'
+alias colpickrgb='grabc 1>/dev/null | xsel -ib; xsel -ob 1>/dev/null'
 
 #-------------------
 # CUT & PASTE FILES.
