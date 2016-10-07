@@ -183,9 +183,9 @@ let g:airline_powerline_fonts = 1    "for airline
 
 " Don't open on startup
 let g:nerdtree_tabs_open_on_gui_startup=0
-" Open on startup if no files chosen
-autocmd StdinReadPre * let s:std_in=1
-autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
+" " Open on startup if no files chosen
+" autocmd StdinReadPre * let s:std_in=1
+" autocmd VimEnter * if argc() == 0 && !exists("s:std_in") | NERDTree | endif
 " Close Vim if only NerdTree remains
 autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
 " Toggle
