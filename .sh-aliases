@@ -837,6 +837,7 @@ alias translit='iconv -f utf-8 -t ascii//translit'  # transliterate western char
 alias stripcolors='sed -r "s/\x1B\[([0-9];)?([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g"'
 alias tobasenames='xargs basename -a'               # convert paths to basenames
 alias todirnames='xargs realpath | xargs dirname'   # convert paths to dirnames
+alias pickt='pick -t'    # pick subtable (https://github.com/bernardorufino/pick)
 
 # -----------
 # FORMATTING.
