@@ -546,6 +546,7 @@ alias mimelist='cat /usr/share/mime/types'
 alias mimegrep='cat /usr/share/mime/types | grep -i'
 alias mimedefault='xdg-mime default'
 alias update-mime-db-local='update-mime-database ~/.local/share/mime'
+alias font-path="xset q | grep -A1 'Font Path' | tail -n1"
 alias update-fonts='fc-cache -vf ~/.fonts/'
 alias choose-input-method='im-config -c'
 alias lscompose='cat /usr/share/X11/locale/en_US.UTF-8/Compose'                # default compose key combinations
