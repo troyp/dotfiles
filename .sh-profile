@@ -22,11 +22,11 @@ if ! pgrep xcape >/dev/null; then
     xcape -t 300 -e 'Control_L=Escape;Super_R=Menu' &
 fi
 
-# ********
-# *      *
-# * IBUS *
-# *      *
-# ********
+# # ********
+# # *      *
+# # * IBUS *
+# # *      *
+# # ********
 # ---run ibus-daemon---
 # pgrep ibus-daemon || IBUS_ENABLE_SYNC_MODE=1 ibus-daemon -xrd
 
