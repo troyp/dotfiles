@@ -1,6 +1,0 @@
-[Desktop Entry]
-Exec=/opt/scripts/image-app-chooser.sh
-MimeType=image/png;
-Name=image-app-chooser.sh
-NoDisplay=true
-Type=Application

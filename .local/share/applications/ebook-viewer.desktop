@@ -1,8 +1,0 @@
-[Desktop Entry]
-Exec=/opt/calibre/ebook-viewer
-MimeType=application/epub+zip;application/x-mobipocket-ebook;
-Name=ebook-viewer
-Icon=/home/troy/.local/share/icons/Old_Calibre_Logo.png
-NoDisplay=true
-Type=Application
-Categories=Office;Viewer
