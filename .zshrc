@@ -71,8 +71,9 @@ plugins=(dirhistory zsh-syntax-highlighting)
 if [[ -f $ZSH/oh-my-zsh.sh ]]; then
     source $ZSH/oh-my-zsh.sh;
     # reload prompt (since oh-my-zsh.sh doesn't do it properly)
-    [[ -e "$ZSH_CUSTOM/$ZSH_THEME.zsh-theme" ]]        && source "$ZSH_CUSTOM/$ZSH_THEME.zsh-theme"
-    [[ -e "$ZSH_CUSTOM/themes/$ZSH_THEME.zsh-theme" ]] && source "$ZSH_CUSTOM/themes/$ZSH_THEME.zsh-theme"
+    [[ -e "~/.oh-my-zsh/themes/$ZSH_THEME.zsh-theme" ]] && source "~/.oh-my-zsh/themes/$ZSH_THEME.zsh-theme"
+    [[ -e "$ZSH_CUSTOM/$ZSH_THEME.zsh-theme" ]]         && source "$ZSH_CUSTOM/$ZSH_THEME.zsh-theme"
+    [[ -e "$ZSH_CUSTOM/themes/$ZSH_THEME.zsh-theme" ]]  && source "$ZSH_CUSTOM/themes/$ZSH_THEME.zsh-theme"
 fi
 # ZSH-specific aliases and functions
 [[ -f ~/.zsh-aliases ]]   && source ~/.zsh-aliases;
