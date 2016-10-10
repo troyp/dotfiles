@@ -113,15 +113,17 @@ alias lsvdirs='ls -p | command grep -o ^.*/$ | xargs ls -d --color=auto'  # visi
 alias lldirs='ls -lp | GREP_OPTIONS="" grep -P "(\S ?)+/$"'       # list details of directories only
 alias lldirsl='ls -lp | GREP_OPTIONS="" grep -P "(\S ?)+/$|(\S ?)+ (?=-> (\S ?)+$)"'  # list details: dirs/links
 alias lsfiles='ls -p | GREP_OPTIONS="" grep -v "/$"'    # list details of files only (inc. links)
+alias lafiles='ls -Ap | GREP_OPTIONS="" grep -v "/$"'    # list details of files only (inc. links)
 alias llfiles='ls -lp | GREP_OPTIONS="" grep -v "/$"'   # list details of files only (inc. links)
+alias llafiles='ls -Alp | GREP_OPTIONS="" grep -v "/$"'   # list details of files only (inc. links)
 alias llfilesbysize='llfiles | sort -k 5nr'    # list files with details, from largest down
 
 alias lsod='LC_COLLATE=C ls'      # sort dotfiles, then UC, then LC
 alias laod='LC_COLLATE=C ls -la'
 alias lsatimes='for x in *; do stat -c"%n	%x" -- "$x"; done | tabs2cols' # if broken, check tab
 alias sortatimes='for x in *; do stat -c"%x	%n" -- "$x"; done | tabs2cols | sort'
-# alias lsexec='lsfiles | dolines if [[ -x "$x" ]]; then echo "$x"; fi; done'
-alias lsexec='lsfiles | filterexec'
+# alias lsexec='lafiles | dolines if [[ -x "$x" ]]; then echo "$x"; fi; done'
+alias lsexec='lafiles | filterexec'
 alias lsi='du -hsc'    # list total sizes of files and directories
 
 # ------------------
