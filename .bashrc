@@ -86,6 +86,15 @@ if [[ -n "$LOAD_SCRATCH" ]] && [[ -f ~/.bash-scratch ]]; then . ~/.bash-scratch;
 # source .bashmarks-setup.sh after .sh-functions
 if [[ -f ~/.bashmarks-setup.sh ]]; then . ~/.bashmarks-setup.sh; fi
 
+# # PYENV setup functions and variable
+# if [[ -e ~/.pyenv_load_setup_functions.sh ]]; then
+#     source ~/.pyenv_load_setup_functions.sh
+#     pyenv-prepend-to-path
+#     pyenv-virtualenv-enable-autoactivation
+# else
+#     echo "Can't find ~/.pyenv_load_setup_functions.sh"
+# fi
+
 # # ********************
 # # *                  *
 # # * EXPORT FUNCTIONS *
@@ -103,5 +112,3 @@ set +a
 # [[ -f ~/.fzf.bash ]] && source ~/.fzf.bash
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
-
-source ~/.pyenv_shell_setup.sh
