@@ -671,8 +671,8 @@ alias ipylab='ipython --pylab'
 alias py='ipython --pylab'
 alias py3='ipython3 --pylab'
 alias bpy='bpython'
-alias venv-activate='source ./bin/activate'
-alias venv-deactivate=deactivate
+alias virtenv-activate='source ./bin/activate'
+alias virtenv-deactivate=deactivate
 # -------------------------------------------------------------------------------
 # Perl
 alias pl=perl
