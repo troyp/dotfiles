@@ -7,13 +7,13 @@
 # *           *
 # *************
 
-khelp () {khelpcenter "help:/$1"}
--h () {eval "$1 --help"}
+khelp () { khelpcenter "help:/$1"; }
+-h () { eval "$1 --help"; }
 pe () { $( echo "printenv ${1^^}" ); }
-manh () {firefox -P default "localhost//cgi-bin/man/man2html?query=$1"}
-grepdict () {grep $1 /usr/share/dict/words}
-symlink-print() {namei -v "$1" | grep --color -P '(?<=^l).*|$'}
-locatedirs() {locate "$1" | while read -r line; do dirname "`readlink -f "$line"`"; done | uniq}
+manh () { firefox -P default "localhost//cgi-bin/man/man2html?query=$1"; }
+grepdict () { grep $1 /usr/share/dict/words; }
+symlink-print() { namei -v "$1" | grep --color -P '(?<=^l).*|$'; }
+locatedirs() { locate "$1" | while read -r line; do dirname "`readlink -f "$line"`"; done | uniq; }
 
 cnd () {
     mkdir "$@"
