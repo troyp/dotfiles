@@ -75,6 +75,7 @@ xmodmap -e "keycode 115 = End NoSymbol End"
 # ***************
 
 # load .sh-env
-[ -e ~/.sh-env ] && source ~/.sh-env
+[[ -e ~/.sh-env ]] && source ~/.sh-env
 
 set +a
+
