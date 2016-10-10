@@ -201,8 +201,6 @@ VIMPAGER_RC=~/.vimpagerrc
 # * PYTHON *
 # *        *
 # **********
-PYTHONPATH=$PYTHONPATH:/opt/phpsh/lib/python2.7/site-packages
-PYTHONPATH=$PYTHONPATH:/usr/share/sip
 # warning: this can break system python programs - the dirs are
 #          added near the start of the pythonpath
 #PYTHONPATH=$PYTHONPATH:/usr/share/pyshared:$HOME/code/python
