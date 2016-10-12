@@ -158,15 +158,18 @@ for i in "${paths[@]}"; do
 done
 
 infopaths=(
-    /usr/local/texlive/2014/texmf-dist/doc/info
-    $HOME/.linuxbrew/share/info
+    /usr/share/info
+    /usr/local/share/info
     /opt/info
+    /opt/emacs2?/info
+    /usr/local/texlive/201?/texmf-dist/doc/info
+    $HOME/.linuxbrew/share/info
 )
 for i in "${infopaths[@]}"; do append-to-path-var "INFOPATH" "$i" ; done
 
 manpaths=(
     /usr/local/man
-    /usr/local/texlive/2014/texmf-dist/doc/man
+    /usr/local/texlive/201?/texmf-dist/doc/man
     $HOME/.linuxbrew/share/man/
     /opt/man/
 )
