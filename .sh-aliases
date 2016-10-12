@@ -676,15 +676,16 @@ alias py3='ipython3 --pylab'
 alias bpy='bpython'
 alias virtenv-activate='source ./bin/activate'
 alias virtenv-deactivate=deactivate
+alias pyenv-version="pyenv version | awk '{print $1}'"
 # -------------------------------------------------------------------------------
 # Perl
 alias pl=perl
-alias ple='perl -e'       # execute perl code from next argument
-alias pln='perl -ne'      # execute within loop
-alias plnl='perl -nle'    # execute within loop, strip/add newlines
-alias plp='perl -pe'      # execute within loop, with print
-alias plpl='perl -lpe'    # execute within loop, with print, strip/add newlines
-alias pli='perl -ie'      # execute perl code in-place on file(s)
+alias ple='perl -e'        # execute perl code from next argument
+alias pln='perl -ne'       # execute within loop
+alias plnl='perl -nle'     # execute within loop, strip/add newlines
+alias plp='perl -pe'       # execute within loop, with print
+alias plpl='perl -lpe'     # execute within loop, with print, strip/add newlines
+alias pli='perl -ie'       # execute perl code in-place on file(s)
 alias plin='perl -ine'     # execute perl code in-place on file(s), within loop
 alias plip='perl -ipe'     # execute perl code in-place on file(s), with print
 alias plinp='perl -inpe'   # execute perl code in-place on file(s), with print, within loop
