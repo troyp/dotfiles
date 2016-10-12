@@ -157,12 +157,3 @@ export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
 # OPAM configuration
 . /home/troy/.opam/opam-init/init.zsh > /dev/null 2> /dev/null || true
-
-# PYENV setup functions and variable
-if [[ -e ~/.pyenv_load_setup_functions.sh ]]; then
-    source ~/.pyenv_load_setup_functions.sh
-    pyenv-prepend-to-path
-    pyenv-virtualenv-enable-autoactivation
-else
-    echo "Can't find ~/.pyenv_load_setup_functions.sh"
-fi
