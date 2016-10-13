@@ -10,19 +10,32 @@
 # | PYENV |
 # '-------'
 
+# define $PYENV and $PYENV/bin to $PATH
+PYENV_ROOT="$HOME/.pyenv"
+PATH="$PYENV_ROOT/bin:$PATH"
+
 # PYENV setup functions and variable
-if [[ -e ~/.pyenv_load_setup_functions.sh ]]; then
-    source ~/.pyenv_load_setup_functions.sh
-    pyenv-prepend-to-path
+if ( which pyenv >/dev/null ); then
+    eval "$(pyenv init -)"
 else
-    echo "Can't find ~/.pyenv_load_setup_functions.sh"
+    echo "command pyenv not available: install pyenv"
 fi
+
+# ,------------------,
+# | PYENV-VIRTUALENV |
+# '------------------'
+
+pyenv-virtualenv-setup-autoactivation () {
+    if pyenv commands | grep virtualenv-init >/dev/null; then
+        # diable prompt setting: can be removed in future pyenv-virtualenv release
+        PYENV_VIRTUALENV_DISABLE_PROMPT=1
+        # pyenv-virtualenv setup
+        eval "$(pyenv virtualenv-init -)"
+    else
+        echo "pyenv virtualenv-init command not available: install pyenv-virtualenv"
+    fi
+}
+
 # OPTIONAL: pyenv-virtualenv autoactivation of virtualenvs
-if pyenv commands | grep virtualenv-init >/dev/null; then
-    # diable prompt setting: can be removed in future pyenv-virtualenv release
-    PYENV_VIRTUALENV_DISABLE_PROMPT=1
-    # pyenv-virtualenv setup
-    eval "$(pyenv virtualenv-init -)"
-else
-    echo "pyenv virtualenv-init command not available: install pyenv-virtualenv"
-fi
+pyenv_virtualenv_noauto=1    # disable
+[[ -z $pyenv_virtualenv_noauto ]] && pyenv-virtualenv-setup-autoactivation
