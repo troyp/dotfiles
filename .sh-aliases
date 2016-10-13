@@ -354,8 +354,20 @@ alias install-opam='wget https://raw.github.com/ocaml/opam/master/shell/opam_ins
 alias install-hs-stack-1404='sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 575159689BEFB442; echo "deb http://download.fpcomplete.com/ubuntu trusty main"|sudo tee /etc/apt/sources.list.d/fpco.list; sudo apt-get update && sudo apt-get install stack -y'
 alias install-hs-stack-1604='sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 575159689BEFB442; echo "deb http://download.fpcomplete.com/ubuntu xenial main"|sudo tee /etc/apt/sources.list.d/fpco.list; sudo apt-get update && sudo apt-get install stack -y'
 alias nvm-copy-global='nodebindir=`which node`; nodedir=${nodebindir%/bin/node}; chmod -R 755 $nodedir/bin/*; sudo cp -r $nodedir/{bin,lib,share} /usr/local/'
-alias install-nvm='git clone https://github.com/creationix/nvm.git ~/.nvm && cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`; . ~/.nvm/nvm.sh'
-alias nvm-upgrade='cd "$NVM_DIR" && git fetch origin && git checkout `git describe --abbrev=0 --tags`; . $NVM_DIR/nvm.sh'
+install-nvm () {
+    export NVM_DIR="$HOME/.nvm" && (
+        git clone https://github.com/creationix/nvm.git "$NVM_DIR"
+        cd "$NVM_DIR"
+        git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" origin`
+    ) && source "$NVM_DIR/nvm.sh"
+}
+upgrade-nvm () {
+    (
+        cd "$NVM_DIR"
+        git fetch origin
+        git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" origin`
+    ) && source "$NVM_DIR/nvm.sh"
+}
 # ===== other download aliases =====
 alias ytdl='youtube-dl -citk'
 
