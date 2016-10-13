@@ -348,6 +348,14 @@ alias install-qarma='(git clone https://github.com/luebking/qarma.git && cd qarm
 alias install-perlbrew='\curl -L https://install.perlbrew.pl | bash'
 alias oh-my-zsh-install-zsh-syntax-highlighting='git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting; echo "Add to plugins list in .zshrc and re-source."'
 alias install-pyenv='git clone https://github.com/yyuu/pyenv.git ~/.pyenv; git clone https://github.com/yyuu/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv; echo "see github.com/yyuu/pyenv & github.com/yyuu/pyenv-virtualenv"'
+alias install-ocamlbrew='curl -kL https://raw.github.com/hcarty/ocamlbrew/master/ocamlbrew-install | bash'
+alias install-ocamlbrew-track='tail -f /tmp/ocamlbrew.*'
+alias install-opam='wget https://raw.github.com/ocaml/opam/master/shell/opam_installer.sh -O - | sh -s /usr/local/bin'
+alias install-hs-stack-1404='sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 575159689BEFB442; echo "deb http://download.fpcomplete.com/ubuntu trusty main"|sudo tee /etc/apt/sources.list.d/fpco.list; sudo apt-get update && sudo apt-get install stack -y'
+alias install-hs-stack-1604='sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 575159689BEFB442; echo "deb http://download.fpcomplete.com/ubuntu xenial main"|sudo tee /etc/apt/sources.list.d/fpco.list; sudo apt-get update && sudo apt-get install stack -y'
+alias nvm-copy-global='nodebindir=`which node`; nodedir=${nodebindir%/bin/node}; chmod -R 755 $nodedir/bin/*; sudo cp -r $nodedir/{bin,lib,share} /usr/local/'
+alias install-nvm='git clone https://github.com/creationix/nvm.git ~/.nvm && cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`; . ~/.nvm/nvm.sh'
+alias nvm-upgrade='cd "$NVM_DIR" && git fetch origin && git checkout `git describe --abbrev=0 --tags`; . $NVM_DIR/nvm.sh'
 # ===== other download aliases =====
 alias ytdl='youtube-dl -citk'
 
@@ -634,13 +642,8 @@ alias ppcjs='underscore print --outfmt pretty'  # js/json pretty printing & synt
 alias mzscheme='rlwrap /opt/racket/bin/mzscheme'
 alias scheme48='rlwrap scheme48'
 alias sml='rlwrap sml'
-alias ocamlbrew-install='curl -kL https://raw.github.com/hcarty/ocamlbrew/master/ocamlbrew-install | bash'
-alias ocamlbrew-install-track='tail -f /tmp/ocamlbrew.*'
-alias opam-install='wget https://raw.github.com/ocaml/opam/master/shell/opam_installer.sh -O - | sh -s /usr/local/bin'
 alias ocaml='rlwrap ocaml'
 alias sbcl='rlwrap sbcl'
-alias hs-stack-install-1404='sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 575159689BEFB442; echo "deb http://download.fpcomplete.com/ubuntu trusty main"|sudo tee /etc/apt/sources.list.d/fpco.list; sudo apt-get update && sudo apt-get install stack -y'
-alias hs-stack-install-1604='sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 575159689BEFB442; echo "deb http://download.fpcomplete.com/ubuntu xenial main"|sudo tee /etc/apt/sources.list.d/fpco.list; sudo apt-get update && sudo apt-get install stack -y'
 alias viminstall='cd ~/.vim/bundle; git clone'
 alias extract_elisp='find . -name "*.el.gz" | xargs sudo gunzip'
 alias core-on='ulimit -c unlimited'
@@ -720,9 +723,6 @@ alias pkgc='pkg-config --libs'
 alias cpkgc='cmake --find-package -DLANGUAGE=C -DCOMPILER_ID=GNU -DMODE=COMPILE'   # eg. cpkgc -DNAME=LibXml2
 alias pyc="python2 -c 'from math import *; from operator import *; from itertools import *; from functools import *; print "
 alias pipu='sudo -H pip install --upgrade'
-alias nvm-copy-global='nodebindir=`which node`; nodedir=${nodebindir%/bin/node}; chmod -R 755 $nodedir/bin/*; sudo cp -r $nodedir/{bin,lib,share} /usr/local/'
-alias nvm-install='git clone https://github.com/creationix/nvm.git ~/.nvm && cd ~/.nvm && git checkout `git describe --abbrev=0 --tags`; . ~/.nvm/nvm.sh'
-alias nvm-upgrade='cd "$NVM_DIR" && git fetch origin && git checkout `git describe --abbrev=0 --tags`; . $NVM_DIR/nvm.sh'
 alias iconi='/opt/icon/bin/icon /opt/icon/pl/progs/qei.icn'  # REPL for Icon programming language
 
 # --------------
