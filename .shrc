@@ -54,3 +54,13 @@ export PROJECT_HOME=$HOME/dev
 # These scripts work for both bash and zsh:
 source /opt/perlbrew/etc/bashrc
 source /opt/perlbrew/etc/perlbrew-completion.bash
+
+# -------------------------------------------------------------------------------
+# *******
+# *     *
+# * NVM *
+# *     *
+# *******
+
+export NVM_DIR="$HOME/.nvm"
+[ -s "$NVM_DIR/nvm.sh" ] && . "$NVM_DIR/nvm.sh" # This loads nvm
