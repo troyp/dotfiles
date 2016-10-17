@@ -12,21 +12,22 @@
 # '--------------'
 
 # add shims to front of $PATH
-export PATH="/home/troy/.pyenv/shims:${PATH}"
+# export PATH="/home/troy/.pyenv/shims:${PATH}"
+pathprepend "/home/troy/.pyenv/shims:${PATH}"
 
 # set $PYENV_SHELL
-export PYENV_SHELL=zsh
+export PYENV_SHELL=${SHELL##*/}
 
 # completions
-source '/home/troy/.pyenv/completions/pyenv.zsh'
+source "/home/troy/.pyenv/completions/pyenv.${SHELL##*/}"
 
 # rehash shims
 command pyenv rehash 2>/dev/null
 
-# define pyenv function (sh dispatcher), unless $PYENV_USE_SCRIPT
+# define pyenv function (sh dispatcher), unless $pyenv_use_script
 # -- this lets pyenv change variables in the shell session, allowing commands
 #    like 'pyenv shell'.
-if [[ -z $PYENV_USE_SCRIPT ]]; then
+if [[ -z $pyenv_use_script ]]; then
     pyenv() {
         local command
         command="$1"
