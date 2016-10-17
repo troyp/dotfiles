@@ -69,44 +69,25 @@ bind -x '"\C-x\C-m": "xmodmap $HOME/.Xmodmap"'
 # *                  *
 # ********************
 
+# environment: sourcing from .sh-profile doesn't seem to be sufficient, so load in .bashrc
+[[ -f ~/.sh-env ]]          && source ~/.sh-env
 # common startup files
-if [[ -f ~/.shrc ]]; then . ~/.shrc fi; fi      # .shrc sources .sh-aliases, .sh-functions
+ [[ -f ~/.shrc ]]           && source ~/.shrc fi      # .shrc sources .sh-aliases, .sh-functions
 # aliases
-if [[ -f ~/.bash-aliases ]]; then . ~/.bash-aliases; fi
+ [[ -f ~/.bash-aliases ]]   && source ~/.bash-aliases
 # functions
-if [[ -f ~/.bash-functions ]]; then . ~/.bash-functions; fi
+ [[ -f ~/.bash-functions ]] && source ~/.bash-functions
 # prompt
-if [[ -f ~/.bash-prompt ]]; then . ~/.bash-prompt; fi
+ [[ -f ~/.bash-prompt ]]    && source ~/.bash-prompt
 # completion
-if [[ -f /etc/profile.d/bash_completion.sh ]]; then . /etc/profile.d/bash_completion.sh; fi
+ [[ -f /etc/profile.d/bash_completion.sh ]] && source /etc/profile.d/bash_completion.sh
 # misc
-if [[ -n "$LOAD_SCRATCH" ]] && [[ -f ~/.bash-scratch ]]; then . ~/.bash-scratch; fi
+ [[ -n "$LOAD_SCRATCH" ]]  && [[ -f ~/.bash-scratch ]] && source ~/.bash-scratch
 
 # ---bashmarks---
 # source .bashmarks-setup.sh after .sh-functions
-if [[ -f ~/.bashmarks-setup.sh ]]; then . ~/.bashmarks-setup.sh; fi
+ [[ -f ~/.bashmarks-setup.sh ]] && source ~/.bashmarks-setup.sh
 
-# -------------------------------------------------------------------------------
-# ,-------,
-# | PYENV |
-# '-------'
-
-# PYENV setup functions and variable
-if [[ -e ~/.pyenv_load_setup_functions.sh ]]; then
-    source ~/.pyenv_load_setup_functions.sh
-    pyenv-prepend-to-path
-else
-    echo "Can't find ~/.pyenv_load_setup_functions.sh"
-fi
-# OPTIONAL: pyenv-virtualenv autoactivation of virtualenvs
-if pyenv commands | grep virtualenv-init >/dev/null; then
-    # diable prompt setting: can be removed in future pyenv-virtualenv release
-    PYENV_VIRTUALENV_DISABLE_PROMPT=1
-    # pyenv-virtualenv setup
-    eval "$(pyenv virtualenv-init -)"
-else
-    echo "pyenv virtualenv-init command not available: install pyenv-virtualenv"
-fi
 
 # # ********************
 # # *                  *
