@@ -15,12 +15,17 @@
 	co = checkout
 
 	# ===DIFF===
+	# changes to add
 	d = diff --color-words
+	# added changes to commit
 	da = diff --cached --color-words
-	dc = diff HEAD --color-words
+	# committed changes to push
+	dc = diff HEAD origin/master --color-words
+	# ---BY WORD---
 	dw  = !GIT_PAGER='less -r' git diff --color-words
 	dwa = !GIT_PAGER='less -r' git diff --cached --color-words
 	dwc = !GIT_PAGER='less -r' git diff HEAD --color-words
+	# ---BY WORD | GUI VIEWER---
 	dg  = !GIT_EXTERNAL_DIFF='meld $2 $5 | cat' git diff --color-words
 	dga = !GIT_EXTERNAL_DIFF='meld $2 $5 | cat' git diff --cached --color-words
 	dgc = !GIT_EXTERNAL_DIFF='meld $2 $5 | cat' git diff HEAD --color-words
@@ -30,7 +35,7 @@
 	dhc = !diff HEAD --color-words | diff-highlight
 	dl  = diff --color
 	dla = diff --cached --color
-	dlc = diff HEAD --color
+	dlc = diff HEAD origin/master --color
 	filestoadd = diff --stat
 	changestoadd = diff
 	filestocommit = status
