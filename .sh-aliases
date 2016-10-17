@@ -28,6 +28,14 @@ alias sapti='sudo apt-get install'
 alias aptc='apt-cache'
 alias aptf='apt-file'
 alias apds='aptitude search'    # find matching packages
+apdv() { aptitude search "$0" | less }
+apdn() {(    # search by package name (terms ANDed)
+        srchstr=""
+        for term in "$@"; do
+            srchstr+="?name($term)"
+        done
+        aptitude search "$srchstr"
+       )}
 alias aptcs='apt-cache search'  # find matching packages
 alias aptff='apt-file find'  # (find==search) find packages containing matching files
 alias aptcp='apt-cache policy'
