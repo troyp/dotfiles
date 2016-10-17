@@ -66,6 +66,7 @@ alias kde-view-bookmarks-file='view /home/troy/.kde/share/apps/kfile/bookmarks.x
 alias plasmarestart4='kbuildsycoca4 && kquitapp plasma-desktop && kstart plasma-desktop'
 alias kfconf=kf5-config
 alias kfconflist='kf5-config --types'
+alias plasma-applets-edit='editor ~/.config/plasma-org.kde.plasma.desktop-appletsrc'
 
 #---------------------
 # CD & MKDIR ALIASES.
