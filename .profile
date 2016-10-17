@@ -11,15 +11,14 @@
 # for ssh logins, install and configure the libpam-umask package.
 #umask 022
 
+# .profile -> .sh-profile
+[ -e ~/.sh-profile ] && source ~/.sh-profile
 
 # if running bash, source .bashrc
 if [[ -n "$BASH_VERSION" ]]; then
         [[ -f "$HOME/.bashrc" ]] && . "$HOME/.bashrc"
         [[ -f "$HOME/.bashenv" ]] && . "$HOME/.bashenv"
 fi
-
-# .profile -> .sh-profile
-[ -e ~/.sh-profile ] && source ~/.sh-profile
 
 # fzf (https://github.com/junegunn/fzf)
 [ -e ~/.fzf.bash ] && source ~/.fzf.bash
