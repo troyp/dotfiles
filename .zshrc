@@ -59,7 +59,7 @@ ZSH_THEME="troyp/troyp"
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
 # Add wisely, as too many plugins slow down shell startup.
-plugins=(dirhistory zsh-syntax-highlighting)
+plugins=(dirhistory zsh-syntax-highlighting zsh-nvm)
 
 # User configuration
 
