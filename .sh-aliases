@@ -660,6 +660,8 @@ alias ppcjs='underscore print --outfmt pretty'  # js/json pretty printing & synt
 #-----------------------------
 # EDITORS & PROGRAMMING TOOLS.
 #-----------------------------
+alias factorlang=/opt/factor/factor
+alias jlangconsole=$JHOME/bin/jconsole    # since java console is also called jconsole
 alias mzscheme='rlwrap /opt/racket/bin/mzscheme'
 alias scheme48='rlwrap scheme48'
 alias sml='rlwrap sml'
@@ -690,7 +692,7 @@ alias stacki='stack install'
 alias cabali='cabal install'
 alias opami='opam install'
 alias gemi='gem install'
-alias npmi='npm install -g'
+alias npmig='npm install -g'
 # -------------------------------------------------------------------------------
 # Python
 alias pynote='ipython notebook --pylab=inline'
@@ -911,9 +913,7 @@ alias rannum='tr -dc "0-9" < /dev/urandom | head -c'
 #---------------------
 alias vi=nvi
 alias coline='command col'    # leave col free as a column selection command
-alias factorlang=/opt/factor/factor
 alias unmount=umount
-alias jcons=$JHOME/bin/jconsole
 alias trash-restore=restore-trash
 alias ack=ack-grep
 alias noi=noice
