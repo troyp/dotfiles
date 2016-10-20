@@ -703,6 +703,8 @@ alias bpy='bpython'
 alias virtenv-activate='source ./bin/activate'
 alias virtenv-deactivate=deactivate
 alias pyenv-version="pyenv version | awk '{print $1}'"
+alias py-lptrace='sudo python /opt/scripts/lptrace/lptrace.py -p'
+alias pydb-lptrace='sudo python /opt/scripts/lptrace/lptrace.py -d -p'
 # -------------------------------------------------------------------------------
 # Perl
 alias pl=perl
