@@ -362,6 +362,9 @@ alias install-ocamlbrew-track='tail -f /tmp/ocamlbrew.*'
 alias install-opam='wget https://raw.github.com/ocaml/opam/master/shell/opam_installer.sh -O - | sh -s /usr/local/bin'
 alias install-hs-stack-1404='sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 575159689BEFB442; echo "deb http://download.fpcomplete.com/ubuntu trusty main"|sudo tee /etc/apt/sources.list.d/fpco.list; sudo apt-get update && sudo apt-get install stack -y'
 alias install-hs-stack-1604='sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 575159689BEFB442; echo "deb http://download.fpcomplete.com/ubuntu xenial main"|sudo tee /etc/apt/sources.list.d/fpco.list; sudo apt-get update && sudo apt-get install stack -y'
+alias   install-rust='curl -sSf https://static.rust-lang.org/rustup.sh | sh'
+alias uninstall-rust='curl -sSf https://static.rust-lang.org/rustup.sh | sh -s -- --uninstall'
+alias install-android-studio-32bit-prerequisites='sudo apt-get install libc6:i386 libstdc++6:i386 zlib1g:i386'
 alias nvm-copy-global='nodebindir=`which node`; nodedir=${nodebindir%/bin/node}; chmod -R 755 $nodedir/bin/*; sudo cp -r $nodedir/{bin,lib,share} /usr/local/'
 install-nvm () {
     export NVM_DIR="$HOME/.nvm" && (
