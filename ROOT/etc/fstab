@@ -30,7 +30,7 @@ UUID=4633ee66-a6a4-4aca-a68f-89f863b1a679   /mnt/empty2    ext4   defaults   0  
 UUID=6dbeb861-82a9-4c63-a05c-2105e30e89fd   /mnt/data2     ext4   defaults   0   0
 #
 # # /dev/sde1:
-# UUID=87b1188c-ab12-416c-b10e-cdf5ef1c6146   /mnt/oldroot   ext4   defaults   0   0
+UUID=87b1188c-ab12-416c-b10e-cdf5ef1c6146   /mnt/oldroot   ext4   defaults   0   0
 # # /dev/sde2:
 # UUID=e82b60b4-295b-4ed0-b0dc-a62f7a222896   /mnt/oldswap   swap   defaults   0   0
 #
