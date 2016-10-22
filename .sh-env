@@ -1,6 +1,9 @@
 #                                                           -*- shell-script -*-
 [[ ! -z $DEBUG  ]] && echo "sourcing .sh-env"
 
+# load private variables
+[[ -e ~/.sh-env-private ]] && source ~/.sh-env-private
+
 # ***************
 # *             *
 # * ENVIRONMENT *
