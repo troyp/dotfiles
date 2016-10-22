@@ -561,6 +561,14 @@ alias gitalias="git config --get-regexp '^alias\.' | cut -c 7- | sed 's/ /\t/' |
 alias gitsetupignore="git config --global core.excludesfile '~/.gitignore'"
 alias gitcommits='git log --oneline --color | perl -ne '"'"'printf "HEAD~%-3d %s", ++$i, "$_"'"'"'| less -r'
 
+# -----------
+# SSH ALIASES
+# -----------
+alias sshgen="ssh-keygen -t rsa -b 4096 -C $my-email"
+alias ssh-choose-key='find ~/.ssh -type 'f' | grep -v '.pub$' | iselect -ma'
+alias ssh-agent-start='eval "$(ssh-agent -s)"'
+alias ssh-addkey='ssh-add `ssh-choose-key`'
+
 #------------------
 # SETTINGS ALIASES.
 #------------------
