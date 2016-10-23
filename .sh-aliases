@@ -366,6 +366,7 @@ alias install-hs-stack-1604='sudo apt-key adv --keyserver hkp://keyserver.ubuntu
 alias   install-rust='curl -sSf https://static.rust-lang.org/rustup.sh | sh'
 alias uninstall-rust='curl -sSf https://static.rust-lang.org/rustup.sh | sh -s -- --uninstall'
 alias install-android-studio-32bit-prerequisites='sudo apt-get install libc6:i386 libstdc++6:i386 zlib1g:i386'
+alias install-kf5-krusader-prerequisites="sudo apt-get-install plasma-workspace libc6 libgcc1 libqt5dbus5 libqt5xml5 libqtcore4 libqt5gui5 libqt5widgets5 libqt5printsupport5 libstdc++6 arj zlib1g ark bzip2 cpio kate kmail kdiff3 kompare xxdiff konsole krename lhasa md5deep cfv p7zip rpm unace unrar unrar-free rar unzip zip build-essential libkf5parts-dev libkf5wallet-dev cmake libkf5xmlgui-dev extra-cmake-modules kdoctools-dev qt5-default plasma-framework-dev"
 alias nvm-copy-global='nodebindir=`which node`; nodedir=${nodebindir%/bin/node}; chmod -R 755 $nodedir/bin/*; sudo cp -r $nodedir/{bin,lib,share} /usr/local/'
 install-nvm () {
     export NVM_DIR="$HOME/.nvm" && (
