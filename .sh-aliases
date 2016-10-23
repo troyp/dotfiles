@@ -227,6 +227,7 @@ alias grepc='grep --color=always'       # color grep for pipes
 alias grepic='grep -i --color=always'   # color grep for pipes (case-insensitive)
 alias grepn='grep -Hn --color=always'   # grep with filename and line no.
 alias grepin='grep -iHn --color=always' # grep with filename and line no. (case-insensitive)
+alias grepbin='grep -iHn -B1 --color=always' # grep, show prior line (filename, line no,case-insens)
 alias grepr='grep -iHnr --color=always' # recursive grep with filename and line no. (case-insens)
 alias grepsys='sudo grep -r -D skip'    # recursive grep with sudo, skip device files
 # alias grepp='grep -P'                   # grep with perl syntax
