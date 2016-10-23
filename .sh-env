@@ -1,5 +1,6 @@
 #                                                           -*- shell-script -*-
 [[ ! -z $DEBUG  ]] && echo "sourcing .sh-env"
+set -a
 
 # load private variables
 [[ -e ~/.sh-env-private ]] && source ~/.sh-env-private
@@ -10,7 +11,6 @@
 # * VARIABLES   *
 # *             *
 # ***************
-set -a
 
 export TZ='Australia/Sydney';    # time zone
 
