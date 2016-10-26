@@ -64,5 +64,6 @@
 	interactive = auto
 [diff]
 	tool = vimdiff
+	mnemonicprefix = true
 [push]
 	default = simple
