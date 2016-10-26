@@ -410,6 +410,8 @@ alias pydirserve='python2 -m SimpleHTTPServer'  # serve current dir tree on port
 # alias pydirserve='python3 -m http.server'  # serve current dir tree on port 8000
 alias dirserve=http-server   # serve current dir tree (or ./public) on port 8080 (or set with -p)
 alias lsportprocs='lsof -i'  # list processes on given port [range], eg. lsportprocs TCP:8081
+alias lynx='lynx -vikeys -cfg=~/.lynx.cfg'
+alias chrome-minimal='google-chrome --profile-directory="Profile 1"'
 
 #--------------------
 # NETWORKING ALIASES.
@@ -535,6 +537,7 @@ alias vmore='vim -u $HOME/.vim/vimrc.more'
 alias cless="LESSOPEN='|~/.lessfilter %s' less -R"
 alias lesr='less -R'   # raw ANSI color escapes
 alias lesrr='less -r'  # raw control chars
+docview() { pandoc "$1" | \lynx -vikeys -stdin }
 
 # =============
 # MOZC ALIASES.
@@ -706,6 +709,7 @@ alias cabali='cabal install'
 alias opami='opam install'
 alias gemi='gem install'
 alias npmig='npm install -g'
+alias cargoi='cargo install'
 # -------------------------------------------------------------------------------
 # Python
 alias pynote='ipython notebook --pylab=inline'
