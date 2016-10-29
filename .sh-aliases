@@ -805,7 +805,7 @@ alias sejpptojpeg='sejda-console pdftojpeg'
 alias sejpptotext='sejda-console extractpages'
 alias sejtotext='sejda-console extracttext'
 alias gs-pstopdf='gs -q -dBATCH -dAutoFilterColorImages=false -sColorImageFilter=FlateEncode -dNOPAUSE -sDEVICE=pdfwrite -sOutputFile=out.pdf'
-alias jpdftweak='java -jar /opt/jpdftweak/jpdftweak.jar'  # can renumber pages in PDFs (loses bmarks)
+alias jpdftweak='java -jar /opt/jar/jpdftweak/jpdftweak.jar'  # can renumber pages in PDFs (loses bmarks)
 alias pdfimg='pdfimages -j'
 # OCR: use pdfocr for OCR; much better than pdfsandwich (default settings)
 alias pdfjoin-rotate='pdfjam --fitpaper true --rotateoversize true --suffix joined'
