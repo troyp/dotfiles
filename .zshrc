@@ -79,6 +79,9 @@ fi
 [[ -f ~/.zsh-aliases ]]   && source ~/.zsh-aliases;
 [[ -f ~/.zsh-functions ]] && source ~/.zsh-functions;
 
+# ZSH-specific functions directory
+fpath+=~/.zfunc
+
 zsh_URL=https://sourceforge.net/projects/zsh/files/latest/download?source=typ_redirect
 
 bindkey "^P" history-beginning-search-backward
