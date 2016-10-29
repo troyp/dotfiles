@@ -74,6 +74,7 @@ KDE_PLACES_FILE='/home/troy/.local/share/user-places.xbel'
 KDE_BOOKMARKS_FILE='/home/troy/.kde/share/apps/kfile/bookmarks.xml'
 kde4_system_config_dir='/usr/share/kde4'
 kde4_local_config_dirs='~/.kde4/share:~/.kde/share:~/.local/share'
+RUST_SRC_PATH='/opt/rust/src'
 
 # ------
 # PATHS.
@@ -91,6 +92,7 @@ paths=(
     $HOME/.emacs.d
     $HOME/.scripts
     $HOME/.cabal/bin
+    $HOME/.cargo/bin
     $HOME/.nimble/bin
     $HOME/.cask/bin
     $HOME/.lein/bin
