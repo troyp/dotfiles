@@ -16,9 +16,25 @@ symlink-print() { namei -v "$1" | grep --color -P '(?<=^l).*|$'; }
 locatedirs() { locate "$1" | while read -r line; do dirname "`readlink -f "$line"`"; done | uniq; }
 
 cnd () {
-    mkdir "$@"
-    cd "${@: -1}"
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+cnd [-h|-p]
+
+    Options:
+      -h --help     display this help
+      -p --parents  no error if existing, make parents as needed
+EOF
+        shift;
+    elif [[ "$1" =~ ^-p$\|^--parents$ ]]; then
+        shift
+        mkdir -p "$@"
+        cd "${@: -1}"
+    else
+        mkdir "$@"
+        cd "${@: -1}"
+    fi;
 }
+alias cnp='cnd -p'
 
 lsd () {
     base=${1%/}
