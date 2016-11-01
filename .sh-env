@@ -92,6 +92,8 @@ paths=(
     $HOME/.emacs.d
     $HOME/.scripts
     $HOME/.cabal/bin
+    ## optimized ripgrep: prefer to cargo version
+    /opt/ripgrep/target/release
     $HOME/.cargo/bin
     $HOME/.nimble/bin
     $HOME/.cask/bin
