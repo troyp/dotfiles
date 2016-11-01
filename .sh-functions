@@ -7,8 +7,6 @@
 # *           *
 # *************
 
-khelp () { khelpcenter "help:/$1"; }
--h () { eval "$1 --help"; }
 pe () { $( echo "printenv ${1^^}" ); }
 manh () { firefox -P default "localhost//cgi-bin/man/man2html?query=$1"; }
 grepdict () { grep $1 /usr/share/dict/words; }
@@ -39,6 +37,33 @@ alias cnp='cnd -p'
 lsd () {
     base=${1%/}
     ls -d "$base"/*/
+}
+
+khelp () { khelpcenter "help:/$1"; }
+
+export cmds_with_help_subcommand="git bzr svn hg darcs pip pip2 pip3 gem npm opam cargo"
+-h () {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+-h [-h] COMMAND [TOPIC]
+    Display help.
+
+    Options:
+      -h --help     display this help
+EOF
+        shift;
+        fi
+    (
+        [[ $PAGER =~ ^less($| ) ]] && PAGER="${PAGER/less/less -F}"
+        cmd="$1"
+        shift
+        if [[ $cmds_with_help_subcommand =~ (^| )$cmd($| ) ]]; then
+            helpstr="help"
+        else
+            helpstr="--help"
+        fi
+        eval "$cmd $helpstr $@ | $PAGER";
+    )
 }
 
 col () {
