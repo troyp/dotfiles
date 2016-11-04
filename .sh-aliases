@@ -479,7 +479,7 @@ alias \?='echo'
 alias \?\?='help'
 alias lssetopt='set -o | grep "on$"'
 alias testprogexists='>/dev/null 2>&1 command -v'
-alias g='dolphin `pwd`'    # note: oh-my-zsh git plugin will overwrite this with g=git
+alias g='dolphin "`pwd`"'    # note: oh-my-zsh git plugin will overwrite this with g=git
 
 
 # ---------------
