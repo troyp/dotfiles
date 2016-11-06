@@ -634,8 +634,16 @@ fromhex () {
     echo $((0x$1))
 }
 
-#FIXME
 video-extract () {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+video-extract INPUT_VIDEO OUTPUT_CLIP_NAME [ START_TIME ] END_TIME
+    Extract a clip from START_TIME (or 00:00:00) to END_TIME from the video file
+    INPUT_VIDEO and save as OUTPUT_CLIP_NAME.
+EOF
+        shift
+        return 0
+    fi;
     file="$1"
     out="$2"
     if [ $# -gt 3 ]; then
@@ -650,7 +658,7 @@ video-extract () {
     echo $start
     echo $end
     # avconv $start $end -i "$file" -c:a copy -c:v copy "$out"
-    avconv $start -i "$file" $end -codec copy "$out"
+    eval "avconv $start -i \"$file\" $end -codec copy \"$out\""
 }
 
 remove-recursive () {
