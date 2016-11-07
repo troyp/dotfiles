@@ -635,30 +635,42 @@ fromhex () {
 }
 
 video-extract () {
-    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
-        cat <<EOF
+    (
+        if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+            cat <<EOF
 video-extract INPUT_VIDEO OUTPUT_CLIP_NAME [ START_TIME ] END_TIME
     Extract a clip from START_TIME (or 00:00:00) to END_TIME from the video file
     INPUT_VIDEO and save as OUTPUT_CLIP_NAME.
+
+    Options:
+      -h --help     display this help
+      -n --no-act   display command but don't execute
 EOF
-        shift
-        return 0
-    fi;
-    file="$1"
-    out="$2"
-    if [ $# -gt 3 ]; then
-        start="-ss $3"
-        end="-t $4"
-    else
-        start="-ss 00:00:00"
-        end="-t $3"
-    fi
-    echo $file
-    echo $out
-    echo $start
-    echo $end
-    # avconv $start $end -i "$file" -c:a copy -c:v copy "$out"
-    eval "avconv $start -i \"$file\" $end -codec copy \"$out\""
+            shift
+            return 0
+        elif [[ "$1" =~ ^-n$\|^--no-act(ion)?$ ]]; then
+            noaction="t"
+            shift
+        fi;
+        # end options processing
+
+        file="$1"
+        out="$2"
+        if [ $# -gt 3 ]; then
+            start="-ss $3"
+            end="-t $4"
+        else
+            start="-ss 00:00:00"
+            end="-t $3"
+        fi
+        # avconv $start $end -i "$file" -c:a copy -c:v copy "$out"
+        cmd="avconv $start $end -i \"$file\" -codec copy  -metadata title=\"$out\" \"$out\""
+        if [[ -n $noaction ]]; then
+            echo "$cmd"
+        else
+            eval "$cmd"
+        fi
+    )
 }
 
 remove-recursive () {
