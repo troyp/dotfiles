@@ -686,6 +686,18 @@ EOF
     )
 }
 
+video-concat () {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+video-concat INPUT_CLIP_1 INPUT_CLIP_2 [OUTPUT_CLIP_NAME]
+    Concatenate INPUT_CLIP_1 and INPUT_CLIP_2 with transitions.
+    Save as OUTPUT_CLIP (default: out.mp3)
+EOF
+        return 0
+    fi;
+    melt "$1" "$2" -mix 19 -mixer luma -consumer avformat:"${3:-out.mp4}" vcodec=libxvid b=5000k
+}
+
 remove-recursive () {
     file="$1"
     dir="${2:-.}"
