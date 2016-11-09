@@ -634,6 +634,8 @@ fromhex () {
     echo $((0x$1))
 }
 
+time-to-seconds () { echo $1 | awk -F: '{ print ($1 * 3600) + ($2 *   60) + $3 }' }
+
 video-extract () {
     (
         if [[ "$1" =~ ^-h$\|^--help$ ]]; then
