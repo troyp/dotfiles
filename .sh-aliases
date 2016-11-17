@@ -551,6 +551,15 @@ alias mozc-word-register='/usr/lib/mozc/mozc_tool --mode=word_register_dialog'
 alias mozc-handwriting='/usr/lib/mozc/mozc_tool --mode=hand_writing'
 alias mozc-character-palette='/usr/lib/mozc/mozc_tool --mode=character_palette'
 
+# ===================
+# DICTIONARY ALIASES.
+# ===================
+alias gd=grepdict   # see .sh-functions
+alias gcide='dict -d gcide'
+alias dictwn='dict -d wn'
+alias moby='dict -d moby-thesaurus'
+alias websters='view ~/ebooks/reference/websters-1913.txt'
+
 #-----------------
 # ARCHIVE ALIASES.
 #-----------------
@@ -943,7 +952,6 @@ alias noi=noice
 alias lastu=last    # leave last free for alias
 alias PeaExtractor=/opt/peazip/res/pealauncher
 alias PeaUtils=/opt/peazip/res/pea
-alias gd=grepdict   # see .sh-functions
 alias ucs=/opt/scripts/unicodesearch    # github.com/jpverkamp/dotfiles/blob/master/bin/uni
 alias u='unicode --max=0'        # search for unicode characters
 alias ucr='unicode --max=0 -r'   # regex search for unicode characters
