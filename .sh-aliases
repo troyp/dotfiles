@@ -40,6 +40,7 @@ alias aptcs='apt-cache search'  # find matching packages
 alias aptff='apt-file find'  # (find==search) find packages containing matching files
 alias aptcp='apt-cache policy'
 alias aptcsh='apt-cache show'  # show package records
+alias dplistexe='dpkg -L renameutils | while read -r x; do if [[ -f "$x" ]] && [[ -x "$x" ]]; then echo "$x"; fi; done'
 alias aptfl='apt-file list'  # list contents of matching packages
 alias aptgetkey='sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys'  # Ubuntu
 alias dplist='dpkg -l'   # list package names matching pattern, eg. dplsit 'dbus*'
