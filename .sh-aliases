@@ -881,7 +881,8 @@ alias uniqdirs='while read -r line; do dirname "`readlink -f "$line"`"; done | s
 alias dofields='while read -r x1 x2 x3 x4 x5 x6 x7 x8 x9; do'
 # while read -r x; do echo "stmts using $x"; done
 alias imaplines='xargs -d "\n" -n 1 -p'
-alias filterexec='dolines if [[ -x "$x" ]]; then echo "$x"; fi; done'
+isexec() { if [[ -f "$1" ]] && [[ -x "$1" ]]; then return 0; else return 1; fi; }
+alias filterexec='dolines if [[ -f "$x" ]] && [[ -x "$x" ]]; then echo "$x"; fi; done'
 alias dedup='perl -ne '"'"'$H{$_}++ or print'"'"   # remove repeated lines (need not be adjacent)
 alias suniq='sort -u'   # sort and remove repeated lines
 alias tolowercase="tr '[:upper:]' '[:lower:]'"
