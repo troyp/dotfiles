@@ -161,6 +161,51 @@ alias lsenv='export | less'    # list environment variables (alphabetical)
 alias lsenvf='set | less'      # list environment variables and functions (alphabetical)
 alias lsenvall='env | less'    # list entire environment
 
+# --------------------------
+# FILE MANIPULATION ALIASES.
+# --------------------------
+# --- looping over files ---
+alias dofiles='for x in *; do'    # process each file in current directory
+# eg.  mapfiles printf "`pwd`/$x\n"
+alias mapfiles='for x in *; do echo "$x" |'    # for each file in cur dir (end with `done`)...
+alias docbfiles='xsel -ob | files-from-url | dolines' # loop over files copied in clipboard (convert from file:// URL)
+alias docburls='xsel -ob | dolines'                   # loop over urls copied to clipboard
+alias docburls-reversed='xsel -ob | tac | dolines'    # loop over urls copied to clipboard (reverse order)
+
+# --- editing files ---
+alias sed-file='sed -i.bak' # edit file in-place (makes backup) sed-file 's/old/new/g' f.ext
+alias editchoose='iselect -ma | xargs emacsclient' # select a file to edit in emacs
+alias scriptvi='edit-script vim'
+alias scriptem='edit-script emacsclient'
+
+# --- copying files ---
+alias name2fat='perl -pe '"'"'s/\+|:/ - /g and s/\[<>\/\\?+:"\]//g'"'"''  # filename -> FAT-compat
+alias rscopy='rsync -avzH --progress'
+alias rsdiff='rsync -rvnc --delete'  # compare two directories by simulating the process of copying the first to overwrite the second
+alias rscopyto='rsync -rvc --delete .'  # copy current directory to another directory, deleting its original contents
+alias rsupdate='rsync -auvzH --progress'
+alias cppath='cp --parents'   # copy a relative file-path into a dir
+# --- icp ---
+# note: aliasing cp to icp (and mv to imv):
+# alias cp='icp --pass-through -i' will check before overwriting on pass-through,
+# but when used with one argument (as icp), it will check twice (once within icp,
+# then again when passed through to cp)
+alias cp='icp --pass-through -i'
+
+# --- linking files ---
+alias symlink='ln -s'
+alias sln='ln -s'
+alias msymlink='mmv -s'  # mmv multiple symlink using wildcards, eg.  msymlink *.pdf #1_link.pdf
+alias ln-in-dir-from-file='ln -t'
+alias ln-from-file-to-file='ln -T'
+
+# --- other ---
+alias irm='rm -i'  # interactive rm: prompt before removal
+alias diff='colordiff -u'
+alias diffdir='colordiff -rqb'
+alias chmodx='chmod a+x'
+alias file-owner='stat -c "%U"'
+
 
 #-----------------------
 # FILE RENAMING ALIASES.
@@ -169,6 +214,9 @@ alias lsenvall='env | less'    # list entire environment
 alias rn='mv -iT'    # use mv to rename (ask before overwrite, treat dest as filename, not dir)
 alias lowercase-files='dofiles mv -i "$x" "$(echo "$x" | tolowercase)"; done'
 alias hilitcase-files='dofiles mv -i "$x" "$(echo "${x%.*}" | tohilitcase).${x##*.}"; done'
+# alias mv='mv -i'
+alias mv='imv --pass-through --command -i'
+
 
 # ALTERNATIVES TO WDIRED (C-x d <directory> C-x C-q)
 alias emdir="env EDITOR=emacs vidir"                        # emacs/vidir rename
@@ -263,46 +311,6 @@ alias findfileinwd='find . -maxdepth 1 -type f'      # find in current directory
 alias statf='stat --printf'    # eg. statf "%s" file (size in B), statf "%h" file (no. hard links)
 alias rgg='rg -pS'             # ripgrep with pretty and smartcase
 alias rgh='rg -pS --hidden'    # ripgrep with pretty and smartcase, include dotfiles
-
-# --------------------------
-# FILE MANIPULATION ALIASES.
-# --------------------------
-# --- looping over files ---
-alias dofiles='for x in *; do'    # process each file in current directory
-# eg.  mapfiles printf "`pwd`/$x\n"
-alias mapfiles='for x in *; do echo "$x" |'    # for each file in cur dir (end with `done`)...
-alias docbfiles='xsel -ob | files-from-url | dolines' # loop over files copied in clipboard (convert from file:// URL)
-alias docburls='xsel -ob | dolines'                   # loop over urls copied to clipboard
-alias docburls-reversed='xsel -ob | tac | dolines'    # loop over urls copied to clipboard (reverse order)
-
-# --- editing files ---
-alias sed-file='sed -i.bak' # edit file in-place (makes backup) sed-file 's/old/new/g' f.ext
-alias editchoose='iselect -ma | xargs emacsclient' # select a file to edit in emacs
-alias scriptvi='edit-script vim'
-alias scriptem='edit-script emacsclient'
-
-# --- copying files ---
-alias name2fat='perl -pe '"'"'s/\+|:/ - /g and s/\[<>\/\\?+:"\]//g'"'"''  # filename -> FAT-compat
-alias mv='mv -i'
-alias rscopy='rsync -avzH --progress'
-alias rsdiff='rsync -rvnc --delete'  # compare two directories by simulating the process of copying the first to overwrite the second
-alias rscopyto='rsync -rvc --delete .'  # copy current directory to another directory, deleting its original contents
-alias rsupdate='rsync -auvzH --progress'
-alias cppath='cp --parents'   # copy a relative file-path into a dir
-
-# --- linking files ---
-alias symlink='ln -s'
-alias sln='ln -s'
-alias msymlink='mmv -s'  # mmv multiple symlink using wildcards, eg.  msymlink *.pdf #1_link.pdf
-alias ln-in-dir-from-file='ln -t'
-alias ln-from-file-to-file='ln -T'
-
-# --- other ---
-alias irm='rm -i'  # interactive rm: prompt before removal
-alias diff='colordiff -u'
-alias diffdir='colordiff -rqb'
-alias chmodx='chmod a+x'
-alias file-owner='stat -c "%U"'
 
 # -----------------------
 # HTML & XML MANIPULATION
