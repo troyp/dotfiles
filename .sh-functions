@@ -958,6 +958,46 @@ blankpage SIZE COL NAME  - creates a page of size SIZE and colour COL, called NA
 	convert -size "$size" "$col" "$out"
 }
 
+blankpage_before () {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+blankpage_before [-h] N [COLOUR]
+
+Create a blank page with the same dimensions as the Nth file in the current
+directory. If COLOUR is unspecified, it is white. This can be used to add a
+page at a specific position to a comic archive directory.
+
+    Options:
+      -h --help     display this help
+EOF
+        shift
+        return 0
+    fi
+    n="$1"
+    col="${2:-xc:white}"
+    f=$(ls | sed -n "`printf "%dp;" $n`")
+    base=`echo "${f%.*}"`
+    ext=`echo "${f##*.}"`
+    newname="${base}-prev.${ext}"
+    geom=`convert "$f" -print "%wx%h\n" /dev/null`
+    convert -size "$geom" "$col" "$newname"
+}
+
+name-following () {
+    (
+        base=`echo "${1%.*}"`
+        ext=`echo "${1##*.}"`
+        echo "${base}_next.${ext}"
+    )
+}
+name-preceding () {
+    (
+        base=`echo "${1%.*}"`
+        ext=`echo "${1##*.}"`
+        echo "${base}-prev.${ext}"
+    )
+}
+
 files-from-url () {
     # convert a list of 'file://' URLs to filenames
 	sep="${1-\n}";
