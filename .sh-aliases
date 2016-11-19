@@ -159,6 +159,8 @@ alias showpermissions='stat --printf "%-20n  %a  %A\n"';
 alias basedir='basename $PWD'
 alias pwdb='basename $PWD'
 alias pwdp='dirname $PWD'
+filename-ext ()  { echo "${1%.*}"; }
+filename-base () { echo "${1##*.}"; }
 
 
 # --------------------
