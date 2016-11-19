@@ -48,7 +48,13 @@ alias aptcp='apt-cache policy'  # show installed version, candidate, repository
 alias aptcsh='apt-cache show'  # show package records
 # --- files ---
 alias dplist='dpkg -l'   # list package names matching pattern, eg. dplsit 'dbus*'
-alias dplistexe='dpkg -L renameutils | while read -r x; do if [[ -f "$x" ]] && [[ -x "$x" ]]; then echo "$x"; fi; done'
+dplistexe () {
+    for f in `dpkg -L "$1"`; do
+        if [[ -f "$f" ]] && [[ -x "$f" ]]; then
+            echo "$f";
+        fi;
+    done;
+}
 alias aptfl='apt-file list'  # list contents of matching packages
 alias aptgetkey='sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys'  # Ubuntu
 alias dpfiles='dpkg -L'  # list files installed by a package
