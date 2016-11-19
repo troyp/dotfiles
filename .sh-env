@@ -99,6 +99,7 @@ paths=(
     $HOME/.cask/bin
     $HOME/.lein/bin
     $HOME/.npm-global/bin
+    $HOME/.rbenv/bin
 	  $HOME/gowork/bin
     $HOME/code/working
     $HOME/code/scripts
