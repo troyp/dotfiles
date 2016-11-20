@@ -199,7 +199,7 @@ alias cppath='cp --parents'   # copy a relative file-path into a dir
 # alias cp='icp --pass-through -i' will check before overwriting on pass-through,
 # but when used with one argument (as icp), it will check twice (once within icp,
 # then again when passed through to cp)
-alias cp='icp --pass-through -i'
+# alias cp='icp --pass-through cp -i'
 
 # --- linking files ---
 alias symlink='ln -s'
@@ -224,7 +224,7 @@ alias rn='mv -iT'    # use mv to rename (ask before overwrite, treat dest as fil
 alias lowercase-files='dofiles mv -i "$x" "$(echo "$x" | tolowercase)"; done'
 alias hilitcase-files='dofiles mv -i "$x" "$(echo "${x%.*}" | tohilitcase).${x##*.}"; done'
 # alias mv='mv -i'
-alias mv='imv --pass-through --command -i'
+# alias mv='imv --pass-through --command mv -i'
 
 
 # ALTERNATIVES TO WDIRED (C-x d <directory> C-x C-q)
