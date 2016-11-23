@@ -107,6 +107,11 @@ launchterminal() { x-terminal-emulator & }
 zle -N launchterminal
 bindkey '^[O2S' launchterminal
 
+# copy last command on A-Ins
+copylastcommand() { fc -ln -1 -1 | cb }
+zle -N copylastcommand
+bindkey '^[[2;3~' copylastcommand
+
 zstyle ':completion:*' list-prompt   ''
 zstyle ':completion:*' select-prompt ''
 
