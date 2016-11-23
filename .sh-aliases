@@ -511,6 +511,8 @@ alias \?\?='help'
 alias lssetopt='set -o | grep "on$"'
 alias testprogexists='>/dev/null 2>&1 command -v'
 alias g='dolphin "`pwd`"'    # note: oh-my-zsh git plugin will overwrite this with g=git
+alias lastcommand='fc -ln -1 -1'
+alias copycommand='fc -ln -1 -1 | cb'
 
 
 # ---------------
