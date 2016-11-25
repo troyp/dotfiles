@@ -1024,6 +1024,21 @@ rename-strip-extra-from-year () {
     rename "$options" "$str" "$@";
 }
 
+ren-flatten-subdirs () {
+    # flatten contents of numbered subdirectories
+    echo "Rename subdirectories by embedded number?"
+    read -r REPLY
+    if [[ $REPLY =~ "^(y|Y|yes|YES|Yes)$" ]]; then
+        rename 's/[^0-9]*([0-9]+).*/$1/' *
+    fi
+    echo "Are you sure you want to flatten all subdirectories of $PWD?"
+    read -r REPLY
+    if [[ $REPLY =~ "^(y|Y|yes)$" ]]; then
+        for d in */; do for f in "$d"/*; do mv "$f" "${f//\//_}"; done; done
+        for d in */; do rmdir "$d"; done
+    fi
+}
+
 bci () {
     read -r -d '' prelude <<'EOF'
 scale=20;
