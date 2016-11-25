@@ -1344,3 +1344,61 @@ chm2maff() {
     rm -Ir "$dir"
 }
 
+donum () {
+    # eg. seq 1 5 | donum -f '%d_%d' 'i+1' '2*i' # result: 2_2 3_4 4_6 5_8 6_10
+    format='%d'
+    separator=' '
+
+    # === PARSE ARGUMENTS ===
+    local SHORT=hsf:
+    local LONG=help,separator,format
+    local PARSED=`getopt --options $SHORT --longoptions $LONG --name "$0" -- "$@"`
+    if [[ $? -ne 0 ]]; then exit 2; fi
+    eval set -- "$PARSED"
+    while true; do
+        case "$1" in
+            -h|--help)
+                cat <<EOF
+donum [OPTION...] EXPR...
+    Expand each number in STDIN arithmetically using EXPR.
+    example:
+        >> seq 1 5 | donum -f '%d_%d' 'i+1' '2*i'
+        2_2 3_4 4_6 5_8 6_10
+
+    Options:
+      -h --help       display this help
+      -s --separator  specify separator string (default: space)
+      -f --format     specify printf format specifier for output
+EOF
+                return 0
+                ;;
+            -s|--separator)
+                separator="$2"
+                shift 2
+                ;;
+            -f|--format)
+                format="$2"
+                shift 2
+                ;;
+            --)
+                shift
+                break;
+                ;;
+            *)
+                echo "error"; return 3
+                ;;
+        esac
+    done
+    # =======================
+
+    use_sep=""
+    exprs=( "$@" )
+    while read -r i; do
+        for ((n=1; n<=${#exprs[@]}; ++n)); do
+            exprs[$n]=`eval 'echo $((' "${@[$n]}" '))'`
+            # echo "--" `eval 'echo $((' "${@[$n]}" '))'` "--"
+        done
+        printf "${use_sep:+$separator}$format" "$@"
+        use_sep="t"
+    done
+}
