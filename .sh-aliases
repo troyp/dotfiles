@@ -271,6 +271,8 @@ alias ren-titlecase-preview='ren -n '\''use Text::Autoformat; my @parts=split /\
 alias ren-manga-add-leading-zero='ren '\''s/第([0-9]+)巻/第0$1巻/'\'
 alias ren-parenthesize-filename="ren '"'s/^(.*)\.(?!gz$)(\w+(.gz)?)$/($1).$2/'"'"
 alias ren-author-dash-title-to-surname-first="ren -n '"'s/^(((([A-Za-z][-A-Za-z]*|[A-Za-z][.])[ ]?)[ ]?)+) ([A-Z][-a-z]*) - (.*)$/$5, $1 - $6/'"'"
+alias ren-2-digits-before-ext="rename '"'s/(?<=[^0-9])(\d)\.([^.]+)$/0$1.$2/'"' *"
+alias ren-3-digits-before-ext="rename '"'s/(?<=[^0-9])(\d)\.([^.]+)$/00$1.$2/'"' *; rename '"'s/(?<=[^0-9])(\d\d)\.([^.]+)$/0$1.$2/'"' *"
 
 ## MMV: simple wildcard-based renaming
 # mmv: eg.   mmv '*.bk.*' '#1.#2'
