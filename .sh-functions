@@ -1039,6 +1039,18 @@ ren-flatten-subdirs () {
     fi
 }
 
+renprefix () {
+    replacement="'s/^/$1/'"
+    for f in "$2"; do
+        eval "rename $replacement '$f'"
+    done
+    if [[ -z "$2" ]]; then
+        for f in *; do
+            eval "rename $replacement '$f'"
+        done
+    fi
+}
+
 bci () {
     read -r -d '' prelude <<'EOF'
 scale=20;
