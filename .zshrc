@@ -108,9 +108,14 @@ zle -N launchterminal
 bindkey '^[O2S' launchterminal
 
 # copy last command on A-Ins
-copylastcommand() { fc -ln -1 -1 | cb }
+copylastcommand() { fc -ln -1 -1 | xsel -ib; }
 zle -N copylastcommand
 bindkey '^[[2;3~' copylastcommand
+
+# copy last result on C-Ins
+copylastresult() { eval `fc -ln -1 -1` | xsel -ib }
+zle -N copylastresult
+bindkey '^[[2;5~' copylastresult
 
 zstyle ':completion:*' list-prompt   ''
 zstyle ':completion:*' select-prompt ''
