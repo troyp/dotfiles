@@ -33,13 +33,13 @@ alias sdebr='sudo dpkg -r'
 alias saptar='sudo apt-add-repository'
 # --- search ---
 alias apds='aptitude search'    # find matching packages
-apdv() { aptitude search "$0" | less }
+apdv() { aptitude search "$0" | less; }
 apdn() {(    # search by package name (terms ANDed)
-        srchstr=""
+        srchstr="";
         for term in "$@"; do
-            srchstr+="?name($term)"
-        done
-        aptitude search "$srchstr"
+            srchstr+="?name($term)";
+        done;
+        aptitude search "$srchstr";
        )}
 alias aptcs='apt-cache search'  # find matching packages
 alias aptff='apt-file find'  # (find==search) find packages containing matching files
@@ -403,17 +403,17 @@ alias nvm-copy-global='nodebindir=`which node`; nodedir=${nodebindir%/bin/node};
 alias install-slop-prerequisites='sudo apt-get install cmake gengetopt libgl1-mesa-dev libglew-dev libglm-dev libimlib2-dev libxext-dev libxrandr-dev libxrender-dev'
 install-nvm () {
     export NVM_DIR="$HOME/.nvm" && (
-        git clone https://github.com/creationix/nvm.git "$NVM_DIR"
-        cd "$NVM_DIR"
-        git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" origin`
-    ) && source "$NVM_DIR/nvm.sh"
+        git clone https://github.com/creationix/nvm.git "$NVM_DIR";
+        cd "$NVM_DIR";
+        git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" origin`;
+    ) && source "$NVM_DIR/nvm.sh";
 }
 upgrade-nvm () {
     (
-        cd "$NVM_DIR"
-        git fetch origin
-        git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" origin`
-    ) && source "$NVM_DIR/nvm.sh"
+        cd "$NVM_DIR";
+        git fetch origin;
+        git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" origin`;
+    ) && source "$NVM_DIR/nvm.sh";
 }
 # ===== other download aliases =====
 alias ytdl='youtube-dl -citk'
@@ -574,7 +574,7 @@ alias vmore='vim -u $HOME/.vim/vimrc.more'
 alias cless="LESSOPEN='|~/.lessfilter %s' less -R"
 alias lesr='less -R'   # raw ANSI color escapes
 alias lesrr='less -r'  # raw control chars
-docview() { pandoc "$1" | \lynx -vikeys -stdin }
+docview() { pandoc "$1" | \lynx -vikeys -stdin; }
 
 # =============
 # MOZC ALIASES.
@@ -873,7 +873,7 @@ alias img-tochannels='convert -separate'
 alias img-avg='convert -average'
 alias display_with_srgb='display -profile /usr/share/ghostscript/9.*/iccprofiles/srgb.icc'
 alias img-info=identify
-img-geometry () { convert "$1" -print "%wx%h\n" /dev/null }
+img-geometry () { convert "$1" -print "%wx%h\n" /dev/null; }
 
 # -------------------
 # FILE FORMAT ALIASES

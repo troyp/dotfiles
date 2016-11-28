@@ -35,8 +35,8 @@ EOF
 alias cnp='cnd -p'
 
 lsd () {
-    base=${1%/}
-    ls -d "$base"/*/
+    base=${1%/};
+    ls -d "$base"/*/;
 }
 
 khelp () { khelpcenter "help:/$1"; }
@@ -87,8 +87,8 @@ add_hook() {
 history-refresh () {
     # refreshes history (brings in commands that have been typed
     # in other shells since the shell started)
-    history -c
-    history -r
+    history -c;
+    history -r;
 }
 
 alias-function ()
@@ -103,54 +103,54 @@ rename-function ()
     old=$1;
     new=$2;
     eval "$(echo "$new ()"; declare -f $old | tail -n +2)";
-    unset -f $old
+    unset -f $old;
 }
 
 explode () {
-    printf $1 | grep -o .
+    printf $1 | grep -o .;
 }
 
 remove-last () {
-    head -n -1 $1 > temp-remove-last
-    mv -i temp-remove-last $1
+    head -n -1 $1 > temp-remove-last;
+    mv -i temp-remove-last $1;
 }
 
 # TODO: handle aliases, functions, failure, multiple matches (eg. alias and command)
 # TODO: probably best to convert to script
 prsource () {
-    cat $(which $1)
+    cat $(which $1);
 }
 # prsource with syntax highlighting via colz alias
 prsrc () {
-    cat $(which $1) | colz
+    cat $(which $1) | colz;
 }
 
 # compress directory as .tgz
 tgz () {
-    tar czf "${1%/}.tgz" "$1"
+    tar czf "${1%/}.tgz" "$1";
 }
 
 renumber () {
     # renumber DIR START# EXT
-    pushd "${1:-.}" || return
-    n0="${2:-0}"
+    pushd "${1:-.}" || return;
+    n0="${2:-0}";
     i=$n0;
-    n=`\ls -Af | wc -l`
+    n=`\ls -Af | wc -l`;
     for fname in *; do
-	if [ -n "$3" ]; then   # if 3rd arg is given and nonzero
-	    ext=".$3"
-	elif [[ $fname =~ \. ]] && [[ -z "${3+1}" ]]; then
-	    # if filename has extension and no 3rd arg is given
-	    ext=".${fname##*.}"
-	else
-	    # if file has no extension or if 3rd arg is explicit empty string
-	    ext=""
-	fi
-	padded=`printf "%0${#n}d%s" "$i" "$ext"`
-	mv -i "$fname" "$padded"
-	i=`expr $i + 1`;
-    done
-    popd
+        if [ -n "$3" ]; then   # if 3rd arg is given and nonzero
+	          ext=".$3";
+	      elif [[ $fname =~ \. ]] && [[ -z "${3+1}" ]]; then
+	          # if filename has extension and no 3rd arg is given
+	          ext=".${fname##*.}";
+	      else
+	          # if file has no extension or if 3rd arg is explicit empty string
+	          ext="";
+	      fi;
+	      padded=`printf "%0${#n}d%s" "$i" "$ext"`;
+	      mv -i "$fname" "$padded";
+	      i=`expr $i + 1`;
+    done;
+    popd;
 }
 
 zcbz () { zip -r "${1%/}.cbz" "$1"; }
@@ -158,77 +158,77 @@ zcbz () { zip -r "${1%/}.cbz" "$1"; }
 # convert directory to .cbz, order by first number in file names
 # cbz-by-num DIRNAME [EXT]
 cbz-by-num () {
-    pushd "$1" || return
-    # n=`ls -v | tail -n1 | awk -F'.' '{ print(length($1)) }'`
+    pushd "$1" || return;
+    # n=`ls -v | tail -n1 | awk -F'.' '{ print(length($1)) }'`;
     n=`ls -pv | GREP_OPTIONS="" grep -v ".*/$" | tail -n1 | awk -F'.' '{ print(length($1)) }'`;
     for fname in *; do
-	fnum="${fname%.*}"
-	fext="${fname##*.}"
-	ext="${2:-$fext}"
-	padded=`printf "%0${n}d.%s" "$(expr $fnum + 0)" "$ext"`
-	mv -i "$fname" "$padded"
-	# echo "$fname    $padded"
-    done
-    popd
-    zip -r "${1%/}.cbz" "$1"
+	      fnum="${fname%.*}";
+	      fext="${fname##*.}";
+	      ext="${2:-$fext}";
+	      padded=`printf "%0${n}d.%s" "$(expr $fnum + 0)" "$ext"`;
+	      mv -i "$fname" "$padded";
+	      # echo "$fname    $padded";
+    done;
+    popd;
+    zip -r "${1%/}.cbz" "$1";
 }
 
 # compress directory as .tgz
 maff () {
     if [[ ! -f "$1/index.html" ]]
     then
-	      echo "No index.html file. Enter relative Path of file to redirect to."
-	      printf "main page: "
-	      startfile=`line`
-	      > "$1/index.html" echo '<html>'
-	      >>"$1/index.html" echo '  <head>'
-	      >>"$1/index.html" echo "    <meta http-equiv=\"refresh\" content=\"0; url=$startfile\" />"
-	      >>"$1/index.html" echo '  </head>'
-	      >>"$1/index.html" echo '</html>'
-    fi
-    archive_name="${1%/}.maff"
-    7z a -tzip "$archive_name" "$1"
+	      echo "No index.html file. Enter relative Path of file to redirect to.";
+	      printf "main page: ";
+	      startfile=`line`;
+	      > "$1/index.html" echo '<html>';
+	      >>"$1/index.html" echo '  <head>';
+	      >>"$1/index.html" echo "    <meta http-equiv=\"refresh\" content=\"0; url=$startfile\" />";
+	      >>"$1/index.html" echo '  </head>';
+	      >>"$1/index.html" echo '</html>';
+    fi;
+    archive_name="${1%/}.maff";
+    7z a -tzip "$archive_name" "$1";
 }
 
 maffus () {
-    archive_name=`echo "${1%/}" | sed -e 's/ /_/g'`.maff
-    7z a -tzip "$archive_name" "$1"
+    archive_name=`echo "${1%/}" | sed -e 's/ /_/g'`.maff;
+    7z a -tzip "$archive_name" "$1";
 }
 
 man2text () { man "$1" | \col -bx; }
 
 ussp () {
     # convert underscores to spaces in filename
-    converted_name=${1//_/ }
+    converted_name=${1//_/ };
     if [ ! -f "$converted_name" ]; then
-	mv -i "$1" "$converted_name"
-    fi
+	      mv -i "$1" "$converted_name";
+    fi;
 }
 
 spus () {
     # convert spaces to underscores in filename
-    converted_name=${1// /_}
+    converted_name=${1// /_};
     if [ ! -f "$converted_name" ]; then
-	mv -i "$1" "$converted_name"
-    fi
+	      mv -i "$1" "$converted_name";
+    fi;
 }
 
 dashus () {
     # convert dashes to spaces in filename
-    converted_name=${1//-/ }
+    converted_name=${1//-/ };
     if [ ! -f "$converted_name" ]; then
-	mv -i "$1" "$converted_name"
-    fi
+	      mv -i "$1" "$converted_name";
+    fi;
 }
 
 dotsp () {
     # convert underscores to spaces in filename
-    extension="${1##*.}"
-    base_name="${1%.*}"
-    converted_name="${base_name//./ }.$extension"
+    extension="${1##*.}";
+    base_name="${1%.*}";
+    converted_name="${base_name//./ }.$extension";
     if [ ! -f "$converted_name" ]; then
-	mv -i "$1" "$converted_name"
-    fi
+	      mv -i "$1" "$converted_name";
+    fi;
 }
 
 # -------------------------------------------------------------------------------
@@ -237,7 +237,7 @@ dotsp () {
 # '---------------'
 
 pdfcat () {
-    pdftotext "$1" -
+    pdftotext "$1" -;
 }
 
 pdfoutline-out () {
@@ -247,15 +247,15 @@ pdfoutline-out PDFFILE [OUTFILE]
     Output the bookmarks (outline) of PDFFILE to text file OUTFILE.
     If OUTFILE is -, the bookmarks are output to stdout.
 EOF
-        return
+        return;
     fi;
-    pdffile="$1"
-    outfile="${2:-${1%.pdf}.bmarks}"
+    pdffile="$1";
+    outfile="${2:-${1%.pdf}.bmarks}";
     if [[ "$outfile" == "-" ]]; then
-        pdftk "$1" dump_data
+        pdftk "$1" dump_data;
     else
-        pdftk "$1" dump_data output "$outfile"
-    fi
+        pdftk "$1" dump_data output "$outfile";
+    fi;
 }
 
 pdfoutline-in () {
@@ -265,23 +265,23 @@ pdfoutline-in PDFFILE BMARKS [OUTFILE]
     Updates the bookmarks of PDFFILE to match those of the BMARKS file and saves
     the result to OUTFILE.
 EOF
-        return
+        return;
     fi;
-    pdffile="$1"
-    bmarks="$2"
-    outfile="${3:-${1%.pdf}-updated.pdf}"
-    pdftk "$pdffile" update_info "$bmarks" output "$outfile"
+    pdffile="$1";
+    bmarks="$2";
+    outfile="${3:-${1%.pdf}-updated.pdf}";
+    pdftk "$pdffile" update_info "$bmarks" output "$outfile";
 }
 
 pdfoutline-edit () {
     # pdfoutline-edit PDF_DOC
     # edit bookmarks of PDF_DOC
-    outline=$(mktemp)
-    output=$(mktemp)
-    pdftk "$1" dump_data > $outline
-    `echo ${EDITOR:-vim} $outline`
-    pdftk "$1" update_info $outline output $output
-    mv -i $output "$1"
+    outline=$(mktemp);
+    output=$(mktemp);
+    pdftk "$1" dump_data > $outline;
+    `echo ${EDITOR:-vim} $outline`;
+    pdftk "$1" update_info $outline output $output;
+    mv -i $output "$1";
 }
 
 pdfdroplast () {
@@ -297,27 +297,27 @@ pdfdroplast [-o outfile] infile [last_page]
       -h --help     display this help
       -o --outfile  save resulting file under the specified name
 EOF
-        shift
-        return 0
+        shift;
+        return 0;
     fi;
     if [[ "$1" =~ ^-o$\|^--outfile$ ]]; then
-        shift
-        outfile="$1"
-        shift
-    fi
-    infile="$1"
-    infile_base="${infile%.*}"
-    outfile="${outfile:-${infile_base}_out.pdf}"
-    n="${2:-1}"
-    m=$((n+1))
-    echo "pdftk '$infile' cat 1-r$m output '$outfile'"
-    eval "pdftk '$infile' cat 1-r$m output '$outfile'"
+        shift;
+        outfile="$1";
+        shift;
+    fi;
+    infile="$1";
+    infile_base="${infile%.*}";
+    outfile="${outfile:-${infile_base}_out.pdf}";
+    n="${2:-1}";
+    m=$((n+1));
+    echo "pdftk '$infile' cat 1-r$m output '$outfile'";
+    eval "pdftk '$infile' cat 1-r$m output '$outfile'";
 }
 
 pdf-extract-images () {
-    imgdir="${1}-images"
-    mkdir "$imgdir"
-    pdfimages "$1" "$imgdir"/out
+    imgdir="${1}-images";
+    mkdir "$imgdir";
+    pdfimages "$1" "$imgdir"/out;
 }
 
 function pdfpagerange () {
@@ -325,10 +325,10 @@ function pdfpagerange () {
     # eg. pdfpagerange "input.pdf" 75-77
     #     pdfpagerange "input.pdf" 75-77 "output.pdf"
     # NOTE: Page ranges use absolute numbering starting from page 1, not the page numbers specified in the pdf.
-    input="$1"
-    range="$2"
-    output="${3:-$input [pages $range]}"
-    qpdf --pages "$input" "$range" -- "$input" "$output"
+    input="$1";
+    range="$2";
+    output="${3:-$input [pages $range]}";
+    qpdf --pages "$input" "$range" -- "$input" "$output";
 }
 
 # -------------------------------------------------------------------------------
@@ -343,15 +343,15 @@ djvuoutline-out DJVUFILE [OUTFILE]
     Output the bookmarks (outline) of DJVUFILE to text file OUTFILE.
     If OUTFILE is -, the bookmarks are output to stdout.
 EOF
-        return
+        return;
     fi;
-    djvufile="$1"
-    outfile="${2:-${1%.djvu}.bmarks}"
+    djvufile="$1";
+    outfile="${2:-${1%.djvu}.bmarks}";
     if [[ "$outfile" == "-" ]]; then
-        djvused "$djvufile" -e 'print-outline'
+        djvused "$djvufile" -e 'print-outline';
     else
-        djvused "$djvufile" -e 'print-outline' > "$outfile"
-    fi
+        djvused "$djvufile" -e 'print-outline' > "$outfile";
+    fi;
 }
 
 djvuoutline-in () {
@@ -361,12 +361,12 @@ djvuoutline-in DJVUFILE BMARKS [OUTFILE]
     Updates the bookmarks of DJVUFILE to match those of the BMARKS file and
     saves the result to OUTFILE.
 EOF
-        return
+        return;
     fi;
-    djvufile="$1"
-    bmarks="$2"
-    outfile="${3:-${1%.djvu}-updated.djvu}"
-    djvused "$djvufile" -e "set-outline \"$bmarks\"; save-bundled \"$outfile\""
+    djvufile="$1";
+    bmarks="$2";
+    outfile="${3:-${1%.djvu}-updated.djvu}";
+    djvused "$djvufile" -e "set-outline \"$bmarks\"; save-bundled \"$outfile\"";
 }
 
 djvuoutline-edit () {
@@ -376,20 +376,20 @@ djvuoutline-edit DJVUFILE [OUTFILE]
     Edit the bookmarks (outline) of DJVUFILE and save to OUTFILE.
     If OUTFILE is omitted, overwrite DJVUFILE.
 EOF
-        return
+        return;
     fi;
-    djvufile="$1"
-    outfile="$2"
-    # djoutline-edit DJVU_DOC
+    djvufile="$1";
+    outfile="$2";
+    # djoutline-edit DJVU_DOC;
     # edit bookmarks of DJVU_DOC
-    outline=$(mktemp)
-    djvused "$djvufile" -e 'print-outline' > $outline
-    `echo ${EDITOR:-vim} $outline`
-    echo "$outfile"
+    outline=$(mktemp);
+    djvused "$djvufile" -e 'print-outline' > $outline;
+    `echo ${EDITOR:-vim} $outline`;
+    echo "$outfile";
     if [[ -z "$outfile" ]]; then
-        djvused "$djvufile" -e "set-outline $outline; save"
+        djvused "$djvufile" -e "set-outline $outline; save";
     else
-        djvused "$djvufile" -e "set-outline $outline; save-bundled \"$outfile\""
+        djvused "$djvufile" -e "set-outline $outline; save-bundled \"$outfile\"";
     fi
 }
 
@@ -399,7 +399,7 @@ EOF
 # '-----------------'
 
 einfo () {
-    emacsclient --eval "(info \"$(findinfofile $1)\")"
+    emacsclient --eval "(info \"$(findinfofile $1)\")";
 }
 
 diredterm () {
@@ -414,49 +414,49 @@ diredterm [-h] [directory]
 EOF
         shift;
     fi;
-    emacsclient -t -e "(dired \"${1:-$PWD}\")"
+    emacsclient -t -e "(dired \"${1:-$PWD}\")";
 }
 
 # -------------------------------------------------------------------------------
 
 quick-diffdir () {
-    diff <(cd "$1" && find | sort) <(cd "$2" && find | sort)
+    diff <(cd "$1" && find | sort) <(cd "$2" && find | sort);
 }
 
 findinfilename () {
-    find * -regextype posix-extended -type f -iregex "^[^.]*$1[^/]*$"
+    find * -regextype posix-extended -type f -iregex "^[^.]*$1[^/]*$";
 }
 
 findinfofile () {
-    locate --regex "/$1\.info(\.gz)?$"
+    locate --regex "/$1\.info(\.gz)?$";
 }
 
 apt-install-from-file () {
-    sudo apt-get install `cat $1 | tr '\n' ' '`
+    sudo apt-get install `cat $1 | tr '\n' ' '`;
 }
 
 linkcount () {
-    linkcount=$(ls -l "$1" | tr '\t' ' ' | tr -s ' ' | cut -d' ' -f2)
-    echo $linkcount
+    linkcount=$(ls -l "$1" | tr '\t' ' ' | tr -s ' ' | cut -d' ' -f2);
+    echo $linkcount;
 }
 
 mihtm () {
-   tmp=$(mktemp)
-   mediainfo --Output=HTML "$1" > "$tmp"
-   ${BROWSER:-sensible-browser} "$tmp"
+   tmp=$(mktemp);
+   mediainfo --Output=HTML "$1" > "$tmp";
+   ${BROWSER:-sensible-browser} "$tmp";
 }
 
 uuid2dev () {
-    line=$(ls -al /dev/disk/by-uuid/ | grep $1)
-    echo ${line##*/}
+    line=$(ls -al /dev/disk/by-uuid/ | grep $1);
+    echo ${line##*/};
 }
 
 dev2uuid () {
-    line=`ls -n  /dev/disk/by-uuid/ | grep $1`
+    line=`ls -n  /dev/disk/by-uuid/ | grep $1`;
     # extract substring:
     # echo $line | cut -d' ' -f9    # depends on #cols in ls -n
     # echo $line | sed -r 's/.* ([-0-9a-f]+) -> \.\.\/\.\.\/\w+/\1/'    # sed e-regexp
-    echo $line | grep -Po '(?<= )([-0-9a-f]+)(?= ->)'    # grep w/ Perl-compat regexp
+    echo $line | grep -Po '(?<= )([-0-9a-f]+)(?= ->)';    # grep w/ Perl-compat regexp
 }
 
 loc1 () { locate "$1" | head -n1; }
@@ -464,33 +464,31 @@ loc1 () { locate "$1" | head -n1; }
 tohtml () {
     # usage:    tohtml [ PORT [ STYLE DECLARATIONS ] ]
     # eg:       ls -l | tohtml 8000 "color: blue"
-    tmp=$(mktemp)
+    tmp=$(mktemp);
 
-    printf 'HTTP/1.1 200 OK\n\n' >> $tmp
-    printf '<html><body style="' >> $tmp
-    echo -n "$2" >> $tmp
+    printf 'HTTP/1.1 200 OK\n\n' >> $tmp;
+    printf '<html><body style="' >> $tmp;
+    echo -n "$2" >> $tmp;
     printf '">' >> $tmp
-    while read -r line
-    do
-	printf "$line" | htent >> $tmp
-	printf "</br>\n" >> $tmp
-    done
-    printf '</body></html>' >> $tmp
+    while read -r line; do
+	      printf "$line" | htent >> $tmp;
+	      printf "</br>\n" >> $tmp;
+    done;
+    printf '</body></html>' >> $tmp;
 
-    while true
-    do
-	cat $tmp | nc -l ${1:-8080}
-    done
+    while true; do
+	      cat $tmp | nc -l ${1:-8080};
+    done;
 }
 
 comment-out () {
     # search for a pattern in a script or configuration file and comment it out
     # by prefixing with '# '
-    pattern=$1
-    file=$2
-    tmpfile=`tempfile`
-    sed -E "s/$pattern/# \\0/" "$file" > $tmpfile
-    cp $tmpfile "$file"
+    pattern=$1;
+    file=$2;
+    tmpfile=`tempfile`;
+    sed -E "s/$pattern/# \\0/" "$file" > $tmpfile;
+    cp $tmpfile "$file";
 }
 
 videodl () {
@@ -500,17 +498,17 @@ videodl () {
     #   rtmpdump:      apt or git://git.ffmpeg.org/rtmpdump
     #   livestreamer:  https://github.com/chrippa/livestreamer
     #   livedumper:    pip or https://github.com/m45t3r/livedumper
-    livedumper "$2" "$1"
+    livedumper "$2" "$1";
 }
 
 jar-version () {
     # print version string from jar manifest file
-    wd=`pwd`
-    tempdir=`mktemp -d`
-    cd $tempdir
-    unzip "$wd/$1" > /dev/null
-    grep -i "^Version\|Implementation-Version" META-INF/MANIFEST.MF
-    cd "$wd"
+    wd=`pwd`;
+    tempdir=`mktemp -d`;
+    cd $tempdir;
+    unzip "$wd/$1" > /dev/null;
+    grep -i "^Version\|Implementation-Version" META-INF/MANIFEST.MF;
+    cd "$wd";
 }
 
 list-dependencies-safe () {
@@ -518,7 +516,7 @@ list-dependencies-safe () {
     # List shared libraries that are direct dependencies of EXECUTABLE.
     # Unlike ldd, this is safe to use on an untrusted executable.
     # Alternatives: ldd, readelf -d
-    objdump -p $1 | grep NEEDED
+    objdump -p $1 | grep NEEDED;
 }
 
 nthline () { sed -n "`printf "%dp;" $@`"; }
@@ -527,12 +525,12 @@ catnth () {
     # catenate files on specified lines of the input
     # eg. locate foo | catnth 3 5
     #     catenates 3rd and 5th files returned by locate
-    tmp=`mktemp`
-    cat > $tmp
+    tmp=`mktemp`;
+    cat > $tmp;
     while [ $# -gt 0 ]; do
-	cat `sed "${1}q;d" $tmp`
-	shift
-    done
+	      cat `sed "${1}q;d" $tmp`;
+	      shift;
+    done;
 }
 
 # fileapp FILE: return default application for FILE
@@ -548,7 +546,7 @@ tree-html () { tree -aC -H "`pwd`/$1" -o "$2" "$1"; }
 
 mangrep () {
     (
-        manfile=""
+        manfile="";
 
         if [[ "$1" =~ ^-h$\|^--help$ ]]; then
             cat <<EOF
@@ -567,74 +565,74 @@ EOF
             return;
         fi;
         if [[ "$1" =~ ^-s$\|^--strict$ ]]; then
-            strict="true"
+            strict="true";
             shift
-        fi
+        fi;
         if [[ "$1" =~ ^--bash$ ]]; then
-            manfile="bash"
-            shift
-        fi
+            manfile="bash";
+            shift;
+        fi;
         if [[ "$1" =~ ^--zsh$ ]]; then
-            manfile="zshall"
-            shift
-        fi
+            manfile="zshall";
+            shift;
+        fi;
         if [[ "$1" =~ ^--ksh$ ]]; then
-            manfile="ksh"
-            shift
-        fi
+            manfile="ksh";
+            shift;
+        fi;
 
         # consume manfile argument (if not set by options), then pattern argument
         if [[ -z "$manfile" ]]; then
-            manfile="$1"
-            shift
-        fi
-        pattern="$1"
+            manfile="$1";
+            shift;
+        fi;
+        pattern="$1";
 
 
         if [[ -n "$strict" ]]; then
             man $manfile | less -p "^       $pattern ";
         else
             man $manfile | less -p "^ +$pattern ";
-        fi
+        fi;
     )
 }
 
 totmp () {
-    tmp=`mktemp`
+    tmp=`mktemp`;
     while read -r x; do
-	echo $x >> $tmp
-    done
-    echo $tmp
+	      echo $x >> $tmp;
+    done;
+    echo $tmp;
 }
 
 pidfiles () { lsof -p $1 | less; }
 
 # ffprof PROF: print profile directory of profile PROF, eg. `ffprof default`
 ffprof () {
-    echo ~/.mozilla/firefox/*.$1*/
+    echo ~/.mozilla/firefox/*.$1*/;
 }
 # fftempfiles PROF: print temp directory of profile PROF, eg. `fftempfiles default`
 fftempfiles () {
-    echo ~/.cache/mozilla/firefox/*.$1*/cache2/entries/
+    echo ~/.cache/mozilla/firefox/*.$1*/cache2/entries/;
 }
 
 chrometempfiles () {
-    echo ~/.cache/google-chrome/Profile $1/Cache/
+    echo ~/.cache/google-chrome/Profile $1/Cache/;
 }
 
 copypath () {
-    realpath "$1" | xsel -ib
+    realpath "$1" | xsel -ib;
 }
 
 hex () {
-    printf "%x" "$1"
+    printf "%x" "$1";
 }
 
 fromhex () {
-    echo $((0x$1))
+    echo $((0x$1));
 }
 
-time-to-seconds () { echo $1 | awk -F: '{ print ($1 * 3600) + ($2 *   60) + $3 }' }
+time-to-seconds () { echo $1 | awk -F: '{ print ($1 * 3600) + ($2 *   60) + $3 }'; }
 
 video-extract () {
     (
@@ -650,39 +648,39 @@ video-extract INPUT_VIDEO OUTPUT_CLIP_NAME [ START_TIME ] END_TIME
       -h --help     display this help
       -n --no-act   display command but don't execute
 EOF
-            shift
-            return 0
+            shift;
+            return 0;
         elif [[ "$1" =~ ^-n$\|^--no-act(ion)?$ ]]; then
-            noaction="t"
-            shift
+            noaction="t";
+            shift;
         fi;
         # end options processing
 
-        file="$1"
-        out="$2"
+        file="$1";
+        out="$2";
         if [[ $# -gt 3 ]]; then
-            start="-ss $3"
-            s_start=`time-to-seconds $3`
+            start="-ss $3";
+            s_start=`time-to-seconds $3`;
             if [[ $4 == "end" ]]; then
-                duration=""
+                duration="";
             else
-                s_end=`time-to-seconds $4`
-                duration="-t $((s_end - s_start))"
-            fi
+                s_end=`time-to-seconds $4`;
+                duration="-t $((s_end - s_start))";
+            fi;
         else
-            start="-ss 00:00:00"
-            duration="-t $3"
-        fi
+            start="-ss 00:00:00";
+            duration="-t $3";
+        fi;
         # syntax:
         #   avconv $startpos -i "$file" $duration -c:a copy -c:v copy "$out"
         # alternative: (mencoder doesn't allow fractional seconds in times)
         #   mencoder -ss $startpos -endpos $endpos -oac pcm -oav copy "$file" "$out"
-        cmd="avconv $start -i \"$file\" $duration -codec copy  -metadata title=\"$out\" \"$out\""
+        cmd="avconv $start -i \"$file\" $duration -codec copy  -metadata title=\"$out\" \"$out\"";
         if [[ -n $noaction ]]; then
-            echo "$cmd"
+            echo "$cmd";
         else
-            eval "$cmd"
-        fi
+            eval "$cmd";
+        fi;
     )
 }
 
@@ -693,31 +691,31 @@ video-concat INPUT_CLIP_1 INPUT_CLIP_2 [OUTPUT_CLIP_NAME]
     Concatenate INPUT_CLIP_1 and INPUT_CLIP_2 with transitions.
     Save as OUTPUT_CLIP (default: out.mp3)
 EOF
-        return 0
+        return 0;
     fi;
-    melt "$1" "$2" -mix 19 -mixer luma -consumer avformat:"${3:-out.mp4}" vcodec=libxvid b=5000k
+    melt "$1" "$2" -mix 19 -mixer luma -consumer avformat:"${3:-out.mp4}" vcodec=libxvid b=5000k;
 }
 
 remove-recursive () {
-    file="$1"
-    dir="${2:-.}"
+    file="$1";
+    dir="${2:-.}";
     find "$dir" -type d -exec rm {}/"$file" \;
 }
 
 github-co-subdir () {
     # Checkout subdirectory as svn repo (using svn since it's not supported by git)
-    url=${1/tree\/master/trunk}
-    defaultname=`basename $1`
-    dest=${2:-$defaultname}
-    svn checkout "$url" "$dest"
+    url=${1/tree\/master/trunk};
+    defaultname=`basename $1`;
+    dest=${2:-$defaultname};
+    svn checkout "$url" "$dest";
 }
 
 github-export-subdir () {
     # Export subdirectory (using svn since it's not supported by git)
-    url=${1/tree\/master/trunk}
-    defaultname=`basename $1`
-    dest=${2:-$defaultname}
-    svn export "$url" "$dest"
+    url=${1/tree\/master/trunk};
+    defaultname=`basename $1`;
+    dest=${2:-$defaultname};
+    svn export "$url" "$dest";
 }
 
 animelyrics () {
@@ -731,26 +729,26 @@ animelyrics () {
     # The result is saved as a song.utf8.txt file.
     # Requires: iconv (from glibc-common), dos2unix.
     if [[ "$1" =~ ^http://www.animelyrics.com/ ]]; then
-	url="${1/%.htm/.jis.txt}"
-	fname="${url##*/}"
-	curl "$url" > "$fname"
+        url="${1/%.htm/.jis.txt}";
+        fname="${url##*/}";
+        curl "$url" > "$fname";
     else
-	fname="$1"
-    fi
-    out="${fname/%.jis.txt/.utf8.txt}"
-    head -n8 "$fname" > "$out"
-    tail -n+8 "$fname" | iconv -f SHIFT-JIS -t UTF-8 >> "$out"
+        fname="$1";
+    fi;
+    out="${fname/%.jis.txt/.utf8.txt}";
+    head -n8 "$fname" > "$out";
+    tail -n+8 "$fname" | iconv -f SHIFT-JIS -t UTF-8 >> "$out";
     # ^M characters from line endings
-    dos2unix "$out"
+    dos2unix "$out";
 }
 
 updateln () {
     (
-        prefix="${1%/}"
-        targets="${2:-.hardlink-targets}"
+        prefix="${1%/}";
+        targets="${2:-.hardlink-targets}";
         for f in `cat "$targets"`; do
-	          ln -i -T "$prefix/$f" ./"$f"
-        done
+	          ln -i -T "$prefix/$f" ./"$f";
+        done;
     )
 }
 
@@ -758,43 +756,43 @@ inrange () {
     # inrange NUM RANGE
     # uses expandranges script from ~/.scripts
     # prints NUM if it is in the range, nothing otherwise (allow use as filter)
-    number="$1"
-    range="$2"
-    grep -q "^$number$" <(expandranges "$range") && printf "$number\n"
+    number="$1";
+    range="$2";
+    grep -q "^$number$" <(expandranges "$range") && printf "$number\n";
 }
 
 dllist () {
-    list="$1"
-    shift
-    wgetopts="${*:--e robots=off -U=Mozilla -w 1}"
+    list="$1";
+    shift;
+    wgetopts="${*:--e robots=off -U=Mozilla -w 1}";
 
     for f in `cat "$list"`; do
-    	wget  `echo "$wgetopts"` "$f"
-    done
+    	wget  `echo "$wgetopts"` "$f";
+    done;
 }
 
 function img-rot () {
     # requires imagemagick/graphicsmagick
-    infile="$1"
-    cw_angle="$2"
-    outfile="${3:-${infile}_rot_$2}"
+    infile="$1";
+    cw_angle="$2";
+    outfile="${3:-${infile}_rot_$2}";
     if [ -f "$outfile" ]; then
-        echo "File '$outfile' exists."
-	confirm "Overwrite?" || return 1
-    fi
-    convert "$infile" -rotate "$cw_angle" "$outfile"
+        echo "File '$outfile' exists.";
+        confirm "Overwrite?" || return 1;
+    fi;
+    convert "$infile" -rotate "$cw_angle" "$outfile";
 }
 
 function img-rot () {
     # requires imagemagick/graphicsmagick
-    infile="$1"
-    cw_angle="$2"
-    outfile="${3:-${infile}_rot_$2}"
+    infile="$1";
+    cw_angle="$2";
+    outfile="${3:-${infile}_rot_$2}";
     if [ -f "$outfile" ]; then
-        echo "File '$outfile' exists."
-	confirm "Overwrite?" || return 1
-    fi
-    convert "$infile" -rotate "$cw_angle" "$outfile"
+        echo "File '$outfile' exists.";
+        confirm "Overwrite?" || return 1;
+    fi;
+    convert "$infile" -rotate "$cw_angle" "$outfile";
 }
 
 function img-resize () {
@@ -816,31 +814,31 @@ img-resize [-h | -v] INFILE WxH [OUTFILE]
       -h --help     display this help
       -v --verbose  verbose
 EOF
-        shift
-        return 0
+        shift;
+        return 0;
     fi;
     if [[ "$1" =~ ^-v$\|^--verbose$ ]]; then
-        verbose="true"
-        shift
-    fi
-    infile="$1"
-    size="$2"
-    default_out_name="${infile%.*}_resized.${infile##*.}"
-    outfile="${3:-$default_out_name}"
+        verbose="true";
+        shift;
+    fi;
+    infile="$1";
+    size="$2";
+    default_out_name="${infile%.*}_resized.${infile##*.}";
+    outfile="${3:-$default_out_name}";
     if [[ -n $verbose ]]; then
-        echo "convert \"$infile\" -resize \"$size\" \"$outfile\""
-    fi
-    convert "$infile" -resize "$size" "$outfile"
+        echo "convert \"$infile\" -resize \"$size\" \"$outfile\"";
+    fi;
+    convert "$infile" -resize "$size" "$outfile";
 }
 
 function confirm () {
-    Q="${1:-Are you sure?}"
-    read -p "$Q " -n 1; echo
+    Q="${1:-Are you sure?}";
+    read -p "$Q " -n 1; echo;
     if [[ $REPLY =~ [yY] ]]; then
-		return 0
+        return 0;
     else
-		return 1
-    fi
+        return 1;
+    fi;
 }
 
 function mkvtracks () {
@@ -853,74 +851,74 @@ mkvtracks [-h | -v] file
       -h --help     display this help
       -v --verbose  verbose listing
 EOF
-        shift
-        return 0
+        shift;
+        return 0;
     fi;
     if [[ "$1" =~ ^-v$\|^--verbose$ ]]; then
-        shift
-	      mkvinfo "$1" | grep -ie '\(track\|codec id\)'
-        return 0
+        shift;
+        mkvinfo "$1" | grep -ie '\(track\|codec id\)';
+        return 0;
     fi;
-  mkvmerge -i "$1"
+    mkvmerge -i "$1";
 }
 
 function mkvextract-ass () {
-	file="$1"
-	trackID="$2"
-	mkvextract tracks "$file" "$trackID":"${file%.*}.ass"
+    file="$1";
+    trackID="$2";
+    mkvextract tracks "$file" "$trackID":"${file%.*}.ass";
 }
 
 function findfilebyext () {
-	# usage: findfilebyext EXT [INAME]
-	#   Finds files in current directory subtree with extension EXT and iname INAME.
-	# eg.  findfilebyext jar
-	# eg.  findfilebyext jar "*lib*"
-	ftype="$1"
-	file="${2:-*}"
-	find . -type f -iname "*.$ftype" -iname "$file"
+	  # usage: findfilebyext EXT [INAME]
+	  #   Finds files in current directory subtree with extension EXT and iname INAME.
+	  # eg.  findfilebyext jar
+	  # eg.  findfilebyext jar "*lib*"
+    ftype="$1";
+    file="${2:-*}";
+    find . -type f -iname "*.$ftype" -iname "$file";
 }
 
 function mediainfo-browse () {
-	# usage: mediainfo-browse $FILE
-	# open mediainfo data on $FILE in HTML format in browser
-	file="$1"
-	sensibleb_or_null=''
-	browser="${BROWSER:-${sensibleb_or_null:-firefox}}"
-	output=`mktemp`
-	mediainfo --Output=HTML "$file"  > $output
-	$browser "$output"
+	  # usage: mediainfo-browse $FILE
+	  # open mediainfo data on $FILE in HTML format in browser
+    file="$1";
+    sensibleb_or_null='';
+    browser="${BROWSER:-${sensibleb_or_null:-firefox}}";
+    output=`mktemp`;
+    mediainfo --Output=HTML "$file"  > $output;
+    $browser "$output";
 }
 
 dirtree-permissions () {
-	dir="${1:-.}"
-	perm="${2:-755}"
-	find "$dir" -type d -print0 -exec chmod "$perm" {} \+
+    dir="${1:-.}";
+    perm="${2:-755}";
+    find "$dir" -type d -print0 -exec chmod "$perm" {} \+;
 }
 
 dirtree-fileperms () {
-	dir="${1:-.}"
-	perm="${2:-644}"
-	find "$dir" -type f -print0 -exec chmod "$perm" {} \+
+    dir="${1:-.}";
+    perm="${2:-644}";
+    find "$dir" -type f -print0 -exec chmod "$perm" {} \+;
 }
 
 dirtree () {
-	dir="${1:-.}"
-	shift
-	comm="${*:-echo}"
-	find "$dir" -type d -print0 -exec "$comm" {} \;
+    dir="${1:-.}";
+    shift;
+    comm="${*:-echo}";
+    find "$dir" -type d -print0 -exec "$comm" {} \;;
 }
 
 dirtree-file () {
-	dir="${1:-.}"
-	shift
-	comm="${*:-echo}"
-	find "$dir" -type f -print0 -exec "$comm" {} \;
+    dir="${1:-.}";
+    shift;
+    comm="${*:-echo}";
+    find "$dir" -type f -print0 -exec "$comm" {} \;;
 }
 
 jlc () {
-	# J language command
-	cmd="$*"
-	$JHOME/bin/jconsole -js "echo $cmd" "return''"
+    # J language command
+    cmd="$*";
+    $JHOME/bin/jconsole -js "echo $cmd" "return''";
 }
 
 blankpage () {
@@ -932,30 +930,30 @@ blankpage SIZE COL NAME  - creates a page of size SIZE and colour COL, called NA
 ";
     if [[ "$1" =~ ^-h$\|^--help$ ]]; then echo "$help"; shift; fi;
     # requires imagemagick/graphicsmagick
-	case "$#" in
-	  0)
-		size="1000x1600";
-		col="xc:white";
-		out="out.jpg";
-		;;
-	  1)
-		size="1000x1600";
-		col="xc:white";
-		out="$1";
-		;;
-	  2)
-		size="$1";
-		col="xc:white";
-		out="$2";
-		;;
-	  3)
-		size="$1";
+    case "$#" in
+        0)
+            size="1000x1600";
+            col="xc:white";
+            out="out.jpg";
+            ;;
+        1)
+            size="1000x1600";
+            col="xc:white";
+		        out="$1";
+		        ;;
+	      2)
+		        size="$1";
+		        col="xc:white";
+		        out="$2";
+		        ;;
+	      3)
+		        size="$1";
 		col="xc:$2";
 
-		out="$3";
-		;;
-	esac
-	convert -size "$size" "$col" "$out"
+    out="$3";
+    ;;
+    esac;
+    convert -size "$size" "$col" "$out";
 }
 
 blankpage_before () {
@@ -970,85 +968,85 @@ page at a specific position to a comic archive directory.
     Options:
       -h --help     display this help
 EOF
-        shift
-        return 0
-    fi
-    n="$1"
-    col="${2:-xc:white}"
-    f=$(ls | sed -n "`printf "%dp;" $n`")
-    base=`echo "${f%.*}"`
-    ext=`echo "${f##*.}"`
-    newname="${base}-prev.${ext}"
-    geom=`convert "$f" -print "%wx%h\n" /dev/null`
-    convert -size "$geom" "$col" "$newname"
+        shift;
+        return 0;
+    fi;
+    n="$1";
+    col="${2:-xc:white}";
+    f=$(ls | sed -n "`printf "%dp;" $n`");
+    base=`echo "${f%.*}"`;
+    ext=`echo "${f##*.}"`;
+    newname="${base}-prev.${ext}";
+    geom=`convert "$f" -print "%wx%h\n" /dev/null`;
+    convert -size "$geom" "$col" "$newname";
 }
 
 name-following () {
     (
-        base=`echo "${1%.*}"`
-        ext=`echo "${1##*.}"`
-        echo "${base}_next.${ext}"
+        base=`echo "${1%.*}"`;
+        ext=`echo "${1##*.}"`;
+        echo "${base}_next.${ext}";
     )
 }
 name-preceding () {
     (
-        base=`echo "${1%.*}"`
-        ext=`echo "${1##*.}"`
-        echo "${base}-prev.${ext}"
+        base=`echo "${1%.*}"`;
+        ext=`echo "${1##*.}"`;
+        echo "${base}-prev.${ext}";
     )
 }
 
 files-from-url () {
     # convert a list of 'file://' URLs to filenames
-	sep="${1-\n}";
-	while read -r f; do
-		printf "${f#file://}$sep";
-	done
+    sep="${1-\n}";
+    while read -r f; do
+        printf "${f#file://}$sep";
+    done;
 }
 
 rename-prefix-dir () {
-	for arg in "$@"; do
-		filename="${arg##*/}";
-		filepath=`readlink -f "$arg"`;
-		dirpath="${filepath%/*}";
-		dirname="${dirpath##*/}";
-		mv -i "$arg" "$dirname - $filename";
-	done
+    for arg in "$@"; do
+        filename="${arg##*/}";
+	      filepath=`readlink -f "$arg"`;
+	      dirpath="${filepath%/*}";
+	      dirname="${dirpath##*/}";
+	      mv -i "$arg" "$dirname - $filename";
+    done;
 }
 
 rename-strip-extra-from-year () {
-    options=""; if [ "$1" == "-n" ]; then options="-n"; shift; fi
-    files="$@"
-    str='s/[(][-\w_.'"'"']+, ?(\d{4})[)](?=\.\w+)$/($1)/'
-    echo "Renaming with Perl expression: $str"
+    options=""; if [ "$1" == "-n" ]; then options="-n"; shift; fi;
+    files="$@";
+    str='s/[(][-\w_.'"'"']+, ?(\d{4})[)](?=\.\w+)$/($1)/';
+    echo "Renaming with Perl expression: $str";
     rename "$options" "$str" "$@";
 }
 
 ren-flatten-subdirs () {
     # flatten contents of numbered subdirectories
-    echo "Rename subdirectories by embedded number?"
-    read -r REPLY
+    echo "Rename subdirectories by embedded number?";
+    read -r REPLY;
     if [[ $REPLY =~ "^(y|Y|yes|YES|Yes)$" ]]; then
-        rename 's/[^0-9]*([0-9]+).*/$1/' *
-    fi
-    echo "Are you sure you want to flatten all subdirectories of $PWD?"
-    read -r REPLY
+        rename 's/[^0-9]*([0-9]+).*/$1/' *;
+    fi;
+    echo "Are you sure you want to flatten all subdirectories of $PWD?";
+    read -r REPLY;
     if [[ $REPLY =~ "^(y|Y|yes)$" ]]; then
-        for d in */; do for f in "$d"/*; do mv "$f" "${f//\//_}"; done; done
-        for d in */; do rmdir "$d"; done
-    fi
+        for d in */; do for f in "$d"/*; do mv "$f" "${f//\//_}"; done; done;
+        for d in */; do rmdir "$d"; done;
+    fi;
 }
 
 renprefix () {
-    replacement="'s/^/$1/'"
+    replacement="'s/^/$1/'";
     for f in "$2"; do
-        eval "rename $replacement '$f'"
-    done
+        eval "rename $replacement '$f'";
+    done;
     if [[ -z "$2" ]]; then
         for f in *; do
-            eval "rename $replacement '$f'"
-        done
-    fi
+            eval "rename $replacement '$f'";
+        done;
+    fi;
 }
 
 bci () {
@@ -1089,14 +1087,14 @@ lnpath () {
     dest="${2%/}";
     relpath="${file%/*}"
     mkdir -pv "$dest/$relpath";
-    ln "$file" "$dest/$file"
+    ln "$file" "$dest/$file";
 }
 
 tztime () {
     # FIXME
     zone=$(find /usr/share/zoneinfo/           \
           | grep -i "$1"                       \
-          | iselect -kj:KEY_DOWN -kk:KEY_UP -ma)
+          | iselect -kj:KEY_DOWN -kk:KEY_UP -ma);
     prefix="${zone%/*/*}";
     tz="${zone#$prefix/}";
     TZ="$tz" date;
@@ -1111,9 +1109,9 @@ symlink-by-correspondence () {
     A="${1%/}";
     B="${2%/}";
     A_NAME="${A##*/}";
-    echo "A: $A"
-    echo "B: $B"
-    echo "ANAME: $A_NAME"
+    echo "A: $A";
+    echo "B: $B";
+    echo "ANAME: $A_NAME";
     for dir in "$B/"*/; do
         dir="${dir%/}";
         if [ -n "$case_insensitive" ]; then
@@ -1157,9 +1155,9 @@ github-clone-with-wiki() {
 }
 
 grepcontext() {
-    n="$1"
-    shift
-    grep -A $n -B$n -n "$@"
+    n="$1";
+    shift;
+    grep -A $n -B$n -n "$@";
 }
 
 grepview() {
@@ -1213,12 +1211,12 @@ EOF
         shift;
     fi;
     if [[ "$1" =~ ^--?q(uiet)?$ ]]; then quiet="-q "; shift; fi;
-    echo $1 $2
-    f="$1"
-    startdir="${2:-.}"
-    cmd="find $startdir -samefile $f ${quiet+ 2>/dev/null}"
-    [[ -z $quiet ]] &&  >&2 echo "$cmd"
-    eval "$cmd"
+    echo $1 $2;
+    f="$1";
+    startdir="${2:-.}";
+    cmd="find $startdir -samefile $f ${quiet+ 2>/dev/null}";
+    [[ -z $quiet ]] &&  >&2 echo "$cmd";
+    eval "$cmd";
 }
 
 googlecodewiki2gfm() {
@@ -1226,8 +1224,8 @@ googlecodewiki2gfm() {
     converter="${converter_dir%/}/wiki2gfm.py";
     infile="$1";
     outfile="${2:-$infile.md}";
-    echo "$converter" --input_file "$infile" --output_file "$outfile"
-    python2 "$converter" --input_file "$infile" --output_file "$outfile"
+    echo "$converter" --input_file "$infile" --output_file "$outfile";
+    python2 "$converter" --input_file "$infile" --output_file "$outfile";
 }
 
 grepalias() {
@@ -1250,15 +1248,15 @@ grepalias [-h] pattern
 EOF
         shift;
     fi;
-    pattern="$1"
-    re="^${pattern}="
-    echo 'alias | grep "'"$re"'"'
-    alias | grep "$re"
+    pattern="$1";
+    re="^${pattern}=";
+    echo 'alias | grep "'"$re"'"';
+    alias | grep "$re";
 }
 
 exeview() {
     (
-        matching='substring'
+        matching='substring';
         if [[ "$1" =~ ^-h$\|^--help$ ]]; then
             cat <<EOF
 exeview [-h] [-e|-m] pattern
@@ -1273,41 +1271,41 @@ EOF
             shift;
         fi;
         if [[ "$1" =~ ^-m$\|^--match$ ]]; then
-            matching='glob'
-            shift
-        fi
+            matching='glob';
+            shift;
+        fi;
         if [[ "$1" =~ ^-e$\|^--exact$ ]]; then
-            matching='exact'
-            shift
-        fi
+            matching='exact';
+            shift;
+        fi;
 
-        pattern="$1"
+        pattern="$1";
 
         if [[ $matching == "glob" ]]; then
-            file=`whence -m "$pattern" | iselect -ma`
+            file=`whence -m "$pattern" | iselect -ma`;
         elif [[ $matching == "substring" ]]; then
-            file=`whence -m "*$pattern*" | iselect -ma`
+            file=`whence -m "*$pattern*" | iselect -ma`;
         elif [[ $matching == "exact" ]]; then
-            file=`whence "$pattern" | iselect -ma`
-        fi
+            file=`whence "$pattern" | iselect -ma`;
+        fi;
 
         if [[ -n "$file" ]]; then
-            vimpager "$file"
-        fi
+            vimpager "$file";
+        fi;
     )
 }
 
 tsvtotable () {
     # TODO: finish
-    printf '<html>\n<head>\n'
-    printf '<meta http-equiv="content-type" content="text/html; charset=UTF-8">\n'
-    printf '<style>\ntable {\nborder-collapse="collapse";\n}\ntd {\n'
-    printf "border='1px solid black';\npadding='5px';\n"
-    printf '}\n</style>\n</head>\n<body>\n<div>\n<table>\n'
+    printf '<html>\n<head>\n';
+    printf '<meta http-equiv="content-type" content="text/html; charset=UTF-8">\n';
+    printf '<style>\ntable {\nborder-collapse="collapse";\n}\ntd {\n';
+    printf "border='1px solid black';\npadding='5px';\n";
+    printf '}\n</style>\n</head>\n<body>\n<div>\n<table>\n';
     while read -r line; do
-        sed 's:^:<tr><td>:; s:\t:</td><td>:g; s:$:</td></tr>\n:'
-    done
-    printf '</table>\n</div>\n</body>\n</html>\n'
+        sed 's:^:<tr><td>:; s:\t:</td><td>:g; s:$:</td></tr>\n:';
+    done;
+    printf '</table>\n</div>\n</body>\n</html>\n';
 }
 
 filter() {
@@ -1333,40 +1331,40 @@ EOF
     # echo "[[ $* ]]"
     while read -r x; do
         if eval "[[ $* ]]"; then
-            echo "$x"
-        fi
-    done
+            echo "$x";
+        fi;
+    done;
 }
 
 chm2html() {
-    file="$1"
-    dir="$2"
-    archmage "$file" "$dir"
+    file="$1";
+    dir="$2";
+    archmage "$file" "$dir";
     # correct erroneous wrapping of index links
-    printf '\na { white-space: nowrap; }' >> "$dir"/arch_css.css
+    printf '\na { white-space: nowrap; }' >> "$dir"/arch_css.css;
 }
 
 chm2maff() {
-    file="$1"
-    dir="$2"
-    archmage "$file" "$dir"
+    file="$1";
+    dir="$2";
+    archmage "$file" "$dir";
     # correct erroneous wrapping of index links
-    printf '\na { white-space: nowrap; }' >> "$dir"/arch_css.css
-    7z a -tzip "$dir.maff" "$dir"
-    rm -Ir "$dir"
+    printf '\na { white-space: nowrap; }' >> "$dir"/arch_css.css;
+    7z a -tzip "$dir.maff" "$dir";
+    rm -Ir "$dir";
 }
 
 donum () {
     # eg. seq 1 5 | donum -f '%d_%d' 'i+1' '2*i' # result: 2_2 3_4 4_6 5_8 6_10
-    format='%d'
-    separator=' '
+    format='%d';
+    separator=' ';
 
     # === PARSE ARGUMENTS ===
-    local SHORT=hsf:
-    local LONG=help,separator,format
-    local PARSED=`getopt --options $SHORT --longoptions $LONG --name "$0" -- "$@"`
-    if [[ $? -ne 0 ]]; then exit 2; fi
-    eval set -- "$PARSED"
+    local SHORT=hsf:;
+    local LONG=help,separator,format;
+    local PARSED=`getopt --options $SHORT --longoptions $LONG --name "$0" -- "$@"`;
+    if [[ $? -ne 0 ]]; then exit 2; fi;
+    eval set -- "$PARSED";
     while true; do
         case "$1" in
             -h|--help)
@@ -1382,35 +1380,35 @@ donum [OPTION...] EXPR...
       -s --separator  specify separator string (default: space)
       -f --format     specify printf format specifier for output
 EOF
-                return 0
+                return 0;
                 ;;
             -s|--separator)
-                separator="$2"
-                shift 2
+                separator="$2";
+                shift 2;
                 ;;
             -f|--format)
-                format="$2"
-                shift 2
+                format="$2";
+                shift 2;
                 ;;
             --)
-                shift
+                shift;
                 break;
                 ;;
             *)
-                echo "error"; return 3
+                echo "error"; return 3;
                 ;;
-        esac
-    done
+        esac;
+    done;
     # =======================
 
-    use_sep=""
-    exprs=( "$@" )
+    use_sep="";
+    exprs=( "$@" );
     while read -r i; do
         for ((n=1; n<=${#exprs[@]}; ++n)); do
-            exprs[$n]=`eval 'echo $((' "${@[$n]}" '))'`
-            # echo "--" `eval 'echo $((' "${@[$n]}" '))'` "--"
-        done
-        printf "${use_sep:+$separator}$format" "$@"
-        use_sep="t"
-    done
+            exprs[$n]=`eval 'echo $((' "${@[$n]}" '))'`;
+            # echo "--" `eval 'echo $((' "${@[$n]}" '))'` "--";
+        done;
+        printf "${use_sep:+$separator}$format" "$@";
+        use_sep="t";
+    done;
 }
