@@ -112,10 +112,11 @@ copylastcommand() { fc -ln -1 -1 | xsel -ib; }
 zle -N copylastcommand
 bindkey '^[[2;3~' copylastcommand
 
-# copy last result on C-Ins
+# copy last result on C-~ or C-Ins
 copylastresult() { eval `fc -ln -1 -1` | xsel -ib }
 zle -N copylastresult
 bindkey '^[[2;5~' copylastresult
+bindkey '^@' copylastresult
 
 zstyle ':completion:*' list-prompt   ''
 zstyle ':completion:*' select-prompt ''
