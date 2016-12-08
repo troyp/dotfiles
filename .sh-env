@@ -95,7 +95,6 @@ paths=(
     ## optimized ripgrep: prefer to cargo version
     /opt/ripgrep/target/release
     $HOME/.cargo/bin
-    $HOME/.nimble/bin
     $HOME/.cask/bin
     $HOME/.lein/bin
     $HOME/.npm-global/bin
@@ -139,7 +138,8 @@ paths=(
     /opt/lilyterm/bin
     # /opt/mozart/platform/unknown-unknown
     /opt/mozart2/bin
-    /opt/Nim/bin
+    /opt/nim/bin
+    /opt/nim
     # /opt/node/bin
     /opt/pdf-diff
     /opt/pdfdir
