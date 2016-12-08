@@ -1412,3 +1412,14 @@ EOF
         use_sep="t";
     done;
 }
+
+psfield () {
+    local field="$1";
+    local pid="$2"
+    ps -h -o$field -p$pid 2>/dev/null;
+}
+
+print_terminal() {
+    local pid=$(ps -h -oppid -p$$   2>/dev/null)
+    echo      $(ps -h -ocomm -p$pid 2>/dev/null)
+}
