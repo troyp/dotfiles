@@ -276,6 +276,8 @@ alias ren-2-digits-before-ext="rename '"'s/(?<=[^0-9])(\d)\.([^.]+)$/0$1.$2/'"' 
 alias ren-3-digits-before-ext="rename '"'s/(?<=[^0-9])(\d)\.([^.]+)$/00$1.$2/'"' *; rename '"'s/(?<=[^0-9])(\d\d)\.([^.]+)$/0$1.$2/'"' *"
 alias ren-fat32='ren "s/:/ -/g; tr/\\\"?;+\\\\/'"'.,&|/"'"'
 alias renn-fat32='renn "s/:/ -/g; tr/\\\"?;+\\\\/'"'.,&|/"'"'
+alias ren-mp3='rename "s/\W*[[(](\w|-)+[.-]com[])]\.mp3$/.mp3/i"'
+alias renn-mp3='rename -n "s/\W*[[(](\w|-)+[.-]com[])]\.mp3$/.mp3/i"'
 
 ## MMV: simple wildcard-based renaming
 # mmv: eg.   mmv '*.bk.*' '#1.#2'
