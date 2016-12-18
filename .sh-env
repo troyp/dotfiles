@@ -171,7 +171,7 @@ infopaths=(
     /usr/share/info
     /usr/local/share/info
     /opt/info
-    /opt/emacs2?/info
+    /opt/emacs*/info
     /usr/local/texlive/201?/texmf-dist/doc/info
     $HOME/.linuxbrew/share/info
 )
