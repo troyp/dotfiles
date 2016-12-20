@@ -84,6 +84,8 @@ fpath+=~/.zfunc
 
 zsh_URL=https://sourceforge.net/projects/zsh/files/latest/download?source=typ_redirect
 
+setopt null_glob
+
 bindkey "^P" history-beginning-search-backward
 bindkey "^N" history-beginning-search-forward
 bindkey "^[[A" up-line-or-search
