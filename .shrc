@@ -52,8 +52,8 @@ export PROJECT_HOME=$HOME/dev
 # ************
 
 # These scripts work for both bash and zsh:
-source /opt/perlbrew/etc/bashrc
-source /opt/perlbrew/etc/perlbrew-completion.bash
+[[ -f /opt/perlbrew/etc/bashrc ]] && source /opt/perlbrew/etc/bashrc
+[[ -f /opt/perlbrew/etc/perlbrew-completion.bash ]] && source /opt/perlbrew/etc/perlbrew-completion.bash
 
 # -------------------------------------------------------------------------------
 # *******
