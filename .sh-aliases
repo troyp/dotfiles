@@ -505,7 +505,7 @@ alias 2cb='xsel -ib >/dev/null'  #  uptime|2cb  # uptime to clipboard (no output
 alias c=copyq
 alias qn='copyq tab "&notes" add'       # add to copyq notes tab
 alias qsn='copyq tab "&snippets" add'   # add to copyq snippets tab
-alias cbdl='cb | dolines wget "$x"; done'   # download a list of file urls from clipboard
+alias cbdl='(cb; echo "") | dolines wget "$x"; done'   # download a list of file urls from clipboard
 
 
 #---------------
