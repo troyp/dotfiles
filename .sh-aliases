@@ -713,11 +713,7 @@ alias restartx="sudo restart `basename $(cat /etc/X11/default-display-manager)`"
 alias has-virt-support="egrep -q 'vmx|svm' /proc/cpuinfo"
 alias has-64bit-cpu='egrep -q lm /proc/cpuinfo'
 alias has-64bit-kernel='[[ `uname -m` =~ 64 ]]'
-<<<<<<< HEAD
 alias xcape-restart="pkill -9 xcape; xcape -t 300 -e 'Control_L=Escape;Super_R=Menu' &"
-=======
-alias xcape-restart="pkill xcape; xcape -t 300 -e 'Control_L=Escape;Super_R=Menu' &"
->>>>>>> 968ec98ffc8858c047acdc8c2805badb9b0e9f8c
 
 # --------------------------------------
 # SYNTAX HIGHLIGHTING & PRETTY PRINTING.
