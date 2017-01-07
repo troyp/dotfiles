@@ -1406,3 +1406,53 @@ print_terminal() {
     local pid=$(ps -h -oppid -p$$   2>/dev/null)
     echo      $(ps -h -ocomm -p$pid 2>/dev/null)
 }
+
+aptfilename() {
+    # help
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+aptfilename pattern
+    Search for packages containing a file ending in /PATTERN.
+    If PATTERN is a string, then it matches the filename.
+
+    Options:
+      -h --help     display this help
+EOF
+        return 0;
+    fi;
+    (
+        # other options
+        while [[ $# -gt 1 ]]; do
+            case "$1" in
+                -p|--partial)
+                    partial="partial"
+                    shift
+                    ;;
+                *)
+                    echo "unrecognized option: $1"
+                    return 1
+                    ;;
+            esac
+        done
+
+        re="/$1$"    # default (non-partial) regex
+
+        # handle partial option
+        if [[ -n $partial ]]; then
+            if [[ "$1" == ^*$ ]]; then
+                inner="${${1#^}%$}"
+                re="/$inner$"
+            elif [[ "$1" == ^* ]]; then
+                inner="${1#^}"
+                re="/$inner"'[^/]*$'
+            elif [[ "$1" == *$ ]]; then
+                inner="${1%$}"
+                re="$inner$"
+            else
+                re="$1"
+            fi
+        fi
+
+        apt-file find --regexp "$re"
+    )
+}
