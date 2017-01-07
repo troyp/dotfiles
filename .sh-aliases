@@ -375,6 +375,11 @@ alias wgetp='wget -kKpEN'    # get page & prerequisites (same host only)
 alias wgetpp='wget -kKpEHN'   # get page & prerequisites (span hosts)
 alias wgetpcut='wget -kKpEN -nH --cut-dirs'
 alias wgetcat='wget -pE -O' # usage: wgetcat <filename> <filename> ... <url> #UNTESTED
+alias wgetm-cjk='wget -nH -kKpN -rl inf -np --no-remove-listing --restrict-file-names=nocontrol'
+alias wgetmh-cjk='wget -H -kKpN -rl inf -np --no-remove-listing --restrict-file-names=nocontrol'
+alias wgetmf-cjk="wgetm --reject-regex '.*[?$].*' --restrict-file-names=nocontrol"  # no param URLs
+alias wgetm-incdirs-cjk='wget -nH -mkKp --include-directories --restrict-file-names=nocontrol'
+alias wgetmff-incdirs-cjk="wget -nH -mkKp --reject-regex '.*[?$].*' --restrict-file-names=nocontrol --include-directories"
 alias listhttplinks='xargs elinks --dump | grep "http" | sed "s/.*http/http/g"' # Waits for url from stdin then lists http links on page. echo url | listhttplinks. Pipe to wget.
 alias listhttplinks2='xargs wget -O - 2>&1 | grep -i "http:" | sed "s/^.*http/http/\" | cut -d"\"" -f1 | sort -u'
 # alias cbdl (clipboard aliases)
