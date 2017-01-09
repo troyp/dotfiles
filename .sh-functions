@@ -1007,6 +1007,13 @@ rename-strip-extra-from-year () {
 
 ren-flatten-subdirs () {
     # flatten contents of numbered subdirectories
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+ren-flatten-subdirs
+    Flatten contents of numbered subdirectories of the current directory.
+EOF
+        return 0;
+    fi;
     echo "Rename subdirectories by embedded number?";
     read -r REPLY;
     if [[ $REPLY =~ "^(y|Y|yes|YES|Yes)$" ]]; then
