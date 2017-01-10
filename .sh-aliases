@@ -904,9 +904,9 @@ alias choose='iselect -ma'
 # alias maplines='xargs -d "\n" -n 1'
 alias maplines='xargs -L1'
 # eg.     ls|dolines printf "`pwd`/$x\n"; done
-alias dolines='while read -r x; do'
+alias dolines='while read -r x || [[ -n $x ]]; do'
 # uniqdirs: print a list of target directories (ie. resolve symlinks) of files
-alias uniqdirs='while read -r line; do dirname "`readlink -f "$line"`"; done | sort | uniq'
+alias uniqdirs='while read -r line || [[ -n $line ]]; do dirname "`readlink -f "$line"`"; done | sort | uniq'
 # eg.              ls -l | dofields echo $x9; done
 # equivalent to:   ls -l | awk '{ print $9 }'
 alias dofields='while read -r x1 x2 x3 x4 x5 x6 x7 x8 x9; do'
