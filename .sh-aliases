@@ -949,6 +949,8 @@ alias tobasenames='xargs basename -a'               # convert paths to basenames
 alias todirnames='xargs realpath | xargs dirname'   # convert paths to dirnames
 alias pickt='pick -t'    # pick subtable (https://github.com/bernardorufino/pick)
 alias noerr='cat 2>/dev/null'    # allow |noerr to hide error output
+alias withnl='(while read -r x || [[ -n $x ]]; do echo "$x"; done)'
+alias tacn='withnl | tac'    # tac with newline
 
 # -----------
 # FORMATTING.
