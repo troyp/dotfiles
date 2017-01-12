@@ -5,6 +5,10 @@ include "%L"   # import the default Compose file for your locale
 # japanese full-width
 <Multi_key> <bracketleft> <bracketleft>       : "《"
 <Multi_key> <bracketright> <bracketright>     : "》"
+<Multi_key> <less> <quotedbl>                 : "『"
+<Multi_key> <greater> <quotedbl>              : "』"
+<Multi_key> <less> <apostrophe>               : "「"
+<Multi_key> <greater> <apostrophe>            : "」"
 <Multi_key> <0> <minus>                       : "・"
 # set operators
 <Multi_key> <braceleft> <u>                   : "∪"
