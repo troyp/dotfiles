@@ -181,6 +181,7 @@ manpaths=(
     /usr/local/texlive/201?/texmf-dist/doc/man
     $HOME/.linuxbrew/share/man/
     /opt/man/
+    /opt/racket/man
 )
 for i in "${manpaths[@]}"; do append-to-path-var "MANPATH" "$i" ; done
 
