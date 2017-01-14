@@ -23,7 +23,7 @@
        (when fr (send fr command))))))
 
 ;; -------------------------------------------------------------------------------
-;; rebind (see drracket docs)
+;; rebind (see drracket docs 3.3.9)
 ;; Bind key to duplicate an existing shortcut, using the name from the
 ;; "Show Active Keybindings" dialog
 
@@ -34,7 +34,7 @@
      (send (send ed get-keymap) call-function
            command ed evt #t))))
 ;; -------------------------------------------------------------------------------
-;; menu-bind (see drracket docs)
+;; menu-bind (see drracket docs 3.3.9)
 ;; Bind key to menu item by name
 
 (define (menu-bind key menu-item)
