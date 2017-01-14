@@ -86,6 +86,6 @@
 (keybind-toplevel-cmd "m:-" close-current-tab)
 (keybind-toplevel-cmd "c:x;c:t" create-new-tab)
 (keybind-toplevel-cmd "m:=" create-new-tab)
-
 (menu-bind "c:x;c:r" "Run")
 (menu-bind "c:x;c:c" "Quit")
+(rebind "m:o" "shift-focus")
