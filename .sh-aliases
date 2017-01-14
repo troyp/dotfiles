@@ -786,6 +786,9 @@ alias virtenv-deactivate=deactivate
 alias pyenv-version="pyenv version | awk '{print $1}'"
 alias py-lptrace='sudo python /opt/scripts/lptrace/lptrace.py -p'
 alias pydb-lptrace='sudo python /opt/scripts/lptrace/lptrace.py -d -p'
+# install Jupyter + calysto_hy kernel in virtual env
+alias install-jupyter='python3 -m venv jupyter; cd jupyter; source bin/activate; pip install wheel; pip install jupyter; pip install git+https://github.com/Calysto/calysto_hy.git'
+alias ihy='(cd /opt/jupyter; source bin/activate; jupyter console --kernel calysto_hy)'
 # -------------------------------------------------------------------------------
 # Perl
 alias pl=perl
