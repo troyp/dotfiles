@@ -1463,3 +1463,22 @@ EOF
         apt-file find --regexp "$re"
     )
 }
+
+lsdocs() {
+    (
+        name="$1"
+        IFS=':'
+        for d in `echo $DOCPATH`; do
+            find "$d" -maxdepth 1 -iname "$name"
+        done
+    )
+}
+docs() {
+    (
+        while (1) {
+                result=`lsdocs "$1" | iselect -a`
+                [[ -z "$result" ]] && break
+                ranger "$result"
+            }
+    )
+}

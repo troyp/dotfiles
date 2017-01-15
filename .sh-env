@@ -196,6 +196,7 @@ for i in "${cdpaths[@]}"; do append-to-path-var "CDPATH" "$i" ; done
 LD_LIBRARY_PATH=/usr/local/lib
 CLASSPATH=$CLASSPATH:.
 FACTOR_ROOTS=$FACTOR_ROOTS:$HOME/code/factor
+DOCPATH=/usr/share/doc:/opt/doc
 
 # ------
 # OTHER.
