@@ -1475,10 +1475,15 @@ lsdocs() {
 }
 docs() {
     (
-        while (1) {
-                result=`lsdocs "$1" | iselect -a`
-                [[ -z "$result" ]] && break
-                ranger "$result"
-            }
+        while true; do
+            # select docs directory to browse
+            result=`lsdocs "$1" | iselect -a`
+            # if exit iselect without choice, we're done
+            [[ -z "$result" ]] && break
+            # browse directory with ranger
+            ranger "$result"
+            # if only 1 directory was found, don't return to iselect screen
+            [[ `lsdocs "$1" | wc -l` == 1 ]] && break
+        done
     )
 }
