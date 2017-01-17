@@ -1,0 +1,141 @@
+[
+   {
+      "x" : "//a[@class='active']/following-sibling",
+      "t" : "https://kat.cr/usearch/foo",
+      "g" : "2C80CB72-3199-D4CB-ED65-C71C-F557-99AC",
+      "u" : "https://kat.cr/usearch/*",
+      "n" : "//body[@class='mainBody']/a[3]",
+      "c" : true,
+      "rt" : 0,
+      "y" : true,
+      "o" : "Troy Pracy",
+      "d" : "AutoPager rule for kat.cr"
+   },
+   {
+      "n" : "//a[(text()='Next ›')]",
+      "u" : "http://thejadednetwork.com/sfx/index/ha/*",
+      "g" : "CB9A8D55-8E98-7979-A62C-85BA-43E8-C4A7",
+      "t" : "http://thejadednetwork.com/sfx/index/a/",
+      "x" : "//div[@id='content-wrap']/table",
+      "o" : "Troy Pracy",
+      "d" : "AutoPager rule for thejadednetwork.com",
+      "rt" : 0,
+      "c" : true
+   },
+   {
+      "n" : "//a[(text()='Next ›')]",
+      "u" : "http://thejadednetwork.com/sfx/search/*",
+      "g" : "E6DCDF4A-5E32-A082-F45F-9C40-FE04-0A18",
+      "t" : "http://thejadednetwork.com/sfx/search/?keyword=foo",
+      "x" : "//div[@id='content-wrap']/table",
+      "d" : "AutoPager rule for thejadednetwork.com",
+      "y" : true,
+      "o" : "Troy Pracy",
+      "rt" : 0,
+      "c" : true
+   },
+   {
+      "n" : "//div[@id='CategoryPagingBottom']/div/div/a[contains(text(), 'Next')]",
+      "u" : "http://www.vapeking.com.au/*",
+      "g" : "5251DF71-46FB-54E4-E077-71EA-1553-6CFF",
+      "t" : "http://www.vapeking.com.au/",
+      "x" : "//form[@id='frmCompare']",
+      "y" : true,
+      "o" : "Troy Pracy",
+      "d" : "AutoPager rule for www.vapeking.com.au",
+      "rt" : 0,
+      "c" : true
+   },
+   {
+      "rt" : 0,
+      "c" : true,
+      "d" : "AutoPager rule for jisho.org",
+      "o" : "Troy Pracy",
+      "y" : true,
+      "t" : "http://jisho.org/search/foo",
+      "x" : "//div[@id='page_container']",
+      "n" : "//div[@id='primary' and @class='large-8 columns']/div[@class='concepts']/a[@class='more']",
+      "g" : "79A10CCD-A638-6063-5E3F-B767-F64B-4709",
+      "u" : "http://jisho.org/search/*"
+   },
+   {
+      "x" : "//div[@id='recent-products-shop']/div/ul",
+      "t" : "http://houseofvape.com.au/product-category/rebuildables-rba-rda/rba-rta/",
+      "g" : "6CCAD911-B2AE-731F-1550-6F13-92DB-8C7E",
+      "u" : "http://houseofvape.com.au/product-category/*",
+      "n" : "//a[@class='next page-numbers' and span/@class='meta-nav']",
+      "c" : true,
+      "rt" : 0,
+      "d" : "AutoPager rule for houseofvape.com.au",
+      "o" : "Troy Pracy"
+   },
+   {
+      "g" : "5D13866B-9881-57D2-E1E0-0D32-9EDF-982D",
+      "u" : "https://www.bing.com/search*",
+      "n" : "//a[@class='sb_pagN' and div/@class='sw_next']",
+      "x" : "//div[@id='b_content']",
+      "t" : "https://www.bing.com/search?q=foo",
+      "d" : "AutoPager rule for www.bing.com",
+      "o" : "Troy Pracy",
+      "c" : true,
+      "rt" : 0
+   },
+   {
+      "d" : "AutoPager rule for myanimelist.net",
+      "o" : "Troy Pracy",
+      "c" : true,
+      "rt" : 0,
+      "g" : "97480B88-31DE-A1A3-3219-1099-3E73-37C8",
+      "u" : "http://myanimelist.net/forum/*",
+      "n" : "//a[(text()='»')]",
+      "x" : "//div[@id='content']",
+      "t" : "http://myanimelist.net/forum/?topicid=1582711&show=0"
+   },
+   {
+      "n" : "//a[(text()='next page')]",
+      "u" : "http://lambda-the-ultimate.org/*",
+      "g" : "B6AA29D1-8A0B-8317-10FC-E51A-29A0-20E9",
+      "t" : "http://lambda-the-ultimate.org/",
+      "x" : "//table[@id='content']",
+      "d" : "AutoPager rule for lambda-the-ultimate.org",
+      "o" : "Troy Pracy",
+      "rt" : 0,
+      "c" : true
+   },
+   {
+      "u" : "http://www.proz.com/*",
+      "y" : true,
+      "n" : "//a[contains(.//text(),'Next')]",
+      "x" : "//div[table/@class='standard']",
+      "o" : "troy",
+      "d" : "AutoPager rule for www.proz.com",
+      "t" : "http://www.proz.com/?sp=gloss/titles&nresults=22909&start=50",
+      "c" : true,
+      "rt" : 0,
+      "g" : "00232F40-6C82-FC74-DEF3-1DB8-B8DA-8A2B"
+   },
+   {
+      "t" : "http://www.urbandictionary.com/define.php?term=foo",
+      "c" : true,
+      "rt" : 0,
+      "g" : "063A015B-0C93-D98D-7D04-38BE-461E-1E1C",
+      "u" : "http://www.urbandictionary.com/define.php*",
+      "n" : "//a[@rel='next' and @class='spf-link' and (text()='2')]",
+      "x" : "//div[@id='outer']",
+      "o" : "troy",
+      "d" : "AutoPager rule for www.urbandictionary.com"
+   },
+   {
+      "n" : "//a[@id='pnnext']",
+      "o" : "troy",
+      "d" : "AutoPager rule for www.google.com.au",
+      "x" : "//div[@id='rcnt']",
+      "u" : "https://www.google.com.au/search*",
+      "y" : true,
+      "j" : 2,
+      "c" : true,
+      "g" : "2A743B9B-EAB2-C555-35B8-887D-E407-8003",
+      "rt" : 0,
+      "t" : "https://www.google.com.au/search?q=foo"
+   }
+]
