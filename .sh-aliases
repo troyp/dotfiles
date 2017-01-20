@@ -162,6 +162,7 @@ alias pwdb='basename $PWD'
 alias pwdp='dirname $PWD'
 filename-ext ()  { echo "${1%.*}"; }
 filename-base () { echo "${1##*.}"; }
+alias mplayer-info='mplayer -frames 0 -identify'
 
 
 # --------------------
