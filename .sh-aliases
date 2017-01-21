@@ -1066,6 +1066,7 @@ alias videodl-best='videodl best'
 alias ibus-start='ibus-daemon -drx'
 alias sort-natural='sort -bdV'
 alias sort-icase-natural='sort -bdfV'
+alias sort-case-sens='LC_COLLATE=C sort'
 alias diskusage='gdmap -f'
 # alias dolphin='XDG_CURRENT_DESKTOP=kde dolphin'   # may fix ui if launched from other desktop environment
 alias ibusd='IBUS_ENABLE_SYNC_MODE=1 ibus-daemon -drx'
