@@ -166,6 +166,12 @@ paths=(
 for i in "${paths[@]}"; do
     pathappend "$i"
 done
+# add rubygem paths
+for d in `gem environment gemdir`/gems/*; do
+    if [[ -d "$d"/bin ]]; then
+        pathappend "$d"/bin;
+    fi
+done
 
 infopaths=(
     /usr/share/info
