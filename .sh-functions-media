@@ -1,5 +1,5 @@
 #                                                           -*- shell-script -*-
-[[ ! -z $DEBUG  ]] && echo "sourcing .sh-functions"
+[[ ! -z $DEBUG  ]] && echo "sourcing .sh-functions-media"
 
 videodl () {
     # videodl QUALITY URL
