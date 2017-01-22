@@ -1,0 +1,186 @@
+#                                                           -*- shell-script -*-
+[[ ! -z $DEBUG  ]] && echo "sourcing .sh-functions"
+
+videodl () {
+    # videodl QUALITY URL
+    # Download video URL with livedumper; args swapped to allow aliases.
+    # requires:
+    #   rtmpdump:      apt or git://git.ffmpeg.org/rtmpdump
+    #   livestreamer:  https://github.com/chrippa/livestreamer
+    #   livedumper:    pip or https://github.com/m45t3r/livedumper
+    livedumper "$2" "$1";
+}
+
+video-extract () {
+    (
+        if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+            cat <<EOF
+video-extract INPUT_VIDEO OUTPUT_CLIP_NAME [ START_TIME ] END_TIME
+    Extract a clip from START_TIME (or 00:00:00) to END_TIME from the video file
+    INPUT_VIDEO and save as OUTPUT_CLIP_NAME.
+
+    Time Format: hh:mm:ss[.s...]
+
+    Options:
+      -h --help     display this help
+      -n --no-act   display command but don't execute
+EOF
+            shift;
+            return 0;
+        elif [[ "$1" =~ ^-n$\|^--no-act(ion)?$ ]]; then
+            noaction="t";
+            shift;
+        fi;
+        # end options processing
+
+        file="$1";
+        out="$2";
+        if [[ $# -gt 3 ]]; then
+            start="-ss $3";
+            s_start=`time-to-seconds $3`;
+            if [[ $4 == "end" ]]; then
+                duration="";
+            else
+                s_end=`time-to-seconds $4`;
+                duration="-t $((s_end - s_start))";
+            fi;
+        else
+            start="-ss 00:00:00";
+            duration="-t $3";
+        fi;
+        # syntax:
+        #   avconv $startpos -i "$file" $duration -c:a copy -c:v copy "$out"
+        # alternative: (mencoder doesn't allow fractional seconds in times)
+        #   mencoder -ss $startpos -endpos $endpos -oac pcm -oav copy "$file" "$out"
+        cmd="avconv $start -i \"$file\" $duration -codec copy  -metadata title=\"$out\" \"$out\"";
+        if [[ -n $noaction ]]; then
+            echo "$cmd";
+        else
+            eval "$cmd";
+        fi;
+    )
+}
+
+video-concat () {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+video-concat INPUT_CLIP_1 INPUT_CLIP_2 [OUTPUT_CLIP_NAME]
+    Concatenate INPUT_CLIP_1 and INPUT_CLIP_2 with transitions.
+    Save as OUTPUT_CLIP (default: out.mp3)
+EOF
+        return 0;
+    fi;
+    melt "$1" "$2" -mix 19 -mixer luma -consumer avformat:"${3:-out.mp4}" vcodec=libxvid b=5000k;
+}
+
+animelyrics () {
+    # Takes either an URL (http://www.animelyrics.com/section/group/song.htm)
+    #   or a JIS-encoded text file (song.jis.txt).
+    # If an URL is given, the kanji print view version (song.jis.txt) of the
+    #   file is downloaded.
+    # The JIS-encoded file is then converted to UTF8, except for the ASCII art
+    #   heading, which is left unchanged.
+    # Finally, line endings are converted to unix format.
+    # The result is saved as a song.utf8.txt file.
+    # Requires: iconv (from glibc-common), dos2unix.
+    if [[ "$1" =~ ^http://www.animelyrics.com/ ]]; then
+        url="${1/%.htm/.jis.txt}";
+        fname="${url##*/}";
+        curl "$url" > "$fname";
+    else
+        fname="$1";
+    fi;
+    out="${fname/%.jis.txt/.utf8.txt}";
+    head -n8 "$fname" > "$out";
+    tail -n+8 "$fname" | iconv -f SHIFT-JIS -t UTF-8 >> "$out";
+    # ^M characters from line endings
+    dos2unix "$out";
+}
+
+img-rot () {
+    # requires imagemagick/graphicsmagick
+    infile="$1";
+    cw_angle="$2";
+    outfile="${3:-${infile}_rot_$2}";
+    if [ -f "$outfile" ]; then
+        echo "File '$outfile' exists.";
+        confirm "Overwrite?" || return 1;
+    fi;
+    convert "$infile" -rotate "$cw_angle" "$outfile";
+}
+
+img-resize () {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+img-resize [-h | -v] INFILE WxH [OUTFILE]
+    Resize an image.
+
+    The new size is given in the format WIDTHxHEIGHT (as given by 'identify').
+    If the OUTFILE name is not specified, it is the same as the input file name,
+    but with '_resized' appended (before the extension).
+
+    For example: The command
+        img-resize myfile.jpg 50x100
+    will resize myfile.jpg to 50 pixels by 100 pixels and save the result as
+    myfile_resized.jpg.
+
+    Options:
+      -h --help     display this help
+      -v --verbose  verbose
+EOF
+        shift;
+        return 0;
+    fi;
+    if [[ "$1" =~ ^-v$\|^--verbose$ ]]; then
+        verbose="true";
+        shift;
+    fi;
+    infile="$1";
+    size="$2";
+    default_out_name="${infile%.*}_resized.${infile##*.}";
+    outfile="${3:-$default_out_name}";
+    if [[ -n $verbose ]]; then
+        echo "convert \"$infile\" -resize \"$size\" \"$outfile\"";
+    fi;
+    convert "$infile" -resize "$size" "$outfile";
+}
+
+mkvtracks () {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+mkvtracks [-h | -v] file
+    Print a list of tracks in an MKV file.
+
+    Options:
+      -h --help     display this help
+      -v --verbose  verbose listing
+EOF
+        shift;
+        return 0;
+    fi;
+    if [[ "$1" =~ ^-v$\|^--verbose$ ]]; then
+        shift;
+        mkvinfo "$1" | grep -ie '\(track\|codec id\)';
+        return 0;
+    fi;
+    mkvmerge -i "$1";
+}
+
+mkvextract-ass () {
+    file="$1";
+    trackID="$2";
+    mkvextract tracks "$file" "$trackID":"${file%.*}.ass";
+}
+
+mediainfo-browse () {
+	  # usage: mediainfo-browse $FILE
+	  # open mediainfo data on $FILE in HTML format in browser
+    file="$1";
+    sensibleb_or_null='';
+    browser="${BROWSER:-${sensibleb_or_null:-firefox}}";
+    output=`mktemp`;
+    mediainfo --Output=HTML "$file"  > $output;
+    $browser "$output";
+}
+
+ 
