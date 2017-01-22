@@ -424,12 +424,6 @@ linkcount () {
     echo $linkcount;
 }
 
-mihtm () {
-   tmp=$(mktemp);
-   mediainfo --Output=HTML "$1" > "$tmp";
-   ${BROWSER:-sensible-browser} "$tmp";
-}
-
 uuid2dev () {
     line=$(ls -al /dev/disk/by-uuid/ | grep $1);
     echo ${line##*/};

@@ -183,4 +183,10 @@ mediainfo-browse () {
     $browser "$output";
 }
 
+mihtm () {
+   tmp=$(mktemp);
+   mediainfo --Output=HTML "$1" > "$tmp";
+   ${BROWSER:-sensible-browser} "$tmp";
+}
+
  
