@@ -1,6 +1,7 @@
 #                                                           -*- shell-script -*-
 [[ ! -z $DEBUG  ]] && echo "sourcing .sh-functions"
 [[ -f ~/.sh-functions-media ]] && source ~/.sh-functions-media
+[[ -f ~/.sh-functions-docs ]] && source ~/.sh-functions-docs
 
 # *************
 # *           *
@@ -154,33 +155,6 @@ renumber () {
     popd;
 }
 
-zcbz () { zip -r "${1%/}.cbz" "$1"; }
-
-# convert directory to .cbz, order by first number in file names
-# cbz-by-num DIRNAME [EXT]
-cbz-by-num () {
-    pushd "$1" || return;
-    # n=`ls -v | tail -n1 | awk -F'.' '{ print(length($1)) }'`;
-    n=`ls -pv | GREP_OPTIONS="" grep -v ".*/$" | tail -n1 | awk -F'.' '{ print(length($1)) }'`;
-    for fname in *; do
-	      fnum="${fname%.*}";
-	      fext="${fname##*.}";
-	      ext="${2:-$fext}";
-	      padded=`printf "%0${n}d.%s" "$(expr $fnum + 0)" "$ext"`;
-	      mv -i "$fname" "$padded";
-	      # echo "$fname    $padded";
-    done;
-    popd;
-    zip -r "${1%/}.cbz" "$1";
-}
-
-maffus () {
-    archive_name=`echo "${1%/}" | sed -e 's/ /_/g'`.maff;
-    7z a -tzip "$archive_name" "$1";
-}
-
-man2text () { man "$1" | \col -bx; }
-
 ussp () {
     # convert underscores to spaces in filename
     converted_name=${1//_/ };
@@ -213,168 +187,6 @@ dotsp () {
     if [ ! -f "$converted_name" ]; then
 	      mv -i "$1" "$converted_name";
     fi;
-}
-
-# -------------------------------------------------------------------------------
-# ,---------------,
-# | PDF Functions |
-# '---------------'
-
-pdfcat () {
-    pdftotext "$1" -;
-}
-
-pdfoutline-out () {
-    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
-        cat <<EOF
-pdfoutline-out PDFFILE [OUTFILE]
-    Output the bookmarks (outline) of PDFFILE to text file OUTFILE.
-    If OUTFILE is -, the bookmarks are output to stdout.
-EOF
-        return;
-    fi;
-    pdffile="$1";
-    outfile="${2:-${1%.pdf}.bmarks}";
-    if [[ "$outfile" == "-" ]]; then
-        pdftk "$1" dump_data;
-    else
-        pdftk "$1" dump_data output "$outfile";
-    fi;
-}
-
-pdfoutline-in () {
-    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
-        cat <<EOF
-pdfoutline-in PDFFILE BMARKS [OUTFILE]
-    Updates the bookmarks of PDFFILE to match those of the BMARKS file and saves
-    the result to OUTFILE.
-EOF
-        return;
-    fi;
-    pdffile="$1";
-    bmarks="$2";
-    outfile="${3:-${1%.pdf}-updated.pdf}";
-    pdftk "$pdffile" update_info "$bmarks" output "$outfile";
-}
-
-pdfoutline-edit () {
-    # pdfoutline-edit PDF_DOC
-    # edit bookmarks of PDF_DOC
-    outline=$(mktemp);
-    output=$(mktemp);
-    pdftk "$1" dump_data > $outline;
-    `echo ${EDITOR:-vim} $outline`;
-    pdftk "$1" update_info $outline output $output;
-    mv -i $output "$1";
-}
-
-pdfdroplast () {
-    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
-        cat <<EOF
-pdfdroplast [-o outfile] infile [last_page]
-    Create a new PDF by dropping the last page(s) of an input file.
-    PDF bookmarks are lost.
-
-    The new file is saved with the suffix '_out' (before the extension), unless
-    a name is given explicitly with the -o option.
-    Options:
-      -h --help     display this help
-      -o --outfile  save resulting file under the specified name
-EOF
-        shift;
-        return 0;
-    fi;
-    if [[ "$1" =~ ^-o$\|^--outfile$ ]]; then
-        shift;
-        outfile="$1";
-        shift;
-    fi;
-    infile="$1";
-    infile_base="${infile%.*}";
-    outfile="${outfile:-${infile_base}_out.pdf}";
-    n="${2:-1}";
-    m=$((n+1));
-    echo "pdftk '$infile' cat 1-r$m output '$outfile'";
-    eval "pdftk '$infile' cat 1-r$m output '$outfile'";
-}
-
-pdf-extract-images () {
-    imgdir="${1}-images";
-    mkdir "$imgdir";
-    pdfimages "$1" "$imgdir"/out;
-}
-
-function pdfpagerange () {
-    # requres qpdf
-    # eg. pdfpagerange "input.pdf" 75-77
-    #     pdfpagerange "input.pdf" 75-77 "output.pdf"
-    # NOTE: Page ranges use absolute numbering starting from page 1, not the page numbers specified in the pdf.
-    input="$1";
-    range="$2";
-    output="${3:-$input [pages $range]}";
-    qpdf --pages "$input" "$range" -- "$input" "$output";
-}
-
-# -------------------------------------------------------------------------------
-# ,----------------,
-# | DJVU Functions |
-# '----------------'
-
-djvuoutline-out () {
-    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
-        cat <<EOF
-djvuoutline-out DJVUFILE [OUTFILE]
-    Output the bookmarks (outline) of DJVUFILE to text file OUTFILE.
-    If OUTFILE is -, the bookmarks are output to stdout.
-EOF
-        return;
-    fi;
-    djvufile="$1";
-    outfile="${2:-${1%.djvu}.bmarks}";
-    if [[ "$outfile" == "-" ]]; then
-        djvused "$djvufile" -e 'print-outline';
-    else
-        djvused "$djvufile" -e 'print-outline' > "$outfile";
-    fi;
-}
-
-djvuoutline-in () {
-    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
-        cat <<EOF
-djvuoutline-in DJVUFILE BMARKS [OUTFILE]
-    Updates the bookmarks of DJVUFILE to match those of the BMARKS file and
-    saves the result to OUTFILE.
-EOF
-        return;
-    fi;
-    djvufile="$1";
-    bmarks="$2";
-    outfile="${3:-${1%.djvu}-updated.djvu}";
-    djvused "$djvufile" -e "set-outline \"$bmarks\"; save-bundled \"$outfile\"";
-}
-
-djvuoutline-edit () {
-    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
-        cat <<EOF
-djvuoutline-edit DJVUFILE [OUTFILE]
-    Edit the bookmarks (outline) of DJVUFILE and save to OUTFILE.
-    If OUTFILE is omitted, overwrite DJVUFILE.
-EOF
-        return;
-    fi;
-    djvufile="$1";
-    outfile="$2";
-    # djoutline-edit DJVU_DOC;
-    # edit bookmarks of DJVU_DOC
-    outline=$(mktemp);
-    djvused "$djvufile" -e 'print-outline' > $outline;
-    `echo ${EDITOR:-vim} $outline`;
-    echo "$outfile";
-    if [[ -z "$outfile" ]]; then
-        djvused "$djvufile" -e "set-outline $outline; save";
-    else
-        djvused "$djvufile" -e "set-outline $outline; save-bundled \"$outfile\"";
-    fi
 }
 
 # -------------------------------------------------------------------------------
@@ -705,66 +517,6 @@ jlc () {
     $JHOME/bin/jconsole -js "echo $cmd" "return''";
 }
 
-blankpage () {
-    help="
-blankpage                - creates a white 1000x1600 page called 'out.jpg'
-blankpage NAME           - creates a white 1000x1600 page called NAME
-blankpage SIZE NAME      - creates a white page of size SIZE called NAME
-blankpage SIZE COL NAME  - creates a page of size SIZE and colour COL, called NAME
-";
-    if [[ "$1" =~ ^-h$\|^--help$ ]]; then echo "$help"; shift; fi;
-    # requires imagemagick/graphicsmagick
-    case "$#" in
-        0)
-            size="1000x1600";
-            col="xc:white";
-            out="out.jpg";
-            ;;
-        1)
-            size="1000x1600";
-            col="xc:white";
-		        out="$1";
-		        ;;
-	      2)
-		        size="$1";
-		        col="xc:white";
-		        out="$2";
-		        ;;
-	      3)
-		        size="$1";
-		col="xc:$2";
-
-    out="$3";
-    ;;
-    esac;
-    convert -size "$size" "$col" "$out";
-}
-
-blankpage_before () {
-    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
-        cat <<EOF
-blankpage_before [-h] N [COLOUR]
-
-Create a blank page with the same dimensions as the Nth file in the current
-directory. If COLOUR is unspecified, it is white. This can be used to add a
-page at a specific position to a comic archive directory.
-
-    Options:
-      -h --help     display this help
-EOF
-        shift;
-        return 0;
-    fi;
-    n="$1";
-    col="${2:-xc:white}";
-    f=$(ls | sed -n "`printf "%dp;" $n`");
-    base=`echo "${f%.*}"`;
-    ext=`echo "${f##*.}"`;
-    newname="${base}-prev.${ext}";
-    geom=`convert "$f" -print "%wx%h\n" /dev/null`;
-    convert -size "$geom" "$col" "$newname";
-}
-
 name-following () {
     (
         base=`echo "${1%.*}"`;
@@ -1010,15 +762,6 @@ EOF
     eval "$cmd";
 }
 
-googlecodewiki2gfm() {
-    converter_dir="${GOOGLE_WIKI2GFM_PATH:-/opt/google-code-support-tools/wiki_to_md/}";
-    converter="${converter_dir%/}/wiki2gfm.py";
-    infile="$1";
-    outfile="${2:-$infile.md}";
-    echo "$converter" --input_file "$infile" --output_file "$outfile";
-    python2 "$converter" --input_file "$infile" --output_file "$outfile";
-}
-
 grepalias() {
     if [[ "$1" =~ ^-h$\|^--help$ ]]; then
         cat <<EOF
@@ -1086,19 +829,6 @@ EOF
     )
 }
 
-tsvtotable () {
-    # TODO: finish
-    printf '<html>\n<head>\n';
-    printf '<meta http-equiv="content-type" content="text/html; charset=UTF-8">\n';
-    printf '<style>\ntable {\nborder-collapse="collapse";\n}\ntd {\n';
-    printf "border='1px solid black';\npadding='5px';\n";
-    printf '}\n</style>\n</head>\n<body>\n<div>\n<table>\n';
-    while read -r line; do
-        sed 's:^:<tr><td>:; s:\t:</td><td>:g; s:$:</td></tr>\n:';
-    done;
-    printf '</table>\n</div>\n</body>\n</html>\n';
-}
-
 filter() {
     if [[ "$1" =~ ^-h$\|^--help$ ]]; then
         cat <<EOF
@@ -1125,24 +855,6 @@ EOF
             echo "$x";
         fi;
     done;
-}
-
-chm2html() {
-    file="$1";
-    dir="$2";
-    archmage "$file" "$dir";
-    # correct erroneous wrapping of index links
-    printf '\na { white-space: nowrap; }' >> "$dir"/arch_css.css;
-}
-
-chm2maff() {
-    file="$1";
-    dir="$2";
-    archmage "$file" "$dir";
-    # correct erroneous wrapping of index links
-    printf '\na { white-space: nowrap; }' >> "$dir"/arch_css.css;
-    7z a -tzip "$dir.maff" "$dir";
-    rm -Ir "$dir";
 }
 
 donum () {
