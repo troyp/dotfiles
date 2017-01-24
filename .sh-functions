@@ -1000,3 +1000,37 @@ docs() {
         done
     )
 }
+
+gfmdview () {
+    # help
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+gfmdView file [-p port]
+    View a github-flavored markdown file with the gfms server.
+    Options:
+      -h --help     display this help
+      -p --port     use port PORT
+EOF
+        return 0;
+    fi;
+    port="8083"    # default port
+    (
+        # options
+        while [[ $# -gt 1 ]]; do
+            case "$1" in
+                -p|--port) port="$2"
+                           shift 2; ;;
+                *) echo "unrecognized option: $1"; return 1; ;;
+            esac
+        done
+        # --- end options ---
+        file="$1"
+        dir=`dirname "$1"`
+        filename=`basename "$1"`
+        cd "$dir"
+        gfms -p "$port" &
+        sleep 5
+        echo http://localhost/"$filename"
+        firefox http://localhost:$port/"$filename"
+    )
+}
