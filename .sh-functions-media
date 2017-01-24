@@ -175,18 +175,11 @@ mkvextract-ass () {
 mediainfo-browse () {
 	  # usage: mediainfo-browse $FILE
 	  # open mediainfo data on $FILE in HTML format in browser
-    file="$1";
-    sensibleb_or_null='';
-    browser="${BROWSER:-${sensibleb_or_null:-firefox}}";
-    output=`mktemp`;
-    mediainfo --Output=HTML "$file"  > $output;
-    $browser "$output";
+    tmp=$(mktemp);
+    mediainfo --Output=HTML "$1" > "$tmp";
+    ${BROWSER:-sensible-browser} "$tmp";
 }
 
-mihtm () {
-   tmp=$(mktemp);
-   mediainfo --Output=HTML "$1" > "$tmp";
-   ${BROWSER:-sensible-browser} "$tmp";
+sub-extract () {
+        ffmpeg -i "$1" -vn -an -codec:s srt "${1%.*}.srt"
 }
-
- 
