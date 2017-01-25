@@ -977,6 +977,7 @@ alias deduppath="awk -F: '{for (i=1;i<=NF;i++) { if ( !x[\$i]++ ) printf(\"%s:\"
 alias tabs2cols="column -t -s $'\t'"
 alias cutsp="onespace | cut -d' '"
 # eg.:    ls -Al | cuts -f2,9    # list filenames and number of hard links
+alias cut:='cut -d:'
 alias evenlines="awk 'NR%2==0'"  # print even lines (starting at line 0)
 alias oddlines="awk 'NR%2==1'"
 alias concat='tr -d "\n"'        # join lines into string
