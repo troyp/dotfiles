@@ -253,6 +253,8 @@ alias ren-underscore-to-space="ren 'tr/_/ /'"
 alias ren-space-to-underscore="ren 'tr/ /_/'"
 alias ren-uppercase="ren 'tr/a-z/A-Z/'"
 alias ren-lowercase="ren 'tr/A-Z/a-z/'"
+alias ren-camelcase='ren '"'"'s/(\b\w)/\u$1/g; tr/ //d'"'"
+alias renn-camelcase='renn '"'"'s/(\b\w)/\u$1/g; tr/ //d'"'"
 # ren-author-to-surname-first: eg. rename 'Greg Egan' -> 'Egan, Greg' Multiple middle names OK.
 alias ren-author-to-surname-first="ren '"'s/^(.*) ([-A-Za-z]+)$/$2, $1/'"'"
 # FIXME:
