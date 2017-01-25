@@ -724,6 +724,7 @@ alias has-virt-support="egrep -q 'vmx|svm' /proc/cpuinfo"
 alias has-64bit-cpu='egrep -q lm /proc/cpuinfo'
 alias has-64bit-kernel='[[ `uname -m` =~ 64 ]]'
 alias xcape-restart="pkill -9 xcape; xcape -t 300 -e 'Control_L=Escape;Super_R=Menu' &"
+alias users-all='cut -d: -f1 /etc/passwd'
 
 # --------------------------------------
 # SYNTAX HIGHLIGHTING & PRETTY PRINTING.
