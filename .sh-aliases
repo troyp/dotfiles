@@ -825,7 +825,7 @@ alias rbcol='ruby -rcolorize -e'    # eg rbcol 'puts "This is blue".colorize(:bl
 alias riv='PAGER=vimpager ri'
 alias ri='LESS="$LESS -r" ri --format ansi'
 alias rii='ri -i'
-alias pry='PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin pry'   # avoid warnings about $PATH
+# alias pry='PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin pry'   # avoid warnings about $PATH
 
 # -------------------------------------------------------------------------------
 alias phprepl='php --interactive'
