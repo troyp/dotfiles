@@ -295,7 +295,8 @@ alias mmv-symlink='mmv -a'    # symlink source to target
 # -------------------------
 # FILE SEARCH/INFO ALIASES.
 # -------------------------
-alias gr='pcregrep -in --color=auto'    # color, line no.s, case-insensitive, PCRE
+# gr: pcregrep search - shows line number and color if output is to a terminal, just the text if output is to a pipe
+gr () { if [[ -t 1 ]]; then pcregrep -in --color=auto "$@"; else pcregrep -i --color=auto "$@"; fi; }
 alias grep='grep --color=auto'
 alias grepi='grep -i --color=auto'      # color, case-insensitive grep
 alias greps='grep -F'                   # fixed string grep
