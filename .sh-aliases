@@ -966,6 +966,8 @@ alias pickt='pick -t'    # pick subtable (https://github.com/bernardorufino/pick
 alias noerr='cat 2>/dev/null'    # allow |noerr to hide error output
 alias withnl='(while read -r x || [[ -n $x ]]; do echo "$x"; done)'
 alias tacn='withnl | tac'    # tac with newline
+alias if_term='if [[ -t 1 ]]; then'    # test if output is going to a terminal (not a pipe)
+alias is_term='[[ -t 1 ]]'             # test if output is going to a terminal (not a pipe)
 
 # -----------
 # FORMATTING.
