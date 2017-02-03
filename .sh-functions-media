@@ -166,6 +166,30 @@ EOF
     mkvmerge -i "$1";
 }
 
+mkvsubtrack () {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+mkvsubtrack FILE
+    Return the track number and format (file extension) of the subtitle track.
+EOF
+        return 0; fi;
+    mkvmerge -i "$1" |
+        grep -F 'subtitles' |
+        perl -pe 's/Track ID (\d+): subtitles \(([^)]+\/)?([^)]+)\)/$1 $3/; tr/A-Z/a-z/;' |
+        perl -pe 's/vobsub/sub/; s/substationalpha/ssa/';
+}
+
+mkvsubextract () {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+mkvsubextract FILE
+    Extract subtitle track from mkv file and save in current directory.
+EOF
+        return 0; fi;
+    read trackID ext <<< `mkvsubtrack "$1"`;
+    mkvextract tracks "$1" "$trackID":"${1%.*}.$ext";
+}
+
 mkvextract-ass () {
     file="$1";
     trackID="$2";
