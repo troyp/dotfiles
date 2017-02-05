@@ -412,7 +412,17 @@ fromhex () {
     echo $((0x$1));
 }
 
-time-to-seconds () { echo $1 | awk -F: '{ print ($1 * 3600) + ($2 *   60) + $3 }'; }
+timetoseconds () {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+timetoseconds [[HOURS:]MIN:]SECONDS
+EOF
+        return 0; fi;
+    time="$*"
+    while [[ ! $time =~ .*:.*:.* ]]; do time="0:$time"; done
+    awk -F: '{ print ($1 * 3600) + ($2 *   60) + $3 }' <<< "$time"
+}
+alias secs=timetoseconds
 
 remove-recursive () {
     file="$1";
