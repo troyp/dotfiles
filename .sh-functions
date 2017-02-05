@@ -1034,3 +1034,51 @@ EOF
         firefox http://localhost:$port/"$filename"
     )
 }
+
+listlinkurls () {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+listlinkurls [--no-fragments] [--sort] URL
+    Print a list of link addresses found in the document at URL.
+
+    Options:
+      -d --hiddenlinks=[option]
+          control display of hidden links
+              merge     merge with non-hidden links
+              listonly  list separately at end (default)
+              ignore    do not list
+      -f --fragments     include any fragments (#fragement_id) at the end of link URLs
+      -h --help          display this help
+      -n --numbers       number the links
+      -s --sort          sort link addresses and remove duplicates
+EOF
+        return 0
+    fi
+    (
+        # options
+        while [[ $# -gt 1 ]]
+        do
+            case "$1" in
+                (-d | --hiddenlinks) hidden="$2"
+                                     shift 2 ;;
+                (-f | fragments) fragments="true"
+                                 shift 1 ;;
+                (-n | --numbers) numbers="true"
+                                 shift 1 ;;
+                (-s | --sort) sort="true"
+                              shift 1 ;;
+                (*) echo "unrecognized option: $1"
+                    return 1 ;;
+            esac
+        done
+        # --- end options ---
+        cmd="lynx -dump -listonly"
+        if [[ -n $hidden ]];   then cmd="$cmd -hiddenlinks=$hidden"; fi
+        if [[ -z $numbers ]];  then cmd="$cmd -nonumbers"; fi
+		    cmd="$cmd '$1'"
+		    if [[ -z $fragments ]];  then cmd="$cmd | sed 's/#.*//'"; fi
+		    if [[ -n $sort ]];       then cmd="$cmd | sort -u"; fi
+		    echo "$cmd"
+		    eval "$cmd"
+	  )
+}
