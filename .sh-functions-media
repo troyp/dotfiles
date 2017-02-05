@@ -204,6 +204,16 @@ mediainfo-browse () {
     ${BROWSER:-sensible-browser} "$tmp";
 }
 
-sub-extract () {
-        ffmpeg -i "$1" -vn -an -codec:s srt "${1%.*}.srt"
+subextract () {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+subextract FILE [FORMAT]
+    Extract subtitle and convert to FORMAT.
+EOF
+        return 0; fi;
+    (
+        file="$1";
+        format="${2:-srt}";
+        ffmpeg -i "$name" -vn -an -codec:s "$format" "${name%.*}.$2"
+    )
 }
