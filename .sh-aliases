@@ -423,6 +423,51 @@ alias install-kf5-krusader-prerequisites="sudo apt-get-install plasma-workspace 
 alias install-wine='sudo apt-get install wine winbind playonlinux'
 alias nvm-copy-global='nodebindir=`which node`; nodedir=${nodebindir%/bin/node}; chmod -R 755 $nodedir/bin/*; sudo cp -r $nodedir/{bin,lib,share} /usr/local/'
 alias install-slop-prerequisites='sudo apt-get install cmake gengetopt libgl1-mesa-dev libglew-dev libglm-dev libimlib2-dev libxext-dev libxrandr-dev libxrender-dev'
+install-peco() {
+    tmpdir=`mktemp -d`;
+    cd $tmpdir;
+    github-latest-release -d peco peco
+    ( file * | grep -P '\bgzip\b' > /dev/null ) && tar xf * ;
+    ( file * | grep -P '\bzip\b' > /dev/null )  && unzip * ;
+    mv peco*/peco /opt/bin/;
+    mv peco*/README.md /opt/doc/peco-README.md;
+}
+install-buku() {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+install-buku [-s][-o]
+    Install buku command-line bookmark manager (github.com/jarun/Buku)
+    Options:
+        -s --sudo    Use sudo with pip3 install
+        -o --oil     Install Oil front-end (github.com/AndreiUlmeyda/oil)
+EOF
+        return 0; fi;
+    # options
+    while [[ $# -gt 0 ]]; do
+             case "$1" in
+                 -s|--sudo) sudo="true";
+                            shift; ;;
+                 -o|--oil)  oil="true";
+                            shift 1; ;;
+                 *) echo "unrecognized option: $1"; return 1; ;;
+             esac
+    done
+    # --- end options ---
+    if [[ -n sudo ]]; then
+        sudo pip3 install urllib3 cryptography beautifulsoup4 requests;
+    else
+        pip3 install urllib3 cryptography beautifulsoup4 requests
+    fi;
+    # oil (buku frontend)
+    if [[ -n oil ]]; then
+    fi;
+}
+install-oil-dependencies() {
+    sudo apt-get install jq
+    sudo apt-get install xsel
+    install-peco
+    echo "ready to install oil: https://github.com/AndreiUlmeyda/oil"
+}
 install-nvm () {
     export NVM_DIR="$HOME/.nvm" && (
         git clone https://github.com/creationix/nvm.git "$NVM_DIR";
