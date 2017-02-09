@@ -481,6 +481,8 @@ install-oil() {
         cd oil;
         sudo make install;
     )
+    echo "note: oil requires awk and jq be available in /bin/."
+    echo "Create symlinks or edit the shebang lines in the scripts in oil/src/."
 }
 install-nvm () {
     export NVM_DIR="$HOME/.nvm" && (
