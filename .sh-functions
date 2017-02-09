@@ -1092,3 +1092,43 @@ EOF
 		    eval "$cmd"
 	  )
 }
+
+github-latest-release() {
+    (
+        download="";
+        # options
+        PARSED=$(getopt -n "$0" -o d --long "download"  -- "$@")
+        if [ $? -ne 0 ]; then echo "getopt error"; exit 1; fi
+        eval set -- "$PARSED"
+        while true; do
+            case "$1" in
+                -h|--help)
+                    cat <<EOF
+github-latest-release [-d] USER REPO [PATTERN]
+    Print the URL of the latest release of a repo.
+    Options:
+        -d --download    download
+
+EOF
+                    ;;
+                -d|--download) download="true";
+                               shift; ;;
+                --) shift; break; ;;
+                *) echo "unrecognized option: $1"; return 1; ;;
+            esac
+        done
+        # --- end options ---
+        user="$1"
+        repo="$2"
+        pattern="${3:-linux.*64}"
+        url=$(curl -s https://api.github.com/repos/$user/$repo/releases/latest \
+                  | grep -oP '(?<=browser_download_url": ")([^"]+)' \
+                  | grep -P "$pattern");
+        if [[ -n $download ]]; then
+            wget $url;
+        else
+            echo $url;
+        fi;
+    )
+};
+
