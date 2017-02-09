@@ -433,40 +433,54 @@ install-peco() {
     mv peco*/README.md /opt/doc/peco-README.md;
 }
 install-buku() {
-    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
-        cat <<EOF
-install-buku [-s][-o]
-    Install buku command-line bookmark manager (github.com/jarun/Buku)
+    PARSED=$(getopt -n "$0" -o sd --long "sudo,deb"  -- "$@")
+    if [ $? -ne 0 ]; then echo "getopt error"; exit 1; fi
+    eval set -- "$PARSED"
+    while true; do
+        case "$1" in
+            -h|--help) cat <<EOF
+install-buku [-s][-d]
     Options:
-        -s --sudo    Use sudo with pip3 install
-        -o --oil     Install Oil front-end (github.com/AndreiUlmeyda/oil)
+        -s --sudo    use sudo with pip3 install
+        -d --deb     use .deb package
 EOF
-        return 0; fi;
-    # options
-    while [[ $# -gt 0 ]]; do
-             case "$1" in
-                 -s|--sudo) sudo="true";
-                            shift; ;;
-                 -o|--oil)  oil="true";
-                            shift 1; ;;
-                 *) echo "unrecognized option: $1"; return 1; ;;
-             esac
+                       shift; ;;
+            -s|--sudo) use_sudo="true";
+                       shift; ;;
+            -d|--deb)  deb="true";
+                       shift; ;;
+            --) shift; break; ;;
+            *) echo "unrecognized option: $1"; return 1; ;;
+        esac
     done
-    # --- end options ---
-    if [[ -n sudo ]]; then
+    if [[ -n $use_sudo ]]; then
         sudo pip3 install urllib3 cryptography beautifulsoup4 requests;
     else
         pip3 install urllib3 cryptography beautifulsoup4 requests
     fi;
-    # oil (buku frontend)
-    if [[ -n oil ]]; then
-    fi;
+    (
+        cd /opt;
+        if [[ -n $deb ]]; then
+            mkdir -p deb; cd deb/;
+            github-latest-release -d jarun Buku 'deb';
+            sudo dpkg -i buku*.deb;
+        else
+            git clone https://github.com/jarun/Buku.git;
+            cd Buku;
+            sudo make install;
+        fi
+    )
 }
-install-oil-dependencies() {
+install-oil() {
     sudo apt-get install jq
     sudo apt-get install xsel
     install-peco
-    echo "ready to install oil: https://github.com/AndreiUlmeyda/oil"
+    (
+        cd /opt;
+        git clone https://github.com/AndreiUlmeyda/oil.git;
+        cd oil;
+        sudo make install;
+    )
 }
 install-nvm () {
     export NVM_DIR="$HOME/.nvm" && (
