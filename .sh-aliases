@@ -692,12 +692,13 @@ alias 7zip='7z a -tzip'  # 7zip myarchive.zip myarchive/
 # tgz [name [files]]    make .tgz out of files
 # unar unarchive multiple formats
 
-# ------------
-# GIT ALIASES.
-# ------------
+# ----------------
+# GIT/SVN ALIASES.
+# ----------------
 alias gitalias="git config --get-regexp '^alias\.' | cut -c 7- | sed 's/ /\t/' | column -s'	' -t"
 alias gitsetupignore="git config --global core.excludesfile '~/.gitignore'"
 alias gitcommits='git log --oneline --color | perl -ne '"'"'printf "HEAD~%-3d %s", ++$i, "$_"'"'"'| less -r'
+alias cbclone='ghq get `xsel -ob`'
 
 # -----------
 # SSH ALIASES
