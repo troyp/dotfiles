@@ -922,6 +922,8 @@ alias libreconv-pdf='unoconv -f pdf'    # convert from libreoffice supported for
 # ------------------
 # PIPELINE OPERATORS
 # ------------------
+function nargs { echo $#; };
+alias cuts='cuts -0'
 alias iselect='iselect -kj:KEY_DOWN -kk:KEY_UP'
 alias choose='iselect -ma'
 # alias maplines='xargs -d "\n" -n 1'
