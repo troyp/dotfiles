@@ -1097,6 +1097,7 @@ alias shootwin='shutter -w -e'    # screenshot window and exit
 alias shootmenu='shutter -m -e'    # screenshot menu and exit
 alias shootagain='shutter -r -e'   # repeat last screenshot - not working?
 alias sc-tutorial='sc /usr/share/doc/sc/tutorial.sc'
+alias rofii='rofi -combi-modi window,drun,run -show combi -modi combi'   # general purpose launcher
 
 
 # -------
