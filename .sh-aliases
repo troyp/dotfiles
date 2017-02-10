@@ -887,7 +887,12 @@ alias perlrepl='perl -de 0'
 # adapted from instmodsh script
 alias cpanlist="perl -MExtUtils::Installed -e '"'use vars qw($Inst @Modules);$Inst = ExtUtils::Installed->new();@Modules = $Inst->modules();print("Installed modules are:\n   ", join("\n   ", @Modules), "\n");'"'"
 alias perltopics="perldoc -t perltoc | grep -oP '^  ([^ ]+)'"
-alias pd = 'perldoc -t perltoc | grep -oP "^  ([^ ]+)" | peco | while read -r x || [[ -n $x ]]; do perldoc "$x"; done 2>/dev/null'
+alias pd='perldoc -t perltoc | grep -oP "^  ([^ ]+)" | peco | while read -r x || [[ -n $x ]]; do perldoc "$x"; done 2>/dev/null'
+pds() { perldoc "$1"; perldoc -q "$1"; perldoc -f "$1"; perldoc -v "$1"; perldoc -a "$1"; };
+alias perlmodules="perl -MFile::Find=find -MFile::Spec::Functions -Tlwe '"'find { wanted => sub { print canonpath $_ if /\.pm\z/ }, no_chdir => 1 }, @INC'"'"    # see perldoc perlmodlib
+alias pdmod='perlmodules | peco | xa perldoc -F'
+alias pdmodsrc='perlmodules | peco | xa perldoc -Fm'
+
 # -------------------------------------------------------------------------------
 # Ruby
 alias rbe='ruby -e'       # execute ruby code from next argument
