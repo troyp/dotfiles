@@ -191,10 +191,11 @@ alias scriptem='edit-script emacsclient'
 
 # --- copying files ---
 alias name2fat='perl -pe '"'"'s/\+|:/ - /g and s/\[<>\/\\?+:"\]//g'"'"''  # filename -> FAT-compat
-alias rscopy='rsync -avH --progress'
-alias rsdiff='rsync -rvnc --delete'  # compare two directories by simulating the process of copying the first to overwrite the second
-alias rscopyto='rsync -rvc --delete .'  # copy current directory to another directory, deleting its original contents
-alias rsupdate='rsync -auvH --progress'
+alias rsmerge='rsync -aH -v --progress'    # merge (do not delete files in target removed from origin)
+alias rssync='rsync -aH --delete -v --progress'  # sync (delete files in target removed from origin)
+alias rsdiff='rsync -rnc --delete -v'  # compare two directories by simulating the process of copying the first to overwrite the second
+alias rscopyto='rsync -rc --delete -v .'  # copy current directory to another directory, deleting its original contents
+alias rsupdate='rsync -auH -v --progress'
 alias cppath='cp --parents'   # copy a relative file-path into a dir
 # --- icp ---
 # note: aliasing cp to icp (and mv to imv):
