@@ -117,7 +117,7 @@ alias cdchrometempdir='"cd `chrometempfiles 3`"'  # cd to Firefox temp directory
 #------------
 # LS ALIASES.
 #------------
-alias lsg='ls | grep -i'
+alias lsg='ls | grep -iP'
 alias ls='ls --group-directories-first --color=auto --time-style=+" %d.%m.%y "'
 alias ls1='ls -1'
 alias lsc='ls --color=always'
