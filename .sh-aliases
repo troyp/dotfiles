@@ -744,6 +744,7 @@ alias viewcomposeall='lscomposeall | less'
 alias distro='cat /etc/lsb-release'
 alias systeminfo='DISTRO=$(cat /etc/os-release|command grep PRETTY); DISTRO="${DISTRO#PRETTY_NAME=\"}"; printf "DISTRO: ${DISTRO%\"}\nARCH:   $(uname -i)\nKERNEL: $(uname -r)\nNODE:   $(uname -n)\n"'
 alias xevkb="xev | grep -A2 --line-buffered '^KeyRelease' | sed -n '/keycode /s/^.*keycode \([0-9]*\).* (.*, \(.*\)).*$/\1 \2/p'"
+alias togglemute='pactl set-sink-mute 0 toggle'
 alias preparesetleds='sudo chmod 666 /dev/console'
 alias capslockon='sudo setleds -D +caps < /dev/console'  # turn off capslock if xset doesn't work. Requires chmod 666 /dev/console (otherwise su - must used rather than sudo)
 alias capslockoff='capslockon; sudo setleds -D -caps < /dev/console' # see capslockon; sometimes you need to use capslockon first or the light won't clear.
