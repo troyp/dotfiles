@@ -1132,3 +1132,11 @@ EOF
     )
 };
 
+function zimserver() {
+    # requires pip3 install zimply
+    python3 - <<EOF
+from zimply import ZIMServer
+ZIMServer("$1")
+EOF
+}
+
