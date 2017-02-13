@@ -112,7 +112,7 @@ paths=(
     /opt
     /opt/activator-dist/bin
     /opt/Amber/bin
-    /opt/android-studio
+    /opt/android-studio/bin
     /opt/apache-maven-3.3.3/bin
     /opt/bin
     /opt/calibre
