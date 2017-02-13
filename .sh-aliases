@@ -846,9 +846,11 @@ alias cabali='cabal install'
 alias opami='opam install'
 alias gemi='gem install'
 alias sgemi='sudo gem install'
+alias npmi='npm install'
 alias npmig='npm install -g'
 alias cargoi='cargo install'
 alias boweri='bower install'
+alias composerrg='composer global require'
 # -------------------------------------------------------------------------------
 # Python
 alias pynote='ipython notebook --pylab=inline'
