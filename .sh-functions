@@ -1142,3 +1142,42 @@ ZIMServer("$1")
 EOF
 }
 
+function lsmerge() {
+    (
+        ls_opts=''; sort_opts='';
+
+        # --- options ---
+        PARSED=$(getopt -n "$0" -o l:s: -l "ls,sort"  -- "$@")
+        if [ $? -ne 0 ]; then echo "getopt error"; exit 1; fi
+        eval set -- "$PARSED"
+        while true; do
+            case "$1" in
+                -h|--help)
+                    cat <<EOF
+lsmerge [--ls='LS OPTS'][--sort='SORT OPTS'] DIRS...
+Options:
+    -l  --ls     option string to pass to ls
+    -s  --sort   option string to pass to sort
+EOF
+                    return; ;;
+                -l|--ls)
+                    ls_opts="$2";
+                    shift 2; ;;
+                -s|--sort)
+                    sort_opts="$2";
+                    shift 2; ;;
+                --)
+                    shift; break; ;;
+                *)
+                    shift; ;;
+            esac
+        done
+        # --- end options ---
+
+        {
+            for dir in "$@"; do
+                eval "ls $ls_opts '$dir'";
+            done;
+        } | eval "sort $sort_opts";
+    )
+}
