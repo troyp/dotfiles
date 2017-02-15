@@ -1181,3 +1181,42 @@ EOF
         } | eval "sort $sort_opts";
     )
 }
+
+perlcopy() {
+    (
+        verbose=""
+
+        # --- options ---
+        PARSED=$(getopt -n "$0" -o hv --long "help,verbose"  -- "$@")
+        if [ $? -ne 0 ]; then echo "getopt error"; exit 1; fi
+        eval set -- "$PARSED"
+        while true; do
+            case "$1" in
+                -h|--help)
+                    cat <<EOF
+perlcopy [-v] EXPR DIR FILES...
+    Copy FILES to DIR, renaming according to perl expression EXPR.
+    Options:
+        -v --verbose  explain what is being done
+EOF
+                    return; ;;
+                -v|--verbose)
+                    verbose="-v"
+                    shift; ;;
+                --)
+                    shift; break; ;;
+            esac
+        done
+        # --- end options ---
+
+        expr="$1"
+        todir="$2"
+        shift 2
+        fromdir=`pwd`
+        tmpdir=`mktemp -d`
+        for f in "$@"; do cp $verbose "$f" "$tmpdir"; done
+        cd $tmpdir
+        rename $verbose "$expr" * ;
+        mv $verbose -t "$todir" * ;
+    )
+}
