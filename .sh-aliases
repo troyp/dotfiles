@@ -992,6 +992,16 @@ alias rtf2txt='unrtf --text'
 alias libreconv=unoconv    # convert between libreoffice supported formats
 alias libreconv-pdf='unoconv -f pdf'    # convert from libreoffice supported format to pdf
 
+# ----------------
+# JAPANESE ALIASES
+# ----------------
+alias fromjis='iconv -f SHIFT-JIS -t UTF-8'
+alias tojis='iconv -f UTF-8 -t SHIFT-JIS'
+alias translit='iconv -f utf-8 -t ascii//translit'  # transliterate western characters
+alias toromaji='iconv -f utf8 -t shift-jis | kakasi -w -Ha -Ka -Ja -Ea -ka'
+# requires python romkan library (pip install romkan)
+alias rom2kana='python -c "'"import sys, romkan; print(romkan.to_hiragana(' '.join(sys.argv[1:])))"'"'
+
 # ------------------
 # PIPELINE OPERATORS
 # ------------------
@@ -1038,9 +1048,6 @@ alias lastless='tail -n1 | xargs less'
 alias chooseless='iselect -ma | xargs less'
 #
 alias recol='pr -t --columns'  # recolumnate single-column data
-alias fromjis='iconv -f SHIFT-JIS -t UTF-8'
-alias tojis='iconv -f UTF-8 -t SHIFT-JIS'
-alias translit='iconv -f utf-8 -t ascii//translit'  # transliterate western characters
 # http://stackoverflow.com/questions/17998978/removing-colors-from-output - buggy
 alias stripcolors='sed -r "s/\x1B\[([0-9];)?([0-9]{1,2}(;[0-9]{1,2})?)?[mGK]//g"'
 alias tobasenames='xargs basename -a'               # convert paths to basenames
