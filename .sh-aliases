@@ -354,6 +354,8 @@ alias xq=xqilla
 alias delete-before-doctype="sed -i -ne '/<!DOCTYPE/,$ p'"
 alias urlenc='xargs -0 urlencode'
 alias urldeenc='xargs -0 urlencode -d'
+alias urldecjs='sed "s/+/%2B/g" | xargs -0 urlencode -d'
+alias urldecjscb='cb | sed "s/+/%2B/g" | xargs -0 urlencode -d'
 alias htmlxpath='xmllint --html --xpath'
 
 #------------------------
@@ -506,6 +508,7 @@ alias install-dein='mkdir ~/.vim/dein; ( cd ~/.vim/dein/; curl https://raw.githu
 alias install-lein='cd `mktemp -d`; wget https://raw.github.com/technomancy/leiningen/stable/bin/lein; chmod a+x lein; sudo mv lein /opt/scripts/; cd -'
 # ===== other download aliases =====
 alias ytdl='youtube-dl -citk'
+alias imgurdl='python3 /opt/imgur-album-downloader/imguralbum.py'    # github.com/alexgisby/imgur-album-downloader
 
 # ----------------
 # FIREFOX ALIASES.
