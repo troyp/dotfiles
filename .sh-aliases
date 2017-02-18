@@ -354,6 +354,7 @@ alias xq=xqilla
 alias delete-before-doctype="sed -i -ne '/<!DOCTYPE/,$ p'"
 alias urlenc='xargs -0 urlencode'
 alias urldeenc='xargs -0 urlencode -d'
+alias htmlxpath='xmllint --html --xpath'
 
 #------------------------
 # WGET & RELATED ALIASES.
