@@ -1019,8 +1019,10 @@ alias maplines='xargs -L1'
 alias dolines='while read -r x || [[ -n $x ]]; do'
 # uniqdirs: print a list of target directories (ie. resolve symlinks) of files
 alias uniqdirs='while read -r line || [[ -n $line ]]; do dirname "`readlink -f "$line"`"; done | sort | uniq'
-# eg.              ls -l | dofields echo $x9; done
-# equivalent to:   ls -l | awk '{ print $9 }'
+# eg.              ls -l | dofields echo $x7; done
+# equivalent to:   ls -l | awk '{ print $7 }'
+# eg.              ls -l | dofields echo "$x7: $x5"; done
+# equivalent to:   ls -l | awk '{ printf "%s: %s\n", $7, $5 }'
 alias dofields='while read -r x1 x2 x3 x4 x5 x6 x7 x8 x9; do'
 # while read -r x; do echo "stmts using $x"; done
 alias imaplines='xargs -d "\n" -n 1 -p'
