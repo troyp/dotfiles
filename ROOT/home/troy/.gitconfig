@@ -7,7 +7,7 @@
 [alias]
 	cl = clone
 	# clone repository in clipboard
-	g = !git clone $(xsel -ob)
+	g = !cd \"$GIT_PREFIX\" && git clone $(xsel -ob)
 	a = add -A
 	b = branch
 	c = commit -m
