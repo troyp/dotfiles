@@ -509,6 +509,8 @@ alias install-lein='cd `mktemp -d`; wget https://raw.github.com/technomancy/lein
 # ===== other download aliases =====
 alias ytdl='youtube-dl -citk'
 alias imgurdl='python3 /opt/imgur-album-downloader/imguralbum.py'    # github.com/alexgisby/imgur-album-downloader
+alias packtdl='python /opt/packtpub-crawler/script/spider.py --config config/troy.cfg --type'
+alias packtdlextras='python /opt/packtpub-crawler/script/spider.py --config config/prod.cfg --extras'
 
 # ----------------
 # FIREFOX ALIASES.
