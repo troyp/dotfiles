@@ -552,6 +552,7 @@ alias htheaders='lynx -dump -head'
 alias lstcpservers='sudo netstat -plentv'
 alias monitor-http-requests="sudo tcpdump -i eth0 -A -s 5000 'tcp port 80 and (((ip[2:2] - ((ip[0]&0xf)<<2)) - ((tcp[12]&0xf0)>>2)) != 0)'"
 alias get-mtu='ifconfig | grep -i mtu'
+alias github-add-ssh='ssh-keyscan -t rsa github.com > ~/.ssh/known_hosts'
 
 # -------------
 # HELP ALIASES.
