@@ -61,6 +61,8 @@
 	excludesfile = ~/.gitignore
 	autocrlf = input
 	pager = less -+F -RSX
+[credential]
+	helper = cache --timeout=7200
 [diff]
 	tool = vimdiff
 	mnemonicprefix = true
