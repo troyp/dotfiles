@@ -1,9 +1,3 @@
-[core]
-	excludesfile = ~/.gitignore
-	autocrlf = input
-	pager = less -+F -RSX
-[include]
-	path = /home/troy/.gitconfig_personal
 [alias]
 	cl = clone
 	# clone repository in clipboard
@@ -63,8 +57,14 @@
 [color]
 	ui = auto # covers diff = true, status = auto, branch = auto
 	interactive = auto
+[core]
+	excludesfile = ~/.gitignore
+	autocrlf = input
+	pager = less -+F -RSX
 [diff]
 	tool = vimdiff
 	mnemonicprefix = true
+[include]
+	path = /home/troy/.gitconfig_personal
 [push]
 	default = simple
