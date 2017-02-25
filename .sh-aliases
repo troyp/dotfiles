@@ -177,8 +177,11 @@ alias lsenvall='env | less'    # list entire environment
 # --------------------------
 # --- looping over files ---
 alias dofiles='for x in *; do'    # process each file in current directory
-# eg.  mapfiles printf "`pwd`/$x\n"
-alias mapfiles='for x in *; do echo "$x" |'    # for each file in cur dir (end with `done`)...
+# eg. mapfiles img-info
+# eg. mapfiles img-info '| cuts 1'
+mapfiles() { first="$1"; shift; for x in *; do eval "$first '$x' $*"; done; };
+# eg. loopfiles 'img-info "$x" | cuts 1'
+loopfiles() { for x in *; do eval "$*"; done; };
 alias docbfiles='xsel -ob | files-from-url | dolines' # loop over files copied in clipboard (convert from file:// URL)
 alias docburls='xsel -ob | dolines'                   # loop over urls copied to clipboard
 alias docburls-reversed='xsel -ob | tac | dolines'    # loop over urls copied to clipboard (reverse order)
