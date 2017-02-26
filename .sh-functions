@@ -1220,3 +1220,15 @@ EOF
         mv $verbose -t "$todir" * ;
     )
 }
+
+nextdir() {
+    (
+        thisdir="${$(pwd)##*/}";
+        cd ..;
+        subdirs=$(ls -1p | grep -P '/$');
+        echo $(ls -1p | grep -P '/$' | sed 's/\/$//' | grep -A1 "^$thisdir$" | tail -n1)
+    )
+}
+cdn() {
+    cd ../`nextdir`;
+}
