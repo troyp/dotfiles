@@ -134,16 +134,17 @@ alias lac='ls -Al --color=always'  # detailed list dotfiles, colored output to p
 alias lacc='ls -Al --time=access'    # detailed list access-time dotfiles
 alias lr='ls -lR'    # detailed list recursive
 alias lc='ls -Cp'    # filenames only, append / to directories
-alias lsdirs="ls -1ap | grep -P '(?=/$)'"    # list subdirectories of current dir
-alias lldirs="ls -1alp | grep -P '(?=/$)'"
-alias lsvdirs="ls -1p | grep -P '(?=/$)'"  # visible only
-alias llvdirs="ls -1p | grep -P '(?=/$)' | xargs -d'\n' ls -d --color=auto"
-alias lldirs='ls -lp | grep -P "(\S ?)+/$"'       # list details of directories only
+# list subdirectories only (including links to directories):
+alias lsdirs="ls -1p | grep -P '(?=/$)' | xargs -d'\n' ls -d --color=auto"
+alias lldirs="lsdirs -l"
+alias ladirs="ls -1Ap | grep -P '(?=/$)' | xargs -d'\n' ls -d --color=auto"  # incl. hidden dirs
+alias lladirs="ladirs -l"
 alias lldirsl='ls -lp | grep -P "(\S ?)+/$|(\S ?)+ (?=-> (\S ?)+$)"'  # list details: dirs/links
-alias lsfiles='ls -p | grep -v "/$"'    # list details of files only (inc. links)
-alias lafiles='ls -Ap | grep -v "/$"'    # list details of files only (inc. links)
-alias llfiles='ls -lp | grep -v "/$"'   # list details of files only (inc. links)
-alias llafiles='ls -Alp | grep -v "/$"'   # list details of files only (inc. links)
+# list files only (including links to files):
+alias lsfiles="ls -p | grep -v '/$' | xargs -d'\n' ls -d --color=auto"
+alias llfiles="lsfiles -l"
+alias lafiles="ls -Ap | grep -v '/$' | xargs -d'\n' ls -d --color=auto"
+alias llafiles="lafiles -l"
 alias llfilesbysize='llfiles | sort -k 5nr'    # list files with details, from largest down
 
 alias lsod='LC_COLLATE=C ls'      # sort dotfiles, then UC, then LC
