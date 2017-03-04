@@ -181,7 +181,7 @@ alias lsenvall='env | less'    # list entire environment
 # --- looping over files ---
 alias dofiles='for x in *; do'    # process each file in current directory
 # eg. mapfiles img-info
-# eg. mapfiles img-info '| cuts 1'
+# eg. mapfiles img-info '| cuts 1'    OR    mapfiles img-info \| cuts 1
 mapfiles() { first="$1"; shift; for x in *; do eval "$first '$x' $*"; done; };
 # eg. loopfiles 'img-info "$x" | cuts 1'
 loopfiles() { for x in *; do eval "$*"; done; };
@@ -359,8 +359,8 @@ alias xstar=xmlstarlet
 alias xq=xqilla
 alias delete-before-doctype="sed -i -ne '/<!DOCTYPE/,$ p'"
 alias urlenc='xargs -0 urlencode'
-alias urldeenc='xargs -0 urlencode -d'
-alias urldecjs='sed "s/+/%2B/g" | xargs -0 urlencode -d'
+alias urldeenc='xargs -0 urlencode -d'    # use urldecjs for bookmarklets
+alias urldecjs='sed "s/+/%2B/g" | xargs -0 urlencode -d'   # url-decode bookmarklet js
 alias urldecjscb='cb | sed "s/+/%2B/g" | xargs -0 urlencode -d'
 alias htmlxpath='xmllint --html --xpath'
 
