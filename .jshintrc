@@ -1,0 +1,7 @@
+{
+    "boss":      true,       // allow assignment as conditional
+    "esversion": 6,
+    "latedef":   "nofunc",   // allow function use before declaration
+    "moz":       true,
+    "scripturl": true,
+}
