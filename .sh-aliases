@@ -45,6 +45,7 @@ alias aptcs='apt-cache search'  # find matching packages
 alias aptff='apt-file find'  # (find==search) find packages containing matching files
 # --- info ---
 alias aptcp='apt-cache policy'  # show installed version, candidate, repository
+alias aptcm='apt-cache madison' # show candidate versions, repos in table
 alias aptcsh='apt-cache show'  # show package records
 alias debpkg="dpkg-deb -I j804_amd64.deb|grep -oP '(?<=Package:\t).*'"    # package installed by .deb file
 # --- files ---
