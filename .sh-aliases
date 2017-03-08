@@ -517,8 +517,14 @@ alias install-lein='cd `mktemp -d`; wget https://raw.github.com/technomancy/lein
 # ===== other download aliases =====
 alias ytdl='youtube-dl -citk'
 alias imgurdl='python3 /opt/imgur-album-downloader/imguralbum.py'    # github.com/alexgisby/imgur-album-downloader
-alias packtdl='python /opt/packtpub-crawler/script/spider.py --config config/troy.cfg --type'
+alias packtdlepub='python /opt/packtpub-crawler/script/spider.py --config config/prod.cfg --type epub'
+alias packtdlpdf='python /opt/packtpub-crawler/script/spider.py --config config/prod.cfg --type pdf'
+alias packtdl_from_here='python script/spider.py --config config/prod.cfg --extras --type epub'
+alias packtdlformat='python /opt/packtpub-crawler/script/spider.py --config config/prod.cfg --type'
 alias packtdlextras='python /opt/packtpub-crawler/script/spider.py --config config/prod.cfg --extras'
+alias packtclaim='python /opt/packtpub-crawler/script/spider.py -c config/prod.cfg --notify gmail --claimOnly'
+alias packtdlall='python /opt/Packt-Publishing-Free-Learning/packtPublishingFreeEbook.py -da'   # dl all books (in formats given in Packt-Publishing-Free-Learning/configFile.cfg)
+alias packtdlchosen='python /opt/Packt-Publishing-Free-Learning/packtPublishingFreeEbook.py -dc'  # dl books listed in Packt-Publishing-Free-Learning/configFile.cfg
 
 # ----------------
 # FIREFOX ALIASES.
