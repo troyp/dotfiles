@@ -529,6 +529,7 @@ alias ytdl='youtube-dl -citk'
 alias imgurdl='python3 /opt/imgur-album-downloader/imguralbum.py'    # github.com/alexgisby/imgur-album-downloader
 alias packtdlepub='python /opt/packtpub-crawler/script/spider.py --config config/prod.cfg --type epub'
 alias packtdlpdf='python /opt/packtpub-crawler/script/spider.py --config config/prod.cfg --type pdf'
+alias packtdlallformats='python /opt/packtpub-crawler/script/spider.py --config config/prod.cfg --extras --type all'
 alias packtdl_from_here='python script/spider.py --config config/prod.cfg --extras --type epub'
 alias packtdlformat='python /opt/packtpub-crawler/script/spider.py --config config/prod.cfg --type'
 alias packtdlextras='python /opt/packtpub-crawler/script/spider.py --config config/prod.cfg --extras'
