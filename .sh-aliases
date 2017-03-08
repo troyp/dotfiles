@@ -342,7 +342,17 @@ alias locatei='locate -i'        # locate files ignoring case`
 alias findfilename='find . -type f -iname'   # find files with (case-insens) name PATTERN.
 alias findinwd='find . -maxdepth 1'      # find in current directory (non-recursive)
 alias findfileinwd='find . -maxdepth 1 -type f'      # find in current directory (non-recursive)
-alias findrepl='printf ">> "; while read line; do find . -iname "*$line*"; printf ">> "; done'
+# alias findrepl='printf ">> "; while read line; do find . -iname "*$line*"; printf ">> "; done'
+findrepl() {
+    printf ">> ";
+    while read line; do
+        for dir in "${@-.}"; do
+            find `realpath "$dir"` -iname "*$line*";
+        done
+        printf ">> ";
+    done
+}
+alias findreplcs='findrepl ~/ebooks/coding ~/ebooks/cs ~/ebooks/dl'
 alias statf='stat --printf'    # eg. statf "%s" file (size in B), statf "%h" file (no. hard links)
 alias rgg='rg -pS'             # ripgrep with pretty and smartcase
 alias rgh='rg -pS --hidden'    # ripgrep with pretty and smartcase, include dotfiles
