@@ -1232,3 +1232,49 @@ nextdir() {
 cdn() {
     cd ../`nextdir`;
 }
+
+git-origin-url () {
+    git config --get remote.origin.url | sed -r 's/git@(.*):(.*).git/http:\/\/\/\1\/\2/';
+}
+
+github-goto-commit () {
+    (
+        selected=$(git --no-pager log | peco);
+        commithash=$(git --no-pager log | grep -B4 -F "$selected" | grep "^commit" | cuts 2);
+        repo=$(git config --get remote.origin.url | sed -r "s/git@(.*):(.*).git/http:\/\/\/\1\/\2/");
+        firefox "$repo/commit/$commithash";
+    )
+}
+
+github-commit-to-url () {
+    (
+        if [[ -n $1 ]]; then commithash=$1; else read commithash; fi;
+        repo=$(git config --get remote.origin.url | sed -r 's/git@(.*):(.*).git/http:\/\/\/\1\/\2/');
+        echo "$repo/commit/$commithash";
+    )
+}
+
+github-url-to-commit () {
+    (
+        if [[ -n $1 ]]; then url=$1; else read url; fi;
+        sed -r 's/https?:\/\/github.com\/[^/]+\/[^/]+\/commit\/([^/]+)/\1/' <<<"$url";
+    )
+}
+
+git-next-commit () {
+    if [[ -n $1 ]]; then commithash=$1; else read commithash; fi;
+    git log | grep -F -B6 $commithash | head -n1 | cuts 2;
+}
+git-previous-commit () {
+    if [[ -n $1 ]]; then commithash=$1; else read commithash; fi;
+    git log | grep -F -A6 $commithash | tail -n1 | cuts 2;
+}
+
+github-next-commit () {
+    if [[ -n $1 ]]; then url=$1; else read url; fi;
+    github-url-to-commit $url | git-next-commit | github-commit-to-url;
+}
+github-previous-commit () {
+    if [[ -n $1 ]]; then url=$1; else read url; fi;
+    github-url-to-commit $url | git-previous-commit | github-commit-to-url;
+}
