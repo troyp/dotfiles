@@ -577,7 +577,6 @@ alias htheaders='lynx -dump -head'
 alias lstcpservers='sudo netstat -plentv'
 alias monitor-http-requests="sudo tcpdump -i eth0 -A -s 5000 'tcp port 80 and (((ip[2:2] - ((ip[0]&0xf)<<2)) - ((tcp[12]&0xf0)>>2)) != 0)'"
 alias get-mtu='ifconfig | grep -i mtu'
-alias github-add-ssh='ssh-keyscan -t rsa github.com > ~/.ssh/known_hosts'
 
 # -------------
 # HELP ALIASES.
@@ -732,6 +731,8 @@ alias gitalias="git config --get-regexp '^alias\.' | cut -c 7- | sed 's/ /\t/' |
 alias gitsetupignore="git config --global core.excludesfile '~/.gitignore'"
 alias gitcommits='git log --oneline --color | perl -ne '"'"'printf "HEAD~%-3d %s", ++$i, "$_"'"'"'| less -r'
 alias cbclone='ghq get `xsel -ob`'
+alias github-add-ssh='ssh-keyscan -t rsa github.com > ~/.ssh/known_hosts'
+alias github-goto-first-commit='git log --reverse | head -n1 | cuts 2 | read commit; firefox `git config --get remote.origin.url | sed -r "s/git@(.*):(.*).git/http:\/\/\/\1\/\2/"`/commit/$commit'
 
 # -----------
 # SSH ALIASES
