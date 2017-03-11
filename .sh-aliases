@@ -1210,7 +1210,7 @@ alias diskusage='gdmap -f'
 # alias dolphin='XDG_CURRENT_DESKTOP=kde dolphin'   # may fix ui if launched from other desktop environment
 alias ibusd='IBUS_ENABLE_SYNC_MODE=1 ibus-daemon -drx'
 alias thumbsdb='vinetto -o ./.thumbnails ./?humbs.db'
-alias kanjitomo='java -Xmx1000m -jar /opt/KanjiTomo/KanjiTomo.jar -run'
+alias kanjitomo='java -Xmx1000m -jar /opt/jar/KanjiTomo/KanjiTomo.jar -run'
 alias subtitledl='subliminal download -l en'    # dl subs matching a video file - requires pip install subliminal
 alias surft='surf -t'
 alias shoot='shutter -s -e'    # screenshot rectangular selection and exit
