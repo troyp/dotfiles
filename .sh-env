@@ -140,7 +140,6 @@ paths=(
     /opt/mozart2/bin
     /opt/nim/bin
     /opt/nim
-    # /opt/node/bin
     /opt/pdf-diff
     /opt/pdfdir
     /opt/peazip
@@ -171,6 +170,13 @@ for d in `gem environment gemdir`/gems/*; do
     if [[ -d "$d"/bin ]]; then
         pathappend "$d"/bin;
     fi
+done
+
+prioritypaths=(
+    /opt/node*/bin
+)
+for i in "${prioritypaths[@]}"; do
+    pathprepend "$i"
 done
 
 infopaths=(
