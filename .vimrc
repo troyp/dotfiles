@@ -254,6 +254,7 @@ nnoremap <leader>w :w!<cr>
 " Fast editing of the .vimrc
 noremap <leader>fed :e! ~/.vimrc<cr>
 noremap <leader>feR :so ~/.vimrc<cr>
+noremap <leader>feS :Verbose :scriptnames<cr>
 noremap <leader>f<C-e>d :e! ~/.gvimrc<cr>
 noremap <leader>f<C-e>R :so ~/.gvimrc<cr>
 
