@@ -640,6 +640,7 @@ alias copycommand='fc -ln -1 -1 | cb'
 # ============
 alias crontab-save='crontab-l > ~/.crontab'
 alias crontab-load='crontab ~/.crontab'
+alias crontab-edit='vim ~/.crontab'
 
 # ---------------
 # PROCESS ALIASES
