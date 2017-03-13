@@ -13,7 +13,21 @@ Helptags
 " ----------
 call plug#begin('~/.vim/plugged')
 
+Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+Plug 'tpope/vim-scriptease'
+Plug 'tpope/vim-surround'
+Plug 'tpope/vim-abolish'
+Plug 'tpope/vim-eunuch'
+Plug 'tpope/vim-markdown'
+Plug 'tpope/vim-fugitive'
+Plug 'tpope/vim-repeat'
+Plug 'tpope/vim-speeddating'
+Plug 'tpope/vim-unimpaired'
+Plug 'scrooloose/nerdtree'
+
 call plug#end()
+" PlugUpdate
 
 " ----------
 " NeoBundle.
@@ -52,8 +66,9 @@ call dein#add('Shougo/dein.vim')
 " fzf
 " ./install --all so the interactive script doesn't block
 " you can check the other command line options  in the install file
-call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 }) 
-call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
+" " not working?
+" call dein#add('junegunn/fzf', { 'build': './install --all', 'merged': 0 })
+" call dein#add('junegunn/fzf.vim', { 'depends': 'fzf' })
 
 " and a lot more plugins.....
 
@@ -128,7 +143,7 @@ set expandtab
 
 syntax on                    " syntax highlighting
 set background=dark          " use colours that suit a dark background
-colorscheme evening         
+colorscheme evening
 "others: evening, jellybeans, twilight, desert, bubblegum, vividchalk, zenburn
 set laststatus=2             " always display status line
 set statusline=%<%f\ %h%m%r%=%-14.(%l,%c%V%)\ %P
@@ -384,4 +399,3 @@ execute "set rtp+=" . g:opamshare . "/merlin/vim"
 command! Opamupdatedocs :execute "helptags " . substitute(system('opam config var share'),'\n$','','''') .  "/merlin/vim/doc"
 " ocp-indent
 set rtp^="/home/troy/.opam/system/share/ocp-indent/vim"
-
