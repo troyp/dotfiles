@@ -635,6 +635,11 @@ alias g='dolphin "`pwd`"'    # note: oh-my-zsh git plugin will overwrite this wi
 alias lastcommand='fc -ln -1 -1'
 alias copycommand='fc -ln -1 -1 | cb'
 
+# ============
+# CRON ALIASES
+# ============
+alias crontab-save='crontab-l > ~/.crontab'
+alias crontab-load='crontab ~/.crontab'
 
 # ---------------
 # PROCESS ALIASES
