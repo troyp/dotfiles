@@ -641,9 +641,11 @@ alias copycommand='fc -ln -1 -1 | cb'
 alias crontab-save='crontab-l > ~/.crontab'
 alias crontab-load='crontab ~/.crontab'
 alias crontab-edit='vim ~/.crontab'
+alias crontab-edit-load='vim ~/.crontab && crontab ~/.crontab'
 alias root-crontab-save='sudo crontab -l > /root/.crontab'
 alias root-crontab-load='sudo crontab /root/.crontab'
 alias root-crontab-edit='sudo vim /root/.crontab'
+alias root-crontab-edit-load='sudo vim /root/.crontab && sudo crontab ~/.crontab'
 alias system-crontab-edit='sudo vim /etc/crontab'
 
 # ---------------
