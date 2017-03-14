@@ -782,6 +782,7 @@ alias lsxcompose='cat ~/.XCompose'                                             #
 alias lscomposeall='cat /usr/share/X11/locale/en_US.UTF-8/Compose ~/.XCompose' # all compose key combinations
 alias viewcompose='lscompose | less'
 alias viewcomposeall='lscomposeall | less'
+alias cron_logfile_on="sudo sed -ir 's/^#(cron\.\*)/\1/' /etc/rsyslog.d/50-default.conf" # log to /var/log/cron.log
 
 # --------------------------
 # SYSTEM / HARDWARE ALIASES.
