@@ -525,7 +525,8 @@ alias install-pathogen='mkdir -p ~/.vim/autoload ~/.vim/bundle && curl -LSso ~/.
 alias install-dein='mkdir ~/.vim/dein; ( cd ~/.vim/dein/; curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh && sh installer.sh . && echo "run vim and execute :call dein#install()")'
 alias install-lein='cd `mktemp -d`; wget https://raw.github.com/technomancy/leiningen/stable/bin/lein; chmod a+x lein; sudo mv lein /opt/scripts/; cd -'
 # ===== other download aliases =====
-alias ytdl='youtube-dl -citk'
+alias ytdl='youtube-dl -citk --all-subs'
+alias ytdlsubs='youtube-dl -t --all-subs --skip-download'
 alias imgurdl='python3 /opt/imgur-album-downloader/imguralbum.py'    # github.com/alexgisby/imgur-album-downloader
 alias packtdlepub='python /opt/packtpub-crawler/script/spider.py --config config/prod.cfg --type epub'
 alias packtdlpdf='python /opt/packtpub-crawler/script/spider.py --config config/prod.cfg --type pdf'
