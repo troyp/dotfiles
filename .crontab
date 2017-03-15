@@ -23,4 +23,4 @@
 # m h  dom mon dow   command
 
  5 11  *  *  *   python /opt/packtpub-crawler/script/spider.py --config config/prod.cfg --extras --all >> ~/.crontab.log 2>&1
-
+ 8 11  *  *  *   mv -nvt ~/ebooks/dl/ /opt/packtpub-crawler/ebooks/* >> ~/.crontab.log 2>&1
