@@ -189,6 +189,7 @@ loopfiles() { for x in *; do eval "$*"; done; };
 alias docbfiles='xsel -ob | files-from-url | dolines' # loop over files copied in clipboard (convert from file:// URL)
 alias docburls='xsel -ob | dolines'                   # loop over urls copied to clipboard
 alias docburls-reversed='xsel -ob | tac | dolines'    # loop over urls copied to clipboard (reverse order)
+alias dosubdirs='for x in */; do x="${x%/}";'    # process each subdir in current directory
 
 # --- editing files ---
 alias sed-file='sed -i.bak' # edit file in-place (makes backup) sed-file 's/old/new/g' f.ext
