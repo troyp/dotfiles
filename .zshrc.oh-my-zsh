@@ -70,7 +70,6 @@ plugins=(dirhistory zsh-syntax-highlighting zsh-nvm)
 #     | LOAD OTHER FILES |
 #     '------------------'
 # startup files
-[[ -f ~/.shrc ]] && source ~/.shrc;      # .shrc sources .sh-aliases, .sh-functions
 if [[ -f $ZSH/oh-my-zsh.sh ]]; then
     source $ZSH/oh-my-zsh.sh;
     # reload prompt (since oh-my-zsh.sh doesn't do it properly)
@@ -78,6 +77,8 @@ if [[ -f $ZSH/oh-my-zsh.sh ]]; then
     [[ -e "$ZSH_CUSTOM/$ZSH_THEME.zsh-theme" ]]         && source "$ZSH_CUSTOM/$ZSH_THEME.zsh-theme"
     [[ -e "$ZSH_CUSTOM/themes/$ZSH_THEME.zsh-theme" ]]  && source "$ZSH_CUSTOM/themes/$ZSH_THEME.zsh-theme"
 fi
+
+[[ -f ~/.shrc ]] && source ~/.shrc;      # .shrc sources .sh-aliases, .sh-functions
 # ZSH-specific aliases and functions
 [[ -f ~/.zsh-aliases ]]   && source ~/.zsh-aliases;
 [[ -f ~/.zsh-functions ]] && source ~/.zsh-functions;
