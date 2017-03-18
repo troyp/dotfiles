@@ -1,5 +1,7 @@
 [core]
 	excludesfile = /home/troy/.gitignore_global
+	editor = 'emacsclient -ta vim'
+	merge.tool = vimdiff
 [user]
 	name = Troy Pracy
 	email = troyp7@gmail.com
