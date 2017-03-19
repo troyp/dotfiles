@@ -556,6 +556,7 @@ alias ffsearch="firefox -search"
 alias cdffdir='cd `ffprof $FFMAINPROFILE`'    # cd to Firefox profile directory
 alias cdffcache='cd `fftempfiles $FFMAINPROFILE`'  # cd to Firefox cache directory
 alias ffpipe='base64 -w0 <&0 | read -r x; firefox "data:text/html;base64,$x"'
+alias mozrepl='rlwrap telnet localhost 4242'
 
 #------------------------
 # BROWSER/SERVER ALIASES.
