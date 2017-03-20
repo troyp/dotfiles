@@ -2,13 +2,18 @@
 [[ ! -z $DEBUG  ]] && echo "sourcing .sh-functions-media"
 
 videodl () {
-    # videodl QUALITY URL
-    # Download video URL with livedumper; args swapped to allow aliases.
-    # requires:
+    # REQUIREMENTS:
     #   rtmpdump:      apt or git://git.ffmpeg.org/rtmpdump
     #   livestreamer:  https://github.com/chrippa/livestreamer
     #   livedumper:    pip or https://github.com/m45t3r/livedumper
-    livedumper "$2" "$1";
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+videodl URL [QUALITY]
+
+Download video URL using livedumper, with QUALITY defaulting to 'best'.
+        EOF
+        return 0; fi;
+    livedumper "$2" "${1:-best}";
 }
 
 video-extract () {
