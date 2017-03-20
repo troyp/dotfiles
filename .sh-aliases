@@ -1248,7 +1248,7 @@ alias shootmenu='shutter -m -e'    # screenshot menu and exit
 alias shootagain='shutter -r -e'   # repeat last screenshot - not working?
 alias sc-tutorial='sc /usr/share/doc/sc/tutorial.sc'
 alias rofii='rofi -combi-modi window,drun,run -show combi -modi combi'   # general purpose launcher
-
+alias install-avidump2-'sudo apt-get install libmono-system4.0-cil libmono-corlib4.5-cil libmono-system-xml-linq4.0-cil'
 
 # -------
 # NOVELTY
