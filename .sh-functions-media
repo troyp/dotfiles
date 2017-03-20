@@ -11,7 +11,7 @@ videodl () {
 videodl URL [QUALITY]
 
 Download video URL using livedumper, with QUALITY defaulting to 'best'.
-        EOF
+EOF
         return 0; fi;
     livedumper "$2" "${1:-best}";
 }
