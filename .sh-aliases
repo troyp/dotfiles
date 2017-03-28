@@ -917,7 +917,7 @@ alias composerrg='composer global require'
 # -------------------------------------------------------------------------------
 # Python
 alias pynote='ipython notebook --pylab=inline'
-alias ipylab='ipython --pylab'
+alias ipylab='ipython --pylab -i ~/.pylab'
 alias py=ipylab
 alias py3='ipython3 --pylab'
 alias bpy='bpython'
