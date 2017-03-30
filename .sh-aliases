@@ -529,6 +529,7 @@ alias install-lein='cd `mktemp -d`; wget https://raw.github.com/technomancy/lein
 alias ytdl='youtube-dl -citk --all-subs'
 alias ytdlsubs='youtube-dl -t --all-subs --skip-download'
 alias imgurdl='python3 /opt/imgur-album-downloader/imguralbum.py'    # github.com/alexgisby/imgur-album-downloader
+alias packt=packtdlallformats
 alias packtdlepub='python /opt/packtpub-crawler/script/spider.py --config config/prod.cfg --type epub'
 alias packtdlpdf='python /opt/packtpub-crawler/script/spider.py --config config/prod.cfg --type pdf'
 alias packtdlallformats='python /opt/packtpub-crawler/script/spider.py --config config/prod.cfg --extras --all'
