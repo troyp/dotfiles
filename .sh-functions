@@ -1278,3 +1278,24 @@ github-previous-commit () {
     if [[ -n $1 ]]; then url=$1; else read url; fi;
     github-url-to-commit $url | git-previous-commit | github-commit-to-url;
 }
+
+diffdotfiles() {
+    f="$1";
+    f1=`readlink -f "$1"`;
+    if [[ "$f1" =~ "^$HOME(/dotfiles/ROOT$HOME)?/.git(config|ignore)$" ]]; then
+        # .gitconfig or .gitignore
+        f2=~/dotfiles/ROOT/"${${f1#$HOME}#/dotfiles/ROOT}";
+    elif [[ "$f1" =~ "$HOME/dotfiles/" ]]; then
+        # resolves to a file in dotfiles/ (probably symlink)
+        f2=~/"${f1#$HOME/dotfiles/}";
+    elif [[ "$f1" =~ "$HOME" ]]; then
+        # resolves to file in ~ but outside dotfiles/
+        f2=~/dotfiles/"${f1#$HOME/}";
+    else
+        # resolves to a file outside ~: look in dotfiles/ROOT/...
+        f2="~/dotfiles/ROOT$f1";
+    fi;
+    echo "$f1";
+    echo "$f2";
+    \diff -s --normal "$f1" "$f2";
+}
