@@ -789,6 +789,16 @@ alias lscomposeall='cat /usr/share/X11/locale/en_US.UTF-8/Compose ~/.XCompose' #
 alias viewcompose='lscompose | less'
 alias viewcomposeall='lscomposeall | less'
 alias cron_logfile_on="sudo sed -ir 's/^#(cron\.\*)/\1/' /etc/rsyslog.d/50-default.conf" # log to /var/log/cron.log
+alias lsxkb='cat /usr/share/X11/xkb/rules/base.lst'
+alias lsxkbmodels="sed '/^! model$/,/^ *$/!d;//d' /usr/share/X11/xkb/rules/base.lst"
+alias lsxkblayouts="sed '/^! layout$/,/^ *$/!d;//d' /usr/share/X11/xkb/rules/base.lst"
+alias lsxkbvariants="sed '/^! variant$/,/^ *$/!d;//d' /usr/share/X11/xkb/rules/base.lst"
+alias lsxkboptions="sed '/^! option$/,/^ *$/!d;//d' /usr/share/X11/xkb/rules/base.lst"
+alias viewxkb="less -M '+/^\s*\!\s\w+$' /usr/share/X11/xkb/rules/base.lst"
+alias viewxkbmodels="lsxkbmodels | less -M"
+alias viewxkblayouts="lsxkblayouts | less -M"
+alias viewxkbvariants="lsxkbvariants | less -M"
+alias viewxkboptions="lsxkboptions | less -M"
 
 # --------------------------
 # SYSTEM / HARDWARE ALIASES.
