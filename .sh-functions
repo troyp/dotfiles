@@ -299,7 +299,35 @@ list-dependencies-safe () {
     objdump -p $1 | grep NEEDED;
 }
 
-nthline () { sed -n "`printf "%dp;" $@`"; }
+nthline() {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+nthline LINENUM ...
+
+    Prints the specified line numbers of the piped input.
+    Line numbers may be negative, in which case they count backward from the
+    last line (which is -0). Ranges may also be used, separated by two dots
+    (with no spaces), eg. with 100 lines of input:
+
+        nthline 2 3..5 -0..-2
+
+    is equivalent to:
+
+        nthline 2 3 4 5 100 99 98
+EOF
+        return 0; fi;
+    (
+        expanded=$(echo "$*" | perl -pe 's/(-?\d+)\.\.(-?\d+)/($1>$2)?join(" ", reverse $2..$1):join(" ", $1..$2)/ge');
+        [[ -n $DEBUG ]] && >&2 echo "expanded: $expanded";
+        tmpfile=`mktemp`;
+        cat > $tmpfile;
+        N=$(cat $tmpfile | wc -l);
+        [[ -n $DEBUG ]] && >&2 echo "N: $N";
+        sedargs=$(for i in `echo "$expanded"`; do [[ "$i" < 0 ]] && echo -n "$((N + i))p; " || echo -n "${i}p; "; done);
+        [[ -n $DEBUG ]] && >&2 echo "sedargs: $sedargs";
+        cat $tmpfile | sed -n "$sedargs";
+    )
+}
 
 catnth () {
     # catenate files on specified lines of the input
