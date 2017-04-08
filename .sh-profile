@@ -1,15 +1,47 @@
 #                                                                 -*- shell-script -*-
 set -a
 
-# ********************
-# *                  *
-# * KEYBOARD / INPUT *
-# *                  *
-# ********************
+# *********
+# *       *
+# * INPUT *
+# *       *
+# *********
 
+# ---KEY REPEAT---
+xset r rate 250 50  # X key repeat: xset r rate <ms delay> <char per sec>
+#kbdrate -r 50 -d 250  # console key repeat: kbdrate -r <cps> -d <ms>
+
+
+#---KEY REBINDING---
+if [ -e ~/.Xmodmap ]; then xmodmap ~/.Xmodmap; fi
+
+# # Swap Ctrl and Caps Lock
+# setxkbmap -option "ctrl:swapcaps"
+# Make Caps Lock an additional Ctrl
+# setxkbmap -option "caps:ctrl_modifier"
+setxkbmap -option "ctrl:nocaps"
+# Add the standard behavior to Menu key
+setxkbmap -option "altwin:menu"
+# compose key (multi-key)
+# setxkbmap -option "compose:lctrl"
+setxkbmap -option "compose:sclk"
+# kill x-server
+setxkbmap -option "terminate:ctrl_alt_bksp"
+# Both Shift keys together activate Caps Lock, one Shift key deactivates
+setxkbmap -option "shift:both_capslock_cancel"
+# switch layout
+setxkbmap -option "grp:sclk_toggle"
+setxkbmap -option "grp:rctrl_rshift_toggle"
+
+# fix End key (mapped to SuperL for unknown reason)
+xmodmap -e "keycode 115 = End NoSymbol End"
 # Fix Pause button
 xmodmap -e "keycode 127 = Pause"
-
+# L Control -> Hyper
+xmodmap -e "keycode 37 = Hyper_L"
+# extra function key keycodes
+xmodmap -e "keycode 94 = F18"
+xmodmap -e "keycode 95 = F19"
 
 # =======
 #  XCAPE
@@ -19,8 +51,10 @@ xmodmap -e "keycode 127 = Pause"
 # and Key/OtherKey names are as found in /usr/include/X11/keysymdef.h (with the XK_ prefixes removed)
 if ! pgrep xcape >/dev/null; then
     #xcape -t 300 -e 'Control_L=Escape;Super_R=Menu;Control_R=Multi_key;Shift_L=parenleft;Shift_R=parenright' &
-    xcape -t 300 -e 'Control_L=Escape;Super_R=Menu' &
+    # xcape -t 300 -e 'Caps_Lock=Escape;Super_R=Menu' &
+    xcape -t 300 -e 'Control_L=Escape;Super_R=Menu;Hyper_L=Multi_key' &
 fi
+
 
 # # ********
 # # *      *
@@ -48,25 +82,6 @@ export XMODIFIERS=@im=fcitx
 # gconftool --set -t string /desktop/gnome/interface/gtk_key_theme Vim
 # gconftool --set -t string /desktop/gnome/interface/gtk_key_theme Emacs
 
-
-# *********
-# *       *
-# * INPUT *
-# *       *
-# *********
-
-# ---KEY REPEAT---
-xset r rate 250 50  # X key repeat: xset r rate <ms delay> <char per sec>
-#kbdrate -r 50 -d 250  # console key repeat: kbdrate -r <cps> -d <ms>
-
-
-#---KEY REBINDING---
-#if [ -e ~/.Xmodmap ]; then xmodmap ~/.Xmodmap; fi
-#xmodmap -e "keycode 115 = Super_L" -e "add mod4 = Super_L" # -> .Xmodmap
-# setxkbmap -option "ctrl:swapcaps"
-
-# fix End key (mapped to SuperL for unknown reason)
-xmodmap -e "keycode 115 = End NoSymbol End"
 
 # ***************
 # *             *
