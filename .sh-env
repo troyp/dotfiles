@@ -153,6 +153,7 @@ paths=(
     /opt/sbt/bin
     /opt/scripts
     /opt/sejda-console/bin
+    /opt/selenium/bin
     /opt/smlnj/bin
     /opt/SublimeText2
     /opt/tor-browser
