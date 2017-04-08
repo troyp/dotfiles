@@ -700,7 +700,7 @@ alias pf=xclip-pastefile
 alias vip=vimpager
 alias wvip='PAGER=vimpager'
 alias vman='MANPAGER=vimpager man'
-alias less='less -isW'    # ignore case, squeeze blank lines, hilite unread
+alias less='less -isMW -j5'    # smart-case, squeeze blank, hilite unread, l prompt, jump target: l5
 # follow appended data (like tail -f) in less
 alias fless='less +F'
 alias vless=/usr/share/vim/vim74/macros/less.sh
