@@ -389,15 +389,39 @@ pidfiles () { lsof -p $1 | less; }
 
 # ffprof PROF: print profile directory of profile PROF, eg. `ffprof default`
 ffprof () {
-    echo ~/.mozilla/firefox/*.$1*/;
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then cat <<EOF
+ffprof PROF_SUBSTRING
+   Print profile directory of profile matching PROF_SUBSTRING.
+EOF
+        return 0; fi;
+    (
+        s="${1:-default}";
+        echo ~/.mozilla/firefox/*.$s*/;
+    )
 }
 # fftempfiles PROF: print temp directory of profile PROF, eg. `fftempfiles default`
 fftempfiles () {
-    echo ~/.cache/mozilla/firefox/*.$1*/cache2/entries/;
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then cat <<EOF
+fftempfiles PROF_SUBSTRING
+   Print temp files directory of profile matching PROF_SUBSTRING.
+EOF
+        return 0; fi;
+    (
+        s="${1:-default}";
+        echo ~/.cache/mozilla/firefox/*.$s*/cache2/entries/;
+    )
 }
 
 chrometempfiles () {
-    echo ~/.cache/google-chrome/Profile $1/Cache/;
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then cat <<EOF
+chrometempfiles PROF_SUBSTRING
+   Print temp files directory of profile matching PROF_SUBSTRING.
+EOF
+        return 0; fi;
+    (
+        s="${1:-Default}";
+        echo ~/.cache/google-chrome/*$s*/Cache/;
+    )
 }
 
 copypath () {
