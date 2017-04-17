@@ -1106,6 +1106,14 @@ alias filterexec='dolines if [[ -f "$x" ]] && [[ -x "$x" ]]; then echo "$x"; fi;
 alias dedup='perl -ne '"'"'$H{$_}++ or print'"'"   # remove repeated lines (need not be adjacent)
 alias suniq='sort -u'   # sort and remove repeated lines
 alias expanddotranges='perl -pe '"'"'s/,/ /g; s/(-?\d+)\.\.(-?\d+)/($1>$2)?join(" ", reverse $2..$1):join(" ", $1..$2)/ge'"'"
+perms() {
+    python <<EOF
+from itertools import permutations as p
+args = "$*".split()
+for line in (" ".join(tup) for tup in p(args)):
+    print(line)
+EOF
+}
 alias tolowercase="tr '[:upper:]' '[:lower:]'"
 alias touppercase="tr '[:lower:]' '[:upper:]'"
 alias tohilitcase="perl -MText::Autoformat -e'undef $/; print autoformat +<>, { case => \"highlight\" }'"
