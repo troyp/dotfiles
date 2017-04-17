@@ -805,6 +805,7 @@ alias viewxkboptions="lsxkboptions | less -M"
 # --------------------------
 alias distro='cat /etc/lsb-release'
 alias systeminfo='DISTRO=$(cat /etc/os-release|command grep PRETTY); DISTRO="${DISTRO#PRETTY_NAME=\"}"; printf "DISTRO: ${DISTRO%\"}\nARCH:   $(uname -i)\nKERNEL: $(uname -r)\nNODE:   $(uname -n)\n"'
+alias inx='inxi -F -d -lpu -z'
 alias xevkb="xev | grep -A2 --line-buffered '^KeyRelease' | sed -n '/keycode /s/^.*keycode \([0-9]*\).* (.*, \(.*\)).*$/\1 \2/p'"
 alias togglemute='pactl set-sink-mute 0 toggle'
 alias preparesetleds='sudo chmod 666 /dev/console'
@@ -1193,6 +1194,7 @@ alias ucc='unicode --max=0 -s'   # describe unicode characters in string
 alias nconv='numconv -f all -t Western_Lower'  # convert number to decimal
 alias thesaurus=aiksaurus
 alias weather='ansiweather -l Lismore,AU -u metric -s true -f 5 -d true | sed "s/=>/=>\n/" | tr "-" "\n"'
+alias weathernow='inxi -xxxW goonellabah,nsw,australia'
 
 #---------------------
 # APPLICATION ALIASES.
