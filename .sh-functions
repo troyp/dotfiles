@@ -1351,3 +1351,11 @@ diffdotfiles() {
     echo "$f2";
     \diff -s --normal "$f1" "$f2";
 }
+
+git-add-remote-and-subtree() {
+    remote_name="$1";
+    url="$2";
+    dir="${3:-docs}"
+    git remote add -f $remote_name $url;
+    git subtree add --prefix $dir/$remote_name $remote_name master --squash;
+}
