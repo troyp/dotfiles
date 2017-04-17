@@ -34,13 +34,15 @@ alias saptar='sudo apt-add-repository'
 # --- search ---
 alias apds='aptitude search'    # find matching packages
 apdv() { aptitude search "$0" | less; }
-apdn() {(    # search by package name (terms ANDed)
+apdn() {
+    (    # search by package name (terms ANDed)
         srchstr="";
         for term in "$@"; do
             srchstr+="?name($term)";
         done;
         aptitude search "$srchstr";
-       )}
+    )
+}
 alias aptcs='apt-cache search'  # find matching packages
 alias aptff='apt-file find'  # (find==search) find packages containing matching files
 # --- info ---
