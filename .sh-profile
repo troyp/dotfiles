@@ -23,7 +23,7 @@ setxkbmap -option "ctrl:nocaps"
 # Add the standard behavior to Menu key
 setxkbmap -option "altwin:menu"
 # compose key (multi-key)
-# setxkbmap -option "compose:lctrl"
+setxkbmap -option "compose:lctrl"
 setxkbmap -option "compose:sclk"
 # kill x-server
 setxkbmap -option "terminate:ctrl_alt_bksp"
