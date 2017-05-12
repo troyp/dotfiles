@@ -1125,6 +1125,7 @@ isexec() { if [[ -f "$1" ]] && [[ -x "$1" ]]; then return 0; else return 1; fi; 
 alias filterexec='dolines if [[ -f "$x" ]] && [[ -x "$x" ]]; then echo "$x"; fi; done'
 alias dedup='perl -ne '"'"'$H{$_}++ or print'"'"   # remove repeated lines (need not be adjacent)
 alias suniq='sort -u'   # sort and remove repeated lines
+alias noblanklines='grep -v "^[[:space:]]*$"'
 alias expanddotranges='perl -pe '"'"'s/,/ /g; s/(-?\d+)\.\.(-?\d+)/($1>$2)?join(" ", reverse $2..$1):join(" ", $1..$2)/ge'"'"
 perms() {
     python <<EOF
