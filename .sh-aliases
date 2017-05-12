@@ -876,6 +876,9 @@ alias has-64bit-kernel='[[ `uname -m` =~ 64 ]]'
 alias xcape-restart="pkill -9 xcape; xcape -t 300 -e 'Control_L=Escape;Super_R=Menu' &"
 alias kbreset='pkill -9 xcape; source ~/.sh-profile'
 alias users-all='cut -d: -f1 /etc/passwd'
+winid() {
+    xwininfo -name "$1" | grep -oP "(?<=Window id: )0x[0-9a-f]+";
+}
 
 # --------------------------------------
 # SYNTAX HIGHLIGHTING & PRETTY PRINTING.
