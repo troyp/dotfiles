@@ -31,6 +31,18 @@ alias sapti='sudo apt-get install'
 alias sdebi='sudo dpkg -i'
 alias sdebr='sudo dpkg -r'
 alias saptar='sudo apt-add-repository'
+sapsi() {
+    apdn "$@" |
+        iselect -kj:KEY_DOWN -kk:KEY_UP -ma |
+        cuts 2 |
+        xargs sudo apt-get install;
+}
+sapsdi() {
+    aptitude search '?and('`tr " " "," <<<"$@"`')' |
+        iselect -kj:KEY_DOWN -kk:KEY_UP -ma |
+        cuts 2 |
+        xargs sudo apt-get install;
+}
 # --- search ---
 alias apds='aptitude search'    # find matching packages
 apdv() { aptitude search "$0" | less; }
