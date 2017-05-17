@@ -812,10 +812,12 @@ alias viewxkboptions="lsxkboptions | less -M"
 
 alias lscomposefiles='echo /usr/share/X11/locale/en_US.UTF-8/Compose; echo ~/.XCompose'
 alias lscompose='cat `lscomposefiles`'  # all compose key combinations
+alias lscompose_extra='cat `lscomposefiles_extra`'  # extra compose key combinations
 alias lscompose_default='cat /usr/share/X11/locale/en_US.UTF-8/Compose'
 alias lsxcompose='cat ~/.XCompose'      # user compose key combinations
 alias viewxcompose='lscompose | less'
 alias viewcompose='lscompose | less'
+alias viewcompose_extra='lscompose_extra | less'
 alias viewcompose_default='lscompose_default | less'
 # --------------------------
 # SYSTEM / HARDWARE ALIASES.
