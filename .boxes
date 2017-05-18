@@ -182,43 +182,6 @@ END c-cmt2
 
 # ============================================================================
 
-BOX c-cmt3
-
-author   "AlpT (@freaknet.org)"
-designer "AlpT (@freaknet.org)"
-revision "1.0"
-revdate  "Fri Jun  9 11:04:42 CEST 2006"
-created  "Fri Jun  9 11:04:42 CEST 2006"
-
-sample
-    /**
-     *
-     */
-    code(here); a++;
-    /**/
-ends
-
-shapes {
-    nnw ("/** ",
-         " *  ",
-         " */ ")
-      n (" ",
-         " ",
-         " ")
-    ssw ("/**/")
-      s (" ")
-}
-
-delimiter ?"
-replace "\*/" with "*\/"                 # quote closing comment tags
-reverse "\*\\/" to "*/"
-
-elastic (n,s)
-
-END c-cmt3
-
-# ============================================================================
-
 BOX javadoc
 
 author   "Ted Berg <tedberg@spiritone.com>"
