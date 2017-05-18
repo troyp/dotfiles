@@ -27,6 +27,35 @@
 #____________________________________________________________________________
 #============================================================================
 
+BOX slim_commaquote
+
+author "Karl E. Jorgensen <karl@jorgensen.com>"
+created "Fri Jul 20 16:52:39 BST 2001"
+revision "0.1"
+
+sample
+,-------------------------------------------------------,
+| Your Text Here Your Text Here Your Text Here Your Tex |
+| Your Text Here Your Text Here Your Text Here Your Tex |
+| Your Text Here Your Text Here Your Text Here Your Tex |
+| Your Text Here Your Text Here Your Text Here Your Tex |
+'-------------------------------------------------------'
+ends
+
+shapes {
+    nw (",") nnw ("-") n ("-") ne (",")
+     w ("|")                     e ("|")
+    sw ("'") ssw ("-") s ("-") se ("'")
+}
+
+padding { h 1 }
+
+elastic (n,e,s,w)
+
+END slim_commaquote
+
+# ============================================================================
+
 
 BOX c
 
