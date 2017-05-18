@@ -873,3 +873,30 @@ reverse "\\*\\+\\)" to "*)"
 END caml
 
 # ============================================================================
+
+BOX caml-cmt
+
+author "Troy Pracy"
+created "May 2017"
+revision "0.1"
+
+sample
+    /* Your Text Here Your Text Here Your Text Here
+     * Your Text Here Your Text Here Your Text Here
+     * Your Text Here Your Text Here Your Text Here
+     */
+ends
+
+shapes {
+    nw ("(*")
+     w (" *")
+    sw (" *") ssw (")") s (" ")
+}
+
+padding { left 2 }
+
+elastic (s, w)
+
+END caml-cmt
+
+# ============================================================================
