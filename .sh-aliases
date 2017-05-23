@@ -535,6 +535,7 @@ upgrade-nvm () {
         git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" origin`;
     ) && source "$NVM_DIR/nvm.sh";
 }
+alias install-json-tools='for pkg in json underscore-cli prettyjson jsonlint; do npm install -g $pkg; done'
 alias install-vim-plug='curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 alias install-pathogen='mkdir -p ~/.vim/autoload ~/.vim/bundle && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim'
 alias install-dein='mkdir ~/.vim/dein; ( cd ~/.vim/dein/; curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh && sh installer.sh . && echo "run vim and execute :call dein#install()")'
