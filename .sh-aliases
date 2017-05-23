@@ -759,16 +759,6 @@ alias 7zip='7z a -tzip'  # 7zip myarchive.zip myarchive/
 # tgz [name [files]]    make .tgz out of files
 # unar unarchive multiple formats
 
-# ----------------
-# GIT/SVN ALIASES.
-# ----------------
-alias gitalias="git config --get-regexp '^alias\.' | cut -c 7- | sed 's/ /\t/' | column -s'	' -t"
-alias gitsetupignore="git config --global core.excludesfile '~/.gitignore'"
-alias gitcommits='git log --oneline --color | perl -ne '"'"'printf "HEAD~%-3d %s", ++$i, "$_"'"'"'| less -r'
-alias cbclone='ghq get `xsel -ob`'
-alias github-add-ssh='ssh-keyscan -t rsa github.com > ~/.ssh/known_hosts'
-alias github-goto-first-commit='git log --reverse | head -n1 | cuts 2 | read commit; firefox `git config --get remote.origin.url | sed -r "s/git@(.*):(.*).git/http:\/\/\/\1\/\2/"`/commit/$commit'
-
 # -----------
 # SSH ALIASES
 # -----------
@@ -899,6 +889,16 @@ alias users-all='cut -d: -f1 /etc/passwd'
 winid() {
     xwininfo -name "$1" | grep -oP "(?<=Window id: )0x[0-9a-f]+";
 }
+
+# ----------------
+# GIT/VCS ALIASES.
+# ----------------
+alias gitalias="git config --get-regexp '^alias\.' | cut -c 7- | sed 's/ /\t/' | column -s'	' -t"
+alias gitsetupignore="git config --global core.excludesfile '~/.gitignore'"
+alias gitcommits='git log --oneline --color | perl -ne '"'"'printf "HEAD~%-3d %s", ++$i, "$_"'"'"'| less -r'
+alias cbclone='ghq get `xsel -ob`'
+alias github-add-ssh='ssh-keyscan -t rsa github.com > ~/.ssh/known_hosts'
+alias github-goto-first-commit='git log --reverse | head -n1 | cuts 2 | read commit; firefox `git config --get remote.origin.url | sed -r "s/git@(.*):(.*).git/http:\/\/\/\1\/\2/"`/commit/$commit'
 
 # --------------------------------------
 # SYNTAX HIGHLIGHTING & PRETTY PRINTING.
