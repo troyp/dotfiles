@@ -900,6 +900,7 @@ alias gitcommits='git log --oneline --color | perl -ne '"'"'printf "HEAD~%-3d %s
 alias cbclone='ghq get `xsel -ob`'
 alias github-add-ssh='ssh-keyscan -t rsa github.com > ~/.ssh/known_hosts'
 alias github-goto-first-commit='git log --reverse | head -n1 | cuts 2 | read commit; firefox `git config --get remote.origin.url | sed -r "s/git@(.*):(.*).git/http:\/\/\/\1\/\2/"`/commit/$commit'
+github-get-issues() { http -a troyp -b "https://api.github.com/repos/$1/$2/issues?state=all" | json }
 
 # --------------------------------------
 # SYNTAX HIGHLIGHTING & PRETTY PRINTING.
