@@ -1359,3 +1359,17 @@ git-add-remote-and-subtree() {
     git remote add -f $remote_name $url;
     git subtree add --prefix $dir/$remote_name $remote_name master --squash;
 }
+
+mkfilelists() {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+mkfilelists [DIR]
+    Creates two files in directory DIR, .files.txt and .files.tree.txt.
+    The former lists the paths of all files under DIR (recursively).
+    The latter contains a tree diagram of the directory contents.
+EOF
+        return 0; fi;
+    dir="${1:-`ls -1 | head -n1`}";
+    find "$dir" -type f > "$dir"/.files.txt;
+    tree "$dir" > "$dir"/.files.tree.txt;
+}
