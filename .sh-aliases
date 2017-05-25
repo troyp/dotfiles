@@ -1161,12 +1161,13 @@ alias tolowercase="tr '[:upper:]' '[:lower:]'"
 alias touppercase="tr '[:lower:]' '[:upper:]'"
 alias tohilitcase="perl -MText::Autoformat -e'undef $/; print autoformat +<>, { case => \"highlight\" }'"
 alias totitlecase="perl -MText::Autoformat -e'undef $/; print autoformat +<>, { case => \"title\" }'"
-# =====XARGS ALIASES=====
-alias xa='xargs '                  # trailing space in alias causes next word to be alias expanded as well
-alias chooseargs='iselect -ma | xargs'
 alias first='head -n1'
 alias last='tail -n1'   # system command last is available as alias lastu
 alias rest='tail -n+2'
+# =====XARGS ALIASES=====
+alias xa='xargs '                  # trailing space in alias causes next word to be alias expanded as well
+alias chooseargs='iselect -ma | xargs'
+alias xarglns='xargs -d\\n'
 alias xaa='xargs bash -ic'
 alias xacat='xargs cat'
 alias xaless='xargs less'
