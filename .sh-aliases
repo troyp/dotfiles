@@ -1168,6 +1168,9 @@ alias rest='tail -n+2'
 alias xa='xargs '                  # trailing space in alias causes next word to be alias expanded as well
 alias chooseargs='iselect -ma | xargs'
 alias xarglns='xargs -d\\n'
+# Filter files in current directory by PCRE and pass to another command
+withfiles() { ls | grep -iP "$1" | xargs -d\\n "${@:2}"; }
+withFiles() { ls | grep -P "$1" | xargs -d\\n "${@:2}"; }
 alias xaa='xargs bash -ic'
 alias xacat='xargs cat'
 alias xaless='xargs less'
