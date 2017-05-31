@@ -357,6 +357,16 @@ imap <silent> <C-a> <C-O><Home>
 " http://vim.wikia.com/wiki/Folding_with_Regular_Expression
 nnoremap \z :setlocal foldexpr=(getline(v:lnum)=~@/)?0:(getline(v:lnum-1)=~@/)\\|\\|(getline(v:lnum+1)=~@/)?1:2 foldmethod=expr foldlevel=0 foldcolumn=2<CR>
 
+" -------------
+" Text Objects.
+" -------------
+" line text object
+vnoremap il <esc>g_v_
+vnoremap al <esc>$v0
+onoremap il :<c-u>normal! g_v_<cr>
+onoremap al :<c-u>normal! $v0<cr>
+
+
 "------------------------------------------------------
 "
 " --------
