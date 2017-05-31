@@ -350,6 +350,13 @@ endfunction
 noremap <expr> <silent> <C-a> SmartHome()
 imap <silent> <C-a> <C-O><Home>
 
+" ------
+" Regex.
+" ------
+
+" http://vim.wikia.com/wiki/Folding_with_Regular_Expression
+nnoremap \z :setlocal foldexpr=(getline(v:lnum)=~@/)?0:(getline(v:lnum-1)=~@/)\\|\\|(getline(v:lnum+1)=~@/)?1:2 foldmethod=expr foldlevel=0 foldcolumn=2<CR>
+
 "------------------------------------------------------
 "
 " --------
