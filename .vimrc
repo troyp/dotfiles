@@ -24,7 +24,10 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-unimpaired'
+Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
+Plug 'powerman/vim-plugin-viewdoc'
+Plug 'Konfekt/FastFold'
 
 call plug#end()
 " PlugUpdate
