@@ -225,6 +225,8 @@ set runtimepath^=~/.vim/bundle/ctrlp.vim
 " Surround.
 "----------
 
+autocmd VimEnter * xmap s  <Plug>VSurround
+autocmd VimEnter * xmap gs <Plug>VgSurround
 
 
 "------------------------------------------------------
