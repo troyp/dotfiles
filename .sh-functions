@@ -1373,3 +1373,16 @@ EOF
     find "$dir" -type f > "$dir"/.files.txt;
     tree "$dir" > "$dir"/.files.tree.txt;
 }
+
+gitc() {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+    cat <<EOF
+gitc REPO [DIR]
+    Clones REPO, then changes to its directory.
+EOF
+        return 0; fi;
+    repo="$1";
+    folder="${2:-${${x##*/}%.git}}";
+    git clone "$@";
+    cd "$folder";
+}
