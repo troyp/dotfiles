@@ -9,6 +9,18 @@
 # *           *
 # *************
 
+# ,------------,
+# | predicates |
+# '------------'
+
+nonempty () [[ -n "$1" ]]
+empty () [[ -z "$1" ]]
+
+
+# ,-------,
+# | other |
+# '-------'
+
 pe () { $( echo "printenv ${1^^}" ); }
 manh () { firefox -P default "localhost//cgi-bin/man/man2html?query=$1"; }
 grepdict () { grep $1 /usr/share/dict/words; }
