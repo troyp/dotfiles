@@ -1386,3 +1386,20 @@ EOF
     git clone "$@";
     cd "$folder";
 }
+
+zip_filelist() {
+    zip -sf "$1" |
+        tail -n +3 |
+        head -n -1 |
+        while read -r x || [[ -n $x ]]; do
+            echo "${${x#*/}%/}";
+        done;
+}
+
+rar_filelist() {
+    rar l "$1" |
+        tail -n +10 |
+        head -n -3 |
+        tr -s ' ' |
+        cut -d' ' -f 6-
+}
