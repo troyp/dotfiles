@@ -1415,3 +1415,15 @@ rar_filelist() {
         tr -s ' ' |
         cut -d' ' -f 6-
 }
+
+pdf_remove_password() {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        echo "pdf_remove_password INFILE PASSWORD [OUTFILE]"; return 0;
+    fi;
+    (
+        input="$1";
+        password="$2";
+        output="${3:-out.pdf}";
+        qpdf --password="$password" --decrypt "$input" "$output";
+    )
+}
