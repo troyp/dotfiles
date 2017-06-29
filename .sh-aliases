@@ -629,7 +629,7 @@ alias ksu=kdesudo
 # for i in `seq 5`; do echo $(cb); done  # prints clipboard 5x
 # ...|cb will pipe to clipboard and print previous contents
 # ...|2cb will pipe to clipboard without output
-alias cb='xsel -ob'  #  prints clipboard; ...|cb  # pipes input into clipboard
+alias cb='xsel -b'  #  prints clipboard; ...|cb  # pipes input into clipboard
 alias 2cb='xsel -ib >/dev/null'  #  uptime|2cb  # uptime to clipboard (no output)
 # alias sel='xsel -op'  #  prints selection; ...|sel  # pipes input into selection
 # alias 2sel='xsel -ip >/dev/null'  #  uptime|2cb  # uptime to selection (no output)
