@@ -542,6 +542,7 @@ alias install-dein='mkdir ~/.vim/dein; ( cd ~/.vim/dein/; curl https://raw.githu
 alias install-lein='cd `mktemp -d`; wget https://raw.github.com/technomancy/leiningen/stable/bin/lein; chmod a+x lein; sudo mv lein /opt/scripts/; cd -'
 # ===== other download aliases =====
 alias ytdl='youtube-dl -ci --all-subs --xattrs -o "%(title)s-%(id)s.%(ext)s"'
+alias ytdl_enus='youtube-dl -ci --sub-lang enUS --write-sub --xattrs -o "%(title)s-%(id)s.%(ext)s"'
 alias ytdlsubs='youtube-dl -t --all-subs --skip-download'
 alias imgurdl='python3 /opt/imgur-album-downloader/imguralbum.py'    # github.com/alexgisby/imgur-album-downloader
 alias packt=packtdlallformats
