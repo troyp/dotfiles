@@ -1439,3 +1439,15 @@ pdf_remove_password() {
         qpdf --password="$password" --decrypt "$input" "$output";
     )
 }
+
+increment() {
+    (
+        num="$1";
+        if [[ "$num" =~ ^0 ]]; then
+            digits=`printf $num | wc -c`;
+            echo $((num+1)) | xargs printf "%0${digits}d";
+        else
+            echo $((num+1));
+        fi;
+    )
+}
