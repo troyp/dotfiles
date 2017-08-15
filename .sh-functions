@@ -30,21 +30,27 @@ locatedirs() { locate "$1" | while read -r line; do dirname "`readlink -f "$line
 cnd () {
     if [[ "$1" =~ ^-h$\|^--help$ ]]; then
         cat <<EOF
-cnd [-h|-p]
+cnd [-h|-p] DIR [SUBDIR...]
+    Create a new directory and change into it. If there are additional arguments
+    supplied, they are subdirectories created in the new directory.
 
     Options:
       -h --help     display this help
       -p --parents  no error if existing, make parents as needed
 EOF
-        shift;
+        return 0;
     elif [[ "$1" =~ ^-p$\|^--parents$ ]]; then
-        shift
-        mkdir -p "$@"
-        cd "${@: -1}"
-    else
-        mkdir "$@"
-        cd "${@: -1}"
-    fi;
+        mkdirswitch="-p";
+        shift;
+    fi
+
+    newdir="${@:1:1}";
+    eval "mkdir $mkdirswitch $newdir"  || return 1;
+    cd "$newdir";
+    shift;
+    if [[ $# > 0 ]]; then
+        eval "mkdir $mkdirswitch $@";
+    fi
 }
 alias cnp='cnd -p'
 
