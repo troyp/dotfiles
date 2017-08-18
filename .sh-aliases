@@ -891,6 +891,8 @@ alias users-all='cut -d: -f1 /etc/passwd'
 winid() {
     xwininfo -name "$1" | grep -oP "(?<=Window id: )0x[0-9a-f]+";
 }
+alias lsgroups='getent groups'
+alias lsusers='bash -c "compgen -u"'
 
 # ----------------
 # GIT/VCS ALIASES.
