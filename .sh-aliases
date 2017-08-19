@@ -357,7 +357,7 @@ alias greppo='pcregrep -o'                   # only output matching substring
 grepcb() {
     { if [[ "$#" == 1 || "$1" == - ]]; then cat | pcregrep -o "$1";
     else cat "$2" | pcregrep -o "$1";
-    fi; } | xsel -b
+    fi } | tee >(xsel -b);
 };
 alias sudb='sudo updatedb'
 alias locater='locate --regex'   # locate extended regex
