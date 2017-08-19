@@ -338,6 +338,7 @@ alias grepbin='grep -iHn -B1 --color=always' # grep, show prior line (filename, 
 alias grepr='grep -iHnr --color=always' # recursive grep with filename and line no. (case-insens)
 alias grepsys='sudo grep -r -D skip'    # recursive grep with sudo, skip device files
 alias grepnot='grep -v'
+alias grepo='grep -o'                   # only output matching substring
 # alias grepp='grep -P'                   # grep with perl syntax
 alias grepp=pcregrep                         # PCRE-based grep variant
 alias greppi='pcregrep -i --color=auto'      # color, case-insensitive pcregrep
@@ -351,6 +352,13 @@ alias greppr='pcregrep -iHnr --color=always' # recursive pcregrep with filename 
 alias greppsys='sudo pcregrep -r -D skip'    # recursive pcregrep with sudo, skip device files
 alias greppm='pcregrep -M --color=auto'      # color multiline pcregrep
 alias greppmi='pcregrep -iM --color=auto'    # color, case-insensitive multiline pcregrep
+alias greppnot='pcregrep -v'
+alias greppo='pcregrep -o'                   # only output matching substring
+grepcb() {
+    { if [[ "$#" == 1 || "$1" == - ]]; then cat | pcregrep -o "$1";
+    else cat "$2" | pcregrep -o "$1";
+    fi; } | xsel -b
+};
 alias sudb='sudo updatedb'
 alias locater='locate --regex'   # locate extended regex
 alias locatea='locate -A'        # locate files matching ALL patterns
