@@ -25,7 +25,23 @@ pe () { $( echo "printenv ${1^^}" ); }
 manh () { firefox -P default "localhost//cgi-bin/man/man2html?query=$1"; }
 grepdict () { grep $1 /usr/share/dict/words; }
 symlink-print() { namei -v "$1" | grep --color -P '(?<=^l).*|$'; }
-locatedirs() { locate "$1" | while read -r line; do dirname "`readlink -f "$line"`"; done | uniq; }
+
+locatedirs() {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+locatedirs PATTERN MAXDEPTH
+    Use 'locate' to find directories matching PATTERN at maximum depth MAXDEPTH.
+EOF
+        return 0;
+    fi;
+    if [[ "$#" -gt 1 ]]; then levels="$2"; else levels="*"; fi;
+    locate "$1" |
+        while read -r line; do
+            dirname "`readlink -f "$line"`";
+        done |
+        grep -oP "^/([^/]+/){0,$levels}" |
+        sort -u;
+}
 
 cnd () {
     if [[ "$1" =~ ^-h$\|^--help$ ]]; then
