@@ -363,6 +363,10 @@ EOF
     )
 }
 
+copynthline () {
+    cat | nthline "$@" | ( while read -r x || [[ -n $x ]]; do printf "$x\n" | tee >(xsel -b); done );
+}
+
 catnth () {
     # catenate files on specified lines of the input
     # eg. locate foo | catnth 3 5
