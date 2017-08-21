@@ -1,0 +1,15 @@
+[Desktop Entry]
+Name=Keynav
+Exec=keynav
+Icon=~/.local/share/icons/semicomplete.png
+GenericName=Keyboard Navigation 
+Type=Application
+Terminal=false
+X-KDE-autostart-after=panel
+X-KDE-StartupNotify=false
+X-KDE-UniqueApplet=true
+Categories=Utility;
+Comment[en_GB]=A keyboard navigation tool
+
+Hidden=False
+X-GNOME-Autostart-enabled=true
