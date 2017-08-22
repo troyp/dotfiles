@@ -119,6 +119,7 @@ paths=(
     /opt/clean/bin
     /opt/eclipse
     /opt/epub2pdf
+    /opt/elasticsearch/bin
     /opt/firefox
     /opt/gcolor3/src
     /opt/google-code-support-tools/googlecode-issues-exporter
