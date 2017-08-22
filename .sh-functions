@@ -34,12 +34,12 @@ locatedirs PATTERN MAXDEPTH
 EOF
         return 0;
     fi;
-    if [[ "$#" -gt 1 ]]; then levels="$2"; else levels="*"; fi;
+    if [[ "$#" -gt 1 ]]; then levels="{0,$2}"; else levels="*"; fi;
     locate "$1" |
         while read -r line; do
             dirname "`readlink -f "$line"`";
         done |
-        grep -oP "^/([^/]+/){0,$levels}" |
+        grep -oP "^/([^/]+/)$levels" |
         sort -u;
 }
 
