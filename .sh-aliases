@@ -997,7 +997,7 @@ alias pydb-lptrace='sudo python /opt/scripts/lptrace/lptrace.py -d -p'
 # install Jupyter + calysto_hy kernel in virtual env
 alias install-jupyter='python3 -m venv jupyter; cd jupyter; source bin/activate; pip install wheel; pip install jupyter; pip install git+https://github.com/Calysto/calysto_hy.git'
 alias ihy='(cd /opt/jupyter; source bin/activate; jupyter console --kernel calysto_hy)'
-alias jupyter='(cd /opt/jupyter; source bin/activate; bin/jupyter console)'
+alias jupyter='cd /opt/jupyter; source bin/activate; bin/jupyter console'
 # -------------------------------------------------------------------------------
 # Perl
 alias p='perl -pe'       # execute within loop, with print
