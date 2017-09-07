@@ -61,12 +61,20 @@ EOF
     fi
 
     newdir="${@:1:1}";
-    eval "mkdir $mkdirswitch '$newdir'"  || return 1;
+    if [[ -n $mkdirswitch ]]; then
+        mkdir -p "$newdir";
+    else
+        mkdir "$newdir";
+    fi || return 1;
     cd "$newdir";
     shift;
     while [[ $# > 0 ]]; do
         subdir="${@:1:1}";
-        eval "mkdir $mkdirswitch '$subdir'";
+        if [[ -n $mkdirswitch ]]; then
+            mkdir -p "$subdir";
+        else
+            mkdir "$subdir";
+        fi;
         shift 1;
     done;
 }
