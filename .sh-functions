@@ -61,12 +61,14 @@ EOF
     fi
 
     newdir="${@:1:1}";
-    eval "mkdir $mkdirswitch $newdir"  || return 1;
+    eval "mkdir $mkdirswitch '$newdir'"  || return 1;
     cd "$newdir";
     shift;
-    if [[ $# > 0 ]]; then
-        eval "mkdir $mkdirswitch $@";
-    fi
+    while [[ $# > 0 ]]; do
+        subdir="${@:1:1}";
+        eval "mkdir $mkdirswitch '$subdir'";
+        shift 1;
+    done;
 }
 alias cnp='cnd -p'
 
