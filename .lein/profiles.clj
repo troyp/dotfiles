@@ -5,8 +5,10 @@
 ;;         }
 ;;  }
 {:repl {:plugins
-        [[cider/cider-nrepl "0.10.0-SNAPSHOT"]
-         [refactor-nrepl "2.0.0-SNAPSHOT"]
+        [[cider/cider-nrepl "0.14.0"]
+         [refactor-nrepl "2.3.1"]
+         [lein-exec "0.3.6"]
+         [lein-gorilla "0.4.0"]
          ]
         :dependencies
         [[alembic "0.3.2"]
