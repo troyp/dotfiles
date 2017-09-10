@@ -1507,3 +1507,19 @@ desktop-exec() {
         grep -oP '(?<=^[Ee]xec=).*' "$1" | xargs sh -c &;
     fi;
 }
+
+shacheck() {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        echo "sha1check [ALGORITHM] FILE SUM"; return 0;
+    fi;
+    if [[ $# == 3 ]]; then
+        algo="$1";
+        shift;
+    else
+        algo="1";
+    fi;
+    file="$1";
+    sum="$2";
+    printf "$sum  $file\n" | shasum -a $algo -c - ;
+}
+
