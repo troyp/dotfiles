@@ -139,6 +139,7 @@ paths=(
     /opt/lilyterm/bin
     # /opt/mozart/platform/unknown-unknown
     /opt/mozart2/bin
+    /opt/MultiMarkdown-6/build
     /opt/nim/bin
     /opt/nim
     /opt/pdf-diff
