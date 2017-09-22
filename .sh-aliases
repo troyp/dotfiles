@@ -1011,6 +1011,8 @@ alias pli='perl -ie'       # execute perl code in-place on file(s)
 alias plin='perl -ine'     # execute perl code in-place on file(s), within loop
 alias plip='perl -ipe'     # execute perl code in-place on file(s), with print
 alias plinp='perl -inpe'   # execute perl code in-place on file(s), with print, within loop
+alias plwe='perl -0777 -pe'  # execute perl code within loop, with print, slurp whole file
+alias plwi='perl -0777 -ipe' # execute perl code in-place within loop, with print, slurp whole file
 alias Pl='perl -E'      # perl (enable features)
 alias perl-warnings-on="alias ple='perl -ew'; alias Ple='perl -wE'"
 alias perl-warnings-off="alias ple='perl -e'; alias Ple='perl -E'"
