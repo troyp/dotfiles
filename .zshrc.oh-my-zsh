@@ -171,7 +171,14 @@ promptinit
 # alias ohmyzsh="mate ~/.oh-my-zsh"
 
 # fzf
+# default bindings:
+#     C-t (paste files & directories)
+#     C-r (paste from history)
+#     A-c (cd into directory)
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+# export FZF_DEFAULT_COMMAND='ag --all-types --hidden --ignore .git -f -g "" | cat'
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+fzf --bind=ctrl-i:toggle+down
 
 export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
 
