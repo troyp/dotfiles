@@ -783,6 +783,7 @@ alias ssh-addkey='ssh-add `ssh-choose-key`'
 #------------------
 alias pralias='cat $SH_ALIAS_FILE'
 alias search-my-commands='cat -- $SH_ALIAS_FILE $SH_FUNCTION_FILE $SCRIPTS_DIRECTORY/* 2> /dev/null | grep -i'
+alias smc=search-my-commands
 alias editalias='${EDITOR:-vim} $SH_ALIAS_FILE; source $SH_ALIAS_FILE'
 alias xres='xrdb ~/.Xresources'
 alias lspath='echo $PATH|tr ":" "\n"'
