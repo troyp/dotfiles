@@ -1118,6 +1118,12 @@ alias display_with_srgb='display -profile /usr/share/ghostscript/9.*/iccprofiles
 alias img-info=identify
 img-geometry () { convert "$1" -print "%wx%h\n" /dev/null; }
 
+# -------------
+# MEDIA ALIASES
+# -------------
+alias audioshowstreams='ffprobe -show_streams -select_streams a -loglevel error'
+alias videoshowstreams='ffprobe -show_streams -loglevel error'
+
 # -------------------
 # FILE FORMAT ALIASES
 # -------------------
