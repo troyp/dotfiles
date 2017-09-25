@@ -71,3 +71,6 @@
 	path = /home/troy/.gitconfig_personal
 [push]
 	default = simple
+[user]
+	email = troyp7@gmail.com
+	name = Troy Pracy
