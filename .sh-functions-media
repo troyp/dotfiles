@@ -222,3 +222,32 @@ EOF
         ffmpeg -i "$name" -vn -an -codec:s "$format" "${name%.*}.$2"
     )
 }
+
+videonumtracks() {
+    ffprobe -show_streams "$1" 2>/dev/null |
+        grep -oF "[STREAM]" |
+        wc -l;
+}
+
+audionumtracks() {
+    ffprobe -show_streams -select_streams a "$1" 2>/dev/null |
+        grep -oF "[STREAM]" |
+        wc -l;
+}
+
+audioformat() {
+    ffprobe -show_streams -select_streams a "$1" 2>/dev/null |
+        linesbetween '[STREAM]' '[/STREAM]' |
+        grep -oP '(?<=codec_long_name.)\w+' |
+        tr 'A-Z' 'a-z';
+
+}
+
+# TODO: allow multiple audio streams with audioformat and audioextract
+audioextract() {
+    name="${1%.*}";
+    format=$(audioformat "$1");
+    out_name="${2:-$name.$format}";
+    [ -e $out_name ] && echo "file exists" && return 1;
+    ffmpeg -i "$1" -vn -acodec copy "${2:-$name.$format}";
+}
