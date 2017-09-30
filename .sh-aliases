@@ -1218,6 +1218,13 @@ alias tacn='withnl | tac'    # tac with newline
 alias if_term='if [[ -t 1 ]]; then'    # test if output is going to a terminal (not a pipe)
 alias is_term='[[ -t 1 ]]'             # test if output is going to a terminal (not a pipe)
 
+# ============
+# FZF ALIASES.
+# ============
+alias fzfm='fzf --ansi --exact --border --multi --bind=ctrl-i:toggle+down'
+alias fzfp='fzf --ansi --exact --border --preview "cat {}"'
+alias fzfc='fzf --ansi --exact --border --preview "cat {} | pygmentize -f terminal256 -O style=native -g"'
+
 # -----------
 # FORMATTING.
 # -----------
