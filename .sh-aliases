@@ -726,7 +726,8 @@ alias pf=xclip-pastefile
 # --------------
 alias vip=vimpager
 alias wvip='PAGER=vimpager'
-alias vman='MANPAGER=vimpager man'
+alias vpman='MANPAGER=vimpager man'
+vman() { man "$@" | less.sh; }
 alias less='less -isMW -j5'    # smart-case, squeeze blank, hilite unread, l prompt, jump target: l5
 # follow appended data (like tail -f) in less
 alias fless='less +F'
