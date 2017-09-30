@@ -291,6 +291,9 @@ noremap <leader>eg :e! ~/.gvimrc<cr>
 noremap <leader>sv :so ~/.vimrc<cr>
 noremap <leader>sg :so ~/.gvimrc<cr>
 
+" Readonly mode
+noremap <leader>bw :call ToggleOpt('readonly')<cr>
+
 " Windows
 noremap <C-x>0 :hide<cr>
 noremap <C-x>1 :only<cr>
