@@ -106,6 +106,7 @@ paths=(
     ${SCALA_HOME:-/opt/scala}/bin
 	  $JHOME/bin
     /usr/local/texlive/2014/bin/x86_64-linux
+    /usr/share/vim/vim*/macros
     /var/lib/gems/1.8/bin
 	  /opt/icon/bin
 	  /opt/pdfsandich
