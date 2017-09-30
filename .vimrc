@@ -432,3 +432,15 @@ execute "set rtp+=" . g:opamshare . "/merlin/vim"
 command! Opamupdatedocs :execute "helptags " . substitute(system('opam config var share'),'\n$','','''') .  "/merlin/vim/doc"
 " ocp-indent
 set rtp^="/home/troy/.opam/system/share/ocp-indent/vim"
+
+"------------------------------------------------------
+
+" --------
+" Less.sh.
+" --------
+function BindQuit()
+    map q :quit<cr>
+endfunction
+function LessInitFunc()
+    map <f12> :call BindQuit()<cr>
+endfunction
