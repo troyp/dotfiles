@@ -914,7 +914,7 @@ alias cbclone='ghq get `xsel -ob`'
 alias github-add-ssh='ssh-keyscan -t rsa github.com > ~/.ssh/known_hosts'
 alias github-goto-first-commit='git log --reverse | head -n1 | cuts 2 | read commit; firefox `git config --get remote.origin.url | sed -r "s/git@(.*):(.*).git/http:\/\/\/\1\/\2/"`/commit/$commit'
 alias github-markdown-preview=grip
-github-get-issues() { http -a troyp -b "https://api.github.com/repos/$1/$2/issues?state=all" | json }
+github-get-issues() { http -a troyp -b "https://api.github.com/repos/$1/$2/issues?state=all" | json; }
 
 # --------------------------------------
 # SYNTAX HIGHLIGHTING & PRETTY PRINTING.
@@ -1342,7 +1342,7 @@ alias shootmenu='shutter -m -e'    # screenshot menu and exit
 alias shootagain='shutter -r -e'   # repeat last screenshot - not working?
 alias sc-tutorial='sc /usr/share/doc/sc/tutorial.sc'
 alias rofii='rofi -combi-modi window,drun,run -show combi -modi combi'   # general purpose launcher
-alias install-avidump2-'sudo apt-get install libmono-system4.0-cil libmono-corlib4.5-cil libmono-system-xml-linq4.0-cil'
+alias install-avidump2='sudo apt-get install libmono-system4.0-cil libmono-corlib4.5-cil libmono-system-xml-linq4.0-cil'
 
 # -------
 # NOVELTY

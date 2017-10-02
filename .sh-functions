@@ -1501,10 +1501,10 @@ desktop-extract-exec() {
 desktop-exec() {
     if [[ "$#" == 0 || lastarg =~ -.* ]]; then
         # stdin input
-        cat | grep -oP '(?<=^[Ee]xec=).*' "$1" | xargs sh -c &;
+        cat | grep -oP '(?<=^[Ee]xec=).*' "$1" | xargs sh -c &
     else
         # file input
-        grep -oP '(?<=^[Ee]xec=).*' "$1" | xargs sh -c &;
+        grep -oP '(?<=^[Ee]xec=).*' "$1" | xargs sh -c &
     fi;
 }
 
