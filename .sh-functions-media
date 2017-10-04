@@ -42,11 +42,11 @@ EOF
         out="$2";
         if [[ $# -gt 3 ]]; then
             start="-ss $3";
-            s_start=`time-to-seconds $3`;
+            s_start=`timetoseconds $3`;
             if [[ $4 == "end" ]]; then
                 duration="";
             else
-                s_end=`time-to-seconds $4`;
+                s_end=`timetoseconds $4`;
                 duration="-t $((s_end - s_start))";
             fi;
         else
