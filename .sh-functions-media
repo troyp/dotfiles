@@ -66,6 +66,45 @@ EOF
     )
 }
 
+video-extract-duration () {
+    (
+        if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+            cat <<EOF
+video-extract-duration INPUT OUTCLIP STARTTIME DURATION
+    Extract a clip of DURATION seconds from INPUT beginning at STARTTIME and
+    save as OUTCLIP.
+
+    Time Format: hh:mm:ss[.s...]
+
+    Options:
+      -h --help     display this help
+      -n --no-act   display command but don't execute
+EOF
+            shift;
+            return 0;
+        elif [[ "$1" =~ ^-n$\|^--no-act(ion)?$ ]]; then
+            noaction="t";
+            shift;
+        fi;
+        # end options processing
+
+        file="$1";
+        out="$2";
+        start="-ss $3";
+        duration="-t $4";
+        # syntax:
+        #   avconv $startpos -i "$file" $duration -c:a copy -c:v copy "$out"
+        # alternative: (mencoder doesn't allow fractional seconds in times)
+        #   mencoder -ss $startpos -endpos $endpos -oac pcm -oav copy "$file" "$out"
+        cmd="avconv $start -i \"$file\" $duration -codec copy  -metadata title=\"$out\" \"$out\"";
+        if [[ -n $noaction ]]; then
+            echo "$cmd";
+        else
+            eval "$cmd";
+        fi;
+    )
+}
+
 video-concat () {
     if [[ "$1" =~ ^-h$\|^--help$ ]]; then
         cat <<EOF
