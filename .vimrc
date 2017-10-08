@@ -269,6 +269,9 @@ inoremap <A-y> <C-e>
 " inoremap <C-S-Y> <C-e>
 inoremap <C-y> <C-y>
 
+" Fix Y
+noremap Y y$
+
 inoremap <A-w> <C-c>
 
 " Files
