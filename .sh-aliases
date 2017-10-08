@@ -647,6 +647,32 @@ alias cbnth='copyq read'  # print nth clipboard item (0-indexed)
 alias qn='copyq tab "&notes" add'       # add to copyq notes tab
 alias qsn='copyq tab "&snippets" add'   # add to copyq snippets tab
 alias cbdl='(cb; echo "") | dolines wget "$x"; done'   # download a list of file urls from clipboard
+alias cbcp='xsel -b >'         # copy data from clipboard to file
+cbappend () {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+cbappend [-s SEPARATOR] FILE
+    Append clipboard contents to FILE.
+
+    Options:
+      -s --separator   specify a separator printed after the item
+EOF
+        return 0; fi;
+    sep="";
+    # ----- options -----
+    while [[ $# -gt 1 ]]; do
+        case "$1" in
+            (-d | -s | --separator | --delimiter)
+                sep="$2"
+                shift 2 ;;
+            (*) echo "unrecognized option: $1"
+                return 1 ;;
+        esac
+    done
+    # --- end options ---
+    printf "$(xsel -b)$sep" >> "$1";
+}
+alias cbcpf='cp $(xsel -b)'    # copy file from clipboard
 
 
 #---------------

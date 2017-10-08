@@ -438,9 +438,9 @@ set rtp^="/home/troy/.opam/system/share/ocp-indent/vim"
 " --------
 " Less.sh.
 " --------
-function BindQuit()
+function! BindQuit()
     map q :quit<cr>
 endfunction
-function LessInitFunc()
+function! LessInitFunc()
     map <f12> :call BindQuit()<cr>
 endfunction
