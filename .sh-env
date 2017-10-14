@@ -127,6 +127,7 @@ paths=(
     /opt/google-code-support-tools/wiki_to_md
     /opt/google_appengine/
     /opt/helpdeco
+    /opt/html-xml-utils-7.2
     /opt/hub/bin
     /opt/hy/env/bin
     /opt/i2p
