@@ -696,6 +696,7 @@ alias lastcommand='fc -ln -1 -1'
 alias copycommand='fc -ln -1 -1 | cb'
 alias plainbash='bash --noprofile --norc'
 alias plainzsh='zsh -f --no-rcs'
+alias hr="jot -s '' -b '━' `tput cols`"
 
 # ============
 # CRON ALIASES
