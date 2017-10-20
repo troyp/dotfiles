@@ -11,6 +11,7 @@ alias lsmodules='tree /usr/lib/x86_64-linux-gnu/zsh/*/zsh|sed "s/.so$//"'
 alias reloadtheme='source "$ZSH_CUSTOM/ZSH_THEME.zsh-theme" 2>/dev/null || source "$ZSH_CUSTOM/themes/$ZSH_THEME.zsh-theme"'
 alias dirl='dirs | tolines | number-lines'
 alias zkeys='bindkey | grep -F'
+alias reload_completions='rm -f ~/.zcompdump; compinit'
 
 # alias splitpath='IFS=":" read -A arr <<<$IN; printf "%s\n" "${arr[@]}"'
 alias dopath='while IFS=":" read -A arr; do for x in "${arr[@]}"; do'
