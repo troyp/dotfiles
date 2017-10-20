@@ -584,6 +584,7 @@ alias ffsearch="firefox -search"
 #       alias is *called*, rather than when the alias definition is read.
 alias cdffdir='cd `ffprof $FFMAINPROFILE`'    # cd to Firefox profile directory
 alias cdffcache='cd `fftempfiles $FFMAINPROFILE`'  # cd to Firefox cache directory
+alias ffprefs='echo $(ffprof $FFMAINPROFILE)/prefs.js'
 alias ffpipe='base64 -w0 <&0 | read -r x; firefox "data:text/html;base64,$x"'
 alias mozrepl='rlwrap telnet localhost 4242'
 
