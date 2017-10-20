@@ -2,6 +2,7 @@
 [[ ! -z $DEBUG  ]] && echo "sourcing .sh-aliases"
 
 # load private aliases
+[[ -e ~/.sh-functions ]] && source ~/.sh-functions
 [[ -e ~/.sh-aliases-private ]] && source ~/.sh-aliases-private
 
 #-------------
