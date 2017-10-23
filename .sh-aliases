@@ -147,6 +147,11 @@ alias llx='ls -lX'   # detailed list sort by extension
 alias lls='ls -lS'   # detailed list sort by file size
 alias la='ls -Al'    # detailed list dotfiles
 alias lac='ls -Al --color=always'  # detailed list dotfiles, colored output to pipe
+lap () {
+    [[ "$1" =~ ^--?h(elp)?$ ]] && echo "laless [DIR]\tShow long directory contents in pager." && return 0;
+    ls --group-directories-first --color=auto --time-style=+" %d.%m.%y " -Al --color=always "${1:-.}" |
+        $PAGER
+}
 alias lacc='ls -Al --time=access'    # detailed list access-time dotfiles
 alias lr='ls -lR'    # detailed list recursive
 alias lc='ls -Cp'    # filenames only, append / to directories
