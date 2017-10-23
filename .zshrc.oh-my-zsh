@@ -92,6 +92,7 @@ setopt null_glob
 
 bindkey "^P" history-beginning-search-backward
 bindkey "^N" history-beginning-search-forward
+bindkey "^U" backward-kill-line
 bindkey "^[[A" up-line-or-search
 bindkey "^[[B" down-line-or-search
 bindkey "^R" history-incremental-pattern-search-backward
