@@ -127,7 +127,6 @@ paths=(
     /opt/google-code-support-tools/wiki_to_md
     /opt/google_appengine/
     /opt/helpdeco
-    /opt/html-xml-utils-7.2
     /opt/hub/bin
     /opt/hy/env/bin
     /opt/i2p
@@ -179,6 +178,7 @@ done
 
 prioritypaths=(
     /opt/node*/bin
+    /opt/html-xml-utils-7.2
 )
 for i in "${prioritypaths[@]}"; do
     pathprepend "$i"
