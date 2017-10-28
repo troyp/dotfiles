@@ -1,0 +1,15 @@
+# input cache
+cachedir=/home/troy/.plsense.d
+clean-env=0
+logfile=
+loglevel=
+# Max tasks on server
+maxtasks=20
+perl=perl
+perldoc=perldoc
+# Input port for main server
+port1=33333
+# Input port for work server
+port2=33334
+# Input port for resolve server
+port3=33335
