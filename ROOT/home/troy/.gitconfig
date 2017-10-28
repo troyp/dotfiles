@@ -7,6 +7,9 @@
 	c = commit -m
 	cu = commit -m "update"
 	co = checkout
+	# FIXME
+	ccd = ! git_clonecd(){git clone "\"$@\"" && cd "\"${2:-${${x##*/}%.git}}\""} && git-clonecd
+	get = config --get
 
 	# ===DIFF===
 	# changes to add
