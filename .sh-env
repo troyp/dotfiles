@@ -34,12 +34,14 @@ function append-to-path-var {
 }
 
 pathappend() {
+    local dir
     dir="${1%/}"
     if [[ -d "$dir" ]] && ! [[ "$PATH:" =~ "^$dir:" ]]; then
         PATH="$PATH:$dir"
     fi
 }
 pathprepend() {
+    local dir
     # prepend directory if not already at start of PATH
     dir="${1%/}"
     if [[ -d "$dir" ]] && ! [[ "$PATH:" =~ "^$dir:" ]]; then
