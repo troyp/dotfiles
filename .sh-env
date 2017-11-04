@@ -148,6 +148,7 @@ paths=(
     /opt/MultiMarkdown-6/build
     /opt/nim/bin
     /opt/nim
+    /opt/palemoon
     /opt/pdf-diff
     /opt/pdfdir
     /opt/peazip
