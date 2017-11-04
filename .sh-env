@@ -139,6 +139,7 @@ paths=(
     /opt/info2html
     /opt/jade
     /opt/jpdfbookmarks
+    /opt/julia/bin
     /opt/leiningen
     /opt/lfe-master/bin
     /opt/LightTable
