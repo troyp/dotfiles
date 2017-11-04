@@ -71,6 +71,7 @@ ANDROID_HOME='/home/troy/Android/Sdk'
 ANDROID_SDK_HOME='/home/troy/.android'
 GOPATH=$HOME/gowork
 JHOME=/opt/j64-805
+SCALA_HOME=/opt/scala-2.12.4
 KDE_PLACES_FILE='/home/troy/.local/share/user-places.xbel'
 KDE_BOOKMARKS_FILE='/home/troy/.kde/share/apps/kfile/bookmarks.xml'
 kde4_system_config_dir='/usr/share/kde4'
