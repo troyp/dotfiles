@@ -630,6 +630,7 @@ alias coreinf='info coreutils'   # eg.  coreinf 'env'
 alias what='whatis -w'   # one-line man descriptions, wildcard search
 alias whatr='whatis -r'   # one-line man descriptions, regex search
 alias whichman='man -a --where --where-cat'
+alias github-readme-to-man='pandoc -s -f markdown_github -t man'
 
 #-------------------
 # OPEN & SU ALIASES.
