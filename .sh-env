@@ -76,6 +76,7 @@ KDE_BOOKMARKS_FILE='/home/troy/.kde/share/apps/kfile/bookmarks.xml'
 kde4_system_config_dir='/usr/share/kde4'
 kde4_local_config_dirs='~/.kde4/share:~/.kde/share:~/.local/share'
 RUST_SRC_PATH='/opt/rust/src'
+SSL_CERT_FILE=/etc/ssl/certs/ca-certificates.crt
 
 # ------
 # PATHS.
