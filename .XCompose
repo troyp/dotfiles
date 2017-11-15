@@ -1,5 +1,5 @@
-include "%L"   # import the default Compose file for your locale
 include "/opt/kragen-xcompose/dotXCompose"
+include "%L"   # import the default Compose file for your locale
 include "/opt/kragen-xcompose/parens.compose"
 include "/opt/kragen-xcompose/frakturcompose"
 
