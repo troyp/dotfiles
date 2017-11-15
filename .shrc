@@ -7,8 +7,11 @@
 # *                 *
 # *******************
 
-[[ -f ~/.sh-aliases ]]                      &&  source ~/.sh-aliases;
-[[ -f ~/.sh-functions ]]                    &&  source ~/.sh-functions;
+[[ -f ~/.sh-aliases ]]   &&  source ~/.sh-aliases;
+[[ -f ~/.sh-functions ]] &&  source ~/.sh-functions;
+[[ -f ~/.scripts/script-env.sh ]] &&  source ~/.scripts/script-env.sh;
+
+[[ -f /opt/scripts/hhighlighter/h.sh ]] && source /opt/scripts/hhighlighter/h.sh
 
 # -------------------------------------------------------------------------------
 # ********
