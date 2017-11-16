@@ -271,10 +271,6 @@ findinfofile () {
     locate --regex "/$1\.info(\.gz)?$";
 }
 
-apt-install-from-file () {
-    sudo apt-get install `cat $1 | tr '\n' ' '`;
-}
-
 linkcount () {
     linkcount=$(ls -l "$1" | tr '\t' ' ' | tr -s ' ' | cut -d' ' -f2);
     echo $linkcount;
@@ -1039,6 +1035,10 @@ print_terminal() {
     echo      $(ps -h -ocomm -p$pid 2>/dev/null)
 }
 
+apt-install-from-file () {
+    sudo apt-get install `cat $1 | tr '\n' ' '`;
+}
+
 aptfilename() {
     # help
     if [[ "$1" =~ ^-h$\|^--help$ ]]; then
@@ -1087,6 +1087,10 @@ EOF
 
         apt-file find --regexp "$re"
     )
+}
+
+apt-search-versions() {
+    aptcs "$1" | fzf | cuts 1 | xargs apt-show-versions -a;
 }
 
 lsdocs() {
