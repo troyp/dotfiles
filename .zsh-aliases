@@ -19,3 +19,16 @@ alias donepath='done; done;'
 
 alias exe_search='whence -afms'   # find all executables matching pattern
 alias exe_all='whence -acm'    # list all executables of a given name
+
+alias lscolors-view='zsh_ls_colors | $PAGER'
+zsh_ls_colors() {
+    (
+        setopt sh_word_split;
+        lscol="${LS_COLORS//:/ }";
+        for c in $lscol; do
+            key="${c%=*}";
+            val="${c#*=}";
+            echo "\e[${val}m$key\t$val\e[00m";
+        done;
+    )
+}
