@@ -1601,3 +1601,41 @@ install-sbt() {
     sudo apt-get update
     sudo apt-get install sbt
 }
+
+ff2pm-copy-gmscripts() {
+    (
+        ffprofile="${1:-default}";
+        pmprofile="${2:-default}";
+        ffdir=$(for p in ~/.mozilla/firefox/*; do
+                    echo "$p"; done |
+                    grep -F ".$ffprofile");
+        pmdir=$(for p in ~/.moonchild\ productions/pale\ moon/*; do
+                    echo "$p"; done |
+                    grep -F ".$pmprofile");
+        cd "$ffdir/gm_scripts";
+        for s in *; do
+            target="$pmdir/gm_scripts/$s";
+            if [[ -f "$s" ]]; then
+                if [[ -f "$target" ]]; then mv "$target" "$target.bk"; fi;
+                cp -T "$s" "$target";
+            elif [[ -d "$s" ]]; then
+                if [[ -d "$target" ]]; then mv "$target" "$target.bk"; fi;
+                cp -T -r "$s" "$target";
+            fi;
+        done;
+    )
+}
+
+ff2pm-copy-userstyles() {
+    ffprofile="${1:-default}";
+    pmprofile="${2:-default}";
+    ffdir=$(for p in ~/.mozilla/firefox/*; do
+                echo "$p"; done |
+                grep -F ".$ffprofile");
+    pmdir=$(for p in ~/.moonchild\ productions/pale\ moon/*; do
+                echo "$p"; done |
+                grep -F ".$pmprofile");
+    target="$pmdir/stylish.sqlite";
+    if [[ -f "$target" ]]; then mv "$target" "$target.bk"; fi;
+    cp "$ffdir/stylish.sqlite" "$target";
+}
