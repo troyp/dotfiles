@@ -563,7 +563,7 @@ alias install-ammonite='sudo curl -L -o /usr/local/bin/amm https://git.io/vdNv2 
 alias install-duktape='git clone https://github.com/svaarala/duktape.git;cd duktape;make dist;cd dist;make -f Makefile.sharedlibrary;sudo make -f Makefile.sharedlibrary install;make -f Makefile.cmdline;sudo ln -s `pwd`/duk /usr/local/bin/duk'
 # ===== other download aliases =====
 alias ytdl='youtube-dl -ci --all-subs --xattrs -o "%(title)s-%(id)s.%(ext)s"'
-alias ytdl_enus='youtube-dl -ci --sub-lang enUS --write-sub --xattrs -o "%(title)s-%(id)s.%(ext)s"'
+alias ytdl_enus='youtube-dl -ci --write-sub --sub-format ass/srt/best --sub-lang enUS --xattrs -o "%(title)s-%(id)s.%(ext)s"'
 alias ytdlsubs='youtube-dl -t --all-subs --skip-download'
 alias imgurdl='python3 /opt/imgur-album-downloader/imguralbum.py'    # github.com/alexgisby/imgur-album-downloader
 alias packt=packtdlallformats
