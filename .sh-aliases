@@ -965,6 +965,7 @@ alias github-add-ssh='ssh-keyscan -t rsa github.com > ~/.ssh/known_hosts'
 alias github-goto-first-commit='git log --reverse | head -n1 | cuts 2 | read commit; firefox `git config --get remote.origin.url | sed -r "s/git@(.*):(.*).git/http:\/\/\/\1\/\2/"`/commit/$commit'
 alias github-markdown-preview=grip
 github-get-issues() { http -a troyp -b "https://api.github.com/repos/$1/$2/issues?state=all" | json; }
+alias github-wget-issues="wget -c -nH -kKpN -rl inf -np --no-remove-listing -e robots=off -U='Mozilla' -w 1 --accept-regex='.*/issues.*|.*/pull.*|.*/compare/.*' --reject-regex '.*[?$].*'"
 
 # --------------------------------------
 # SYNTAX HIGHLIGHTING & PRETTY PRINTING.
