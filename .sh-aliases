@@ -560,6 +560,7 @@ alias install-dein='mkdir ~/.vim/dein; ( cd ~/.vim/dein/; curl https://raw.githu
 alias install-lein='cd `mktemp -d`; wget https://raw.github.com/technomancy/leiningen/stable/bin/lein; chmod a+x lein; sudo mv lein /opt/scripts/; cd -'
 # SCALA REPL
 alias install-ammonite='sudo curl -L -o /usr/local/bin/amm https://git.io/vdNv2 && sudo chmod +x /usr/local/bin/amm && amm'
+alias install-duktape='git clone https://github.com/svaarala/duktape.git;cd duktape;make dist;cd dist;make -f Makefile.sharedlibrary;sudo make -f Makefile.sharedlibrary install;make -f Makefile.cmdline;sudo ln -s `pwd`/duk /usr/local/bin/duk'
 # ===== other download aliases =====
 alias ytdl='youtube-dl -ci --all-subs --xattrs -o "%(title)s-%(id)s.%(ext)s"'
 alias ytdl_enus='youtube-dl -ci --sub-lang enUS --write-sub --xattrs -o "%(title)s-%(id)s.%(ext)s"'
