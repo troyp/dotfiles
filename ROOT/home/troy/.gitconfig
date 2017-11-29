@@ -51,6 +51,11 @@
 	# also shell alias gitcommits
 	s = status
 
+	head = rev-parse --short HEAD
+	rev = rev-parse --short
+	revlong = rev-parse
+	showrev = -c core.pager='cat' show -s --abbrev-commit --pretty=oneline
+	showrevlong = -c core.pager='cat' show -s --pretty=oneline
 	# initialize folder as repository and push to newly-created github repo whose URL is in clipboard
 	gh = "!f(){ git init; touch README.md; git add README.md; git commit -m 'initial commit'; git remote add origin $(xsel -ob); git push -u origin master; };f"
 	subdir = filter-branch --prune-empty --subdirectory-filter
