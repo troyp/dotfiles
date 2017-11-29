@@ -40,6 +40,7 @@
 	filestopush = diff --stat HEAD origin/master
 	changestopush = diff HEAD origin/master
 	set-origin = remote set-url origin
+	printorigin = config --get remote.origin.url
 
 	showlastcommit = log -p --follow -1
 	# https://coderwall.com/p/euwpig/a-better-git-log
