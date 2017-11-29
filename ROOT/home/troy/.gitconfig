@@ -1,3 +1,5 @@
+[include]
+	path = /home/troy/.gitconfig_personal
 [alias]
 	cl = clone
 	# clone repository in clipboard
@@ -71,10 +73,5 @@
 [diff]
 	tool = vimdiff
 	mnemonicprefix = true
-[include]
-	path = /home/troy/.gitconfig_personal
 [push]
 	default = simple
-[user]
-	email = troyp7@gmail.com
-	name = Troy Pracy
