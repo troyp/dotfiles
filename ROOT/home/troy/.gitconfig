@@ -75,3 +75,5 @@
 	mnemonicprefix = true
 [push]
 	default = simple
+[github]
+	user = troyp
