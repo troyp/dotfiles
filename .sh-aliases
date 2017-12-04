@@ -273,7 +273,9 @@ alias ecp2="qcp -f 'dc' -o autowidth,spaces,width=80,swap -e 'emacsclient -nw'" 
 # RENAME (PERL)
 # note: to use perl expr as replace, use s///e
 alias ren=rename
+renr() { find . -type f -exec rename "$1" {} \; }
 alias renn='rename -n'    # rename preview (dry-run)
+rennr() { find . -type f -exec rename -n "$1" {} \; }
 alias add-png-ext="ren 's/\s*$/.png/' -- *"
 # ren-year-to-end: eg. ren '(2000)  file name.more.pdf' -> 'file name.more (2000).pdf'
 alias ren-year-to-end='ren '"'"'s/^(\([0-9]+\)) *-? *(.*)\.(.+)$/$2 $1.$3/'"'"''
