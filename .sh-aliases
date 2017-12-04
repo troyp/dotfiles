@@ -1033,6 +1033,7 @@ alias npmig='npm install -g'
 alias cargoi='cargo install'
 alias boweri='bower install'
 alias composerrg='composer global require'
+alias notes='res=$(fzf < ~/dotfiles/notes-list.tsv | cut -f1); [[ -n $res ]] && echo "$res" | xargs bash -c '"'"'</dev/tty vim "$@"'"'"' xx'
 # -------------------------------------------------------------------------------
 # Jupyter
 # install Jupyter + calysto_hy kernel in virtual env
