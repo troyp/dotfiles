@@ -103,6 +103,7 @@ set timeoutlen=250           " delay after ESC (default too long)
 set nojoinspaces             " no extra space joining to lines ending in [.?!]
 set virtualedit=all          " Virtual editing in all modes (place cursor past line end)
 set backupdir=~/.vim/backup  " Backups in separate directory
+set scrolloff=8
 
 autocmd BufNewFile,BufRead *.pentadactyl set filetype=vim
 autocmd BufNewFile,BufRead .pentadactylrc set filetype=vim
