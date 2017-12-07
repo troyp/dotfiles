@@ -285,6 +285,9 @@ nnoremap <C-x><C-w> :w<cr>
 inoremap <C-x><C-w> <Esc>:w<cr>i
 nnoremap <leader>w :w!<cr>
 
+" Eval
+noremap <C-x><C-e> :echom<space>
+
 " Fast editing of the .vimrc
 noremap <leader>fed :e! ~/.vimrc<cr>
 noremap <leader>feR :so ~/.vimrc<cr>
