@@ -459,9 +459,9 @@ totmp () {
 
 pidfiles () { lsof -p $1 | less; }
 
-# ffprof PROF: print profile directory of profile PROF, eg. `ffprof default`
 ffprof () {
-    if [[ "$1" =~ ^-h$\|^--help$ ]]; then cat <<EOF
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
 ffprof PROF_SUBSTRING
    Print profile directory of profile matching PROF_SUBSTRING.
 EOF
@@ -471,9 +471,9 @@ EOF
         echo ~/.mozilla/firefox/*.$s*/;
     )
 }
-# fftempfiles PROF: print temp directory of profile PROF, eg. `fftempfiles default`
 fftempfiles () {
-    if [[ "$1" =~ ^-h$\|^--help$ ]]; then cat <<EOF
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
 fftempfiles PROF_SUBSTRING
    Print temp files directory of profile matching PROF_SUBSTRING.
 EOF
@@ -484,8 +484,34 @@ EOF
     )
 }
 
+pmprof () {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+pmprof PROF_SUBSTRING
+   Print profile directory of profile matching PROF_SUBSTRING.
+EOF
+        return 0; fi;
+    (
+        s="${1:-default}";
+        echo ~/.moonchild\ productions/pale\ moon/*.$s*/;
+    )
+}
+pmtempfiles () {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+pmtempfiles PROF_SUBSTRING
+   Print temp files directory of profile matching PROF_SUBSTRING.
+EOF
+        return 0; fi;
+    (
+        s="${1:-default}";
+        echo ~/.cache/moonchild\ productions/pale\ moon/*.$s*/cache2/entries/;
+    )
+}
+
 chrometempfiles () {
-    if [[ "$1" =~ ^-h$\|^--help$ ]]; then cat <<EOF
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
 chrometempfiles PROF_SUBSTRING
    Print temp files directory of profile matching PROF_SUBSTRING.
 EOF
