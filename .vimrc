@@ -28,6 +28,8 @@ Plug 'scrooloose/nerdcommenter'
 Plug 'scrooloose/nerdtree'
 Plug 'powerman/vim-plugin-viewdoc'
 Plug 'Konfekt/FastFold'
+Plug 'Jagua/vim-mozrepl'
+Plug 'christoomey/vim-run-interactive'
 
 call plug#end()
 " PlugUpdate
