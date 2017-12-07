@@ -1050,8 +1050,8 @@ alias iscala='jupyter console --kernel=scala'
 # Python
 alias pynote='ipython notebook --pylab=inline'
 alias ipylab='ipython --pylab -i ~/.pylab'
-alias py=ipylab
-alias py3='ipython3 --pylab'
+alias ipy=ipylab
+alias ipy3='ipython3 --pylab'
 alias bpy='bpython'
 alias mkenv3='python3 -m venv'
 alias envactivate='source ./bin/activate'
