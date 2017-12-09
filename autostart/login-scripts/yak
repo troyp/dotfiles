@@ -1,0 +1,44 @@
+#!/bin/bash
+
+# see http://forums.gentoo.org/viewtopic-t-873915-start-0.html
+# Adding sessions: see http://pawelkoston.pl/blog/sublime-text-3-cheatsheet-modules-web-develpment/
+# FCITX: if not working, use:  --im /usr/bin/fcitx
+
+/usr/bin/yakuake --inputstyle onthespot --geometry '1152x417-31+36' &
+sleep 1.5
+
+# MAIN
+TERMINAL_ID_0=$(qdbus org.kde.yakuake /yakuake/sessions org.kde.yakuake.terminalIdsForSessionId 0)
+TERMINAL_ID_0=$(qdbus org.kde.yakuake /yakuake/sessions org.kde.yakuake.terminalIdsForSessionId ${SESSION_ID_0})
+qdbus org.kde.yakuake /yakuake/tabs setTabTitle ${SESSION_ID_0} "Shell"
+
+# # ROOT
+# SESSION_ID_1=$(qdbus org.kde.yakuake /yakuake/sessions org.kde.yakuake.addSession)
+# TERMINAL_ID_1=$(qdbus org.kde.yakuake /yakuake/sessions org.kde.yakuake.terminalIdsForSessionId ${SESSION_ID_1})
+# qdbus org.kde.yakuake /yakuake/tabs setTabTitle ${SESSION_ID_1} "Root"
+# qdbus org.kde.yakuake /yakuake/sessions runCommandInTerminal ${TERMINAL_ID_1} "sudo su"
+
+# PYLAB
+SESSION_ID_2=$(qdbus org.kde.yakuake /yakuake/sessions org.kde.yakuake.addSession)
+TERMINAL_ID_2=$(qdbus org.kde.yakuake /yakuake/sessions org.kde.yakuake.terminalIdsForSessionId ${SESSION_ID_2})
+qdbus org.kde.yakuake /yakuake/tabs setTabTitle ${SESSION_ID_2} "Pylab"
+qdbus org.kde.yakuake /yakuake/sessions runCommandInTerminal ${TERMINAL_ID_2} "ipython --pylab -i ~/.pylab"
+
+# # TOP/IOTOP - split session
+# SESSION_ID_3=$(qdbus org.kde.yakuake /yakuake/sessions org.kde.yakuake.addSession)
+# # ID for left terminal:
+# TERMINAL_ID_3A=$(qdbus org.kde.yakuake /yakuake/sessions org.kde.yakuake.terminalIdsForSessionId ${SESSION_ID_3})
+# qdbus org.kde.yakuake /yakuake/tabs setTabTitle ${SESSION_ID_3} "Top"
+# qdbus org.kde.yakuake /yakuake/sessions runCommandInTerminal ${TERMINAL_ID_3A} "htop"
+# # ID for right terminal:
+# # TERMINAL_ID_3B=$(qdbus org.kde.yakuake /yakuake/sessions org.kde.yakuake.terminalIdsForSessionId ${SESSION_ID_3} | cut -d, -f2)
+# TERMINAL_ID_3B=$((TERMINAL_ID_3A + 1))
+# qdbus org.kde.yakuake /yakuake/sessions org.kde.yakuake.splitTerminalLeftRight ${TERMINAL_ID_3A}
+# qdbus org.kde.yakuake /yakuake/sessions runCommandInTerminal ${TERMINAL_ID_3B} "sudo iotop"
+
+# TOP
+SESSION_ID_3=$(qdbus org.kde.yakuake /yakuake/sessions org.kde.yakuake.addSession)
+TERMINAL_ID_3=$(qdbus org.kde.yakuake /yakuake/sessions org.kde.yakuake.terminalIdsForSessionId ${SESSION_ID_3})
+qdbus org.kde.yakuake /yakuake/tabs setTabTitle ${SESSION_ID_3} "Top"
+qdbus org.kde.yakuake /yakuake/sessions runCommandInTerminal ${TERMINAL_ID_3} "htop"
+

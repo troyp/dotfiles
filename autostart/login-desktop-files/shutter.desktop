@@ -1,0 +1,16 @@
+[Desktop Entry]
+Version=1.0
+Name=Shutter
+GenericName=Screenshot Tool
+Comment=Capture, edit and share screenshots
+Exec=shutter 2>dev/null
+Icon=shutter
+Terminal=false
+Type=Application
+Categories=Utility;Application;
+X-GNOME-Autostart-enabled=false
+Hidden=true
+X-KDE-autostart-after=panel
+X-KDE-StartupNotify=false
+X-KDE-UniqueApplet=true
+

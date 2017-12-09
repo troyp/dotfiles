@@ -1,0 +1,6 @@
+#! /bin/sh
+
+for f in ./login-desktop-files/*;          do cp -t ~/.config/autostart "$f";                 done;
+for f in ./login-scripts/*;                do cp -t ~/.config/autostart-scripts "$f";         done;
+for f in ./login-before-desktop-scripts/*; do cp -t ~/.config/plasma-workspace/env "$f";      done;
+for f in ./logout-scripts/*;               do cp -t ~/.config/plasma-workspace/shutdown "$f"; done;
