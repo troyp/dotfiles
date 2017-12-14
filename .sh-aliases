@@ -381,9 +381,9 @@ alias findfileinwd='find . -maxdepth 1 -type f'      # find in current directory
 findrepl() {
     printf ">> ";
     while read line; do
-        for dir in "${@-.}"; do
-            find `realpath "$dir"` -iname "*$line*";
-        done
+        ( for dir in "${@-.}"; do
+              find `realpath "$dir"` -iname "*$line*";
+          done ) | less;
         printf ">> ";
     done
 }
