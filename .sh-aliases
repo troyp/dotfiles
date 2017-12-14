@@ -223,6 +223,13 @@ alias name2fat='perl -pe '"'"'s/\+|:/ - /g and s/\[<>\/\\?+:"\]//g'"'"''  # file
 alias rsmerge='rsync -aH -v --progress'    # merge (do not delete files in target removed from origin)
 alias rssync='rsync -aH --delete -v --progress'  # sync (delete files in target removed from origin)
 alias rsdiff='rsync -rnc --delete -v'  # compare two directories by simulating the process of copying the first to overwrite the second
+copyto() {
+    dest="${1:-.}";
+    while read -r x || [[ -n "$x" ]]; do
+        cp -t "$dest" "$x";
+    done;
+}
+alias copyselect='fzf --ansi --exact --border --multi --bind=ctrl-i:toggle+down | copyto'
 alias rscopyto='rsync -rc --delete -v .'  # copy current directory to another directory, deleting its original contents
 alias rsupdate='rsync -auH -v --progress'
 alias cppath='cp --parents'   # copy a relative file-path into a dir
