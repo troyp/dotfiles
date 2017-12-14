@@ -388,6 +388,12 @@ findrepl() {
     done
 }
 alias findreplcs='findrepl ~/ebooks/coding ~/ebooks/cs ~/ebooks/dl'
+findiname() {
+    find "$1" -iname "*$2*" | less -FX;
+}
+findfileiname() {
+    find "$1" -type f -iname "*$2*" | less -FX;
+}
 alias statf='stat --printf'    # eg. statf "%s" file (size in B), statf "%h" file (no. hard links)
 alias rgg='rg -pS'             # ripgrep with pretty and smartcase
 alias rgh='rg -pS --hidden'    # ripgrep with pretty and smartcase, include dotfiles
