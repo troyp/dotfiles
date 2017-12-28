@@ -1,4 +1,6 @@
-#! /bin/sh
+#! /bin/bash
+
+shopt -q -s nullglob
 
 for f in ./login-desktop-files/*;          do cp -t ~/.config/autostart "$f";                 done;
 for f in ./login-scripts/*;                do cp -t ~/.config/autostart-scripts "$f";         done;
