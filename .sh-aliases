@@ -400,6 +400,10 @@ findiname() {
 }
 findfileiname() {
     find "$1" -type f -iname "*$2*" | less -FX;
+# TODO: generalize findiname, remove findiname2
+# findiname2 DIR1 DIR2 PARTIALNAME
+findiname2() {
+    find "$1" "$2" -iname "*$3*" | less -FX;
 }
 alias sffind='findiname ~/ebooks/fiction/sf-fantasy'
 alias sffindfile='findfileiname ~/ebooks/fiction/sf-fantasy'
