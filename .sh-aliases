@@ -374,8 +374,8 @@ alias greppnot='pcregrep -v'
 alias greppo='pcregrep -o'                   # only output matching substring
 grepcb() {
     { if [[ "$#" == 1 || "$1" == - ]]; then cat | pcregrep -o "$1";
-    else cat "$2" | pcregrep -o "$1";
-    fi } | tee >(xsel -b);
+      else cat "$2" | pcregrep -o "$1";
+      fi } | tee >(xsel -b);
 };
 alias sudb='sudo updatedb'
 alias locater='locate --regex'   # locate extended regex
@@ -400,8 +400,9 @@ findiname() {
 }
 findfileiname() {
     find "$1" -type f -iname "*$2*" | less -FX;
-# TODO: generalize findiname, remove findiname2
-# findiname2 DIR1 DIR2 PARTIALNAME
+    # TODO: generalize findiname, remove findiname2
+    # findiname2 DIR1 DIR2 PARTIALNAME
+}
 findiname2() {
     find "$1" "$2" -iname "*$3*" | less -FX;
 }
