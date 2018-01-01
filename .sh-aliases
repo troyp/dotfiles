@@ -1242,6 +1242,7 @@ alias cuts='cuts -0'
 alias iselect='iselect -kj:KEY_DOWN -kk:KEY_UP'
 alias choose='iselect -ma'
 alias vimselect='iselect -ma | xargs vim'
+alias unique='awk '"'"'!x[$0]++'"'"''
 # alias maplines='xargs -d "\n" -n 1'
 alias maplines='xargs -L1'
 # eg.     ls|dolines printf "`pwd`/$x\n"; done
