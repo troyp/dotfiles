@@ -43,6 +43,7 @@
 	changestopush = diff HEAD origin/master
 	set-origin = remote set-url origin
 	printorigin = config --get remote.origin.url
+	fileschanged = diff-tree --name-only --no-commit-id @@{1} @
 
 	showlastcommit = log -p --follow -1
 	# https://coderwall.com/p/euwpig/a-better-git-log
