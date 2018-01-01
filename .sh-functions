@@ -40,7 +40,7 @@ EOF
             dirname "`readlink -f "$line"`";
         done |
         grep -oP "^/([^/]+/)$levels" |
-        sort -u;
+        awk '!x[$0]++';
 }
 
 cnd () {
