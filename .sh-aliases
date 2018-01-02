@@ -1384,6 +1384,7 @@ alias lastu=last    # leave last free for alias
 alias PeaExtractor=/opt/peazip/res/pealauncher
 alias PeaUtils=/opt/peazip/res/pea
 alias googlecodewiki2mediawiki=gw2mw.sh  # convert google code wiki --> mediawiki
+alias ct=chromix-too
 
 #---------------------------------
 # APPLICATION DEFAULTS & VARIANTS.
