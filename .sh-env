@@ -55,7 +55,7 @@ pathprepend() {
 # all-caps locations used for settings
 # lowercase locations only used as documentation
 SH_ALIAS_FILE=$HOME/.sh-aliases
-SH_FUNCTION_FILE=$HOME/.sh-functions
+SH_FUNCTION_FILES='~/.sh-functions:~/.sh-functions-find:~/.sh-functions-docs:~/.sh-functions-media'
 ZSH_ALIAS_FILE=$HOME/.zsh-aliases
 ZSH_FUNCTION_FILE=$HOME/.zsh-functions
 BASH_ALIAS_FILE=$HOME/.bash-aliases
