@@ -1,0 +1,30 @@
+#                                                            -*- shell-script -*-
+
+relativeregex() {
+    re="$1"
+    dir="${2:-`pwd`}"
+    printf '^%s/%s$' "$dir" "$re"
+}
+
+relativepartialregex() {
+    re="$1"
+    dir="${2:-`pwd`}"
+    printf '^%s/.*%s.*$' "$dir" "$re"
+}
+
+filenameregex() {
+    re="$1"
+    printf '(^.*/)?%s$' "$re"
+}
+
+filenameinitialregex() {
+    re="$1"
+    dir="${2:-`pwd`}"
+    printf '(^.*/)?%s.*$' "$re"
+}
+
+filenamepartialregex() {
+    re="$1"
+    dir="${2:-`pwd`}"
+    printf '(^.*/)?.*%s.*$' "$re"
+}
