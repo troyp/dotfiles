@@ -509,6 +509,19 @@ EOF
     )
 }
 
+chromeprof () {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+chromeprof PROF_SUBSTRING
+   Print profile directory of profile matching PROF_SUBSTRING.
+EOF
+        return 0; fi;
+    (
+        s="${1:-Default}";
+        echo ~/.config/google-chrome/*$s*/;
+    )
+}
+
 chrometempfiles () {
     if [[ "$1" =~ ^-h$\|^--help$ ]]; then
         cat <<EOF

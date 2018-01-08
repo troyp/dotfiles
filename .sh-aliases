@@ -128,7 +128,6 @@ alias rd='ranger --choosedir=$HOME/.ranger-choosedir; cd `cat $HOME/.ranger-choo
 alias rpick='ranger --choosefiles $HOME/.ranger-choosefiles'
 alias rpickone='ranger --choosefile $HOME/.ranger-choosefile'
 alias rpickdir='ranger --choosedir $HOME/.ranger-choosedir'
-alias cdchrometempdir='"cd `chrometempfiles 3`"'  # cd to Firefox temp directory
 
 #------------
 # LS ALIASES.
@@ -637,6 +636,8 @@ alias dirserve=http-server   # serve current dir tree (or ./public) on port 8080
 alias lsportprocs='lsof -i'  # list processes on given port [range], eg. lsportprocs TCP:8081
 alias lynx='lynx -vikeys -cfg=~/.lynx.cfg'
 alias chrome-minimal='google-chrome --profile-directory="Profile 1"'
+alias cdchrometempdir='cd "`chrometempfiles Default`"'  # cd to Google Chrome temp directory
+alias cdchromedir='cd "`chromeprof Default`"'  # cd to Google Chrome profile directory
 
 #--------------------
 # NETWORKING ALIASES.
