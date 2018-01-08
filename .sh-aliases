@@ -155,6 +155,8 @@ lap () {
 alias lacc='ls -Al --time=access'    # detailed list access-time dotfiles
 alias lr='ls -lR'    # detailed list recursive
 alias lc='ls -Cp'    # filenames only, append / to directories
+# list full paths
+alias lsfull='for f in "$PWD"/* "$PWD"/.*; do echo "$f"; done | sort'
 # list subdirectories only (including links to directories):
 alias lsdirs="ls -1p | grep -P '(?=/$)' | xargs -d'\n' ls -d --color=auto"
 alias lldirs="lsdirs -l"
