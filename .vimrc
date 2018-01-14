@@ -284,6 +284,10 @@ noremap Y y$
 
 inoremap <A-w> <C-c>
 
+" Move Text
+vnoremap J :m '>+1<CR>gv=gv
+vnoremap K :m '<-2<CR>gv=gv
+
 " Files
 nnoremap <C-x><C-f> :e<space>
 nnoremap <C-x><C-s> :w<cr>
