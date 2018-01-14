@@ -272,6 +272,13 @@ let g:neocomplete#enable_at_startup = 1
 "-------------
 
 inoremap <C-l> <Del>
+inoremap <C-f> <Right>
+inoremap <C-b> <Left>
+inoremap <C-p> <Up>
+inoremap <C-n> <Down>
+inoremap <C-e> <End>
+inoremap <C-.> <C-n>
+inoremap <C-,> <C-p>
 noremap <C-e> $
 noremap <C-n> <C-n>
 noremap <C-p> <C-p>
