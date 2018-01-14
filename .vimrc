@@ -256,6 +256,7 @@ autocmd VimEnter * xmap gs <Plug>VgSurround
 set timeoutlen=2000   " increase time limit to 2s
 let mapleader = " "
 let g:mapleader = " "
+ map <Leader><Space> <Plug>(easymotion-prefix)
 
 "------------------------------------------------------
 
