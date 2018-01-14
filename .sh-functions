@@ -1678,3 +1678,11 @@ ff2pm-copy-userstyles() {
     if [[ -f "$target" ]]; then mv "$target" "$target.bk"; fi;
     cp "$ffdir/stylish.sqlite" "$target";
 }
+
+git-printorigin() {
+    (
+        repo="$1";
+        cd "$1" >/dev/null;
+        git config --get remote.origin.url
+    )
+}
