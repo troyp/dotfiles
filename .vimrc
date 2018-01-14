@@ -307,6 +307,10 @@ inoremap <C-x><C-w> <Esc>:w<cr>i
 nnoremap <leader>w :w!<cr>
 nnoremap <leader>ff :edit<space>
 
+" External Programs
+noremap <f12> :!usr/bin/dolphin<CR>
+noremap <S-f4> :!roxterm expand('%:p:h')
+
 " Eval
 noremap <C-x><C-e> :echom<space>
 
