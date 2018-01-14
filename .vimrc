@@ -305,6 +305,7 @@ inoremap <C-x><C-s> <Esc>:w<cr>i
 nnoremap <C-x><C-w> :w<cr>
 inoremap <C-x><C-w> <Esc>:w<cr>i
 nnoremap <leader>w :w!<cr>
+nnoremap <leader>ff :edit<space>
 
 " Eval
 noremap <C-x><C-e> :echom<space>
