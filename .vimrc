@@ -196,7 +196,12 @@ set switchbuf=usetab,newtab
 "-------
 
 set mouse=a                  " mouse support for all modes
-set ttymouse=xterm2            " set terminal mouse support codes
+
+if has("mouse_sgr")
+    set ttymouse=sgr
+else
+    set ttymouse=xterm2
+end
 
 "------------------------------------------------------
 
