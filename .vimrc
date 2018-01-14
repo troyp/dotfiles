@@ -13,8 +13,19 @@ Helptags
 " ----------
 call plug#begin('~/.vim/plugged')
 
+Plug 'christoomey/vim-run-interactive'
+Plug 'easymotion/vim-easymotion'
+Plug 'Jagua/vim-mozrepl'
+Plug 'haya14busa/vim-easyoperator-line'
+Plug 'haya14busa/vim-easyoperator-phrase'
+Plug 'haya14busa/vim-migemo'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
+Plug 'Konfekt/FastFold'
+Plug 'powerman/vim-plugin-viewdoc'
+Plug 'scrooloose/nerdcommenter'
+Plug 'scrooloose/nerdtree'
+Plug 'Shougo/neobundle'
 Plug 'tpope/vim-scriptease'
 Plug 'tpope/vim-surround'
 Plug 'tpope/vim-abolish'
@@ -24,12 +35,7 @@ Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-unimpaired'
-Plug 'scrooloose/nerdcommenter'
-Plug 'scrooloose/nerdtree'
-Plug 'powerman/vim-plugin-viewdoc'
-Plug 'Konfekt/FastFold'
-Plug 'Jagua/vim-mozrepl'
-Plug 'christoomey/vim-run-interactive'
+Plug 'vim-scripts/YankRing'
 
 call plug#end()
 " PlugUpdate
