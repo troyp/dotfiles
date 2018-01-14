@@ -331,6 +331,8 @@ noremap <leader>bw :call ToggleOpt('readonly')<cr>
 
 " Windows
 noremap <C-x>0 :hide<cr>
+noremap <S-Del> :hide<cr>
+noremap <C-Del> :close!<cr>
 noremap <C-x>1 :only<cr>
 noremap <C-x>2 :split<cr>
 noremap <C-x>3 :vsplit<cr>
@@ -355,9 +357,7 @@ noremap <Leader><tab> :bNext<cr>
 " Close buffer but not window
 noremap <C-x>k :bp<bar>sp<bar>bn<bar>bd<space>
 noremap <leader>bd :bp<bar>sp<bar>bn<bar>bd<CR>
-
-" Save buffers and quit
-noremap <C-x><C-c> :wq<cr>
+noremap <Del> :bp<bar>sp<bar>bn<bar>bd<CR>
 
 " Quit
 noremap <leader>xx :q<cr>
