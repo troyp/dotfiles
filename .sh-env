@@ -121,6 +121,7 @@ paths=(
     /opt/Amber/bin
     /opt/android-studio/bin
     /opt/apache-maven-3.3.3/bin
+    /opt/basilisk
     /opt/bin
     /opt/calibre
     /opt/clean/bin
