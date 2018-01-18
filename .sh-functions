@@ -1686,3 +1686,12 @@ git-printorigin() {
         git config --get remote.origin.url
     )
 }
+
+chrome-tampermonkey-copy() {
+    scriptdir="`chromeprof Default`Local Extension Settings/gcalenpjmijncebpfijmoaglllgpjagf";
+    /opt/scripts/extract_tampermonkey_script.py "$scriptdir";
+    for script in *.user.js; do
+        name=$( grep -P '@name\b' "$script" | sed -r 's!// *@name +!!' | tr ' \t' '__' );
+        mv -i "$script" "$name.user.js";
+    done;
+}
