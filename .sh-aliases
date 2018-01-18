@@ -72,9 +72,10 @@ dplistexe () {
         fi;
     done;
 }
-alias aptfl='apt-file list'  # list contents of matching packages
+alias debpfl='apt-file list'  # list contents of matching packages
+alias debpifl='dpkg-query -L' # list files installed by a package
+alias debdebfl='dpkg-deb -c'   # list files contained in deb
 alias aptgetkey='sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys'  # Ubuntu
-alias dpfiles='dpkg -L'  # list files installed by a package
 # --- other ---
 alias dpfind='dpkg -S'   # find package, location, man file location of a command
 alias dp-remove-broken-package='dpkg --remove --force-remove-reinstreq'
