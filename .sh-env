@@ -170,6 +170,7 @@ paths=(
     /opt/SublimeText2
     /opt/tor-browser
     /opt/utorrent-server-v3_0
+    /opt/waterfox
     /opt/wmutils-contrib
     /opt/xcape
     /opt/xulrunner
