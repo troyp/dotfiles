@@ -392,33 +392,29 @@
     <!-- Keybindings for running Run menu from Lxpanel on Home + R-->
     <keybind key="W-r">
       <action name="Execute">
-        <command>lxsession-default launcher_manager</command>
+        <command>lxpanelctl menu</command>
       </action>
     </keybind>
     <keybind key="A-F2">
       <action name="Execute">
-        <command>lxsession-default launcher_manager</command>
+        <!-- <command>lxsession-default launcher_manager</command> -->
+        <command>krunner</command>
       </action>
     </keybind>
-    <!-- Keybindings for running Menu from Lxpanel -->
-    <keybind key="A-F1">
-      <action name="Execute">
-        <command>lxpanelctl menu</command>
-      </action>
-    </keybind>
-    <keybind key="C-Escape">
-      <action name="Execute">
-        <command>lxpanelctl menu</command>
-      </action>
-    </keybind>
+
     <!-- Keybindings to toggle fullscreen -->
-    <keybind key="F11">
+    <keybind key="W-F11">
       <action name="ToggleFullscreen"/>
     </keybind>
     <!-- Launch task manager on Ctrl + Alt + Del-->
     <keybind key="C-A-Delete">
       <action name="Execute">
         <command>lxsession-default tasks</command>
+      </action>
+    </keybind>
+    <keybind key="W-Delete">
+      <action name="Execute">
+        <command>xkill</command>
       </action>
     </keybind>
     <!-- <!-\- Launch a terminal on Ctrl + Alt + T-\-> -->
