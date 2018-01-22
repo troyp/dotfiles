@@ -37,8 +37,8 @@ setxkbmap -option "grp:rctrl_rshift_toggle"
 xmodmap -e "keycode 115 = End NoSymbol End"
 # Fix Pause button
 xmodmap -e "keycode 127 = Pause"
-# L Control -> Hyper
-xmodmap -e "keycode 37 = Hyper_L"
+# # L Control -> Hyper
+# xmodmap -e "keycode 37 = Hyper_L"
 # extra function key keycodes
 xmodmap -e "keycode 93 = F18"
 xmodmap -e "keycode 94 = F19"
