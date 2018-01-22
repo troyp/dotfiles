@@ -1,0 +1,91 @@
+# Default Lubuntu theme for Openbox, GPL2 / Open Source
+# By Rafael Laguna, Lubuntu Artwork Team
+
+border.color: #808080
+border.width: 1
+menu.items.active.bg: Solid Flat
+menu.items.active.bg.color: #8FB2CF
+menu.items.active.disabled.text.color: #AFAFAF
+menu.items.active.text.color: #FFFFFF
+menu.items.bg: Solid Flat
+menu.items.bg.color: #E0E0E0
+menu.items.disabled.text.color: #808080
+menu.items.font: shadow=n
+menu.items.text.color: #606060
+menu.overlap.x: 1
+menu.separator.color: #E0E0E0
+menu.separator.padding.height: 10
+menu.separator.padding.width: 10
+menu.separator.width: 4
+menu.title.bg: Gradient Vertical Flat
+menu.title.bg.color: #D2D2D2
+menu.title.bg.colorTo: #797979
+menu.title.text.color: #FFFFFF
+menu.title.text.font: shadow=n
+menu.title.text.justify: center
+osd.bg: flat solid
+osd.bg.color: #dcdcdc
+osd.border.color: #808080
+osd.hilight.bg: Gradient Vertical Flat
+osd.hilight.bg.color: #F8F8F8
+osd.hilight.bg.colorTo: #7E9EBD
+osd.label.text.color: #606060
+osd.unhilight.bg: Solid Flat
+osd.unhilight.bg.color: #EDEDED
+padding.height: 3
+padding.width: 5
+window.active.border.color: #606060
+window.active.button.disabled.bg: parentrelative
+window.active.button.disabled.image.color: #808080
+window.active.button.hover.image.color: #008AFF
+window.active.button.pressed.bg: parentrelative
+window.active.button.pressed.image.color: #000000
+window.active.button.toggled.hover.image.color: #008AFF
+window.active.button.toggled.image.color: #808080
+window.active.button.toggled.pressed.image.color: #008AFF
+window.active.button.unpressed.bg: parentrelative
+window.active.button.unpressed.image.color: #808080
+window.active.client.color: #D9D9D9
+window.active.grip.bg: Solid Raised
+window.active.grip.bg.color: #DCDCDC
+window.active.grip.bg.border.color: #DCDCDC
+window.active.handle.bg: Gradient Vertical Raised
+window.active.handle.bg.color: #E0E0E0
+window.active.handle.bg.colorTo: #D8D8D8
+window.active.handle.bg.border.color: #DCDCDC
+window.active.label.bg: ParentRelative Flat
+window.active.label.text.color: #606060
+window.active.label.text.font: shadow=y:shadowtint=-100:shadowoffset=0
+window.active.title.bg: Gradient Vertical Flat
+window.active.title.bg.color: #FFFFFF
+window.active.title.bg.colorTo: #E0E0E0
+window.active.title.separator.color: #E0E0E0
+window.client.padding.width: 0
+window.handle.width: 2
+window.inactive.border.color: #808080
+window.inactive.button.disabled.bg: parentrelative
+window.inactive.button.disabled.image.color: #BDBDBD
+window.inactive.button.hover.image.color: #008AFF
+window.inactive.button.pressed.bg: parentrelative
+window.inactive.button.pressed.image.color: #008AFF
+window.inactive.button.toggled.hover.image.color: #008AFF
+window.inactive.button.toggled.image.color: #BDBDBD
+window.inactive.button.unpressed.bg: parentrelative
+window.inactive.button.unpressed.image.color: #BDBDBD
+window.inactive.client.color: #D9D9D9
+window.inactive.grip.bg: Gradient Vertical Raised
+window.inactive.grip.bg.color: #E0E0E0
+window.inactive.grip.bg.colorTo: #D8D8D8
+window.inactive.grip.bg.border.color: #DCDCDC
+window.inactive.handle.bg: Gradient Vertical Raised
+window.inactive.handle.bg.color: #E0E0E0
+window.inactive.handle.bg.colorTo: #EEEEEE
+window.inactive.handle.bg.border.color: #DCDCDC
+window.inactive.label.bg: parentrelative
+window.inactive.label.text.color: #AAAAAA
+window.inactive.label.text.font: shadow=n
+window.inactive.title.bg: Gradient Vertical Flat
+window.inactive.title.bg.color: #EBEBEB
+window.inactive.title.bg.colorTo: #E0E0E0
+window.inactive.title.separator.color: #E0E0E0
+window.label.text.justify: center
