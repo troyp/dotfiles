@@ -220,54 +220,7 @@
         <to>4</to>
       </action>
     </keybind>
-    <!-- <keybind key="C-A-Left"> -->
-    <!--   <action name="GoToDesktop"> -->
-    <!--     <to>left</to> -->
-    <!--     <wrap>no</wrap> -->
-    <!--   </action> -->
-    <!-- </keybind> -->
-    <!-- <keybind key="C-A-Right"> -->
-    <!--   <action name="GoToDesktop"> -->
-    <!--     <to>right</to> -->
-    <!--     <wrap>no</wrap> -->
-    <!--   </action> -->
-    <!-- </keybind> -->
-    <!-- <keybind key="C-A-Up"> -->
-    <!--   <action name="GoToDesktop"> -->
-    <!--     <to>up</to> -->
-    <!--     <wrap>no</wrap> -->
-    <!--   </action> -->
-    <!-- </keybind> -->
-    <!-- <keybind key="C-A-Down"> -->
-    <!--   <action name="GoToDesktop"> -->
-    <!--     <to>down</to> -->
-    <!--     <wrap>no</wrap> -->
-    <!--   </action> -->
-    <!-- </keybind> -->
-    <!-- <keybind key="S-A-Left"> -->
-    <!--   <action name="SendToDesktop"> -->
-    <!--     <to>left</to> -->
-    <!--     <wrap>no</wrap> -->
-    <!--   </action> -->
-    <!-- </keybind> -->
-    <!-- <keybind key="S-A-Right"> -->
-    <!--   <action name="SendToDesktop"> -->
-    <!--     <to>right</to> -->
-    <!--     <wrap>no</wrap> -->
-    <!--   </action> -->
-    <!-- </keybind> -->
-    <!-- <keybind key="S-A-Up"> -->
-    <!--   <action name="SendToDesktop"> -->
-    <!--     <to>up</to> -->
-    <!--     <wrap>no</wrap> -->
-    <!--   </action> -->
-    <!-- </keybind> -->
-    <!-- <keybind key="S-A-Down"> -->
-    <!--   <action name="SendToDesktop"> -->
-    <!--     <to>down</to> -->
-    <!--     <wrap>no</wrap> -->
-    <!--   </action> -->
-    <!-- </keybind> -->
+
     <keybind key="W-d">
       <action name="ToggleShowDesktop"/>
     </keybind>
@@ -275,11 +228,6 @@
     <keybind key="A-F4">
       <action name="Close"/>
     </keybind>
-    <!-- <keybind key="A-Escape"> -->
-    <!--   <action name="Lower"/> -->
-    <!--   <action name="FocusToBottom"/> -->
-    <!--   <action name="Unfocus"/> -->
-    <!-- </keybind> -->
     <keybind key="A-space">
       <action name="ShowMenu">
         <menu>client-menu</menu>
@@ -417,29 +365,7 @@
         <command>xkill</command>
       </action>
     </keybind>
-    <!-- <!-\- Launch a terminal on Ctrl + Alt + T-\-> -->
-    <!-- <keybind key="C-A-T"> -->
-    <!--   <action name="Execute"> -->
-    <!--     <command>lxsession-default terminal</command> -->
-    <!--   </action> -->
-    <!-- </keybind> -->
-    <!-- <!-\- Launch a filemanager on Ctrl + Alt + D-\-> -->
-    <!-- <keybind key="C-A-D"> -->
-    <!--   <action name="Execute"> -->
-    <!--     <startupnotify> -->
-    <!--       <enabled>true</enabled> -->
-    <!--       <name>PCManFM</name> -->
-    <!--     </startupnotify> -->
-    <!--     <command>lxsession-default file_manager</command> -->
-    <!--   </action> -->
-    <!-- </keybind> -->
-    <!-- <!-\- Lock the screen on Ctrl + Alt + l-\-> -->
-    <!-- <keybind key="C-A-l"> -->
-    <!--   <action name="Execute"> -->
-    <!--     <command>lxsession-default lock</command> -->
-    <!--   </action> -->
-    <!-- </keybind> -->
-    <!-- Keybinding for Volume management -->
+
     <keybind key="XF86AudioRaiseVolume">
       <action name="Execute">
         <command>amixer -q sset Master 3%+ unmute</command>
@@ -478,23 +404,6 @@
         <command>lxsession-default file_manager</command>
       </action>
     </keybind>
-    <!-- <!-\- Keybindings for Multimedia Keys and LCD Backlight (alternative when not using gnome-power-manager or xfce4-volumed) -\-> -->
-    <!-- <keybind key="C-F7"> -->
-    <!--   <action name="Execute"> -->
-    <!--     <command>sleep 2;xset dpms force off</command> -->
-    <!--   </action> -->
-    <!-- </keybind> -->
-    <!-- <keybind key="C-F10"> -->
-    <!--   <action name="Execute"> -->
-    <!--     <command>xbacklight -dec 10</command> -->
-    <!--   </action> -->
-    <!-- </keybind> -->
-    <!-- <keybind key="C-F11"> -->
-    <!--   <action name="Execute"> -->
-    <!--     <command>xbacklight -inc 10</command> -->
-    <!--   </action> -->
-    <!-- </keybind> -->
-    <!-- Launch scrot when Print is pressed -->
     <keybind key="Print">
       <action name="Execute">
         <command>lxsession-default screenshot</command>
