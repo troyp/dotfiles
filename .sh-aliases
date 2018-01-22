@@ -988,6 +988,7 @@ winid() {
 }
 alias lsgroups='getent groups'
 alias lsusers='bash -c "compgen -u"'
+alias dmesgless='dmesg --color=always | less -R'
 
 # ----------------
 # GIT/VCS ALIASES.
