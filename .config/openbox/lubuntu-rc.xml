@@ -201,16 +201,24 @@
     </keybind>
     <!-- Move to desktop -->
     <keybind key="W-S-1">
-      <action name="SendToDesktop"><to>1</to></action>
+      <action name="SendToDesktop">
+        <to>1</to>
+      </action>
     </keybind>
     <keybind key="W-S-2">
-      <action name="SendToDesktop"><to>2</to></action>
+      <action name="SendToDesktop">
+        <to>2</to>
+      </action>
     </keybind>
     <keybind key="W-S-3">
-      <action name="SendToDesktop"><to>3</to></action>
+      <action name="SendToDesktop">
+        <to>3</to>
+      </action>
     </keybind>
     <keybind key="W-S-4">
-      <action name="SendToDesktop"><to>4</to></action>
+      <action name="SendToDesktop">
+        <to>4</to>
+      </action>
     </keybind>
     <!-- <keybind key="C-A-Left"> -->
     <!--   <action name="GoToDesktop"> -->
@@ -539,32 +547,22 @@
         <action name="FocusToBottom"/>
         <action name="Unfocus"/>
       </mousebind>
-      <mousebind button="A-Up" action="Click">
+      <mousebind button="W-Up" action="Click">
         <action name="GoToDesktop">
           <to>previous</to>
         </action>
       </mousebind>
-      <mousebind button="A-Down" action="Click">
+      <mousebind button="W-Down" action="Click">
         <action name="GoToDesktop">
           <to>next</to>
         </action>
       </mousebind>
-      <mousebind button="C-A-Up" action="Click">
-        <action name="GoToDesktop">
-          <to>previous</to>
-        </action>
-      </mousebind>
-      <mousebind button="C-A-Down" action="Click">
-        <action name="GoToDesktop">
-          <to>next</to>
-        </action>
-      </mousebind>
-      <mousebind button="A-S-Up" action="Click">
+      <mousebind button="W-S-Up" action="Click">
         <action name="SendToDesktop">
           <to>previous</to>
         </action>
       </mousebind>
-      <mousebind button="A-S-Down" action="Click">
+      <mousebind button="W-S-Down" action="Click">
         <action name="SendToDesktop">
           <to>next</to>
         </action>
