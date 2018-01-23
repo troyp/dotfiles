@@ -135,6 +135,7 @@ alias rpickdir='ranger --choosedir $HOME/.ranger-choosedir'
 #------------
 alias lsg='ls | grep -iP'
 alias ls='ls --group-directories-first --color=auto --time-style=+" %d.%m.%y "'
+alias lsv='ls -C -w $COLUMNS --color=always | less -R'
 alias ls1='ls -1'
 alias lsc='ls --color=always'
 alias ll='ls -l'   # list details
