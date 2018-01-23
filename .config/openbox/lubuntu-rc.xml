@@ -220,7 +220,6 @@
         <to>4</to>
       </action>
     </keybind>
-
     <keybind key="W-d">
       <action name="ToggleShowDesktop"/>
     </keybind>
@@ -349,7 +348,6 @@
         <command>krunner</command>
       </action>
     </keybind>
-
     <!-- Keybindings to toggle fullscreen -->
     <keybind key="W-F11">
       <action name="ToggleFullscreen"/>
@@ -365,7 +363,6 @@
         <command>xkill</command>
       </action>
     </keybind>
-
     <keybind key="XF86AudioRaiseVolume">
       <action name="Execute">
         <command>amixer -q sset Master 3%+ unmute</command>
@@ -428,6 +425,33 @@
     <screenEdgeWarpMouse>false</screenEdgeWarpMouse>
     <!-- Set this to TRUE to move the mouse pointer across the desktop when
        switching due to hitting the edge of the screen -->
+
+    <!-- ,----------------, -->
+    <!-- | mouse bindings | -->
+    <!-- '----------------' -->
+
+    <!-- titlebar, edges & corners -->
+    <context name="Titlebar Top Right Bottom Left TLCorner TRCorner BRCorner BLCorner">
+      <mousebind button="Left" action="Press">
+        <action name="Focus"/>
+        <action name="Raise"/>
+        <action name="Unshade"/>
+      </mousebind>
+      <mousebind button="Middle" action="Press">
+        <action name="Lower"/>
+        <action name="FocusToBottom"/>
+        <action name="Unfocus"/>
+      </mousebind>
+      <mousebind button="Right" action="Press">
+        <action name="Focus"/>
+        <action name="Raise"/>
+        <action name="ShowMenu">
+          <menu>client-menu</menu>
+        </action>
+      </mousebind>
+    </context>
+
+    <!-- window frame -->
     <context name="Frame">
       <mousebind button="A-Left" action="Press">
         <action name="Focus"/>
@@ -473,6 +497,8 @@
         </action>
       </mousebind>
     </context>
+
+    <!-- titlebar -->
     <context name="Titlebar">
       <mousebind button="Left" action="Drag">
         <action name="Move"/>
@@ -501,25 +527,7 @@
         </action>
       </mousebind>
     </context>
-    <context name="Titlebar Top Right Bottom Left TLCorner TRCorner BRCorner BLCorner">
-      <mousebind button="Left" action="Press">
-        <action name="Focus"/>
-        <action name="Raise"/>
-        <action name="Unshade"/>
-      </mousebind>
-      <mousebind button="Middle" action="Press">
-        <action name="Lower"/>
-        <action name="FocusToBottom"/>
-        <action name="Unfocus"/>
-      </mousebind>
-      <mousebind button="Right" action="Press">
-        <action name="Focus"/>
-        <action name="Raise"/>
-        <action name="ShowMenu">
-          <menu>client-menu</menu>
-        </action>
-      </mousebind>
-    </context>
+
     <context name="Top">
       <mousebind button="Left" action="Drag">
         <action name="Resize">
@@ -565,6 +573,8 @@
         <action name="Resize"/>
       </mousebind>
     </context>
+
+    <!-- client window: inside decorations -->
     <context name="Client">
       <mousebind button="Left" action="Press">
         <action name="Focus"/>
@@ -579,6 +589,7 @@
         <action name="Raise"/>
       </mousebind>
     </context>
+
     <context name="Icon">
       <mousebind button="Left" action="Press">
         <action name="Focus"/>
