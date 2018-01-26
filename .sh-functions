@@ -1695,3 +1695,18 @@ chrome-tampermonkey-copy() {
         mv -i "$script" "$name.user.js";
     done;
 }
+
+xdg-mime-query-default-for-file() {
+    xdg-mime query default $(xdg-mime query filetype "$1");
+}
+
+xdg-mime-set-html-default-app() {
+    if [[ "$1" =~ ^-h$|^--help$ ]]; then
+        cat <<EOF
+xdg-mime-set-html-default-app DESKTOP-FILE
+    Set the application specified by DESKTOP-FILE as the default application
+    for HTML files.
+EOF
+        return 0; fi;
+    xdg-mime default "$1" application/x-extension-htm application/x-extension-html application/x-extension-shtml application/x-extension-xht application/x-extension-xhtml application/xhtml+xml text/html x-scheme-handler/chrome x-scheme-handler/ftp x-scheme-handler/http x-scheme-handler/https;
+}
