@@ -1701,7 +1701,7 @@ xdg-mime-query-default-for-file() {
 }
 
 xdg-mime-set-html-default-app() {
-    if [[ "$1" =~ ^-h$|^--help$ ]]; then
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
         cat <<EOF
 xdg-mime-set-html-default-app DESKTOP-FILE
     Set the application specified by DESKTOP-FILE as the default application
