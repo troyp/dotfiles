@@ -1160,6 +1160,7 @@ alias e="emacsclient -ta ''"
 alias eq='emacs -Q -nw'
 alias eqw='emacs -Q'
 alias ec="emacsclient -cna ''"
+alias emc=emacsclient
 # emacsclient: geometry option isn't working - why not?
 alias eg="emacsclient -cna 'gvim' -F '((height . 43) (width . 97) (top . -63) (left . -35))'"
 alias emint='pkill --signal SIGINT emacs'
