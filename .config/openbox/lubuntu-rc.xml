@@ -426,9 +426,9 @@
     <!-- Set this to TRUE to move the mouse pointer across the desktop when
        switching due to hitting the edge of the screen -->
 
-    <!-- ,----------------, -->
+    <!-- ,~~~~~~~~~~~~~~~~, -->
     <!-- | mouse bindings | -->
-    <!-- '----------------' -->
+    <!-- '~~~~~~~~~~~~~~~~' -->
 
     <!-- titlebar, edges & corners -->
     <context name="Titlebar Top Right Bottom Left TLCorner TRCorner BRCorner BLCorner">
