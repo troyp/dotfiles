@@ -619,15 +619,23 @@ alias ffsearch="firefox -search"
 #       alias is *called*, rather than when the alias definition is read.
 alias cdffdir='cd "$(ffprof $FFMAINPROFILE)"'    # cd to Firefox profile directory
 alias cdffcache='cd "$(fftempfiles $FFMAINPROFILE)"'  # cd to Firefox cache directory
-alias ffprefs='echo $(ffprof $FFMAINPROFILE)/prefs.js'
+WFMAINPROFILE=default
+
+alias ffprefs='echo $(ffprof)/prefs.js'
 alias ffpipe='base64 -w0 <&0 | read -r x; firefox "data:text/html;base64,$x"'
-alias mozrepl='rlwrap telnet localhost 4242'
 alias ffalltabs='cat ~/.mozilla/firefox/*.default/sessionstore-backups/recovery.js | jq ".windows[].tabs[].entries[].url"'
 alias ffcurrenttabno='cat ~/.mozilla/firefox/*.default/sessionstore-backups/recovery.js | jq ".windows[0].selected"'
-alias cdpmdir='cd "$(pmprof $FFMAINPROFILE)"'    # cd to Firefox profile directory
-alias cdpmcache='cd "$(pmtempfiles $FFMAINPROFILE)"'  # cd to Firefox cache directory
+alias cdpmdir='cd "$(pmprof)"'    # cd to Firefox profile directory
+alias cdpmcache='cd "$(pmtempfiles)"'  # cd to Firefox cache directory
 alias pmalltabs='jq ".windows[].tabs[].entries[].url" ~/.moonchild\ productions/pale\ moon/*.default/sessionstore.js'
 alias pmcurrenttabno='jq ".windows[0].selected" ~/.moonchild\ productions/pale\ moon/*.default/sessionstore.js'
+alias cdwfdir='cd "$(wfprof)"'    # cd to Firefox profile directory
+alias cdwfcache='cd "$(wftempfiles)"'  # cd to Firefox cache directory
+alias wfprefs='echo $(wfprof)/prefs.js'
+alias wfpipe='base64 -w0 <&0 | read -r x; waterfox "data:text/html;base64,$x"'
+alias wfalltabs='cat $(wfprof)/sessionstore-backups/recovery.js | jq ".windows[].tabs[].entries[].url"'
+alias wfcurrenttabno='cat $(wfprof)/sessionstore-backups/recovery.js | jq ".windows[0].selected"'
+alias mozrepl='rlwrap telnet localhost 4242'
 alias mozreplcurrenttab="echo 'repl.look()'|nc localhost 4242|grep -oP '(?<=this.gLastValidURLStr=).*'"
 
 #------------------------
