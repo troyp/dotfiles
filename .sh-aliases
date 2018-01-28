@@ -651,6 +651,7 @@ alias chrome-minimal='google-chrome --profile-directory="Profile 1"'
 alias cvimserver='$HOME/.cvimrc/cvim_server.py'
 alias cdchrometempdir='cd "`chrometempfiles Default`"'  # cd to Google Chrome temp directory
 alias cdchromedir='cd "`chromeprof Default`"'  # cd to Google Chrome profile directory
+alias chromerepl='/opt/google/chrome/chrome --headless --repl'  # requires path to actual binary
 
 #--------------------
 # NETWORKING ALIASES.
