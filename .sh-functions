@@ -467,7 +467,7 @@ ffprof PROF_SUBSTRING
 EOF
         return 0; fi;
     (
-        s="${1:-default}";
+        s="${1:-${FFMAINPROFILE:-default}}";
         echo ~/.mozilla/firefox/*.$s*/;
     )
 }
@@ -479,7 +479,7 @@ fftempfiles PROF_SUBSTRING
 EOF
         return 0; fi;
     (
-        s="${1:-default}";
+        s="${1:-${FFMAINPROFILE:-default}}";
         echo ~/.cache/mozilla/firefox/*.$s*/cache2/entries/;
     )
 }
@@ -492,7 +492,7 @@ pmprof PROF_SUBSTRING
 EOF
         return 0; fi;
     (
-        s="${1:-default}";
+        s="${1:-${PMMAINPROFILE:-default}}";
         echo ~/.moonchild\ productions/pale\ moon/*.$s*/;
     )
 }
@@ -504,7 +504,7 @@ pmtempfiles PROF_SUBSTRING
 EOF
         return 0; fi;
     (
-        s="${1:-default}";
+        s="${1:-${PMMAINPROFILE:-default}}";
         echo ~/.cache/moonchild\ productions/pale\ moon/*.$s*/cache2/entries/;
     )
 }
@@ -517,7 +517,7 @@ chromeprof PROF_SUBSTRING
 EOF
         return 0; fi;
     (
-        s="${1:-Default}";
+        s="${1:-${CHROMEMAINPROFILE:-default}}";
         echo ~/.config/google-chrome/*$s*/;
     )
 }
@@ -530,7 +530,7 @@ chrometempfiles PROF_SUBSTRING
 EOF
         return 0; fi;
     (
-        s="${1:-Default}";
+        s="${1:-${CHROMEMAINPROFILE:-default}}";
         echo ~/.cache/google-chrome/*$s*/Cache/;
     )
 }
