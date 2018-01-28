@@ -1735,3 +1735,21 @@ EOF
         return 0; fi;
     xdg-mime default "$1" application/x-extension-htm application/x-extension-html application/x-extension-shtml application/x-extension-xht application/x-extension-xhtml application/xhtml+xml text/html x-scheme-handler/chrome x-scheme-handler/ftp x-scheme-handler/http x-scheme-handler/https;
 }
+
+gh-num-starred() {
+    curl -u "$my_gh_username:$my_gh_pw" -I --silent 'https://api.github.com/users/troyp/starred?page=1&per_page=100' 2>&1 |
+        grep -oP '^Link:.*rel=.*page=(\d+).*' |
+        sed 's/.*[?]page=//' |
+        sed 's/[^0-9].*//';
+}
+gh-starred-json() {
+    for i in 1..$(gh-num-starred); do
+        curl -u "$my_gh_username:$my_gh_pw" --silent "https://api.github.com/users/troyp/starred?page=$i&per_page=100" 2>&1;
+    done;
+}
+gh-starred-list() {
+    gh-starred-json |
+        for s in $(jq --raw-output '.[] | .full_name'); do
+            printf "$s\n";
+        done;
+}
