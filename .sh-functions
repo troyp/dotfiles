@@ -509,6 +509,31 @@ EOF
     )
 }
 
+wfprof () {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+ffprof PROF_SUBSTRING
+   Print profile directory of profile matching PROF_SUBSTRING.
+EOF
+        return 0; fi;
+    (
+        s="${1:-${WFMAINPROFILE:-default}}";
+        echo ~/.waterfox/*.$s*/;
+    )
+}
+wftempfiles () {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+fftempfiles PROF_SUBSTRING
+   Print temp files directory of profile matching PROF_SUBSTRING.
+EOF
+        return 0; fi;
+    (
+        s="${1:-${WFMAINPROFILE:-default}}";
+        echo ~/.cache/waterfox/*.$s*/cache2/entries/;
+    )
+}
+
 chromeprof () {
     if [[ "$1" =~ ^-h$\|^--help$ ]]; then
         cat <<EOF
