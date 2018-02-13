@@ -842,7 +842,6 @@ alias mozc-character-palette='/usr/lib/mozc/mozc_tool --mode=character_palette'
 # ===================
 # DICTIONARY ALIASES.
 # ===================
-alias gd=grepdict   # see .sh-functions
 alias gcide='dict -d gcide'
 alias dictwn='dict -d wn'
 alias moby='dict -d moby-thesaurus'

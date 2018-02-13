@@ -24,6 +24,7 @@ empty () [[ -z "$1" ]]
 pe () { $( echo "printenv ${1^^}" ); }
 manh () { firefox -P default "localhost//cgi-bin/man/man2html?query=$1"; }
 grepdict () { grep $1 /usr/share/dict/words; }
+gd () { grepdict "$1" | less }
 symlink-print() { namei -v "$1" | grep --color -P '(?<=^l).*|$'; }
 
 locatedirs() {
