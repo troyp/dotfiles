@@ -307,6 +307,22 @@
       <action name="UnmaximizeFull"/>
       <action name="MoveResizeTo"><x>0</x><y>-0</y><width>100%</width><height>50%</height></action>
     </keybind>
+    <keybind key="W-Home">        # TopLeftCorner
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo"><x>0</x><y>0</y><width>50%</width><height>50%</height></action>
+    </keybind>
+    <keybind key="W-End">        # BottomLeftCorner
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo"><x>0</x><y>-0</y><width>50%</width><height>50%</height></action>
+    </keybind>
+    <keybind key="W-Prior">        # TopRightCorner
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo"><x>-0</x><y>0</y><width>50%</width><height>50%</height></action>
+    </keybind>
+    <keybind key="W-Next">        # BottomRightCorner
+      <action name="UnmaximizeFull"/>
+      <action name="MoveResizeTo"><x>-0</x><y>-0</y><width>50%</width><height>50%</height></action>
+    </keybind>
     <keybind key="W-apostrophe">
       <action name="ToggleMaximize"/>
     </keybind>
