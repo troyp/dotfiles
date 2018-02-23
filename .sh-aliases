@@ -1427,6 +1427,7 @@ alias qiv='qiv -e'
 # alias handyoutliner='opt/handyoutliner/start-linux'
 alias handyoutliner='mono /opt/handyoutliner/HandyOutliner.exe'
 alias clock='cairo-clock -deops -x 1695 -y 104 -w 200 -h 200 -r 1 -t radium'
+alias clock-desktop='xclock -chime -update 1 -geometry 1094x929+400+50'
 alias gremclock='cairo-clock -deops -x 1695 -y 104 -w 200 -h 200 -r 1 -t gremlin'
 alias pman='pinfo -m'
 # repeat character, eg.    rep '*' 20
