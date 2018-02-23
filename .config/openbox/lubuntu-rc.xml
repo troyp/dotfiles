@@ -425,11 +425,9 @@
     <screenEdgeWarpMouse>false</screenEdgeWarpMouse>
     <!-- Set this to TRUE to move the mouse pointer across the desktop when
        switching due to hitting the edge of the screen -->
-
     <!-- ,~~~~~~~~~~~~~~~~, -->
     <!-- | mouse bindings | -->
     <!-- '~~~~~~~~~~~~~~~~' -->
-
     <!-- titlebar, edges & corners -->
     <context name="Titlebar Top Right Bottom Left TLCorner TRCorner BRCorner BLCorner">
       <mousebind button="Left" action="Press">
@@ -450,7 +448,6 @@
         </action>
       </mousebind>
     </context>
-
     <!-- window frame -->
     <context name="Frame">
       <mousebind button="A-Left" action="Press">
@@ -497,7 +494,6 @@
         </action>
       </mousebind>
     </context>
-
     <!-- titlebar -->
     <context name="Titlebar">
       <mousebind button="Left" action="Drag">
@@ -527,7 +523,6 @@
         </action>
       </mousebind>
     </context>
-
     <context name="Top">
       <mousebind button="Left" action="Drag">
         <action name="Resize">
@@ -573,7 +568,6 @@
         <action name="Resize"/>
       </mousebind>
     </context>
-
     <!-- client window: inside decorations -->
     <context name="Client">
       <mousebind button="Left" action="Press">
@@ -589,7 +583,6 @@
         <action name="Raise"/>
       </mousebind>
     </context>
-
     <context name="Icon">
       <mousebind button="Left" action="Press">
         <action name="Focus"/>
