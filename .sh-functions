@@ -1754,3 +1754,11 @@ gh-starred-list() {
             printf "$s\n";
         done;
 }
+
+filenames_to_relative() {
+    for arg in "$@"; do
+        f=`realpath "$arg"`;
+        wd="$(realpath .)";
+        echo "${f#$wd/}";
+    done;
+}
