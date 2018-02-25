@@ -490,7 +490,7 @@ alias listhttplinks2='xargs wget -O - 2>&1 | grep -i "http:" | sed "s/^.*http/ht
 alias dl-noice='git clone http://git.2f30.org/noice/'
 alias install-noice='dl-noice; cd noice; make; cp noice /opt/bin/'
 # https://calibre-ebook.com/download_linux
-alias install-calibre='sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.py | sudo python -c "import sys; main=lambda:sys.stderr.write('Download failed\n'); exec(sys.stdin.read()); main()"'
+alias install-calibre='sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.py | sudo python -c "import sys; main=lambda:sys.stderr.write('"'"'Download failed\n'"'"'); exec(sys.stdin.read()); main()"'
 alias install-youtube-dl='sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl;sudo chmod a+rx /usr/local/bin/youtube-dl'
 # alias install-vimpager='(cd /opt && if [[ -d vimpager ]]; then rm -rI vimpager && git clone git://github.com/rkitover/vimpager && cd vimpager && sudo make install)'
 alias install-vimpager-deb='(cd /opt && if [[ -d vimpager ]]; then rm -rI vimpager; fi && git clone git://github.com/rkitover/vimpager && cd vimpager && sudo make install-deb)'
