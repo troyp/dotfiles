@@ -1334,9 +1334,9 @@ alias tacn='withnl | tac'    # tac with newline
 alias if_term='if [[ -t 1 ]]; then'    # test if output is going to a terminal (not a pipe)
 alias is_term='[[ -t 1 ]]'             # test if output is going to a terminal (not a pipe)
 
-# ============
+# ------------
 # FZF ALIASES.
-# ============
+# ------------
 alias fzfm='fzf --ansi --exact --border --multi --bind=ctrl-i:toggle+down'
 alias fzfp='fzf --ansi --exact --border --preview "cat {}"'
 alias fzfc='fzf --ansi --exact --border --preview "cat {} | pygmentize -f terminal256 -O style=native -g"'
@@ -1359,6 +1359,7 @@ alias oddlines="awk 'NR%2==1'"
 alias concat='tr -d "\n"'        # join lines into string
 alias tabify-table="perl -ple 's/\s+/\t/g'"    # whitespace-delim table -> tab-delim
 alias number-lines='perl -wnle '\''print "$.\t$_"'\'    # add numbers to left of lines
+alias align='column -t'   # align columns
 
 # ------------
 # rs variants:
@@ -1371,7 +1372,6 @@ alias col2row='rs 1 0'
 alias c2r='rs 1 0'
 # transpose: eg.    printf "1 2 3\n4 5 6\n" | transpose
 alias transpose='rs -T'
-alias align='column -t'   # align columns
 
 # -------
 # RANDOM.
