@@ -1347,6 +1347,7 @@ alias fzfc='fzf --ansi --exact --border --preview "cat {} | pygmentize -f termin
 alias onespace="tr '\t' ' ' | tr -s ' '"  # collapse whitespace (tabs/spaces) into a single space (good with cut)
 alias tolines='tr " \t" "\n\n"'
 alias joinlines='tr "\n" " "'
+alias quotelines='while read -r x || [[ -n $x ]]; do echo "'"'"'$x'"'"'"; done'
 alias firstcol="cut -d' ' -f1"
 alias splitpath='( IFS=: read -r -d '' -A path_array; for f in $path_array; do echo "$f"; done )'
 alias deduppath="awk -F: '{for (i=1;i<=NF;i++) { if ( !x[\$i]++ ) printf(\"%s:\",\$i); }}'"
