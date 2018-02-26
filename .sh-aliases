@@ -1006,6 +1006,7 @@ winid() {
 alias lsgroups='getent groups'
 alias lsusers='bash -c "compgen -u"'
 alias dmesgless='dmesg --color=always | less -R'
+alias printdatetime='date +"%d %b・%l:%M%P"'
 
 # ----------------
 # GIT/VCS ALIASES.
