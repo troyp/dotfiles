@@ -953,6 +953,7 @@ alias capslockoff='capslockon; sudo setleds -D -caps < /dev/console' # see capsl
 alias hdd='df -hT'
 alias hdd-info='sudo parted -l'
 alias partitionlist='fdisk -l'
+alias lvms='sudo pvs; echo; sudo vgs; echo; sudo lvs'
 alias lstab='cat /etc/mtab'  # list mounted partitions / filesystems in fstab format
 alias etab='sudo $(echo ${EDITOR:-vim}) /etc/fstab' # customize auto-mounted partitions / filesystems in fstab file
 alias retab='sudo mount -a'  # mount all partitions in fstab
