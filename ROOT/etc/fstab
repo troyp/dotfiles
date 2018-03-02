@@ -15,8 +15,8 @@ UUID=EEFC-24A3  /boot/efi       vfat    defaults        0       1
 #
 # /dev/sda3:  LABEL=data
 UUID=1dc71a89-3f41-449d-8774-02aab8003844   /mnt/data      ext4   defaults      0   0
-# /dev/sda4:  LABEL=ebooks
-UUID=4b9aae25-d65d-4b1f-80fa-369619359d46   /mnt/ebooks    ext4   defaults      0   0
+# /dev/sda4:  LABEL=ebooks_old
+UUID=4b9aae25-d65d-4b1f-80fa-369619359d46   /mnt/ebooks-old  ext4   defaults           0   0
 # /dev/sda5:  LABEL=video
 UUID=bf6b3fb5-bf2d-4f26-b4d5-37f95c62c319   /mnt/video     ext4   defaults      0   0
 # /dev/sda6:
