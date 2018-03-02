@@ -5,36 +5,33 @@
 # that works even if disks are added and removed. See fstab(5).
 #
 # <file system>                            <mount point>  <type>  <options>  <dump> <pass>
-/dev/mapper/lubuntu--vg-root /               ext4    errors=remount-ro 0       1
+/dev/mapper/lubuntu--vg-root                /               ext4    errors=remount-ro  0   1
 # /boot was on /dev/sdc2 during installation
-UUID=65e8db2e-1c6f-48c2-af64-c47396ec1465 /boot           ext2    defaults        0       2
+UUID=65e8db2e-1c6f-48c2-af64-c47396ec1465   /boot           ext2    defaults           0   2
 # /boot/efi was on /dev/sdc1 during installation
-UUID=EEFC-24A3  /boot/efi       vfat    defaults        0       1
-# /dev/mapper/lubuntu--vg-swap_1 none            swap    sw              0       0
-#
+UUID=EEFC-24A3                              /boot/efi       vfat    defaults           0   1
+#/dev/mapper/lubuntu--vg-swap_1              none            swap    sw                 0   0
 #
 # /dev/sda3:  LABEL=data
-UUID=1dc71a89-3f41-449d-8774-02aab8003844   /mnt/data      ext4   defaults      0   0
+UUID=1dc71a89-3f41-449d-8774-02aab8003844   /mnt/data        ext4   defaults           0   0
 # /dev/sda4:  LABEL=ebooks_old
 UUID=4b9aae25-d65d-4b1f-80fa-369619359d46   /mnt/ebooks-old  ext4   defaults           0   0
 # /dev/sda5:  LABEL=video
-UUID=bf6b3fb5-bf2d-4f26-b4d5-37f95c62c319   /mnt/video     ext4   defaults      0   0
+UUID=bf6b3fb5-bf2d-4f26-b4d5-37f95c62c319   /mnt/video       ext4   defaults           0   0
 # /dev/sda6:
-UUID=1b2efff7-ec7c-412d-aef0-e7906dd8c1e9   /mnt/video2    ext4   defaults      0   0
+UUID=1b2efff7-ec7c-412d-aef0-e7906dd8c1e9   /mnt/video2      ext4   defaults           0   0
 #
 # /dev/sdc1:
-UUID=e91b2f32-3387-4ee3-bf4c-2f8d085277c4   /mnt/empty     ext4   defaults      0   0
+UUID=e91b2f32-3387-4ee3-bf4c-2f8d085277c4   /mnt/empty       ext4   defaults           0   0
 # /dev/sdc2:
-UUID=4633ee66-a6a4-4aca-a68f-89f863b1a679   /mnt/data3     ext4   defaults      0   0
+UUID=4633ee66-a6a4-4aca-a68f-89f863b1a679   /mnt/data3       ext4   defaults           0   0
 # /dev/sdc3:
-UUID=6dbeb861-82a9-4c63-a05c-2105e30e89fd   /mnt/data2     ext4   defaults      0   0
+UUID=6dbeb861-82a9-4c63-a05c-2105e30e89fd   /mnt/data2       ext4   defaults           0   0
+UUID=87b1188c-ab12-416c-b10e-cdf5ef1c6146   /mnt/oldroot     ext4   defaults           0   0
+# # /dev/sdf2:
+# UUID=e82b60b4-295b-4ed0-b0dc-a62f7a222896   /mnt/oldswap     swap   defaults           0   0
 #
-# # /dev/sde1:
-UUID=87b1188c-ab12-416c-b10e-cdf5ef1c6146   /mnt/oldroot   ext4   defaults      0   0
-# # /dev/sde2:
-# UUID=e82b60b4-295b-4ed0-b0dc-a62f7a222896   /mnt/oldswap   swap   defaults      0   0
-#
-# /dev/sde3:  LABEL=library
-UUID=d5bec501-13a9-4476-aa13-4cada200ecb3   /mnt/ebooks2   ext4   auto,nofail   0   0
-# /dev/sde5:
-UUID=f8a04a70-f49b-46b3-b77e-35f0bb57aa0c   /mnt/docs      ext4   auto,nofail   0   0
+# /dev/sdf3:  LABEL=library
+UUID=d5bec501-13a9-4476-aa13-4cada200ecb3   /mnt/ebooks2     ext4   auto,nofail        0   0
+# /dev/sdf5:
+UUID=f-5,nofail        0   0
