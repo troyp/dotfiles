@@ -90,6 +90,11 @@ zsh_URL=https://sourceforge.net/projects/zsh/files/latest/download?source=typ_re
 
 setopt null_glob
 
+# ,--------------,
+# | key bindings |
+# '--------------'
+# To find key codes, use <C-v><KEY>, or cat
+
 bindkey "^P" history-beginning-search-backward
 bindkey "^N" history-beginning-search-forward
 bindkey "^U" backward-kill-line
