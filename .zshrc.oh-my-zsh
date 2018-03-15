@@ -130,6 +130,14 @@ zle -N copylastresult
 bindkey '^[[2;5~' copylastresult
 bindkey '^@' copylastresult
 
+# open file browser: f12=dolphin, S-f12=ranger
+open_file_browser_graphical() { ( dolphin . & ) 2>/dev/null }
+open_file_browser_text() { ( roxterm -m -e ranger . & ) 2>/dev/null }
+zle -N open_file_browser_graphical
+zle -N open_file_browser_text
+bindkey "^[[24~" open_file_browser_graphical
+bindkey "^[[24;2~" open_file_browser_text
+
 zstyle ':completion:*' list-prompt   ''
 zstyle ':completion:*' select-prompt ''
 
