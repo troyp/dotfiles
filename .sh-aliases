@@ -422,8 +422,8 @@ findfileiname2() {
 }
 alias sffind='findiname ~/ebooks/fiction/sf-fantasy'
 alias sffindfile='findfileiname ~/ebooks/fiction/sf-fantasy'
-alias comicsfind='findiname /home/troy/Documents/Comics'
-alias comicsfindfile='findfileiname /home/troy/Documents/Comics'
+alias comicsfind='findiname ~/Documents/Comics'
+alias comicsfindfile='findfileiname ~/Documents/Comics'
 alias csfind='findiname2 ~/ebooks/coding ~/ebooks/cs'
 alias csfindfile='findfileiname2 ~/ebooks/coding ~/ebooks/cs'
 alias statf='stat --printf'    # eg. statf "%s" file (size in B), statf "%h" file (no. hard links)
