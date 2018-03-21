@@ -417,7 +417,7 @@ findfileiname() {
 findiname2() {
     find "$1" "$2" -iname "*$3*" | less -FX;
 }
-findfileiname() {
+findfileiname2() {
     find "$1" "$2" -type f -iname "*$3*" | less -FX;
 }
 alias sffind='findiname ~/ebooks/fiction/sf-fantasy'
