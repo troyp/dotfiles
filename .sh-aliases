@@ -408,18 +408,24 @@ findrepl() {
 alias findreplcs='findrepl ~/ebooks/coding ~/ebooks/cs ~/ebooks/dl'
 findiname() {
     find "$1" -iname "*$2*" | less -FX;
+    # TODO: generalize findiname, remove findiname2
+    # findiname2 DIR1 DIR2 PARTIALNAME
 }
 findfileiname() {
     find "$1" -type f -iname "*$2*" | less -FX;
-    # TODO: generalize findiname, remove findiname2
-    # findiname2 DIR1 DIR2 PARTIALNAME
 }
 findiname2() {
     find "$1" "$2" -iname "*$3*" | less -FX;
 }
+findfileiname() {
+    find "$1" "$2" -type f -iname "*$3*" | less -FX;
+}
 alias sffind='findiname ~/ebooks/fiction/sf-fantasy'
 alias sffindfile='findfileiname ~/ebooks/fiction/sf-fantasy'
+alias comicsfind='findiname /home/troy/Documents/Comics'
+alias comicsfindfile='findfileiname /home/troy/Documents/Comics'
 alias csfind='findiname2 ~/ebooks/coding ~/ebooks/cs'
+alias csfindfile='findfileiname2 ~/ebooks/coding ~/ebooks/cs'
 alias statf='stat --printf'    # eg. statf "%s" file (size in B), statf "%h" file (no. hard links)
 alias rgg='rg -pS'             # ripgrep with pretty and smartcase
 alias rgh='rg -pS --hidden'    # ripgrep with pretty and smartcase, include dotfiles
