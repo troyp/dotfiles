@@ -1014,6 +1014,7 @@ alias lsgroups='getent groups'
 alias lsusers='bash -c "compgen -u"'
 alias dmesgless='dmesg --color=always | less -R'
 alias printdatetime='date +"%a %d %b・%l:%M%P"'
+alias lswindows='wmctrl -lpG'    # win-id, desktop# PID, x-off, y-off, w, h, machine-name, rest=title
 
 # ----------------
 # GIT/VCS ALIASES.
