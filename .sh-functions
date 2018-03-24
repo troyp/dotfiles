@@ -16,6 +16,31 @@
 nonempty () [[ -n "$1" ]]
 empty () [[ -z "$1" ]]
 
+# -------------------------------------------------------------------------------
+# ,-----------------,
+# | Emacs Functions |
+# '-----------------'
+
+einfo () {
+    emacsclient --eval "(info \"$(findinfofile $1)\")";
+}
+
+diredterm () {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+diredterm [-h] [directory]
+    Open an Emacs terminal window with a dired buffer showing DIRECTORY.
+    DIRECTORY defaults to the current working directory ($PWD).
+
+    Options:
+      -h --help     display this help
+EOF
+        shift;
+    fi;
+    emacsclient -t -e "(dired \"${1:-$PWD}\")";
+}
+
+# -------------------------------------------------------------------------------
 
 # ,-------,
 # | other |
@@ -233,32 +258,6 @@ dotsp () {
 	      mv -i "$1" "$converted_name";
     fi;
 }
-
-# -------------------------------------------------------------------------------
-# ,-----------------,
-# | Emacs Functions |
-# '-----------------'
-
-einfo () {
-    emacsclient --eval "(info \"$(findinfofile $1)\")";
-}
-
-diredterm () {
-    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
-        cat <<EOF
-diredterm [-h] [directory]
-    Open an Emacs terminal window with a dired buffer showing DIRECTORY.
-    DIRECTORY defaults to the current working directory ($PWD).
-
-    Options:
-      -h --help     display this help
-EOF
-        shift;
-    fi;
-    emacsclient -t -e "(dired \"${1:-$PWD}\")";
-}
-
-# -------------------------------------------------------------------------------
 
 quick-diffdir () {
     diff <(cd "$1" && find | sort) <(cd "$2" && find | sort);
