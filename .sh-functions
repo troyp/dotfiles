@@ -1763,3 +1763,27 @@ filenames_to_relative() {
         echo "${f#$wd/}";
     done;
 }
+
+choosedir() {
+    cat |
+        iselect -kj:KEY_DOWN -kk:KEY_UP -a |
+        read -r x &&
+        if [[ -d "$x" ]]; then
+            echo "$x";
+        else
+            realpath `dirname "$x"`;
+        fi;
+}
+
+choosedirs() {
+    cat |
+        iselect -kj:KEY_DOWN -kk:KEY_UP -ma |
+        while read -r x || [[ -n $x ]]; do
+            if [[ -d "$x" ]]; then
+                echo "$x";
+            else
+                realpath `dirname "$x"`;
+            fi;
+        done |
+        sort -u;
+}
