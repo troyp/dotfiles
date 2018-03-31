@@ -402,46 +402,46 @@ mangrep () {
 
         if [[ "$1" =~ ^-h$\|^--help$ ]]; then
             cat <<EOF
-mangrep [-s] manfile pattern
-mangrep --[bash|zsh|ksh] pattern
+mangrep [-s|-a]... manfile pattern
+mangrep [-s|-a]... --[bash|zsh|ksh|manfile FILE] pattern
     Find an individual pattern (eg. command or option) in a man page.
     The pattern must occur as the first non-whitespace text on the line.
 
-    Options:
-      -h --help     display this help
-      -s --strict   pattern must occur after exactly 7 spaces
-      --bash        search for PATTERN in BASH(1)
-      --zsh         search for PATTERN in ZSHALL(1)
-      --ksh         search for PATTERN in KSH(1)
+    General Options:
+      -a --anywhere    search for PATTERN in body text, not just headings
+      -h --help        display this help
+      -s --strict      pattern must occur after exactly 7 spaces
+
+    Manfile Options:
+      --manfile        search for PATTERN in MANFILE
+      --bash           search for PATTERN in BASH(1)
+      --zsh            search for PATTERN in ZSHALL(1)
+      --ksh            search for PATTERN in KSH(1)
 EOF
             return;
         fi;
-        if [[ "$1" =~ ^-s$\|^--strict$ ]]; then
-            strict="true";
-            shift
-        fi;
-        if [[ "$1" =~ ^--bash$ ]]; then
-            manfile="bash";
-            shift;
-        fi;
-        if [[ "$1" =~ ^--zsh$ ]]; then
-            manfile="zshall";
-            shift;
-        fi;
-        if [[ "$1" =~ ^--ksh$ ]]; then
-            manfile="ksh";
-            shift;
-        fi;
 
-        # consume manfile argument (if not set by options), then pattern argument
-        if [[ -z "$manfile" ]]; then
-            manfile="$1";
-            shift;
-        fi;
+        while [ $# -gt 1 ]; do
+            case "$1" in
+                (-s | --strict)   strict="true";
+                                  shift ;;
+                (-a | --anywhere) anywhere="true";
+                                  shift ;;
+                (--bash)          manfile="bash";
+                                  shift ;;
+                (--zsh)           manfile="zshall";
+                                  shift ;;
+                (--ksh)           manfile="ksh";
+                                  shift ;;
+                (--manfile)       manfile="$2";
+                                  shift 2 ;;
+            esac;
+        done;
         pattern="$1";
 
-
-        if [[ -n "$strict" ]]; then
+        if [[ -n "$anywhere" ]]; then
+            man $manfile | less -p "$pattern";
+        elif [[ -n "$strict" ]]; then
             man $manfile | less -p "^       $pattern ";
         else
             man $manfile | less -p "^ +$pattern ";
