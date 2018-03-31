@@ -697,6 +697,7 @@ alias get-mtu='ifconfig | grep -i mtu'
 alias gitman='git help'
 alias erlman='erl -man'
 alias bashman='mangrep bash'  # see .sh-functions. eg. bashman type
+alias zman='mangrep -s ZSHALL'    # see .sh-functions. eg. bashman type
 alias coreinf='info coreutils'   # eg.  coreinf 'env'
 # alias mans='man -k . | grep'  # use whatis -r (or -w) instead
 alias what='whatis -w'   # one-line man descriptions, wildcard search

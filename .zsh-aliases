@@ -5,7 +5,6 @@
 # ZSH/SHELL ALIASES.
 #-------------------
 alias help=run-help
-alias zman='mangrep -s ZSHALL'
 alias lscolors=spectrum_ls
 alias lsmodules='tree /usr/lib/x86_64-linux-gnu/zsh/*/zsh|sed "s/.so$//"'
 alias reloadtheme='source "$ZSH_CUSTOM/ZSH_THEME.zsh-theme" 2>/dev/null || source "$ZSH_CUSTOM/themes/$ZSH_THEME.zsh-theme"'
