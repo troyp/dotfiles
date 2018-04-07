@@ -675,6 +675,8 @@ alias cvimserver='$HOME/.cvimrc/cvim_server.py'
 alias cdchrometempdir='cd "`chrometempfiles Default`"'  # cd to Google Chrome temp directory
 alias cdchromedir='cd "`chromeprof Default`"'  # cd to Google Chrome profile directory
 alias chromerepl='/opt/google/chrome/chrome --headless --repl'  # requires path to actual binary
+alias slimerjswf='SLIMERJSLAUNCHER=/opt/waterfox/waterfox ~/node_modules/.bin/slimerjs'
+alias slimerjswfheadless='SLIMERJSLAUNCHER=/opt/waterfox/waterfox ~/node_modules/.bin/slimerjs --headless'
 
 #--------------------
 # NETWORKING ALIASES.
