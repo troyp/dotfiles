@@ -1787,3 +1787,11 @@ choosedirs() {
         done |
         sort -u;
 }
+
+isexec() {
+    if [[ -f "$1" && -x $(realpath "$1") ]]; then
+        echo true;
+    else
+        echo false;
+    fi;
+}
