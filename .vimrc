@@ -376,6 +376,8 @@ noremap <C-j> i<CR><ESC>
 
 " Line Numbers
 noremap <leader>tn :set invnumber<cr>
+" Line wrap"
+noremap <leader>t<C-l> :set wrap! wrap?<cr>
 
 " Undo
 " note: <C-/> is read as /
