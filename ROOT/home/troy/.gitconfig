@@ -20,6 +20,8 @@
 	da = diff --cached --color-words
 	# committed changes to push
 	dc = diff HEAD origin/master --color-words
+	# working directory vs committed
+	diffworkingwithrepo = diff HEAD --color-words
 	# ---BY WORD---
 	dw  = !GIT_PAGER='less -r' git diff --color-words
 	dwa = !GIT_PAGER='less -r' git diff --cached --color-words
