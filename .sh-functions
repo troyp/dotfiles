@@ -1797,6 +1797,7 @@ isexec() {
 }
 
 ghsearchgo() {
-    curl -G "https://api.github.com/search/repositories" --data-urlencode "q=$1" 2>/dev/null |
-        jq -r '.items | .[0] | "\(.owner | .login)/\(.name)"';
+    userrepo=$(curl -G "https://api.github.com/search/repositories" --data-urlencode "q=$1" 2>/dev/null |
+                   jq -r '.items | .[0] | "\(.owner | .login)/\(.name)"');
+    x-www-browser "https://github.com/$userrepo";
 }
