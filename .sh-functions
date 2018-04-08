@@ -1802,8 +1802,27 @@ ghsearchgo() {
     x-www-browser "https://github.com/$userrepo";
 }
 
-gitchangedlines() {
+gitunstagedlines() {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+gitchangedlines FILE
+    Print the first line of each changed (unstaged) block in FILE.
+EOF
+        return 0; fi;
     git diff --unified=0 "$1" |
+        grep -oP "^@@ -\d+,\d+ \+(\d+)" |
+        perl -pe 's/@@ -\d+,\d+ \+//';
+}
+
+gitchangedlines() {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+gitchangedlines FILE
+    Print the first line of each changed block in FILE (staged or unstaged).
+EOF
+        return 0; fi;
+    lastcommit=$(git log|head -n1|sed 's/^commit //');
+    git diff HEAD --unified=0 "$1" |
         grep -oP "^@@ -\d+,\d+ \+(\d+)" |
         perl -pe 's/@@ -\d+,\d+ \+//';
 }
