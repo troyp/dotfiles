@@ -1801,3 +1801,9 @@ ghsearchgo() {
                    jq -r '.items | .[0] | "\(.owner | .login)/\(.name)"');
     x-www-browser "https://github.com/$userrepo";
 }
+
+gitchangedlines() {
+    git diff --unified=0 "$1" |
+        grep -oP "^@@ -\d+,\d+ \+(\d+)" |
+        perl -pe 's/@@ -\d+,\d+ \+//';
+}
