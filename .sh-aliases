@@ -1356,6 +1356,8 @@ alias withnl='(while read -r x || [[ -n $x ]]; do echo "$x"; done)'
 alias tacn='withnl | tac'    # tac with newline
 alias if_term='if [[ -t 1 ]]; then'    # test if output is going to a terminal (not a pipe)
 alias is_term='[[ -t 1 ]]'             # test if output is going to a terminal (not a pipe)
+# url2domain: pipe into it, or: url2domain <<<$URL
+alias url2domain="{sed -r 's|^[^:/]+:/*||' | sed -r 's|/.*||'}"
 
 # ------------
 # FZF ALIASES.
