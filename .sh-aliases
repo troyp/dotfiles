@@ -448,6 +448,7 @@ alias makelinks-dirtree-flatten='find . -type f -exec printf "<a href={}>{}</a><
 alias href-relativize="sed -e 's/href=\"http:\/\/[^ \"]*\//href=\"/g'"
 alias dehtent="perl -n -mHTML::Entities -e ' ; print HTML::Entities::decode_entities(\$_) ;'"
 alias htent="perl -n -mHTML::Entities -e ' ; print HTML::Entities::encode_entities(\$_) ;'"
+alias htmlentdecode="recode -f html..ascii"    # force conversion even if not reversible
 alias remove-wayback-insert="sed -i '/BEGIN WAYBACK TOOLBAR INSERT/,/END WAYBACK TOOLBAR INSERT/d'"
 alias xstar=xmlstarlet
 alias xq=xqilla
