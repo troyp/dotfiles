@@ -1275,7 +1275,7 @@ alias libreconv-pdf='unoconv -f pdf'    # convert from libreoffice supported for
 alias fromjis='iconv -f SHIFT-JIS -t UTF-8'
 alias tojis='iconv -f UTF-8 -t SHIFT-JIS'
 alias translit='iconv -f utf-8 -t ascii//translit'  # transliterate western characters
-alias toromaji='iconv -f utf8 -t shift-jis | kakasi -w -Ha -Ka -Ja -Ea -ka'
+alias romaji='kakasi -i utf8 -Ha -Ka -Ja -Ea -ka'
 # requires python romkan library (pip install romkan)
 alias rom2kana='python -c "'"import sys, romkan; print(romkan.to_hiragana(' '.join(sys.argv[1:])))"'"'
 alias wakan='(cd ~/.wine/drive_c/Program\ Files\ \(x86\)/Wakan; wine wakan.exe)'
