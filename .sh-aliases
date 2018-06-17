@@ -1031,6 +1031,12 @@ alias dmesgless='dmesg --color=always | less -R'
 alias printdatetime='date +"%a %d %b・%l:%M%P"'
 alias lswindows='wmctrl -lpG'    # win-id, desktop# PID, x-off, y-off, w, h, machine-name, rest=title
 
+# --------------
+# SWITCH WINDOWS
+# --------------
+alias gotowaterfox='wmctrl -F -x -a Navigator.Waterfox'
+alias gotoemacs='wmctrl -F -x -a emacs.Emacs'
+
 # ----------------
 # GIT/VCS ALIASES.
 # ----------------
