@@ -1826,3 +1826,12 @@ EOF
         grep -oP "^@@ -\d+,\d+ \+(\d+)" |
         perl -pe 's/@@ -\d+,\d+ \+//';
 }
+
+git-lastmessage() {
+    i=$1
+    iplus=$((i+1))
+    git log HEAD~$iplus..HEAD~$i |
+        sed '1,/^ *$/d' |
+        sed '/./,$!d' |
+        tail -n+1;
+}
