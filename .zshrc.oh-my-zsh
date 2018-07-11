@@ -105,6 +105,21 @@ bindkey "^S" history-incremental-pattern-search-forward
 bindkey -s '^x^z' ~/.oh-my-zsh/custom/
 bindkey "^[a" _expand_alias  # Alt-A
 
+# ,---------,
+# | vi-mode |
+# '---------'
+bindkey -v
+
+# emacs keys for vi-mode
+bindkey "^A" vi-beginning-of-line
+bindkey -a "^A" vi-beginning-of-line
+bindkey "^E" vi-end-of-line
+bindkey -a "^E" vi-end-of-line
+bindkey "^B" vi-backward-char
+bindkey -a "^B" vi-backward-char
+bindkey "^F" vi-forward-char
+bindkey -a "^F" vi-forward-char
+
 # override oh-my-zsh
 bindkey '\el' down-case-word    # restore downcase
 bindkey ' ' self-insert         # disable magic-space (history expansion on space)
