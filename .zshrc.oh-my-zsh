@@ -124,7 +124,7 @@ copylastcommand() { fc -ln -1 -1 | xsel -ib; }
 zle -N copylastcommand
 bindkey '^[[2;3~' copylastcommand
 
-# copy last result on C-~ or C-Ins
+# copy last result on C-~ or C-Ins (note: reevaluates)
 copylastresult() { eval `fc -ln -1 -1` | xsel -ib }
 zle -N copylastresult
 bindkey '^[[2;5~' copylastresult
