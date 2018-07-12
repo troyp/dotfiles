@@ -102,23 +102,47 @@ bindkey "^[[A" up-line-or-search
 bindkey "^[[B" down-line-or-search
 bindkey "^R" history-incremental-pattern-search-backward
 bindkey "^S" history-incremental-pattern-search-forward
-bindkey -s '^x^z' ~/.oh-my-zsh/custom/
 bindkey "^[a" _expand_alias  # Alt-A
+
+bindkey -s '^x^z' ~/.oh-my-zsh/custom/
 
 # ,---------,
 # | vi-mode |
 # '---------'
 bindkey -v
 
+bindkey -v "^P" history-beginning-search-backward
+bindkey -a "^P" history-beginning-search-backward
+bindkey -v "^N" history-beginning-search-forward
+bindkey -a "^N" history-beginning-search-forward
+bindkey -v "^[[A" up-line-or-search
+bindkey -a "^[[A" up-line-or-search
+bindkey -v "^[[B" down-line-or-search
+bindkey -a "^[[B" down-line-or-search
+bindkey -v "^R" history-incremental-pattern-search-backward
+bindkey -a "^R" history-incremental-pattern-search-backward
+bindkey -v "^S" history-incremental-pattern-search-forward
+bindkey -a "^S" history-incremental-pattern-search-forward
+bindkey -v "^[a" _expand_alias  # Alt-A
+bindkey -v "^XR" history-incremental-search-backward
+bindkey -a "^XR" history-incremental-search-backward
+bindkey -v "^XS" history-incremental-search-forward
+bindkey -a "^XS" history-incremental-search-forward
+bindkey -v "^[a" _expand_alias  # Alt-A
+bindkey -a "^[a" _expand_alias  # Alt-A
+
 # emacs keys for vi-mode
-bindkey "^A" vi-beginning-of-line
+bindkey -v "^A" vi-beginning-of-line
 bindkey -a "^A" vi-beginning-of-line
-bindkey "^E" vi-end-of-line
+bindkey -v "^E" vi-end-of-line
 bindkey -a "^E" vi-end-of-line
-bindkey "^B" vi-backward-char
-bindkey -a "^B" vi-backward-char
-bindkey "^F" vi-forward-char
-bindkey -a "^F" vi-forward-char
+bindkey -v "^U" kill-line
+bindkey -a "^K" kill-line
+bindkey -v "^U" backward-kill-line
+bindkey -a "^U" backward-kill-line
+# emacs keys for vi-insert-mode
+bindkey -v "^B" vi-backward-char
+bindkey -v "^F" vi-forward-char
 
 # override oh-my-zsh
 bindkey '\el' down-case-word    # restore downcase
@@ -128,25 +152,37 @@ bindkey ' ' self-insert         # disable magic-space (history expansion on spac
 fgwidget() { fg }
 zle -N fgwidget
 bindkey '^Z' fgwidget
+bindkey -v '^Z' fgwidget
+bindkey -a '^Z' fgwidget
 
 # launch terminal on S-F4 (match Dolphin behaviour)
 launchterminal() { x-terminal-emulator & }
 zle -N launchterminal
 # (roxterm etc)
 bindkey '^[[;12S' launchterminal
+bindkey -v '^[[;1S' launchterminal
+bindkey -a '^[[;1S' launchterminal
 # (konsole)
 bindkey '^[O2S' launchterminal
+bindkey -v '^[O2S' launchterminal
+bindkey -a '^[O2S' launchterminal
 
 # copy last command on A-Ins
 copylastcommand() { fc -ln -1 -1 | xsel -ib; }
 zle -N copylastcommand
 bindkey '^[[2;3~' copylastcommand
+bindkey -v '^[[2;3~' copylastcommand
+bindkey -a '^[[2;3~' copylastcommand
 
 # copy last result on C-~ or C-Ins (note: reevaluates)
 copylastresult() { eval `fc -ln -1 -1` | xsel -ib }
 zle -N copylastresult
 bindkey '^[[2;5~' copylastresult
+bindkey -v '^[[2;5~' copylastresult
+bindkey -a '^[[2;5~' copylastresult
 bindkey '^@' copylastresult
+bindkey -v '^@' copylastresult
+bindkey -a '^@' copylastresult
 
 # open file browser: f12=dolphin, S-f12=ranger
 open_file_browser_graphical() { ( dolphin . & ) 2>/dev/null }
@@ -154,7 +190,11 @@ open_file_browser_text() { ( roxterm -m -e ranger . & ) 2>/dev/null }
 zle -N open_file_browser_graphical
 zle -N open_file_browser_text
 bindkey "^[[24~" open_file_browser_graphical
-bindkey "^[[24;2~" open_file_browser_text
+bindkey -v "^[[24~" open_file_browser_graphical
+bindkey -a "^[[24;2~" open_file_browser_text
+bindkey "^[[24~" open_file_browser_graphical
+bindkey -v "^[[24;2~" open_file_browser_text
+bindkey -a "^[[24;2~" open_file_browser_text
 
 zstyle ':completion:*' list-prompt   ''
 zstyle ':completion:*' select-prompt ''
