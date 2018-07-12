@@ -132,6 +132,9 @@ bindkey '^Z' fgwidget
 # launch terminal on S-F4 (match Dolphin behaviour)
 launchterminal() { x-terminal-emulator & }
 zle -N launchterminal
+# (roxterm etc)
+bindkey '^[[;12S' launchterminal
+# (konsole)
 bindkey '^[O2S' launchterminal
 
 # copy last command on A-Ins
