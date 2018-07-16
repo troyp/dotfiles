@@ -735,6 +735,9 @@ alias qn='copyq tab "&notes" add'       # add to copyq notes tab
 alias qsn='copyq tab "&snippets" add'   # add to copyq snippets tab
 alias cbdl='(cb; echo "") | dolines wget "$x"; done'   # download a list of file urls from clipboard
 alias cbcp='xsel -b >'         # copy data from clipboard to file
+alias cbdlp='(cb; echo "") | dolines wget -p "$x"; done' # download a list of file urls with page requisites from clipboard
+alias cbdo='cb | dolines'                                # process each line in clipboard text
+alias cbdor='cb | tacn | dolines'                        # process each line in clipboard text (reverse order)
 cbappend () {
     if [[ "$1" =~ ^-h$\|^--help$ ]]; then
         cat <<EOF
