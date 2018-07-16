@@ -143,6 +143,7 @@ bindkey -a "^U" backward-kill-line
 # emacs keys for vi-insert-mode
 bindkey -v "^B" vi-backward-char
 bindkey -v "^F" vi-forward-char
+bindkey -v "^[." insert-last-word
 
 # override oh-my-zsh
 bindkey '\el' down-case-word    # restore downcase
