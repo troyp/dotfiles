@@ -1,0 +1,5 @@
+~/.scripts/yak &
+fcitx-autostart &
+keynav &
+kupfer --no-splash &
+/usr/local/bin/copyq &
