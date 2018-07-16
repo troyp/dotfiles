@@ -1,0 +1,6 @@
+#                                                            -*- shell-script -*-
+[[ ! -z $DEBUG  ]] && echo "sourcing .sh-aliases-private"
+set -a
+
+my_email='';
+my_github_pw='';
