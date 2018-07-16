@@ -13,6 +13,7 @@ include "/opt/kragen-xcompose/frakturcompose"
 <Multi_key> <less> <apostrophe>               : "「"
 <Multi_key> <greater> <apostrophe>            : "」"
 <Multi_key> <0> <minus>                       : "・"
+<Multi_key> <0> <9>                           : "　"
 # set operators
 <Multi_key> <braceleft> <u>                   : "∪"
 <Multi_key> <braceleft> <n>                   : "∩"
