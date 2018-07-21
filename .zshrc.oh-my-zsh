@@ -136,7 +136,7 @@ bindkey -v "^A" vi-beginning-of-line
 bindkey -a "^A" vi-beginning-of-line
 bindkey -v "^E" vi-end-of-line
 bindkey -a "^E" vi-end-of-line
-bindkey -v "^U" kill-line
+bindkey -v "^K" kill-line
 bindkey -a "^K" kill-line
 bindkey -v "^U" backward-kill-line
 bindkey -a "^U" backward-kill-line
