@@ -189,6 +189,13 @@ EOF
     convert "$infile" -resize "$size" "$outfile";
 }
 
+img-max-dimension() {
+    {
+        convert test.png -print "%w %h\n" /dev/null | read w h;
+        echo $(( w > h ? w : h ));
+    }
+}
+
 mkvtracks () {
     if [[ "$1" =~ ^-h$\|^--help$ ]]; then
         cat <<EOF
