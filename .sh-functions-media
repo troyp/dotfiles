@@ -196,6 +196,53 @@ img-max-dimension() {
     }
 }
 
+# img-crop-NxM WARNING: result is broken for some values of n. Consider using img-crop-NxM-excess.
+img-crop-NxM() {
+    file="$1";
+    ext="${file##*.}";
+    crop="$2";
+    n="${crop%x*}";
+    m="${crop#*x}";
+    cropspec="${n}x${m}@";
+    outfile="${3:-out.$ext}"
+    grid_colour="${4:-black}";
+    border="${5:-0}";
+    borderspec="${border}x${border}";
+    convert "$file" -bordercolor $grid_colour -background $grid_colour -crop $cropspec -chop 1x1 -splice 1x1 -flatten -border $borderspec $outfile
+}
+
+img-crop-WxH() {
+    file="$1";
+    ext="${file##*.}";
+    cell="$2";
+    w="${cell%x*}";
+    h="${cell#*x}";
+    cropspec="${w}x${h}";
+    outfile="${3:-out.$ext}"
+    grid_colour="${4:-black}";
+    border="${5:-0}";
+    borderspec="${border}x${border}";
+    convert "$file" -bordercolor $grid_colour -background $grid_colour -crop $cropspec -chop 1x1 -splice 1x1 -flatten -chop 0x1 -border $borderspec $outfile
+}
+
+img-crop-NxM-excess() {
+    file="$1";
+    ext="${file##*.}";
+    W=`convert "$file" -print "%w" /dev/null`;
+    H=`convert "$file" -print "%h" /dev/null`;
+    crop="$2";
+    n="${crop%x*}";
+    m="${crop#*x}";
+    w="$((W/n))";
+    h="$((H/m))";
+    cropspec="${w}x${h}";
+    outfile="${3:-out.$ext}"
+    grid_colour="${4:-black}";
+    border="${5:-0}";
+    borderspec="${border}x${border}";
+    convert "$file" -bordercolor $grid_colour -background $grid_colour -crop $cropspec -chop 1x1 -splice 1x1 -flatten -chop 0x1 -border $borderspec $outfile
+}
+
 mkvtracks () {
     if [[ "$1" =~ ^-h$\|^--help$ ]]; then
         cat <<EOF
