@@ -103,6 +103,7 @@ bindkey "^[[B" down-line-or-search
 bindkey "^R" history-incremental-pattern-search-backward
 bindkey "^S" history-incremental-pattern-search-forward
 bindkey "^[a" _expand_alias  # Alt-A
+bindkey "^L" delete-char
 
 bindkey -s '^x^z' ~/.oh-my-zsh/custom/
 
@@ -130,6 +131,7 @@ bindkey -v "^XS" history-incremental-search-forward
 bindkey -a "^XS" history-incremental-search-forward
 bindkey -v "^[a" _expand_alias  # Alt-A
 bindkey -a "^[a" _expand_alias  # Alt-A
+bindkey -v "^L" vi-delete-char
 
 # emacs keys for vi-mode
 bindkey -v "^A" vi-beginning-of-line
@@ -144,6 +146,7 @@ bindkey -a "^U" backward-kill-line
 bindkey -v "^B" vi-backward-char
 bindkey -v "^F" vi-forward-char
 bindkey -v "^[." insert-last-word
+bindkey -v "^D" vi-delete-char
 
 # override oh-my-zsh
 bindkey '\el' down-case-word    # restore downcase
