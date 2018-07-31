@@ -915,6 +915,7 @@ alias xdmenustrict='xdg-desktop-menu install'
 alias xdmenurefresh='for f in ~/.local/share/applications/*.desktop; do xdg-desktop-menu install --novendor $f; done'
 alias mimetype='xdg-mime query filetype'
 alias mimeapp='xdg-mime query default'
+mimeapp-for-file() { mimeapp $(mimetype "$1"); }
 alias mimelist='cat /usr/share/mime/types'
 alias mimegrep='cat /usr/share/mime/types | grep -i'
 alias mimedefault='xdg-mime default'
