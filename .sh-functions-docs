@@ -184,6 +184,46 @@ cbz-by-num () {
     zip -r "${1%/}.cbz" "$1";
 }
 
+cbz_blankpage_before () {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+blankpage_before [-h] N [COLOUR]
+
+Create a blank page with the same dimensions as the Nth file in the current
+directory. If COLOUR is unspecified, it is white. This can be used to add a
+page at a specific position to a comic archive directory.
+
+    Options:
+      -h --help     display this help
+EOF
+        shift
+        return 0
+    fi
+    n="$1"
+    cbzfile="$2"
+    col="${3:-xc:white}"
+
+    cbzname=`echo "${cbzfile%.*}"`
+    tempdir=`mktemp -d`
+    mkdir "$tempdir/$cbzname"
+    unzip "$cbzfile" -d "$tempdir/$cbzname"
+    origdir="$PWD"    # issue with pushd
+    cd "$tempdir/$cbzname"
+    cd *
+
+    f=$(ls | sed -n "`printf "%dp;" $n`")
+    base=`echo "${f%.*}"`
+    ext=`echo "${f##*.}"`
+    newname="${base}-prev.${ext}"
+    geom=`convert "$f" -print "%wx%h\n" /dev/null`
+    convert -size "$geom" "$col" "$newname"
+
+    cd "$origdir"
+    mv "$cbzfile" "$cbzfile.bk"
+    zip -r "$cbzfile" "$tempdir"
+
+}
+
 maffus () {
     archive_name=`echo "${1%/}" | sed -e 's/ /_/g'`.maff;
     7z a -tzip "$archive_name" "$1";
