@@ -794,6 +794,10 @@ bc2 () {
     echo "ibase=2; obase=10; $*" | bc;
 }
 
+pymath () {
+    python3 -c "import math; import itertools; print($1)";
+}
+
 lnpath () {
     # link a relative filepath into a dir, creating necessary directories
     file="$1";
