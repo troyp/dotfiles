@@ -345,6 +345,11 @@ audioextract() {
     ffmpeg -i "$1" -vn -acodec copy "${2:-$name.$format}";
 }
 ytdl_480p() {
-    format=$(youtube-dl -F "$1" | grep 848x480|grep enUS|cut -d' ' -f1);
+    format=$(youtube-dl -F "$1" | grep 848x480 | grep enUS | cut -d' ' -f1);
     youtube-dl -ci --sub-lang enUS -f "$format" --xattrs -o "%(title)s-%(id)s.%(ext)s" "$1";
+}
+ytdl_Np() {
+    file="$2";
+    format=$(youtube-dl -F "$file" | grep "x$1" | grep enUS | cut -d' ' -f1);
+    youtube-dl -ci --sub-lang enUS --write-sub -f "$format" --xattrs -o "%(title)s-%(id)s.%(ext)s" "$file";
 }
