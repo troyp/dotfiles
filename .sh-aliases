@@ -1377,6 +1377,12 @@ alias is_term='[[ -t 1 ]]'             # test if output is going to a terminal (
 # url2domain: pipe into it, or: url2domain <<<$URL
 alias url2domain="{sed -r 's|^[^:/]+:/*||' | sed -r 's|/.*||'}"
 
+# -------------
+# MATH ALIASES.
+# -------------
+gcd() { command python3 -c "import math; print(math.gcd(int($1),int($2)))" }
+lcm() { command python3 -c "import math; print(($1*$2)//math.gcd(int($1),int($2)))" }
+
 # ------------
 # FZF ALIASES.
 # ------------
