@@ -890,6 +890,7 @@ alias lstar='tar taf'    # list contents - multiple formats
 alias 7zip='7z a -tzip'  # 7zip myarchive.zip myarchive/
 # tgz [name [files]]    make .tgz out of files
 # unar unarchive multiple formats
+alias cbr2cbzall='for * in ./*.cbr; do cbr2cbz "$x"; done'    # cbr2cbz in ~/.scripts
 
 # -----------
 # SSH ALIASES
