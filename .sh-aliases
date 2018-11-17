@@ -282,11 +282,14 @@ alias ecp2="qcp -f 'dc' -o autowidth,spaces,width=80,swap -e 'emacsclient -nw'" 
 
 # RENAME (PERL)
 # note: to use perl expr as replace, use s///e
+
+alias renn='rename -n'    # rename preview (dry-run)
 alias ren=rename
+alias reren='(x=$(fc -ln -1); eval $x:gs/renn/ren/)'    # rerun preceding "renn" test run as "ren"
+
 renr() {
     find . -type f -exec rename "$1" {} \;
 }
-alias renn='rename -n'    # rename preview (dry-run)
 rennr() {
     find . -type f -exec rename -n "$1" {} \;
 }
