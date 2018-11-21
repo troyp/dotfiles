@@ -1143,7 +1143,10 @@ alias iscala='jupyter console --kernel=scala'
 alias pynote='ipython notebook --pylab=inline'
 alias ipylab='ipython --pylab -i ~/.pylab'
 alias ipy=ipylab
+alias ipymath="ipython3 -i --pylab -c 'from math import *; from itertools import *; from functools import *; from operator import *;'"
 alias ipy3='ipython3 --pylab'
+pyc () { python2 -c "from math import *; from itertools import *; from functools import *; from operator import *; print($1)"; }
+
 alias bpy='bpython'
 alias mkenv3='python3 -m venv'
 alias envactivate='source ./bin/activate'
@@ -1205,7 +1208,6 @@ alias cppdecl=c++decl
 alias pcgrep='pkg-config --list-all | grep -i'
 alias pkgc='pkg-config --libs'
 alias cpkgc='cmake --find-package -DLANGUAGE=C -DCOMPILER_ID=GNU -DMODE=COMPILE'   # eg. cpkgc -DNAME=LibXml2
-alias pyc="python2 -c 'from math import *; from operator import *; from itertools import *; from functools import *; print "
 alias pipu='sudo -H pip install --upgrade'
 alias iconi='/opt/icon/bin/icon /opt/icon/pl/progs/qei.icn'  # REPL for Icon programming language
 
