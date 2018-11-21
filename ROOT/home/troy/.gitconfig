@@ -51,6 +51,7 @@
 	# https://coderwall.com/p/euwpig/a-better-git-log
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	ll = log --stat --abbrev-commit
+	logunpushed = log origin/master..master
 	# also shell alias gitcommits
 	s = status
 
