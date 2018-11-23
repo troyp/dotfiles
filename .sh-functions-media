@@ -243,6 +243,13 @@ img-crop-NxM-excess() {
     convert "$file" -bordercolor $grid_colour -background $grid_colour -crop $cropspec -chop 1x1 -splice 1x1 -flatten -chop 0x1 -border $borderspec $outfile
 }
 
+img-copy-at-18%() {
+    file="$1";
+    name="${file%.*}";
+    ext="${file##*.}";
+    convert "$file" -resize 18% "$name.18%.$ext";
+}
+
 mkvtracks () {
     if [[ "$1" =~ ^-h$\|^--help$ ]]; then
         cat <<EOF
