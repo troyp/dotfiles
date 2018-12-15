@@ -1144,7 +1144,8 @@ alias pynote='ipython notebook --pylab=inline'
 alias ipylab='ipython --pylab -i ~/.pylab'
 alias ipy=ipylab
 alias ipymath="ipython3 -i --pylab -c 'from math import *; from itertools import *; from functools import *; from operator import *;'"
-alias ipy3='ipython3 --pylab'
+alias ipylab3='ipython3 --pylab'
+alias ipy3=ipylab3
 pyc () { python2 -c "from math import *; from itertools import *; from functools import *; from operator import *; print($1)"; }
 
 alias bpy='bpython'
