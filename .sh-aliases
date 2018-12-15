@@ -243,6 +243,9 @@ alias cppath='cp --parents'   # copy a relative file-path into a dir
 # then again when passed through to cp)
 # alias cp='icp --pass-through cp -i'
 
+# --- moving files ---
+alias mvallhere="find . -type f -exec mv -i '{}' ./ \;"
+
 # --- linking files ---
 alias symlink='ln -s'
 alias sln='ln -s'
