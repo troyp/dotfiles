@@ -34,4 +34,4 @@ UUID=87b1188c-ab12-416c-b10e-cdf5ef1c6146   /mnt/oldroot     ext4   defaults    
 # /dev/sdf3:  LABEL=library
 UUID=d5bec501-13a9-4476-aa13-4cada200ecb3   /mnt/ebooks2     ext4   auto,nofail        0   0
 # /dev/sdf5:
-UUID=f-5,nofail        0   0
+UUID=f8a04a70-f49b-46b3-b77e-35f0bb57aa0c   /mnt/docs        ext4   auto,nofail        0   0
