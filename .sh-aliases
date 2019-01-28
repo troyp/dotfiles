@@ -1353,6 +1353,10 @@ alias last='tail -n1'   # system command last is available as alias lastu
 alias rest='tail -n+2'
 alias nodupes="awk 'a"'[$0]++{exit(1)}'"' -"   # error if duplicate lines are found
 alias strip="python -c 'import sys; print(sys.stdin.read().strip())'"
+alias pptsv="column -t -s'	'"
+alias ppcsv="column -t -s','"
+alias viewtsv="pptsv| less"
+alias viewcsv="ppcsv| less"
 # =====XARGS ALIASES=====
 alias xa='xargs '                  # trailing space in alias causes next word to be alias expanded as well
 alias chooseargs='iselect -ma | xargs'
