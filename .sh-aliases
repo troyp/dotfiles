@@ -1280,6 +1280,8 @@ alias display_whitebg='display -background white -flatten'
 alias img-info=identify
 img-geometry () { convert "$1" -print "%wx%h\n" /dev/null; }
 alias imgview-trans='pqiv -c'
+alias feh-next='pkill --signal USR1 feh'
+alias feh-previous='pkill --signal USR2 feh'
 
 # -------------
 # MEDIA ALIASES
