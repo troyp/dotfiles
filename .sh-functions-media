@@ -244,10 +244,11 @@ img-crop-NxM-excess() {
 }
 
 img-copy-at-18%() {
-    file="$1";
-    name="${file%.*}";
-    ext="${file##*.}";
-    convert "$file" -resize 18% "$name.18%.$ext";
+    for file in "$@"; do
+        name="${file%.*}";
+        ext="${file##*.}";
+        convert "$file" -resize 18% "$name.18%.$ext";
+    done;
 }
 
 mkvtracks () {
