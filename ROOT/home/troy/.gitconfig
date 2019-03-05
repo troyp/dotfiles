@@ -54,6 +54,7 @@
 	logunpushed = log origin/master..master
 	# also shell alias gitcommits
 	s = status
+	sl = !git status | less
 
 	head = rev-parse --short HEAD
 	rev = rev-parse --short
