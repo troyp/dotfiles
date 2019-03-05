@@ -27,7 +27,7 @@ function append-to-path-var {
         eval "$1=$2:\$$1";
         # TODO: remove duplicates from later in list
     else
-        if [ -d "$2" ] && [[ ":$(/usr/bin/printenv $1):" != *":$2:"*  ]]; then
+        if [ -d "$2" ] && [[ ':$(eval "echo \$$1"):' != *":$2:"*  ]]; then
             eval "$1=\${$1}:$2";
         fi
     fi
