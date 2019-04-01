@@ -48,6 +48,7 @@
 	fileschanged = diff-tree --name-only --no-commit-id @@{1} @
 
 	showlastcommit = log -p --follow -1
+	ld = log --stat --abbrev-commit -p
 	# https://coderwall.com/p/euwpig/a-better-git-log
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	ll = log --stat --abbrev-commit
