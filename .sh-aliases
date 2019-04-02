@@ -1398,8 +1398,8 @@ alias url2domain="{sed -r 's|^[^:/]+:/*||' | sed -r 's|/.*||'}"
 # MATH ALIASES.
 # -------------
 c() { wcalc_input="$*" wcalc; }
-gcd() { command python3 -c "import math; print(math.gcd(int($1),int($2)))" }
-lcm() { command python3 -c "import math; print(($1*$2)//math.gcd(int($1),int($2)))" }
+gcd() { command python3 -c "import math; print(math.gcd(int($1),int($2)))"; }
+lcm() { command python3 -c "import math; print(($1*$2)//math.gcd(int($1),int($2)))"; }
 
 # ------------
 # FZF ALIASES.
