@@ -57,6 +57,7 @@
 	logunpushed = log origin/master..master
 	logdiffunpushed = log --stat --abbrev-commit -p origin/master..master
 	# also shell alias gitcommits
+	n = rev-list --count origin/master..master
 	s = status
 	sl = !git status | less
 
