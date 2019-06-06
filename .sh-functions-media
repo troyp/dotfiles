@@ -302,6 +302,10 @@ mkvextract-ass () {
     mkvextract tracks "$file" "$trackID":"${file%.*}.ass";
 }
 
+mkvdeletetitle() {
+    mkvpropedit "$1" -e info -d title;
+}
+
 mediainfo-browse () {
 	  # usage: mediainfo-browse $FILE
 	  # open mediainfo data on $FILE in HTML format in browser
