@@ -1507,11 +1507,11 @@ cbr2cbz() {
     (
         archive="$1";
         name="${1%.*}";
-        mkdir "$name";
+        mkdir -- "$name";
         7z x "$archive" -o"$name";
-        7z a -tzip "$name.cbz" "$name";
+        7z a -tzip "$name.cbz" -- "$name";
         trash "$archive";
-        trash "$name/"
+        trash -- "$name/"
     )
 }
 
