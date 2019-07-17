@@ -1363,6 +1363,7 @@ alias pptsv="column -t -s'	'"
 alias ppcsv="column -t -s','"
 alias viewtsv="pptsv| less"
 alias viewcsv="ppcsv| less"
+firstchar() { echo -n "${1%"${1#?}"}"; }
 # =====XARGS ALIASES=====
 alias xa='xargs '                  # trailing space in alias causes next word to be alias expanded as well
 alias chooseargs='iselect -ma | xargs'
