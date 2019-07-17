@@ -17,3 +17,12 @@ alias custom-prompt='PS1="$mblue┌─($orange$mblue\!|$orange \s--\j jobs--\$(d
 # -----
 alias etags_rec_el_c_h='find . -type f -iregex '.*[.]\(c\|h\|el\)' | etags -'
 alias etags_sudo_rec_el_c_h='find . -type f -iregex '.*[.]\(c\|h\|el\)' | sudo etags -'
+
+trimleft() {
+    leftWS="${1%%[![:space:]]*}";
+    echo -n "${1#"$leftWS"}";
+}
+trimright() {
+    rightWS="${1##*[![:space:]]}";
+    echo -n "${1%"$rightWS"}";
+}

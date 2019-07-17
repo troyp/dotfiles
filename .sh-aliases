@@ -1358,6 +1358,7 @@ alias last='tail -n1'   # system command last is available as alias lastu
 alias rest='tail -n+2'
 alias nodupes="awk 'a"'[$0]++{exit(1)}'"' -"   # error if duplicate lines are found
 alias strip="python -c 'import sys; print(sys.stdin.read().strip())'"
+trim() { echo -n $(trimright $(trimleft "$1")); }    # trimleft/right defined in .bash-aliases, .zsh-aliases
 alias pptsv="column -t -s'	'"
 alias ppcsv="column -t -s','"
 alias viewtsv="pptsv| less"
