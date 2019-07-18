@@ -1835,3 +1835,14 @@ git-lastmessage() {
         sed '/./,$!d' |
         tail -n+1;
 }
+
+# archextract archive [extract_dir]
+# choose files interactively from archive to extract
+archextract() {
+    unzip -l "$1" |
+        tail -n+4 |
+        head -n-2 |
+        iselect -ma |
+        awk '{print substr($0, 29)}' |
+        dolines unzip -d "${2:-.}" -j "$1" "$x"; done
+}
