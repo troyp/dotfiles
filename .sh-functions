@@ -1844,5 +1844,5 @@ archextract() {
         head -n-2 |
         iselect -ma |
         awk '{print substr($0, 29)}' |
-        dolines unzip -d "${2:-.}" -j "$1" "$x"; done
+        while read -r x || [[ -n $x ]]; do unzip -d "${2:-.}" -j "$1" "$x"; done
 }
