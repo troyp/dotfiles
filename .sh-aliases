@@ -780,7 +780,6 @@ alias cbcpf='cp $(xsel -b)'    # copy file from clipboard
 #---------------
 alias vi-bindings='set -o vi'
 alias emacs-bindings='set -o emacs'
-alias runfromhere='export PATH="./:$PATH"'
 alias typa='type -a'
 alias typp='type -p'
 alias \?='echo'
@@ -794,6 +793,10 @@ alias plainbash='bash --noprofile --norc'
 alias plainzsh='zsh -f --no-rcs'
 alias dirsh='$SHELL -c "source .dir.sh"'
 alias hr="jot -s '' -b '━' `tput cols`"
+alias pathaddcurdir='PATH=.:$PATH'
+alias pathremcurdir='PATH=${PATH#.:}'
+alias pathaddcurdirg='export PATH=.:$PATH'
+alias pathremcurdirg='export PATH=${PATH#.:}'
 
 # ============
 # CRON ALIASES
