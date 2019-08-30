@@ -303,7 +303,9 @@ mkvextract-ass () {
 }
 
 mkvdeletetitle() {
-    mkvpropedit "$1" -e info -d title;
+    for f in "$@"; do
+        mkvpropedit "$f" -e info -d title;
+    done;
 }
 
 mediainfo-browse () {

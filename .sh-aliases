@@ -1091,6 +1091,7 @@ alias scheme48='rlwrap scheme48'
 alias sml='rlwrap sml'
 alias ocaml='rlwrap ocaml'
 alias sbcl='rlwrap sbcl'
+alias nimrepl='rlwrap nim secret'
 alias viminstall='cd ~/.vim/bundle; git clone'
 # see http://nikhilism.com/post/2012/a-poor-mans-notational-velocity-on-linux/
 alias nvv="gvim --remote-silent +':lcd %:p:h | :au FocusLost * :wa' \
