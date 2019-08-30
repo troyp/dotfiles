@@ -76,6 +76,8 @@
 	undocommitandadd = reset HEAD~1
 	# change a local commit message
 	correctcommit = commit --amend
+	# fast-forward
+	ff = merge --ff-only origin/master
 [color]
 	ui = auto # covers diff = true, status = auto, branch = auto
 	interactive = auto
