@@ -308,6 +308,12 @@ mkvdeletetitle() {
     done;
 }
 
+mp4deletetitle() {
+    for f in "$@"; do
+        AtomicParsley "$f" --title "";
+    done;
+}
+
 mediainfo-browse () {
 	  # usage: mediainfo-browse $FILE
 	  # open mediainfo data on $FILE in HTML format in browser
