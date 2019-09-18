@@ -308,9 +308,27 @@ mkvdeletetitle() {
     done;
 }
 
+mkvsettitlebyfilename() {
+    for f in "$@"; do
+        mkvpropedit "$f" -e info -s title="${f%.mkv}";
+    done;
+}
+
 mp4deletetitle() {
     for f in "$@"; do
         AtomicParsley "$f" --title "";
+    done;
+}
+
+mp4settitlebyfilename() {
+    for f in "$@"; do
+        AtomicParsley "$f" --title "${f%.mp4}";
+    done;
+}
+
+ffmpegsettitlebyfilename() {
+    for f in "$@"; do
+        ffmpeg -i "$f" -vcodec copy -acodec copy -metadata title="${f%.*}" "${f%.*}.out.${f##*.}";
     done;
 }
 
