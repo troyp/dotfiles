@@ -736,7 +736,7 @@ alias ksu=kdesudo
 # ...|cb will pipe to clipboard and print previous contents
 # ...|2cb will pipe to clipboard without output
 alias cb='xsel -b'                                       #  prints clipboard; ...|cb  # pipe into clipboard
-alias 2cb='xsel -ib >/dev/null'                          #  uptime|2cb   # uptime to clipboard (no output)
+alias 2cb='xsel -ib >/dev/null'                          # eg. uptime|2cb   # uptime to clipboard (no output)
 # alias sel='xsel -op'  #  prints selection; ...|sel     # pipes input into selection
 # alias 2sel='xsel -ip >/dev/null'  #  uptime|2cb        # uptime to selection (no output)
 alias q=copyq
