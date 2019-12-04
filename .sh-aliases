@@ -773,6 +773,7 @@ EOF
     printf "$(xsel -b)$sep" >> "$1";
 }
 alias cbcpf='cp $(xsel -b)'    # copy file from clipboard
+alias cbtacn='cb | tacn'
 
 
 #---------------
