@@ -21,8 +21,8 @@ export TZ='Australia/Sydney';    # time zone
 # appended after the empty string.
 # Hence the path-var will begin with separator ":"
 
-function append-to-path-var {
-    if [[ "$1" =~ ^--?f(ront)?$ ]]; then
+append_to_path_var() {
+    if [[ "$1" =~ "^--?f(ront)?$" ]]; then
         shift;
         eval "$1=$2:\$$1";
         # TODO: remove duplicates from later in list
@@ -202,7 +202,7 @@ infopaths=(
     /usr/local/texlive/201?/texmf-dist/doc/info(N)
     $HOME/.linuxbrew/share/info
 )
-for i in "${infopaths[@]}"; do append-to-path-var "INFOPATH" "$i" ; done
+for i in "${infopaths[@]}"; do append_to_path_var "INFOPATH" "$i" ; done
 
 manpaths=(
     /usr/local/man
@@ -211,14 +211,14 @@ manpaths=(
     /opt/man/
     /opt/racket/man
 )
-for i in "${manpaths[@]}"; do append-to-path-var "MANPATH" "$i" ; done
+for i in "${manpaths[@]}"; do append_to_path_var "MANPATH" "$i" ; done
 
 cdpaths=(
     $HOME/.cdpath/
     $HOME/ebooks/
     $HOME/Downloads
 )
-for i in "${cdpaths[@]}"; do append-to-path-var "CDPATH" "$i" ; done
+for i in "${cdpaths[@]}"; do append_to_path_var "CDPATH" "$i" ; done
 
 LD_LIBRARY_PATH=/usr/local/lib
 CLASSPATH=$CLASSPATH:.
