@@ -1846,3 +1846,30 @@ archextract() {
         awk '{print substr($0, 29)}' |
         while read -r x || [[ -n $x ]]; do unzip -d "${2:-.}" -j "$1" "$x"; done
 }
+
+anime_episodes_wp() {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+anime_episodes_wp
+    Converts format from pentadactyl command (eg) :copytablecols-strict 1 2
+EOF
+        return 0
+    fi
+    cat | perl -0777pe 's/".?Transcription: *"/・/gs,s/Japanese: *//g,s/"//g,s/\t/ - /g'
+}
+
+cb_anime_episodes_wp() {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+cb_anime_episodes_wp FILE
+    Converts clipboard text from the pentadactyl command (eg):
+        :copytablecols-strict 1 2
+    to the format:
+        EPNUM - TRANSLATION・ROMAJI (JAPANESE)
+    and saves in FILE (default .episoes.txt)
+EOF
+        return 0
+    fi
+    file="${1:-.episodes.txt}";
+    cb | anime_episodes > "$file";
+}
