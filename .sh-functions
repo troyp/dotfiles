@@ -751,15 +751,39 @@ EOF
 }
 
 renprefix () {
-    replacement="'s/^/$1/'";
-    for f in "$2"; do
-        eval "rename $replacement '$f'";
-    done;
-    if [[ -z "$2" ]]; then
-        for f in *; do
-            eval "rename $replacement '$f'";
-        done;
+    flags=""
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+renprefix [-n] pref file...
+    Add PREF to start of each FILE's name
+EOF
+        return 0;
+    elif [[ "$1" =~ ^-n$ ]]; then
+        flags=" -n";
+        shift;
     fi;
+    replacement="'s/^/$1/'";
+    for f in *; do
+        eval "rename$flags $replacement '$f'";
+    done;
+}
+
+rensuffix () {
+    flags=""
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+rensuffix [-n] suff file...
+    Add SUFF to end of each FILE's name
+EOF
+        return 0;
+    elif [[ "$1" =~ ^-n$ ]]; then
+        flags=" -n";
+        shift;
+    fi;
+    replacement="'s/$/$1/'";
+    for f in *; do
+        eval "rename$flags $replacement '$f'";
+    done;
 }
 
 bci () {
