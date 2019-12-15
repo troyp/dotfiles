@@ -1836,6 +1836,57 @@ git-lastmessage() {
         tail -n+1;
 }
 
+webpage_exists() {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+webpage_exists [-s|-S] URL
+    Succeeds if a webpage exists at URL (status code 2.. or 3..).
+
+    Options:
+      -s    print status code if successful
+      -S    print status code whether or not page exists
+EOF
+        return 0
+    fi
+    (
+        # options
+        echo $#
+        echo $1
+        while [[ $# -gt 1 ]]
+        do
+            case "$1" in
+                (-s) print_on_success=t;
+                     echo "-s"
+                     shift 1 ;;
+                (-S) print_always=t;
+                     echo "-S"
+                     shift 1 ;;
+                (*)  echo "unrecognized option: $1"
+                     return 1 ;;
+            esac
+        done
+        # --- end options ---
+        echo $#
+    )
+    echo $print_on_success
+    echo $print_always
+    echo $1
+    curl -s --head "$1" |
+        head -n1 |
+        {
+            if [[ -n $print_always ]]; then
+                echo "always"
+                grep -oP "(?<=HTTP/1\.\d )\d\d\d" &&
+                grep -qP "HTTP/1\.\d [23]\d\d";
+            elif [[ -n $print_on_success ]]; then
+                echo "success"
+                grep -oP "(?<=HTTP/1\.\d )[23]\d\d";
+            else
+                grep -qP "HTTP/1\.\d [23]\d\d";
+            fi;
+        }
+}
+
 # archextract archive [extract_dir]
 # choose files interactively from archive to extract
 archextract() {
