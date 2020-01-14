@@ -18,6 +18,10 @@
 #     (note: "alias-expand-line" and "history-and-alias-expand-line" are also
 #             available, but not bound by default.)
 # A trailing space in an alias causes the next word to be alias-expanded as well
+# To include a newline in a single-line command, you can use the notation $'\n'
+#     eg. ls | fgrep $'foo\nbar'    # list files containing 'foo' or 'bar'
+#     This string literal notation interprets backslash escape sequences
+#     according to the ANSI C standard.
 
 #-----------------------------------
 # DEBIAN-SPECIFIC ALIASES: PACKAGES.
