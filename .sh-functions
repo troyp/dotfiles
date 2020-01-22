@@ -9,6 +9,12 @@
 # *           *
 # *************
 
+# To accept input data either as an argument OR piped through stdin:
+#     * Use cat "$@" | ...
+#     * Use test "$1" && exec < "$1"
+# To accept either a filename argument or piped data, you can use:
+#           file="${1--}" or file="${1-/dev/stdin}", then cat "$file" | ...
+
 # ,------------,
 # | predicates |
 # '------------'
