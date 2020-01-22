@@ -1975,3 +1975,13 @@ EOF
     file="${1:-.episodes.txt}";
     cb | anime_episodes > "$file";
 }
+
+chartocode() {
+    cat "$@" |
+        while read -r x || [[ -n $x ]]; do
+            for (( i=0; i<${#x}; i++ )); do
+                s=`printf "%04x\n" "'${x:$i:1}"`;
+                echo "${s#00}";
+            done;
+        done;
+}
