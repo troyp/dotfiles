@@ -195,7 +195,9 @@ alias pwdp='dirname $PWD'
 filename-base ()  { echo "${1%.*}"; }
 filename-ext () { echo "${1##*.}"; }
 alias mplayer-info='mplayer -frames 0 -identify'
-
+alias fullpath='realpath --no-symlinks'
+alias fullpath_resolve_links='readlink -f'
+namefrompath () { echo "${1##*/}"; }
 
 # --------------------
 # ENVIRONMENT ALIASES.
