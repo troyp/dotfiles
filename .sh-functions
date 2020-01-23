@@ -1985,3 +1985,29 @@ chartocode() {
             done;
         done;
 }
+
+dotfiles-link-target() {
+    file="$1";
+    file_canon=$(realpath --no-symlinks "$file");
+    dir="${file_canon%/*}";
+    if [[ $dir = ~/dotfiles/ROOT/* ]]; then
+        echo "${file_canon#~/dotfiles/ROOT}";
+    else
+        echo "${file_canon/dotfiles\//}";
+    fi;
+}
+dotfiles-hardlink() {
+    for file in "$@"; do
+        target=$(dotfiles-link-target "$file");
+        targetdir=$(dirname "$target");
+        ln --verbose -t "$targetdir" "$file";
+    done;
+}
+dotfiles-symlink() {
+    for file in "$@"; do
+        file_canon=$(realpath --no-symlinks "$file");
+        target=$(dotfiles-link-target "$file");
+        targetdir=$(dirname "$target");
+        ln --verbose --symbolic -t "$targetdir" "$file_canon";
+    done;
+}
