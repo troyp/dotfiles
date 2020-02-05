@@ -1249,6 +1249,7 @@ alias emacs-from-here='HOME=`realpath .` emacs'
 alias emacs-set-config='( setopt nullglob; userdir=$(iselect -ma ~/.emacs.d.* ~/.emacs-*/.emacs.d); echo "~/.emacs.d -> $userdir"; ln -f -s -T "$userdir" ~/.emacs.d )'
 alias emacs-choose-config='( setopt nullglob; iselect -ma ~/.emacs.d.* ~/.emacs-*/.emacs.d )'
 alias emacschoose='HOME=`iselect -ma ~/.emacs-*/` emacs'
+alias emacs-unhang='pkill -SIGUSR2 emacs; echo "Turn debug-on-quit back off with M-x toggle-debug-on-quit"'
 
 # -----------
 # PDF ALIASES
