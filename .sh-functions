@@ -790,7 +790,8 @@ EOF
         shift;
     fi;
     replacement="'s/^/$1/'";
-    for f in *; do
+    shift 1;
+    for f in "$@"; do
         eval "rename$flags $replacement '$f'";
     done;
 }
@@ -808,7 +809,8 @@ EOF
         shift;
     fi;
     replacement="'s/$/$1/'";
-    for f in *; do
+    shift 1;
+    for f in "$@"; do
         eval "rename$flags $replacement '$f'";
     done;
 }
