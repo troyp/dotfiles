@@ -1973,7 +1973,7 @@ EOF
         return 0
     fi
     file="${1:-.episodes.txt}";
-    cb | anime_episodes > "$file";
+    cb | anime_episodes_wp > "$file";
 }
 
 chartocode() {
