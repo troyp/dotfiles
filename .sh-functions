@@ -770,9 +770,9 @@ EOF
     fi;
     for f in "$@"; do
         if [[ -d "$f" ]]; then
-            eval "rename $flags 's/(\[.*\])( ?)(.+)/"'$3$2$1'"/' '$f'";
+            eval "rename $flags 's/(\[[^]]*\])( ?)(.+)/"'$3$2$1'"/' '$f'";
         else
-            eval "rename $flags 's/(\[.*\])( ?)(.+)\.(.+)/"'$3$2$1.$4'"/' '$f'";
+            eval "rename $flags 's/(\[[^]]*\])( ?)(.+)\.(.+)/"'$3$2$1.$4'"/' '$f'";
         fi;
     done;
 }
