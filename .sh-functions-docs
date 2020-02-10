@@ -224,6 +224,18 @@ EOF
 
 }
 
+cbr2cbz() {
+    (
+        archive="$1";
+        name="${1%.*}";
+        mkdir -- "$name";
+        7z x "$archive" -o"$name";
+        7z a -tzip "$name.cbz" -- "$name";
+        trash "$archive";
+        trash -- "$name/"
+    )
+}
+
 maffus () {
     archive_name=`echo "${1%/}" | sed -e 's/ /_/g'`.maff;
     7z a -tzip "$archive_name" "$1";
