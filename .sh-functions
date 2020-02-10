@@ -2001,3 +2001,15 @@ dotfiles-symlink() {
         ln --verbose --symbolic -t "$targetdir" "$file_canon";
     done;
 }
+
+columnate-lines-unindented-and-tab-indented() {
+    # Takes a file with lines of unindented text mixed with tab-indented text
+    # (eg. romaji and a translation) and combines the respective lines into columns.
+    # The number of unindented lines should equal the number of unindented lines.
+    file=${1--};
+    unindented=`mktemp`;
+    indented=`mktemp`;
+    grep -P "^\s+$|^[^\t]" "$file" > $unindented;
+    grep -P "^	" "$file" | sed -r "s/^\t+//" > $indented;
+    paste "$unindented" "$indented" | column -es $'\t' -t;
+}
