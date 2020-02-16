@@ -660,6 +660,8 @@ alias ffsearch="firefox -search"
 alias cdffdir='cd "$(ffprof $FFMAINPROFILE)"'    # cd to Firefox profile directory
 alias cdffcache='cd "$(fftempfiles $FFMAINPROFILE)"'  # cd to Firefox cache directory
 WFMAINPROFILE=default
+FFEXEC=/opt/waterfox/waterfox
+ffhere() { $FFEXEC --new-tab "file://$PWD"; }
 
 alias ffprefs='echo $(ffprof)/prefs.js'
 alias ffpipe='base64 -w0 <&0 | read -r x; firefox "data:text/html;base64,$x"'
