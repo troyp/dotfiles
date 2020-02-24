@@ -646,21 +646,21 @@ alias packtdlchosen='python /opt/Packt-Publishing-Free-Learning/packtPublishingF
 # ----------------
 # FIREFOX ALIASES.
 # ----------------
-alias firefox=/opt/firefox/firefox
-alias ff='firefox --new-tab'
-alias ffw='firefox --new-window'
-alias ffp='firefox --new-instance -P'
-alias ffpm='firefox --ProfileManager'
+FFEXEC=/opt/waterfox/waterfox
 FFMAINPROFILE=default
-alias ffd="firefox -P $FFMAINPROFILE"
-alias ffmain="firefox -P $FFMAINPROFILE"
-alias ffsearch="firefox -search"
+WFMAINPROFILE=default
+alias firefox=/opt/firefox/firefox
+alias ff="$FFEXEC --new-tab"
+alias ffw="$FFEXEC --new-window"
+alias ffp="$FFEXEC --new-instance -P"
+alias ffpm="$FFEXEC --ProfileManager"
+alias ffd="$FFEXEC -P $FFMAINPROFILE"
+alias ffmain="$FFEXEC -P $FFMAINPROFILE"
+alias ffsearch="$FFEXEC -search"
 # note: when using `...` in alias, use single quotes so the backquotes are evaluated when the
 #       alias is *called*, rather than when the alias definition is read.
 alias cdffdir='cd "$(ffprof $FFMAINPROFILE)"'    # cd to Firefox profile directory
 alias cdffcache='cd "$(fftempfiles $FFMAINPROFILE)"'  # cd to Firefox cache directory
-WFMAINPROFILE=default
-FFEXEC=/opt/waterfox/waterfox
 ffhere() { $FFEXEC --new-tab "file://$PWD"; }
 
 alias ffprefs='echo $(ffprof)/prefs.js'
