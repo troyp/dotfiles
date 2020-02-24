@@ -1479,7 +1479,7 @@ alias ucd='unicode --max=0 -d'   # decimal search for unicode characters
 alias ucc='unicode --max=0 -s'   # describe unicode characters in string
 alias nconv='numconv -f all -t Western_Lower'  # convert number to decimal
 alias thesaurus=aiksaurus
-alias weather='ansiweather -l Lismore,AU -u metric -s true -f 5 -d true | sed "s/=>/=>\n/" | tr "-" "\n"'
+alias weather='ansiweather -l Lismore,AU -u metric -s true -f 5 -d true | sed "s/=>/=>\n\r/" | sed "s/-/\n\r/g"'
 alias weathernow='inxi -xxxW goonellabah,nsw,australia'
 
 #---------------------
