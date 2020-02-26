@@ -57,6 +57,11 @@ manh () { firefox -P default "localhost//cgi-bin/man/man2html?query=$1"; }
 grepdict () { grep $1 /usr/share/dict/words; }
 gd () { grepdict "$1" | less; }
 symlink-print() { namei -v "$1" | grep --color -P '(?<=^l).*|$'; }
+thesauruspower() {
+    curl -sA "Mozilla/5.0 (X11; Linux i686; rv:64.0) Gecko/20100101 Firefox/64.0" "https://www.powerthesaurus.org/$*/synonyms" |
+        pup ".pt-thesaurus-card__term-title text{}" |
+        paste -sd ",";
+}
 
 locatedirs() {
     if [[ "$1" =~ ^-h$\|^--help$ ]]; then
