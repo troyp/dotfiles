@@ -971,7 +971,7 @@ lscomposefiles() {
         sed -r 's|%L|/usr/share/X11/locale/en_US.UTF-8/Compose|' |
         sed -r "s|%H|$HOME|" |
         sed -r 's|%S|/usr/share/X11/locale|';
-    echo '~/.XCompose';
+    echo "$HOME/.XCompose";
 }
 # .XCompose and additional compose files included (not locale compose file)
 alias lscomposefiles_extra='lscomposefiles|grep -v /usr/share/X11/locale/en_US.UTF-8/Compose'
