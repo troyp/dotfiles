@@ -105,7 +105,27 @@ bindkey "^S" history-incremental-pattern-search-forward
 bindkey "^[a" _expand_alias  # Alt-A
 bindkey "^L" delete-char
 
-bindkey -s '^x^z' ~/.oh-my-zsh/custom/
+bindkey -s '^X^D^B' "cd ~/ebooks/\n"
+bindkey -s '^X^D^C' "cd ~/code/\n"
+bindkey -s '^X^D^D' "cd ~/dotfiles/\n"
+bindkey -s '^X^D^E' "cd ~/.emacs.d/private/\n"
+bindkey -s '^X^D^H' "cd ~/\n"
+bindkey -s '^X^D^K' "cd ~/bookmarks/\n"
+bindkey -s '^X^D^L' "cd ~/.local/\n"
+bindkey -s '^X^D^P' "cd ~/.pentadactyl/\n"
+bindkey -s '^X^D^R' "cd ~/repos/\n"
+bindkey -s '^X^D^Z' "cd ~/.oh-my-zsh/custom/\n"
+
+bindkey -s '^X^I^B' "~/ebooks/"
+bindkey -s '^X^I^C' "~/code/"
+bindkey -s '^X^I^D' "~/dotfiles/"
+bindkey -s '^X^I^E' "~/.emacs.d/private/"
+bindkey -s '^X^I^H' "~/"
+bindkey -s '^X^I^K' "~/bookmarks/"
+bindkey -s '^X^I^L' "~/.local/"
+bindkey -s '^X^I^P' "~/.pentadactyl/"
+bindkey -s '^X^I^R' "~/repos/"
+bindkey -s '^X^I^Z' "~/.oh-my-zsh/custom/"
 
 # ,---------,
 # | vi-mode |
@@ -147,6 +167,28 @@ bindkey -v "^B" vi-backward-char
 bindkey -v "^F" vi-forward-char
 bindkey -v "^[." insert-last-word
 bindkey -v "^D" vi-delete-char
+
+bindkey -v -s '^X^D^B' "cd ~/ebooks/\n"
+bindkey -v -s '^X^D^C' "cd ~/code/\n"
+bindkey -v -s '^X^D^D' "cd ~/dotfiles/\n"
+bindkey -v -s '^X^D^E' "cd ~/.emacs.d/private/\n"
+bindkey -v -s '^X^D^H' "cd ~/\n"
+bindkey -v -s '^X^D^K' "cd ~/bookmarks/\n"
+bindkey -v -s '^X^D^L' "cd ~/.local/\n"
+bindkey -v -s '^X^D^P' "cd ~/.pentadactyl/\n"
+bindkey -v -s '^X^D^R' "cd ~/repos/\n"
+bindkey -v -s '^X^D^Z' "cd ~/.oh-my-zsh/custom/\n"
+
+bindkey -v -s '^X^I^B' "~/ebooks/"
+bindkey -v -s '^X^I^C' "~/code/"
+bindkey -v -s '^X^I^D' "~/dotfiles/"
+bindkey -v -s '^X^I^E' "~/.emacs.d/private/"
+bindkey -v -s '^X^I^H' "~/"
+bindkey -v -s '^X^I^K' "~/bookmarks/"
+bindkey -v -s '^X^I^L' "~/.local/"
+bindkey -v -s '^X^I^P' "~/.pentadactyl/"
+bindkey -v -s '^X^I^R' "~/repos/"
+bindkey -v -s '^X^I^Z' "~/.oh-my-zsh/custom/"
 
 # override oh-my-zsh
 bindkey '\el' down-case-word    # restore downcase
