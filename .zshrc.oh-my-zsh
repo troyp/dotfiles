@@ -230,6 +230,13 @@ bindkey '^@' copylastresult
 bindkey -v '^@' copylastresult
 bindkey -a '^@' copylastresult
 
+# calculator f8
+opencalc() { (roxterm -e wcalc) 2>/dev/null; }
+zle -N opencalc
+bindkey "^[[19~" opencalc
+bindkey -v "^[[19~" opencalc
+bindkey -a "^[[19~" opencalc
+
 # open file browser: f12=dolphin, S-f12=ranger
 open_file_browser_graphical() { ( dolphin . & ) 2>/dev/null; }
 open_file_browser_text() { ( roxterm -m -e ranger . & ) 2>/dev/null; }
