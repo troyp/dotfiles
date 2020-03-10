@@ -32,6 +32,8 @@ include "/opt/kragen-xcompose/frakturcompose"
 <Multi_key> <bar> <minus>                     : "⊢"
 # fraction slash
 <Multi_key> <slash> <slash>                   : "⁄"
+# other math symbols
+<Multi_key> <Multi_key> <p> <r> <o> <d>       : "∏"
 # tie
 <Multi_key> <minus> <0>                       : "‿"
 <Multi_key> <minus> <9>                       : "⁀"
