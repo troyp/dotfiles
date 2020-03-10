@@ -127,6 +127,8 @@ bindkey -s '^X^I^P' "~/.pentadactyl/"
 bindkey -s '^X^I^R' "~/repos/"
 bindkey -s '^X^I^Z' "~/.oh-my-zsh/custom/"
 
+bindkey -s "^X^H^K" "viewcompose\n"
+
 # ,---------,
 # | vi-mode |
 # '---------'
@@ -189,6 +191,8 @@ bindkey -v -s '^X^I^L' "~/.local/"
 bindkey -v -s '^X^I^P' "~/.pentadactyl/"
 bindkey -v -s '^X^I^R' "~/repos/"
 bindkey -v -s '^X^I^Z' "~/.oh-my-zsh/custom/"
+
+bindkey -v -s "^X^H^K" "viewcompose\n"
 
 # override oh-my-zsh
 bindkey '\el' down-case-word    # restore downcase
