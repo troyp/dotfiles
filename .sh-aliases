@@ -1115,6 +1115,7 @@ alias fregec='java -Xss1m -jar /opt/frege/fregec.jar -d build'
 alias fregerepl='/opt/frege-repl/gradlew --no-daemon --console plain :frege-repl-core:run'
 alias java-setdefault='sudo update-alternatives --config java'
 alias git-dir-is-dirty='[ `git diff --shortstat 2>>/dev/null | wc -l` != 0 ]'  # succeeds if dirty
+# -------------------------------------------------------------------------------
 # Package Managers: list installed packages
 alias pkgs_npm='npm list'
 alias pkgs_raco='tree -L 2 ~/.racket/planet/300/packages/'
@@ -1124,18 +1125,34 @@ alias pkgs_gem='gem list'
 alias pkgs_npm='ls ~/.npm'
 alias pkgs_pip='pip list'
 # Package Managers: install
-alias pipi='pip install --user'
-alias pipi2='pip2 install --user'
-alias pipi3='pip3 install --user'
-alias pipreq='pip install --user -r requirements.txt'
-alias pipreq2='pip2 install --user -r requirements.txt'
-alias pipreq3='pip3 install --user -r requirements.txt'
-alias spipi='sudo -H pip install'
-alias spipi2='sudo -H pip2 install'
-alias spipi3='sudo -H pip3 install'
-alias spipreq='sudo -H pip install -r requirements.txt'
-alias spipreq2='sudo -H pip2 install -r requirements.txt'
-alias spipreq3='sudo -H pip3 install -r requirements.txt'
+# ... pip (Python)
+alias pipi='python -m pip install --user'
+alias pipi2='python2 -m pip install --user'
+alias pipi3='python3 -m pip install --user'
+alias pipreq='pipi -r requirements.txt'
+alias pipreq2='pipi2 -r requirements.txt'
+alias pipreq3='pipi3 -r requirements.txt'
+alias pipu='python -m pip install --upgrade'
+alias pipu2='python2 -m pip install --upgrade'
+alias pipu3='python3 -m pip install --upgrade'
+alias pipupgrade='pipu pip'
+alias pipupgrade2='pipu2 pip'
+alias pipupgrade3='pipu3 pip'
+# ... ... (avoid using sudo pip)
+alias spipiwarn='echo "Avoid spipi aliases - use pipi (see https://github.com/pypa/pip/issues/5599)"'
+alias spipi='spipiwarn; sudo -H pip install'
+alias spipi2='spipiwarn; sudo -H pip2 install'
+alias spipi3='spipiwarn; sudo -H pip3 install'
+alias spipreq='spipi -r requirements.txt'
+alias spipreq2='spipi2 -r requirements.txt'
+alias spipreq3='spipi3 -r requirements.txt'
+alias spipu='spipiwarn; sudo -H pip install --upgrade'
+alias spipu2='spipiwarn; sudo -H pip2 install --upgrade'
+alias spipu3='spipiwarn; sudo -H pip3 install --upgrade'
+alias spipupgrade='sudo apt-get update pip'
+alias spipupgrade2='sudo apt-get update pip2'
+alias spipupgrade3='sudo apt-get update pip3'
+# ... other
 alias stacki='stack install'
 alias cabali='cabal install'
 alias opami='opam install'
@@ -1229,7 +1246,6 @@ alias cppdecl=c++decl
 alias pcgrep='pkg-config --list-all | grep -i'
 alias pkgc='pkg-config --libs'
 alias cpkgc='cmake --find-package -DLANGUAGE=C -DCOMPILER_ID=GNU -DMODE=COMPILE'   # eg. cpkgc -DNAME=LibXml2
-alias pipu='sudo -H pip install --upgrade'
 alias iconi='/opt/icon/bin/icon /opt/icon/pl/progs/qei.icn'  # REPL for Icon programming language
 
 # --------------
