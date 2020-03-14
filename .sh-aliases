@@ -50,6 +50,8 @@ sapsdi() {
 }
 # --- search ---
 alias apds='aptitude search'    # find matching packages
+alias aptl='apt list'
+alias aptli='apt list --installed' # search for matching installed packages
 apdv() { aptitude search "$0" | less; }
 apdn() {
     (    # search by package name (terms ANDed)
