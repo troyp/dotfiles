@@ -1270,6 +1270,7 @@ alias emacs-set-config='( setopt nullglob; userdir=$(iselect -ma ~/.emacs.d.* ~/
 alias emacs-choose-config='( setopt nullglob; iselect -ma ~/.emacs.d.* ~/.emacs-*/.emacs.d )'
 alias emacschoose='HOME=`iselect -ma ~/.emacs-*/` emacs'
 alias emacs-unhang='pkill -SIGUSR2 emacs; echo "Turn debug-on-quit back off with M-x toggle-debug-on-quit"'
+alias cdemacslisp='cd /usr/local/share/emacs/26.1/lisp/emacs-lisp'
 
 # -----------
 # PDF ALIASES
