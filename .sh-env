@@ -113,6 +113,7 @@ paths=(
     ${SCALA_HOME:-/opt/scala}/bin
 	  $JHOME/bin
     /usr/local/texlive/2014/bin/x86_64-linux
+    /usr/local/go/bin
     /usr/share/vim/vim*/macros
     /var/lib/gems/1.8/bin
 	  /opt/icon/bin
@@ -150,6 +151,7 @@ paths=(
     # /opt/mozart/platform/unknown-unknown
     /opt/mozart2/bin
     /opt/MultiMarkdown-6/build
+    /opt/num-utils-0.5
     /opt/palemoon
     /opt/pdf-diff
     /opt/pdfdir
