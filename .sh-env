@@ -102,6 +102,7 @@ paths=(
     $HOME/.cargo/bin
     $HOME/.cask/bin
     $HOME/.lein/bin
+    $HOME/.nimble/bin
     $HOME/.npm-global/bin
     $HOME/.rbenv/bin
 	  $HOME/gowork/bin
@@ -149,8 +150,6 @@ paths=(
     # /opt/mozart/platform/unknown-unknown
     /opt/mozart2/bin
     /opt/MultiMarkdown-6/build
-    /opt/nim/bin
-    /opt/nim
     /opt/palemoon
     /opt/pdf-diff
     /opt/pdfdir
