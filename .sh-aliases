@@ -1453,7 +1453,7 @@ alias fzfc='fzf --ansi --exact --border --preview "cat {} | pygmentize -f termin
 # -----------
 alias onespace="tr '\t' ' ' | tr -s ' '"  # collapse whitespace (tabs/spaces) into a single space (good with cut)
 alias tolines='tr " \t" "\n\n"'
-alias fromlines='xargs echo'
+alias fromlines="perl -0777 -ple 's/\n(?!$)/ /g'"
 alias joinlines=fromlines
 alias quotelines='while read -r x || [[ -n $x ]]; do echo "'"'"'$x'"'"'"; done'
 alias firstcol="cut -d' ' -f1"
