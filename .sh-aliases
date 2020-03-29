@@ -211,6 +211,8 @@ alias lsenvall='env | less'    # list entire environment
 # --------------------------
 # FILE MANIPULATION ALIASES.
 # --------------------------
+# --- creating files ---
+alias mkfile='install -Dv /dev/null'    # create file and any missing parent directories
 # --- looping over files ---
 alias dofiles='for x in *; do'    # process each file in current directory
 # eg. mapfiles img-info
