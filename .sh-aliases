@@ -885,7 +885,7 @@ alias lesr='less -R'   # raw ANSI color escapes
 alias lesrr='less -r'  # raw control chars
 alias lessprint='less -X'  # no termcap init/deinit - prevents deinit clearing screen after less
 alias lless='less +G'  # start at end of file
-docview() { pandoc "$1" | \lynx -vikeys -stdin; }
+docview() { file="${1--}"; pandoc "$file" | \lynx -vikeys -stdin; }
 
 # =============
 # MOZC ALIASES.
