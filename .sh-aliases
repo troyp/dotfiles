@@ -444,8 +444,8 @@ findiregex() {
 findiregex2() {
     find "$1" "$2" -regextype egrep -iregex ".*$3.*" | less -FX;
 }
-alias sffind='findiname ~/ebooks/fiction/sf-fantasy'
-alias sffindfile='findfileiname ~/ebooks/fiction/sf-fantasy'
+alias sffind='findiname2 ~/ebooks/fiction/sf-fantasy /mnt/data2/SFF'
+alias sffindfile='findfileiname2 ~/ebooks/fiction/sf-fantasy /mnt/data2/SFF'
 alias sffindre='findiregex ~/ebooks/fiction/sf-fantasy'
 alias comicsfind='findiname ~/Documents/Comics'
 alias comicsfindfile='findfileiname ~/Documents/Comics'
