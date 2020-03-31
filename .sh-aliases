@@ -481,19 +481,19 @@ alias htmlxpath='xmllint --html --xpath'
 # WGET & RELATED ALIASES.
 #------------------------
 # multiple hosts: use -H; restrict domains with -D dom1.com,dom2.org
-alias wgetm='wget -nH -kKpN -rl inf -np --no-remove-listing'
-alias wgetmh='wget -H -kKpN -rl inf -np --no-remove-listing'
+alias wgetm='wget -nH -kpN -rl inf -np --no-remove-listing'
+alias wgetmh='wget -H -kpN -rl inf -np --no-remove-listing'
 alias wgetmcont='wgetm -c'    # continue, changed/new files only
 alias wgetmnc='wgetm -c -nc'   # continue, new files only
 alias wgetmf="wgetm --reject-regex '.*[?$].*'"  # filter out URLs with params
 # wgetm-incdirs: eg. wgetmincdirs /Tools,/Utilities domainname.com/Tools/index.html
-alias wgetm-incdirs='wget -nH -kKpN -rl inf --no-remove-listing --include-directories'
+alias wgetm-incdirs='wget -nH -kpN -rl inf --no-remove-listing --include-directories'
 alias wgetmf-incdirs="wgetm-incdirs --reject-regex '.*[?].*'"
 alias wgetmff-incdirs="wgetm-incdirs --reject-regex '.*[?$].*'"
-alias wgetm-incdirs-span='wget -H -kKpN -rl inf --no-remove-listing --include-directories'
+alias wgetm-incdirs-span='wget -H -kpN -rl inf --no-remove-listing --include-directories'
 alias wgetm-conv='wgetm -E'          # wgetm w. adjust-extension (-E)
 alias wgetmf-conv='wgetmf -E'        # wgetmf w. adjust-extension (-E)
-alias wgetmlimit='wget -kKpEN -np -nH -rl'  #eg wgetmlimit 2... (2 recurs lvls)
+alias wgetmlimit='wget -kpEN -np -nH -rl'  #eg wgetmlimit 2... (2 recurs lvls)
 alias wgetmcut='wgetm --cut-dirs'  #eg wgetmcut 2 ... (removes root + top 2 subdirs)
 alias wgetmfcut="wgetmf --reject-regex '.*[?].*' ---cut-dirs"  #eg wgetmcut 2 ... (removes root + top 2 subdirs)
 alias wgetmffcut="wgetmff --reject-regex '.*[?$].*' ---cut-dirs"  #eg wgetmcut 2 ... (removes root + top 2 subdirs)
@@ -501,18 +501,18 @@ alias wgetmflat='wgetm -nd'
 alias wgetstealth='wget -e robots=off -U=Mozilla'
 alias wgetmstealth='wgetm -e robots=off -U="Mozilla" -w 1'
 alias wgetmfstealth='wgetmf -e robots=off -U="Mozilla" -w 1'
-alias wget1='wget -kKpEHN -rl 1'
-alias wget1stealthconv='wget -kKpEHN -rl 1 -e robots=off -U=Mozilla -w 1'
-alias wget1flatstealthconv='wget -kKpEHN -nd -rl 1 -e robots=off -U=Mozilla -w 1'
-alias wgetp='wget -kKpEN'    # get page & prerequisites (same host only)
-alias wgetpp='wget -kKpEHN'   # get page & prerequisites (span hosts)
-alias wgetpcut='wget -kKpEN -nH --cut-dirs'
+alias wget1='wget -kpEHN -rl 1'
+alias wget1stealthconv='wget -kpEHN -rl 1 -e robots=off -U=Mozilla -w 1'
+alias wget1flatstealthconv='wget -kpEHN -nd -rl 1 -e robots=off -U=Mozilla -w 1'
+alias wgetp='wget -kpEN'    # get page & prerequisites (same host only)
+alias wgetpp='wget -kpEHN'   # get page & prerequisites (span hosts)
+alias wgetpcut='wget -kpEN -nH --cut-dirs'
 alias wgetcat='wget -pE -O' # usage: wgetcat <filename> <filename> ... <url> #UNTESTED
-alias wgetm-cjk='wget -nH -kKpN -rl inf -np --no-remove-listing --restrict-file-names=nocontrol'
-alias wgetmh-cjk='wget -H -kKpN -rl inf -np --no-remove-listing --restrict-file-names=nocontrol'
+alias wgetm-cjk='wget -nH -kpN -rl inf -np --no-remove-listing --restrict-file-names=nocontrol'
+alias wgetmh-cjk='wget -H -kpN -rl inf -np --no-remove-listing --restrict-file-names=nocontrol'
 alias wgetmf-cjk="wgetm --reject-regex '.*[?$].*' --restrict-file-names=nocontrol"  # no param URLs
-alias wgetm-incdirs-cjk='wget -nH -mkKp --include-directories --restrict-file-names=nocontrol'
-alias wgetmff-incdirs-cjk="wget -nH -mkKp --reject-regex '.*[?$].*' --restrict-file-names=nocontrol --include-directories"
+alias wgetm-incdirs-cjk='wget -nH -mkp --include-directories --restrict-file-names=nocontrol'
+alias wgetmff-incdirs-cjk="wget -nH -mkp --reject-regex '.*[?$].*' --restrict-file-names=nocontrol --include-directories"
 alias listhttplinks='xargs elinks --dump | grep "http" | sed "s/.*http/http/g"' # Waits for url from stdin then lists http links on page. echo url | listhttplinks. Pipe to wget.
 alias listhttplinks2='xargs wget -O - 2>&1 | grep -i "http:" | sed "s/^.*http/http/\" | cut -d"\"" -f1 | sort -u'
 # alias cbdl (clipboard aliases)
