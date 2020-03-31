@@ -884,6 +884,7 @@ alias cless_sh="LESSOPEN='| /usr/share/source-highlight/src-hilite-lesspipe.sh %
 alias lesr='less -R'   # raw ANSI color escapes
 alias lesrr='less -r'  # raw control chars
 alias lessprint='less -X'  # no termcap init/deinit - prevents deinit clearing screen after less
+alias lessnoinit='LESS="${LESS}X"'
 alias lless='less +G'  # start at end of file
 docview() { file="${1--}"; pandoc "$file" | \lynx -vikeys -stdin; }
 
