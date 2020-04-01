@@ -186,6 +186,7 @@ alias sortatimes='for x in *; do stat -c"%x	%n" -- "$x"; done | tabs2cols | sort
 alias lsexec='lafiles | filterexec'
 alias lsi='du -hsc'    # list total sizes of files and directories
 alias treea='tree -a -I '.git' --matchdirs --prune'   # list all files and dotfiles, exclude git directory
+treeless () { tree -C "$@" | less -isMRW -j5; }
 
 # ------------------
 # FILE INFO ALIASES.
