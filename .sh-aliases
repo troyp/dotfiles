@@ -442,18 +442,27 @@ findfileiname2() {
 findiregex() {
     find "$1" -regextype egrep -iregex ".*$2.*" | less -FX;
 }
+findfileiregex() {
+    find "$1" -type f -regextype egrep -iregex ".*$2.*" | less -FX;
+}
 findiregex2() {
     find "$1" "$2" -regextype egrep -iregex ".*$3.*" | less -FX;
 }
+findfileiregex2() {
+    find "$1" "$2" -type f -regextype egrep -iregex ".*$3.*" | less -FX;
+}
 alias sffind='findiname2 ~/ebooks/fiction/sf-fantasy /mnt/data2/SFF'
 alias sffindfile='findfileiname2 ~/ebooks/fiction/sf-fantasy /mnt/data2/SFF'
-alias sffindre='findiregex ~/ebooks/fiction/sf-fantasy'
+alias sffindre='findiregex2 ~/ebooks/fiction/sf-fantasy /mnt/data2/SFF'
+alias sffindfilere='findfileiregex2 ~/ebooks/fiction/sf-fantasy /mnt/data2/SFF'
 alias comicsfind='findiname ~/Documents/Comics'
 alias comicsfindfile='findfileiname ~/Documents/Comics'
 alias comicsfindre='findiregex ~/Documents/Comics'
+alias comicsfindfilere='findfileiregex ~/Documents/Comics'
 alias csfind='findiname2 ~/ebooks/coding ~/ebooks/cs'
 alias csfindfile='findfileiname2 ~/ebooks/coding ~/ebooks/cs'
 alias csfindre='findiregex2 ~/ebooks/coding ~/ebooks/cs'
+alias csfindfilere='findfileiregex2 ~/ebooks/coding ~/ebooks/cs'
 alias statf='stat --printf'    # eg. statf "%s" file (size in B), statf "%h" file (no. hard links)
 alias rgg='rg -pS'             # ripgrep with pretty and smartcase
 alias rgh='rg -pS --hidden'    # ripgrep with pretty and smartcase, include dotfiles
