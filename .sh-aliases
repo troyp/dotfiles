@@ -1387,6 +1387,7 @@ alias filterexec='dolines if [[ -f "$x" ]] && [[ -x $(realpath "$x") ]]; then ec
 alias dedup='perl -ne '"'"'$H{$_}++ or print'"'"   # remove repeated lines (need not be adjacent)
 alias suniq='sort -u'   # sort and remove repeated lines
 alias noblanklines='grep -v "^[[:space:]]*$"'
+alias unwrap="perl -00 -lpe 's/\n/ /g, s/ +/ /g'"
 alias expanddotranges='perl -pe '"'"'s/,/ /g; s/(-?\d+)\.\.(-?\d+)/($1>$2)?join(" ", reverse $2..$1):join(" ", $1..$2)/ge'"'"
 perms() {
     python <<EOF
