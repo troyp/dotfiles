@@ -1,0 +1,11 @@
+#info
+f    select-reference-this-line
+b    beginning-of-node
+d    dir-node
+e    end-of-node
+u    up-node
+^e   end-of-line
+^g   abort-key
+^hc  describe-command
+^hk  describe-key
+^hv  describe-variable
