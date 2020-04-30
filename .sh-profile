@@ -42,6 +42,8 @@ xmodmap -e "keycode 127 = Pause"
 # extra function key keycodes
 xmodmap -e "keycode 93 = F18"
 xmodmap -e "keycode 94 = F19"
+# menu -> super key (use xcape to recover menu key function)
+xmodmap -e "keysym Menu = Super_R"
 
 # =======
 #  XCAPE
