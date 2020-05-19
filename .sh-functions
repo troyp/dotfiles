@@ -322,6 +322,17 @@ tohtml () {
     done;
 }
 
+vim-view-as-html() {
+    (
+        tempdir=`mktemp -d`;
+        ln -t $tempdir "$1";
+        cd $tempdir;
+        f=`basename "$1"`;
+        ex "$f" +'TOhtml' +'!/opt/waterfox/waterfox %' +'qall!';
+    )
+}
+vim-convert-to-html() { ex "$1" +'TOhtml' +'w' +'qall!'; }
+
 comment-out () {
     # search for a pattern in a script or configuration file and comment it out
     # by prefixing with '# '
