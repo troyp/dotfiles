@@ -251,6 +251,14 @@ img-copy-at-18%() {
     done;
 }
 
+vlc-last-screenshot() {
+    (
+        n="${1:-1}";
+        cd ~/Pictures/vlc-snapshot;
+        display $(\ls -t | tail -n+$n | head -n1 | xargs realpath);
+    )
+}
+
 mkvtracks () {
     if [[ "$1" =~ ^-h$\|^--help$ ]]; then
         cat <<EOF
