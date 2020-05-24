@@ -1893,6 +1893,13 @@ git-lastmessage() {
         tail -n+1;
 }
 
+git-viewcommit() {
+    tempf=`tempfile`;
+    git log --pretty=oneline > $tempf;
+    rev=$(percol $tempf | cut -d' ' -f1);
+    git show $rev;
+}
+
 webpage_exists() {
     if [[ "$1" =~ ^-h$\|^--help$ ]]; then
         cat <<EOF
