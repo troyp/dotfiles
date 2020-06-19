@@ -524,7 +524,7 @@ alias wgetmf-cjk="wgetm --reject-regex '.*[?$].*' --restrict-file-names=nocontro
 alias wgetm-incdirs-cjk='wget -nH -mkp --include-directories --restrict-file-names=nocontrol'
 alias wgetmff-incdirs-cjk="wget -nH -mkp --reject-regex '.*[?$].*' --restrict-file-names=nocontrol --include-directories"
 urllistlinks() { elinks "$1" --dump | grep "http" | sed "s/.*http/http/g"; }
-urllistlinks2() { wget -O - "$1" 2>&1 | grep -i "http:" | sed "s/^.*http/http/" | cut -d"\"" -f1 | sort -u }
+urllistlinks2() { wget -O - "$1" 2>&1 | grep -i "http:" | sed "s/^.*http/http/" | cut -d"\"" -f1 | sort -u; }
 # alias cbdl (clipboard aliases)
 
 # -----------------
