@@ -187,6 +187,7 @@ alias lsexec='lafiles | filterexec'
 alias lsi='du -hsc'    # list total sizes of files and directories
 alias treea='tree -a -I '.git' --matchdirs --prune'   # list all files and dotfiles, exclude git directory
 treeless () { tree -C "$@" | less -isMRW -j5; }
+alias latest-file='nth-latest-file 1'
 
 # ------------------
 # FILE INFO ALIASES.
