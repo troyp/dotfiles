@@ -1359,6 +1359,7 @@ alias rom2kana='python -c "'"import sys, romkan; print(romkan.to_hiragana(' '.jo
 alias wakan='(cd ~/.wine/drive_c/Program\ Files\ \(x86\)/Wakan; wine wakan.exe)'
 alias jlookup='(cd /opt/jlookup; ./jlookup)'
 alias jlookupgui='(cd /opt/jlookup; ./jlookup-gui)'
+alias grepjapanese='grep -P "[\xe4-\xe9][\x80-\xbf][\x80-\xbf]|\xe3[\x81-\x83][\x80-\xbf]"'
 
 # ------------------
 # PIPELINE OPERATORS
