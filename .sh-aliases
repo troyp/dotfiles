@@ -1375,6 +1375,7 @@ alias maplines='xargs -L1'
 # eg.     ls|dolines printf "`pwd`/$x\n"; done
 alias dolines='while read -r x || [[ -n $x ]]; do'
 alias dolinesr='tacn | dolines'
+alias dopath='echo "$PATH"|prettypath|dolines'
 # uniqdirs: print a list of target directories (ie. resolve symlinks) of files
 alias uniqdirs='while read -r line || [[ -n $line ]]; do dirname "`readlink -f "$line"`"; done | sort | uniq'
 # eg.              ls -l | dofields echo $x7; done
@@ -1455,6 +1456,7 @@ alias tolines='tr " \t" "\n\n"'
 alias fromlines="perl -0777 -ple 's/\n(?!$)/ /g'"
 alias joinlines=fromlines
 alias quotelines='while read -r x || [[ -n $x ]]; do echo "'"'"'$x'"'"'"; done'
+alias tonewlines='sed s/\\\\n/\\n/g'
 alias firstcol="cut -d' ' -f1"
 alias prettypath='( IFS=: read -r -d "" -A path_array; for f in $path_array; do echo "$f"; done )'
 alias deduppath="awk -F: '{for (i=1;i<=NF;i++) { if ( !x[\$i]++ ) printf(\"%s:\",\$i); }}'"
