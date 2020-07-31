@@ -1447,6 +1447,27 @@ alias if_term='if [[ -t 1 ]]; then'    # test if output is going to a terminal (
 alias is_term='[[ -t 1 ]]'             # test if output is going to a terminal (not a pipe)
 # url2domain: pipe into it, or: url2domain <<<$URL
 alias url2domain="{sed -r 's|^[^:/]+:/*||' | sed -r 's|/.*||'}"
+# - - - - - -
+# formatting.
+# - - - - - -
+alias onespace="tr '\t' ' ' | tr -s ' '"  # collapse whitespace (tabs/spaces) into a single space (good with cut)
+alias tolines='tr " \t" "\n\n"'
+alias fromlines="perl -0777 -ple 's/\n(?!$)/ /g'"
+alias joinlines=fromlines
+alias quotelines='while read -r x || [[ -n $x ]]; do echo "'"'"'$x'"'"'"; done'
+alias firstcol="cut -d' ' -f1"
+alias prettypath='( IFS=: read -r -d "" -A path_array; for f in $path_array; do echo "$f"; done )'
+alias deduppath="awk -F: '{for (i=1;i<=NF;i++) { if ( !x[\$i]++ ) printf(\"%s:\",\$i); }}'"
+alias tabs2cols="column -t -s $'\t'"
+alias cutsp="onespace | cut -d' '"
+# eg.:    ls -Al | cutsp -f2,9    # list filenames and number of hard links
+alias cut:='cut -d:'
+alias evenlines="awk 'NR%2==0'"  # print even lines (starting at line 0)
+alias oddlines="awk 'NR%2==1'"
+alias concat='tr -d "\n"'        # join lines into string
+alias tabify-table="perl -ple 's/\s+/\t/g'"    # whitespace-delim table -> tab-delim
+alias number-lines='perl -wnle '\''print "$.\t$_"'\'    # add numbers to left of lines
+alias align='column -t'   # align columns
 
 # -------------
 # MATH ALIASES.
@@ -1461,28 +1482,6 @@ lcm() { command python3 -c "import math; print(($1*$2)//math.gcd(int($1),int($2)
 alias fzfm='fzf --ansi --exact --border --multi --bind=ctrl-i:toggle+down'
 alias fzfp='fzf --ansi --exact --border --preview "cat {}"'
 alias fzfc='fzf --ansi --exact --border --preview "cat {} | pygmentize -f terminal256 -O style=native -g"'
-
-# -----------
-# FORMATTING.
-# -----------
-alias onespace="tr '\t' ' ' | tr -s ' '"  # collapse whitespace (tabs/spaces) into a single space (good with cut)
-alias tolines='tr " \t" "\n\n"'
-alias fromlines="perl -0777 -ple 's/\n(?!$)/ /g'"
-alias joinlines=fromlines
-alias quotelines='while read -r x || [[ -n $x ]]; do echo "'"'"'$x'"'"'"; done'
-alias firstcol="cut -d' ' -f1"
-alias prettypath='( IFS=: read -r -d "" -A path_array; for f in $path_array; do echo "$f"; done )'
-alias deduppath="awk -F: '{for (i=1;i<=NF;i++) { if ( !x[\$i]++ ) printf(\"%s:\",\$i); }}'"
-alias tabs2cols="column -t -s $'\t'"
-alias cutsp="onespace | cut -d' '"
-# eg.:    ls -Al | cuts -f2,9    # list filenames and number of hard links
-alias cut:='cut -d:'
-alias evenlines="awk 'NR%2==0'"  # print even lines (starting at line 0)
-alias oddlines="awk 'NR%2==1'"
-alias concat='tr -d "\n"'        # join lines into string
-alias tabify-table="perl -ple 's/\s+/\t/g'"    # whitespace-delim table -> tab-delim
-alias number-lines='perl -wnle '\''print "$.\t$_"'\'    # add numbers to left of lines
-alias align='column -t'   # align columns
 
 # ------------
 # rs variants:
