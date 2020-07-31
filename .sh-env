@@ -93,8 +93,8 @@ paths=(
     $HOME/.emacs.d
     $HOME/.scripts
     $HOME/.scripts/script-directories/*
+    $HOME/.ghcup/bin
     $HOME/.cabal/bin
-    ## optimized ripgrep: prefer to cargo version
     /opt/ripgrep/target/release
     $HOME/.cargo/bin
     $HOME/.cask/bin
@@ -123,6 +123,7 @@ paths=(
     /opt/basilisk
     /opt/bin
     /opt/calibre
+    /opt/CopyQ
     /opt/clean/bin
     /opt/eclipse
     /opt/epub2pdf
@@ -145,7 +146,6 @@ paths=(
     /opt/lfe-master/bin
     /opt/LightTable
     /opt/lilyterm/bin
-    # /opt/mozart/platform/unknown-unknown
     /opt/mozart2/bin
     /opt/MultiMarkdown-6/build
     /opt/num-utils-0.5
