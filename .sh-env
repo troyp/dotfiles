@@ -81,7 +81,8 @@ NODE_PATH='$HOME/.npm-global/lib/node_modules'
 # PATHS.
 # ------
 
-ubuntu_default_PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games:/usr/local/games
+ubuntu_default_PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/games:/usr/local/games
+path-set-default() { export PATH=$ubuntu_default_PATH; }
 
 PATH=${PATH%:.}  # remove . from end of $PATH
 paths=(
