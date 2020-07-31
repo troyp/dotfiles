@@ -35,18 +35,15 @@ append_to_path_var() {
 
 pathappend() {
     local dir
+    # append directory and remove copies from within $PATH
     dir="${1%/}"
-    if [[ -d "$dir" ]] && ! [[ "$PATH:" =~ "^$dir:" ]]; then
-        PATH="$PATH:$dir"
-    fi
+    [[ -d "$dir" ]] && PATH="${PATH//$dir:/}:$dir"
 }
 pathprepend() {
     local dir
-    # prepend directory if not already at start of PATH
+    # prepend directory and remove copies from within $PATH
     dir="${1%/}"
-    if [[ -d "$dir" ]] && ! [[ "$PATH:" =~ "^$dir:" ]]; then
-        PATH="$dir:$PATH"
-    fi
+    [[ -d "$dir" ]] && PATH="$dir:${PATH//:$dir/}"
 }
 
 # ---------
