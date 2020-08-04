@@ -456,41 +456,14 @@ alias sffind='findiname2 ~/ebooks/fiction/sf-fantasy /mnt/data2/SFF'
 alias sffindfile='findfileiname2 ~/ebooks/fiction/sf-fantasy /mnt/data2/SFF'
 alias sffindre='findiregex2 ~/ebooks/fiction/sf-fantasy /mnt/data2/SFF'
 alias sffindfilere='findfileiregex2 ~/ebooks/fiction/sf-fantasy /mnt/data2/SFF'
-sfrun() {
-    find ~/ebooks/fiction/sf-fantasy /mnt/data2/SFF -iname "*$1*" | iselect -a | read -r f; mimeopen -a "$f";
-}
-sfrunre() {
-    find ~/ebooks/fiction/sf-fantasy /mnt/data2/SFF -regextype egrep -iregex ".*$1.*" |
-        iselect -a |
-        read -r f;
-    mimeopen -a "$f";
-}
 alias comicsfind='findiname ~/Documents/Comics'
 alias comicsfindfile='findfileiname ~/Documents/Comics'
 alias comicsfindre='findiregex ~/Documents/Comics'
 alias comicsfindfilere='findfileiregex ~/Documents/Comics'
-comicsrun() {
-    find ~/Documents/Comics -type f -iname "*$1*" | iselect -a | read -r f; mcomix "$f" &;
-}
-comicsrunre() {
-    find ~/Documents/Comics -type f -regextype egrep -iregex ".*$1.*" |
-        iselect -a |
-        read -r f;
-    mcomix "$f" &;
-}
 alias csfind='findiname2 ~/ebooks/coding ~/ebooks/cs'
 alias csfindfile='findfileiname2 ~/ebooks/coding ~/ebooks/cs'
 alias csfindre='findiregex2 ~/ebooks/coding ~/ebooks/cs'
 alias csfindfilere='findfileiregex2 ~/ebooks/coding ~/ebooks/cs'
-csrun() {
-    find ~/ebooks/coding ~/ebooks/cs -iname "*$1*" | iselect -a | read -r f; mimeopen -a "$f";
-}
-csrunre() {
-    find ~/ebooks/coding ~/ebooks/cs -regextype egrep -iregex ".*$1.*" |
-        iselect -a |
-        read -r f;
-    mimeopen -a "$f";
-}
 alias statf='stat --printf'    # eg. statf "%s" file (size in B), statf "%h" file (no. hard links)
 alias rgg='rg -pS'             # ripgrep with pretty and smartcase
 alias rgh='rg -pS --hidden'    # ripgrep with pretty and smartcase, include dotfiles

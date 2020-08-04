@@ -2,6 +2,136 @@
 [[ ! -z $DEBUG  ]] && echo "sourcing .sh-functions-docs"
 
 # -------------------------------------------------------------------------------
+# ,------------------------------,
+# | eBook Search & Run Functions |
+# '------------------------------'
+comicsrun() {
+    find ~/Documents/Comics -type f -iname "*$1*" |
+        peco |
+        read -r f;
+    [[ -n $f ]] && mcomix "$f" &
+}
+comicsrunre() {
+    find ~/Documents/Comics -type f -regextype egrep -iregex ".*$1.*" |
+        peco |
+        read -r f;
+    [[ -n $f ]] && mcomix "$f" &
+}
+sfrun() {
+    find ~/ebooks/fiction/sf-fantasy /mnt/data2/SFF -iname "*$1*" | peco | read -r f; [[ -n $f ]] && { mimeopen -a "$f" || mimeopen -n "$f" };
+}
+sfrunre() {
+    find ~/ebooks/fiction/sf-fantasy /mnt/data2/SFF -regextype egrep -iregex ".*$1.*" |
+        peco |
+        read -r f;
+    [[ -n $f ]] && { mimeopen -a "$f" || mimeopen -n "$f" };
+}
+csrun() {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+csrun PATTERN
+    Search for CS books matching PATTERN, select one and open with mimeopen.
+
+    Options:
+        -a    Search all supported filetypes except images
+        -A    Search all supported filetypes
+EOF
+        return 0; fi;
+    if [[ $1 =~ ^-a$\|^-A$ ]]; then local opts="${1#-}"; shift; fi;
+    find ~/ebooks/coding ~/ebooks/cs -iname "*$1*" |
+        {
+            if [[ $opts = a ]]; then
+                egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|xps|dvi|fb2|md|maff|mht)$|^[^.]+$';
+            elif [[ $opts = A ]]; then
+                cat
+            else
+                egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|fb2|maff|mht)$|^[^.]+$';
+            fi;
+        } |
+        peco |
+        read -r f;
+    [[ -n $f ]] && { mimeopen -a "$f" || mimeopen -n "$f" };
+}
+csrunre() {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+csrunre REGEX
+    Search for CS books matching REGEX, select one and open with mimeopen.
+
+    Options:
+        -a    Search all supported filetypes except images
+        -A    Search all supported filetypes
+EOF
+        return 0; fi;
+    if [[ $1 =~ ^-a$\|^-A$ ]]; then local opts="${1#-}"; shift; fi;
+    find ~/ebooks/coding ~/ebooks/cs -regextype egrep -iregex ".*$1.*" |
+        {
+            if [[ $opts = a ]]; then
+                egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|xps|dvi|fb2|md|maff|mht)$|^[^.]+$';
+            elif [[ $opts = A ]]; then
+                cat
+            else
+                egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|fb2|maff|mht)$|^[^.]+$';
+            fi;
+        } |
+        peco |
+        read -r f;
+    [[ -n $f ]] && { mimeopen -a "$f" || mimeopen -n "$f" };
+}
+csokular() {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+csokular PATTERN
+    Search for CS books matching PATTERN, select one and open with okular.
+
+    Options:
+        -a    Search all supported filetypes except images
+        -A    Search all supported filetypes
+EOF
+        return 0; fi;
+    if [[ $1 =~ ^-a$\|^-A$ ]]; then local opts="${1#-}"; shift; fi;
+    find ~/ebooks/coding ~/ebooks/cs -iname "*$1*" |
+        {
+            if [[ $opts = a ]]; then
+                egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|xps|dvi|fb2|md)$';
+            elif [[ $opts = A ]]; then
+                egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|xps|dvi|fb2|md|tiff|jpg|png)$';
+            else
+                egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|fb2)$';
+            fi;
+        } |
+        peco |
+        read -r f;
+    [[ -n $f ]] && okular "$f" &
+}
+csokularre() {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+csokularre REGEX
+    Search for CS books matching REGEX, select one and open with okular.
+
+    Options:
+        -a    Search all supported filetypes except images
+        -A    Search all supported filetypes
+EOF
+        return 0; fi;
+    if [[ $1 =~ ^-a$\|^-A$ ]]; then local opts="${1#-}"; shift; fi;
+    find ~/ebooks/coding ~/ebooks/cs -regextype egrep -iregex ".*$1.*" |
+        {
+            if [[ $opts = a ]]; then
+                egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|xps|dvi|fb2|md)$';
+            elif [[ $opts = A ]]; then
+                egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|xps|dvi|fb2|md|tiff|jpg|png)$';
+            else
+                egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|fb2)$';
+            fi;
+        } |
+        peco |
+        read -r f;
+    [[ -n $f ]] && okular "$f" &
+}
+
+# -------------------------------------------------------------------------------
 # ,---------------,
 # | PDF Functions |
 # '---------------'
