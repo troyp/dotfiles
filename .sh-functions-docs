@@ -149,6 +149,7 @@ pdfoutline-out PDFFILE [OUTFILE]
 EOF
         return;
     fi;
+    local pdffile outfile;
     pdffile="$1";
     outfile="${2:-${1%.pdf}.bmarks}";
     if [[ "$outfile" == "-" ]]; then
@@ -167,6 +168,7 @@ pdfoutline-in PDFFILE BMARKS [OUTFILE]
 EOF
         return;
     fi;
+    local pdffile bmarks outfile;
     pdffile="$1";
     bmarks="$2";
     outfile="${3:-${1%.pdf}-updated.pdf}";
@@ -176,6 +178,7 @@ EOF
 pdfoutline-edit () {
     # pdfoutline-edit PDF_DOC
     # edit bookmarks of PDF_DOC
+    local outline output;
     outline=$(mktemp);
     output=$(mktemp);
     pdftk "$1" dump_data > $outline;
@@ -197,9 +200,9 @@ pdfdroplast [-o outfile] infile [last_page]
       -h --help     display this help
       -o --outfile  save resulting file under the specified name
 EOF
-        shift;
         return 0;
     fi;
+    local outfile infile infile_base n m;
     if [[ "$1" =~ ^-o$\|^--outfile$ ]]; then
         shift;
         outfile="$1";
@@ -215,6 +218,7 @@ EOF
 }
 
 pdf-extract-images () {
+    local imgdir;
     imgdir="${1}-images";
     mkdir "$imgdir";
     pdfimages "$1" "$imgdir"/out;
@@ -225,6 +229,7 @@ pdfpagerange () {
     # eg. pdfpagerange "input.pdf" 75-77
     #     pdfpagerange "input.pdf" 75-77 "output.pdf"
     # NOTE: Page ranges use absolute numbering starting from page 1, not the page numbers specified in the pdf.
+    local input range output;
     input="$1";
     range="$2";
     output="${3:-$input [pages $range]}";
@@ -245,6 +250,7 @@ djvuoutline-out DJVUFILE [OUTFILE]
 EOF
         return;
     fi;
+    local djvufile outfile;
     djvufile="$1";
     outfile="${2:-${1%.djvu}.bmarks}";
     if [[ "$outfile" == "-" ]]; then
@@ -263,6 +269,7 @@ djvuoutline-in DJVUFILE BMARKS [OUTFILE]
 EOF
         return;
     fi;
+    local djvufile bmarks outfile;
     djvufile="$1";
     bmarks="$2";
     outfile="${3:-${1%.djvu}-updated.djvu}";
@@ -278,6 +285,7 @@ djvuoutline-edit DJVUFILE [OUTFILE]
 EOF
         return;
     fi;
+    local djvufile outfile outline;
     djvufile="$1";
     outfile="$2";
     # djoutline-edit DJVU_DOC;
@@ -299,6 +307,7 @@ zcbz () { zip -r "${1%/}.cbz" "$1"; }
 # convert directory to .cbz, order by first number in file names
 # cbz-by-num DIRNAME [EXT]
 cbz-by-num () {
+    local n fname fnum fext ext padded;
     pushd "$1" || return;
     # n=`ls -v | tail -n1 | awk -F'.' '{ print(length($1)) }'`;
     n=`ls -pv | GREP_OPTIONS="" grep -v ".*/$" | tail -n1 | awk -F'.' '{ print(length($1)) }'`;
@@ -326,9 +335,9 @@ specific position to a comic archive directory.
     Options:
       -h --help     display this help
 EOF
-        shift
         return 0
     fi
+    local n cbzfile col cbzname tempdir origdir f base ext newname geom;
     n="$1"
     cbzfile="$2"
     col="${3:-xc:white}"
@@ -355,18 +364,18 @@ EOF
 }
 
 cbr2cbz() {
-    (
-        archive="$1";
-        name="${1%.*}";
-        mkdir -- "$name";
-        7z x "$archive" -o"$name";
-        7z a -tzip "$name.cbz" -- "$name";
-        trash "$archive";
-        trash -- "$name/"
-    )
+    local archive name;
+    archive="$1";
+    name="${1%.*}";
+    mkdir -- "$name";
+    7z x "$archive" -o"$name";
+    7z a -tzip "$name.cbz" -- "$name";
+    trash "$archive";
+    trash -- "$name/"
 }
 
 maffus () {
+    local archive_name;
     archive_name=`echo "${1%/}" | sed -e 's/ /_/g'`.maff;
     7z a -tzip "$archive_name" "$1";
 }
@@ -374,13 +383,15 @@ maffus () {
 man2text () { man "$1" | \col -bx; }
 
 blankpage () {
-    help="
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
 blankpage                - creates a white 1000x1600 page called 'out.jpg'
 blankpage NAME           - creates a white 1000x1600 page called NAME
 blankpage SIZE NAME      - creates a white page of size SIZE called NAME
 blankpage SIZE COL NAME  - creates a page of size SIZE and colour COL, called NAME
-";
-    if [[ "$1" =~ ^-h$\|^--help$ ]]; then echo "$help"; shift; fi;
+EOF
+    fi;
+    local size col out;
     # requires imagemagick/graphicsmagick
     case "$#" in
         0)
@@ -420,9 +431,9 @@ page at a specific position to a comic archive directory.
     Options:
       -h --help     display this help
 EOF
-        shift;
         return 0;
     fi;
+    local n col f base ext newname geom;
     n="$1";
     col="${2:-xc:white}";
     f=$(ls | sed -n "`printf "%dp;" $n`");
@@ -434,6 +445,7 @@ EOF
 }
 
 googlecodewiki2gfm() {
+    local converter_dir converter infile outfile;
     converter_dir="${GOOGLE_WIKI2GFM_PATH:-/opt/google-code-support-tools/wiki_to_md/}";
     converter="${converter_dir%/}/wiki2gfm.py";
     infile="$1";
@@ -456,6 +468,7 @@ tsvtotable () {
 }
 
 chm2html() {
+    local file dir;
     file="$1";
     dir="$2";
     archmage "$file" "$dir";
@@ -464,6 +477,7 @@ chm2html() {
 }
 
 chm2maff() {
+    local file dir;
     file="$1";
     dir="$2";
     archmage "$file" "$dir";
@@ -472,5 +486,3 @@ chm2maff() {
     7z a -tzip "$dir.maff" "$dir";
     rm -Ir "$dir";
 }
-
- 
