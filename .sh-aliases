@@ -465,6 +465,7 @@ alias csfindfile='findfileiname2 ~/ebooks/coding ~/ebooks/cs'
 alias csfindre='findiregex2 ~/ebooks/coding ~/ebooks/cs'
 alias csfindfilere='findfileiregex2 ~/ebooks/coding ~/ebooks/cs'
 greptools() { grep -iP "$1" ~/tools/*.md; }
+alias dactylcmd="grep -HnoP 'commands.add\(\["'"'"\K[][a-z]+(?="'"'")' ~/repos/dactyl/common/modules/*.jsm ~/repos/dactyl/common/content/*.js | sed 's|/home/troy/repos/dactyl/common/||' | tr -d '[]' | grep -P"
 alias statf='stat --printf'    # eg. statf "%s" file (size in B), statf "%h" file (no. hard links)
 alias rgg='rg -pS'             # ripgrep with pretty and smartcase
 alias rgh='rg -pS --hidden'    # ripgrep with pretty and smartcase, include dotfiles
