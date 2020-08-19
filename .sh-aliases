@@ -464,6 +464,7 @@ alias csfind='findiname2 ~/ebooks/coding ~/ebooks/cs'
 alias csfindfile='findfileiname2 ~/ebooks/coding ~/ebooks/cs'
 alias csfindre='findiregex2 ~/ebooks/coding ~/ebooks/cs'
 alias csfindfilere='findfileiregex2 ~/ebooks/coding ~/ebooks/cs'
+greptools() { grep -iP "$1" ~/tools/*.md; }
 alias statf='stat --printf'    # eg. statf "%s" file (size in B), statf "%h" file (no. hard links)
 alias rgg='rg -pS'             # ripgrep with pretty and smartcase
 alias rgh='rg -pS --hidden'    # ripgrep with pretty and smartcase, include dotfiles
