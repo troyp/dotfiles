@@ -1597,14 +1597,3 @@ alias hotshell='/usr/bin/hs'   # clash with NPM module executable
 alias starwars='telnet towel.blinkenlights.nl'
 # http://www.reddit.com/r/commandline/comments/2ofb4e/star_trek_holodeck_noise_for_12_hours_with/
 alias startrek='play -n -c2 synth whitenoise lowpass -1 69 lowpass -1 50 lowpass -1 120 gain +15'
-
-
-# *********************
-# *                   *
-# * COMMAND REMINDERS *
-# *                   *
-# *********************
-# These entries are to facilitate grepping the alias file for a forgotten command
-
-# lsof, fuser : list processes accessing a file or socket, open files for process, etc
-# gcp: cp with additional functionality, incl. progress, munging to handle FAT restrictions,...
