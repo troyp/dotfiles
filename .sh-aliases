@@ -412,6 +412,8 @@ alias sudb='sudo updatedb'
 alias locater='locate --regex'   # locate extended regex
 alias locatea='locate -A'        # locate files matching ALL patterns
 alias locatei='locate -i'        # locate files ignoring case`
+locateprint() { locate "$@" | printfiles; }
+locateview() { locate "$@" | viewfiles; }
 alias findfilename='find . -type f -iname'   # find files with (case-insens) name PATTERN.
 alias findinwd='find . -maxdepth 1'      # find in current directory (non-recursive)
 alias findfileinwd='find . -maxdepth 1 -type f'      # find in current directory (non-recursive)
@@ -1418,6 +1420,22 @@ alias ppcsv="column -t -s','"
 alias viewtsv="pptsv| less"
 alias viewcsv="ppcsv| less"
 firstchar() { echo -n "${1%"${1#?}"}"; }
+printfiles() {
+    iselect -ma |
+    while read -r x || [[ -n $x ]]; do
+        bat "$x" 2>/dev/null ||
+            cat "$x" | pygmentize 2>/dev/null;
+    done;
+}
+viewfiles() {
+    iselect -ma |
+    while read -r x || [[ -n $x ]]; do
+        bat --color=always "$x" 2>/dev/null ||
+            cat "$x" | pygmentize 2>/dev/null; jot -s '' -b '━' `tput cols`;
+    done |
+    less -R;
+}
+
 # =====XARGS ALIASES=====
 alias xa='xargs '                  # trailing space in alias causes next word to be alias expanded as well
 alias chooseargs='iselect -ma | xargs'
