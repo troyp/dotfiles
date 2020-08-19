@@ -499,6 +499,7 @@ alias wgetmh='wget -H -kpN -rl inf -np --no-remove-listing'
 alias wgetmcont='wgetm -c'    # continue, changed/new files only
 alias wgetmnc='wgetm -c -nc'   # continue, new files only
 alias wgetmf="wgetm --reject-regex '.*[?$].*'"  # filter out URLs with params
+alias wgetmregex="wgetm --accept-regex"
 # wgetm-incdirs: eg. wgetmincdirs /Tools,/Utilities domainname.com/Tools/index.html
 alias wgetm-incdirs='wget -nH -kpN -rl inf --no-remove-listing --include-directories'
 alias wgetmf-incdirs="wgetm-incdirs --reject-regex '.*[?].*'"
