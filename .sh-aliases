@@ -811,6 +811,10 @@ alias cbtacn='cb | tacn'
 #---------------
 # SHELL ALIASES.
 #---------------
+alias fixterminal='reset; stty sane; tput rs1; echo -e "\033c"'
+alias fixterminal1='reset'
+alias fixterminal2='stty sane; tput rs1'
+alias fixterminal3='echo -e "\033c"'
 alias vi-bindings='set -o vi'
 alias emacs-bindings='set -o emacs'
 alias typa='type -a'
