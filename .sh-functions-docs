@@ -9,22 +9,61 @@ comicsrun() {
     find ~/Documents/Comics -type f -iname "*$1*" |
         peco |
         read -r f;
-    [[ -n $f ]] && mcomix "$f" &
+    [[ -n $f ]] && kstart5 mcomix "$f";
 }
 comicsrunre() {
     find ~/Documents/Comics -type f -regextype egrep -iregex ".*$1.*" |
         peco |
         read -r f;
-    [[ -n $f ]] && mcomix "$f" &
+    [[ -n $f ]] && kstart5 mcomix "$f";
 }
 sfrun() {
-    find ~/ebooks/fiction/sf-fantasy /mnt/data2/SFF -iname "*$1*" | peco | read -r f; [[ -n $f ]] && { mimeopen -a "$f" || mimeopen -n "$f" };
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+sfrun PATTERN
+    Search for SF books matching PATTERN, select one and open with mimeopen.
+
+    Options:
+        -d    Use default application
+    EOF
+        return 0; fi;
+    local opts mimetype app exec;
+    if [[ $1 =~ ^-a$\|^-A$ ]]; then local opts="${1#-}"; shift; fi;
+    find ~/ebooks/fiction/sf-fantasy /mnt/data2/SFF -iname "*$1*" | peco | read -r f;
+    if [[ -n $opts ]]; then
+        mimetype=$(xdg-mime query filetype "$f");
+        app=$(xdg-mime query default "$mimetype");
+        # This works only with simple Exec= lines, but good enough
+        exec=$(grep "^Exec=" $app | sed -r 's/Exec=([^ ]+) .*/\1/');
+        kstart5 $exec "$f";
+    else
+        [[ -n $f ]] && { mimeopen -a "$f" || mimeopen -n "$f" };
+    fi;
 }
 sfrunre() {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+sfrunre REGEX
+    Search for SF books matching REGEX, select one and open with mimeopen.
+
+    Options:
+        -d    Use default application
+EOF
+        return 0; fi;
+    local opts mimetype app exec;
+    if [[ $1 =~ ^-d$ ]]; then local opts="d"; shift; fi;
     find ~/ebooks/fiction/sf-fantasy /mnt/data2/SFF -regextype egrep -iregex ".*$1.*" |
         peco |
         read -r f;
-    [[ -n $f ]] && { mimeopen -a "$f" || mimeopen -n "$f" };
+    if [[ -n $opts ]]; then
+        mimetype=$(xdg-mime query filetype "$f");
+        app=$(xdg-mime query default "$mimetype");
+        # This works only with simple Exec= lines, but good enough
+        exec=$(grep "^Exec=" $app | sed -r 's/Exec=([^ ]+) .*/\1/');
+        kstart5 $exec "$f";
+    else
+        [[ -n $f ]] && { mimeopen -a "$f" || mimeopen -n "$f" };
+    fi;
 }
 csrun() {
     if [[ "$1" =~ ^-h$\|^--help$ ]]; then
@@ -37,17 +76,15 @@ csrun PATTERN
         -A    Search all supported filetypes
 EOF
         return 0; fi;
-    if [[ $1 =~ ^-a$\|^-A$ ]]; then local opts="${1#-}"; shift; fi;
+    if [[ $1 =~ ^-d$ ]]; then local opts="d"; shift; fi;
     find ~/ebooks/coding ~/ebooks/cs -iname "*$1*" |
-        {
-            if [[ $opts = a ]]; then
-                egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|xps|dvi|fb2|md|maff|mht)$|^[^.]+$';
-            elif [[ $opts = A ]]; then
-                cat
-            else
-                egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|fb2|maff|mht)$|^[^.]+$';
-            fi;
-        } |
+        if [[ $opts = a ]]; then
+            egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|xps|dvi|fb2|md|maff|mht)$|^[^.]+$';
+        elif [[ $opts = A ]]; then
+            cat
+        else
+            egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|fb2|maff|mht)$|^[^.]+$';
+        fi |
         peco |
         read -r f;
     [[ -n $f ]] && { mimeopen -a "$f" || mimeopen -n "$f" };
@@ -65,15 +102,13 @@ EOF
         return 0; fi;
     if [[ $1 =~ ^-a$\|^-A$ ]]; then local opts="${1#-}"; shift; fi;
     find ~/ebooks/coding ~/ebooks/cs -regextype egrep -iregex ".*$1.*" |
-        {
-            if [[ $opts = a ]]; then
-                egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|xps|dvi|fb2|md|maff|mht)$|^[^.]+$';
-            elif [[ $opts = A ]]; then
-                cat
-            else
-                egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|fb2|maff|mht)$|^[^.]+$';
-            fi;
-        } |
+        if [[ $opts = a ]]; then
+            egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|xps|dvi|fb2|md|maff|mht)$|^[^.]+$';
+        elif [[ $opts = A ]]; then
+            cat
+        else
+            egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|fb2|maff|mht)$|^[^.]+$';
+        fi |
         peco |
         read -r f;
     [[ -n $f ]] && { mimeopen -a "$f" || mimeopen -n "$f" };
@@ -102,7 +137,7 @@ EOF
         } |
         peco |
         read -r f;
-    [[ -n $f ]] && okular "$f" &
+    [[ -n $f ]] && kstart5 okular "$f";
 }
 csokularre() {
     if [[ "$1" =~ ^-h$\|^--help$ ]]; then
@@ -128,7 +163,107 @@ EOF
         } |
         peco |
         read -r f;
-    [[ -n $f ]] && okular "$f" &
+    [[ -n $f ]] && kstart5 okular "$f";
+}
+papersrun() {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+papersrun PATTERN
+    Search for papers matching PATTERN, select one and open with mimeopen.
+
+    Options:
+        -a    Search all supported filetypes except images
+        -A    Search all supported filetypes
+EOF
+        return 0; fi;
+    if [[ $1 =~ ^-d$ ]]; then local opts="d"; shift; fi;
+    find ~/ebooks/coding ~/ebooks/papers -iname "*$1*" |
+        if [[ $opts = a ]]; then
+            egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|xps|dvi|fb2|md|maff|mht)$|^[^.]+$';
+        elif [[ $opts = A ]]; then
+            cat
+        else
+            egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|fb2|maff|mht)$|^[^.]+$';
+        fi |
+        peco |
+        read -r f;
+    [[ -n $f ]] && { mimeopen -a "$f" || mimeopen -n "$f" };
+}
+papersrunre() {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+papersrunre REGEX
+    Search for papers matching REGEX, select one and open with mimeopen.
+
+    Options:
+        -a    Search all supported filetypes except images
+        -A    Search all supported filetypes
+EOF
+        return 0; fi;
+    if [[ $1 =~ ^-a$\|^-A$ ]]; then local opts="${1#-}"; shift; fi;
+    find ~/ebooks/coding ~/ebooks/papers -regextype egrep -iregex ".*$1.*" |
+        if [[ $opts = a ]]; then
+            egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|xps|dvi|fb2|md|maff|mht)$|^[^.]+$';
+        elif [[ $opts = A ]]; then
+            cat
+        else
+            egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|fb2|maff|mht)$|^[^.]+$';
+        fi |
+        peco |
+        read -r f;
+    [[ -n $f ]] && { mimeopen -a "$f" || mimeopen -n "$f" };
+}
+papersokular() {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+papersokular PATTERN
+    Search for papers matching PATTERN, select one and open with okular.
+
+    Options:
+        -a    Search all supported filetypes except images
+        -A    Search all supported filetypes
+EOF
+        return 0; fi;
+    if [[ $1 =~ ^-a$\|^-A$ ]]; then local opts="${1#-}"; shift; fi;
+    find ~/ebooks/coding ~/ebooks/papers -iname "*$1*" |
+        {
+            if [[ $opts = a ]]; then
+                egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|xps|dvi|fb2|md)$';
+            elif [[ $opts = A ]]; then
+                egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|xps|dvi|fb2|md|tiff|jpg|png)$';
+            else
+                egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|fb2)$';
+            fi;
+        } |
+        peco |
+        read -r f;
+    [[ -n $f ]] && kstart5 okular "$f";
+}
+papersokularre() {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+papersokularre REGEX
+    Search for papers matching REGEX, select one and open with okular.
+
+    Options:
+        -a    Search all supported filetypes except images
+        -A    Search all supported filetypes
+EOF
+        return 0; fi;
+    if [[ $1 =~ ^-a$\|^-A$ ]]; then local opts="${1#-}"; shift; fi;
+    find ~/ebooks/coding ~/ebooks/papers -regextype egrep -iregex ".*$1.*" |
+        {
+            if [[ $opts = a ]]; then
+                egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|xps|dvi|fb2|md)$';
+            elif [[ $opts = A ]]; then
+                egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|xps|dvi|fb2|md|tiff|jpg|png)$';
+            else
+                egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|fb2)$';
+            fi;
+        } |
+        peco |
+        read -r f;
+    [[ -n $f ]] && kstart5 okular "$f";
 }
 
 # -------------------------------------------------------------------------------
