@@ -1449,6 +1449,7 @@ withfiles() { ls | grep -iP "$1" | xargs -d\\n "${@:2}"; }
 withFiles() { ls | grep -P "$1" | xargs -d\\n "${@:2}"; }
 alias xaa='xargs bash -ic'
 alias xacat='xargs cat'
+alias xabat='xargs bat'
 alias xaless='xargs less'
 alias xavip='xargs vimpager'
 alias xavi='xargs vipipe'
