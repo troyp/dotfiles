@@ -318,6 +318,8 @@ bindkey -v "^K" kill-line
 bindkey -a "^K" kill-line
 bindkey -v "^U" backward-kill-line
 bindkey -a "^U" backward-kill-line
+bindkey -v "^Y" yank
+bindkey -a "^Y" yank
 # emacs keys for vi-insert-mode
 bindkey -v "^B" vi-backward-char
 bindkey -v "^F" vi-forward-char
