@@ -170,6 +170,7 @@ bindkey -s "^X^H^K" "viewcompose\n"
 # '---------'
 bindkey -v
 
+bindkey -a "U" redo
 bindkey -v "^P" history-beginning-search-backward
 bindkey -a "^P" history-beginning-search-backward
 bindkey -v "^N" history-beginning-search-forward
