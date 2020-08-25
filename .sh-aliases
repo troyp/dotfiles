@@ -49,8 +49,9 @@ sapsdi() {
         xargs sudo apt-get install;
 }
 # --- search ---
-alias apds='aptitude search'    # find matching packages
-alias aptl='apt list'
+alias aptpkgsmatchingbyname='aptitude search'    # find matching packages by name
+alias aptpkgs='apt list'
+alias aptpkgsmatching='apt-cache search'  # find matching packages
 alias aptli='apt list --installed' # search for matching installed packages
 apdv() { aptitude search "$0" | less; }
 apdn() {
@@ -62,12 +63,11 @@ apdn() {
         aptitude search "$srchstr";
     )
 }
-alias aptcs='apt-cache search'  # find matching packages
-alias aptff='apt-file find'  # (find==search) find packages containing matching files
+alias aptfilepkgs='apt-file find'  # (find==search) find packages containing matching files
 # --- info ---
 alias aptcp='apt-cache policy'  # show installed version, candidate, repository
 alias aptcm='apt-cache madison' # show candidate versions, repos in table
-alias aptcsh='apt-cache show'  # show package records
+alias aptpkgdesc='apt-cache show'  # show package records
 alias debpkg="dpkg-deb -I j804_amd64.deb|grep -oP '(?<=Package:\t).*'"    # package installed by .deb file
 # --- files ---
 alias dplist='dpkg -l'   # list package names matching pattern, eg. dplsit 'dbus*'
@@ -78,9 +78,9 @@ dplistexe () {
         fi;
     done;
 }
-alias debpfl='apt-file list'  # list contents of matching packages
-alias debpifl='dpkg-query -L' # list files installed by a package
-alias debdebfl='dpkg-deb -c'   # list files contained in deb
+alias aptpkgfiles='apt-file -F list'  # list contents of package
+alias dppkgfiles='dpkg-query -L' # list files installed by a package
+alias debfiles='dpkg-deb -c'   # list files contained in deb
 alias aptgetkey='sudo apt-key adv --keyserver keyserver.ubuntu.com --recv-keys'  # Ubuntu
 # --- other ---
 alias dpfind='dpkg -S'   # find package, location, man file location of a command
