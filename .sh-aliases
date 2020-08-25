@@ -1107,6 +1107,8 @@ alias github-goto-first-commit='git log --reverse | head -n1 | cuts 2 | read com
 alias github-markdown-preview=grip
 github-get-issues() { http -a troyp -b "https://api.github.com/repos/$1/$2/issues?state=all" | json; }
 alias github-wget-issues="wget -c -nH -kKpN -rl inf -np --no-remove-listing -e robots=off -U='Mozilla' -w 1 --accept-regex='.*/issues.*|.*/pull.*|.*/compare/.*' --reject-regex '.*[?$].*'"
+# gitlab-download-wiki PROJECT_NUMBER [PROJECT_NAME]
+gitlab-download-wiki() { curl "https://gitlab.com/api/v4/projects/$1/wikis?with_content=1" > ${2:-$1}-wiki.json; }
 
 # --------------------------------------
 # SYNTAX HIGHLIGHTING & PRETTY PRINTING.
