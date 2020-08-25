@@ -473,8 +473,10 @@ alias papersfindfilere='findfileiregex ~/ebooks/papers'
 greptools() { grep -iP "$1" ~/tools/*.md; }
 alias dactylcmd="grep -HnoP 'commands.add\(\["'"'"\K[][a-z]+(?="'"'")' ~/repos/dactyl/common/modules/*.jsm ~/repos/dactyl/common/content/*.js | sed 's|/home/troy/repos/dactyl/common/||' | tr -d '[]' | grep -P"
 alias statf='stat --printf'    # eg. statf "%s" file (size in B), statf "%h" file (no. hard links)
-alias rgg='rg -pS'             # ripgrep with pretty and smartcase
-alias rgh='rg -pS --hidden'    # ripgrep with pretty and smartcase, include dotfiles
+alias rgg='rg -pLS'             # ripgrep with pretty, symlinks and smartcase
+alias rgh='rg -pLS --hidden'    # ripgrep with pretty, symlinks and smartcase, include dotfiles
+alias rga="rg -pLSuu --glob '!.git/*'"     # ripgrep: include all except .git dirs
+alias rgaf="rg -pLSuu --glob '!.git/*'"    # ripgrep files: include all except .git dirs
 
 # -----------------------
 # HTML & XML MANIPULATION
