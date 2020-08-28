@@ -93,6 +93,8 @@ export XMODIFIERS=@im=fcitx
 
 # load .sh-env
 [[ -e ~/.sh-env ]] && source ~/.sh-env
+# load .sh-ssh
+[[ -e ~/.sh-ssh ]] && source ~/.sh-ssh
 
 set +a
 
