@@ -1,0 +1,43 @@
+# From https://bitbucket.org/snippets/Rockin4Life33/xAaqBn
+
+# Note: ~/.ssh/environment should not be used, as it already has a different purpose in SSH,
+#       if the file `agent.env` does not exist it will be created and populated
+SSH_ENV=~/.ssh/agent.env
+
+agent_is_running() {
+    if [ "$SSH_AUTH_SOCK" ]; then
+        # ssh-add returns:
+        #   0 = agent running, has keys
+        #   1 = agent running, no keys
+        #   2 = agent not running
+        ssh-add -l > /dev/null 2>&1 || [ $? -eq 1 ]
+    else
+        false
+    fi
+}
+
+agent_has_keys() {
+    ssh-add -l > /dev/null 2>&1
+}
+
+agent_load_env() {
+    . "$SSH_ENV" > /dev/null 2>&1
+}
+
+agent_start() {
+    (umask 077; ssh-agent > "$SSH_ENV")
+    . "$SSH_ENV" > /dev/null
+}
+
+if ! agent_is_running; then
+    agent_load_env
+fi
+
+if ! agent_is_running; then
+    agent_start
+    ssh-add ~/.ssh/id_rsa
+elif ! agent_has_keys; then
+    ssh-add ~/.ssh/id_rsa
+fi
+
+unset SSH_ENV
