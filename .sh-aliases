@@ -52,6 +52,7 @@ sapsdi() {
 alias aptpkgsmatchingbyname='aptitude search'    # find matching packages by name
 alias aptpkgs='apt list'
 alias aptpkgsmatching='apt-cache search'  # find matching packages
+alias aptcs='apt-cache search'  # find matching packages
 alias aptli='apt list --installed' # search for matching installed packages
 apdv() { aptitude search "$0" | less; }
 apdn() {
