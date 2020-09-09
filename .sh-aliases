@@ -153,7 +153,7 @@ alias llt='ls -ltr'  # detailed list sort by last modified (latest at bottom)
 alias llx='ls -lX'   # detailed list sort by extension
 alias lls='ls -lS'   # detailed list sort by file size
 alias la='ls -Al'    # detailed list dotfiles
-alias cutlsa='cuts 7'    # extract filename from ls -a output
+alias cutlsl='cuts 7'    # extract filename from ls -l output
 alias lac='ls -Al --color=always'  # detailed list dotfiles, colored output to pipe
 lap () {
     [[ "$1" =~ ^--?h(elp)?$ ]] && echo "laless [DIR]\tShow long directory contents in pager." && return 0;
