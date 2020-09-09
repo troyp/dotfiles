@@ -510,8 +510,8 @@ alias wgetmf="wgetm --reject-regex '.*[?$].*'"  # filter out URLs with params
 alias wgetmregex="wgetm --accept-regex"
 # wgetm-incdirs: eg. wgetmincdirs /Tools,/Utilities domainname.com/Tools/index.html
 alias wgetm-incdirs='wget -nH -kpN -rl inf --no-remove-listing --include-directories'
-alias wgetmf-incdirs="wgetm-incdirs --reject-regex '.*[?].*'"
-alias wgetmff-incdirs="wgetm-incdirs --reject-regex '.*[?$].*'"
+alias wgetmf-incdirs="wget -nH -kpN -rl inf --no-remove-listing --reject-regex '.*[?].*' --include-directories"
+alias wgetmff-incdirs="wget -nH -kpN -rl inf --no-remove-listing --reject-regex '.*[?$].*' --include-directories"
 alias wgetm-incdirs-span='wget -H -kpN -rl inf --no-remove-listing --include-directories'
 alias wgetm-conv='wgetm -E'          # wgetm w. adjust-extension (-E)
 alias wgetmf-conv='wgetmf -E'        # wgetmf w. adjust-extension (-E)
