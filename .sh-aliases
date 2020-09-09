@@ -855,6 +855,7 @@ alias pathaddcurdir='PATH=.:$PATH'
 alias pathremcurdir='PATH=${PATH#.:}'
 alias pathaddcurdirg='export PATH=.:$PATH'
 alias pathremcurdirg='export PATH=${PATH#.:}'
+alias quiet='&>/dev/null'
 
 # ============
 # CRON ALIASES
