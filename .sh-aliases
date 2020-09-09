@@ -149,7 +149,12 @@ alias llc='ll --color=always'
 alias lll='ls -l --time-style=+"           %a %d.%b.%y ''
  %T  %a %d.%b.%y "'  # detailed list with weekday, plus mod. time for recent files
 alias lln='ls -lv'   # detailed list natural sort
-alias llt='ls -ltr'  # detailed list sort by last modified (latest at bottom)
+alias llt='ls -lt'     # detailed list sort by last modified time (most recent at top)
+alias lltr='ls -ltr'   # detailed list sort by last modified (latest at bottom)
+alias lllt='lll -t'    # extra-detailed list sort by last modified time (most recent at top)
+alias llltr='lll -tr'  # extra-detailed list sort by last modified time (most recent at top)
+alias llat='lll -At'   # extra-detailed list sort by last modified time (most recent at top), include dotfiles
+alias llatr='lll -Atr' # extra-detailed list sort by last modified time (most recent at top), include dotfiles
 alias llx='ls -lX'   # detailed list sort by extension
 alias lls='ls -lS'   # detailed list sort by file size
 alias la='ls -Al'    # detailed list dotfiles
