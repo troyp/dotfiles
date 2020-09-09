@@ -160,10 +160,23 @@ alias lls='ls -lS'   # detailed list sort by file size
 alias la='ls -Al'    # detailed list dotfiles
 alias cutlsl='cuts 7'    # extract filename from ls -l output
 alias lac='ls -Al --color=always'  # detailed list dotfiles, colored output to pipe
+llp () {
+    [[ "$1" =~ ^--?h(elp)?$ ]] && echo "laless [DIR]\tShow long directory contents in pager." && return 0;
+    ls -l --time-style=+" %d.%m.%y " --color=always "${1:-.}" | $PAGER
+}
 lap () {
     [[ "$1" =~ ^--?h(elp)?$ ]] && echo "laless [DIR]\tShow long directory contents in pager." && return 0;
-    ls --group-directories-first --color=auto --time-style=+" %d.%m.%y " -Al --color=always "${1:-.}" |
-        $PAGER
+    ls -Al --time-style=+" %d.%m.%y " --color=always "${1:-.}" | $PAGER
+}
+lltp () {
+    [[ "$1" =~ ^--?h(elp)?$ ]] && echo "laless [DIR]\tShow long directory contents in pager." && return 0;
+    ls -lt --time-style=+"           %a %d.%b.%y ''
+ %T  %a %d.%b.%y " --color=always "${1:-.}" | $PAGER
+}
+latp () {
+    [[ "$1" =~ ^--?h(elp)?$ ]] && echo "laless [DIR]\tShow long directory contents in pager." && return 0;
+    ls -Alt --time-style=+"           %a %d.%b.%y ''
+ %T  %a %d.%b.%y " --color=always "${1:-.}" | $PAGER
 }
 alias lacc='ls -Al --time=access'    # detailed list access-time dotfiles
 alias lr='ls -lR'    # detailed list recursive
