@@ -775,7 +775,8 @@ git-grepconfig() { grep -iP "$1" ~/.gitconfig; }
 #-------------------
 # OPEN & SU ALIASES.
 #-------------------
-alias x=xdg-open
+alias x=mimeopen
+alias xx='mimeopen -a'
 alias xrun=xdg-open
 alias grun=gnome-open
 alias krun=kde-open
