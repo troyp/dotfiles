@@ -275,7 +275,7 @@ quick-diffdir () {
 }
 
 findinfilename () {
-    find * -regextype posix-extended -type f -iregex "^[^.]*$1[^/]*$";
+    find -L * -regextype posix-extended -type f -iregex "^[^.]*$1[^/]*$";
 }
 
 findinfofile () {
@@ -674,7 +674,7 @@ function findfilebyext () {
 	  # eg.  findfilebyext jar "*lib*"
     ftype="$1";
     file="${2:-*}";
-    find . -type f -iname "*.$ftype" -iname "$file";
+    find -L . -type f -iname "*.$ftype" -iname "$file";
 }
 
 dirtree-permissions () {
@@ -693,14 +693,22 @@ dirtree () {
     dir="${1:-.}";
     shift;
     comm="${*:-echo}";
-    find "$dir" -type d -print0 -exec "$comm" {} \;;
+    if [[ "$1" =~ ^L$ ]]; then
+        find -L "$dir" -type d -print0 -exec "$comm" {} \;;
+    else
+        find "$dir" -type d -print0 -exec "$comm" {} \;;
+    fi;
 }
 
 dirtree-file () {
     dir="${1:-.}";
     shift;
     comm="${*:-echo}";
-    find "$dir" -type f -print0 -exec "$comm" {} \;;
+    if [[ "$1" =~ ^L$ ]]; then
+        find -L "$dir" -type f -print0 -exec "$comm" {} \;;
+    else
+        find "$dir" -type f -print0 -exec "$comm" {} \;;
+    fi;
 }
 
 jlc () {
@@ -1231,7 +1239,7 @@ lsdocs() {
         name="$1"
         IFS=':'
         for d in `echo $DOCPATH`; do
-            find "$d" -maxdepth 1 -iname "$name"
+            find -L "$d" -maxdepth 1 -iname "$name"
         done
     )
 }
@@ -1552,10 +1560,18 @@ mkfilelists [DIR]
     Creates two files in directory DIR, .files.txt and .files.tree.txt.
     The former lists the paths of all files under DIR (recursively).
     The latter contains a tree diagram of the directory contents.
+
+    Options:
+        -L    include symlinks
 EOF
         return 0; fi;
     dir="${1:-`ls -1 | head -n1`}";
-    find "$dir" -type f > "$dir"/.files.txt;
+    shift;
+    if [[ "$1" =~ ^L$ ]]; then
+        find -L "$dir" -type f > "$dir"/.files.txt;
+    else
+        find "$dir" -type f > "$dir"/.files.txt;
+    fi;
     tree "$dir" > "$dir"/.files.tree.txt;
 }
 

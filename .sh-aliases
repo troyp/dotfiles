@@ -453,25 +453,25 @@ findiname() {
     # findiname2 DIR1 DIR2 PARTIALNAME
 }
 findfileiname() {
-    find "$1" -type f -iname "*$2*" | less -FX;
+    find -L "$1" -type f -iname "*$2*" | less -FX;
 }
 findiname2() {
-    find "$1" "$2" -iname "*$3*" | less -FX;
+    find -L "$1" "$2" -iname "*$3*" | less -FX;
 }
 findfileiname2() {
-    find "$1" "$2" -type f -iname "*$3*" | less -FX;
+    find -L "$1" "$2" -type f -iname "*$3*" | less -FX;
 }
 findiregex() {
-    find "$1" -regextype egrep -iregex ".*$2.*" | less -FX;
+    find -L "$1" -regextype egrep -iregex ".*$2.*" | less -FX;
 }
 findfileiregex() {
-    find "$1" -type f -regextype egrep -iregex ".*$2.*" | less -FX;
+    find -L "$1" -type f -regextype egrep -iregex ".*$2.*" | less -FX;
 }
 findiregex2() {
-    find "$1" "$2" -regextype egrep -iregex ".*$3.*" | less -FX;
+    find -L "$1" "$2" -regextype egrep -iregex ".*$3.*" | less -FX;
 }
 findfileiregex2() {
-    find "$1" "$2" -type f -regextype egrep -iregex ".*$3.*" | less -FX;
+    find -L "$1" "$2" -type f -regextype egrep -iregex ".*$3.*" | less -FX;
 }
 alias sffind='findiname2 ~/ebooks/fiction/sf-fantasy /mnt/data2/SFF'
 alias sffindfile='findfileiname2 ~/ebooks/fiction/sf-fantasy /mnt/data2/SFF'
@@ -1042,7 +1042,7 @@ alias viewcompose_default='lscompose_default | less'
 # SYSTEM / HARDWARE ALIASES.
 # --------------------------
 alias distro='cat /etc/lsb-release'
-alias systeminfo='DISTRO=$(cat /etc/os-release|command grep PRETTY); DISTRO="${DISTRO#PRETTY_NAME=\"}"; printf "DISTRO: ${DISTRO%\"}\nARCH:   $(uname -i)\nKERNEL: $(uname -r)\nNODE:   $(uname -n)\n"'
+alias systeminfo='{cat /etc/os-release|head -n2|sed -r "s/=/: /;s/NAME/DISTRO/"|tr -d "\""; printf "ARCH: $(uname -i)\nKERNEL: $(uname -r)\nNODE: $(uname -n)\n"}|column -s: -t'
 alias inx='inxi -F -d -lpu -z'
 alias xevkb="xev | grep -A2 --line-buffered '^KeyRelease' | sed -n '/keycode /s/^.*keycode \([0-9]*\).* (.*, \(.*\)).*$/\1 \2/p'"
 alias togglemute='pactl set-sink-mute 0 toggle'

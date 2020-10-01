@@ -6,13 +6,13 @@
 # | eBook Search & Run Functions |
 # '------------------------------'
 comicsrun() {
-    find ~/Documents/Comics -type f -iname "*$1*" |
+    find -L ~/Documents/Comics -type f -iname "*$1*" |
         peco |
         read -r f;
     [[ -n $f ]] && kstart5 mcomix "$f";
 }
 comicsrunre() {
-    find ~/Documents/Comics -type f -regextype egrep -iregex ".*$1.*" |
+    find -L ~/Documents/Comics -type f -regextype egrep -iregex ".*$1.*" |
         peco |
         read -r f;
     [[ -n $f ]] && kstart5 mcomix "$f";
@@ -29,7 +29,7 @@ sfrun PATTERN
         return 0; fi;
     local opts mimetype app exec;
     if [[ $1 =~ ^-a$\|^-A$ ]]; then local opts="${1#-}"; shift; fi;
-    find ~/ebooks/fiction/sf-fantasy /mnt/data2/SFF -iname "*$1*" | peco | read -r f;
+    find -L ~/ebooks/fiction/sf-fantasy /mnt/data2/SFF -iname "*$1*" | peco | read -r f;
     if [[ -n $opts ]]; then
         mimetype=$(xdg-mime query filetype "$f");
         app=$(xdg-mime query default "$mimetype");
@@ -52,7 +52,7 @@ EOF
         return 0; fi;
     local opts mimetype app exec;
     if [[ $1 =~ ^-d$ ]]; then local opts="d"; shift; fi;
-    find ~/ebooks/fiction/sf-fantasy /mnt/data2/SFF -regextype egrep -iregex ".*$1.*" |
+    find -L ~/ebooks/fiction/sf-fantasy /mnt/data2/SFF -regextype egrep -iregex ".*$1.*" |
         peco |
         read -r f;
     if [[ -n $opts ]]; then
@@ -77,7 +77,7 @@ csrun PATTERN
 EOF
         return 0; fi;
     if [[ $1 =~ ^-d$ ]]; then local opts="d"; shift; fi;
-    find ~/ebooks/coding ~/ebooks/cs -iname "*$1*" |
+    find -L ~/ebooks/coding ~/ebooks/cs -iname "*$1*" |
         if [[ $opts = a ]]; then
             egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|xps|dvi|fb2|md|maff|mht)$|^[^.]+$';
         elif [[ $opts = A ]]; then
@@ -101,7 +101,7 @@ csrunre REGEX
 EOF
         return 0; fi;
     if [[ $1 =~ ^-a$\|^-A$ ]]; then local opts="${1#-}"; shift; fi;
-    find ~/ebooks/coding ~/ebooks/cs -regextype egrep -iregex ".*$1.*" |
+    find -L ~/ebooks/coding ~/ebooks/cs -regextype egrep -iregex ".*$1.*" |
         if [[ $opts = a ]]; then
             egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|xps|dvi|fb2|md|maff|mht)$|^[^.]+$';
         elif [[ $opts = A ]]; then
@@ -125,7 +125,7 @@ csokular PATTERN
 EOF
         return 0; fi;
     if [[ $1 =~ ^-a$\|^-A$ ]]; then local opts="${1#-}"; shift; fi;
-    find ~/ebooks/coding ~/ebooks/cs -iname "*$1*" |
+    find -L ~/ebooks/coding ~/ebooks/cs -iname "*$1*" |
         {
             if [[ $opts = a ]]; then
                 egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|xps|dvi|fb2|md)$';
@@ -151,7 +151,7 @@ csokularre REGEX
 EOF
         return 0; fi;
     if [[ $1 =~ ^-a$\|^-A$ ]]; then local opts="${1#-}"; shift; fi;
-    find ~/ebooks/coding ~/ebooks/cs -regextype egrep -iregex ".*$1.*" |
+    find -L ~/ebooks/coding ~/ebooks/cs -regextype egrep -iregex ".*$1.*" |
         {
             if [[ $opts = a ]]; then
                 egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|xps|dvi|fb2|md)$';
@@ -177,7 +177,7 @@ papersrun PATTERN
 EOF
         return 0; fi;
     if [[ $1 =~ ^-d$ ]]; then local opts="d"; shift; fi;
-    find ~/ebooks/coding ~/ebooks/papers -iname "*$1*" |
+    find -L ~/ebooks/coding ~/ebooks/papers -iname "*$1*" |
         if [[ $opts = a ]]; then
             egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|xps|dvi|fb2|md|maff|mht)$|^[^.]+$';
         elif [[ $opts = A ]]; then
@@ -201,7 +201,7 @@ papersrunre REGEX
 EOF
         return 0; fi;
     if [[ $1 =~ ^-a$\|^-A$ ]]; then local opts="${1#-}"; shift; fi;
-    find ~/ebooks/coding ~/ebooks/papers -regextype egrep -iregex ".*$1.*" |
+    find -L ~/ebooks/coding ~/ebooks/papers -regextype egrep -iregex ".*$1.*" |
         if [[ $opts = a ]]; then
             egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|xps|dvi|fb2|md|maff|mht)$|^[^.]+$';
         elif [[ $opts = A ]]; then
@@ -225,7 +225,7 @@ papersokular PATTERN
 EOF
         return 0; fi;
     if [[ $1 =~ ^-a$\|^-A$ ]]; then local opts="${1#-}"; shift; fi;
-    find ~/ebooks/coding ~/ebooks/papers -iname "*$1*" |
+    find -L ~/ebooks/coding ~/ebooks/papers -iname "*$1*" |
         {
             if [[ $opts = a ]]; then
                 egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|xps|dvi|fb2|md)$';
@@ -251,7 +251,7 @@ papersokularre REGEX
 EOF
         return 0; fi;
     if [[ $1 =~ ^-a$\|^-A$ ]]; then local opts="${1#-}"; shift; fi;
-    find ~/ebooks/coding ~/ebooks/papers -regextype egrep -iregex ".*$1.*" |
+    find -L ~/ebooks/coding ~/ebooks/papers -regextype egrep -iregex ".*$1.*" |
         {
             if [[ $opts = a ]]; then
                 egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|xps|dvi|fb2|md)$';
