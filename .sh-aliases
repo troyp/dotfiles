@@ -461,6 +461,12 @@ findiname2() {
 findfileiname2() {
     find -L "$1" "$2" -type f -iname "*$3*" | less -FX;
 }
+findiname3() {
+    find -L "$1" "$2" "$3" -iname "*$4*" | less -FX;
+}
+findfileiname3() {
+    find -L "$1" "$2" "$3" -type f -iname "*$4*" | less -FX;
+}
 findiregex() {
     find -L "$1" -regextype egrep -iregex ".*$2.*" | less -FX;
 }
@@ -472,6 +478,12 @@ findiregex2() {
 }
 findfileiregex2() {
     find -L "$1" "$2" -type f -regextype egrep -iregex ".*$3.*" | less -FX;
+}
+findiregex3() {
+    find -L "$1" "$2" "$3" -regextype egrep -iregex ".*$4.*" | less -FX;
+}
+findfileiregex3() {
+    find -L "$1" "$2" "$3" -type f -regextype egrep -iregex ".*$4.*" | less -FX;
 }
 alias sffind='findiname2 ~/ebooks/fiction/sf-fantasy /mnt/data2/SFF'
 alias sffindfile='findfileiname2 ~/ebooks/fiction/sf-fantasy /mnt/data2/SFF'
