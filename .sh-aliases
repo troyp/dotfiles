@@ -501,6 +501,10 @@ alias papersfind='findiname ~/ebooks/papers'
 alias papersfindfile='findfileiname ~/ebooks/papers'
 alias papersfindre='findiregex ~/ebooks/papers'
 alias papersfindfilere='findfileiregex ~/ebooks/papers'
+alias scifind='findiname3 ~/ebooks/science ~/ebooks/cs ~/ebooks/philosophy'
+alias scifindfile='findfileiname3 ~/ebooks/science ~/ebooks/cs ~/ebooks/philosophy'
+alias scifindre='findiregex3 ~/ebooks/science ~/ebooks/cs ~/ebooks/philosophy'
+alias scifindfilere='findfileiregex3 ~/ebooks/science ~/ebooks/cs ~/ebooks/philosophy'
 greptools() { grep -iP "$1" ~/tools/*.md; }
 alias dactylcmd="grep -HnoP 'commands.add\(\["'"'"\K[][a-z]+(?="'"'")' ~/repos/dactyl/common/modules/*.jsm ~/repos/dactyl/common/content/*.js | sed 's|/home/troy/repos/dactyl/common/||' | tr -d '[]' | grep -P"
 alias statf='stat --printf'    # eg. statf "%s" file (size in B), statf "%h" file (no. hard links)

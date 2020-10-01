@@ -266,6 +266,107 @@ EOF
     [[ -n $f ]] && kstart5 okular "$f";
 }
 
+scirun() {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+scirun PATTERN
+    Search for science books matching PATTERN, select one and open with mimeopen.
+
+    Options:
+        -a    Search all supported filetypes except images
+        -A    Search all supported filetypes
+EOF
+        return 0; fi;
+    if [[ $1 =~ ^-d$ ]]; then local opts="d"; shift; fi;
+    find -L ~/ebooks/science ~/ebooks/cs ~/ebooks/philosophy -iname "*$1*" |
+        if [[ $opts = a ]]; then
+            egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|xps|dvi|fb2|md|maff|mht)$|^[^.]+$';
+        elif [[ $opts = A ]]; then
+            cat
+        else
+            egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|fb2|maff|mht)$|^[^.]+$';
+        fi |
+        peco |
+        read -r f;
+    [[ -n $f ]] && { mimeopen -a "$f" || mimeopen -n "$f"; };
+}
+scirunre() {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+scirunre REGEX
+    Search for science books matching REGEX, select one and open with mimeopen.
+
+    Options:
+        -a    Search all supported filetypes except images
+        -A    Search all supported filetypes
+EOF
+        return 0; fi;
+    if [[ $1 =~ ^-a$\|^-A$ ]]; then local opts="${1#-}"; shift; fi;
+    find -L ~/ebooks/science ~/ebooks/cs ~/ebooks/philosophy -regextype egrep -iregex ".*$1.*" |
+        if [[ $opts = a ]]; then
+            egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|xps|dvi|fb2|md|maff|mht)$|^[^.]+$';
+        elif [[ $opts = A ]]; then
+            cat
+        else
+            egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|fb2|maff|mht)$|^[^.]+$';
+        fi |
+        peco |
+        read -r f;
+    [[ -n $f ]] && { mimeopen -a "$f" || mimeopen -n "$f"; };
+}
+sciokular() {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+sciokular PATTERN
+    Search for science books matching PATTERN, select one and open with okular.
+
+    Options:
+        -a    Search all supported filetypes except images
+        -A    Search all supported filetypes
+EOF
+        return 0; fi;
+    if [[ $1 =~ ^-a$\|^-A$ ]]; then local opts="${1#-}"; shift; fi;
+    find -L ~/ebooks/science ~/ebooks/cs ~/ebooks/philosophy -iname "*$1*" |
+        {
+            if [[ $opts = a ]]; then
+                egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|xps|dvi|fb2|md)$';
+            elif [[ $opts = A ]]; then
+                egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|xps|dvi|fb2|md|tiff|jpg|png)$';
+            else
+                egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|fb2)$';
+            fi;
+        } |
+        peco |
+        read -r f;
+    [[ -n $f ]] && kstart5 okular "$f";
+}
+sciokularre() {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+sciokularre REGEX
+    Search for science books matching REGEX, select one and open with okular.
+
+    Options:
+        -a    Search all supported filetypes except images
+        -A    Search all supported filetypes
+EOF
+        return 0; fi;
+    if [[ $1 =~ ^-a$\|^-A$ ]]; then local opts="${1#-}"; shift; fi;
+    find -L ~/ebooks/science ~/ebooks/cs ~/ebooks/philosophy -regextype egrep -iregex ".*$1.*" |
+        {
+            if [[ $opts = a ]]; then
+                egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|xps|dvi|fb2|md)$';
+            elif [[ $opts = A ]]; then
+                egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|xps|dvi|fb2|md|tiff|jpg|png)$';
+            else
+                egrep -i '\.(pdf|ps|djvu|chm|cbz|cbr|epub|mobi|fb2)$';
+            fi;
+        } |
+        peco |
+        read -r f;
+    [[ -n $f ]] && kstart5 okular "$f";
+}
+
 # -------------------------------------------------------------------------------
 # ,---------------,
 # | PDF Functions |
