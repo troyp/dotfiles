@@ -113,6 +113,9 @@ set virtualedit=all          " Virtual editing in all modes (place cursor past l
 set backupdir=~/.vim/backup  " Backups in separate directory
 set scrolloff=8
 
+set nobackup
+set noswapfile
+
 autocmd BufNewFile,BufRead *.pentadactyl set filetype=vim
 autocmd BufNewFile,BufRead .pentadactylrc set filetype=vim
 autocmd BufNewFile,BufRead *.vimperator set filetype=vim
