@@ -83,9 +83,11 @@ NODE_PATH='$HOME/.npm-global/lib/node_modules'
 
 ubuntu_default_PATH=/usr/local/bin:/usr/bin:/bin:/usr/local/sbin:/usr/sbin:/sbin:/usr/games:/usr/local/games
 path-set-default() { export PATH=$ubuntu_default_PATH; }
+# PATH=$PATH:$ubuntu_default_PATH
 
 PATH=${PATH%:.}  # remove . from end of $PATH
 paths=(
+    /opt/texbin
     $HOME/bin
     $HOME/.local/bin
     $HOME/.local/bin/node
@@ -106,10 +108,13 @@ paths=(
 	  $HOME/gowork/bin
     $HOME/code/working
     $HOME/code/scripts
+    $HOME/node_modules/.bin
     $ANDROID_HOME/tools
     $ANDROID_HOME/platform-tools
     ${SCALA_HOME:-/opt/scala}/bin
 	  $JHOME/bin
+    $HOME/.local/share/flatpak/exports/share
+    /var/lib/flatpak/exports/share
     /usr/local/texlive/2014/bin/x86_64-linux
     /usr/local/go/bin
     /usr/share/vim/vim*/macros
@@ -174,6 +179,8 @@ paths=(
     /opt/xcape
     /opt/xulrunner
     /opt/zed
+    /opt/rakudo/bin
+    /opt/rakudo/share/perl6/site/bin
 )
 for i in "${paths[@]}"; do
     pathappend "$i"
