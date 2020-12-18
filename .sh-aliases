@@ -1391,6 +1391,8 @@ img-geometry () { convert "$1" -print "%wx%h\n" /dev/null; }
 alias imgview-trans='pqiv -c'
 alias feh-next='pkill --signal USR1 feh'
 alias feh-previous='pkill --signal USR2 feh'
+alias wkhtmltoimage="wkhtmltoimage --custom-header-propagation --custom-header User-Agent 'Mozilla/5.0 (X11; Linux x86_64; rv:64.0) Gecko/20100101 Firefox/64.0'"
+alias wkhtmltopdf="wkhtmltopdf --custom-header-propagation --custom-header User-Agent 'Mozilla/5.0 (X11; Linux x86_64; rv:64.0) Gecko/20100101 Firefox/64.0'"
 
 # -------------
 # MEDIA ALIASES
