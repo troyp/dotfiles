@@ -559,6 +559,7 @@ alias wgetstealth='wget -e robots=off -U=Mozilla'
 alias wgetmstealth='wgetm -e robots=off -U="Mozilla" -w 1'
 alias wgetmfstealth='wgetmf -e robots=off -U="Mozilla" -w 1'
 alias wget1='wget -kpEHN -rl 1'
+alias wget1samehost='wget -kpEN -rl 1'
 alias wget1stealthconv='wget -kpEHN -rl 1 -e robots=off -U=Mozilla -w 1'
 alias wget1flatstealthconv='wget -kpEHN -nd -rl 1 -e robots=off -U=Mozilla -w 1'
 alias wgetp='wget -kpEN'    # get page & prerequisites (same host only)
