@@ -893,6 +893,9 @@ alias system-crontab-edit='sudo vim /etc/crontab'
 # ---------------
 alias t=htop
 alias psall='ps aux'
+alias ps-cpu='ps aux --sort -%cpu,+cmd'
+alias ps-mem='ps aux --sort -%mem,+cmd'
+alias ps-recent='ps aux --sort -start_time,+cmd'
 alias psgrep='ps aux | grep'
 alias psname2pid='ps -o pid= -C'  # equivalent to pgrep
 alias psbyname='ps -C'
