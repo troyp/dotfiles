@@ -763,9 +763,12 @@ alias slimerjswfheadless='SLIMERJSLAUNCHER=/opt/waterfox/waterfox ~/node_modules
 # NETWORKING ALIASES.
 #--------------------
 alias tracert=traceroute
-alias ports='netstat -tunp'
+alias ports='sudo netstat -tuanp'
+alias ports-files='sudo lsof -Pn -i'
+lsport() { sudo lsof -i:$1; }
 # from: http://unix.stackexchange.com/questions/22615/
-alias ip-addr="lwp-request -o text checkip.dyndns.org | awk '{ print $NF }'"
+# alias myip="lwp-request -o text checkip.dyndns.org | awk '{ print $NF }'"
+alias myip="dig @resolver4.opendns.com myip.opendns.com +short"
 alias htheaders='lynx -dump -head'
 alias lstcpservers='sudo netstat -plentv'
 alias monitor-http-requests="sudo tcpdump -i eth0 -A -s 5000 'tcp port 80 and (((ip[2:2] - ((ip[0]&0xf)<<2)) - ((tcp[12]&0xf0)>>2)) != 0)'"
