@@ -367,6 +367,39 @@ EOF
     [[ -n $f ]] && kstart5 okular "$f";
 }
 
+rlist() {
+    f=`realpath "$1"`;
+    name=${f##*/};
+    ln -s "$f" ~/.readinglist;
+}
+
+rlistls() {
+    for f in ~/.readinglist/*; do realpath "$f"; done;
+}
+
+rlistadd() {
+    (
+        initd=`pwd`;
+        cd ~/.readinglist;
+        x=$(for f in "$initd"/*; do realpath "$f"; done | peco);
+        ln -s "$x";
+    )
+}
+
+rlistrun() {
+    (
+        cd ~/.readinglist;
+        rlistls | peco | read -r x; mimeopen -n "$x" &;
+    )
+}
+
+rlistrm() {
+    (
+        cd ~/.readinglist;
+        ls | peco | read -r x; rm "$x";
+    )
+}
+
 # -------------------------------------------------------------------------------
 # ,---------------,
 # | PDF Functions |
