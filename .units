@@ -1,0 +1,5 @@
+# ,-----------------------,
+# | GNU Units Definitions |
+# '-----------------------'
+
+mps       1 m/s        # unofficial abbreviation for metres per second
