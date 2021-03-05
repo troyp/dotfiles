@@ -392,12 +392,35 @@ alias mmv-symlink='mmv -a'    # symlink source to target
 # -------------------------
 # FILE SEARCH/INFO ALIASES.
 # -------------------------
+# ugrep aliases (taken from README)
+alias uq='ug -Q'       # short & quick query UI (interactive, uses .ugrep config)
+alias ux='ug -UX'      # short & quick binary pattern search (uses .ugrep config)
+alias uz='ug -z'       # short & quick compressed files and archives search (uses .ugrep config)
+#
+alias ugit='ug -R --ignore-files' # works like git-grep & define your preferences in .ugrep config
+#
+# alias grep='ugrep -G'    # search with basic regular expressions (BRE)
+alias egrep='ugrep -E'    # search with extended regular expressions (ERE)
+alias fgrep='ugrep -F'    # find string(s)
+alias pgrep='ugrep -P'    # search with Perl regular expressions
+alias xgrep='ugrep -W'    # search (ERE) and output text or hex for binary
+#
+alias zgrep='ugrep -zG'   # search compressed files and archives with BRE
+alias zegrep='ugrep -zE'   # search compressed files and archives with ERE
+alias zfgrep='ugrep -zF'   # find string(s) in compressed files and/or archives
+alias zpgrep='ugrep -zP'   # search compressed files and archives with Perl regular expressions
+alias zxgrep='ugrep -zW'   # search (ERE) compressed files/archives and output text or hex for binary
+#
+alias xdump='ugrep -X ""' # hexdump files without searching
+
+alias ugi='ug -i'
+
 # gr: pcregrep search - shows line number and color if output is to a terminal, just the text if output is to a pipe
 gr () { if [[ -t 1 ]]; then pcregrep -in --color=auto "$@"; else pcregrep -i --color=auto "$@"; fi; }
 alias grep='grep --color=auto'
 alias grepi='grep -i --color=auto'      # color, case-insensitive grep
 alias greps='grep -F'                   # fixed string grep
-alias grepis='grep -F'                  # fixed string grep (case-insensitive)
+alias grepis='grep -iF'                 # fixed string grep (case-insensitive)
 alias grepc='grep --color=always'       # color grep for pipes
 alias grepic='grep -i --color=always'   # color grep for pipes (case-insensitive)
 alias grepn='grep -Hn --color=always'   # grep with filename and line no.
