@@ -1233,7 +1233,7 @@ alias rkt='racket -e "(require readline)" -i'
 # the code to install scribble-emacs (from scribble docs) seems to be broken
 alias update-scribble-mode='racket -e "(require (planet neil/scribble-emacs:1:2/install-in-my-emacs))"'
 alias cppdecl=c++decl
-alias pcgrep='pkg-config --list-all | grep -i'
+alias pkggrep='pkg-config --list-all | grep -i'
 alias pkgc='pkg-config --libs'
 alias cpkgc='cmake --find-package -DLANGUAGE=C -DCOMPILER_ID=GNU -DMODE=COMPILE'   # eg. cpkgc -DNAME=LibXml2
 alias iconi='/opt/icon/bin/icon /opt/icon/pl/progs/qei.icn'  # REPL for Icon programming language
