@@ -4,6 +4,7 @@
 # load private aliases
 [[ -e ~/.sh-functions ]] && source ~/.sh-functions
 [[ -e ~/.sh-aliases-private ]] && source ~/.sh-aliases-private
+[[ -e ~/.sh-functions-install-software ]] && source ~/.sh-functions-install-software
 
 #-------------
 # ALIAS NOTES.
@@ -601,116 +602,6 @@ urllistlinks2() { wget -O - "$1" 2>&1 | grep -i "http:" | sed "s/^.*http/http/" 
 # -----------------
 # DOWNLOAD ALIASES.
 # -----------------
-# ===== download/install software =====
-alias dl-noice='git clone http://git.2f30.org/noice/'
-alias install-noice='dl-noice; cd noice; make; cp noice /opt/bin/'
-# https://calibre-ebook.com/download_linux
-alias install-calibre='sudo -v && wget -nv -O- https://download.calibre-ebook.com/linux-installer.py | sudo python -c "import sys; main=lambda:sys.stderr.write('"'"'Download failed\n'"'"'); exec(sys.stdin.read()); main()"'
-alias install-youtube-dl='sudo curl -L https://yt-dl.org/downloads/latest/youtube-dl -o /usr/local/bin/youtube-dl;sudo chmod a+rx /usr/local/bin/youtube-dl'
-# alias install-vimpager='(cd /opt && if [[ -d vimpager ]]; then rm -rI vimpager && git clone git://github.com/rkitover/vimpager && cd vimpager && sudo make install)'
-alias install-vimpager-deb='(cd /opt && if [[ -d vimpager ]]; then rm -rI vimpager; fi && git clone git://github.com/rkitover/vimpager && cd vimpager && sudo make install-deb)'
-alias install-qarma='(git clone https://github.com/luebking/qarma.git && cd qarma/qarma-zenity && qmake .. && make && install qarma /opt/bin || return 1)'
-alias install-tq='pip3 install https://github.com/plainas/tq/zipball/stable'  # select html by css selector
-alias oh-my-zsh-install-zsh-syntax-highlighting='git clone https://github.com/zsh-users/zsh-syntax-highlighting.git ${ZSH_CUSTOM:-~/.oh-my-zsh/custom}/plugins/zsh-syntax-highlighting; echo "Add to plugins list in .zshrc and re-source."'
-alias install-perlbrew='\curl -L https://install.perlbrew.pl | bash'
-alias install-pyenv='git clone https://github.com/yyuu/pyenv.git ~/.pyenv; git clone https://github.com/yyuu/pyenv-virtualenv.git ~/.pyenv/plugins/pyenv-virtualenv; echo "see github.com/yyuu/pyenv & github.com/yyuu/pyenv-virtualenv"'
-alias install-hy-here='mkdir hy; cd hy; pyvenv env; pip install git+https://github.com/hylang/hy.git'
-alias install-ocamlbrew='curl -kL https://raw.github.com/hcarty/ocamlbrew/master/ocamlbrew-install | bash'
-alias install-ocamlbrew-track='tail -f /tmp/ocamlbrew.*'
-alias install-opam='wget https://raw.github.com/ocaml/opam/master/shell/opam_installer.sh -O - | sh -s /usr/local/bin'
-alias install-hs-stack-1404='sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 575159689BEFB442; echo "deb http://download.fpcomplete.com/ubuntu trusty main"|sudo tee /etc/apt/sources.list.d/fpco.list; sudo apt-get update && sudo apt-get install stack -y'
-alias install-hs-stack-1604='sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv-keys 575159689BEFB442; echo "deb http://download.fpcomplete.com/ubuntu xenial main"|sudo tee /etc/apt/sources.list.d/fpco.list; sudo apt-get update && sudo apt-get install stack -y'
-alias   install-rust='curl https://static.rust-lang.org/rustup.sh -sSf | sh'
-alias uninstall-rust='curl https://static.rust-lang.org/rustup.sh -sSf | sh -s -- --uninstall'
-alias install-android-studio-32bit-prerequisites='sudo apt-get install libc6:i386 libstdc++6:i386 zlib1g:i386'
-alias install-kf5-krusader-prerequisites="sudo apt-get-install plasma-workspace libc6 libgcc1 libqt5dbus5 libqt5xml5 libqtcore4 libqt5gui5 libqt5widgets5 libqt5printsupport5 libstdc++6 arj zlib1g ark bzip2 cpio kate kmail kdiff3 kompare xxdiff konsole krename lhasa md5deep cfv p7zip rpm unace unrar unrar-free rar unzip zip build-essential libkf5parts-dev libkf5wallet-dev cmake libkf5xmlgui-dev extra-cmake-modules kdoctools-dev qt5-default plasma-framework-dev"
-alias install-wine='sudo apt-get install wine winbind playonlinux'
-alias nvm-copy-global='nodebindir=`which node`; nodedir=${nodebindir%/bin/node}; chmod -R 755 $nodedir/bin/*; sudo cp -r $nodedir/{bin,lib,share} /usr/local/'
-alias install-slop-prerequisites='sudo apt-get install cmake gengetopt libgl1-mesa-dev libglew-dev libglm-dev libimlib2-dev libxext-dev libxrandr-dev libxrender-dev'
-install-peco() {
-    tmpdir=`mktemp -d`;
-    cd $tmpdir;
-    github-latest-release -d peco peco
-    ( file * | grep -P '\bgzip\b' > /dev/null ) && tar xf * ;
-    ( file * | grep -P '\bzip\b' > /dev/null )  && unzip * ;
-    mv peco*/peco /opt/bin/;
-    mv peco*/README.md /opt/doc/peco-README.md;
-}
-install-buku() {
-    PARSED=$(getopt -n "$0" -o sd --long "sudo,deb"  -- "$@")
-    if [ $? -ne 0 ]; then echo "getopt error"; exit 1; fi
-    eval set -- "$PARSED"
-    while true; do
-        case "$1" in
-            -h|--help) cat <<EOF
-install-buku [-s][-d]
-    Options:
-        -s --sudo    use sudo with pip3 install
-        -d --deb     use .deb package
-EOF
-                       shift; ;;
-            -s|--sudo) use_sudo="true";
-                       shift; ;;
-            -d|--deb)  deb="true";
-                       shift; ;;
-            --) shift; break; ;;
-            *) echo "unrecognized option: $1"; return 1; ;;
-        esac
-    done
-    if [[ -n $use_sudo ]]; then
-        sudo pip3 install urllib3 cryptography beautifulsoup4 requests;
-    else
-        pip3 install urllib3 cryptography beautifulsoup4 requests
-    fi;
-    (
-        cd /opt;
-        if [[ -n $deb ]]; then
-            mkdir -p deb; cd deb/;
-            github-latest-release -d jarun Buku 'deb';
-            sudo dpkg -i buku*.deb;
-        else
-            git clone https://github.com/jarun/Buku.git;
-            cd Buku;
-            sudo make install;
-        fi
-    )
-}
-install-oil() {
-    sudo apt-get install jq
-    sudo apt-get install xsel
-    install-peco
-    (
-        cd /opt;
-        git clone https://github.com/AndreiUlmeyda/oil.git;
-        cd oil;
-        sudo make install;
-    )
-    echo "note: oil requires awk and jq be available in /bin/."
-    echo "Create symlinks or edit the shebang lines in the scripts in oil/src/."
-}
-install-nvm () {
-    export NVM_DIR="$HOME/.nvm" && (
-        git clone https://github.com/creationix/nvm.git "$NVM_DIR";
-        cd "$NVM_DIR";
-        git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" origin`;
-    ) && source "$NVM_DIR/nvm.sh";
-}
-upgrade-nvm () {
-    (
-        cd "$NVM_DIR";
-        git fetch origin;
-        git checkout `git describe --abbrev=0 --tags --match "v[0-9]*" origin`;
-    ) && source "$NVM_DIR/nvm.sh";
-}
-alias install-json-tools='for pkg in json underscore-cli prettyjson jsonlint; do npm install -g $pkg; done'
-alias install-vim-plug='curl -fLo ~/.vim/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
-alias install-pathogen='mkdir -p ~/.vim/autoload ~/.vim/bundle && curl -LSso ~/.vim/autoload/pathogen.vim https://tpo.pe/pathogen.vim'
-alias install-dein='mkdir ~/.vim/dein; ( cd ~/.vim/dein/; curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > installer.sh && sh installer.sh . && echo "run vim and execute :call dein#install()")'
-alias install-lein='cd `mktemp -d`; wget https://raw.github.com/technomancy/leiningen/stable/bin/lein; chmod a+x lein; sudo mv lein /opt/scripts/; cd -'
-# SCALA REPL
-alias install-ammonite='sudo curl -L -o /usr/local/bin/amm https://git.io/vdNv2 && sudo chmod +x /usr/local/bin/amm && amm'
-alias install-duktape='git clone https://github.com/svaarala/duktape.git;cd duktape;make dist;cd dist;make -f Makefile.sharedlibrary;sudo make -f Makefile.sharedlibrary install;make -f Makefile.cmdline;sudo ln -s `pwd`/duk /usr/local/bin/duk'
-# ===== other download aliases =====
 alias ytdl='youtube-dl -ci --all-subs --xattrs -o "%(title)s-%(id)s.%(ext)s"'
 alias ytdl_enus='youtube-dl -ci --write-sub --sub-format ass/srt/best --sub-lang enUS --xattrs -o "%(title)s-%(id)s.%(ext)s"'
 alias ytdlsubs='youtube-dl -t --all-subs --skip-download'
