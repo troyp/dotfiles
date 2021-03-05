@@ -687,6 +687,7 @@ alias htheaders='lynx -dump -head'
 alias lstcpservers='sudo netstat -plentv'
 alias monitor-http-requests="sudo tcpdump -i eth0 -A -s 5000 'tcp port 80 and (((ip[2:2] - ((ip[0]&0xf)<<2)) - ((tcp[12]&0xf0)>>2)) != 0)'"
 alias get-mtu='ifconfig | grep -i mtu'
+is404() { curl -s --head --request GET "$1" | grep -E "HTTP/[0-9.]+ 404" }
 
 # -------------
 # HELP ALIASES.
