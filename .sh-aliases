@@ -535,7 +535,27 @@ alias scifind='findiname3 ~/ebooks/science ~/ebooks/cs ~/ebooks/philosophy'
 alias scifindfile='findfileiname3 ~/ebooks/science ~/ebooks/cs ~/ebooks/philosophy'
 alias scifindre='findiregex3 ~/ebooks/science ~/ebooks/cs ~/ebooks/philosophy'
 alias scifindfilere='findfileiregex3 ~/ebooks/science ~/ebooks/cs ~/ebooks/philosophy'
-greptools() { grep -iP "$1" ~/tools/*.md; }
+greptools() {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+greptools [-I|-w]... pattern
+    Search the .md files in the ~/tools directory for a pattern.
+
+    Options:
+      -I         search is case-sensitive
+      (other)    as for grep
+EOF
+        return;
+    fi;
+
+    local case_opt_re="-I\b";
+    if [[ "$*" =~ "$case_opt_re" ]]; then
+        grep "$@" ~/tools/*.md;
+    else
+        grep -i "$@" ~/tools/*.md;
+    fi;
+}
+alias greptoolsw='greptools -w'
 alias dactylcmd="grep -HnoP 'commands.add\(\["'"'"\K[][a-z]+(?="'"'")' ~/repos/dactyl/common/modules/*.jsm ~/repos/dactyl/common/content/*.js | sed 's|/home/troy/repos/dactyl/common/||' | tr -d '[]' | grep -P"
 alias statf='stat --printf'    # eg. statf "%s" file (size in B), statf "%h" file (no. hard links)
 alias rgg='rg -pLS'             # ripgrep with pretty, symlinks and smartcase
