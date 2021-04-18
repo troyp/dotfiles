@@ -498,7 +498,7 @@ EOF
         return 0; fi;
     (
         s="${1:-${FFMAINPROFILE:-default}}";
-        echo ~/.mozilla/firefox/*.$s*/;
+        echo ~/.mozilla/firefox/*.$s/;
     )
 }
 fftempfiles () {
