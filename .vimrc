@@ -36,6 +36,7 @@ Plug 'tpope/vim-repeat'
 Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-scripts/YankRing'
+Plug 'zah/nim.vim'
 
 call plug#end()
 " PlugUpdate
@@ -489,3 +490,20 @@ endfunction
 function! LessInitFunc()
     map <f12> :call BindQuit()<cr>
 endfunction
+
+" -----------------------------------------------------
+
+" -------
+" nim.vim
+" -------
+fun! JumpToDef()
+  if exists("*GotoDefinition_" . &filetype)
+    call GotoDefinition_{&filetype}()
+  else
+    exe "norm! \<C-]>"
+  endif
+endf
+
+" Jump to tag
+nn <M-g> :call JumpToDef()<cr>
+ino <M-g> <esc>:call JumpToDef()<cr>i
