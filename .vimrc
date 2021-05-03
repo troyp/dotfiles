@@ -37,6 +37,8 @@ Plug 'tpope/vim-speeddating'
 Plug 'tpope/vim-unimpaired'
 Plug 'vim-scripts/YankRing'
 Plug 'zah/nim.vim'
+Plug 'lotabout/skim', { 'dir': '~/.skim', 'do': './install' }
+Plug 'neoclide/coc.nvim', {'branch': 'release'}
 
 call plug#end()
 " PlugUpdate
