@@ -447,6 +447,7 @@ command! ShowIndentOptions verbose set ai? cin? cink? cino? si? inde? indk?
 command! Nshow verbose nmap
 command! Vshow verbose vmap
 command! Ishow verbose imap
+command! Wrap set wrap!
 
 
 "------------------------------------------------------
