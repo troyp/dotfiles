@@ -369,21 +369,21 @@ list-dependencies-safe () {
     objdump -p $1 | grep NEEDED;
 }
 
-nthline() {
+lns() {
     if [[ "$1" =~ ^-h$\|^--help$ ]]; then
         cat <<EOF
-nthline LINENUM ...
+lns LINENUM ...
 
     Prints the specified line numbers of the piped input.
     Line numbers may be negative, in which case they count backward from the
     last line (which is -0). Ranges may also be used, separated by two dots
     (with no spaces), eg. with 100 lines of input:
 
-        nthline 2 3..5 -0..-2
+        lns 2 3..5 -0..-2
 
     is equivalent to:
 
-        nthline 2 3 4 5 100 99 98
+        lns 2 3 4 5 100 99 98
 EOF
         return 0; fi;
     (
@@ -400,7 +400,7 @@ EOF
 }
 
 copynthline () {
-    cat | nthline "$@" | ( while read -r x || [[ -n $x ]]; do printf "$x\n" | tee >(xsel -b); done );
+    cat | lns "$@" | ( while read -r x || [[ -n $x ]]; do printf "$x\n" | tee >(xsel -b); done );
 }
 
 catnth () {
