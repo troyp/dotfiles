@@ -399,6 +399,35 @@ EOF
     )
 }
 
+nthline() {
+    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
+        cat <<EOF
+nthline N [FILE]
+
+    Prints the specified line number N of FILE if given, or of stdin otherwise.
+
+    If N is negative (including -0), it indicates the number of lines from the
+    end of the file, eg -0 is the last line, -1 the second last.
+EOF
+        return 0;
+    fi;
+
+    local n="$1";
+    local file="$2";
+    if [[ -z "$file" ]]; then
+        file=`tempfile`;
+        cat > $file;
+    fi;
+
+    # handle negative indices
+    if [[ "$n" =~ -.* ]]; then
+        local N=`wc -l <"$file"`;
+        n="$(( $N - ${n#-} ))";
+    fi;
+
+    sed -- "${n}q;d" "$file";
+}
+
 copylines () {
     cat | lns "$@" | ( while read -r x || [[ -n $x ]]; do printf "$x\n" | tee >(xsel -b); done );
 }
