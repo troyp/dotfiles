@@ -399,7 +399,7 @@ EOF
     )
 }
 
-copynthline () {
+copylines () {
     cat | lns "$@" | ( while read -r x || [[ -n $x ]]; do printf "$x\n" | tee >(xsel -b); done );
 }
 
