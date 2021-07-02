@@ -649,6 +649,33 @@ remove-recursive () {
     find "$dir" -type d -exec rm {}/"$file" \;
 }
 
+git-overwrite-remote! () {
+    # overwrite REMOTE with current repo
+    remote=$1;
+    git push --set-upstream $remote master --force;
+}
+
+GITHUBUSERNAME="troyp";
+
+github-clone-wiki () {
+    # fork repo; start a wiki on forked repo (ie create initial page); then:
+    #     github-clone-wiki USER/REPO
+    # or:
+    #     github-clone-wiki USER REPO
+    if [[ $# > 1 ]]; then
+        user=$1;
+        repo=$2;
+    else
+        user=${1%/*};
+        repo=${1#*/};
+    fi;
+    git clone "https://github.com/$user/$repo.wiki.git";
+    pushd $repo.wiki;
+    git remote add forkedwiki "https://github.com/$GITHUBUSERNAME/$repo.wiki.git";
+    git push --set-upstream forkedwiki master --force;
+    popd;
+}
+
 github-co-subdir () {
     # Checkout subdirectory as svn repo (using svn since it's not supported by git)
     url=${1/tree\/master/trunk};
