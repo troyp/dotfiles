@@ -966,7 +966,7 @@ sortinplace() {
     done;
 }
 
-github-clone-with-wiki() {
+github-clone-repo-and-wiki() {
     repo="${1:-`xsel -ob`}";
     if [[ ! $repo =~ \.git$ ]]; then
         # if arg is missing .git ending, add it
