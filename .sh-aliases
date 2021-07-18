@@ -40,13 +40,13 @@ alias saptar='sudo apt-add-repository'
 sapsi() {
     apdn "$@" |
         iselect -kj:KEY_DOWN -kk:KEY_UP -ma |
-        cuts 2 |
+        \cuts 1 |
         xargs sudo apt-get install;
 }
 sapsdi() {
     aptitude search '?and('`tr " " "," <<<"$@"`')' |
         iselect -kj:KEY_DOWN -kk:KEY_UP -ma |
-        cuts 2 |
+        \cuts 1 |
         xargs sudo apt-get install;
 }
 # --- search ---
@@ -160,7 +160,7 @@ alias llatr='lll -Atr' # extra-detailed list sort by last modified time (most re
 alias llx='ls -lX'   # detailed list sort by extension
 alias lls='ls -lS'   # detailed list sort by file size
 alias la='ls -Al'    # detailed list dotfiles
-alias cutlsl='cuts 7'    # extract filename from ls -l output
+alias cutlsl='\cuts 6'    # extract filename from ls -l output
 alias lac='ls -Al --color=always'  # detailed list dotfiles, colored output to pipe
 llp () {
     [[ "$1" =~ ^--?h(elp)?$ ]] && echo "laless [DIR]\tShow long directory contents in pager." && return 0;
@@ -1088,7 +1088,7 @@ alias gitsetupignore="git config --global core.excludesfile '~/.gitignore'"
 alias gitcommits='git log --oneline --color | perl -ne '"'"'printf "HEAD~%-3d %s", ++$i, "$_"'"'"'| less -r'
 alias cbclone='ghq get `xsel -ob`'
 alias github-add-ssh='ssh-keyscan -t rsa github.com > ~/.ssh/known_hosts'
-alias github-goto-first-commit='git log --reverse | head -n1 | cuts 2 | read commit; firefox `git config --get remote.origin.url | sed -r "s/git@(.*):(.*).git/http:\/\/\/\1\/\2/"`/commit/$commit'
+alias github-goto-first-commit='git log --reverse | head -n1 | \cuts 1 | read commit; firefox `git config --get remote.origin.url | sed -r "s/git@(.*):(.*).git/http:\/\/\/\1\/\2/"`/commit/$commit'
 alias github-markdown-preview=grip
 github-get-issues() { http -a troyp -b "https://api.github.com/repos/$1/$2/issues?state=all" | json; }
 alias github-wget-issues="wget -c -nH -kKpN -rl inf -np --no-remove-listing -e robots=off -U='Mozilla' -w 1 --accept-regex='.*/issues.*|.*/pull.*|.*/compare/.*' --reject-regex '.*[?$].*'"
@@ -1370,7 +1370,6 @@ alias grepjapanese='grep -P "[\xe4-\xe9][\x80-\xbf][\x80-\xbf]|\xe3[\x81-\x83][\
 # PIPELINE OPERATORS
 # ------------------
 function nargs { echo $#; };
-alias cuts='cuts -0'
 alias iselect='iselect -kj:KEY_DOWN -kk:KEY_UP'
 alias choose='iselect -ma'
 alias vimselect='iselect -ma | xargs vim'
