@@ -1,5 +1,52 @@
-# ,-----------------------,
-# | GNU Units Definitions |
-# '-----------------------'
+#  ___________
+# |           |
+# | GNU Units |
+# |___________|
+
+# ,------------------,
+# | Unit Definitions |
+# '------------------'
 
 mps       1 m/s        # unofficial abbreviation for metres per second
+
+# ,--------------,
+# | Unit Aliases |
+# '-------------- '
+a0paper      A0paper
+a1paper      A1paper
+a2paper      A2paper
+a3paper      A3paper
+a4paper      A4paper
+a5paper      A5paper
+a6paper      A6paper
+a7paper      A7paper
+a8paper      A8paper
+a9paper      A9paper
+a10paper     A10paper
+b0paper      B0paper
+b1paper      B1paper
+b2paper      B2paper
+b3paper      B3paper
+b4paper      B4paper
+b5paper      B5paper
+b6paper      B6paper
+b7paper      B7paper
+b8paper      B8paper
+b9paper      B9paper
+b10paper     B10paper
+c0paper      C0paper
+c1paper      C1paper
+c2paper      C2paper
+c3paper      C3paper
+c4paper      C4paper
+c5paper      C5paper
+c6paper      C6paper
+c7paper      C7paper
+c8paper      C8paper
+c9paper      C9paper
+c10paper     C10paper
+
+# ,-------------------,
+# | Unit List Aliases |
+# '-------------------'
+!unitlist  time        year;day;hr;min;sec
