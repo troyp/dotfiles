@@ -360,10 +360,15 @@ alias ren-extract-number-no-ext='ren '\''s/[^1-9]*([0-9]+).*/$1/'\'
 alias ren-extract-number-no-ext-preview='ren -n '\''s/[^1-9]*([0-9]+).*/$1/'\'
 # ren-titlecase: note - removes newlines from titles
 alias ren-titlecase='ren '\''use Text::Autoformat; my @parts=split /\./; my $n=$#parts; my @newparts = map {autoformat( $_, {case=>qw(highlight)})} @parts[0..$n]; $newparts[$n] = $parts[$n]; $_ = join(".",@newparts); s/\n//g'\'
-alias ren-titlecase-preview='ren -n '\''use Text::Autoformat; my @parts=split /\./; my $n=$#parts; my @newparts = map {autoformat( $_, {case=>qw(highlight)})} @parts[0..$n]; $newparts[$n] = $parts[$n]; $_ = join(".",@newparts); s/\n//g'\'
+alias renn-titlecase='ren -n '\''use Text::Autoformat; my @parts=split /\./; my $n=$#parts; my @newparts = map {autoformat( $_, {case=>qw(highlight)})} @parts[0..$n]; $newparts[$n] = $parts[$n]; $_ = join(".",@newparts); s/\n//g'\'
+alias ren-titlecase-naive='ren "s/\B./lc($&)/eg, s/\.\w+$/lc($&)/e"'
+alias renn-titlecase-naive='ren -n "s/\B./lc($&)/eg, s/\.\w+$/lc($&)/e"'
 alias ren-manga-add-leading-zero='ren '\''s/第([0-9]+)巻/第0$1巻/'\'
+alias renn-manga-add-leading-zero='ren -n '\''s/第([0-9]+)巻/第0$1巻/'\'
 alias ren-parenthesize-filename="ren '"'s/^(.*)\.(?!gz$)(\w+(.gz)?)$/($1).$2/'"'"
-alias ren-author-dash-title-to-surname-first="ren -n '"'s/^(((([A-Za-z][-A-Za-z]*|[A-Za-z][.])[ ]?)[ ]?)+) ([A-Z][-a-z]*) - (.*)$/$5, $1 - $6/'"'"
+alias renn-parenthesize-filename="ren -n '"'s/^(.*)\.(?!gz$)(\w+(.gz)?)$/($1).$2/'"'"
+alias ren-author-dash-title-to-surname-first="ren '"'s/^(((([A-Za-z][-A-Za-z]*|[A-Za-z][.])[ ]?)[ ]?)+) ([A-Z][-a-z]*) - (.*)$/$5, $1 - $6/'"'"
+alias renn-author-dash-title-to-surname-first="ren -n '"'s/^(((([A-Za-z][-A-Za-z]*|[A-Za-z][.])[ ]?)[ ]?)+) ([A-Z][-a-z]*) - (.*)$/$5, $1 - $6/'"'"
 alias ren-increase-to-2-digits-before-ext="rename '"'s/(?<!\d)(\d)\.([^.]+)$/0$1.$2/'"' *"
 alias renn-increase-to-2-digits-before-ext="rename -n '"'s/(?<!\d)(\d)\.([^.]+)$/0$1.$2/'"' *"
 alias ren-3-increase-to-digits-before-ext="rename '"'s/(?<!\d)(\d)\.([^.]+)$/00$1.$2/'"' *; rename '"'s/(?<!\d)(\d\d)\.([^.]+)$/0$1.$2/'"' *"
