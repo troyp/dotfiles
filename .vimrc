@@ -103,8 +103,12 @@ set clipboard=unnamed
 
 " .GVIMRC: nnoremap <C-z> :"suspending disabled <CR>
 
+" Smart-case search "
+" * requires both ignorecase and smartcase to be set
+" * override with \c (insens) or \C (sens)
 set ignorecase
-set smartcase                " Smart-case search - override with \c or \C
+set smartcase
+
 set encoding=utf-8
 set cf                       " Enable error files & error jumping.
 set clipboard+=unnamed       " Yanks go on clipboard instead.
