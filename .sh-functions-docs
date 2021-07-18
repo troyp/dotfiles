@@ -400,6 +400,24 @@ rlistrm() {
     )
 }
 
+rlistsearch() {
+    (
+        find -L ~/.readinglist -type f -iname '*.txt' -printf "%f\n" |
+            grep -iP "$1" |
+            fzf --select-1 --exit-0 --delimiter "/" --with-nth "-1" --no-preview |
+            read -r x && percol "$HOME/.readinglist/$x";
+    )
+}
+
+rlistless() {
+    (
+        find -L ~/.readinglist -type f -iname '*.txt' -printf "%f\n" |
+            grep -iP "$1" |
+            fzf --select-1 --exit-0 --delimiter "/" --with-nth "-1" --no-preview |
+            read -r x && $PAGER "$HOME/.readinglist/$x";
+    )
+}
+
 # -------------------------------------------------------------------------------
 # ,---------------,
 # | PDF Functions |
