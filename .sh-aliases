@@ -546,13 +546,11 @@ greptools [-I|-w]... pattern
       (other)    as for grep
 EOF
         return;
-    fi;
-
-    local case_opt_re="-I\b";
-    if [[ "$*" =~ "$case_opt_re" ]]; then
-        grep "$@" ~/tools/*.md;
+    elif [[ "$1" =~ ^-I$ ]]; then
+        shift;
+        grep "$1" ~/tools/*.md;
     else
-        grep -i "$@" ~/tools/*.md;
+        grep -i "$1" ~/tools/*.md;
     fi;
 }
 alias greptoolsw='greptools -w'
