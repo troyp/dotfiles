@@ -396,21 +396,13 @@ noremap <C-_> :normal u<cr>
 " -----------
 " Smart Home.
 " -----------
-"
-" http://vim.wikia.com/wiki/Smart_home
-function! SmartHome()
-    let first_nonblank = match(getline('.'), '\S') + 1
-    if first_nonblank == 0
-        return col('.') + 1 >= col('$') ? '0' : '^'
-    endif
-    if col('.') == first_nonblank
-        return '0'  " if at first nonblank, go to start line
-    endif
-    return &wrap && wincol() > 1 ? 'g^' : '^'
-endfunction
-"
-noremap <expr> <silent> <C-a> SmartHome()
-imap <silent> <C-a> <C-O><Home>
+" https://github.com/m-pilia/vim-smarthome
+nmap <silent><C-a> :call smarthome#SmartHome('n')<cr>
+nmap <silent><C-e> :call smarthome#SmartEnd('n')<cr>
+imap <silent><C-a> <C-r>=smarthome#SmartHome('i')<cr>
+imap <silent><C-e> <C-r>=smarthome#SmartEnd('i')<cr>
+vmap <silent><C-a> <Esc>:call smarthome#SmartHome('v')<cr>
+vmap <silent><C-e> <Esc>:call smarthome#SmartEnd('v')<cr>
 
 " ------
 " Regex.
