@@ -943,8 +943,15 @@ alias ssh-addkey='ssh-add `ssh-choose-key`'
 # SETTINGS ALIASES.
 #------------------
 alias pralias='cat $SH_ALIAS_FILE'
-alias search-my-commands='print-my-commands 2>/dev/null | grep -i'
+# alias search-my-commands='print-my-commands 2>/dev/null | grep -i'
 alias smc=search-my-commands
+search-my-commands() {
+    if [[ "$1" =~ ^-l$\|^--less$\|^--more$\|^--pager$ ]]; then
+        print-my-commands | grep -i "${@:2}" | $PAGER;
+    else
+        print-my-commands | grep -i "$@";
+    fi;
+}
 alias editalias='${EDITOR:-vim} $SH_ALIAS_FILE; source $SH_ALIAS_FILE'
 alias xres='xrdb ~/.Xresources'
 alias lspath='echo $PATH|tr ":" "\n"'
