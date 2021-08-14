@@ -165,11 +165,31 @@ bindkey -s '^X^I^Z' "~/.oh-my-zsh/custom/"
 
 bindkey -s "^X^H^K" "viewcompose\n"
 
-# ,---------,
-# | vi-mode |
-# '---------'
-bindkey -v
 
+# -------------------------------------------------------------------------------
+# ,--------------,
+# | vi-mode init |
+# '--------------'
+bindkey -v
+# Mode switch delay
+KEYTIMEOUT=5
+# cursor shape
+function zle-keymap-select {
+    if [[ ${KEYMAP} == vicmd ]] || [[ $1 = 'block' ]]; then
+        echo -ne '\e[1 q';
+    elif [[ ${KEYMAP} == main ]] || [[ ${KEYMAP} == viins ]] || [[ ${KEYMAP} = '' ]] || [[ $1 = 'beam' ]]; then
+        echo -ne '\e[5 q';
+    fi
+}
+zle -N zle-keymap-select
+function beam-cursor {
+    echo -ne '\e[5 q';
+}
+precmd_functions+=(beam-cursor);
+
+# ,------------------,
+# | vi-mode bindings |
+# '------------------'
 bindkey -a "U" redo
 bindkey -v "^P" history-beginning-search-backward
 bindkey -a "^P" history-beginning-search-backward
