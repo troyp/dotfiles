@@ -1074,21 +1074,24 @@ alias has-64bit-kernel='[[ `uname -m` =~ 64 ]]'
 alias xcape-restart="pkill -9 xcape; xcape -t 300 -e 'Control_L=Escape;Super_R=Menu' &"
 alias kbreset='pkill -9 xcape; source ~/.sh-profile'
 alias users-all='cut -d: -f1 /etc/passwd'
-winid() {
-    xwininfo -name "$1" | grep -oP "(?<=Window id: )0x[0-9a-f]+";
-}
-alias xwinprocid="xprop _NET_WM_PID | sed 's/.*= *//'"
 alias lsgroups='getent groups'
 alias lsusers='bash -c "compgen -u"'
 alias dmesgless='dmesg --color=always | less -R'
 alias printdatetime='date +"%a %d %b・%l:%M%P"'
-alias lswindows='wmctrl -lpG'    # win-id, desktop# PID, x-off, y-off, w, h, machine-name, rest=title
 
-# --------------
-# SWITCH WINDOWS
-# --------------
+# -------
+# WINDOWS
+# -------
+winid() { xwininfo -name "$1" | grep -oP "(?<=Window id: )0x[0-9a-f]+"; }
+winid-select() { xwininfo | grep -oP "(?<=Window id: )0x[0-9a-f]+"; }
+alias winid-active='xprop -root 32x '"'"'\t$0'"'"' _NET_ACTIVE_WINDOW|cut -f2'
+alias xwinprocid="xprop _NET_WM_PID | sed 's/.*= *//'"
+alias lswindows='wmctrl -lxpG'    # win-id, desktop#, PID, x-off, y-off, w, h, wm_class, machine-name, rest=title
 alias gotowaterfox='wmctrl -F -x -a Navigator.Waterfox'
 alias gotoemacs='wmctrl -F -x -a emacs.Emacs'
+alias winmenu='wmctrl -ia $(wmctrl -xl|\cuts 0,2,4|column -t|percol|\cuts 0)'
+alias currentapp-winmenu='wmctrl -ia $(wmctrl -xl|\cuts 0,2,4-14|column -t|grep `currentapp-winclass`|percol|\cuts 0)'
+alias currentapp-winclass='xprop -id $(xprop -root 32x '"'"'\t$0'"'"' _NET_ACTIVE_WINDOW|cut -f2) _OB_APP_CLASS | grep -oP '"'"'(?<=_OB_APP_CLASS\(UTF8_STRING\) = ")[^"]+'"'"
 
 # ----------------
 # GIT/VCS ALIASES.
