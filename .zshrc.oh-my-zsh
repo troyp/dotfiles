@@ -165,6 +165,8 @@ bindkey -s '^X^I^Z' "~/.oh-my-zsh/custom/"
 
 bindkey -s "^X^H^K" "viewcompose\n"
 
+bindkey -a '^X^Q' push-line-or-edit
+bindkey -v '^X^U' kill-whole-line
 
 # -------------------------------------------------------------------------------
 # ,--------------,
@@ -328,6 +330,11 @@ bindkey -a -s '^X^I^Z' "~/.oh-my-zsh/custom/"
 
 bindkey -v -s "^X^H^K" "viewcompose\n"
 bindkey -a -s "^X^H^K" "viewcompose\n"
+
+bindkey -v '^X^Q' push-line-or-edit
+bindkey -a '^X^Q' push-line-or-edit
+bindkey -v '^X^U' kill-whole-line
+bindkey -a '^X^U' kill-whole-line
 
 # emacs keys for vi-mode
 bindkey -v "^A" vi-beginning-of-line
