@@ -81,7 +81,7 @@ case "$TERM" in
 	      PS1="$col2┌─($col1$col2\!|$col1 \s--\j jobs--\$(date \"+%a, %d %b %y\")$col2)─\${fill}─($col1\$newPWD$col2)─┐\n$col2└─($col1\$(date \"+%H:%M\")$col2)─>$white "
 	      ;;
     xterm|terminator|xterm-256color)
-	      PS1="$mblue┌─($orange$mblue\!|$orange \s--\j jobs--\$(date \"+%a, %d %b %y\")$mblue)─\${fill}─($orange\$newPWD$mblue)─┐\n$mblue└─($orange\$(date \"+%H:%M\")$mblue)─>$unset "
+	      PS1="$mblue┌─($orange\$(date '+%H:%M, %a %d %b %y')$mblue)─\${fill}─($orange$PWD$mblue)─┐\n$mblue└─($baqua\#$mblue)─>$unset "
 	      ;;
     rxvt-cygwin-native)
 	      PS1=">> "
@@ -99,8 +99,7 @@ $mblue)─┐\n$mblue└─($orange\$(date \"+%H:%M\") \$$mblue)─>$white "
 )-|\n|-(\$(date \"+%H:%M\") \$)-> "
         ;;
     *)
-	      PS1="┌─(\u@\h \$(date \"+%a, %d %b %y\"))─\${fill}─(\$newPWD\
-)─┐\n└─(\$(date \"+%H:%M\") \$)─> "
+	      PS1="$mblue┌─($orange\$(date '+%H:%M, %a %d %b %y')$mblue)─\${fill}─($orange$PWD$mblue)─┐\n$mblue├─($baqua\#$mblue)─>$unset "
 	      ;;
 esac
 
