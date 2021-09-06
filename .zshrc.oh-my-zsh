@@ -368,7 +368,7 @@ bindkey -a '^Z' fgwidget
 launchterminal() { x-terminal-emulator & }
 zle -N launchterminal
 # (roxterm etc)
-bindkey '^[[;12S' launchterminal
+bindkey '^[[1;2S' launchterminal
 bindkey -v '^[[;1S' launchterminal
 bindkey -a '^[[;1S' launchterminal
 # (konsole)
