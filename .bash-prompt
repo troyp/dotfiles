@@ -6,32 +6,31 @@
 ## remove cruft
 #############
 function pre_prompt {
-newPWD="${PWD}"
-user="whoami"
-host=$(echo -n $HOSTNAME | sed -e "s/[\.].*//")
-datenow=$(date "+%a, %d %b %y")
-if [[ $TERM == "cygwin" ]]
-then taskbarsize=3
-else taskbarsize=
-fi
+    newPWD="${PWD}"
+    user="whoami"
+    host=$(echo -n $HOSTNAME | sed -e "s/[\.].*//")
+    datenow=$(date "+%a, %d %b %y")
+    if [[ $TERM == "cygwin" ]]; then
+        taskbarsize=3
+    else
+        taskbarsize=
+    fi
 
-### FIXME ###
-## rewrite promptsize to give correct lengths of history no, no. jobs, shell name
-## at the moment they're just set manually
-#############
-let promptsize=$(echo -n "┌(nnnn|bash--n jobs--ddd, DD mmm YY)(${PWD})-┐" \
-                 | wc -c | tr -d " ")
+    ### FIXME ###
+    ## rewrite promptsize to give correct lengths of history no, no. jobs, shell name
+    ## at the moment they're just set manually
+    #############
+    let promptsize=$(echo -n "┌(HH:MM, ddd DD mmm YY)(${PWD})-┐" | wc -c | tr -d " ")
 
-let fillsize=$((COLUMNS-promptsize-taskbarsize))
+    let fillsize=$((COLUMNS-promptsize-taskbarsize))
 
-fill=$(printf "%0.s─" $(seq $fillsize))
-asciifill=$(printf "%0.s-" $(seq $fillsize))
+    fill=$(printf "%0.s─" $(seq $fillsize))
+    asciifill=$(printf "%0.s-" $(seq $fillsize))
 
-if [ "$fillsize" -lt "0" ]
-then
-    let cutt=3-${fillsize}
-    newPWD="...$(echo -n $PWD | sed -e "s/\(^.\{$cutt\}\)\(.*\)/\2/")"
-fi
+    if [ "$fillsize" -lt "0" ]; then
+        let cutt=3-${fillsize}
+        newPWD="...$(echo -n $PWD | sed -e "s/\(^.\{$cutt\}\)\(.*\)/\2/")"
+    fi
 }
 
 PROMPT_COMMAND=pre_prompt
@@ -77,32 +76,32 @@ export   unset="\[\033[0m\]"
 
 case "$TERM" in
     cygwin)
-	col1=$bgreen
-	col2=$baqua
-	PS1="$col2┌─($col1$col2\!|$col1 \s--\j jobs--\$(date \"+%a, %d %b %y\")$col2)─\${fill}─($col1\$newPWD$col2)─┐\n$col2└─($col1\$(date \"+%H:%M\")$col2)─>$white "
-	;;
+	      col1=$bgreen
+	      col2=$baqua
+	      PS1="$col2┌─($col1$col2\!|$col1 \s--\j jobs--\$(date \"+%a, %d %b %y\")$col2)─\${fill}─($col1\$newPWD$col2)─┐\n$col2└─($col1\$(date \"+%H:%M\")$col2)─>$white "
+	      ;;
     xterm|terminator|xterm-256color)
-	PS1="$mblue┌─($orange$mblue\!|$orange \s--\j jobs--\$(date \"+%a, %d %b %y\")$mblue)─\${fill}─($orange\$newPWD$mblue)─┐\n$mblue└─($orange\$(date \"+%H:%M\")$mblue)─>$unset "
-	;;
+	      PS1="$mblue┌─($orange$mblue\!|$orange \s--\j jobs--\$(date \"+%a, %d %b %y\")$mblue)─\${fill}─($orange\$newPWD$mblue)─┐\n$mblue└─($orange\$(date \"+%H:%M\")$mblue)─>$unset "
+	      ;;
     rxvt-cygwin-native)
-	PS1=">> "
-	;;
+	      PS1=">> "
+	      ;;
     screen)
-	PS1="$mblue┌─($orange\u@\h \$(date \"+%a, %d %b %y\")$mblue)─\${fill}─($orange\$newPWD\
+	      PS1="$mblue┌─($orange\u@\h \$(date \"+%a, %d %b %y\")$mblue)─\${fill}─($orange\$newPWD\
 $mblue)─┐\n$mblue└─($orange\$(date \"+%H:%M\") \$$mblue)─>$white "
-	;;
+	      ;;
     eterm-color|Eterm)
-	# emacs/ansi-term emacs/multi-term
-	PS1=">> "
-	;;
+	      # emacs/ansi-term emacs/multi-term
+	      PS1=">> "
+	      ;;
     linux)
         PS1="|-(\u@\h \$(date \"+%a, %d %b %y\"))-\${asciifill}-(\$newPWD\
 )-|\n|-(\$(date \"+%H:%M\") \$)-> "
         ;;
     *)
-	PS1="┌─(\u@\h \$(date \"+%a, %d %b %y\"))─\${fill}─(\$newPWD\
+	      PS1="┌─(\u@\h \$(date \"+%a, %d %b %y\"))─\${fill}─(\$newPWD\
 )─┐\n└─(\$(date \"+%H:%M\") \$)─> "
-	;;
+	      ;;
 esac
 
 # GNU octave: the following command gives a similar prompt
