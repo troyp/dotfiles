@@ -1,0 +1,78 @@
+#                                                            -*- shell-script -*-
+
+autoload -Uz colors && colors
+TERM=xterm-256color
+
+promptlen() {
+    # http://stackoverflow.com/questions/10564314/
+    local zero='%([BSUbfksu]|([FBK]|){*})';
+    local plain=${(S%%)1//$~zero/};
+    echo ${#plain};
+}
+strrep() { printf "$1%.0s" {1..$2}; }
+
+# override to perform command for each new line in shell
+prompt_hook() { ; }
+
+git-dir-is-dirty() { test $(git diff --shortstat 2>>/dev/null | wc -l) != 0; }
+
+# https://gist.github.com/msabramo/2355834
+function git_prompt_info() {
+    ref=$(git symbolic-ref HEAD 2> /dev/null) || return;
+    echo "$ZSH_THEME_GIT_PROMPT_PREFIX${ref#refs/heads/}$ZSH_THEME_GIT_PROMPT_SUFFIX";
+}
+
+get_prompt() {
+    # inspired by Ayatoli's prompt (ayozone.org)
+    local error="$?";
+
+    # $PROMPT_ADJUST variable reduces prompt length
+    local promptadjust=${PROMPT_ADJUST:-0};
+    local cols="${4:-$COLUMNS}";
+    local left_width=$((cols - promptadjust));
+
+    local FG1="%F{111}";
+    local FG2="%F{$2}";
+    local FG3="%F{047}";
+    local FG4="%F{$2}";     # specialized for git repos
+    local FGe="%F{208}";
+    local FGs="%F{047}";
+    if `git-dir-is-dirty`; then
+        FG4="$FGe";
+    elif [[ -d .git ]]; then
+        FG4="$FGs";
+    fi
+
+    local datestr="$(date '+%H:%M, %a %d %b %y')";
+    local datestrlen=`promptlen "$datestr"`;
+    local dirstr="${PWD/$HOME/~}";
+
+    # ==================
+    # ADJUSTED DIRECTORY
+    # ==================
+    maxlen=$((left_width - 40));
+    local dirstr_adj="${dirstr: -$maxlen:$maxlen}";
+
+    local left_col="%B$FG4┏━$FG2❰%b$FG1$datestr%B$FG2❱━❰%b$FG1$dirstr_adj%B$FG2❱━";
+
+    if (( error > 0 )); then
+        local left_error_suffix="━━━❰ %b${FGe}✗ error: $error%B $FG2❱━";
+    else
+        local left_error_suffix="━━━❰ ${FGs}✔ $FG2❱━";
+    fi
+    # 18 chars (error) or 9 chars (no error)
+
+    local left_len=`promptlen $left_col$left_error_suffix`;
+    local left_padding=`strrep '━' $((left_width - left_len - 1))`
+    # local left_padded="$left${left_padding}┫";
+    local left_col_padded="$left_col$left_error_suffix${left_padding}┫";
+    # (28 + 18 + 1 =) 47 chars + padding
+    local left2_col="$FG4┗━$FG2❰%b$fg[green]%!%B$FG2❱━❱❱";
+
+    eval "$prompt_hook";
+
+    printf "%s\n%s" "$left_col_padded" "$left2_col %{$reset_color%}";
+}
+
+setopt prompt_subst
+PROMPT="\$(get_prompt 111 003 047)";
