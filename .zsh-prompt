@@ -39,12 +39,15 @@ get_prompt() {
     local FG2="%F{$2}";
     local FG3="%F{047}";
     local FG4="%F{$2}";     # specialized for git repos
-    local FGe="%F{208}";
-    local FGs="%F{047}";
+    local FGtick="%F{208}";
+    local FGcross="%F{047}";
+    local FGdirty="%F{208}";
+    local FGclean="%F{047}";
+
     if `git-dir-is-dirty`; then
-        FG4="$FGe";
+        FG4="$FGdirty";
     elif [[ -d .git ]]; then
-        FG4="$FGs";
+        FG4="$FGclean";
     fi
 
     local datestr="$(date '+%H:%M, %a %d %b %y')";
@@ -60,9 +63,9 @@ get_prompt() {
     local left_col="%B$FG4┏━$FG2❰%b$FG1$datestr%B$FG2❱━❰%b$FG1$dirstr_adj%B$FG2❱━";
 
     if (( error > 0 )); then
-        local left_error_suffix="━━━❰ %b${FGe}✗ error: $error%B $FG2❱━";
+        local left_error_suffix="━━━❰ %b${FGcross}✗ error: $error%B $FG2❱━";
     else
-        local left_error_suffix="━━━❰ ${FGs}✔ $FG2❱━";
+        local left_error_suffix="━━━❰ ${FGtick}✔ $FG2❱━";
     fi
     # 18 chars (error) or 9 chars (no error)
 
