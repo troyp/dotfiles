@@ -35,9 +35,9 @@ get_prompt() {
     local cols="${4:-$COLUMNS}";
     local left_width=$((cols - promptadjust));
 
-    local FG1="%F{111}";
+    local FG1="%F{$1}";
     local FG2="%F{$2}";
-    local FG3="%F{047}";
+    local FG3="%F{$3}";
     local FG4="%F{$2}";     # specialized for git repos
     local FGtick="%F{208}";
     local FGcross="%F{047}";
@@ -89,4 +89,4 @@ get_prompt() {
 }
 
 setopt prompt_subst
-PROMPT="\$(get_prompt 111 003 047)";
+PROMPT="\$(get_prompt 111 011 047)";
