@@ -24,6 +24,10 @@ function git_prompt_info() {
 
 get_prompt() {
     # inspired by Ayatoli's prompt (ayozone.org)
+
+    # ,-----------,
+    # | VARIABLES |
+    # '-----------'
     local error="$?";
 
     # $PROMPT_ADJUST variable reduces prompt length
@@ -47,9 +51,9 @@ get_prompt() {
     local datestrlen=`promptlen "$datestr"`;
     local dirstr="${PWD/$HOME/~}";
 
-    # ==================
-    # ADJUSTED DIRECTORY
-    # ==================
+    # ,--------,
+    # | LINE 1 |
+    # '--------'
     maxlen=$((left_width - 40));
     local dirstr_adj="${dirstr: -$maxlen:$maxlen}";
 
@@ -69,6 +73,13 @@ get_prompt() {
     # (28 + 18 + 1 =) 47 chars + padding
     local left2_col="$FG4┗━$FG2❰%b$fg[green]%!%B$FG2❱━❱❱";
 
+    # ,--------,
+    # | LINE 2 |
+    # '--------'
+
+    # ,------,
+    # | MAIN |
+    # '------'
     eval "$prompt_hook";
 
     printf "%s\n%s" "$left_col_padded" "$left2_col %{$reset_color%}";
