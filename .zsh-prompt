@@ -74,11 +74,12 @@ get_prompt() {
     # local left_padded="$left${left_padding}┫";
     local left_col_padded="$left_col$left_error_suffix${left_padding}┫";
     # (28 + 18 + 1 =) 47 chars + padding
-    local left2_col="$FG4┗━$FG2❰$fg[green]%!$FG2❱━❱❱";
 
     # ,--------,
     # | LINE 2 |
     # '--------'
+    # %{...%nG%} tells the shell that ... is n chars long
+    local left2_col="$FG4%{┗━$FG2❰$fg[green]%3G%}%!$FG2%{❱━❱❱%4G%}";
 
     # ,------,
     # | MAIN |
