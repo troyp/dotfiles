@@ -60,10 +60,10 @@ get_prompt() {
     maxlen=$((left_width - 40));
     local dirstr_adj="${dirstr: -$maxlen:$maxlen}";
 
-    local left_col="%B$FG4┏━$FG2❰%b$FG1$datestr%B$FG2❱━❰%b$FG1$dirstr_adj%B$FG2❱━";
+    local left_col="$FG4┏━$FG2❰$FG1$datestr$FG2❱━❰$FG1$dirstr_adj$FG2❱━";
 
     if (( error > 0 )); then
-        local left_error_suffix="━━━❰ %b${FGcross}✗ error: $error%B $FG2❱━";
+        local left_error_suffix="━━━❰ ${FGcross}✗ error: $error $FG2❱━";
     else
         local left_error_suffix="━━━❰ ${FGtick}✔ $FG2❱━";
     fi
@@ -74,7 +74,7 @@ get_prompt() {
     # local left_padded="$left${left_padding}┫";
     local left_col_padded="$left_col$left_error_suffix${left_padding}┫";
     # (28 + 18 + 1 =) 47 chars + padding
-    local left2_col="$FG4┗━$FG2❰%b$fg[green]%!%B$FG2❱━❱❱";
+    local left2_col="$FG4┗━$FG2❰$fg[green]%!$FG2❱━❱❱";
 
     # ,--------,
     # | LINE 2 |
