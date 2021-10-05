@@ -893,8 +893,8 @@ alias fless='less +F'
 alias vless=/usr/share/vim/vim74/macros/less.sh
 alias vless_='vim -u /usr/share/vim/vim74/macros/less.vim'
 alias vmore='vim -u $HOME/.vim/vimrc.more'
-alias cless="LESSOPEN='|~/.lessfilter %s' less -R"
 alias cless_sh="LESSOPEN='| /usr/share/source-highlight/src-hilite-lesspipe.sh %s"
+alias cless="LESSOPEN='|~/.lessfilter_pygmentize %s' less -R"
 alias lesr='less -R'   # raw ANSI color escapes
 alias lesrr='less -r'  # raw control chars
 alias lessprint='less -X'  # no termcap init/deinit - prevents deinit clearing screen after less
