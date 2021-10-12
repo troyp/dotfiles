@@ -1390,7 +1390,7 @@ alias unique='awk '"'"'!x[$0]++'"'"''
 # alias maplines='xargs -d "\n" -n 1'
 alias maplines='xargs -L1'
 # eg.     ls|dolines printf "`pwd`/$x\n"; done
-alias dolines='while read -r x || [[ -n $x ]]; do'
+alias dolines='while IFS="" read -r x || [[ -n $x ]]; do'
 alias dolinesr='tacn | dolines'
 alias dopath='echo "$PATH"|prettypath|dolines'
 # uniqdirs: print a list of target directories (ie. resolve symlinks) of files
