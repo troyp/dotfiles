@@ -1,0 +1,15 @@
+[Desktop Action copy-paths]
+
+Exec=printf "%s" "%F" | xclip -i
+
+Name=Copy Paths
+Icon=edit-copy
+
+[Desktop Entry]
+Actions=copy-paths
+
+MimeType=application/octet-stream
+
+ServiceTypes=KonqPopupMenu/Plugin
+Type=Service
+X-KDE-Priority=TopLevel
