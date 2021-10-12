@@ -803,14 +803,6 @@ name-preceding () {
     )
 }
 
-files-from-url () {
-    # convert a list of 'file://' URLs to filenames
-    sep="${1-\n}";
-    while read -r f; do
-        printf "${f#file://}$sep";
-    done;
-}
-
 rename-prefix-dir () {
     for arg in "$@"; do
         filename="${arg##*/}";
