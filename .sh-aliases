@@ -469,6 +469,7 @@ alias locatea='locate -A'        # locate files matching ALL patterns
 alias locatei='locate -i'        # locate files ignoring case`
 locateprint() { locate "$@" | printfiles; }
 locateview() { locate "$@" | viewfiles; }
+alias fd='fd -I'    # do not respect ignore files (eg .gitignore)
 alias findfilename='find . -type f -iname'   # find files with (case-insens) name PATTERN.
 alias findinwd='find . -maxdepth 1'      # find in current directory (non-recursive)
 alias findfileinwd='find . -maxdepth 1 -type f'      # find in current directory (non-recursive)
