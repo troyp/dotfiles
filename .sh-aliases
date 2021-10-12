@@ -1336,6 +1336,15 @@ alias pdfcrop-quench=pdf_quench
 alias briss='java -jar /opt/jar/briss-0.9/briss-0.9.jar'
 alias pdftotextl='pdftotext -layout'
 
+# ----------------
+# DOCUMENT ALIASES
+# ----------------
+alias rtf2txt='unrtf --text'
+alias libreconv=unoconv    # convert between libreoffice supported formats
+alias libreconv-pdf='unoconv -f pdf'    # convert from libreoffice supported format to pdf
+alias tika="java -jar /opt/jar/tika-app*.jar"
+alias totext='tika -T'  # `cat infile | totext` or `totext infile`
+
 # -------------
 # IMAGE ALIASES
 # -------------
@@ -1361,13 +1370,6 @@ alias copyq-img="copyq read image/png"
 # -------------
 alias audioshowstreams='ffprobe -show_streams -select_streams a -loglevel error'
 alias videoshowstreams='ffprobe -show_streams -loglevel error'
-
-# -------------------
-# FILE FORMAT ALIASES
-# -------------------
-alias rtf2txt='unrtf --text'
-alias libreconv=unoconv    # convert between libreoffice supported formats
-alias libreconv-pdf='unoconv -f pdf'    # convert from libreoffice supported format to pdf
 
 # ----------------
 # JAPANESE ALIASES
