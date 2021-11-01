@@ -39,8 +39,8 @@ get_prompt() {
     local FG2="%F{$2}";
     local FG3="%F{$3}";
     local FG4="%F{$2}";     # specialized for git repos
-    local FGtick="%F{208}";
-    local FGcross="%F{047}";
+    local FGtick="%F{047}";
+    local FGcross="%F{208}";
     local FGdirty="%F{208}";
     local FGclean="%F{047}";
 
