@@ -939,6 +939,7 @@ alias untarbz2='tar xjvf'
 alias untarxz='tar xJvf'
 alias untar='tar xaf'    # unarchive - multiple formats  # use unar instead
 alias lstar='tar taf'    # list contents - multiple formats
+alias ungz='gunzip -c'   # decompress .gz file to stdout
 alias 7zip='7z a -tzip'  # 7zip myarchive.zip myarchive/
 # tgz [name [files]]    make .tgz out of files
 # unar unarchive multiple formats
