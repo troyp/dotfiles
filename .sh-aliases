@@ -1657,6 +1657,7 @@ alias sc-tutorial='sc /usr/share/doc/sc/tutorial.sc'
 alias rofii='rofi -combi-modi window,drun,run -show combi -modi combi'   # general purpose launcher
 alias install-avidump2='sudo apt-get install libmono-system4.0-cil libmono-corlib4.5-cil libmono-system-xml-linq4.0-cil'
 alias hotshell='/usr/bin/hs'   # clash with NPM module executable
+alias tv=tidy-viewer
 alias xterm="xterm -fa 'xft:monospace:size=11' -fd 'xft:Droid Sans Japanese:style=Regular'"
 
 # -------
