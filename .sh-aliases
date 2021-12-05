@@ -1659,6 +1659,14 @@ alias install-avidump2='sudo apt-get install libmono-system4.0-cil libmono-corli
 alias hotshell='/usr/bin/hs'   # clash with NPM module executable
 alias tv=tidy-viewer
 alias xterm="xterm -fa 'xft:monospace:size=11' -fd 'xft:Droid Sans Japanese:style=Regular'"
+alias disks='lsblk -fp -o NAME,STATE,TYPE,FSTYPE,SIZE,LABEL,MOUNTPOINT,UUID,PARTUUID,MODEL,SERIAL'      # Show all disks (including LVM volumes)
+disks_fstab_data() {    # print data for /etc/fstab
+    lsblk -dpP -o NAME,MODEL,SERIAL | sed -E 's/^NAME="(\S+)"/# \1/';
+    local parts=`lsblk -P | grep -P 'TYPE="(part|lvm)"'|sed -E 's/^NAME="([^"]+)".*/\1/'|tr '\n' '|'`;
+    lsblk -lp -o NAME,UUID,MOUNTPOINT,FSTYPE | grep -P ${l%|} | sed -E 's/^(\S+) +/# \1\n/';
+}
+alias lpportrait='lp -o fit-to-page -o media=A4'
+alias lplandscape='lp -o landscape -o fit-to-page -o media=A4'
 
 # -------
 # NOVELTY
