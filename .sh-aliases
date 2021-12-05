@@ -1528,6 +1528,10 @@ alias concat='tr -d "\n"'        # join lines into string
 alias tabify-table="perl -ple 's/\s+/\t/g'"    # whitespace-delim table -> tab-delim
 alias number-lines='perl -wnle '\''print "$.\t$_"'\'    # add numbers to left of lines
 alias align='column -t'   # align columns
+function join_by {
+    [[ "$1" =~ ^-h$\|^--help$ ]] && echo "join_by SEP WORD...\njoin_by SEP \"${WORDARRAY[@]}\"" && return 0;
+    local sep="$1"; first="$2"; shift 2; printf "%s" "$first" "${@/#/$sep}";
+}
 
 # -------------
 # MATH ALIASES.
