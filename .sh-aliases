@@ -960,10 +960,41 @@ alias pralias='cat $SH_ALIAS_FILE'
 # alias search-my-commands='print-my-commands 2>/dev/null | grep -i'
 alias smc=search-my-commands
 search-my-commands() {
-    if [[ "$1" =~ ^-l$\|^--less$\|^--more$\|^--pager$ ]]; then
-        print-my-commands | grep -i "${@:2}" | $PAGER;
+    local scriptoption="";
+    local pager="";
+    # === PARSE ARGUMENTS ===
+    local SHORT=hslp:;
+    local LONG=help,script-contents,less,pager;
+    local PARSED=`getopt --options $SHORT --longoptions $LONG --name "$0" -- "$@"`;
+    if [[ $? -ne 0 ]]; then exit 2; fi;
+    eval set -- "$PARSED";
+    while true; do
+        case "$1" in
+            -h|--help) cat <<EOF
+search-my-commands [OPTION...] PATTERN...
+    Search my user-defined aliases, functions and scripts
+    for PATTERN. By default, it only searches script names
+    (although it searches the body of functions).
+
+    Options:
+      -h --help             display this help
+      -s --script-contents  search within script files
+      -l --less             show output in pager
+      -p --pager            show output in pager
+EOF
+                return 0; ;;
+            -s|--script-contents) scriptoption="-s "; shift; ;;
+            -l|--less|-p|--pager) pager="${PAGER:-less}"; shift; ;;
+            --) shift; break; ;;
+        esac;
+    done;
+    # =======================
+    if [[ -n $pager ]]; then
+        echo "$scriptoption| grep -i $@ | $pager";
+        print-my-commands "$scriptoption"| grep -i "$@" | $pager;
     else
-        print-my-commands | grep -i "$@";
+        echo "$scriptoption| grep -i $@";
+        print-my-commands "$scriptoption"| grep -i "$@";
     fi;
 }
 alias editalias='${EDITOR:-vim} $SH_ALIAS_FILE; source $SH_ALIAS_FILE'
