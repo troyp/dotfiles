@@ -3,6 +3,9 @@ include "%L"   # import the default Compose file for your locale
 include "/opt/kragen-xcompose/parens.compose"
 include "/opt/kragen-xcompose/frakturcompose"
 
+<Multi_key> <minus> <M>                       : "—" 
+<Multi_key> <minus> <N>                       : "–" 
+<Multi_key> <bar> <bar>                       : "¦"
 
 <Multi_key> <bar> <greater>                   : "▸"
 # japanese full-width
