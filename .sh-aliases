@@ -687,6 +687,16 @@ alias wfcurrenttabno='cat $(wfprof)/sessionstore-backups/recovery.js | jq ".wind
 alias mozrepl='rlwrap telnet localhost 4242'
 alias mozreplcurrenttab="echo 'repl.look()'|nc localhost 4242|grep -oP '(?<=this.gLastValidURLStr=).*'"
 
+kwsearches-list() {
+    cat ~/bookmarks/bookmarks.json |
+        jq -r '
+            .children[] | select(.title == "Bookmarks Toolbar") |
+            .children[] | select(.title == "SE") |
+            recurse(.children[]?) |
+            {title: .title, url: .uri, keyword: .keyword}
+        '
+}
+
 #------------------------
 # BROWSER/SERVER ALIASES.
 #------------------------
