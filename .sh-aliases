@@ -1435,6 +1435,10 @@ for line in (" ".join(tup) for tup in p(args)):
     print(line)
 EOF
 }
+# increase num on 2nd line by 1, 3rd line by 2, 4th by 3, etc
+incr() {
+    perl -pe 's/\d+/$&+$i++/e'
+}
 alias tolowercase="tr '[:upper:]' '[:lower:]'"
 alias touppercase="tr '[:lower:]' '[:upper:]'"
 alias tohilitcase="perl -MText::Autoformat -e'undef $/; print autoformat +<>, { case => \"highlight\" }'"
