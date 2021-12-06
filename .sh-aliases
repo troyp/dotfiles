@@ -689,13 +689,24 @@ alias mozreplcurrenttab="echo 'repl.look()'|nc localhost 4242|grep -oP '(?<=this
 
 kwsearches-list() {
     cat ~/bookmarks/bookmarks.json |
-        jq -r '
+        jq -rc '
             .children[] | select(.title == "Bookmarks Toolbar") |
             .children[] | select(.title == "SE") |
             recurse(.children[]?) |
             {title: .title, url: .uri, keyword: .keyword}
         '
 }
+kwsearch-find-by-title() {
+    title=$(kwsearches-list | jq -r ".title | select(contains(\"$1\"))" | rofi -dmenu -i);
+    kwsearches-list | grep "\"$title\"";
+}
+kwsearch-find-by-keyword() {
+    kwsearches-list | jq -c "select(.keyword == \"$1\")";
+}
+kwsearches-filter() { kwsearches-list | grep -F "$1"; }
+kwsearch-find() { kwsearches-filter "$1" | rofi -dmenu -i; }
+kwsearch-find-url() { kwsearch-find "$1" | jq -r '.url'; }
+kwsearch-find-url-by-keyword() { kwsearch-find-by-keyword "$1" | jq -r '.url'; }
 
 #------------------------
 # BROWSER/SERVER ALIASES.
