@@ -693,7 +693,8 @@ kwsearches-list() {
             .children[] | select(.title == "Bookmarks Toolbar") |
             .children[] | select(.title == "SE") |
             recurse(.children[]?) |
-            {title: .title, url: .uri, keyword: .keyword}
+            {title: .title, url: .uri, keyword: .keyword} |
+            select(.url)
         '
 }
 kwsearch-find-by-title() {
