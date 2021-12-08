@@ -117,6 +117,7 @@ paths=(
 	  $JHOME/bin
     $HOME/.local/share/flatpak/exports/share
     $HOME/dotfiles
+    $HOME/.tridactyl/scripts
     /var/lib/flatpak/exports/share
     /usr/local/texlive/2014/bin/x86_64-linux
     /usr/local/go/bin
@@ -253,6 +254,11 @@ _JAVA_AWT_WM_NONREPARENTING=1; export _JAVA_AWT_WM_NONREPARENTING
 LIBOVERLAY_SCROLLBAR=0
 SWEAVE_STYLEPATH_DEFAULT="TRUE"
 VIMPAGER_RC=~/.vimpagerrc
+
+# custom environment vars for tridactyl
+TRI_REPO_DIR=~/source/git-repos/tridactyl
+TRI_SRC_DIR=~/source/git-repos/tridactyl/src
+TRI_CONFIG_DIR=~/.tridactyl
 
 # **********
 # *        *
