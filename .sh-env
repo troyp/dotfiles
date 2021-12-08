@@ -92,13 +92,13 @@ paths=(
     $HOME/.local/bin
     $HOME/.local/bin/node
     $HOME/.linuxbrew/bin
-    $HOME/.fzf
+    $HOME/.fzf/bin
     $HOME/.emacs.d
     $HOME/.scripts
     $HOME/.scripts/script-directories/*
     $HOME/.ghcup/bin
     $HOME/.cabal/bin
-    /opt/ripgrep/target/release
+    # /opt/ripgrep/target/release
     $HOME/.cargo/bin
     $HOME/.cask/bin
     $HOME/.lein/bin
@@ -108,7 +108,9 @@ paths=(
 	  $HOME/gowork/bin
     $HOME/code/working
     $HOME/code/scripts
+    $HOME/.bin-links
     $HOME/node_modules/.bin
+    $HOME/perl5/bin
     $ANDROID_HOME/tools
     $ANDROID_HOME/platform-tools
     ${SCALA_HOME:-/opt/scala}/bin
@@ -126,6 +128,7 @@ paths=(
     /opt/Amber/bin
     /opt/android-studio/bin
     /opt/apache-maven-3.3.3/bin
+    /opt/appimage
     /opt/basilisk
     /opt/bin
     /opt/calibre
@@ -173,6 +176,7 @@ paths=(
     /opt/smlnj/bin
     /opt/SublimeText2
     /opt/tor-browser
+    /opt/tsv-utils/bin
     /opt/utorrent-server-v3_0
     /opt/waterfox
     /opt/wmutils-contrib
@@ -181,6 +185,7 @@ paths=(
     /opt/zed
     /opt/rakudo/bin
     /opt/rakudo/share/perl6/site/bin
+    /opt/graalvm-ce-java8-21.1.0/bin
 )
 for i in "${paths[@]}"; do
     pathappend "$i"
@@ -195,6 +200,7 @@ done
 prioritypaths=(
     /opt/node*/bin
     /opt/html-xml-utils-7.2
+    /opt/bin
 )
 for i in "${prioritypaths[@]}"; do
     pathprepend "$i"
