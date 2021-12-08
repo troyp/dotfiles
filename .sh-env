@@ -116,6 +116,7 @@ paths=(
     ${SCALA_HOME:-/opt/scala}/bin
 	  $JHOME/bin
     $HOME/.local/share/flatpak/exports/share
+    $HOME/dotfiles
     /var/lib/flatpak/exports/share
     /usr/local/texlive/2014/bin/x86_64-linux
     /usr/local/go/bin
@@ -131,6 +132,7 @@ paths=(
     /opt/appimage
     /opt/basilisk
     /opt/bin
+    /opt/binlinks
     /opt/calibre
     /opt/CopyQ
     /opt/clean/bin
@@ -201,6 +203,7 @@ prioritypaths=(
     /opt/node*/bin
     /opt/html-xml-utils-7.2
     /opt/bin
+    $HOME/override
 )
 for i in "${prioritypaths[@]}"; do
     pathprepend "$i"
