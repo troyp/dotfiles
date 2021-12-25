@@ -19,7 +19,7 @@
 	# added changes to commit
 	da = diff --cached --color-words
 	# committed changes to push
-	dc = diff HEAD origin/master --color-words
+	dc = !git diff HEAD origin/$(sed 's|.*/||' .git/refs/remotes/origin/HEAD) --color-words
 	# working directory vs committed
 	diffworkingwithrepo = diff HEAD --color-words
 	# ---BY WORD---
@@ -36,13 +36,13 @@
 	dhc = !diff HEAD --color-words | diff-highlight
 	dl  = diff --color
 	dla = diff --cached --color
-	dlc = diff HEAD origin/master --color
+	dlc = !git diff HEAD origin/$(sed 's|.*/||' .git/refs/remotes/origin/HEAD) --color
 	filestoadd = diff --stat
 	changestoadd = diff
 	filestocommit = status
 	changestocommit = diff --cached
-	filestopush = diff --stat HEAD origin/master
-	changestopush = diff HEAD origin/master
+	filestopush = !git diff --stat HEAD origin/$(sed 's|.*/||' .git/refs/remotes/origin/HEAD)
+	changestopush = !git diff HEAD origin/$(sed 's|.*/||' .git/refs/remotes/origin/HEAD)
 	set-origin = remote set-url origin
 	printorigin = config --get remote.origin.url
 	fileschanged = diff-tree --name-only --no-commit-id @@{1} @
@@ -52,12 +52,12 @@
 	# https://coderwall.com/p/euwpig/a-better-git-log
 	lg = log --color --graph --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset' --abbrev-commit
 	ll = log --stat --abbrev-commit
-	luu = log origin/master..master
-	lud = log --stat --abbrev-commit -p origin/master..master
-	logunpushed = log origin/master..master
-	logdiffunpushed = log --stat --abbrev-commit -p origin/master..master
+	logunpushed = !git log origin/$(sed 's|.*/||' .git/refs/remotes/origin/HEAD)..$(sed 's|.*/||' .git/refs/remotes/origin/HEAD)
+	logdiffunpushed = !git log --stat --abbrev-commit -p origin/$(sed 's|.*/||' .git/refs/remotes/origin/HEAD)..$(sed 's|.*/||' .git/refs/remotes/origin/HEAD)
+	luu = !git logunpushed
+	lud = !git logdiffunpushed
 	# also shell alias gitcommits
-	n = rev-list --count origin/master..master
+	n = !git rev-list --count origin/$(sed 's|.*/||' .git/refs/remotes/origin/HEAD)..$(sed 's|.*/||' .git/refs/remotes/origin/HEAD)
 	s = status
 	sl = !git status | less
 
@@ -67,7 +67,7 @@
 	showrev = -c core.pager='cat' show -s --abbrev-commit --pretty=oneline
 	showrevlong = -c core.pager='cat' show -s --pretty=oneline
 	# initialize folder as repository and push to newly-created github repo whose URL is in clipboard
-	gh = "!f(){ git init; touch README.md; git add README.md; git commit -m 'initial commit'; git remote add origin $(xsel -ob); git push -u origin master; };f"
+	gh = "!f(){ git init; touch README.md; git add README.md; git commit -m 'initial commit'; git remote add origin $(xsel -ob); git push -u origin $(sed 's|.*/||' .git/refs/remotes/origin/HEAD); };f"
 	subdir = filter-branch --prune-empty --subdirectory-filter
 
 	clearunstaged = checkout -- .
@@ -77,7 +77,7 @@
 	# change a local commit message
 	correctcommit = commit --amend
 	# fast-forward
-	ff = merge --ff-only origin/master
+	ff = !git merge --ff-only origin/$(sed 's|.*/||' .git/refs/remotes/origin/HEAD)
 [color]
 	ui = auto # covers diff = true, status = auto, branch = auto
 	interactive = auto
