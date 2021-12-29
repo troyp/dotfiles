@@ -660,12 +660,12 @@ GITHUBUSERNAME="troyp";
 github-fork-wiki () {
     if [[ "$1" =~ ^-h$\|^--help$ ]]; then
         cat <<EOF
-github-clone-wiki USER REPO
-github-clone-wiki USER/REPO
+github-fork-wiki USER REPO
+github-fork-wiki USER/REPO
     To fork a wiki on github:
     1. fork repo
     2. start a wiki on forked repo (ie create initial page)
-    3. github-clone-wiki USER REPO
+    3. github-fork-wiki USER REPO
 EOF
         return;
     fi;
