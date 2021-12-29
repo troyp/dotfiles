@@ -583,9 +583,18 @@ alias xstar=xmlstarlet
 alias xq=xqilla
 alias delete-before-doctype="sed -i -ne '/<!DOCTYPE/,$ p'"
 alias urlenc='xargs -0 urlencode'
-alias urldeenc='xargs -0 urlencode -d'    # use urldecjs for bookmarklets
+alias urldec='xargs -0 urlencode -d'    # use urldecjs for bookmarklets
 alias urldecjs='sed "s/+/%2B/g" | xargs -0 urlencode -d'   # url-decode bookmarklet js
 alias urldecjscb='cb | sed "s/+/%2B/g" | xargs -0 urlencode -d'
+urldeckwsearch() {
+    nodejs -e 'process.openStdin().on(
+                 "data",
+                 s=>{
+                   const ss=String(s).split("%s");
+                   console.log(ss.map(x=>decodeURIComponent(x)).join("%s"))
+                 }
+               )';
+}
 alias htmlxpath='xmllint --html --xpath'
 
 #------------------------
