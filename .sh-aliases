@@ -415,7 +415,9 @@ alias ugit='ug -R --ignore-files' # works like git-grep & define your preference
 # alias grep='ugrep -G'    # search with basic regular expressions (BRE)
 # alias egrep='ugrep -E'    # search with extended regular expressions (ERE)
 # alias fgrep='ugrep -F'    # find string(s)
+alias rgrep='ugrep -R'    # recursive search
 alias pgrep='ugrep -P'    # search with Perl regular expressions
+alias rpgrep='ugrep -PR'    # recursive search
 alias xgrep='ugrep -W'    # search (ERE) and output text or hex for binary
 #
 alias zgrep='ugrep -zG'   # search compressed files and archives with BRE
