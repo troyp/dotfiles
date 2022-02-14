@@ -844,22 +844,39 @@ EOF
 }
 
 ren-brackets-to-end () {
-    flags=""
-    if [[ "$1" =~ ^-h$\|^--help$ ]]; then
-        cat <<EOF
+    local noflag=
+    local blockstart=
+    # --- options ---
+    PARSED=$(getopt -n "$0" -o "bhn" --long "block-start,help,nono"  -- "$@")
+    if [ $? -ne 0 ]; then echo "getopt error"; exit 1; fi
+    eval set -- "$PARSED"
+    while true; do
+        case "$1" in
+            (-h|--help)
+                cat <<EOF
 ren-brackets-to-end [-n] file...
     In each FILE's name, move any prefix in square brackets to end
+
+    Options:
+    -b  --block-start    move bracketed prefix to the start of a block of bracketed tags
+    -h  --help           print this help message
+    -n  --nono           no action: print names to be renamed only
 EOF
-        return 0;
-    elif [[ "$1" =~ ^-n$ ]]; then
-        flags=" -n";
-        shift;
-    fi;
+                return; ;;
+            (-b | --block-start) blockstart=t; shift; ;;
+            (-n | --nono) noflag="-n"; shift; ;;
+            (--) shift; break; ;;
+            (*) shift; ;;
+        esac
+    done
+    # --- end options ---
     for f in "$@"; do
-        if [[ -d "$f" ]]; then
-            eval "rename $flags 's/(\[[^]]*\])( ?)(.+)/"'$3$2$1'"/' '$f'";
+        if [[ -n "$blockstart" ]]; then
+            rename $noflag 's/(\[[^]]*\]) ?([^[]*) ?/$2$1/' "$f";
+        elif [[ -d "$f" ]]; then
+            rename $noflag 's/(\[[^]]*\])( ?)(.+)/$3$2$1/' "$f";
         else
-            eval "rename $flags 's/(\[[^]]*\])( ?)(.+)\.(.+)/"'$3$2$1.$4'"/' '$f'";
+            rename $noflag 's/(\[[^]]*\])( ?)(.+)\.(.+)/$3$2$1.$4/' "$f";
         fi;
     done;
 }
