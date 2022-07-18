@@ -118,6 +118,11 @@ alias kfconf=kf5-config
 alias kfconflist='kf5-config --types'
 alias plasma-applets-edit='editor ~/.config/plasma-org.kde.plasma.desktop-appletsrc'
 
+# ----------------------
+# LXDE-SPECIFIC ALIASES.
+# ----------------------
+lxde-run-launcher='lxpanel -p Lubuntu'
+
 #---------------------
 # CD & MKDIR ALIASES.
 #---------------------
