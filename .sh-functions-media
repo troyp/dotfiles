@@ -251,12 +251,25 @@ img-copy-at-18%() {
     done;
 }
 
+img-white-to-trans() {
+    [[ "$1" =~ ^-h$\|^--help$ ]] && echo "img-white-to-trans FILE [FUZZ%]" && return 0;
+    f="$1"; fuzz="$2";
+    convert -fuzz $fuzz% -transparent white "$f" "${f}_trans.png";
+}
+
 vlc-last-screenshot() {
     (
         n="${1:-1}";
         cd ~/Pictures/vlc-snapshot;
         display $(\ls -t | tail -n+$n | head -n1 | xargs realpath);
     )
+}
+
+figurosity-download-pose-00() {
+    tempf=`mktemp`;
+    wget -O $tempf "https://figurosity.com/figure-drawing-poses/$1";
+    src=`<$tempf pup 'meta[property=og:image] attr{content}'`;
+    wget -O "$1-pose-00" "$src";
 }
 
 mkvtracks () {
@@ -337,6 +350,12 @@ mp4settitlebyfilename() {
 ffmpegsettitlebyfilename() {
     for f in "$@"; do
         ffmpeg -i "$f" -vcodec copy -acodec copy -metadata title="${f%.*}" "${f%.*}.out.${f##*.}";
+    done;
+}
+
+ffmpegdeletetitle() {
+    for f in "$@"; do
+        ffmpeg -i -codec copy -metadata Title="" "${f%.*}.out.${f##*.}"
     done;
 }
 
