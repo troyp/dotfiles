@@ -2132,3 +2132,9 @@ columnate-lines-unindented-and-tab-indented() {
     grep -P "^	" "$file" | sed -r "s/^\t+//" > $indented;
     paste "$unindented" "$indented" | column -es $'\t' -t;
 }
+
+nth-latest-file() {
+    n="${1:-1}"
+    dir="${2:-$HOME/Downloads}"
+    \ls -t "$dir" | tail -n+$n | head -n1 | xargs realpath
+}
