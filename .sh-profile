@@ -13,7 +13,7 @@ xset r rate 250 50  # X key repeat: xset r rate <ms delay> <char per sec>
 
 
 #---KEY REBINDING---
-if [ -e ~/.Xmodmap ]; then xmodmap ~/.Xmodmap; fi
+if [[ -e ~/.Xmodmap ]]; then xmodmap ~/.Xmodmap; fi
 
 # # Swap Ctrl and Caps Lock
 # setxkbmap -option "ctrl:swapcaps"
