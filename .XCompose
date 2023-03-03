@@ -6,6 +6,7 @@ include "/opt/kragen-xcompose/frakturcompose"
 <Multi_key> <minus> <M>                       : "—" 
 <Multi_key> <minus> <N>                       : "–" 
 <Multi_key> <bar> <bar>                       : "¦"
+<Multi_key> <semicolon> <semicolon>           : "；"
 
 <Multi_key> <bar> <greater>                   : "▸"
 # japanese full-width
@@ -37,6 +38,7 @@ include "/opt/kragen-xcompose/frakturcompose"
 <Multi_key> <slash> <slash>                   : "⁄"
 # other math symbols
 <Multi_key> <Multi_key> <p> <r> <o> <d>       : "∏"
+<Multi_key> <bar> <2>                         : "‖"
 # tie
 <Multi_key> <minus> <0>                       : "‿"
 <Multi_key> <minus> <9>                       : "⁀"
