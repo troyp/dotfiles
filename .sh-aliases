@@ -731,7 +731,7 @@ kwsearch-find-url-by-keyword() { kwsearch-find-by-keyword "$1" | jq -r '.url'; }
 alias archm='sudo archmage -p'    # eg. archm 81 myfile.chm
 alias pydirserve='python2 -m SimpleHTTPServer'  # serve current dir tree on port 8000
 # alias pydirserve='python3 -m http.server'  # serve current dir tree on port 8000
-alias dirserve=http-server   # serve current dir tree (or ./public) on port 8080 (or set with -p)
+alias dirserve='http-server -c5'   # serve current dir tree (or ./public) on port 8080 (or set with -p)
 alias lsportprocs='lsof -i'  # list processes on given port [range], eg. lsportprocs TCP:8081
 alias lynx='lynx -vikeys -cfg=~/.lynx.cfg'
 alias chrome-minimal='google-chrome --profile-directory="Profile 1"'
@@ -895,6 +895,8 @@ alias myprocsbymem='ps -u $USER -O pid,user,s,tty,%mem,comm,start,cputime --sort
 alias pkill9='pkill -9'
 alias kill9='kill -9'
 alias die='killall -vs9'
+alias lsof='lsof +c 0'                # show entire command in command column
+alias lsofi='lsof +c 0 -i'            # show process matching internet address (eg `lsofi :8090`)
 alias lsofu='lsof -a -u troy'         # list files for user troy
 alias lsofp='lsof -a -p'              # list files for PID
 alias wof='lsof -r 2'                 # watch files
