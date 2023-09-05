@@ -673,8 +673,8 @@ alias packtdlchosen='python /opt/Packt-Publishing-Free-Learning/packtPublishingF
 # ----------------
 # FIREFOX ALIASES.
 # ----------------
-FFEXEC=/opt/waterfox/waterfox
-FFMAINPROFILE=default
+FFEXEC=/opt/firefox/firefox
+FFMAINPROFILE=troy
 WFMAINPROFILE=default
 alias firefox=/opt/firefox/firefox
 alias ff="$FFEXEC --new-tab"
@@ -728,6 +728,7 @@ kwsearches-filter() { kwsearches-list | grep -F "$1"; }
 kwsearch-find() { kwsearches-filter "$1" | rofi -dmenu -i; }
 kwsearch-find-url() { kwsearch-find "$1" | jq -r '.url'; }
 kwsearch-find-url-by-keyword() { kwsearch-find-by-keyword "$1" | jq -r '.url'; }
+alias tri='. ~/.tridactyl/scripts/tri.sh && tri'
 
 #------------------------
 # BROWSER/SERVER ALIASES.
