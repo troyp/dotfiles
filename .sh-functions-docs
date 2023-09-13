@@ -17,6 +17,10 @@ comicsrunre() {
         read -r f;
     [[ -n $f ]] && kstart5 mcomix "$f";
 }
+sff() {
+    f=`sffind "$@" | iselect -ma`;
+    mimeopen -n "$f" &
+}
 sfrun() {
     if [[ "$1" =~ ^-h$\|^--help$ ]]; then
         cat <<EOF
@@ -379,9 +383,17 @@ rlistls() {
 
 rlistadd() {
     (
-        initd=`pwd`;
+        initd="$1:-$PWD";
         cd ~/.readinglist;
-        x=$(for f in "$initd"/*; do realpath "$f"; done | peco);
+        x=$(find -H "$1" -type f | peco)
+        ln -s "$x";
+    )
+}
+
+rlistaddsf() {
+    (
+        cd ~/.readinglist;
+        x=$(find -H ~/ebooks/fiction/sf-fantasy/ ~/ebooks/fiction/SFF/ -type f | peco)
         ln -s "$x";
     )
 }
@@ -389,7 +401,7 @@ rlistadd() {
 rlistrun() {
     (
         cd ~/.readinglist;
-        rlistls | peco | read -r x; mimeopen -n "$x" &;
+        rlistls | peco | read -r x; mimeopen -n "$x" &
     )
 }
 
@@ -415,6 +427,13 @@ rlistless() {
             grep -iP "$1" |
             fzf --select-1 --exit-0 --delimiter "/" --with-nth "-1" --no-preview |
             read -r x && $PAGER "$HOME/.readinglist/$x";
+    )
+}
+
+manuals() {
+    (
+        cd ~/ebooks/articles/manuals;
+        ls | peco | read -r x; mimeopen -n "$x" &
     )
 }
 
