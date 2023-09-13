@@ -445,7 +445,10 @@ catnth () {
 }
 
 # fileapp FILE: return default application for FILE
-fileapp () { xdg-mime query default `xdg-mime query filetype "$1"`; }
+fileapp () {
+    xdg-mime query default `xdg-mime query filetype "$1"` | sed 's/;.*//';
+}
+
 
 # xfont-select PATTERN: find X11 font name using xfontsel
 xfont-select () { xfontsel -print -pattern \*$1\*; }
