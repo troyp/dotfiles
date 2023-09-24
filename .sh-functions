@@ -449,6 +449,13 @@ fileapp () {
     xdg-mime query default `xdg-mime query filetype "$1"` | sed 's/;.*//';
 }
 
+copyqwrite () {
+    [[ "$1" =~ ^-h$\|^--help$ ]] && echo "copyqwrite FILE [ROW=0]" && return 0;
+    mimetype=`xdg-mime query filetype "$1"`;
+    row=${2:-0};
+    copyq write $row $mimetype - <"$1";
+}
+
 
 # xfont-select PATTERN: find X11 font name using xfontsel
 xfont-select () { xfontsel -print -pattern \*$1\*; }
