@@ -1,6 +1,16 @@
 #                                                           -*- shell-script -*-
 [[ ! -z $DEBUG  ]] && echo "sourcing .sh-functions-docs"
 
+
+# ───────────────────────────────────────────────────────────────────────────────
+# ╭─────────────╮
+# │ CSV and TSV │
+# ╰─────────────╯
+
+# eg. ... | csv_nlines2row 3
+# collects every 3 lines of input into a row of CSV
+csv_nlines2row() { sed -r 's/^ *| *$//g'|awk -v N=$1 'ORS=NR%N?",":RS'; }
+
 # ───────────────────────────────────────────────────────────────────────────────
 # ╭──────────────────────────────╮
 # │ eBook Search & Run Functions │
