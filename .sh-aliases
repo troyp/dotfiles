@@ -165,6 +165,7 @@ alias llatr='lll -Atr' # extra-detailed list sort by last modified time (most re
 alias llx='ls -lX'   # detailed list sort by extension
 alias lls='ls -lS'   # detailed list sort by file size
 alias la='ls -Al'    # detailed list dotfiles
+alias lsa='ls -A'    # list dotfiles
 alias cutlsl='\cuts 6'    # extract filename from ls -l output
 alias lac='ls -Al --color=always'  # detailed list dotfiles, colored output to pipe
 llp () {
@@ -211,6 +212,7 @@ alias sortatimes='for x in *; do stat -c"%x	%n" -- "$x"; done | tabs2cols | sort
 alias lsexec='lafiles | filterexec'
 alias lsi='du -hsc'    # list total sizes of files and directories
 alias treea='tree -a -I '.git' --matchdirs --prune'   # list all files and dotfiles, exclude git directory
+alias untree="sed -r 's/^[├│─  ]+//'"
 treeless () { tree -C "$@" | less -isMRW -j5; }
 alias latest-file='nth-latest-file 1'
 
@@ -295,6 +297,7 @@ alias ln-from-file-to-file='ln -T'
 alias irm='rm -i'  # interactive rm: prompt before removal
 alias diff='colordiff -u'
 alias diffdir='colordiff -rqb'
+alias diff-show-removed='\diff -b --new-line-format="" --unchanged-line-format=""'
 alias chmodx='chmod a+x'
 alias file-owner='stat -c "%U"'
 alias setchecksum='setfattr -n user.checksum -v'   # eg. setchecksum 3FFA89C foo.gz
