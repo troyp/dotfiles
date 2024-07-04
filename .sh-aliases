@@ -996,6 +996,60 @@ alias 7zip='7z a -tzip'  # 7zip myarchive.zip myarchive/
 # unar unarchive multiple formats
 alias cbr2cbzall='for f in ./*.cbr; do cbr2cbz "$f"; done'    # cbr2cbz in ~/.sh-functions
 
+alias cmc='cbconvert convert --suffix .out'
+alias cmcdo='do if [[ ! $f =~ .out.cb. ]]; then cbconvert convert --suffix .out "$f"; fi; done'
+alias cmcall='mkdir -p out; for f in *.cb?; do if [[ ! $f =~ .out.cb. ]]; then cbconvert convert --suffix .out --outdir out "$f"; fi; done'
+alias cmchere='for f in *.cb?; do if [[ ! $f =~ .out.cb. ]]; then cbconvert convert --suffix .out "$f"; fi; done'
+alias cmclowqual='cbconvert convert --quality 30 --suffix .out'
+alias cmclowqualdo='do if [[ ! $f =~ .out.cb. ]]; then cbconvert convert --quality 30 --suffix .out "$f"; fi; done'
+alias cmclowqualall='mkdir -p out; for f in *.cb?; do if [[ ! $f =~ .out.cb. ]]; then cbconvert convert --quality 30 --suffix .out --outdir out "$f"; fi; done'
+alias cmclowqualhere='for f in *.cb?; do if [[ ! $f =~ .out.cb. ]]; then cbconvert convert --quality 30 --suffix .out "$f"; fi; done'
+alias cmchiqual='cbconvert convert --quality 85 --suffix .out'
+alias cmchiqualdo='do if [[ ! $f =~ .out.cb. ]]; then cbconvert convert --quality 85 --suffix .out "$f"; fi; done'
+alias cmchiqualall='mkdir -p out; for f in *.cb?; do if [[ ! $f =~ .out.cb. ]]; then cbconvert convert --quality 85 --suffix .out --outdir out "$f"; fi; done'
+alias cmchiqualhere='for f in *.cb?; do if [[ ! $f =~ .out.cb. ]]; then cbconvert convert --quality 85 --suffix .out "$f"; fi; done'
+alias cmcmidqual='cbconvert convert --quality 60 --suffix .out'
+alias cmcmidqualdo='do if [[ ! $f =~ .out.cb. ]]; then cbconvert convert --quality 60 --suffix .out "$f"; fi; done'
+alias cmcmidqualall='mkdir -p out; for f in *.cb?; do if [[ ! $f =~ .out.cb. ]]; then cbconvert convert --quality 60 --suffix .out --outdir out "$f"; fi; done'
+alias cmcextralowqualall='mkdir -p out; for f in *.cb?; do if [[ ! $f =~ .out.cb. ]]; then cbconvert convert --quality 20 --suffix .out --outdir out "$f"; fi; done'
+alias cmcextralowqualhere='for f in *.cb?; do if [[ ! $f =~ .out.cb. ]]; then cbconvert convert --quality 20 --suffix .out "$f"; fi; done'
+alias cmcextralowqualdo='do if [[ ! $f =~ .out.cb. ]]; then cbconvert convert --quality 20 --suffix .out "$f"; fi; done'
+
+alias cmcto1528='cbconvert convert --height 1528 --suffix .out'
+alias cmcto1528do='do if [[ ! $f =~ .out.cb. ]]; then cbconvert convert --height 1528 --suffix .out "$f"; fi; done'
+alias cmcto1528all='mkdir -p out; for f in *.cb?; do if [[ ! $f =~ .out.cb. ]]; then cbconvert convert --height 1528 --suffix .out --outdir out "$f"; fi; done'
+alias cmcto1528here='for f in *.cb?; do if [[ ! $f =~ .out.cb. ]]; then cbconvert convert --height 1528 --suffix .out "$f"; fi; done'
+
+alias cmcto2292='cbconvert convert --height 2292 --suffix .out'
+alias cmcto2292do='do if [[ ! $f =~ .out.cb. ]]; then cbconvert convert --height 2292 --suffix .out "$f"; fi; done'
+alias cmcto2292all='mkdir -p out; for f in *.cb?; do if [[ ! $f =~ .out.cb. ]]; then cbconvert convert --height 2292 --suffix .out --outdir out "$f"; fi; done'
+alias cmcto2292here='for f in *.cb?; do if [[ ! $f =~ .out.cb. ]]; then cbconvert convert --height 2292 --suffix .out "$f"; fi; done'
+
+alias cmcto1900='cbconvert convert --height 1900 --quality 65 --suffix .out'
+alias cmcto1900do='do if [[ ! $f =~ .out.cb. ]]; then cbconvert convert --height 1900 --quality 65 --suffix .out "$f"; fi; done'
+alias cmcto1900all='mkdir -p out; for f in *.cb?; do if [[ ! $f =~ .out.cb. ]]; then cbconvert convert --height 1900 --quality 65 --suffix .out --outdir out "$f"; fi; done'
+alias cmcto1900here='for f in *.cb?; do if [[ ! $f =~ .out.cb. ]]; then cbconvert convert --height 1900 --quality 65 --suffix .out "$f"; fi; done'
+
+alias cmcto1528midqual='cbconvert convert --height 1528 --quality 60 --suffix .out'
+alias cmcto1528midqualdo='do if [[ ! $f =~ .out.cb. ]]; then cbconvert convert --height 1528 --quality 60 --suffix .out "$f"; fi; done'
+alias cmcto1528midqualall='mkdir -p out; for f in *.cb?; do if [[ ! $f =~ .out.cb. ]]; then cbconvert convert --height 1528 --quality 60 --suffix .out --outdir out "$f"; fi; done'
+alias cmcto1528midqualhere='for f in *.cb?; do if [[ ! $f =~ .out.cb. ]]; then cbconvert convert --height 1528 --quality 60 --suffix .out "$f"; fi; done'
+
+alias cmcto1528lowqual='cbconvert convert --height 1528 --quality 30 --suffix .out'
+alias cmcto1528lowqualdo='do if [[ ! $f =~ .out.cb. ]]; then cbconvert convert --height 1528 --quality 30 --suffix .out "$f"; fi; done'
+alias cmcto1528lowqualall='mkdir -p out; for f in *.cb?; do if [[ ! $f =~ .out.cb. ]]; then cbconvert convert --height 1528 --quality 30 --suffix .out --outdir out "$f"; fi; done'
+alias cmcto1528lowqualhere='for f in *.cb?; do if [[ ! $f =~ .out.cb. ]]; then cbconvert convert --height 1528 --quality 30 --suffix .out "$f"; fi; done'
+
+alias cmcto2292hiqual='cbconvert convert --height 2292 --quality 85 --suffix .out'
+alias cmcto2292hiqualdo='do if [[ ! $f =~ .out.cb. ]]; then cbconvert convert --height 2292 --quality 85 --suffix .out "$f"; fi; done'
+alias cmcto2292hiqualall='mkdir -p out; for f in *.cb?; do if [[ ! $f =~ .out.cb. ]]; then cbconvert convert --height 2292 --quality 85 --suffix .out --outdir out "$f"; fi; done'
+alias cmcto2292hiqualhere='for f in *.cb?; do if [[ ! $f =~ .out.cb. ]]; then cbconvert convert --height 2292 --quality 85 --suffix .out "$f"; fi; done'
+
+alias cmcto1000midqual='cbconvert convert --height 1000 --quality 60 --suffix .out'
+alias cmcto1000midqualdo='do if [[ ! $f =~ .out.cb. ]]; then cbconvert convert --height 1000 --quality 60 --suffix .out "$f"; fi; done'
+alias cmcto1000midqualall='mkdir -p out; for f in *.cb?; do if [[ ! $f =~ .out.cb. ]]; then cbconvert convert --height 1000 --quality 60 --suffix .out --outdir out "$f"; fi; done'
+alias cmcto1000midqualhere='for f in *.cb?; do if [[ ! $f =~ .out.cb. ]]; then cbconvert convert --height 1000 --quality 60 --suffix .out "$f"; fi; done'
+
 # -----------
 # SSH ALIASES
 # -----------
