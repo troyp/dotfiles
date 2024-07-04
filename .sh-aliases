@@ -344,7 +344,7 @@ alias ren-year-to-end-preview='ren -n '"'"'s/^(\([0-9]+\)) *-? *(.*)\.(.+)$/$2 $
 alias ren-dot-to-space='ren '"'"'s/\.(?=[^.]+\.)/ /g unless /^\./'"'"''
 alias ren-dot-to-space-preview='ren -n '"'"'s/\.(?=[^.]+\.)/ /g unless /^\./'"'"''
 alias ren-space-to-dot="ren 'tr/ /./'"
-alias ren-underscore-to-space="ren 'tr/_/ /'"
+alias ren-underscore-to-space="ren 's/_+/ /g'"
 alias ren-space-to-underscore="ren 'tr/ /_/'"
 alias ren-uppercase="ren 'tr/a-z/A-Z/'"
 alias ren-lowercase="ren 'tr/A-Z/a-z/'"
@@ -353,6 +353,9 @@ alias renn-camelcase='renn '"'"'s/(\b\w)/\u$1/g; tr/ //d'"'"
 # ren-author-to-surname-first: eg. rename 'Greg Egan' -> 'Egan, Greg' Multiple middle names OK.
 alias ren-author-to-surname-first="ren '"'s/^(.*) ([-A-Za-z]+)$/$2, $1/'"'"
 alias renn-author-to-surname-first="ren -n '"'s/^(.*) ([-A-Za-z]+)$/$2, $1/'"'"
+# alias ren-author-to-given-name-first="ren '"'s/^(\w+), (\w+)( \w+\.?)*/$2$3 $1/'"'"
+alias ren-author-to-given-name-first="ren '"'s/^('"[-.\x27A-Za-z]+"'), *(\w+)( +\w+\.?)*/$2$3 $1/'"'"
+alias renn-author-to-given-name-first="ren -n '"'s/^('"[-.\x27A-Za-z]+"'), *(\w+)( +\w+\.?)*/$2$3 $1/'"'"
 alias ren-author-to-start-surname-first="ren 's/(.*) ?- ?(.*)\.([a-zA-Z0-9]+)/$2 - $1.$3/,s/(^[^,]+) (.*) - /$2, $1 - /'"
 alias renn-author-to-start-surname-first="ren -n 's/(.*) ?- ?(.*)\.([a-zA-Z0-9]+)/$2 - $1.$3/,s/(^[^,]+) (.*) - /$2, $1 - /'"
 # FIXME:
