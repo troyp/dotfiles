@@ -498,42 +498,42 @@ findrepl() {
 }
 alias findreplcs='findrepl ~/ebooks/coding ~/ebooks/cs ~/ebooks/dl'
 findiname() {
-    find "$1" -iname "*$2*" | less -FX;
+    find "$1" -iname "*$2*" | less -iFX;
     # TODO: generalize findiname, remove findiname2
     # findiname2 DIR1 DIR2 PARTIALNAME
 }
 findfileiname() {
-    find -L "$1" -type f -iname "*$2*" | less -FX;
+    find -L "$1" -type f -iname "*$2*" | less -iFX;
 }
 findiname2() {
-    find -L "$1" "$2" -iname "*$3*" | less -FX;
+    find -L "$1" "$2" -iname "*$3*" | less -iFX;
 }
 findfileiname2() {
-    find -L "$1" "$2" -type f -iname "*$3*" | less -FX;
+    find -L "$1" "$2" -type f -iname "*$3*" | less -iFX;
 }
 findiname3() {
-    find -L "$1" "$2" "$3" -iname "*$4*" | less -FX;
+    find -L "$1" "$2" "$3" -iname "*$4*" | less -iFX;
 }
 findfileiname3() {
-    find -L "$1" "$2" "$3" -type f -iname "*$4*" | less -FX;
+    find -L "$1" "$2" "$3" -type f -iname "*$4*" | less -iFX;
 }
 findiregex() {
-    find -L "$1" -regextype egrep -iregex ".*$2.*" | less -FX;
+    find -L "$1" -regextype egrep -iregex ".*$2.*" | less -iFX;
 }
 findfileiregex() {
-    find -L "$1" -type f -regextype egrep -iregex ".*$2.*" | less -FX;
+    find -L "$1" -type f -regextype egrep -iregex ".*$2.*" | less -iFX;
 }
 findiregex2() {
-    find -L "$1" "$2" -regextype egrep -iregex ".*$3.*" | less -FX;
+    find -L "$1" "$2" -regextype egrep -iregex ".*$3.*" | less -iFX;
 }
 findfileiregex2() {
-    find -L "$1" "$2" -type f -regextype egrep -iregex ".*$3.*" | less -FX;
+    find -L "$1" "$2" -type f -regextype egrep -iregex ".*$3.*" | less -iFX;
 }
 findiregex3() {
-    find -L "$1" "$2" "$3" -regextype egrep -iregex ".*$4.*" | less -FX;
+    find -L "$1" "$2" "$3" -regextype egrep -iregex ".*$4.*" | less -iFX;
 }
 findfileiregex3() {
-    find -L "$1" "$2" "$3" -type f -regextype egrep -iregex ".*$4.*" | less -FX;
+    find -L "$1" "$2" "$3" -type f -regextype egrep -iregex ".*$4.*" | less -iFX;
 }
 alias sffind='findiname2 ~/ebooks/fiction/sf-fantasy /mnt/data2/SFF'
 alias sffindfile='findfileiname2 ~/ebooks/fiction/sf-fantasy /mnt/data2/SFF'
