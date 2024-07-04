@@ -55,6 +55,7 @@ alias aptpkgs='apt list'
 alias aptpkgsmatching='apt-cache search'  # find matching packages
 alias aptcs='apt-cache search'  # find matching packages
 alias aptli='apt list --installed' # search for matching installed packages
+alias aptwhichpackage='wajig whichpackage'
 apdv() { aptitude search "$0" | less; }
 apdn() {
     (    # search by package name (terms ANDed)
@@ -417,6 +418,7 @@ alias mmv-symlink='mmv -a'    # symlink source to target
 alias uq='ug -Q'       # short & quick query UI (interactive, uses .ugrep config)
 alias ux='ug -UX'      # short & quick binary pattern search (uses .ugrep config)
 alias uz='ug -z'       # short & quick compressed files and archives search (uses .ugrep config)
+alias ugf='ug -R'      # ug, follow symlinks recursively
 #
 alias ugit='ug -R --ignore-files' # works like git-grep & define your preferences in .ugrep config
 #
@@ -440,6 +442,7 @@ alias zxgrep='ugrep -zW'   # search (ERE) compressed files/archives and output t
 alias xdump='ugrep -X ""' # hexdump files without searching
 
 alias ugi='ug -i'
+ugl() { ug --color=always "$@" | less -R; }
 
 # gr: pcregrep search - shows line number and color if output is to a terminal, just the text if output is to a pipe
 gr () { if [[ -t 1 ]]; then pcregrep -in --color=auto "$@"; else pcregrep -i --color=auto "$@"; fi; }
@@ -620,6 +623,7 @@ alias wgetmcont='wgetm -c'    # continue, changed/new files only
 alias wgetmnc='wgetm -c -nc'   # continue, new files only
 alias wgetmf="wgetm --reject-regex '.*[?$].*'"  # filter out URLs with params
 alias wgetmregex="wgetm --accept-regex"
+alias wgetmslash="wgetm --default-page=_slash.html"   # pages ending in / become /_slash.html
 # wgetm-incdirs: eg. wgetmincdirs /Tools,/Utilities domainname.com/Tools/index.html
 alias wgetm-incdirs='wget -nH -kpN -rl inf --no-remove-listing --include-directories'
 alias wgetmf-incdirs="wget -nH -kpN -rl inf --no-remove-listing --reject-regex '.*[?].*' --include-directories"
@@ -783,6 +787,7 @@ alias coreinf='info coreutils'   # eg.  coreinf 'env'
 # alias mans='man -k . | grep'  # use whatis -r (or -w) instead
 alias what='whatis -w'   # one-line man descriptions, wildcard search
 alias whatr='whatis -r'   # one-line man descriptions, regex search
+alias whicha='which -a'   # show all results for `which`
 alias whichman='man -a --where --where-cat'
 alias github-readme-to-man='pandoc -s -f markdown_github -t man'
 git-grepconfig() { grep -iP "$1" ~/.gitconfig; }
@@ -843,11 +848,14 @@ EOF
 }
 alias cbcpf='cp $(xsel -b)'    # copy file from clipboard
 alias cbtacn='cb | tacn'
+# copy file(s) to paste into file manager
+fmcopy() { printf "file://%s\n" `realpath "$@"` | xclip -i -selection clipboard -t text/uri-list; }
 
 
 #---------------
 # SHELL ALIASES.
 #---------------
+alias dash='rlwrap dash'
 alias fixterminal='reset; stty sane; tput rs1; echo -e "\033c"'
 alias fixterminal1='reset'
 alias fixterminal2='stty sane; tput rs1'
@@ -971,6 +979,8 @@ alias gcide='dict -d gcide'
 alias dictwn='dict -d wn'
 alias moby='dict -d moby-thesaurus'
 alias websters='view ~/ebooks/reference/websters-1913.txt'
+alias gibberish='shuf -r -n 10000 /usr/share/dict/words|tr "\n" " "'
+alias gibberish-lower='shuf -r -n 10000 /usr/share/dict/words-lowercase|tr "\n" " "'
 
 #-----------------
 # ARCHIVE ALIASES.
@@ -1164,6 +1174,7 @@ alias lsgroups='getent groups'
 alias lsusers='bash -c "compgen -u"'
 alias dmesgless='dmesg --color=always | less -R'
 alias printdatetime='date +"%a %d %b・%l:%M%P"'
+alias copydatetimeformat='echo "%a %d %b・%l:%M%P" | cb'
 
 # -------
 # WINDOWS
@@ -1393,6 +1404,7 @@ alias vimctl='gvim -u .vimctlrc -U .gvimctlrc'
 # -----------
 # PDF ALIASES
 # -----------
+alias pdftohtml1='pdftohtml -s -c'
 alias pdfdiff=diffpdf
 alias pdfgrep='pdfgrep -nH'
 alias pdfgrepi='pdfgrep -i'
@@ -1715,6 +1727,7 @@ alias rep="jot -s '' -b"
 alias say='spd-say -r -40 -t male2'
 alias gemu='gem update --system'
 alias pandoc-md='pandoc -f markdown -t html5 --toc'  # pandoc-md infile.md > outfile.html
+alias mmd=/opt/MultiMarkdown-6/scripts/mmd
 alias mdless='/usr/local/bin/mdless'
 alias feh-im='feh --magick-timeout 0'  # give image-magick enough time to convert files
 alias zmessage='zenity --info --text'  # pop-up message box (like xmessage)
@@ -1749,6 +1762,7 @@ disks_fstab_data() {    # print data for /etc/fstab
 }
 alias lpportrait='lp -o fit-to-page -o media=A4'
 alias lplandscape='lp -o landscape -o fit-to-page -o media=A4'
+alias umpvplaypause='echo "cycle pause" | socat - ~/.umpv_socket'
 
 # -------
 # NOVELTY
