@@ -121,7 +121,7 @@ alias plasma-applets-edit='editor ~/.config/plasma-org.kde.plasma.desktop-applet
 # ----------------------
 # LXDE-SPECIFIC ALIASES.
 # ----------------------
-lxde-run-launcher='lxpanel -p Lubuntu'
+alias lxde-run-launcher='lxpanel -p Lubuntu'
 
 #---------------------
 # CD & MKDIR ALIASES.
