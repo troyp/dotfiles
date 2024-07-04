@@ -145,7 +145,7 @@ EOF
         shift;
         fi
     (
-        [[ $PAGER =~ ^less($| ) ]] && PAGER="${PAGER/less/less -F}"
+        if [[ $PAGER =~ ^less($| ) ]]; then PAGER="${PAGER/less/less -F}"; fi;
         cmd="$1"
         shift
         if [[ $cmds_with_help_subcommand =~ (^| )$cmd($| ) ]]; then
@@ -153,7 +153,7 @@ EOF
         else
             helpstr="--help"
         fi
-        eval "$cmd $helpstr $@ | $PAGER";
+        eval "$cmd $helpstr $@ | ${PAGER:-less -F}";
     )
 }
 
@@ -491,29 +491,30 @@ EOF
         fi;
 
         while [ $# -gt 1 ]; do
+            # echo -n ".$1.$# "
             case "$1" in
                 (-s | --strict)   strict="true";
-                                  shift ;;
+                                  shift; ;;
                 (-a | --anywhere) anywhere="true";
-                                  shift ;;
+                                  shift; ;;
                 (--bash)          manfile="bash";
-                                  shift ;;
+                                  shift; ;;
                 (--zsh)           manfile="zshall";
-                                  shift ;;
+                                  shift; ;;
                 (--ksh)           manfile="ksh";
-                                  shift ;;
+                                  shift; ;;
                 (--manfile)       manfile="$2";
-                                  shift 2 ;;
+                                  shift 2; ;;
             esac;
         done;
         pattern="$1";
 
         if [[ -n "$anywhere" ]]; then
-            man $manfile | less -p "$pattern";
+            \man $manfile | \less -p "$pattern";
         elif [[ -n "$strict" ]]; then
-            man $manfile | less -p "^       $pattern ";
+            \man $manfile | \less -p "^       $pattern ";
         else
-            man $manfile | less -p "^ +$pattern ";
+            \man $manfile | \less -p "^ +$pattern ";
         fi;
     )
 }
