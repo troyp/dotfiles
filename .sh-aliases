@@ -927,14 +927,16 @@ alias pk='pkill -9'
 alias pidtoname='ps -o comm= -p'
 
 
-#-----------------------
-# COLOUR PICKER ALIASES.
-#-----------------------
+#--------------------
+# COLOUR APP ALIASES.
+#--------------------
 alias eyed=gpick
 alias grabhexcol='grabc 2>/dev/null'
 alias grabrgbcol='grabc 1>/dev/null'
 alias colpick='grabc 2>/dev/null | xsel -ib; xsel -ob'
 alias colpickrgb='grabc 1>/dev/null | xsel -ib; xsel -ob 1>/dev/null'
+
+alias colorsys='python -i -c '"'"'import colorsys; from colorsys import *; hsl2rgb=hls_to_rgb; hsv2rgb=hsv_to_rgb; rgb2hsl=rgb_to_hls; rgb2hsv=rgb_to_hsv'"'"
 
 #-------------------
 # CUT & PASTE FILES.
