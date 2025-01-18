@@ -371,6 +371,8 @@ alias ren-extract-number-ext='ren '\''s/[^1-9]*([0-9]+).*(\.[^.]+)/$1$2/'\'
 alias ren-extract-number-ext-preview='ren -n '\''s/[^1-9]*([0-9]+).*(\.[^.]+)/$1$2/'\'
 alias ren-extract-number-no-ext='ren '\''s/[^1-9]*([0-9]+).*/$1/'\'
 alias ren-extract-number-no-ext-preview='ren -n '\''s/[^1-9]*([0-9]+).*/$1/'\'
+# alias ren-strip-issue-range: eg rename 'file (001-125) (year)' -> 'file (year)'
+alias ren-strip-issue-range="ren 's/ *\(?\d\d\d ?- ?\d\d\d\+?\)?//'"
 # ren-titlecase: note - removes newlines from titles
 alias ren-titlecase='ren '\''use Text::Autoformat; my @parts=split /\./; my $n=$#parts; my @newparts = map {autoformat( $_, {case=>qw(highlight)})} @parts[0..$n]; $newparts[$n] = $parts[$n]; $_ = join(".",@newparts); s/\n//g'\'
 alias renn-titlecase='ren -n '\''use Text::Autoformat; my @parts=split /\./; my $n=$#parts; my @newparts = map {autoformat( $_, {case=>qw(highlight)})} @parts[0..$n]; $newparts[$n] = $parts[$n]; $_ = join(".",@newparts); s/\n//g'\'
