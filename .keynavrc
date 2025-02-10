@@ -30,12 +30,40 @@ period       windowzoom,cut-right,warp,click 1,end
 super+period windowzoom,cut-right,warp,click 1,end
 comma        windowzoom,cut-left,warp,click 1,end
 super+comma  windowzoom,cut-left,warp,click 1,end
-space warp,click 1,end
-control+space warp,click 2,end
-shift+space warp,click 3,end
+
 semicolon warp,end
 
+space warp,click 1,end
+control+space warp,click 3,end
+shift+space warp,click 2,end
+
+apostrophe warp,drag 1
+apostrophe warp,drag 1
+shift+apostrophe drag 2
+
+# f3 grid 3x3
+# f4 grid 4x4
+
+1 clear, cell-select 1x1, warp, click 1, end
+2 clear, cell-select 2x1, warp, click 1, end
+3 clear, cell-select 3x1, warp, click 1, end
+4 clear, cell-select 4x1, warp, click 1, end
+5 clear, cell-select 1x2, warp, click 1, end
+6 clear, cell-select 2x2, warp, click 1, end
+7 clear, cell-select 3x2, warp, click 1, end
+8 clear, cell-select 4x2, warp, click 1, end
+9 clear, cell-select 1x3, warp, click 1, end
+0 clear, cell-select 2x3, warp, click 1, end
+ctrl+1 clear, cell-select 3x3, warp, click 1, end
+ctrl+2 clear, cell-select 4x3, warp, click 1, end
+ctrl+3 clear, cell-select 1x4, warp, click 1, end
+ctrl+4 clear, cell-select 2x4, warp, click 1, end
+ctrl+5 clear, cell-select 3x4, warp, click 1, end
+ctrl+6 clear, cell-select 4x4, warp, click 1, end
+
 e grid-nav toggle
+f grid-nav on, click 1,end
+shift+f clear, grid-nav on, grid 15x15
 
 h cut-left
 j cut-down
@@ -54,7 +82,7 @@ shift+u move-right,move-up
 shift+b move-left,move-down
 shift+n move-right,move-down
 
-ctrl+enter cursorzoom 20 20
+# ctrl+enter cursorzoom 20 20
 ctrl+h move-left 0.05
 ctrl+j move-down 0.05
 ctrl+k move-up 0.05
@@ -64,12 +92,6 @@ ctrl+u move-right,move-up 0.05
 ctrl+b move-left,move-down 0.05
 ctrl+n move-right,move-down 0.05
 
-quote warp,drag 1
-apostrophe warp,drag 1
-shift+apostrophe drag 2
-1 click 1
-2 click 2
-3 click 3
 #1 cell-select 1x1,warp,end
 #2 cell-select 1x2,warp,end
 #3 cell-select 2x1,warp,end
@@ -95,6 +117,9 @@ super+y cut-left,cut-up
 super+u cut-right,cut-up
 super+b cut-left,cut-down
 super+n cut-right,cut-down
+
+# Activate bottom pane
+super+apostrophe warp,cut-down,cut-down,click 1,end
 
 ### Example using the 'sh' command.
 # This xdotool invocation require xdotool >= 2.20100623 for 'command chaining'
